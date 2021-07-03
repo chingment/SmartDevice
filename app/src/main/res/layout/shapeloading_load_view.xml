@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <com.lumos.smartdevice.widget.shapeloading.ShapeLoadingView
+        android:id="@+id/shapeloading_View"
+        android:layout_width="@dimen/size_40"
+        android:layout_height="@dimen/size_40"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_2"/>
+
+    <ImageView
+        android:contentDescription="@string/img_content_description_empty"
+        android:id="@+id/img_Indication"
+        android:layout_width="@dimen/size_32"
+        android:layout_height="@dimen/size_4"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size_56"
+        android:src="@drawable/shapeloading_shadow"/>
+
+    <TextView
+        android:id="@+id/txt_PromptTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/sp_18"
+        android:textColor="#757575"
+        android:textSize="@dimen/sp_14"
+        android:visibility="gone"
+        tool:visibility="visible"/>
+
+</merge>

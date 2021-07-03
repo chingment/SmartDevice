@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_nav_header" />
+
+    <LinearLayout
+        android:layout_below="@+id/ly_Header"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <RelativeLayout
+
+            android:layout_width="@dimen/size_250"
+            android:layout_height="match_parent"
+            >
+
+            <RelativeLayout
+                android:id="@+id/rly_LoginArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="45dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rly_LoginArea_Scene"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_42"
+                    >
+
+                    <TextView
+                        android:id="@+id/tv_Scene"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/aty_smlogin_tv_txt_scene"
+                        android:textColor="@color/field_name"
+                        android:textSize="@dimen/sp_10" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rly_LoginArea_UserName"
+                    android:layout_below="@+id/rly_LoginArea_Scene"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_42"
+                    android:background="@drawable/aty_smlogin_input_boder_bottom">
+
+                    <ImageView
+                        android:id="@+id/ic_UserName"
+                        android:layout_width="@dimen/size_16"
+                        android:layout_height="@dimen/size_16"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/size_5"
+                        android:layout_marginRight="@dimen/size_16"
+                        android:background="@drawable/aty_smlogin_input_ic_username" />
+
+                    <EditText
+                        android:id="@+id/et_UserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toRightOf="@+id/ic_UserName"
+                        android:background="@null"
+                        android:hint="@string/aty_smlogin_et_hint_username"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/aty_smlogin_et_txt"
+                        android:textColorHint="@color/aty_smlogin_et_hint"
+                        android:textSize="@dimen/sp_12"
+
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rly_LoginArea_Password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_42"
+                    android:layout_below="@+id/rly_LoginArea_UserName"
+                    android:background="@drawable/aty_smlogin_input_boder_bottom">
+
+
+                    <ImageView
+                        android:id="@+id/ic_Password"
+                        android:layout_width="@dimen/size_16"
+                        android:layout_height="@dimen/size_16"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/size_5"
+                        android:layout_marginRight="@dimen/size_16"
+                        android:background="@drawable/aty_smlogin_input_ic_password" />
+
+                    <EditText
+                        android:id="@+id/et_Password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toRightOf="@+id/ic_Password"
+                        android:background="@null"
+                        android:hint="@string/aty_smlogin_et_hint_password"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/aty_smlogin_et_txt"
+                        android:textColorHint="@color/aty_smlogin_et_hint"
+                        android:textSize="@dimen/sp_12" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/btn_LoginByAccount"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_32"
+                android:layout_below="@+id/rly_LoginArea"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/widget_common_btn"
+                android:gravity="center"
+                android:text="@string/aty_smlogin_btn_txt_login"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_12"/>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
