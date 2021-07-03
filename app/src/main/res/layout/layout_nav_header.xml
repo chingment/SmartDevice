@@ -41,11 +41,12 @@
             android:layout_marginBottom="@dimen/size_2"
             android:layout_marginTop="@dimen/size_6"
             android:gravity="center"
-            android:text="@string/ly_nav_header_tv_txt_title"
+            android:text="@string/title"
             android:textColor="@color/ly_nav_header_tv_txt_title"
             android:textSize="@dimen/sp_15" />
 
         <View
+            android:visibility="gone"
             android:layout_width="@dimen/size_36"
             android:layout_height="@dimen/size_2"
             android:background="@drawable/gradient_box" />

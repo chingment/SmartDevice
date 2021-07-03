@@ -16,6 +16,7 @@
 
 
     <string name="aty_smhelptool_nav_title">帮助工具</string>
+    <string name="aty_smhelptool_gdv_nine_it_txt_factorysetting">出厂设置</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_showsysnav">显示导航</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_checkupdateapp">检查更新</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_closeapp">关闭应用</string>
@@ -23,10 +24,11 @@
     <string name="aty_smhelptool_gdv_nine_it_txt_exitmanager">退出管理</string>
 
 
+    <string name="aty_factorysetting_nav_title">出厂设置</string>
+
     <string name="it_ls_logtips_tv_txt_datetime">时间</string>
     <string name="it_ls_logtips_tv_txt_content">内容</string>
     <string name="img_content_description_empty">图片</string>
-    <string name="ly_nav_header_tv_txt_title">标题</string>
     <string name="ly_nav_header_btn_txt_right">保存</string>
 
 
