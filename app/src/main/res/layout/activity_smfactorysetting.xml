@@ -31,20 +31,20 @@
                 android:gravity="center"
                 android:orientation="vertical">
                 <LinearLayout
+                    android:id="@+id/btn_Nav_AppSceneSetting"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingBottom="@dimen/size_10"
                     android:paddingTop="@dimen/sp_10"
-                    android:background="@drawable/aty_smlogin_input_boder_bottom">
-                    >
+                    android:background="@drawable/aty_smlogin_input_boder_bottom"> cv
                       <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/aty_initdata_tv_txt_deviceid"
+                        android:text="@string/aty_factorysetting_nav_txt_appscene"
                         android:textColor="@color/field_name"
-                        android:textSize="@dimen/sp_10" />
+                        android:textSize="@dimen/sp_16" />
                       <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -52,8 +52,16 @@
                             android:orientation="horizontal"
                            >
 
+                          <TextView
+                              android:id="@+id/tv_AppScene"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:text=""
+                              android:textColor="@color/field_name"
+                              android:textSize="@dimen/sp_10" />
+
+
                             <ImageView
-                                android:id="@+id/ic_UserName"
                                 android:layout_width="@dimen/size_16"
                                 android:layout_height="@dimen/size_16"
                                 android:gravity="end"
@@ -73,7 +81,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/aty_initdata_tv_txt_deviceid"
                         android:textColor="@color/field_name"
-                        android:textSize="@dimen/sp_10" />
+                        android:textSize="@dimen/sp_16" />
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -82,7 +90,6 @@
                         >
 
                         <ImageView
-                            android:id="@+id/ic_UserName"
                             android:layout_width="@dimen/size_16"
                             android:layout_height="@dimen/size_16"
                             android:gravity="end"

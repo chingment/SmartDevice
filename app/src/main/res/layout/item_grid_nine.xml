@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:text="@string/title"
             android:textColor="@color/grid_nine_tv_txt_title"
-            android:textSize="@dimen/size_8"
+            android:textSize="@dimen/sp_12"
             android:gravity="center"/>
     </LinearLayout>
 </RelativeLayout>

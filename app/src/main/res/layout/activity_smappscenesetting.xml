@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <include layout="@layout/layout_nav_header" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:padding="@dimen/size_4"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="@dimen/size_2"
+                    android:layout_height="@dimen/size_14">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary" />
+                </LinearLayout>
+                <TextView
+                    android:paddingLeft="@dimen/size_5"
+                    android:paddingRight="@dimen/size_5"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    android:text="@string/aty_appscenesetting_tv_txt_vesionmode"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/sp_14" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="@dimen/size_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:id="@+id/rg_VesionMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                <RadioButton
+                    android:id="@+id/rbtn_VesionMode_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size_5"
+                    android:text="@string/aty_appscenesetting_rbtn_txt_vesionmode_1"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/sp_14" />
+
+                <RadioButton
+                    android:id="@+id/rbtn_VesionMode_2"
+                    android:layout_marginLeft="@dimen/size_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/size_5"
+                    android:text="@string/aty_appscenesetting_rbtn_txt_vesionmode_2"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/sp_14" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="@dimen/size_2"
+                        android:layout_height="@dimen/size_14">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorPrimary" />
+                    </LinearLayout>
+                    <TextView
+                        android:paddingLeft="@dimen/size_5"
+                        android:paddingRight="@dimen/size_5"
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:layout_weight="1"
+                        android:text="@string/aty_appscenesetting_tv_txt_scenemode"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/sp_14" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="@dimen/size_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+
+                    <RadioGroup
+                        android:id="@+id/rg_SceneMode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/rbtn_SceneMode_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/size_5"
+                        android:text="@string/aty_appscenesetting_rbtn_txt_scenemode_1"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/sp_14" />
+
+                    <RadioButton
+                        android:id="@+id/rbtn_SceneMode_2"
+                        android:layout_marginLeft="@dimen/size_10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/size_5"
+                        android:text="@string/aty_appscenesetting_rbtn_txt_scenemode_2"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/sp_14" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+</LinearLayout>
