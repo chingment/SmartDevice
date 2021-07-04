@@ -70,24 +70,22 @@ public class DbManager {
     }
 
 
-    public ConfigBean getConfig(String field){
+    public String getConfigValue(String field){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        ConfigBean msg=null;
+        String val=null;
         if(db.isOpen()){
             Cursor cursor = db.rawQuery("select * from " + ConfigDao.TABLE_NAME + " where "+ConfigDao.COLUMN_NAME_FIELD + " = ?",new String[]{String.valueOf(field)});
             while(cursor.moveToNext()){
-                msg = new ConfigBean();
 
-                String field1 = cursor.getString(cursor.getColumnIndex(ConfigDao.COLUMN_NAME_FIELD));
-                String value1 = cursor.getString(cursor.getColumnIndex(ConfigDao.COLUMN_NAME_VALUE));
 
-                msg.setField(field1);
-                msg.setValue(value1);
+                val = cursor.getString(cursor.getColumnIndex(ConfigDao.COLUMN_NAME_VALUE));
+
+
 
             }
             cursor.close();
         }
-        return msg;
+        return val;
     }
     
 

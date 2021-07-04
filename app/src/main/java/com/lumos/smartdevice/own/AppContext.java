@@ -72,8 +72,8 @@ public class AppContext extends Application {
         Context context = getApplicationContext();
 
         DbManager.getInstance().initConfig();
-        DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE,"0");
-        DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE,"0");
+        //DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE,"0");
+        //DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE,"0");
        // DbManager.getInstance().getConfig("scene_mode");
     }
 

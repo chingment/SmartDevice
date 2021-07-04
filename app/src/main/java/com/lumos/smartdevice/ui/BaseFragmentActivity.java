@@ -119,12 +119,22 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
     }
 
     public void setNavHeaderBtnByGoBackIsVisible(boolean isVisible) {
-        View nav_back = findViewById(R.id.btn_Nav_Header_Goback);
+        View view = findViewById(R.id.btn_Nav_Header_Goback);
         if (isVisible) {
-            nav_back.setVisibility(View.VISIBLE);
-            nav_back.setOnClickListener(this);
+            view.setVisibility(View.VISIBLE);
+            view.setOnClickListener(this);
         } else {
-            nav_back.setVisibility(View.GONE);
+            view.setVisibility(View.GONE);
+        }
+    }
+
+    public void setNavHeaderBtnByRightIsVisible(boolean isVisible) {
+        View view = findViewById(R.id.btn_Nav_Header_Right);
+        if (isVisible) {
+            view.setVisibility(View.VISIBLE);
+            view.setOnClickListener(this);
+        } else {
+            view.setVisibility(View.GONE);
         }
     }
 

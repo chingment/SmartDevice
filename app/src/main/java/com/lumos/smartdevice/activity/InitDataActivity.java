@@ -199,15 +199,15 @@ public class InitDataActivity extends BaseFragmentActivity {
 
         setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_settingdevice));
 
-        ConfigBean config= DbManager.getInstance().getConfig(ConfigDao.FIELD_VERSION_MODE);
-        if(config.getValue().equals("0")) {
-            initActionIsRun=false;
+        String version_mode= DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
+        if(version_mode==null||version_mode.equals("0")) {
+            initActionIsRun = false;
             setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_verion_mode));
             return false;
         }
 
-        config= DbManager.getInstance().getConfig(ConfigDao.FIELD_SCENE_MODE);
-        if(config.getValue().equals("0")) {
+        String scene_mode= DbManager.getInstance().getConfigValue(ConfigDao.FIELD_SCENE_MODE);
+        if(scene_mode==null||scene_mode.equals("0")) {
             initActionIsRun=false;
             setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_scene_mode));
             return false;

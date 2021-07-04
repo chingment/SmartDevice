@@ -69,7 +69,7 @@
             android:paddingRight="@dimen/size_10"
             android:text="@string/ly_nav_header_btn_txt_right"
             android:textColor="@color/ly_nav_header_btn_txt_right"
-            android:textSize="@dimen/sp_10" />
+            android:textSize="@dimen/sp_14" />
     </LinearLayout>
 
 
