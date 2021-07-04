@@ -13,6 +13,9 @@ import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.sm.SmHelpToolActivity;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
 import com.lumos.smartdevice.adapter.LogTipsAdapter;
+import com.lumos.smartdevice.db.ConfigDao;
+import com.lumos.smartdevice.db.DbManager;
+import com.lumos.smartdevice.db.model.ConfigBean;
 import com.lumos.smartdevice.model.LogTipsBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyListView;
@@ -44,11 +47,11 @@ public class InitDataActivity extends BaseFragmentActivity {
         public void run() {
 
             if(!initActionIsRun) {
-                initActionIsRun=true;
+                initActionIsRun = true;
                 setDeviceInitData();
             }
 
-            setHandleMessage(WHAT_TIPS,"哈哈哈哈哈");
+            //setHandleMessage(WHAT_TIPS,"哈哈哈哈哈");
 
             initActionHandler.postDelayed(this, 1000);
         }
@@ -192,8 +195,24 @@ public class InitDataActivity extends BaseFragmentActivity {
         setHandleMessage(what,msg,null);
     }
 
-    private void setDeviceInitData(){
+    private boolean setDeviceInitData(){
 
+        setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_settingdevice));
 
+        ConfigBean config= DbManager.getInstance().getConfig(ConfigDao.FIELD_VERSION_MODE);
+        if(config.getValue().equals("0")) {
+            initActionIsRun=false;
+            setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_verion_mode));
+            return false;
+        }
+
+        config= DbManager.getInstance().getConfig(ConfigDao.FIELD_SCENE_MODE);
+        if(config.getValue().equals("0")) {
+            initActionIsRun=false;
+            setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_scene_mode));
+            return false;
+        }
+
+        return  true;
     }
 }

@@ -11,6 +11,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 
+import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 
 import java.io.BufferedReader;
@@ -71,8 +72,9 @@ public class AppContext extends Application {
         Context context = getApplicationContext();
 
         DbManager.getInstance().initConfig();
-        DbManager.getInstance().updateConfig("scene_mode","2");
-        DbManager.getInstance().getConfig("scene_mode");
+        DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE,"0");
+        DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE,"0");
+       // DbManager.getInstance().getConfig("scene_mode");
     }
 
     @Override

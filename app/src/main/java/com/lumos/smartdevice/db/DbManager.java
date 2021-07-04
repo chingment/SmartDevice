@@ -38,8 +38,8 @@ public class DbManager {
     }
 
     public void initConfig(){
-        addConfig("version_mode","1");
-        addConfig("scene_mode","1");
+        addConfig(ConfigDao.FIELD_VERSION_MODE,"0");
+        addConfig(ConfigDao.FIELD_SCENE_MODE,"0");
     }
 
     public void addConfig(String field,String value){

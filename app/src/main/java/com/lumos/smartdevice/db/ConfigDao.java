@@ -23,4 +23,7 @@ public class ConfigDao {
 	public static final String TABLE_NAME = "tb_config";
 	public static final String COLUMN_NAME_FIELD = "field";
 	public static final String COLUMN_NAME_VALUE = "value";
+
+	public static final String FIELD_VERSION_MODE = "version_mode";
+	public static final String FIELD_SCENE_MODE = "scen_mode";
 }
