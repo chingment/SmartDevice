@@ -43,4 +43,7 @@
     <string name="ly_nav_header_btn_txt_right">保存</string>
     <string name="title">标题</string>
     <string name="save_success">保存成功</string>
+    <string name="custom_dialog_confirm_btn_txt_cancle">否</string>
+    <string name="custom_dialog_confirm_btn_txt_sure">是</string>
+    <string name="confrim_tips_exitmanager">确定退出管理？</string>
 </resources>

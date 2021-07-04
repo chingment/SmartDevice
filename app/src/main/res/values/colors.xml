@@ -16,4 +16,9 @@
     <color name="aty_smlogin_et_txt">#333333</color>
     <color name="aty_smlogin_et_hint">#BFBFBF</color>
     <color name="grid_nine_tv_txt_title">#333333</color>
+    <color name="dialog_tips">#333333</color>
+    <color name="custom_dialog_confirm_bg">#2000</color>
+    <color name="custom_dialog_confirm_btn_sure">#000000</color>
+    <color name="custom_dialog_confirm_btn_sure_bg">#FFFFFF</color>
+    <color name="custom_dialog_confirm_btn_cancle">#000000</color>
 </resources>

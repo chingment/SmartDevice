@@ -1,10 +1,13 @@
 package com.lumos.smartdevice.activity.sm;
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.InitDataActivity;
 import com.lumos.smartdevice.adapter.GridNineItemAdapter;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
+import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
+import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
@@ -18,6 +21,9 @@ import java.util.List;
 
 public class SmHelpToolActivity extends BaseFragmentActivity {
     private static final String TAG = "SmHelpToolActivity";
+
+
+    private CustomDialogConfirm dialog_Confirm;
 
     private MyGridView gdv_Nine;
     private List<GridNineItemBean> gdv_Nine_Items;
@@ -78,12 +84,41 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
                                 case "fun.rebootsys":
                                     break;
                                 case "fun.exitmanager":
+                                    exitManager();
                                     break;
                             }
                          case GridNineItemType.Url:
                              break;
                     }
                 }
+            }
+        });
+
+        dialog_Confirm = new CustomDialogConfirm(SmHelpToolActivity.this, "", true);
+        dialog_Confirm.getBtnSure().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tag = v.getTag().toString();
+
+                switch (tag) {
+                    case "fun.closeapp":
+                        break;
+                    case "fun.rebootsys":
+                        break;
+                    case "fun.exitmanager":
+                        Intent intent = new Intent(getAppContext(), InitDataActivity.class);
+                        startActivity(intent);
+                        AppManager.getAppManager().finishAllActivity();
+                        break;
+                }
+                dialog_Confirm.hide();
+            }
+        });
+
+        dialog_Confirm.getBtnCancle().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_Confirm.hide();
             }
         });
 
@@ -96,5 +131,21 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
     private void factorySetting(){
         Intent intent = new Intent(getAppContext(), SmFactorySettingActivity.class);
         startActivity(intent);
+
+    }
+
+    private void exitManager(){
+        dialog_Confirm.getTipsImage().setVisibility(View.GONE);
+        dialog_Confirm.getBtnSure().setTag("fun.exitmanager");
+        dialog_Confirm.getTipsText().setText(getAppContext().getString(R.string.confrim_tips_exitmanager));
+        dialog_Confirm.show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (dialog_Confirm != null) {
+            dialog_Confirm.cancel();
+        }
     }
 }
