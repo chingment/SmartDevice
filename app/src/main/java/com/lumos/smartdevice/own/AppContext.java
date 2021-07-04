@@ -13,6 +13,7 @@ import android.text.TextUtils;
 
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
+import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -72,7 +73,7 @@ public class AppContext extends Application {
         Context context = getApplicationContext();
 
         DbManager.getInstance().init();
-
+        OstCtrlInterface.init(context);
         //DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE,"0");
         //DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE,"0");
        // DbManager.getInstance().getConfig("scene_mode");

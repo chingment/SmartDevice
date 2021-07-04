@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentActivity;
 
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.utils.StringUtil;
@@ -144,6 +145,10 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
         if (!StringUtil.isEmpty(txt)) {
             ToastUtil.showMessage(BaseFragmentActivity.this, txt, Toast.LENGTH_LONG);
         }
+    }
+
+    public void setHideSysStatusBar(boolean ishidden) {
+        OstCtrlInterface.getInstance().setHideStatusBar(appContext, ishidden);
     }
 
 }

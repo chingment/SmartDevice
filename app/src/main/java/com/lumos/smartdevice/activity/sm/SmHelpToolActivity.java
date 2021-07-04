@@ -5,6 +5,7 @@ import com.lumos.smartdevice.activity.InitDataActivity;
 import com.lumos.smartdevice.adapter.GridNineItemAdapter;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
+import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
@@ -44,12 +45,12 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
         gdv_Nine = findViewById(R.id.gdv_Nine);
 
         gdv_Nine_Items = new ArrayList<GridNineItemBean>();
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_factorysetting), GridNineItemType.Function, "fun.factorysetting", R.drawable.ic_sm_showsysnav));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_showsysnav), GridNineItemType.Function, "fun.showsysnav", R.drawable.ic_sm_showsysnav));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "fun.checkupdateapp", R.drawable.ic_sm_checkupdateapp));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "fun.closeapp", R.drawable.ic_sm_closeapp));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "fun.rebootsys", R.drawable.ic_sm_rebootsys));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_exitmanager), GridNineItemType.Function, "fun.exitmanager", R.drawable.ic_sm_exitmanager));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_factorysetting), GridNineItemType.Function, "gdv.factorysetting", R.drawable.ic_sm_showsysstatusbar));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_showsysstatusbar), GridNineItemType.Function, "gdv.showsysstatusbar", R.drawable.ic_sm_showsysstatusbar));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "gdv.checkupdateapp", R.drawable.ic_sm_checkupdateapp));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "gdv.closeapp", R.drawable.ic_sm_closeapp));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "gdv.rebootsys", R.drawable.ic_sm_rebootsys));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_exitmanager), GridNineItemType.Function, "gdv.exitmanager", R.drawable.ic_sm_exitmanager));
 
 
         GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(), gdv_Nine_Items);
@@ -72,19 +73,22 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
                     switch (type) {
                         case GridNineItemType.Function:
                             switch (action) {
-                                case "fun.factorysetting":
-                                    factorySetting();
+                                case "gdv.factorysetting":
+                                    gdvFactorySetting();
                                     break;
-                                case "fun.showsysnav":
+                                case "gdv.showsysstatusbar":
+                                    gdvShowSysStatusBar();
                                     break;
-                                case "fun.checkupdateapp":
+                                case "gdv.checkupdateapp":
                                     break;
-                                case "fun.closeapp":
+                                case "gdv.closeapp":
+                                    gdvCloseApp();
                                     break;
-                                case "fun.rebootsys":
+                                case "gdv.rebootsys":
+                                    gdvRebootSys();
                                     break;
-                                case "fun.exitmanager":
-                                    exitManager();
+                                case "gdv.exitmanager":
+                                    gdvExitManager();
                                     break;
                             }
                          case GridNineItemType.Url:
@@ -101,14 +105,14 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
                 String tag = v.getTag().toString();
 
                 switch (tag) {
-                    case "fun.closeapp":
+                    case "dlg.closeapp":
+                        dlgCloseApp();
                         break;
-                    case "fun.rebootsys":
+                    case "dlg.rebootsys":
+                        dlgRebootSys();
                         break;
-                    case "fun.exitmanager":
-                        Intent intent = new Intent(getAppContext(), InitDataActivity.class);
-                        startActivity(intent);
-                        AppManager.getAppManager().finishAllActivity();
+                    case "dlg.exitmanager":
+                        dlgExitManager();
                         break;
                 }
                 dialog_Confirm.hide();
@@ -128,17 +132,52 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
 
     }
 
-    private void factorySetting(){
+    private void gdvFactorySetting(){
         Intent intent = new Intent(getAppContext(), SmFactorySettingActivity.class);
         startActivity(intent);
 
     }
 
-    private void exitManager(){
+    private void gdvShowSysStatusBar(){
+        OstCtrlInterface.getInstance().setHideStatusBar(SmHelpToolActivity.this,false);
+    }
+
+    private void gdvExitManager(){
         dialog_Confirm.getTipsImage().setVisibility(View.GONE);
-        dialog_Confirm.getBtnSure().setTag("fun.exitmanager");
+        dialog_Confirm.getBtnSure().setTag("dlg.exitmanager");
         dialog_Confirm.getTipsText().setText(getAppContext().getString(R.string.confrim_tips_exitmanager));
         dialog_Confirm.show();
+    }
+
+    private void gdvCloseApp(){
+        dialog_Confirm.getTipsImage().setVisibility(View.GONE);
+        dialog_Confirm.getBtnSure().setTag("dlg.closeapp");
+        dialog_Confirm.getTipsText().setText(getAppContext().getString(R.string.confrim_tips_closeapp));
+        dialog_Confirm.show();
+    }
+
+    private void gdvRebootSys(){
+        dialog_Confirm.getTipsImage().setVisibility(View.GONE);
+        dialog_Confirm.getBtnSure().setTag("dlg.rebootsys");
+        dialog_Confirm.getTipsText().setText(getAppContext().getString(R.string.confrim_tips_rebootsys));
+        dialog_Confirm.show();
+    }
+
+
+    private void dlgCloseApp(){
+        setHideSysStatusBar(false);
+        AppManager.getAppManager().AppExit(SmHelpToolActivity.this);
+    }
+
+    private void dlgRebootSys(){
+        setHideSysStatusBar(false);
+        OstCtrlInterface.getInstance().reboot(SmHelpToolActivity.this);
+    }
+
+    private void dlgExitManager(){
+        Intent intent = new Intent(getAppContext(), InitDataActivity.class);
+        startActivity(intent);
+        AppManager.getAppManager().finishAllActivity();
     }
 
     @Override

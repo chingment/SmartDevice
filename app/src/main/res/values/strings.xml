@@ -16,7 +16,7 @@
     <string name="aty_smlogin_scene_manager_center">管理中心</string>
     <string name="aty_smhelptool_nav_title">帮助工具</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_factorysetting">出厂设置</string>
-    <string name="aty_smhelptool_gdv_nine_it_txt_showsysnav">显示导航</string>
+    <string name="aty_smhelptool_gdv_nine_it_txt_showsysstatusbar">显示导航</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_checkupdateapp">检查更新</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_closeapp">关闭应用</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_rebootsys">重启系统</string>
@@ -33,10 +33,10 @@
     <string name="aty_appscenesetting_rbtn_txt_scenemode_1">寄存柜</string>
     <string name="aty_appscenesetting_rbtn_txt_scenemode_2">书柜</string>
     <string name="unknown">未知</string>
-    <string name="vesionmode_1">寄存柜</string>
-    <string name="vesionmode_2">书柜</string>
-    <string name="scenemode_1">单机版</string>
-    <string name="scenemode_2">网络版</string>
+    <string name="scenemode_1">寄存柜</string>
+    <string name="scenemode_2">书柜</string>
+    <string name="vesionmode_1">单机版</string>
+    <string name="vesionmode_2">网络版</string>
     <string name="it_ls_logtips_tv_txt_datetime">时间</string>
     <string name="it_ls_logtips_tv_txt_content">内容</string>
     <string name="img_content_description_empty">图片</string>
@@ -46,4 +46,6 @@
     <string name="custom_dialog_confirm_btn_txt_cancle">否</string>
     <string name="custom_dialog_confirm_btn_txt_sure">是</string>
     <string name="confrim_tips_exitmanager">确定退出管理？</string>
+    <string name="confrim_tips_closeapp">确定关闭应用？</string>
+    <string name="confrim_tips_rebootsys">确定重启系统？</string>
 </resources>
