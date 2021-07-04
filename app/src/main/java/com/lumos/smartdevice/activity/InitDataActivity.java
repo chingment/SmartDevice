@@ -213,6 +213,10 @@ public class InitDataActivity extends BaseFragmentActivity {
             return false;
         }
 
+        if(version_mode.equals("1")){
+
+        }
+
         return  true;
     }
 }

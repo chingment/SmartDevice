@@ -37,7 +37,11 @@ public class DbManager {
         dbMgr = null;
     }
 
-    public void initConfig(){
+    public void  init(){
+        initConfig();
+    }
+
+    private void initConfig(){
         addConfig(ConfigDao.FIELD_VERSION_MODE,"0");
         addConfig(ConfigDao.FIELD_SCENE_MODE,"0");
     }
@@ -46,13 +50,20 @@ public class DbManager {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int id = -1;
         if(db.isOpen()){
+
+            Cursor cursor = db.rawQuery(
+                    "select * from   "+ConfigDao.TABLE_NAME+"  where   field=? ",
+                    new String[] { field });
+            while (cursor.moveToNext()) {
+                db.close();
+                return;
+            }
+
             ContentValues values = new ContentValues();
             values.put(ConfigDao.COLUMN_NAME_FIELD, field);
             values.put(ConfigDao.COLUMN_NAME_VALUE, value);
 
-
             db.insert(ConfigDao.TABLE_NAME, null, values);
-
 
         }
     }

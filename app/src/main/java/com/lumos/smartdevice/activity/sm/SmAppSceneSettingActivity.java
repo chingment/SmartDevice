@@ -28,7 +28,7 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
 
         setNavHeaderTtile(R.string.aty_appscenesetting_nav_title);
         setNavHeaderBtnByGoBackIsVisible(true);
-        setNavHeaderBtnByRightIsVisible(true);
+        setNavHeaderBtnByRightIsVisible(false);
 
 
         initView();
@@ -42,7 +42,21 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
     }
 
     private void initEvent() {
+        rg_VesionMode.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                View v= findViewById(checkedId);
+                DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE,v.getTag().toString());
+            }
+        });
 
+        rg_SceneMode.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                View v= findViewById(checkedId);
+                DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE,v.getTag().toString());
+            }
+        });
     }
 
     private void initData() {
