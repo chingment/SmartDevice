@@ -89,6 +89,7 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
                     }
 
 
+                    showToast(getAppContext().getString(R.string.save_success));
                     break;
 
             }

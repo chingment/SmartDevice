@@ -23,6 +23,8 @@
     <string name="aty_smhelptool_gdv_nine_it_txt_exitmanager">退出管理</string>
     <string name="aty_factorysetting_nav_title">出厂设置</string>
     <string name="aty_factorysetting_nav_txt_appscene">应用场景</string>
+    <string name="aty_factorysetting_tips_nosetversion">未设置版本模式</string>
+    <string name="aty_factorysetting_tips_nosetscene">未设置场景模式</string>
     <string name="aty_appscenesetting_nav_title">应用场景</string>
     <string name="aty_appscenesetting_tv_txt_vesionmode">版本模式</string>
     <string name="aty_appscenesetting_tv_txt_scenemode">场景模式</string>
@@ -30,11 +32,15 @@
     <string name="aty_appscenesetting_rbtn_txt_vesionmode_2">网络版</string>
     <string name="aty_appscenesetting_rbtn_txt_scenemode_1">寄存柜</string>
     <string name="aty_appscenesetting_rbtn_txt_scenemode_2">书柜</string>
-
-
+    <string name="unknown">未知</string>
+    <string name="vesionmode_1">寄存柜</string>
+    <string name="vesionmode_2">书柜</string>
+    <string name="scenemode_1">单机版</string>
+    <string name="scenemode_2">网络版</string>
     <string name="it_ls_logtips_tv_txt_datetime">时间</string>
     <string name="it_ls_logtips_tv_txt_content">内容</string>
     <string name="img_content_description_empty">图片</string>
     <string name="ly_nav_header_btn_txt_right">保存</string>
     <string name="title">标题</string>
+    <string name="save_success">保存成功</string>
 </resources>

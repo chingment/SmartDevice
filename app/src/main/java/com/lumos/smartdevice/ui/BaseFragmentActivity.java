@@ -26,6 +26,8 @@ import androidx.fragment.app.FragmentActivity;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppManager;
+import com.lumos.smartdevice.utils.StringUtil;
+import com.lumos.smartdevice.utils.ToastUtil;
 
 import org.json.JSONObject;
 
@@ -135,6 +137,12 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
             view.setOnClickListener(this);
         } else {
             view.setVisibility(View.GONE);
+        }
+    }
+
+    public void showToast(String txt) {
+        if (!StringUtil.isEmpty(txt)) {
+            ToastUtil.showMessage(BaseFragmentActivity.this, txt, Toast.LENGTH_LONG);
         }
     }
 

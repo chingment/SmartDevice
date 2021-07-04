@@ -16,6 +16,9 @@ package com.lumos.smartdevice.db;
 import android.content.Context;
 
 
+import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.own.AppContext;
+
 import java.util.List;
 import java.util.Map;
 
@@ -26,4 +29,34 @@ public class ConfigDao {
 
 	public static final String FIELD_VERSION_MODE = "version_mode";
 	public static final String FIELD_SCENE_MODE = "scen_mode";
+
+	public static String getVersionModeName(String val) {
+
+		int id = R.string.unknown;
+		switch (val) {
+			case "1":
+				id = R.string.vesionmode_1;
+				break;
+			case "2":
+				id =R.string.vesionmode_2;
+				break;
+		}
+		return	AppContext.getInstance().getResources().getString(id);
+
+	}
+
+	public static String getSceneModeName(String val){
+
+		int id =R.string.unknown;
+		switch (val) {
+			case "1":
+				id =R.string.scenemode_1;
+				break;
+			case "2":
+				id =R.string.scenemode_2;
+				break;
+		}
+		return	AppContext.getInstance().getResources().getString(id);
+
+	}
 }
