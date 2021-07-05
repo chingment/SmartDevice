@@ -42,7 +42,7 @@
                       <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/aty_factorysetting_nav_txt_appscene"
+                        android:text="@string/aty_smfactorysetting_nav_txt_appscene"
                         android:textColor="@color/field_name"
                         android:textSize="@dimen/sp_16" />
                       <LinearLayout

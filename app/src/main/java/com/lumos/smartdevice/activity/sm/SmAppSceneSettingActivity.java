@@ -33,7 +33,7 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smappscenesetting);
 
-        setNavHeaderTtile(R.string.aty_appscenesetting_nav_title);
+        setNavHeaderTtile(R.string.aty_smappscenesetting_nav_title);
         setNavHeaderBtnByGoBackIsVisible(true);
         setNavHeaderBtnByRightIsVisible(false);
 
@@ -47,7 +47,7 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
         rg_VesionMode = findViewById(R.id.rg_VesionMode);
         rg_SceneMode = findViewById(R.id.rg_SceneMode);
         lyt_Setting_Scene_Mode_1 = findViewById(R.id.lyt_Setting_Scene_Mode_1);
-        sp_Com_Scene_Mode_1 = findViewById(R.id.sp_Com_Scene_Mode_1);
+        sp_Com_Scene_Mode_1 = findViewById(R.id.sp_Com_Name_Scene_Mode_1);
     }
 
     private void initEvent() {

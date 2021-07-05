@@ -23,7 +23,7 @@ public class SmFactorySettingActivity extends BaseFragmentActivity implements Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smfactorysetting);
 
-        setNavHeaderTtile(R.string.aty_factorysetting_nav_title);
+        setNavHeaderTtile(R.string.aty_smfactorysetting_nav_title);
         setNavHeaderBtnByGoBackIsVisible(true);
 
         initView();
@@ -52,9 +52,9 @@ public class SmFactorySettingActivity extends BaseFragmentActivity implements Vi
         String version_mode = DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
         String scene_mode = DbManager.getInstance().getConfigValue(ConfigDao.FIELD_SCENE_MODE);
         if (version_mode == null || version_mode.equals("0")) {
-            tv_Nav_AppScene_Tips.setText(R.string.aty_factorysetting_tips_nosetversion);
+            tv_Nav_AppScene_Tips.setText(R.string.aty_smfactorysetting_tips_nosetversion);
         } else if (scene_mode == null || scene_mode.equals("0")) {
-            tv_Nav_AppScene_Tips.setText(R.string.aty_factorysetting_tips_nosetscene);
+            tv_Nav_AppScene_Tips.setText(R.string.aty_smfactorysetting_tips_nosetscene);
         }
         else {
             tv_Nav_AppScene_Tips.setText(ConfigDao.getSceneModeName(scene_mode)+"["+ConfigDao.getVersionModeName(version_mode)+"]");
