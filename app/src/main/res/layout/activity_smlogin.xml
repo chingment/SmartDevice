@@ -131,6 +131,15 @@
                 android:text="@string/aty_smlogin_btn_txt_login"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_12"/>
+
+
+            <LinearLayout
+                android:layout_below="@+id/btn_LoginByAccount"
+                android:id="@+id/btn_HelpTool"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_100"
+                android:orientation="vertical">
+            </LinearLayout>
         </RelativeLayout>
 
 

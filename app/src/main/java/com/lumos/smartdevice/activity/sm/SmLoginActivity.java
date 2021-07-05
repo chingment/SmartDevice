@@ -4,19 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
+import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 public class SmLoginActivity extends BaseFragmentActivity implements View.OnClickListener {
     private static final String TAG = "SmLoginActivity";
 
     private Button btn_LoginByAccount;
+    private LinearLayout btn_HelpTool;
     private EditText et_UserName;
     private EditText et_Password;
     private TextView tv_Scene;
@@ -39,14 +43,29 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
     private void initView() {
 
         btn_LoginByAccount = findViewById(R.id.btn_LoginByAccount);
+        btn_HelpTool = findViewById(R.id.btn_HelpTool);
         et_UserName = findViewById(R.id.et_UserName);
         et_Password = findViewById(R.id.et_Password);
         tv_Scene = findViewById(R.id.tv_Scene);
+
 
     }
 
     private void initEvent() {
         btn_LoginByAccount.setOnClickListener(this);
+
+        if(scene!="1"){
+            LongClickUtil.setLongClick(new Handler(), btn_HelpTool, 500, new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    Intent intent = new Intent(getAppContext(), SmLoginActivity.class);
+                    intent.putExtra("scene","init_data_help");
+                    startActivity(intent);
+                    //finish();
+                    return true;
+                }
+            });
+        }
     }
 
     private void initData() {

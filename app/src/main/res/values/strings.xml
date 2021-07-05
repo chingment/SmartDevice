@@ -12,9 +12,9 @@
     <string name="aty_smlogin_et_hint_username">用户名</string>
     <string name="aty_smlogin_et_hint_password">密码</string>
     <string name="aty_smlogin_btn_txt_login">登录</string>
-    <string name="aty_smlogin_scene_init_data_help">初始化数据帮助中心</string>
+    <string name="aty_smlogin_scene_init_data_help">帮助中心</string>
     <string name="aty_smlogin_scene_manager_center">管理中心</string>
-    <string name="aty_smhelptool_nav_title">帮助工具</string>
+    <string name="aty_smhelptool_nav_title">帮助中心</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_factorysetting">出厂设置</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_showsysstatusbar">显示导航</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_checkupdateapp">检查更新</string>
