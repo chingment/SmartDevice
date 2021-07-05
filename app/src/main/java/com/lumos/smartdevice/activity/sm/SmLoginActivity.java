@@ -76,8 +76,20 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
     }
 
     private void loginByAccount(){
-        Intent intent = new Intent(getAppContext(), SmHelpToolActivity.class);
-        startActivity(intent);
-        finish();
+
+        Intent intent=null;
+        switch (scene){
+            case "init_data_help":
+                intent = new Intent(getAppContext(), SmHelpToolActivity.class);
+                break;
+            case "manager_center":
+                intent = new Intent(getAppContext(), SmHomeActivity.class);
+                break;
+        }
+
+        if(intent!=null) {
+            startActivity(intent);
+            finish();
+        }
     }
 }

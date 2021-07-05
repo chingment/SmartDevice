@@ -10,12 +10,11 @@ import android.widget.TextView;
 
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.sm.SmHelpToolActivity;
+import com.lumos.smartdevice.activity.scenelocker.LockerMainActivity;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
 import com.lumos.smartdevice.adapter.LogTipsAdapter;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
-import com.lumos.smartdevice.db.model.ConfigBean;
 import com.lumos.smartdevice.model.LogTipsBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyListView;
@@ -213,8 +212,10 @@ public class InitDataActivity extends BaseFragmentActivity {
             return false;
         }
 
-        if(version_mode.equals("1")){
-
+        if(scene_mode.equals("1")){
+            Intent intent = new Intent(getAppContext(), LockerMainActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         return  true;

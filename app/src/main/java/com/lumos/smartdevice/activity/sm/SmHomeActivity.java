@@ -20,8 +20,9 @@ import android.widget.AdapterView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SmHelpToolActivity extends BaseFragmentActivity {
-    private static final String TAG = "SmHelpToolActivity";
+public class SmHomeActivity extends BaseFragmentActivity {
+
+    private static final String TAG = "SmHomeActivity";
 
     private CustomDialogConfirm dialog_Confirm;
     private MyGridView gdv_Nine;
@@ -30,9 +31,9 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_smhelptool);
+        setContentView(R.layout.activity_smhome);
 
-        setNavHeaderTtile(R.string.aty_smhelptool_nav_title);
+        setNavHeaderTtile(R.string.aty_smhome_nav_title);
 
         initView();
         initEvent();
@@ -43,8 +44,8 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
         gdv_Nine = findViewById(R.id.gdv_Nine);
 
         gdv_Nine_Items = new ArrayList<GridNineItemBean>();
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_factorysetting), GridNineItemType.Function, "gdv.factorysetting", R.drawable.ic_sm_showsysstatusbar));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_showsysstatusbar), GridNineItemType.Function, "gdv.showsysstatusbar", R.drawable.ic_sm_showsysstatusbar));
+
+
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "gdv.checkupdateapp", R.drawable.ic_sm_checkupdateapp));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "gdv.closeapp", R.drawable.ic_sm_closeapp));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "gdv.rebootsys", R.drawable.ic_sm_rebootsys));
@@ -65,18 +66,12 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (!NoDoubleClickUtil.isDoubleClick()) {
-                   GridNineItemBean gdv_Nine_Item = gdv_Nine_Items.get(position);
+                    GridNineItemBean gdv_Nine_Item = gdv_Nine_Items.get(position);
                     int type = gdv_Nine_Item.getType();
                     String action = gdv_Nine_Item.getAction();
                     switch (type) {
                         case GridNineItemType.Function:
                             switch (action) {
-                                case "gdv.factorysetting":
-                                    gdvFactorySetting();
-                                    break;
-                                case "gdv.showsysstatusbar":
-                                    gdvShowSysStatusBar();
-                                    break;
                                 case "gdv.checkupdateapp":
                                     break;
                                 case "gdv.closeapp":
@@ -89,14 +84,14 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
                                     gdvExitManager();
                                     break;
                             }
-                         case GridNineItemType.Url:
-                             break;
+                        case GridNineItemType.Url:
+                            break;
                     }
                 }
             }
         });
 
-        dialog_Confirm = new CustomDialogConfirm(SmHelpToolActivity.this, "", true);
+        dialog_Confirm = new CustomDialogConfirm(SmHomeActivity.this, "", true);
         dialog_Confirm.getBtnSure().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,15 +125,6 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
 
     }
 
-    private void gdvFactorySetting(){
-        Intent intent = new Intent(SmHelpToolActivity.this, SmFactorySettingActivity.class);
-        startActivity(intent);
-
-    }
-
-    private void gdvShowSysStatusBar(){
-        OstCtrlInterface.getInstance().setHideStatusBar(SmHelpToolActivity.this,false);
-    }
 
     private void gdvExitManager(){
         dialog_Confirm.getTipsImage().setVisibility(View.GONE);
@@ -164,16 +150,16 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
 
     private void dlgCloseApp(){
         setHideSysStatusBar(false);
-        AppManager.getAppManager().AppExit(SmHelpToolActivity.this);
+        AppManager.getAppManager().AppExit(SmHomeActivity.this);
     }
 
     private void dlgRebootSys(){
         setHideSysStatusBar(false);
-        OstCtrlInterface.getInstance().reboot(SmHelpToolActivity.this);
+        OstCtrlInterface.getInstance().reboot(SmHomeActivity.this);
     }
 
     private void dlgExitManager(){
-        Intent intent = new Intent(SmHelpToolActivity.this, InitDataActivity.class);
+        Intent intent = new Intent(SmHomeActivity.this, InitDataActivity.class);
         startActivity(intent);
         AppManager.getAppManager().finishAllActivity();
     }
