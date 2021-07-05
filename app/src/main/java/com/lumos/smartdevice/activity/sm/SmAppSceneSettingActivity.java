@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.db.ConfigDao;
@@ -16,10 +18,15 @@ import com.lumos.smartdevice.db.model.ConfigBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
+import java.util.ArrayList;
+
 public class SmAppSceneSettingActivity extends BaseFragmentActivity {
 
     private RadioGroup rg_VesionMode;
     private RadioGroup rg_SceneMode;
+    private LinearLayout lyt_Setting_Scene_Mode_1;
+
+    private Spinner sp_Com_Scene_Mode_1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,8 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
     private void initView() {
         rg_VesionMode = findViewById(R.id.rg_VesionMode);
         rg_SceneMode = findViewById(R.id.rg_SceneMode);
+        lyt_Setting_Scene_Mode_1 = findViewById(R.id.lyt_Setting_Scene_Mode_1);
+        sp_Com_Scene_Mode_1 = findViewById(R.id.sp_Com_Scene_Mode_1);
     }
 
     private void initEvent() {
@@ -47,14 +56,41 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 View v= findViewById(checkedId);
                 DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE,v.getTag().toString());
+
+                String scene = DbManager.getInstance().getConfigValue(ConfigDao.FIELD_SCENE_MODE);
+                if(scene!=null&&scene.equals("1")) {
+                    String version = v.getTag().toString();
+                    if (version.equals("1")) {
+                        lyt_Setting_Scene_Mode_1.setVisibility(View.VISIBLE);
+                    } else {
+                        lyt_Setting_Scene_Mode_1.setVisibility(View.GONE);
+                    }
+                }
+                else {
+                    lyt_Setting_Scene_Mode_1.setVisibility(View.GONE);
+                }
+
             }
         });
 
         rg_SceneMode.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                View v= findViewById(checkedId);
-                DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE,v.getTag().toString());
+                View v = findViewById(checkedId);
+                DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE, v.getTag().toString());
+
+                String version = DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
+                if(version!=null&&version.equals("1")) {
+                    String scene = v.getTag().toString();
+                    if (scene.equals("1")) {
+                        lyt_Setting_Scene_Mode_1.setVisibility(View.VISIBLE);
+                    } else {
+                        lyt_Setting_Scene_Mode_1.setVisibility(View.GONE);
+                    }
+                }
+                else {
+                    lyt_Setting_Scene_Mode_1.setVisibility(View.GONE);
+                }
             }
         });
     }
@@ -79,6 +115,19 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
                 rg_SceneMode.check(R.id.rbtn_SceneMode_2);
             }
         }
+
+        ArrayList data_list = new ArrayList<String>();
+        data_list.add("北京");
+        data_list.add("上海");
+        data_list.add("广州");
+        data_list.add("深圳");
+
+        //适配器
+        ArrayAdapter arr_adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);
+        //设置样式
+        arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //加载适配器
+        sp_Com_Scene_Mode_1.setAdapter(arr_adapter);
 
     }
 

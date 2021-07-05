@@ -171,6 +171,108 @@
             </LinearLayout>
 
 
+            <LinearLayout
+                android:id="@+id/lyt_Setting_Scene_Mode_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="@dimen/size_2"
+                        android:layout_height="@dimen/size_14">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/colorPrimary" />
+                    </LinearLayout>
+                    <TextView
+                        android:paddingLeft="@dimen/size_5"
+                        android:paddingRight="@dimen/size_5"
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_gravity="left"
+                        android:gravity="left"
+                        android:layout_weight="1"
+                        android:text="@string/aty_appscenesetting_scene_setting_1"
+                        android:textColor="@color/text"
+                        android:textSize="@dimen/sp_14" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:padding="@dimen/size_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:id="@+id/btn_Nav_AppSceneSetting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/size_10"
+                        android:paddingTop="@dimen/sp_10"
+                        android:background="@drawable/aty_smlogin_input_boder_bottom">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/aty_factorysetting_nav_txt_appscene"
+                            android:textColor="@color/field_name"
+                            android:textSize="@dimen/sp_16" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:orientation="horizontal"
+                            >
+
+                            <Spinner
+                                android:id="@+id/sp_Com_Scene_Mode_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/size_10"
+                        android:paddingTop="@dimen/sp_10">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/aty_initdata_tv_txt_deviceid"
+                            android:textColor="@color/field_name"
+                            android:textSize="@dimen/sp_16" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:orientation="horizontal"
+                            >
+
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
 

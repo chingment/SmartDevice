@@ -38,7 +38,7 @@
                     android:orientation="horizontal"
                     android:paddingBottom="@dimen/size_10"
                     android:paddingTop="@dimen/sp_10"
-                    android:background="@drawable/aty_smlogin_input_boder_bottom"> cv
+                    android:background="@drawable/aty_smlogin_input_boder_bottom">
                       <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
