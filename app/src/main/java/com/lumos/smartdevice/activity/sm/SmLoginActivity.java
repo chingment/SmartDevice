@@ -58,9 +58,11 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
             LongClickUtil.setLongClick(new Handler(), btn_HelpTool, 500, new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    Intent intent = new Intent(getAppContext(), SmLoginActivity.class);
-                    intent.putExtra("scene","init_data_help");
-                    startActivity(intent);
+                    if(!scene.equals("init_data_help")) {
+                        Intent intent = new Intent(getAppContext(), SmLoginActivity.class);
+                        intent.putExtra("scene", "init_data_help");
+                        startActivity(intent);
+                    }
                     //finish();
                     return true;
                 }

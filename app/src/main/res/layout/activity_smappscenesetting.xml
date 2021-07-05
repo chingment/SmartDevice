@@ -224,7 +224,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/aty_smfactorysetting_nav_txt_appscene"
+                            android:text="@string/aty_smappscenesetting_com_name"
                             android:textColor="@color/field_name"
                             android:textSize="@dimen/sp_14" />
                         <LinearLayout
@@ -252,7 +252,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/aty_initdata_tv_txt_deviceid"
+                            android:text="@string/aty_smappscenesetting_com_baud"
                             android:textColor="@color/field_name"
                             android:textSize="@dimen/sp_14" />
                         <LinearLayout
@@ -264,7 +264,7 @@
 
 
                             <Spinner
-                                android:id="@+id/sp_Com_Baund_Scene_Mode_1"
+                                android:id="@+id/sp_Com_Baud_Scene_Mode_1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 />
