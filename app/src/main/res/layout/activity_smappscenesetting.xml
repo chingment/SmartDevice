@@ -220,7 +220,7 @@
                         android:orientation="horizontal"
                         android:paddingBottom="@dimen/size_10"
                         android:paddingTop="@dimen/sp_10"
-                        android:background="@drawable/aty_smlogin_input_boder_bottom">
+                        android:background="@drawable/nav_boder_bottom">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -239,6 +239,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="@dimen/sp_14"
+                                android:layout_gravity="end"
+                                android:gravity="end"
                                 />
 
                         </LinearLayout>
@@ -249,7 +251,9 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingBottom="@dimen/size_10"
-                        android:paddingTop="@dimen/sp_10">
+                        android:paddingTop="@dimen/sp_10"
+                        android:background="@drawable/nav_boder_bottom"
+                        >
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -273,6 +277,89 @@
 
 
                         </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/size_10"
+                        android:background="@drawable/nav_boder_bottom"
+                        android:paddingTop="@dimen/sp_10">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/aty_smappscenesetting_com_prl"
+                            android:textColor="@color/field_name"
+                            android:textSize="@dimen/sp_14" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:orientation="horizontal"
+                            >
+
+                            <Spinner
+                                android:id="@+id/sp_Com_Prl_Scene_Mode_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_14"
+                                />
+
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/size_10"
+                        android:paddingTop="@dimen/sp_10">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/aty_smappscenesetting_com_lyt"
+                            android:textColor="@color/field_name"
+                            android:textSize="@dimen/sp_14" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:orientation="horizontal"
+                            >
+
+
+
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingBottom="@dimen/size_10"
+                        android:paddingTop="@dimen/sp_10">
+
+                        <EditText
+                            android:id="@+id/ed_Com_Lyt_Scene_Mode_1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="true"
+                            android:gravity="top"
+                        android:inputType="textMultiLine"
+                        android:minLines="8"
+                        android:maxLines="10"
+                        android:scrollbars="vertical"
+                        android:background="@android:drawable/edit_text"
+                        >
+                    </EditText>
+
+
                     </LinearLayout>
 
                 </LinearLayout>
