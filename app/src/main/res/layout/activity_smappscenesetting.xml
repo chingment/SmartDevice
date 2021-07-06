@@ -346,7 +346,7 @@
                         android:paddingTop="@dimen/sp_10">
 
                         <EditText
-                            android:id="@+id/ed_Com_Lyt_Scene_Mode_1"
+                            android:id="@+id/et_Com_Lyt_Scene_Mode_1"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:enabled="true"

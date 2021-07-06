@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -15,6 +16,7 @@ import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.db.model.ConfigBean;
+import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
@@ -28,6 +30,8 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
 
     private Spinner sp_Com_Name_Scene_Mode_1;
     private Spinner sp_Com_Baud_Scene_Mode_1;
+    private Spinner sp_Com_Prl_Scene_Mode_1;
+    private EditText et_Com_Lyt_Scene_Mode_1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,8 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
         lyt_Setting_Scene_Mode_1 = findViewById(R.id.lyt_Setting_Scene_Mode_1);
         sp_Com_Name_Scene_Mode_1 = findViewById(R.id.sp_Com_Name_Scene_Mode_1);
         sp_Com_Baud_Scene_Mode_1= findViewById(R.id.sp_Com_Baud_Scene_Mode_1);
+        sp_Com_Prl_Scene_Mode_1 = findViewById(R.id.sp_Com_Prl_Scene_Mode_1);
+        et_Com_Lyt_Scene_Mode_1 = findViewById(R.id.et_Com_Lyt_Scene_Mode_1);
     }
 
     private void initEvent() {
@@ -123,7 +129,7 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
         list_Com_Names.add("广州");
         list_Com_Names.add("深圳");
 
-        //适配器
+
         ArrayAdapter adapter_Com_Name= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list_Com_Names);
         adapter_Com_Name.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_Com_Name_Scene_Mode_1.setAdapter(adapter_Com_Name);
@@ -135,11 +141,19 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
         list_Com_Bauds.add("19200");
         list_Com_Bauds.add("38400");
 
-        //适配器
+
         ArrayAdapter adapter_Com_Baud= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list_Com_Bauds);
         adapter_Com_Baud.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_Com_Baud_Scene_Mode_1.setAdapter(adapter_Com_Baud);
 
+        ArrayList list_Com_Ptls_Scene_Mode_1 = new ArrayList<String>();
+        list_Com_Ptls_Scene_Mode_1.add(AppVar.COM_LOCKER_PTL_1);
+
+
+
+        ArrayAdapter adapter_Com_Ptls_Scene_Mode_1= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list_Com_Ptls_Scene_Mode_1);
+        adapter_Com_Ptls_Scene_Mode_1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_Com_Prl_Scene_Mode_1.setAdapter(adapter_Com_Ptls_Scene_Mode_1);
 
     }
 

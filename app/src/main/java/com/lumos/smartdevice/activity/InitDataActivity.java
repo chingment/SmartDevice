@@ -16,6 +16,7 @@ import com.lumos.smartdevice.adapter.LogTipsAdapter;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.LogTipsBean;
+import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.LongClickUtil;
@@ -199,20 +200,20 @@ public class InitDataActivity extends BaseFragmentActivity {
         setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_settingdevice));
 
         String version_mode= DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
-        if(version_mode==null||version_mode.equals("0")) {
+        if(version_mode==null||version_mode.equals(AppVar.VERSION_MODE_0)) {
             initActionIsRun = false;
             setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_verion_mode));
             return false;
         }
 
         String scene_mode= DbManager.getInstance().getConfigValue(ConfigDao.FIELD_SCENE_MODE);
-        if(scene_mode==null||scene_mode.equals("0")) {
+        if(scene_mode==null||scene_mode.equals(AppVar.SCENE_MODE_0)) {
             initActionIsRun=false;
             setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_scene_mode));
             return false;
         }
 
-        if(scene_mode.equals("1")){
+        if(scene_mode.equals(AppVar.SCENE_MODE_1)){
             Intent intent = new Intent(getAppContext(), LockerMainActivity.class);
             startActivity(intent);
             finish();

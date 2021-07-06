@@ -18,6 +18,7 @@ import android.content.Context;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.own.AppContext;
+import com.lumos.smartdevice.own.AppVar;
 
 import java.util.List;
 import java.util.Map;
@@ -34,10 +35,10 @@ public class ConfigDao {
 
 		int id = R.string.unknown;
 		switch (val) {
-			case "1":
+			case AppVar.VERSION_MODE_1:
 				id = R.string.vesionmode_1;
 				break;
-			case "2":
+			case AppVar.VERSION_MODE_2:
 				id =R.string.vesionmode_2;
 				break;
 		}
@@ -49,10 +50,10 @@ public class ConfigDao {
 
 		int id =R.string.unknown;
 		switch (val) {
-			case "1":
+			case AppVar.SCENE_MODE_1:
 				id =R.string.scenemode_1;
 				break;
-			case "2":
+			case AppVar.SCENE_MODE_2:
 				id =R.string.scenemode_2;
 				break;
 		}
