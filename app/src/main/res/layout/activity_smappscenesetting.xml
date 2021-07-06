@@ -77,7 +77,7 @@
                     android:paddingLeft="@dimen/size_5"
                     android:tag="1"
                     android:text="@string/aty_smappscenesetting_rbtn_txt_vesionmode_1"
-                    android:textColor="@color/text"
+                    android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
 
                 <RadioButton
@@ -88,7 +88,7 @@
                     android:paddingLeft="@dimen/size_5"
                     android:tag="2"
                     android:text="@string/aty_smappscenesetting_rbtn_txt_vesionmode_2"
-                    android:textColor="@color/text"
+                    android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
 
                 </RadioGroup>
@@ -149,7 +149,7 @@
                         android:paddingLeft="@dimen/size_5"
                         android:tag="1"
                         android:text="@string/aty_smappscenesetting_rbtn_txt_scenemode_1"
-                        android:textColor="@color/text"
+                        android:textColor="@color/field_name"
                         android:textSize="@dimen/sp_14" />
 
                     <RadioButton
@@ -160,7 +160,7 @@
                         android:paddingLeft="@dimen/size_5"
                         android:text="@string/aty_smappscenesetting_rbtn_txt_scenemode_2"
                         android:tag="2"
-                        android:textColor="@color/text"
+                        android:textColor="@color/field_name"
                         android:textSize="@dimen/sp_14" />
 
                     </RadioGroup>
@@ -238,6 +238,7 @@
                                 android:id="@+id/sp_Com_Name_Scene_Mode_1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_14"
                                 />
 
                         </LinearLayout>
@@ -267,6 +268,7 @@
                                 android:id="@+id/sp_Com_Baud_Scene_Mode_1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:textSize="@dimen/sp_14"
                                 />
 
 

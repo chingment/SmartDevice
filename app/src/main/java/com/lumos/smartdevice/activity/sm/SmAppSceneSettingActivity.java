@@ -26,8 +26,8 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
     private RadioGroup rg_SceneMode;
     private LinearLayout lyt_Setting_Scene_Mode_1;
 
-    private Spinner sp_Com_Scene_Mode_1;
-
+    private Spinner sp_Com_Name_Scene_Mode_1;
+    private Spinner sp_Com_Baud_Scene_Mode_1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +47,8 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
         rg_VesionMode = findViewById(R.id.rg_VesionMode);
         rg_SceneMode = findViewById(R.id.rg_SceneMode);
         lyt_Setting_Scene_Mode_1 = findViewById(R.id.lyt_Setting_Scene_Mode_1);
-        sp_Com_Scene_Mode_1 = findViewById(R.id.sp_Com_Name_Scene_Mode_1);
+        sp_Com_Name_Scene_Mode_1 = findViewById(R.id.sp_Com_Name_Scene_Mode_1);
+        sp_Com_Baud_Scene_Mode_1= findViewById(R.id.sp_Com_Baud_Scene_Mode_1);
     }
 
     private void initEvent() {
@@ -116,18 +117,29 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
             }
         }
 
-        ArrayList data_list = new ArrayList<String>();
-        data_list.add("北京");
-        data_list.add("上海");
-        data_list.add("广州");
-        data_list.add("深圳");
+        ArrayList list_Com_Names = new ArrayList<String>();
+        list_Com_Names.add("北京");
+        list_Com_Names.add("上海");
+        list_Com_Names.add("广州");
+        list_Com_Names.add("深圳");
 
         //适配器
-        ArrayAdapter arr_adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);
-        //设置样式
-        arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //加载适配器
-        sp_Com_Scene_Mode_1.setAdapter(arr_adapter);
+        ArrayAdapter adapter_Com_Name= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list_Com_Names);
+        adapter_Com_Name.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_Com_Name_Scene_Mode_1.setAdapter(adapter_Com_Name);
+
+
+        ArrayList list_Com_Bauds = new ArrayList<String>();
+        list_Com_Bauds.add("4800");
+        list_Com_Bauds.add("9600");
+        list_Com_Bauds.add("19200");
+        list_Com_Bauds.add("38400");
+
+        //适配器
+        ArrayAdapter adapter_Com_Baud= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list_Com_Bauds);
+        adapter_Com_Baud.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_Com_Baud_Scene_Mode_1.setAdapter(adapter_Com_Baud);
+
 
     }
 
@@ -139,13 +151,13 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
                     finish();
                     break;
                 case R.id.btn_Nav_Header_Right:
-                    RadioButton rb_VesionMode = (RadioButton) findViewById(rg_VesionMode.getCheckedRadioButtonId());
+                    RadioButton rb_VesionMode = findViewById(rg_VesionMode.getCheckedRadioButtonId());
                     if (rb_VesionMode != null) {
                        String  version_mode= rb_VesionMode.getTag().toString();
                        DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE,version_mode);
                     }
 
-                    RadioButton rb_SceneMode = (RadioButton) findViewById(rg_SceneMode.getCheckedRadioButtonId());
+                    RadioButton rb_SceneMode = findViewById(rg_SceneMode.getCheckedRadioButtonId());
                     if (rb_SceneMode != null) {
                         String  scene_mode= rb_SceneMode.getTag().toString();
                         DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE,scene_mode);
