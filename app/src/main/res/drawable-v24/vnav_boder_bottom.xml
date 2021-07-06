@@ -3,13 +3,13 @@
     <!-- 连框颜色值 -->
     <item>
         <shape>
-            <solid android:color="@color/aty_smlogin_input_boder_bg" />
+            <solid android:color="@color/vnav_boder_bg" />
         </shape>
     </item>
     <!-- 主体背景颜色值 -->
     <item android:bottom="@dimen/size_1"> <!--设置只有底部有边框-->
         <shape>
-            <solid android:color="@color/aty_smlogin_input_boder_bottom_bg" />
+            <solid android:color="@color/nav_boder_bottom_bg" />
         </shape>
     </item>
 </layer-list>
