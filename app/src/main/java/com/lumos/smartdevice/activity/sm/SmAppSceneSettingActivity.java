@@ -14,15 +14,18 @@ import android.widget.Spinner;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.db.model.ConfigBean;
+import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SmAppSceneSettingActivity extends BaseFragmentActivity {
 
@@ -119,9 +122,8 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
                     String json_Com_Prl=et_Com_Prl.getText().toString();
 
 
-                    JSONArray sdata = JSON.parseArray(json_Com_Prl);
-
-
+                    List<CabinetBean> rt = JSON.parseObject(json_Com_Prl, new TypeReference<List<CabinetBean>>() {
+                    });
 
 
 

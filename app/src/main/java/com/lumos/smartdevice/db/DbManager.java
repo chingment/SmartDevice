@@ -7,6 +7,7 @@ import android.text.TextUtils;
 
 
 import com.lumos.smartdevice.db.model.ConfigBean;
+import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.own.AppContext;
 
 import java.util.ArrayList;
@@ -96,6 +97,39 @@ public class DbManager {
             cursor.close();
         }
         return val;
+    }
+
+    public  List<CabinetBean> getCabinets(){
+
+        List<CabinetBean> cabinets=new ArrayList<>();
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        if(db.isOpen()){
+            Cursor cursor = db.rawQuery("select * from " + CabinetDao.TABLE_NAME + "",null);
+            while(cursor.moveToNext()) {
+
+                CabinetBean cabinet = new CabinetBean();
+
+                String cabinet_id = cursor.getString(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_CABINET_ID));
+                String cabinet_name = cursor.getString(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_CABINET_NAME));
+                String com_id = cursor.getString(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_COM_ID));
+                int com_baud = cursor.getInt(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_COM_BAUD));
+                String com_prl = cursor.getString(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_COM_PRL));
+                String layout = cursor.getString(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_LAYOUT));
+
+                cabinet.setCabinetId(cabinet_id);
+                cabinet.setCabinetName(cabinet_name);
+                cabinet.setComId(com_id);
+                cabinet.setComBaud(com_baud);
+                cabinet.setComPrl(com_prl);
+                cabinet.setLayout(layout);
+
+                cabinets.add(cabinet);
+            }
+            cursor.close();
+        }
+        return cabinets;
     }
     
 

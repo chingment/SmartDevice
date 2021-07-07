@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DbOpenHelper extends SQLiteOpenHelper {
 
-	private static final int DATABASE_VERSION = 6;
+	private static final int DATABASE_VERSION = 8;
 	private static DbOpenHelper instance;
 
 	private static final String CONFIG_TABLE_CREATE = "CREATE TABLE "
@@ -39,12 +39,11 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CONFIG_TABLE_CREATE);
-		db.execSQL(CABINET_TABLE_CREATE);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+		db.execSQL(CABINET_TABLE_CREATE);
 
 	}
 	

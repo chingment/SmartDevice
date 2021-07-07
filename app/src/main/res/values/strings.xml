@@ -6,6 +6,7 @@
     <string name="aty_initdata_tips_settingdevice">正在配置商户设备信息</string>
     <string name="aty_initdata_tips_verion_mode">请先在帮助中心配置版本模式</string>
     <string name="aty_initdata_tips_scene_mode">请先在帮助中心配置场景模式</string>
+    <string name="aty_initdata_tips_set_cabinet">请先在帮助中心配置机柜</string>
 
     <string name="aty_smlogin_nav_title">登录</string>
     <string name="aty_smlogin_tv_txt_scene">场景</string>

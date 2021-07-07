@@ -213,6 +213,14 @@ public class InitDataActivity extends BaseFragmentActivity {
             return false;
         }
 
+        if(version_mode.equals(AppVar.VERSION_MODE_1)){
+            if(DbManager.getInstance().getCabinets().size()==0) {
+                initActionIsRun = false;
+                setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_set_cabinet));
+                return false;
+            }
+        }
+
         if(scene_mode.equals(AppVar.SCENE_MODE_1)){
             Intent intent = new Intent(getAppContext(), LockerMainActivity.class);
             startActivity(intent);
