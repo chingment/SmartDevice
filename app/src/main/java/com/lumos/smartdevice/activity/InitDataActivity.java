@@ -15,7 +15,10 @@ import com.lumos.smartdevice.activity.sm.SmLoginActivity;
 import com.lumos.smartdevice.adapter.LogTipsAdapter;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
+import com.lumos.smartdevice.model.CabinetBean;
+import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LogTipsBean;
+import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyListView;
@@ -26,8 +29,10 @@ import com.lumos.smartdevice.widget.shapeloading.LoadingView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class InitDataActivity extends BaseFragmentActivity {
 
@@ -221,7 +226,28 @@ public class InitDataActivity extends BaseFragmentActivity {
             }
         }
 
-        if(scene_mode.equals(AppVar.SCENE_MODE_1)){
+        if(scene_mode.equals(AppVar.SCENE_MODE_1)) {
+
+            DeviceBean device = new DeviceBean();
+            device.setDeviceId("1224567");
+            device.setSceneMode(scene_mode);
+            device.setVersionMode(version_mode);
+
+            HashMap<String, CabinetBean> cabinets=new HashMap<>();
+            CabinetBean cabinet=new CabinetBean();
+            cabinet.setCabinetId("cabinet1");
+            cabinet.setName("箱子01");
+            cabinet.setComId("sys1");
+            cabinet.setComBaud(19200);
+            cabinet.setComPrl("LV-DSE-V");
+            cabinet.setLayout("[[\"1-1-1-0\",\"2-2-1-0\"],[\"3-3-1-0\",\"3-3-1-1\"]]");
+            cabinets.put(cabinet.getCabinetId(),cabinet);
+
+            device.setCabinets(cabinets);
+
+            AppCacheManager.setDevice(device);
+
+
             Intent intent = new Intent(getAppContext(), LockerMainActivity.class);
             startActivity(intent);
             finish();

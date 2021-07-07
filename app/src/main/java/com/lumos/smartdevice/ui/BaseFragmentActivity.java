@@ -24,7 +24,9 @@ import androidx.fragment.app.FragmentActivity;
 
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
+import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.utils.StringUtil;
@@ -44,9 +46,18 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
     private static final String TAG = "BaseFragmentActivity";
     private AppContext appContext;
     public static boolean isForeground = false;
-
+    private DeviceBean device;
     public AppContext getAppContext() {
         return appContext;
+    }
+
+    public DeviceBean getDevice() {
+
+        if (device == null) {
+            device = AppCacheManager.getDevice();
+        }
+
+        return device;
     }
 
     @Override

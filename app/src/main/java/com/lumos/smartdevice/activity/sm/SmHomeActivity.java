@@ -3,6 +3,7 @@ package com.lumos.smartdevice.activity.sm;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.InitDataActivity;
 import com.lumos.smartdevice.adapter.GridNineItemAdapter;
+import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
 import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SmHomeActivity extends BaseFragmentActivity {
@@ -44,6 +46,20 @@ public class SmHomeActivity extends BaseFragmentActivity {
         gdv_Nine = findViewById(R.id.gdv_Nine);
 
         gdv_Nine_Items = new ArrayList<GridNineItemBean>();
+
+        HashMap<String, CabinetBean> cabinets=getDevice().getCabinets();
+
+        if(cabinets!=null) {
+            for (String o : cabinets.keySet()) {
+
+                CabinetBean cabinet = cabinets.get(o);
+
+                gdv_Nine_Items.add(new GridNineItemBean(cabinet.getName(), GridNineItemType.Function, "gdv.locker", R.drawable.ic_sm_checkupdateapp, cabinet));
+
+            }
+        }
+
+
 
 
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "gdv.checkupdateapp", R.drawable.ic_sm_checkupdateapp));
