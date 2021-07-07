@@ -199,7 +199,7 @@
                         android:layout_gravity="left"
                         android:gravity="left"
                         android:layout_weight="1"
-                        android:text="@string/aty_smappscenesetting_scene_setting_1"
+                        android:text="@string/aty_smappscenesetting_com_prl"
                         android:textColor="@color/text"
                         android:textSize="@dimen/sp_16" />
                 </LinearLayout>
@@ -211,132 +211,6 @@
                     android:background="@color/white"
                     android:orientation="vertical">
 
-
-                    <LinearLayout
-                        android:id="@+id/btn_Nav_AppSceneSetting"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingBottom="@dimen/size_10"
-                        android:paddingTop="@dimen/sp_10"
-                        android:background="@drawable/vnav_boder_bottom">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/aty_smappscenesetting_com_name"
-                            android:textColor="@color/field_name"
-                            android:textSize="@dimen/sp_14" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="right"
-                            android:orientation="horizontal"
-                            >
-
-                            <Spinner
-                                android:id="@+id/sp_Com_Name_Scene_Mode_1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_14"
-                                android:layout_gravity="end"
-                                android:gravity="end"
-                                />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingBottom="@dimen/size_10"
-                        android:paddingTop="@dimen/sp_10"
-                        android:background="@drawable/vnav_boder_bottom"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/aty_smappscenesetting_com_baud"
-                            android:textColor="@color/field_name"
-                            android:textSize="@dimen/sp_14" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="right"
-                            android:orientation="horizontal"
-                            >
-
-
-                            <Spinner
-                                android:id="@+id/sp_Com_Baud_Scene_Mode_1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_14"
-                                />
-
-
-                        </LinearLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingBottom="@dimen/size_10"
-                        android:background="@drawable/vnav_boder_bottom"
-                        android:paddingTop="@dimen/sp_10">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/aty_smappscenesetting_com_prl"
-                            android:textColor="@color/field_name"
-                            android:textSize="@dimen/sp_14" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="right"
-                            android:orientation="horizontal"
-                            >
-
-                            <Spinner
-                                android:id="@+id/sp_Com_Prl_Scene_Mode_1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="@dimen/sp_14"
-                                />
-
-
-
-                        </LinearLayout>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingBottom="@dimen/size_10"
-                        android:paddingTop="@dimen/sp_10">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/aty_smappscenesetting_com_lyt"
-                            android:textColor="@color/field_name"
-                            android:textSize="@dimen/sp_14" />
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="right"
-                            android:orientation="horizontal"
-                            >
-
-
-
-
-
-                        </LinearLayout>
-                    </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -346,14 +220,14 @@
                         android:paddingTop="@dimen/sp_10">
 
                         <EditText
-                            android:id="@+id/et_Com_Lyt_Scene_Mode_1"
+                            android:id="@+id/et_Com_Prl"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:enabled="true"
                             android:gravity="top"
                         android:inputType="textMultiLine"
-                        android:minLines="8"
-                        android:maxLines="10"
+                        android:minLines="20"
+                        android:maxLines="30"
                         android:scrollbars="vertical"
                         android:background="@android:drawable/edit_text"
                         >

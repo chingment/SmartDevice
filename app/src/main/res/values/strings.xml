@@ -32,11 +32,7 @@
     <string name="aty_smappscenesetting_rbtn_txt_vesionmode_2">网络版</string>
     <string name="aty_smappscenesetting_rbtn_txt_scenemode_1">寄存柜</string>
     <string name="aty_smappscenesetting_rbtn_txt_scenemode_2">书柜</string>
-    <string name="aty_smappscenesetting_scene_setting_1">寄存柜端口设置</string>
-    <string name="aty_smappscenesetting_com_name">串口</string>
-    <string name="aty_smappscenesetting_com_baud">波特</string>
-    <string name="aty_smappscenesetting_com_prl">协议</string>
-    <string name="aty_smappscenesetting_com_lyt">布局</string>
+    <string name="aty_smappscenesetting_com_prl">串口协议(JSON)</string>
     <string name="aty_smhome_nav_title">管理中心</string>
     <string name="unknown">未知</string>
     <string name="scenemode_1">寄存柜</string>

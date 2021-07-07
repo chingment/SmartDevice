@@ -12,6 +12,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
@@ -26,12 +28,7 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
 
     private RadioGroup rg_VesionMode;
     private RadioGroup rg_SceneMode;
-    private LinearLayout lyt_Setting_Scene_Mode_1;
-
-    private Spinner sp_Com_Name_Scene_Mode_1;
-    private Spinner sp_Com_Baud_Scene_Mode_1;
-    private Spinner sp_Com_Prl_Scene_Mode_1;
-    private EditText et_Com_Lyt_Scene_Mode_1;
+    private EditText et_Com_Prl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +36,7 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
 
         setNavHeaderTtile(R.string.aty_smappscenesetting_nav_title);
         setNavHeaderBtnByGoBackIsVisible(true);
-        setNavHeaderBtnByRightIsVisible(false);
+        setNavHeaderBtnByRightIsVisible(true);
 
 
         initView();
@@ -50,11 +47,7 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
     private void initView() {
         rg_VesionMode = findViewById(R.id.rg_VesionMode);
         rg_SceneMode = findViewById(R.id.rg_SceneMode);
-        lyt_Setting_Scene_Mode_1 = findViewById(R.id.lyt_Setting_Scene_Mode_1);
-        sp_Com_Name_Scene_Mode_1 = findViewById(R.id.sp_Com_Name_Scene_Mode_1);
-        sp_Com_Baud_Scene_Mode_1= findViewById(R.id.sp_Com_Baud_Scene_Mode_1);
-        sp_Com_Prl_Scene_Mode_1 = findViewById(R.id.sp_Com_Prl_Scene_Mode_1);
-        et_Com_Lyt_Scene_Mode_1 = findViewById(R.id.et_Com_Lyt_Scene_Mode_1);
+        et_Com_Prl = findViewById(R.id.et_Com_Prl);
     }
 
     private void initEvent() {
@@ -64,19 +57,6 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
                 View v= findViewById(checkedId);
                 DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE,v.getTag().toString());
 
-                String scene = DbManager.getInstance().getConfigValue(ConfigDao.FIELD_SCENE_MODE);
-                if(scene!=null&&scene.equals("1")) {
-                    String version = v.getTag().toString();
-                    if (version.equals("1")) {
-                        lyt_Setting_Scene_Mode_1.setVisibility(View.VISIBLE);
-                    } else {
-                        lyt_Setting_Scene_Mode_1.setVisibility(View.GONE);
-                    }
-                }
-                else {
-                    lyt_Setting_Scene_Mode_1.setVisibility(View.GONE);
-                }
-
             }
         });
 
@@ -85,19 +65,6 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 View v = findViewById(checkedId);
                 DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE, v.getTag().toString());
-
-                String version = DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
-                if(version!=null&&version.equals("1")) {
-                    String scene = v.getTag().toString();
-                    if (scene.equals("1")) {
-                        lyt_Setting_Scene_Mode_1.setVisibility(View.VISIBLE);
-                    } else {
-                        lyt_Setting_Scene_Mode_1.setVisibility(View.GONE);
-                    }
-                }
-                else {
-                    lyt_Setting_Scene_Mode_1.setVisibility(View.GONE);
-                }
             }
         });
     }
@@ -123,38 +90,9 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
             }
         }
 
-        ArrayList list_Com_Names = new ArrayList<String>();
-        list_Com_Names.add("北京");
-        list_Com_Names.add("上海");
-        list_Com_Names.add("广州");
-        list_Com_Names.add("深圳");
+        //
 
-
-        ArrayAdapter adapter_Com_Name= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list_Com_Names);
-        adapter_Com_Name.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_Com_Name_Scene_Mode_1.setAdapter(adapter_Com_Name);
-
-
-        ArrayList list_Com_Bauds = new ArrayList<String>();
-        list_Com_Bauds.add("4800");
-        list_Com_Bauds.add("9600");
-        list_Com_Bauds.add("19200");
-        list_Com_Bauds.add("38400");
-
-
-        ArrayAdapter adapter_Com_Baud= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list_Com_Bauds);
-        adapter_Com_Baud.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_Com_Baud_Scene_Mode_1.setAdapter(adapter_Com_Baud);
-
-        ArrayList list_Com_Ptls_Scene_Mode_1 = new ArrayList<String>();
-        list_Com_Ptls_Scene_Mode_1.add(AppVar.COM_LOCKER_PTL_1);
-
-
-
-        ArrayAdapter adapter_Com_Ptls_Scene_Mode_1= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list_Com_Ptls_Scene_Mode_1);
-        adapter_Com_Ptls_Scene_Mode_1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_Com_Prl_Scene_Mode_1.setAdapter(adapter_Com_Ptls_Scene_Mode_1);
-
+        et_Com_Prl.setText("[{\"cabinet_id\":\"locker_1\",\"cabinet_name\":\"箱子01\",\"com_id\":\"sys1\",\"com_baud\":19200,\"com_prl\":\"lbl_ss\",\"layout\":[[\"1-1-1-0\",\"2-2-1-0\"],[\"3-3-1-0\",\"3-3-1-1\"]]}]");
     }
 
     @Override
@@ -176,6 +114,15 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
                         String  scene_mode= rb_SceneMode.getTag().toString();
                         DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE,scene_mode);
                     }
+
+
+                    String json_Com_Prl=et_Com_Prl.getText().toString();
+
+
+                    JSONArray sdata = JSON.parseArray(json_Com_Prl);
+
+
+
 
 
                     showToast(getAppContext().getString(R.string.save_success));

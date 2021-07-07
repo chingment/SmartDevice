@@ -80,7 +80,6 @@ public class DbManager {
         }
     }
 
-
     public String getConfigValue(String field){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String val=null;
