@@ -112,14 +112,14 @@ public class DbManager {
                 CabinetBean cabinet = new CabinetBean();
 
                 String cabinet_id = cursor.getString(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_CABINET_ID));
-                String cabinet_name = cursor.getString(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_CABINET_NAME));
+                String name = cursor.getString(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_NAME));
                 String com_id = cursor.getString(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_COM_ID));
                 int com_baud = cursor.getInt(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_COM_BAUD));
                 String com_prl = cursor.getString(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_COM_PRL));
                 String layout = cursor.getString(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_LAYOUT));
 
                 cabinet.setCabinetId(cabinet_id);
-                cabinet.setCabinetName(cabinet_name);
+                cabinet.setName(name);
                 cabinet.setComId(com_id);
                 cabinet.setComBaud(com_baud);
                 cabinet.setComPrl(com_prl);
@@ -131,6 +131,34 @@ public class DbManager {
         }
         return cabinets;
     }
-    
+
+
+    public  void addCabinet(CabinetBean cabinet){
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        if(db.isOpen()){
+            Cursor cursor = db.rawQuery("select * from " + CabinetDao.TABLE_NAME + " where "+CabinetDao.COLUMN_NAME_CABINET_ID + " = ?",new String[]{String.valueOf(cabinet.getCabinetId())});
+
+            boolean exist = (cursor.getCount() > 0);
+
+            if(!exist){
+
+                ContentValues values = new ContentValues();
+                values.put(CabinetDao.COLUMN_NAME_CABINET_ID, cabinet.getCabinetId());
+                values.put(CabinetDao.COLUMN_NAME_NAME, cabinet.getName());
+                values.put(CabinetDao.COLUMN_NAME_COM_ID, cabinet.getComId());
+                values.put(CabinetDao.COLUMN_NAME_COM_BAUD, cabinet.getComBaud());
+                values.put(CabinetDao.COLUMN_NAME_COM_PRL, cabinet.getComPrl());
+                values.put(CabinetDao.COLUMN_NAME_LAYOUT, cabinet.getLayout());
+
+                db.insert(CabinetDao.TABLE_NAME, null, values);
+
+            }
+
+            cursor.close();
+        }
+
+    }
 
 }

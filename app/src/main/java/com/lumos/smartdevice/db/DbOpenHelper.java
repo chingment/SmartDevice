@@ -18,11 +18,11 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 	private static final String CABINET_TABLE_CREATE = "CREATE TABLE "
 			+ CabinetDao.TABLE_NAME + " ("
 			+ CabinetDao.COLUMN_NAME_CABINET_ID + " TEXT PRIMARY KEY , "
-			+ CabinetDao.COLUMN_NAME_CABINET_NAME + " TEXT , "
+			+ CabinetDao.COLUMN_NAME_NAME + " TEXT , "
 			+ CabinetDao.COLUMN_NAME_COM_ID + " TEXT , "
 			+ CabinetDao.COLUMN_NAME_COM_BAUD + " INTEGER , "
 			+ CabinetDao.COLUMN_NAME_COM_PRL + " TEXT , "
-			+ ConfigDao.COLUMN_NAME_VALUE + " TEXT);";
+			+ CabinetDao.COLUMN_NAME_LAYOUT + " TEXT);";
 
 
 	private DbOpenHelper(Context context) {
@@ -39,11 +39,12 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CONFIG_TABLE_CREATE);
+		db.execSQL(CABINET_TABLE_CREATE);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		db.execSQL(CABINET_TABLE_CREATE);
+
 
 	}
 	

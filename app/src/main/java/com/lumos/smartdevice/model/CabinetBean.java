@@ -5,8 +5,8 @@ import com.alibaba.fastjson.annotation.JSONField;
 public class CabinetBean {
     @JSONField(name="cabinet_id")
     private String cabinetId;
-    @JSONField(name="cabinet_name")
-    private String cabinetName;
+    @JSONField(name="name")
+    private String name;
     @JSONField(name="com_id")
     private String comId;
     @JSONField(name="com_baud")
@@ -24,12 +24,13 @@ public class CabinetBean {
         this.cabinetId = cabinetId;
     }
 
-    public String getCabinetName() {
-        return cabinetName;
+
+    public String getName() {
+        return name;
     }
 
-    public void setCabinetName(String cabinetName) {
-        this.cabinetName = cabinetName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getComId() {

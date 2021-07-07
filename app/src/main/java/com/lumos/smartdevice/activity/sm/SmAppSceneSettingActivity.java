@@ -122,9 +122,14 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
                     String json_Com_Prl=et_Com_Prl.getText().toString();
 
 
-                    List<CabinetBean> rt = JSON.parseObject(json_Com_Prl, new TypeReference<List<CabinetBean>>() {
+                    List<CabinetBean> cabinets = JSON.parseObject(json_Com_Prl, new TypeReference<List<CabinetBean>>() {
                     });
 
+                    if(cabinets!=null){
+                        for (CabinetBean cabinet: cabinets ) {
+                            DbManager.getInstance().addCabinet(cabinet);
+                        }
+                    }
 
 
                     showToast(getAppContext().getString(R.string.save_success));
