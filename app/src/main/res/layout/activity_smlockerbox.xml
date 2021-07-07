@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_nav_header" />
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/size_10"
+            android:paddingTop="@dimen/size_10">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/aty_smlockerbox_tv_txt_cur_cabinet"
+                    android:textColor="@color/field_name"
+                    android:textSize="@dimen/size_10" />
+
+                <TextView
+                    android:id="@+id/tv_CabinetName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/size_10"
+                    android:gravity="left"
+                    android:textColor="@color/field_value"
+                    android:textSize="@dimen/size_10" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical|right"
+                android:layout_gravity="right"
+                >
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
+        <TableLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tl_Boxs"/>
+    </ScrollView>
+</LinearLayout>

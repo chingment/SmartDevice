@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.sm.SmHomeActivity"></activity>
+        <activity android:name=".activity.sm.SmLockerBoxActivity"></activity>
+        <activity android:name=".activity.sm.SmHomeActivity" />
         <activity android:name=".activity.scenelocker.LockerMainActivity" />
         <activity android:name=".activity.sm.SmAppSceneSettingActivity" />
         <activity android:name=".activity.sm.SmFactorySettingActivity" />

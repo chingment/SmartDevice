@@ -35,6 +35,9 @@
     <string name="aty_smappscenesetting_rbtn_txt_scenemode_2">书柜</string>
     <string name="aty_smappscenesetting_com_prl">串口协议(JSON)</string>
     <string name="aty_smhome_nav_title">管理中心</string>
+    <string name="aty_smlockerbox_nav_title">箱子管理</string>
+    <string name="aty_smlockerbox_tv_txt_cur_cabinet">当前机柜</string>
+
     <string name="unknown">未知</string>
     <string name="scenemode_1">寄存柜</string>
     <string name="scenemode_2">书柜</string>

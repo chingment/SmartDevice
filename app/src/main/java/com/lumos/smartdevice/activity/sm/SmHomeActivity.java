@@ -54,7 +54,7 @@ public class SmHomeActivity extends BaseFragmentActivity {
 
                 CabinetBean cabinet = cabinets.get(o);
 
-                gdv_Nine_Items.add(new GridNineItemBean(cabinet.getName(), GridNineItemType.Function, "gdv.locker", R.drawable.ic_sm_checkupdateapp, cabinet));
+                gdv_Nine_Items.add(new GridNineItemBean(cabinet.getName(), GridNineItemType.Function, "gdv.lockerbox", R.drawable.ic_sm_checkupdateapp, cabinet));
 
             }
         }
@@ -88,6 +88,10 @@ public class SmHomeActivity extends BaseFragmentActivity {
                     switch (type) {
                         case GridNineItemType.Function:
                             switch (action) {
+                                case "gdv.lockerbox":
+                                    CabinetBean cabinet = (CabinetBean)gdv_Nine_Item.getTag();
+                                    gdvLockerBox(cabinet);
+                                    break;
                                 case "gdv.checkupdateapp":
                                     break;
                                 case "gdv.closeapp":
@@ -161,6 +165,12 @@ public class SmHomeActivity extends BaseFragmentActivity {
         dialog_Confirm.getBtnSure().setTag("dlg.rebootsys");
         dialog_Confirm.getTipsText().setText(getAppContext().getString(R.string.confrim_tips_rebootsys));
         dialog_Confirm.show();
+    }
+
+    private void gdvLockerBox(CabinetBean cabinet){
+        Intent intent = new Intent(SmHomeActivity.this, SmLockerBoxActivity.class);
+        intent.putExtra("cabinet", cabinet);
+        startActivity(intent);
     }
 
 
