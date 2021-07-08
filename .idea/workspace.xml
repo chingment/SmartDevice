@@ -43,41 +43,27 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLockerBoxActivity.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/dialog/CustomDialogCabinetConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="131" column="45" lean-forward="true" selection-start-line="131" selection-start-column="45" selection-end-line="131" selection-end-column="45" />
-              <folding>
-                <element signature="e#1673#1674#0" expanded="true" />
-                <element signature="e#1702#1703#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_cabinetconfig.xml">
-          <provider selected="true" editor-type-id="android-designer2" />
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="82" column="82" selection-start-line="82" selection-start-column="82" selection-end-line="82" selection-end-column="82" />
-              <folding>
-                <element signature="e#340#357#0" expanded="true" />
-                <element signature="e#1621#1637#0" expanded="true" />
-                <element signature="e#1673#1687#0" expanded="true" />
-                <element signature="e#1926#1974#0" expanded="true" />
-                <element signature="e#2067#2081#0" expanded="true" />
-                <element signature="e#2700#2714#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="240">
+              <caret line="76" column="53" selection-start-line="76" selection-start-column="53" selection-end-line="76" selection-end-column="53" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/dialog/CustomDialogCabinetConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="76" column="51" selection-start-line="76" selection-start-column="51" selection-end-line="76" selection-end-column="51" />
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_confirm.xml">
+          <provider selected="true" editor-type-id="android-designer2" />
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="110" column="37" lean-forward="true" selection-start-line="110" selection-start-column="37" selection-end-line="110" selection-end-column="37" />
+              <folding>
+                <element signature="e#4006#4022#0" expanded="true" />
+                <element signature="e#4115#4130#0" expanded="true" />
+                <element signature="e#4172#4187#0" expanded="true" />
+                <element signature="e#4221#4265#0" expanded="true" />
+                <element signature="e#4448#4463#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -496,10 +482,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1233" height="775" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.2334173" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.2334173" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -508,9 +493,9 @@
       <window_info id="Resources Explorer" order="7" weight="0.32996634" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Version Control" order="0" />
-      <window_info anchor="bottom" id="Logcat" order="1" visible="true" weight="0.37461773" />
+      <window_info anchor="bottom" id="Logcat" order="1" weight="0.37461773" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32874617" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.38685015" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.38685015" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Build" order="5" weight="0.27217126" />
       <window_info anchor="bottom" id="Android Profiler" order="6" />
@@ -573,9 +558,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/aty_smlogin_input_boder_bottom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$USER_HOME$/Library/Android/sdk/platforms/android-29/data/res/drawable/edit_text.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -990,7 +972,22 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/dialog/CustomDialogCabinetConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="76" column="51" selection-start-line="76" selection-start-column="51" selection-end-line="76" selection-end-column="51" />
+          <caret line="76" column="53" selection-start-line="76" selection-start-column="53" selection-end-line="76" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_confirm.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="110" column="37" lean-forward="true" selection-start-line="110" selection-start-column="37" selection-end-line="110" selection-end-column="37" />
+          <folding>
+            <element signature="e#4006#4022#0" expanded="true" />
+            <element signature="e#4115#4130#0" expanded="true" />
+            <element signature="e#4172#4187#0" expanded="true" />
+            <element signature="e#4221#4265#0" expanded="true" />
+            <element signature="e#4448#4463#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
