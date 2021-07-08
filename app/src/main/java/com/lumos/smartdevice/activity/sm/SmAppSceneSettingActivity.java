@@ -127,7 +127,7 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
 
                     if(cabinets!=null){
                         for (CabinetBean cabinet: cabinets ) {
-                            DbManager.getInstance().addCabinet(cabinet);
+                            DbManager.getInstance().saveCabinet(cabinet);
                         }
                     }
 

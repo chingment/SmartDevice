@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/aty_smlockerbox_tv_txt_cur_cabinet"
                     android:textColor="@color/field_name"
-                    android:textSize="@dimen/size_10" />
+                    android:textSize="@dimen/sp_14" />
 
                 <TextView
                     android:id="@+id/tv_CabinetName"
@@ -44,7 +44,7 @@
                     android:layout_marginLeft="@dimen/size_10"
                     android:gravity="left"
                     android:textColor="@color/field_value"
-                    android:textSize="@dimen/size_10" />
+                    android:textSize="@dimen/sp_14" />
 
             </LinearLayout>
 

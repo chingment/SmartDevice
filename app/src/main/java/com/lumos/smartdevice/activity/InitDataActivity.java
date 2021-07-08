@@ -240,7 +240,7 @@ public class InitDataActivity extends BaseFragmentActivity {
             cabinet.setComId("sys1");
             cabinet.setComBaud(19200);
             cabinet.setComPrl("LV-DSE-V");
-            cabinet.setLayout("[[\"1-1-1-0\",\"2-2-1-0\"],[\"3-3-1-0\",\"3-3-1-1\"]]");
+            cabinet.setLayout("[[\"1-1-1-0\",\"2-2-1-0\"],[\"3-3-1-0\",\"4-4-1-1\"],[\"5-5-1-0\",\"6-6-1-0\"]]");
             cabinets.put(cabinet.getCabinetId(),cabinet);
 
             device.setCabinets(cabinets);

@@ -97,14 +97,16 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
                 final View convertView = LayoutInflater.from(SmLockerBoxActivity.this).inflate(R.layout.item_list_lockerbox, tableRow, false);
 
-                LinearLayout tmp_wapper = ViewHolder.get(convertView, R.id.tmp_wapper);
                 TextView tv_Name = ViewHolder.get(convertView, R.id.tv_Name);
-                ImageView img_Box = ViewHolder.get(convertView, R.id.img_Box);
 
+                tv_Name.setText(nick);
 
                 if(isUse.equals("1")){
                     convertView.setVisibility(View.INVISIBLE);
                 }
+
+                if(id.equals("2"))
+                    tv_Name.setBackgroundResource(R.drawable.locker_box_status_2);
 
 
                 tableRow.addView(convertView, new TableRow.LayoutParams(MP, WC, 1));

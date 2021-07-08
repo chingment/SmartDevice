@@ -133,7 +133,7 @@ public class DbManager {
     }
 
 
-    public  void addCabinet(CabinetBean cabinet){
+    public  void saveCabinet(CabinetBean cabinet){
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -153,6 +153,19 @@ public class DbManager {
                 values.put(CabinetDao.COLUMN_NAME_LAYOUT, cabinet.getLayout());
 
                 db.insert(CabinetDao.TABLE_NAME, null, values);
+
+            }
+            else {
+
+
+                ContentValues values = new ContentValues();
+                values.put(CabinetDao.COLUMN_NAME_NAME, cabinet.getName());
+                values.put(CabinetDao.COLUMN_NAME_COM_ID, cabinet.getComId());
+                values.put(CabinetDao.COLUMN_NAME_COM_BAUD, cabinet.getComBaud());
+                values.put(CabinetDao.COLUMN_NAME_COM_PRL, cabinet.getComPrl());
+                values.put(CabinetDao.COLUMN_NAME_LAYOUT, cabinet.getLayout());
+
+                db.update(CabinetDao.TABLE_NAME, values, CabinetDao.COLUMN_NAME_CABINET_ID + " = ?", new String[]{String.valueOf(cabinet.getCabinetId())});
 
             }
 
