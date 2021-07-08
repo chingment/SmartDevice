@@ -18,6 +18,7 @@ import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
+import com.lumos.smartdevice.ui.dialog.CustomDialogCabinetConfig;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.HashMap;
@@ -32,6 +33,8 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     private TableLayout tl_Boxs;
 
     private CabinetBean cabinet;
+
+    private CustomDialogCabinetConfig dialog_CabinetConfig;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +54,11 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     private void initView() {
         tv_CabinetName = findViewById(R.id.tv_CabinetName);
         tl_Boxs = findViewById(R.id.tl_Boxs);
+        dialog_CabinetConfig = new CustomDialogCabinetConfig(SmLockerBoxActivity.this);
     }
 
     private void initEvent() {
-
+        tv_CabinetName.setOnClickListener(this);
     }
 
     private void initData() {
@@ -124,7 +128,19 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                 case R.id.btn_Nav_Header_Goback:
                     finish();
                     break;
+                case R.id.tv_CabinetName:
+                    dialog_CabinetConfig.setCofing(cabinet);
+                    dialog_CabinetConfig.show();
+                    break;
             }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (dialog_CabinetConfig != null) {
+            dialog_CabinetConfig.cancel();
         }
     }
 }

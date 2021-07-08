@@ -54,4 +54,10 @@
     <string name="confrim_tips_exitmanager">确定退出管理？</string>
     <string name="confrim_tips_closeapp">确定关闭应用？</string>
     <string name="confrim_tips_rebootsys">确定重启系统？</string>
+    <string name="custom_dialog_cabinetconfig_cabinet_id">机柜ID</string>
+    <string name="custom_dialog_cabinetconfig_cabinet_name">机柜名</string>
+    <string name="custom_dialog_cabinetconfig_com_id">串口</string>
+    <string name="custom_dialog_cabinetconfig_com_baud">波特</string>
+    <string name="custom_dialog_cabinetconfig_com_prl">协议</string>
+    <string name="custom_dialog_cabinetconfig_layout">布局</string>
 </resources>
