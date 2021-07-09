@@ -235,9 +235,11 @@
                 android:paddingTop="@dimen/sp_10">
                 <TextView
                     android:id="@+id/tv_Layout"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:maxLines="5"
+                    android:scrollbars="vertical"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
             </LinearLayout>
