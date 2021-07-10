@@ -120,6 +120,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
         switch (scene){
             case "init_data_help":
 
+
                 if(!DbManager.getInstance().checkUserPassword(username,password,"1")){
                     showToast(R.string.tips_password_noright);
                     return;

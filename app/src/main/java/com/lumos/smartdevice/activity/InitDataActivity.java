@@ -184,6 +184,23 @@ public class InitDataActivity extends BaseFragmentActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        initActionHandler.postDelayed(initActionRunable, 1000);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if(initActionHandler!=null&&initActionRunable!=null) {
+            initActionHandler.removeCallbacks(initActionRunable);
+        }
+
+    }
+
     public void setHandleMessage(int what, String tips, Object deviceInitDataResult) {
         final Message m = new Message();
         m.what = what;
