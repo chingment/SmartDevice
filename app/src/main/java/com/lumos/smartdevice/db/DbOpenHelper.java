@@ -24,6 +24,12 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 			+ CabinetDao.COLUMN_NAME_COM_PRL + " TEXT , "
 			+ CabinetDao.COLUMN_NAME_LAYOUT + " TEXT);";
 
+	private static final String USER_TABLE_CREATE = "CREATE TABLE "
+			+ UserDao.TABLE_NAME + " ("
+			+ UserDao.COLUMN_NAME_USERNAME + " TEXT PRIMARY KEY , "
+			+ UserDao.COLUMN_NAME_PASSWORD + " TEXT , "
+			+ UserDao.COLUMN_NAME_TYPE + " TEXT );";
+
 
 	private DbOpenHelper(Context context) {
 		super(context, "smartdevice.db", null, DATABASE_VERSION);
@@ -40,6 +46,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CONFIG_TABLE_CREATE);
 		db.execSQL(CABINET_TABLE_CREATE);
+		db.execSQL(USER_TABLE_CREATE);
 	}
 
 	@Override

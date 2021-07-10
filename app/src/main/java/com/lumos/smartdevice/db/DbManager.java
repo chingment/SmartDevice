@@ -41,6 +41,7 @@ public class DbManager {
 
     public void  init(){
         initConfig();
+        initUser();
     }
 
     private void initConfig(){
@@ -48,8 +49,9 @@ public class DbManager {
         addConfig(ConfigDao.FIELD_SCENE_MODE,"0");
     }
 
-    private void initUserAccount(){
-
+    private void initUser(){
+        addUser("system","123456","1");
+        addUser("admin","124356","2");
     }
 
     public void addConfig(String field,String value){
@@ -72,6 +74,47 @@ public class DbManager {
             db.insert(ConfigDao.TABLE_NAME, null, values);
 
         }
+    }
+
+
+    public void addUser(String username,String password,String type){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        int id = -1;
+        if(db.isOpen()){
+
+            Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where "+UserDao.COLUMN_NAME_USERNAME + " = ?",new String[]{username});
+
+            boolean exist = (cursor.getCount() > 0);
+            if(exist){
+                cursor.close();
+                return;
+            }
+
+            ContentValues values = new ContentValues();
+            values.put(UserDao.COLUMN_NAME_USERNAME, username);
+            values.put(UserDao.COLUMN_NAME_PASSWORD, password);
+            values.put(UserDao.COLUMN_NAME_TYPE, type);
+
+            db.insert(UserDao.TABLE_NAME, null, values);
+
+            cursor.close();
+        }
+    }
+
+
+    public boolean checkUserPassword(String username,String password,String type) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where "+UserDao.COLUMN_NAME_USERNAME + " = ? and "+UserDao.COLUMN_NAME_PASSWORD+" = ? and "+UserDao.COLUMN_NAME_TYPE+" = ?",new String[]{username,password,type});
+
+        boolean exist = (cursor.getCount() > 0);
+        if(exist){
+            cursor.close();
+            return true;
+        }
+
+        return false;
+
     }
 
     public void updateConfig(String field,String value){

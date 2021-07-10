@@ -12,9 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.db.ConfigDao;
+import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
+import com.lumos.smartdevice.utils.StringUtil;
 
 public class SmLoginActivity extends BaseFragmentActivity implements View.OnClickListener {
     private static final String TAG = "SmLoginActivity";
@@ -25,6 +28,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
     private EditText et_Password;
     private TextView tv_Scene;
     private String scene;//登录场景
+    private String version_mode;//版本模式
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
         setNavHeaderBtnByGoBackIsVisible(true);
 
         scene = getIntent().getStringExtra("scene");
+        version_mode= DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
 
         initView();
         initEvent();
@@ -99,9 +104,30 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
     private void loginByAccount(){
 
         Intent intent=null;
+        String username=et_UserName.getText().toString();
+        String password=et_Password.getText().toString();
+
+        if(StringUtil.isEmptyNotNull(username)) {
+            showToast(R.string.tips_username_isnotnull);
+            return;
+        }
+
+        if(StringUtil.isEmptyNotNull(password)) {
+            showToast(R.string.tips_password_isnotnull);
+            return;
+        }
+
         switch (scene){
             case "init_data_help":
+
+                if(!DbManager.getInstance().checkUserPassword(username,password,"1")){
+                    showToast(R.string.tips_password_noright);
+                    return;
+                }
+
                 intent = new Intent(getAppContext(), SmHelpToolActivity.class);
+
+
                 break;
             case "manager_center":
                 intent = new Intent(getAppContext(), SmHomeActivity.class);

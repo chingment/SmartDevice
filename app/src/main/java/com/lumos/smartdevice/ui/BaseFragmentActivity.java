@@ -158,6 +158,10 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
         }
     }
 
+    public void showToast(int id) {
+        ToastUtil.showMessage(BaseFragmentActivity.this, getResources().getString(id), Toast.LENGTH_LONG);
+    }
+
     public void setHideSysStatusBar(boolean ishidden) {
         OstCtrlInterface.getInstance().setHideStatusBar(appContext, ishidden);
     }
