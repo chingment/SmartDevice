@@ -12,6 +12,7 @@ import com.lumos.smartdevice.own.AppContext;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,10 @@ public class DbManager {
     private void initConfig(){
         addConfig(ConfigDao.FIELD_VERSION_MODE,"0");
         addConfig(ConfigDao.FIELD_SCENE_MODE,"0");
+    }
+
+    private void initUserAccount(){
+
     }
 
     public void addConfig(String field,String value){
@@ -99,9 +104,9 @@ public class DbManager {
         return val;
     }
 
-    public  List<CabinetBean> getCabinets(){
+    public HashMap<String, CabinetBean> getCabinets(){
 
-        List<CabinetBean> cabinets=new ArrayList<>();
+        HashMap<String, CabinetBean>cabinets=new HashMap<>();
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -125,13 +130,14 @@ public class DbManager {
                 cabinet.setComPrl(com_prl);
                 cabinet.setLayout(layout);
 
-                cabinets.add(cabinet);
+                if(!cabinets.containsKey(cabinet_id)) {
+                    cabinets.put(cabinet_id, cabinet);
+                }
             }
             cursor.close();
         }
         return cabinets;
     }
-
 
     public  void saveCabinet(CabinetBean cabinet){
 

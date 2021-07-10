@@ -23,8 +23,8 @@
             >
             <ImageView
                 android:id="@+id/dialog_Btn_Close"
-                android:layout_width="@dimen/size_10"
-                android:layout_height="@dimen/size_10"
+                android:layout_width="@dimen/size_12"
+                android:layout_height="@dimen/size_12"
                 android:contentDescription="@string/img_content_description_empty"
                 android:src="@drawable/dialog_ic_close" />
         </LinearLayout>

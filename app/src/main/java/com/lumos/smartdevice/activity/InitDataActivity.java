@@ -233,17 +233,17 @@ public class InitDataActivity extends BaseFragmentActivity {
             device.setSceneMode(scene_mode);
             device.setVersionMode(version_mode);
 
-            HashMap<String, CabinetBean> cabinets=new HashMap<>();
-            CabinetBean cabinet=new CabinetBean();
-            cabinet.setCabinetId("cabinet1");
-            cabinet.setName("箱子01");
-            cabinet.setComId("sys1");
-            cabinet.setComBaud(19200);
-            cabinet.setComPrl("LV-DSE-V");
-            cabinet.setLayout("[[\"1-1-1-0\",\"2-2-1-0\"],[\"3-3-1-0\",\"4-4-1-1\"],[\"5-5-1-0\",\"6-6-1-0\"]]");
-            cabinets.put(cabinet.getCabinetId(),cabinet);
+//            HashMap<String, CabinetBean> cabinets=new HashMap<>();
+//            CabinetBean cabinet=new CabinetBean();
+//            cabinet.setCabinetId("cabinet1");
+//            cabinet.setName("箱子01");
+//            cabinet.setComId("sys1");
+//            cabinet.setComBaud(19200);
+//            cabinet.setComPrl("LV-DSE-V");
+//            cabinet.setLayout("[[\"1-1-1-0\",\"2-2-1-0\"],[\"3-3-1-0\",\"4-4-1-1\"],[\"5-5-1-0\",\"6-6-1-0\"]]");
+//            cabinets.put(cabinet.getCabinetId(),cabinet);
 
-            device.setCabinets(cabinets);
+            device.setCabinets(DbManager.getInstance().getCabinets());
 
             AppCacheManager.setDevice(device);
 
