@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.InputType;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,6 +54,10 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
         et_UserName = findViewById(R.id.et_UserName);
         et_Password = findViewById(R.id.et_Password);
         tv_Scene = findViewById(R.id.tv_Scene);
+
+
+        et_Password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+        et_Password.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
 
     }
@@ -120,14 +126,12 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
         switch (scene){
             case "init_data_help":
 
-
                 if(!DbManager.getInstance().checkUserPassword(username,password,"1")){
                     showToast(R.string.tips_password_noright);
                     return;
                 }
 
                 intent = new Intent(getAppContext(), SmHelpToolActivity.class);
-
 
                 break;
             case "manager_center":
