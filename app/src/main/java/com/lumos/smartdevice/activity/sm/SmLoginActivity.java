@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.api.ReqHandler;
+import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
@@ -109,7 +111,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
 
     private void loginByAccount(){
 
-        Intent intent=null;
+
         String username=et_UserName.getText().toString();
         String password=et_Password.getText().toString();
 
@@ -131,17 +133,34 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                     return;
                 }
 
-                intent = new Intent(getAppContext(), SmHelpToolActivity.class);
-
+                Intent  var1 = new Intent(getAppContext(), SmHelpToolActivity.class);
+                startActivity(var1);
+                finish();
                 break;
             case "manager_center":
-                intent = new Intent(getAppContext(), SmHomeActivity.class);
+
+                ReqInterface.getInstance().loginByAccount(username,password, new ReqHandler(){
+
+                    @Override
+                    public void onSuccess(String response) {
+                        super.onSuccess(response);
+
+                        Intent var2 = new Intent(getAppContext(), SmHomeActivity.class);
+                        startActivity(var2);
+                        finish();
+                    }
+
+                    @Override
+                    public void onFailure(String msg, Exception e) {
+                        super.onFailure(msg, e);
+
+                        showToast(R.string.tips_password_noright);
+                    }
+                });
+
                 break;
         }
 
-        if(intent!=null) {
-            startActivity(intent);
-            finish();
-        }
+
     }
 }

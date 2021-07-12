@@ -13,6 +13,7 @@ import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.scenelocker.LockerMainActivity;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
 import com.lumos.smartdevice.adapter.LogTipsAdapter;
+import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.CabinetBean;
@@ -242,6 +243,8 @@ public class InitDataActivity extends BaseFragmentActivity {
                 return false;
             }
         }
+
+
 
         if(scene_mode.equals(AppVar.SCENE_MODE_1)) {
 

@@ -51,7 +51,7 @@ public class DbManager {
 
     private void initUser(){
         addUser("system","123456","1");
-        addUser("admin","124356","2");
+        addUser("admin","123456","2");
     }
 
     public void addConfig(String field,String value){
