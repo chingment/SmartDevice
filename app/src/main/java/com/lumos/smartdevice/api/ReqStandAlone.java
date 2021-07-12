@@ -1,16 +1,12 @@
 package com.lumos.smartdevice.api;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
-import com.lumos.smartdevice.api.rop.RopLoginByAccount;
+import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
+import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.api.DeviceInitDataResultBean;
 import com.lumos.smartdevice.own.AppVar;
-
-import java.util.Map;
 
 public class ReqStandAlone implements IReqVersion{
 
@@ -45,7 +41,7 @@ public class ReqStandAlone implements IReqVersion{
     }
 
     @Override
-    public void loginByAccount(RopLoginByAccount rop, final ReqHandler reqHandler) {
+    public void ownLoginByAccount(RopOwnLoginByAccount rop, final ReqHandler reqHandler) {
 
         reqHandler.sendBeforeSendMessage();
 
@@ -60,6 +56,13 @@ public class ReqStandAlone implements IReqVersion{
         result = new ResultBean(ResultCode.SUCCESS, "登录成功");
 
         reqHandler.sendSuccessMessage(result.toJSONString());
+
+    }
+
+    @Override
+    public void ownLogout(RopOwnLogout rop, final ReqHandler reqHandler) {
+
+
 
     }
 }

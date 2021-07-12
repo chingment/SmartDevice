@@ -1,7 +1,5 @@
 package com.lumos.smartdevice.activity.sm;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,7 +18,7 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
-import com.lumos.smartdevice.api.rop.RopLoginByAccount;
+import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.api.LoginResultBean;
@@ -145,11 +143,11 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                 break;
             case "manager_center":
 
-                RopLoginByAccount rop=new RopLoginByAccount();
+                RopOwnLoginByAccount rop=new RopOwnLoginByAccount();
                 rop.setUserName(username);
                 rop.setPassword(password);
 
-                ReqInterface.getInstance().loginByAccount(rop, new ReqHandler(){
+                ReqInterface.getInstance().ownLoginByAccount(rop, new ReqHandler(){
 
 
                     @Override
