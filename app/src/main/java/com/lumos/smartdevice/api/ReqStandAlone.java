@@ -20,33 +20,26 @@ public class ReqStandAlone implements IReqVersion{
         ResultBean result = null;
 
 
-        DeviceInitDataResultBean rt=new DeviceInitDataResultBean();
+        DeviceInitDataResultBean rt = new DeviceInitDataResultBean();
 
-       if(rop.getSceneMode().equals(AppVar.SCENE_MODE_1)) {
+        if (rop.getSceneMode().equals(AppVar.SCENE_MODE_1)) {
 
-           DeviceBean device = new DeviceBean();
-           device.setDeviceId("1224567");
-           device.setSceneMode(rop.getSceneMode());
-           device.setVersionMode(rop.getVesionMode());
+            DeviceBean device = new DeviceBean();
+            device.setDeviceId("1224567");
+            device.setSceneMode(rop.getSceneMode());
+            device.setVersionMode(rop.getVesionMode());
+            device.setCabinets(DbManager.getInstance().getCabinets());
 
-//            HashMap<String, CabinetBean> cabinets=new HashMap<>();
-//            CabinetBean cabinet=new CabinetBean();
-//            cabinet.setCabinetId("cabinet1");
-//            cabinet.setName("箱子01");
-//            cabinet.setComId("sys1");
-//            cabinet.setComBaud(19200);
-//            cabinet.setComPrl("LV-DSE-V");
-//            cabinet.setLayout("[[\"1-1-1-0\",\"2-2-1-0\"],[\"3-3-1-0\",\"4-4-1-1\"],[\"5-5-1-0\",\"6-6-1-0\"]]");
-//            cabinets.put(cabinet.getCabinetId(),cabinet);
+            rt.setDevice(device);
 
-           device.setCabinets(DbManager.getInstance().getCabinets());
+            result = new ResultBean<>(ResultCode.SUCCESS, "获取成功", rt);
 
-           rt.setDevice(device);
+        } else {
 
-           result = new ResultBean<>(ResultCode.SUCCESS, "获取成功", rt);
+            result = new ResultBean<>(ResultCode.FAILURE, "该场景模式未启用");
+        }
 
-           reqHandler.sendSuccessMessage(result.toJSONString());
-       }
+        reqHandler.sendSuccessMessage(result.toJSONString());
 
     }
 
