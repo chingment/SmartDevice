@@ -8,6 +8,7 @@ public class DeviceBean implements Serializable {
     private String sceneMode;
     private String versionMode;
 
+
     private HashMap<String, CabinetBean> cabinets;
 
 

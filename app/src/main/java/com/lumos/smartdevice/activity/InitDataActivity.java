@@ -4,21 +4,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.scenelocker.LockerMainActivity;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
 import com.lumos.smartdevice.adapter.LogTipsAdapter;
+import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
+import com.lumos.smartdevice.api.ResultBean;
+import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
-import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LogTipsBean;
+import com.lumos.smartdevice.model.api.DeviceInitDataResultBean;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
@@ -30,10 +37,8 @@ import com.lumos.smartdevice.widget.shapeloading.LoadingView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 public class InitDataActivity extends BaseFragmentActivity {
 
@@ -56,8 +61,6 @@ public class InitDataActivity extends BaseFragmentActivity {
                 initActionIsRun = true;
                 setDeviceInitData();
             }
-
-            //setHandleMessage(WHAT_TIPS,"哈哈哈哈哈");
 
             initActionHandler.postDelayed(this, 1000);
         }
@@ -152,17 +155,56 @@ public class InitDataActivity extends BaseFragmentActivity {
                 ls_Logs.setAdapter(logTipsAdapter);
 
 
-//                switch (msg.what) {
-//                    case WHAT_TIPS:
-//                        break;
-//                    case WHAT_READ_CONFIG_SUCCESS:
-//                        setHandleMessage(WHAT_TIPS, "正在配置设备信息");
-//                        break;
-//                    case WHAT_READ_CONFIG_FAILURE:
-//                        setHandleMessage(WHAT_TIPS, "重新尝试读取设备信息");
-//                        initIsRun=false;
-//                        break;
-//                }
+                switch (msg.what) {
+                    case WHAT_TIPS:
+                        break;
+                    case WHAT_READ_CONFIG_SUCCESS:
+                        setHandleMessage(WHAT_TIPS, "正在配置设备信息");
+
+                        if (bundle.getSerializable("deviceInitDataResultBean") == null) {
+                            setHandleMessage(WHAT_SET_CONFIG_FALURE, "配置设备信息失败：初始数据为空");
+                            return false;
+                        }
+
+                        DeviceInitDataResultBean initData = (DeviceInitDataResultBean) bundle.getSerializable("deviceInitDataResultBean");//全局数据
+
+                        if (initData == null) {
+                            setHandleMessage(WHAT_SET_CONFIG_FALURE, "配置设备信息失败：初始对象为空");
+                            return false;
+                        }
+
+                        final DeviceBean device = initData.getDevice();//设备数据
+
+                        if (device == null || StringUtil.isEmptyNotNull(device.getDeviceId())) {
+                            setHandleMessage(WHAT_SET_CONFIG_FALURE, "配置设备信息失败：设备对象为空");
+                            return false;
+                        }
+
+                        AppCacheManager.setDevice(device);
+
+                        setHandleMessage(WHAT_SET_CONFIG_SUCCESS, "信息配置完成，正在启动设备恢复原始状态");
+
+
+                        new Thread(new Runnable() {
+                            public void run() {
+                                SystemClock.sleep(6000);
+
+                                setHandleMessage(WHAT_TIPS, "配置结束，进入购物车界面");
+
+                                if (device.getSceneMode().equals(AppVar.SCENE_MODE_1)) {
+                                    Intent intent = new Intent(getAppContext(), LockerMainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                        }).start();
+
+                        break;
+                    case WHAT_READ_CONFIG_FAILURE:
+                        setHandleMessage(WHAT_TIPS, "重新尝试读取设备信息");
+                        initActionIsRun = false;
+                        break;
+                }
 
                 return false;
             }
@@ -202,13 +244,13 @@ public class InitDataActivity extends BaseFragmentActivity {
 
     }
 
-    public void setHandleMessage(int what, String tips, Object deviceInitDataResult) {
+    public void setHandleMessage(int what, String tips, DeviceInitDataResultBean deviceInitDataResult) {
         final Message m = new Message();
         m.what = what;
         Bundle bundle = new Bundle();
         bundle.putString("tips", tips);
         if(deviceInitDataResult!=null) {
-            //bundle.putSerializable("deviceInitDataResultBean", deviceInitDataResult);
+            bundle.putSerializable("deviceInitDataResultBean", deviceInitDataResult);
         }
         m.setData(bundle);
         handler_msg.sendMessage(m);
@@ -218,7 +260,7 @@ public class InitDataActivity extends BaseFragmentActivity {
         setHandleMessage(what,msg,null);
     }
 
-    private boolean setDeviceInitData(){
+    private void setDeviceInitData(){
 
         setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_settingdevice));
 
@@ -226,53 +268,51 @@ public class InitDataActivity extends BaseFragmentActivity {
         if(version_mode==null||version_mode.equals(AppVar.VERSION_MODE_0)) {
             initActionIsRun = false;
             setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_verion_mode));
-            return false;
+            return;
         }
 
         String scene_mode= DbManager.getInstance().getConfigValue(ConfigDao.FIELD_SCENE_MODE);
         if(scene_mode==null||scene_mode.equals(AppVar.SCENE_MODE_0)) {
             initActionIsRun=false;
             setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_scene_mode));
-            return false;
+            return;
         }
 
         if(version_mode.equals(AppVar.VERSION_MODE_1)){
             if(DbManager.getInstance().getCabinets().size()==0) {
                 initActionIsRun = false;
                 setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_set_cabinet));
-                return false;
+                return;
             }
         }
 
 
+        RopDeviceInitData rop=new RopDeviceInitData();
+        rop.setDeviceId("123456");
+        rop.setSceneMode(scene_mode);
+        rop.setVesionMode(version_mode);
 
-        if(scene_mode.equals(AppVar.SCENE_MODE_1)) {
+        ReqInterface.getInstance().deviceInitData(rop, new ReqHandler(){
 
-            DeviceBean device = new DeviceBean();
-            device.setDeviceId("1224567");
-            device.setSceneMode(scene_mode);
-            device.setVersionMode(version_mode);
+            @Override
+            public void onSuccess(String response) {
+                super.onSuccess(response);
 
-//            HashMap<String, CabinetBean> cabinets=new HashMap<>();
-//            CabinetBean cabinet=new CabinetBean();
-//            cabinet.setCabinetId("cabinet1");
-//            cabinet.setName("箱子01");
-//            cabinet.setComId("sys1");
-//            cabinet.setComBaud(19200);
-//            cabinet.setComPrl("LV-DSE-V");
-//            cabinet.setLayout("[[\"1-1-1-0\",\"2-2-1-0\"],[\"3-3-1-0\",\"4-4-1-1\"],[\"5-5-1-0\",\"6-6-1-0\"]]");
-//            cabinets.put(cabinet.getCabinetId(),cabinet);
+                ResultBean<DeviceInitDataResultBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<DeviceInitDataResultBean>>() {
+                });
 
-            device.setCabinets(DbManager.getInstance().getCabinets());
+                if(rt.getCode()==ResultCode.SUCCESS){
+                    setHandleMessage(WHAT_READ_CONFIG_SUCCESS, getAppContext().getString(R.string.aty_initdata_tips_read_config_success),rt.getData());
+                }
+                else {
+                    setHandleMessage(WHAT_READ_CONFIG_FAILURE, rt.getMessage());
+                }
+            }
 
-            AppCacheManager.setDevice(device);
-
-
-            Intent intent = new Intent(getAppContext(), LockerMainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-
-        return  true;
+            @Override
+            public void onFailure(String msg, Exception e) {
+                super.onFailure(msg, e);
+            }
+        });
     }
 }

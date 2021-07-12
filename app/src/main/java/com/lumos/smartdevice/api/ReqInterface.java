@@ -17,6 +17,9 @@ public class ReqInterface {
                 case "1":
                     iReq = new ReqStandAlone();
                     break;
+                case "2":
+                    iReq = new ReqStandAlone();
+                    break;
             }
         }
 
