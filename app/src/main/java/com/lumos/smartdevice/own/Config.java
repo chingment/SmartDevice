@@ -1,0 +1,28 @@
+package com.lumos.smartdevice.own;
+
+import com.lumos.smartdevice.BuildConfig;
+import com.lumos.smartdevice.utils.SHA256Encrypt;
+import com.lumos.smartdevice.utils.StringUtil;
+
+
+
+public class Config {
+
+    public static final boolean IS_BUILD_DEBUG = BuildConfig.DEBUG;//打包模式
+    public static final boolean IS_APP_DEBUG = BuildConfig.ISAPPDEBUG;//调试模式
+
+    public static String getSign(String appId, String appKey, String appSecret, String data, String currenttime) {
+        // 待加密
+        String queryStr =appId+ appKey + appSecret + currenttime + data;
+//        LogUtil.e(TAG, "queryStr>>==>>" + queryStr);
+        String sortedStr = StringUtil.sortString(queryStr);
+//        LogUtil.e(TAG, "sortedStr>>==>>" + sortedStr);
+        String sha256edStr = SHA256Encrypt.bin2hex(sortedStr).toLowerCase();
+//        LogUtil.e(TAG, "sha256edStr>>==>>" + sha256edStr);
+//        String base64Str = Base64.encodeToString(sha256edStr.getBytes(), Base64.NO_WRAP);
+//        String base64Str = StringUtils.replaceEnter(Base64.encodeToString(sha256edStr.getBytes(), Base64.NO_WRAP), "");
+//        LogUtil.e(TAG, "加密后>>==>>" + base64Str);
+        return sha256edStr;
+    }
+
+}

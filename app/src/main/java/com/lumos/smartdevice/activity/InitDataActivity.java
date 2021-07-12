@@ -30,6 +30,7 @@ import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyListView;
+import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.widget.shapeloading.LoadingView;
@@ -212,7 +213,7 @@ public class InitDataActivity extends BaseFragmentActivity {
     }
 
     private void initData() {
-        tv_DeviceId.setText("1234567");
+        tv_DeviceId.setText(DeviceUtil.getDeviceId());
         tv_VersionName.setText(BuildConfig.VERSION_NAME);
 
     }
@@ -288,7 +289,7 @@ public class InitDataActivity extends BaseFragmentActivity {
 
 
         RopDeviceInitData rop=new RopDeviceInitData();
-        rop.setDeviceId("123456");
+        rop.setDeviceId(DeviceUtil.getDeviceId());
         rop.setSceneMode(scene_mode);
         rop.setVesionMode(version_mode);
 
