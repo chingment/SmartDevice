@@ -25,4 +25,8 @@ public class Config {
         return sha256edStr;
     }
 
+    public class URL {
+        public static final String device_InitData = BuildConfig.ENVIRONMENT + "/api/device/InitData";
+    }
+
 }

@@ -306,7 +306,7 @@ public class InitDataActivity extends BaseFragmentActivity {
                     setHandleMessage(WHAT_READ_CONFIG_SUCCESS, getAppContext().getString(R.string.aty_initdata_tips_read_config_success),rt.getData());
                 }
                 else {
-                    setHandleMessage(WHAT_READ_CONFIG_FAILURE, rt.getMessage());
+                    setHandleMessage(WHAT_READ_CONFIG_FAILURE, rt.getMsg());
                 }
             }
 

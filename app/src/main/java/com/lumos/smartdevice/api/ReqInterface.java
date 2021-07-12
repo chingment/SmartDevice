@@ -18,7 +18,7 @@ public class ReqInterface {
                     iReq = new ReqStandAlone();
                     break;
                 case "2":
-                    iReq = new ReqStandAlone();
+                    iReq = new ReqNetWord();
                     break;
             }
         }

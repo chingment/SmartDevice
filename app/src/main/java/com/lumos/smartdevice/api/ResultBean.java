@@ -5,23 +5,23 @@ import com.alibaba.fastjson.JSON;
 public class ResultBean<T>  {
 
     private int code;
-    private String message;
+    private String msg;
     private T data;
 
     public  ResultBean(){
 
     }
 
-    public ResultBean(int code , String message){
+    public ResultBean(int code , String msg){
 
         this.code=code;
-        this.message=message;
+        this.msg=msg;
     }
 
-    public ResultBean(int code , String message, T data){
+    public ResultBean(int code , String msg, T data){
 
         this.code=code;
-        this.message=message;
+        this.msg=msg;
         this.data=data;
     }
 
@@ -32,11 +32,13 @@ public class ResultBean<T>  {
         this.code = code;
     }
 
-    public String getMessage() {
-        return message;
+
+    public String getMsg() {
+        return msg;
     }
-    public void setMessage(String message) {
-        this.message = message;
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     public T getData() {

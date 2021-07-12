@@ -174,7 +174,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                             finish();
                         }
                         else {
-                            showToast(rt.getMessage());
+                            showToast(rt.getMsg());
                         }
                     }
 
