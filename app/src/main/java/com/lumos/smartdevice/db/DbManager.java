@@ -3,19 +3,14 @@ package com.lumos.smartdevice.db;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.text.TextUtils;
 
 
-import com.lumos.smartdevice.db.model.ConfigBean;
+
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.own.AppContext;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
+
 
 public class DbManager {
     static private DbManager dbMgr = new DbManager();

@@ -13,11 +13,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
+import com.lumos.smartdevice.api.ResultBean;
+import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
+import com.lumos.smartdevice.model.api.LoginResultBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -144,17 +149,22 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                     @Override
                     public void onSuccess(String response) {
                         super.onSuccess(response);
+                        ResultBean<LoginResultBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<LoginResultBean>>() {
+                        });
 
-                        Intent var2 = new Intent(getAppContext(), SmHomeActivity.class);
-                        startActivity(var2);
-                        finish();
+                        if(rt.getCode()== ResultCode.SUCCESS) {
+                            Intent var2 = new Intent(getAppContext(), SmHomeActivity.class);
+                            startActivity(var2);
+                            finish();
+                        }
+                        else {
+                            showToast(rt.getMessage());
+                        }
                     }
 
                     @Override
                     public void onFailure(String msg, Exception e) {
                         super.onFailure(msg, e);
-
-                        showToast(R.string.tips_password_noright);
                     }
                 });
 

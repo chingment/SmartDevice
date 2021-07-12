@@ -8,6 +8,10 @@ public class ResultBean<T>  {
     private String message;
     private T data;
 
+    public  ResultBean(){
+
+    }
+
     public ResultBean(int code , String message){
 
         this.code=code;

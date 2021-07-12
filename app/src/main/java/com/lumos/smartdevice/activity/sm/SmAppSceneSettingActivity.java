@@ -10,21 +10,16 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
-import com.lumos.smartdevice.db.model.ConfigBean;
 import com.lumos.smartdevice.model.CabinetBean;
-import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SmAppSceneSettingActivity extends BaseFragmentActivity {
