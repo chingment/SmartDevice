@@ -26,7 +26,7 @@ public class ReqHandler {
     protected static final int SUCCESS_MESSAGE = 0;
     protected static final int FAILURE_MESSAGE = 1;
     protected static final int BEFORESEMD_MESSAGE = 2;
-
+    protected static final int AFTERSEMD_MESSAGE = 3;
     private Handler handler;
 
     /**
@@ -69,6 +69,10 @@ public class ReqHandler {
 
     }
 
+    public void onAfterSend() {
+
+    }
+
 
     //
     // 后台线程调用方法，通过Handler sendMessage把结果转到UI主线程
@@ -94,15 +98,20 @@ public class ReqHandler {
     //
 
     protected void handleSuccessMessage(String response) {
+        onAfterSend();
         onSuccess(response);
     }
 
     protected void handleFailureMessage(String msg, Exception e) {
+        onAfterSend();
         onFailure(msg, e);
     }
 
     protected void handleBeforeSendMessage() {
         onBeforeSend();
+    }
+    protected void handleAfterSendMessage() {
+        onAfterSend();
     }
 
 
@@ -118,6 +127,9 @@ public class ReqHandler {
                 break;
             case BEFORESEMD_MESSAGE:
                 handleBeforeSendMessage();
+                break;
+            case AFTERSEMD_MESSAGE:
+                handleAfterSendMessage();
                 break;
         }
     }

@@ -29,6 +29,7 @@ import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppManager;
+import com.lumos.smartdevice.ui.dialog.CustomDialogLoading;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.ToastUtil;
 
@@ -47,6 +48,10 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
     private AppContext appContext;
     public static boolean isForeground = false;
     private DeviceBean device;
+
+    private Handler laodingUIHandler;
+    private CustomDialogLoading dialog_Loading;
+
     public AppContext getAppContext() {
         return appContext;
     }
@@ -70,6 +75,37 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
 
         AppManager.getAppManager().addActivity(this);
 
+
+        laodingUIHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        if(msg.obj!=null) {
+                            dialog_Loading = new CustomDialogLoading((Context) msg.obj);
+                            dialog_Loading.setProgressText("正在处理中");
+                            dialog_Loading.show();
+                            new Handler().postDelayed(new Runnable() {
+                                public void run() {
+                                    if (dialog_Loading != null) {
+                                        if (dialog_Loading.isShowing()) {
+                                            laodingUIHandler.sendEmptyMessage(2);
+                                        }
+                                    }
+                                }
+                            }, 6000);
+                        }
+                        break;
+                    case 2:
+                        if (dialog_Loading != null) {
+                            dialog_Loading.cancel();
+                            dialog_Loading=null;
+                        }
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
 
@@ -164,6 +200,20 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
 
     public void setHideSysStatusBar(boolean ishidden) {
         OstCtrlInterface.getInstance().setHideStatusBar(appContext, ishidden);
+    }
+
+    public void showLoading(Context context) {
+        Message m = new Message();
+        m.what = 1;
+        m.obj = context;
+        laodingUIHandler.sendMessage(m);
+    }
+
+    public void hideLoading(Context context) {
+        Message m = new Message();
+        m.what = 2;
+        m.obj = context;
+        laodingUIHandler.sendMessage(m);
     }
 
 }

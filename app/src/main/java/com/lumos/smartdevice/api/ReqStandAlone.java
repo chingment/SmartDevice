@@ -17,6 +17,7 @@ public class ReqStandAlone implements IReqVersion{
     @Override
     public void deviceInitData(RopDeviceInitData rop, final ReqHandler reqHandler) {
 
+
         ResultBean result = null;
 
 
@@ -45,6 +46,8 @@ public class ReqStandAlone implements IReqVersion{
 
     @Override
     public void loginByAccount(RopLoginByAccount rop, final ReqHandler reqHandler) {
+
+        reqHandler.sendBeforeSendMessage();
 
         ResultBean result = null;
 

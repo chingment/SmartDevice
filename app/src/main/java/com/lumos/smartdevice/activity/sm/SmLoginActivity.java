@@ -151,6 +151,19 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
 
                 ReqInterface.getInstance().loginByAccount(rop, new ReqHandler(){
 
+
+                    @Override
+                    public void onBeforeSend() {
+                        super.onBeforeSend();
+                        showLoading(SmLoginActivity.this);
+                    }
+
+                    @Override
+                    public void onAfterSend() {
+                        super.onAfterSend();
+                        hideLoading(SmLoginActivity.this);
+                    }
+
                     @Override
                     public void onSuccess(String response) {
                         super.onSuccess(response);
