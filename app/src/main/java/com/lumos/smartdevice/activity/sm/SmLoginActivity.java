@@ -22,7 +22,7 @@ import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.UserBean;
-import com.lumos.smartdevice.model.api.LoginResultBean;
+import com.lumos.smartdevice.model.api.OwnLoginResultBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -168,7 +168,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                     @Override
                     public void onSuccess(String response) {
                         super.onSuccess(response);
-                        ResultBean<LoginResultBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<LoginResultBean>>() {
+                        ResultBean<OwnLoginResultBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<OwnLoginResultBean>>() {
                         });
 
                         if(rt.getCode()== ResultCode.SUCCESS) {

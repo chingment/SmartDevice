@@ -7,7 +7,7 @@ import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.model.api.DeviceInitDataResultBean;
-import com.lumos.smartdevice.model.api.LoginResultBean;
+import com.lumos.smartdevice.model.api.OwnLoginResultBean;
 import com.lumos.smartdevice.own.AppVar;
 
 public class ReqStandAlone implements IReqVersion{
@@ -58,7 +58,7 @@ public class ReqStandAlone implements IReqVersion{
         }
 
 
-        LoginResultBean ret=new LoginResultBean();
+        OwnLoginResultBean ret=new OwnLoginResultBean();
         ret.setUserId(user.getUserId());
         ret.setUserName(user.getUserName());
         ret.setFullName(user.getFullName());
