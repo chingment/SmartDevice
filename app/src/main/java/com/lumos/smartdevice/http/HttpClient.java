@@ -44,7 +44,6 @@ public class HttpClient {
     private static final int MAX_REQUESTS_PER_HOST = 10;
     private static final String TAG = HttpClient.class.getSimpleName();
     private static final String UTF_8 = "UTF-8";
-    private static final MediaType MEDIA_TYPE = MediaType.parse("text/plain;");
     private static OkHttpClient client;
     //json请求
     private static final MediaType MediaType_JSON = MediaType.parse("application/json; charset=utf-8");
@@ -194,38 +193,6 @@ public class HttpClient {
     }
 
 
-
-    /**
-     * 判断是否为 json
-     *
-     * @param responseBody
-     * @return
-     * @throws Exception
-     */
-
-    private static String judgeJSON(String responseBody) throws Exception {
-        if (!isJsonString(responseBody)) {
-            throw new Exception("server response not json string (response = " + responseBody + ")");
-        }
-        return responseBody;
-    }
-
-    /**
-     * 判断是否为 json
-     *
-     * @param responseBody
-     * @return
-     */
-    private static boolean isJsonString(String responseBody) {
-        return !TextUtils.isEmpty(responseBody) && (responseBody.startsWith("{") && responseBody.endsWith("}"));
-    }
-
-    /**
-     * get
-     *
-     * @param map
-     * @return
-     */
     public static String mapToQueryString(Map<String, String> map) {
         StringBuilder string = new StringBuilder();
         /*if(map.size() > 0) {

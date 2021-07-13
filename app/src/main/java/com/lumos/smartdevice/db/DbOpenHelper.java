@@ -30,6 +30,13 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 			+ UserDao.COLUMN_NAME_PASSWORD + " TEXT , "
 			+ UserDao.COLUMN_NAME_TYPE + " TEXT );";
 
+	private static final String TRIPMSG_TABLE_CREATE = "CREATE TABLE "
+			+ TripMsgDao.TABLE_NAME + " ("
+			+ TripMsgDao.COLUMN_NAME_MSG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+			+ TripMsgDao.COLUMN_NAME_CONTENT + " TEXT , "
+			+ TripMsgDao.COLUMN_NAME_POST_URL + " TEXT , "
+			+ TripMsgDao.COLUMN_NAME_STATUS + " INTEGER );";
+
 
 	private DbOpenHelper(Context context) {
 		super(context, "smartdevice.db", null, DATABASE_VERSION);
@@ -47,6 +54,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 		db.execSQL(CONFIG_TABLE_CREATE);
 		db.execSQL(CABINET_TABLE_CREATE);
 		db.execSQL(USER_TABLE_CREATE);
+		db.execSQL(TRIPMSG_TABLE_CREATE);
 	}
 
 	@Override
