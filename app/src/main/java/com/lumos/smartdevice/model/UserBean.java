@@ -1,8 +1,8 @@
-package com.lumos.smartdevice.model.api;
+package com.lumos.smartdevice.model;
 
 import java.io.Serializable;
 
-public class LoginResultBean implements Serializable {
+public class UserBean implements Serializable {
 
     private String userId;
     private String userName;

@@ -5,7 +5,9 @@ import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.model.api.DeviceInitDataResultBean;
+import com.lumos.smartdevice.model.api.LoginResultBean;
 import com.lumos.smartdevice.own.AppVar;
 
 public class ReqStandAlone implements IReqVersion{
@@ -47,13 +49,20 @@ public class ReqStandAlone implements IReqVersion{
 
         ResultBean result = null;
 
-        if (!DbManager.getInstance().checkUserPassword(rop.getUserName(), rop.getPassword(), "2")) {
+        UserBean user=DbManager.getInstance().checkUserPassword(rop.getUserName(), rop.getPassword(), "2");
+
+        if (user==null) {
             result = new ResultBean(ResultCode.FAILURE, "用户密码错误");
             reqHandler.sendSuccessMessage(result.toJSONString());
             return;
         }
 
-        result = new ResultBean(ResultCode.SUCCESS, "登录成功");
+
+        LoginResultBean ret=new LoginResultBean();
+        ret.setUserId(user.getUserId());
+        ret.setUserName(user.getUserName());
+        ret.setFullName(user.getFullName());
+        result = new ResultBean<>(ResultCode.SUCCESS, "登录成功",ret);
 
         reqHandler.sendSuccessMessage(result.toJSONString());
 

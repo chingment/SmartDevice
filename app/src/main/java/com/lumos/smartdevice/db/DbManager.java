@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.TripMsgBean;
+import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppContext;
 
 import java.util.ArrayList;
@@ -48,8 +49,8 @@ public class DbManager {
     }
 
     private void initUser(){
-        addUser("system","123456","1");
-        addUser("admin","123456","2");
+        addUser("system","123456","系统维护员","1");
+        addUser("admin","123456","后台管理员","2");
     }
 
     public void addConfig(String field,String value){
@@ -75,7 +76,7 @@ public class DbManager {
     }
 
 
-    public void addUser(String username,String password,String type){
+    public void addUser(String username,String password,String fullname, String type){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int id = -1;
         if(db.isOpen()){
@@ -91,6 +92,7 @@ public class DbManager {
             ContentValues values = new ContentValues();
             values.put(UserDao.COLUMN_NAME_USERNAME, username);
             values.put(UserDao.COLUMN_NAME_PASSWORD, password);
+            values.put(UserDao.COLUMN_NAME_FULLNAME, fullname);
             values.put(UserDao.COLUMN_NAME_TYPE, type);
 
             db.insert(UserDao.TABLE_NAME, null, values);
@@ -100,18 +102,36 @@ public class DbManager {
     }
 
 
-    public boolean checkUserPassword(String username,String password,String type) {
+    public UserBean checkUserPassword(String username, String password, String type) {
+
+        UserBean user=null;
+
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where "+UserDao.COLUMN_NAME_USERNAME + " = ? and "+UserDao.COLUMN_NAME_PASSWORD+" = ? and "+UserDao.COLUMN_NAME_TYPE+" = ?",new String[]{username,password,type});
 
         boolean exist = (cursor.getCount() > 0);
         if(exist){
+
+            while(cursor.moveToNext()) {
+
+                user = new UserBean();
+
+                String user_id = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERID));
+                String user_name = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERNAME));
+                String fullname = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_FULLNAME));
+
+
+                user.setUserId(user_id);
+                user.setUserName(user_name);
+                user.setFullName(fullname);
+
+            }
             cursor.close();
-            return true;
+
         }
 
-        return false;
+        return user;
 
     }
 

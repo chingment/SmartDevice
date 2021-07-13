@@ -21,6 +21,7 @@ import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
+import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.model.api.LoginResultBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
@@ -132,7 +133,9 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
         switch (scene){
             case "init_data_help":
 
-                if(!DbManager.getInstance().checkUserPassword(username,password,"1")){
+                UserBean user1=DbManager.getInstance().checkUserPassword(username,password,"1");
+
+                if(user1==null){
                     showToast(R.string.tips_password_noright);
                     return;
                 }

@@ -71,12 +71,8 @@ public class AppContext extends Application {
         super.onCreate();
 
         Context context = getApplicationContext();
-
         DbManager.getInstance().init();
         OstCtrlInterface.init(context);
-        //DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE,"0");
-        //DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE,"0");
-       // DbManager.getInstance().getConfig("scene_mode");
     }
 
     @Override

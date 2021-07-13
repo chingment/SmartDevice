@@ -26,8 +26,10 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
 	private static final String USER_TABLE_CREATE = "CREATE TABLE "
 			+ UserDao.TABLE_NAME + " ("
-			+ UserDao.COLUMN_NAME_USERNAME + " TEXT PRIMARY KEY , "
+			+ UserDao.COLUMN_NAME_USERID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+			+ UserDao.COLUMN_NAME_USERNAME + " TEXT , "
 			+ UserDao.COLUMN_NAME_PASSWORD + " TEXT , "
+			+ UserDao.COLUMN_NAME_FULLNAME + " TEXT , "
 			+ UserDao.COLUMN_NAME_TYPE + " TEXT );";
 
 	private static final String TRIPMSG_TABLE_CREATE = "CREATE TABLE "
