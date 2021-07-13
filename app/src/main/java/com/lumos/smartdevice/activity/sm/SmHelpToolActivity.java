@@ -12,8 +12,7 @@ import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
-import com.lumos.smartdevice.model.api.OwnLoginResultBean;
-import com.lumos.smartdevice.model.api.OwnLogouResultBean;
+import com.lumos.smartdevice.model.api.OwnLogoutResultBean;
 import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
@@ -203,7 +202,7 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
             @Override
             public void onSuccess(String response) {
                 super.onSuccess(response);
-                ResultBean<OwnLogouResultBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<OwnLogouResultBean>>() {
+                ResultBean<OwnLogoutResultBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<OwnLogoutResultBean>>() {
                 });
 
                 if (rt.getCode() == ResultCode.SUCCESS) {

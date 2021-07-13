@@ -192,6 +192,7 @@ public class InitDataActivity extends BaseFragmentActivity {
                             public void run() {
                                 SystemClock.sleep(6000);
 
+
                                 setHandleMessage(WHAT_TIPS, "配置结束，进入购物车界面");
 
                                 if (device.getSceneMode().equals(AppVar.SCENE_MODE_1)) {

@@ -8,6 +8,7 @@ import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.model.api.DeviceInitDataResultBean;
 import com.lumos.smartdevice.model.api.OwnLoginResultBean;
+import com.lumos.smartdevice.model.api.OwnLogoutResultBean;
 import com.lumos.smartdevice.own.AppVar;
 
 public class ReqStandAlone implements IReqVersion{
@@ -71,7 +72,17 @@ public class ReqStandAlone implements IReqVersion{
     @Override
     public void ownLogout(RopOwnLogout rop, final ReqHandler reqHandler) {
 
+        reqHandler.sendBeforeSendMessage();
 
+        ResultBean result = null;
+
+        OwnLogoutResultBean ret=new OwnLogoutResultBean();
+
+        ret.setUserId("111");
+
+        result = new ResultBean<>(ResultCode.SUCCESS, "退出成功",ret);
+
+        reqHandler.sendSuccessMessage(result.toJSONString());
 
     }
 }
