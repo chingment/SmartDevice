@@ -25,7 +25,6 @@ import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LogTipsBean;
-import com.lumos.smartdevice.model.TripMsgBean;
 import com.lumos.smartdevice.model.api.DeviceInitDataResultBean;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppVar;

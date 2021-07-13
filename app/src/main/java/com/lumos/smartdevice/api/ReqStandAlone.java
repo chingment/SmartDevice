@@ -74,13 +74,12 @@ public class ReqStandAlone implements IReqVersion{
 
         reqHandler.sendBeforeSendMessage();
 
-        ResultBean result = null;
 
         OwnLogoutResultBean ret=new OwnLogoutResultBean();
 
-        ret.setUserId("111");
+        ret.setUserId(rop.getUserId());
 
-        result = new ResultBean<>(ResultCode.SUCCESS, "退出成功",ret);
+        ResultBean result = new ResultBean<>(ResultCode.SUCCESS, "退出成功",ret);
 
         reqHandler.sendSuccessMessage(result.toJSONString());
 
