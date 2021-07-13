@@ -1,11 +1,14 @@
 package com.lumos.smartdevice.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -77,6 +80,7 @@ public class InitDataActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_initdata);
 
         initView();
@@ -85,7 +89,6 @@ public class InitDataActivity extends BaseFragmentActivity {
 
 
         initActionHandler.postDelayed(initActionRunable, 1000);
-
 
     }
 

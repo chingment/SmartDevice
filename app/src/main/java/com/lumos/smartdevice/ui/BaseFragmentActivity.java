@@ -9,17 +9,21 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
 
@@ -106,8 +110,9 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
                 return false;
             }
         });
-    }
 
+
+    }
 
     @Override
     protected void onRestart() {
