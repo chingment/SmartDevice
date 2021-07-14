@@ -18,6 +18,7 @@ public class AppCacheManager {
 
     private static String Key_Device = "Key_Device";
     private static String Key_LastUserName="Key_LastUserName";
+    private static String Key_CurrentUserId="Key_CurrentUserId";
 
     private static ACache getCache() {
 
@@ -61,6 +62,5 @@ public class AppCacheManager {
         return userName;
 
     }
-
 
 }
