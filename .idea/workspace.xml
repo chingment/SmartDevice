@@ -12,7 +12,10 @@
     <list default="true" id="bc9a5615-753f-4d27-ba9c-39ff462585f0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHelpToolActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHelpToolActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/own/AppCacheManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/own/AppCacheManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,21 +35,21 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/BaseFragmentActivity.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
-              <folding>
-                <element signature="e#3694#3695#0" expanded="true" />
-                <element signature="e#3727#3728#0" expanded="true" />
-                <element signature="e#3773#3774#0" expanded="true" />
-                <element signature="e#3804#3805#0" expanded="true" />
-                <element signature="method#onDestroy#0;class#BaseFragmentActivity#0" />
-                <element signature="e#4499#4500#0" expanded="true" />
-                <element signature="e#4567#4568#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-555">
+              <caret line="16" column="69" lean-forward="true" selection-start-line="16" selection-start-column="69" selection-end-line="16" selection-end-column="75" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -54,7 +57,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
+            <state relative-caret-position="1807">
               <caret line="192" selection-start-line="192" selection-end-line="198" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -63,16 +66,50 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLockerBoxActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1413">
+              <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLoginActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="231">
+              <caret line="93" column="53" selection-start-line="93" selection-start-column="53" selection-end-line="93" selection-end-column="53" />
+              <folding>
+                <element signature="e#3337#3378#0" expanded="true" />
+                <element signature="e#3472#3513#0" expanded="true" />
+                <element signature="e#4586#4616#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/own/AppCacheManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="132">
+              <caret line="18" selection-start-line="18" selection-end-line="18" />
+              <folding>
+                <element signature="method#getCache#0;class#AppCacheManager#0" />
+                <element signature="method#getDevice#0;class#AppCacheManager#0" />
+                <element signature="method#setDevice#0;class#AppCacheManager#0" />
+                <element signature="method#setLastUserName#0;class#AppCacheManager#0" />
+                <element signature="method#getLastUserName#0;class#AppCacheManager#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHelpToolActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
+            <state relative-caret-position="-2163">
               <caret line="50" column="47" lean-forward="true" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
-              <folding>
-                <element signature="method#onBeforeSend#0;class#7610:8754" />
-                <element signature="method#onAfterSend#0;class#7610:8754" />
-                <element signature="method#onSuccess#0;class#7610:8754" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -108,7 +145,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_confirm.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/utils/DisplayUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/utils/ToastUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ApiFactory.java" />
@@ -120,7 +156,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/model/api/DeviceInitDataResultBean.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopDeviceInitData.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ResultCode.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/model/DeviceBean.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/dialog/CustomDialogLoading.java" />
@@ -146,7 +181,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/model/api/LoginResultBean.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/model/UserBean.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/DbManager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopOwnLogout.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopOwnLoginByAccount.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/model/api/OwnLoginResultBean.java" />
@@ -156,9 +190,12 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/utils/StatusBarUtil.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/BaseFragmentActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHelpToolActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/BaseFragmentActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/own/AppCacheManager.java" />
       </list>
     </option>
   </component>
@@ -210,14 +247,34 @@
             </path>
             <path>
               <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="smartdevice" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="own" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="smartdevice" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -469,11 +526,11 @@
       <window_info id="Resources Explorer" order="7" weight="0.32996634" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Version Control" order="0" />
-      <window_info anchor="bottom" id="Logcat" order="1" visible="true" weight="0.31651375" />
+      <window_info anchor="bottom" id="Logcat" order="1" weight="0.31651375" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32874617" />
       <window_info anchor="bottom" id="Terminal" order="3" weight="0.2767584" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="5" weight="0.24464832" />
+      <window_info anchor="bottom" id="Build" order="5" visible="true" weight="0.24464832" />
       <window_info anchor="bottom" id="Android Profiler" order="6" />
       <window_info anchor="bottom" id="Run" order="7" weight="0.24923548" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.39296636" />
@@ -488,7 +545,7 @@
     </layout>
     <layout-to-restore>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.32996634" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.22072451" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -497,16 +554,16 @@
       <window_info id="Resources Explorer" order="7" weight="0.32996634" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Version Control" order="0" />
-      <window_info anchor="bottom" id="Logcat" order="1" weight="0.18195719" />
+      <window_info anchor="bottom" id="Logcat" order="1" weight="0.31651375" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32874617" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.32874617" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.2767584" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="5" visible="true" weight="0.382263" />
-      <window_info anchor="bottom" id="Android Profiler" order="6" />
-      <window_info anchor="bottom" id="Run" order="7" weight="0.1590214" />
-      <window_info anchor="bottom" id="Debug" order="8" />
-      <window_info anchor="bottom" id="Find" order="9" />
-      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
+      <window_info anchor="bottom" id="Build" order="5" weight="0.24464832" />
+      <window_info anchor="bottom" id="Android Profiler" order="6" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="7" weight="0.24923548" />
+      <window_info anchor="bottom" id="Debug" order="8" weight="0.39296636" />
+      <window_info anchor="bottom" id="Find" order="9" weight="0.35626912" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" weight="0.32996634" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
@@ -528,33 +585,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/dialog/CustomDialogLoading.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/utils/SHA256Encrypt.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/generated/source/buildConfig/dev/debug/com/lumos/smartdevice/BuildConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/utils/DeviceUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1475">
@@ -855,13 +885,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="393">
-          <caret line="165" column="21" selection-start-line="165" selection-start-column="21" selection-end-line="165" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -876,13 +899,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="825">
           <caret line="55" column="55" selection-start-line="55" selection-start-column="55" selection-end-line="55" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="39" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -910,21 +926,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
-          <caret line="82" column="8" selection-start-line="82" selection-start-column="8" selection-end-line="82" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/BaseFragmentActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="234">
+          <caret line="55" column="37" lean-forward="true" selection-start-line="55" selection-start-column="37" selection-end-line="55" selection-end-column="37" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#3694#3695#0" expanded="true" />
             <element signature="e#3727#3728#0" expanded="true" />
             <element signature="e#3773#3774#0" expanded="true" />
@@ -936,9 +943,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="39" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2765">
+          <caret line="197" column="124" selection-start-line="197" selection-start-column="124" selection-end-line="197" selection-end-column="124" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5385#5453#0" expanded="true" />
+            <element signature="e#5616#5692#0" expanded="true" />
+            <element signature="e#6027#6103#0" expanded="true" />
+            <element signature="e#6420#6496#0" expanded="true" />
+            <element signature="e#6694#6764#0" expanded="true" />
+            <element signature="e#7598#7669#0" expanded="true" />
+            <element signature="e#10952#11025#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-555">
+          <caret line="16" column="69" lean-forward="true" selection-start-line="16" selection-start-column="69" selection-end-line="16" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="14" column="5" lean-forward="true" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHomeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
+        <state relative-caret-position="1807">
           <caret line="192" selection-start-line="192" selection-end-line="198" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -946,14 +991,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLockerBoxActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1413">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHelpToolActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
+        <state relative-caret-position="-2163">
           <caret line="50" column="47" lean-forward="true" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="93" column="53" selection-start-line="93" selection-start-column="53" selection-end-line="93" selection-end-column="53" />
           <folding>
-            <element signature="method#onBeforeSend#0;class#7610:8754" />
-            <element signature="method#onAfterSend#0;class#7610:8754" />
-            <element signature="method#onSuccess#0;class#7610:8754" />
+            <element signature="e#3337#3378#0" expanded="true" />
+            <element signature="e#3472#3513#0" expanded="true" />
+            <element signature="e#4586#4616#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/own/AppCacheManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="method#getCache#0;class#AppCacheManager#0" />
+            <element signature="method#getDevice#0;class#AppCacheManager#0" />
+            <element signature="method#setDevice#0;class#AppCacheManager#0" />
+            <element signature="method#setLastUserName#0;class#AppCacheManager#0" />
+            <element signature="method#getLastUserName#0;class#AppCacheManager#0" />
           </folding>
         </state>
       </provider>

@@ -23,6 +23,7 @@ import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.model.api.OwnLoginResultBean;
+import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -90,6 +91,8 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
 
     private void initData() {
 
+        String lastUsername=AppCacheManager.getLastUserName(scene);
+        et_UserName.setText(lastUsername);
         switch (scene){
             case "init_data_help":
                 tv_Scene.setText(R.string.aty_smlogin_scene_init_data_help);
@@ -140,6 +143,8 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                     return;
                 }
 
+                AppCacheManager.setLastUserName(scene,username);
+
                 Intent  var1 = new Intent(getAppContext(), SmHelpToolActivity.class);
                 startActivity(var1);
                 finish();
@@ -172,6 +177,9 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                         });
 
                         if(rt.getCode()== ResultCode.SUCCESS) {
+
+                            AppCacheManager.setLastUserName(scene,rt.getData().getUserName());
+
                             Intent var2 = new Intent(getAppContext(), SmHomeActivity.class);
                             startActivity(var2);
                             finish();

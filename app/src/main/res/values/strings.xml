@@ -9,6 +9,13 @@
     <string name="aty_initdata_tips_set_cabinet">请先在帮助中心配置机柜</string>
     <string name="aty_initdata_tips_read_config_success">读取商户设备配置信息成功</string>
     <string name="aty_initdata_tips_read_config_failure">读取商户设备配置信息失败</string>
+    <string name="aty_initdata_tips_retry_read_config">重新尝试读取设备信息</string>
+    <string name="aty_initdata_tips_setting_config">正在配置设备信息</string>
+    <string name="aty_initdata_tips_setting_config_is_null">配置设备信息失败：初始数据为空</string>
+    <string name="aty_initdata_tips_setting_object_is_null">配置设备信息失败：初始对象为空</string>
+    <string name="aty_initdata_tips_setting_device_is_null">配置设备信息失败：设备对象为空</string>
+    <string name="aty_initdata_tips_setting_complete">配置设备信息完成，正在启动设备恢复原始状态</string>
+    <string name="aty_initdata_tips_setting_end">配置设备信息结束，进入应用</string>
 
     <string name="aty_smlogin_nav_title">登录</string>
     <string name="aty_smlogin_tv_txt_scene">场景</string>

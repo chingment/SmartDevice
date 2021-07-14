@@ -164,30 +164,30 @@ public class InitDataActivity extends BaseFragmentActivity {
                     case WHAT_TIPS:
                         break;
                     case WHAT_READ_CONFIG_SUCCESS:
-                        setHandleMessage(WHAT_TIPS, "正在配置设备信息");
+                        setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_setting_config));
 
                         if (bundle.getSerializable("deviceInitDataResultBean") == null) {
-                            setHandleMessage(WHAT_SET_CONFIG_FALURE, "配置设备信息失败：初始数据为空");
+                            setHandleMessage(WHAT_SET_CONFIG_FALURE, getAppContext().getString(R.string.aty_initdata_tips_setting_config_is_null));
                             return false;
                         }
 
                         DeviceInitDataResultBean initData = (DeviceInitDataResultBean) bundle.getSerializable("deviceInitDataResultBean");//全局数据
 
                         if (initData == null) {
-                            setHandleMessage(WHAT_SET_CONFIG_FALURE, "配置设备信息失败：初始对象为空");
+                            setHandleMessage(WHAT_SET_CONFIG_FALURE, getAppContext().getString(R.string.aty_initdata_tips_setting_object_is_null));
                             return false;
                         }
 
                         final DeviceBean device = initData.getDevice();//设备数据
 
                         if (device == null || StringUtil.isEmptyNotNull(device.getDeviceId())) {
-                            setHandleMessage(WHAT_SET_CONFIG_FALURE, "配置设备信息失败：设备对象为空");
+                            setHandleMessage(WHAT_SET_CONFIG_FALURE, getAppContext().getString(R.string.aty_initdata_tips_setting_device_is_null));
                             return false;
                         }
 
                         AppCacheManager.setDevice(device);
 
-                        setHandleMessage(WHAT_SET_CONFIG_SUCCESS, "信息配置完成，正在启动设备恢复原始状态");
+                        setHandleMessage(WHAT_SET_CONFIG_SUCCESS, getAppContext().getString(R.string.aty_initdata_tips_setting_complete));
 
 
                         new Thread(new Runnable() {
@@ -195,7 +195,7 @@ public class InitDataActivity extends BaseFragmentActivity {
                                 SystemClock.sleep(6000);
 
 
-                                setHandleMessage(WHAT_TIPS, "配置结束，进入购物车界面");
+                                setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_setting_end));
 
                                 if (device.getSceneMode().equals(AppVar.SCENE_MODE_1)) {
                                     Intent intent = new Intent(getAppContext(), LockerMainActivity.class);
@@ -207,7 +207,7 @@ public class InitDataActivity extends BaseFragmentActivity {
 
                         break;
                     case WHAT_READ_CONFIG_FAILURE:
-                        setHandleMessage(WHAT_TIPS, "重新尝试读取设备信息");
+                        setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_retry_read_config));
                         initActionIsRun = false;
                         break;
                 }
