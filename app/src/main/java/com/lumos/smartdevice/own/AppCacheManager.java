@@ -2,6 +2,7 @@ package com.lumos.smartdevice.own;
 
 
 import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.utils.ACache;
 import com.lumos.smartdevice.utils.StringUtil;
 
@@ -18,7 +19,7 @@ public class AppCacheManager {
 
     private static String Key_Device = "Key_Device";
     private static String Key_LastUserName="Key_LastUserName";
-    private static String Key_CurrentUserId="Key_CurrentUserId";
+    private static String Key_CurrentUser="Key_CurrentUser";
 
     private static ACache getCache() {
 
@@ -60,6 +61,20 @@ public class AppCacheManager {
         }
 
         return userName;
+
+    }
+
+    public static void setCurrentUser(UserBean user) {
+        if(user!=null) {
+            AppCacheManager.getCache().put(Key_CurrentUser, user);
+        }
+    }
+
+    public static UserBean getCurrentUser() {
+
+        UserBean user = (UserBean)AppCacheManager.getCache().getAsObject(Key_CurrentUser);
+
+        return user;
 
     }
 

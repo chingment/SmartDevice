@@ -144,7 +144,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                 }
 
                 AppCacheManager.setLastUserName(scene,username);
-
+                AppCacheManager.setCurrentUser(user1);
                 Intent  var1 = new Intent(getAppContext(), SmHelpToolActivity.class);
                 startActivity(var1);
                 finish();
@@ -177,8 +177,16 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                         });
 
                         if(rt.getCode()== ResultCode.SUCCESS) {
+                            OwnLoginResultBean d=rt.getData();
 
                             AppCacheManager.setLastUserName(scene,rt.getData().getUserName());
+
+                            UserBean user=new UserBean();
+                            user.setUserId(d.getUserId());
+                            user.setUserName(d.getUserName());
+                            user.setFullName(d.getFullName());
+
+                            AppCacheManager.setCurrentUser(user);
 
                             Intent var2 = new Intent(getAppContext(), SmHomeActivity.class);
                             startActivity(var2);

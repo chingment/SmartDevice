@@ -14,6 +14,7 @@ import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
 import com.lumos.smartdevice.model.api.OwnLogoutResultBean;
 import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
+import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
@@ -183,7 +184,7 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
     private void dlgExitManager() {
 
         RopOwnLogout rop = new RopOwnLogout();
-
+        rop.setUserId(AppCacheManager.getCurrentUser().getUserId());
         ReqInterface.getInstance().ownLogout(rop, new ReqHandler() {
             @Override
             public void onBeforeSend() {
@@ -204,6 +205,7 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
                 });
 
                 if (rt.getCode() == ResultCode.SUCCESS) {
+                    AppCacheManager.setCurrentUser(null);
                     Intent intent = new Intent(SmHelpToolActivity.this, InitDataActivity.class);
                     startActivity(intent);
                     AppManager.getAppManager().finishAllActivity();

@@ -1,12 +1,21 @@
 package com.lumos.smartdevice.activity.sm;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.InitDataActivity;
 import com.lumos.smartdevice.adapter.GridNineItemAdapter;
+import com.lumos.smartdevice.api.ReqHandler;
+import com.lumos.smartdevice.api.ReqInterface;
+import com.lumos.smartdevice.api.ResultBean;
+import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
+import com.lumos.smartdevice.model.api.OwnLogoutResultBean;
 import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
+import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
@@ -184,10 +193,44 @@ public class SmHomeActivity extends BaseFragmentActivity {
         OstCtrlInterface.getInstance().reboot(SmHomeActivity.this);
     }
 
-    private void dlgExitManager(){
-        Intent intent = new Intent(SmHomeActivity.this, InitDataActivity.class);
-        startActivity(intent);
-        AppManager.getAppManager().finishAllActivity();
+    private void dlgExitManager() {
+
+        RopOwnLogout rop = new RopOwnLogout();
+        rop.setUserId(AppCacheManager.getCurrentUser().getUserId());
+        ReqInterface.getInstance().ownLogout(rop, new ReqHandler() {
+            @Override
+            public void onBeforeSend() {
+                super.onBeforeSend();
+                showLoading(SmHomeActivity.this);
+            }
+
+            @Override
+            public void onAfterSend() {
+                super.onAfterSend();
+                hideLoading(SmHomeActivity.this);
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                super.onSuccess(response);
+                ResultBean<OwnLogoutResultBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<OwnLogoutResultBean>>() {
+                });
+
+                if (rt.getCode() == ResultCode.SUCCESS) {
+                    AppCacheManager.setCurrentUser(null);
+                    Intent intent = new Intent(SmHomeActivity.this, InitDataActivity.class);
+                    startActivity(intent);
+                    AppManager.getAppManager().finishAllActivity();
+                } else {
+                    showToast(rt.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                super.onFailure(msg, e);
+            }
+        });
     }
 
     @Override
