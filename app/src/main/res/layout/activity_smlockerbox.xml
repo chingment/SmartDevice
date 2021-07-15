@@ -84,10 +84,83 @@
             android:paddingLeft="@dimen/size_10"
             android:paddingRight="@dimen/size_10"
             android:gravity="center"
-            android:text="打开所有格子"
+            android:text="全部打开"
             android:textSize="@dimen/sp_10"
             android:textColor="@color/black"
             android:background="@drawable/widget_btn_1"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="@dimen/size_10"
+        android:paddingRight="@dimen/size_10"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="@dimen/size_12"
+            android:layout_height="@dimen/size_12"
+            android:gravity="center"
+            android:textSize="@dimen/sp_10"
+            android:textColor="@color/black"
+            android:background="@drawable/locker_box_status_doc_1"
+            android:layout_marginRight="@dimen/size_5"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_24"
+            android:gravity="center"
+            android:text="@string/locker_box_status_1"
+            android:textSize="@dimen/sp_10"
+            android:textColor="@color/locker_box_status_1"
+            android:layout_marginRight="@dimen/size_5"
+            />
+
+        <TextView
+            android:layout_width="@dimen/size_12"
+            android:layout_height="@dimen/size_12"
+            android:gravity="center"
+            android:textSize="@dimen/sp_10"
+            android:textColor="@color/black"
+            android:background="@drawable/locker_box_status_doc_2"
+            android:layout_marginRight="@dimen/size_5"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_24"
+            android:gravity="center"
+            android:text="@string/locker_box_status_2"
+            android:textSize="@dimen/sp_10"
+            android:textColor="@color/locker_box_status_2"
+            android:layout_marginRight="@dimen/size_5"
+            />
+
+        <TextView
+            android:layout_width="@dimen/size_12"
+            android:layout_height="@dimen/size_12"
+            android:gravity="center"
+            android:textSize="@dimen/sp_10"
+            android:textColor="@color/black"
+            android:background="@drawable/locker_box_status_doc_3"
+            android:layout_marginRight="@dimen/size_5"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/size_24"
+            android:gravity="center"
+            android:text="@string/locker_box_status_3"
+            android:textSize="@dimen/sp_10"
+            android:textColor="@color/locker_box_status_3"
+            android:layout_marginRight="@dimen/size_5"
             />
 
 

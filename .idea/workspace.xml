@@ -10,13 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc9a5615-753f-4d27-ba9c-39ff462585f0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/widget_btn_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/widget_btn_1_f.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/widget_btn_1_n.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/locker_box_status_doc_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/locker_box_status_doc_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-v24/locker_box_status_doc_3.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_smlockerbox.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_smlockerbox.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,43 +38,57 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/widget_btn_1.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="47" selection-start-line="2" selection-start-column="38" selection-end-line="2" selection-end-column="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/widget_btn_1_f.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="46" selection-start-line="11" selection-start-column="46" selection-end-line="11" selection-end-column="46" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/widget_btn_1_n.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_smlockerbox.xml">
           <provider editor-type-id="text-editor">
-            <state relative-caret-position="975">
-              <caret line="87" column="43" selection-start-line="87" selection-start-column="38" selection-end-line="87" selection-end-column="43" />
+            <state relative-caret-position="545">
+              <caret line="142" column="38" selection-start-line="142" selection-start-column="20" selection-end-line="142" selection-end-column="38" />
               <folding>
                 <element signature="e#1009#1960#0" />
+                <element signature="e#2562#2578#0" expanded="true" />
+                <element signature="e#2608#2624#0" expanded="true" />
+                <element signature="e#2821#2837#0" expanded="true" />
+                <element signature="e#2870#2886#0" expanded="true" />
+                <element signature="e#2920#2936#0" expanded="true" />
+                <element signature="e#3035#3049#0" expanded="true" />
+                <element signature="e#3414#3430#0" expanded="true" />
+                <element signature="e#3460#3476#0" expanded="true" />
+                <element signature="e#3571#3587#0" expanded="true" />
+                <element signature="e#3622#3638#0" expanded="true" />
+                <element signature="e#3705#3719#0" expanded="true" />
+                <element signature="e#3871#3886#0" expanded="true" />
+                <element signature="e#4003#4019#0" expanded="true" />
+                <element signature="e#4082#4111#0" expanded="true" />
+                <element signature="e#4141#4155#0" expanded="true" />
+                <element signature="e#4254#4269#0" expanded="true" />
+                <element signature="e#4337#4353#0" expanded="true" />
+                <element signature="e#4388#4404#0" expanded="true" />
+                <element signature="e#4471#4485#0" expanded="true" />
+                <element signature="e#4637#4652#0" expanded="true" />
+                <element signature="e#4769#4785#0" expanded="true" />
+                <element signature="e#4848#4877#0" expanded="true" />
+                <element signature="e#4907#4921#0" expanded="true" />
+                <element signature="e#5020#5035#0" expanded="true" />
+                <element signature="e#5103#5119#0" expanded="true" />
+                <element signature="e#5154#5170#0" expanded="true" />
+                <element signature="e#5237#5251#0" expanded="true" />
+                <element signature="e#5384#5399#0" expanded="true" />
+                <element signature="e#5535#5551#0" expanded="true" />
+                <element signature="e#5614#5643#0" expanded="true" />
+                <element signature="e#5673#5687#0" expanded="true" />
+                <element signature="e#5786#5801#0" expanded="true" />
               </folding>
             </state>
           </provider>
           <provider selected="true" editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="314">
+              <caret line="75" column="47" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -83,6 +97,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -109,9 +124,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmAppSceneSettingActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/model/api/LoginResult.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/Rop/RopLoginByAccount.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopLoginByAccount.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/model/api/DeviceInitDataResultBean.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopDeviceInitData.java" />
@@ -151,21 +163,24 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/utils/StatusBarUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/BaseFragmentActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/own/AppCacheManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHomeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHelpToolActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_smlockerbox.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-v24/widget_btn_1_f.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable-v24/widget_btn_1_n.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable-v24/locker_box_status_doc_1.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable-v24/locker_box_status_doc_3.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable-v24/locker_box_status_doc_2.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_smlockerbox.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-14" />
-    <option name="y" value="32" />
+    <option name="x" value="2" />
+    <option name="y" value="77" />
     <option name="width" value="1229" />
     <option name="height" value="775" />
   </component>
@@ -187,24 +202,6 @@
             <path>
               <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="smartdevice" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="smartdevice" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="activity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
             </path>
             <path>
@@ -217,7 +214,7 @@
               <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
               <item name="res" type="d4f16f75:AndroidResFolderNode" />
-              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
             </path>
             <path>
               <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
@@ -467,7 +464,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1229" height="775" extended-state="0" />
+    <frame x="2" y="77" width="1229" height="775" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
@@ -482,9 +479,9 @@
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.31651375" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32874617" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.2767584" />
+      <window_info anchor="bottom" id="Terminal" order="3" visible="true" weight="0.2767584" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Build" order="5" visible="true" weight="0.44801223" />
+      <window_info anchor="bottom" id="Build" order="5" weight="0.45259938" />
       <window_info anchor="bottom" id="Android Profiler" order="6" />
       <window_info anchor="bottom" id="Run" order="7" weight="0.24923548" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.39296636" />
@@ -539,48 +536,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="20" column="43" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/own/Config.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="27" column="22" lean-forward="true" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/IReqVersion.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="9" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/http/HttpClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="class#RetryIntercepter#0;class#HttpClient#0" />
-            <element signature="method#myPost#0;class#HttpClient#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqNetWord.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="97">
@@ -819,13 +774,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-555">
-          <caret line="16" column="69" lean-forward="true" selection-start-line="16" selection-start-column="69" selection-end-line="16" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -930,13 +878,6 @@
       <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="31" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/widget_btn_1_f.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -951,21 +892,102 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="28" column="36" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/locker_box_status_1.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="26" lean-forward="true" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="52" />
+          <folding>
+            <element signature="e#185#200#0" expanded="true" />
+            <element signature="e#229#244#0" expanded="true" />
+            <element signature="e#259#274#0" expanded="true" />
+            <element signature="e#291#306#0" expanded="true" />
+            <element signature="e#324#339#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/locker_box_status_doc_1.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="52" selection-start-line="4" selection-start-column="52" selection-end-line="4" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/widget_btn_1_n.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="38" lean-forward="true" selection-start-column="38" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/locker_box_status_doc_3.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="52" selection-start-line="4" selection-start-column="52" selection-end-line="4" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/locker_box_status_doc_2.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="52" selection-start-line="4" selection-start-column="52" selection-end-line="4" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_smlockerbox.xml">
       <provider editor-type-id="text-editor">
-        <state relative-caret-position="975">
-          <caret line="87" column="43" selection-start-line="87" selection-start-column="38" selection-end-line="87" selection-end-column="43" />
+        <state relative-caret-position="545">
+          <caret line="142" column="38" selection-start-line="142" selection-start-column="20" selection-end-line="142" selection-end-column="38" />
           <folding>
             <element signature="e#1009#1960#0" />
+            <element signature="e#2562#2578#0" expanded="true" />
+            <element signature="e#2608#2624#0" expanded="true" />
+            <element signature="e#2821#2837#0" expanded="true" />
+            <element signature="e#2870#2886#0" expanded="true" />
+            <element signature="e#2920#2936#0" expanded="true" />
+            <element signature="e#3035#3049#0" expanded="true" />
+            <element signature="e#3414#3430#0" expanded="true" />
+            <element signature="e#3460#3476#0" expanded="true" />
+            <element signature="e#3571#3587#0" expanded="true" />
+            <element signature="e#3622#3638#0" expanded="true" />
+            <element signature="e#3705#3719#0" expanded="true" />
+            <element signature="e#3871#3886#0" expanded="true" />
+            <element signature="e#4003#4019#0" expanded="true" />
+            <element signature="e#4082#4111#0" expanded="true" />
+            <element signature="e#4141#4155#0" expanded="true" />
+            <element signature="e#4254#4269#0" expanded="true" />
+            <element signature="e#4337#4353#0" expanded="true" />
+            <element signature="e#4388#4404#0" expanded="true" />
+            <element signature="e#4471#4485#0" expanded="true" />
+            <element signature="e#4637#4652#0" expanded="true" />
+            <element signature="e#4769#4785#0" expanded="true" />
+            <element signature="e#4848#4877#0" expanded="true" />
+            <element signature="e#4907#4921#0" expanded="true" />
+            <element signature="e#5020#5035#0" expanded="true" />
+            <element signature="e#5103#5119#0" expanded="true" />
+            <element signature="e#5154#5170#0" expanded="true" />
+            <element signature="e#5237#5251#0" expanded="true" />
+            <element signature="e#5384#5399#0" expanded="true" />
+            <element signature="e#5535#5551#0" expanded="true" />
+            <element signature="e#5614#5643#0" expanded="true" />
+            <element signature="e#5673#5687#0" expanded="true" />
+            <element signature="e#5786#5801#0" expanded="true" />
           </folding>
         </state>
       </provider>
       <provider selected="true" editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/widget_btn_1_n.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
+        <state relative-caret-position="314">
+          <caret line="75" column="47" selection-start-line="75" selection-start-column="47" selection-end-line="75" selection-end-column="47" />
         </state>
       </provider>
     </entry>
