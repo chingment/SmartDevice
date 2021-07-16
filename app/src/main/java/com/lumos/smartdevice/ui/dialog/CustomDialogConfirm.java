@@ -66,7 +66,9 @@ public class CustomDialogConfirm extends Dialog {
 
     public CustomDialogConfirm(Context context, String tips, boolean isCancle) {
         super(context, R.style.custom_dialog_confirm);
+
         mThis=this;
+
         mContext = context;
         mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_confirm, null);
 
