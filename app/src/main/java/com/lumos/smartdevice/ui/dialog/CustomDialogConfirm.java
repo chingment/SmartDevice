@@ -65,7 +65,7 @@ public class CustomDialogConfirm extends Dialog {
     }
 
     public CustomDialogConfirm(Context context, String tips, boolean isCancle) {
-        super(context, R.style.custom_dialog_confirm);
+        super(context, R.style.custom_dialog);
 
         mThis=this;
 

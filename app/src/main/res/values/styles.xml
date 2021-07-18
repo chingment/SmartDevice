@@ -28,17 +28,5 @@
         <item name="android:backgroundDimAmount">0.6</item>
     </style>
 
-    <style name="custom_dialog_confirm">
-        <item name="android:windowBackground">@color/custom_dialog_confirm_bg</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-    </style>
-
-    <style name="custom_dialog_loading">
-        <item name="android:windowBackground">@color/custom_dialog_loading_bg</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
-    </style>
-
 
 </resources>

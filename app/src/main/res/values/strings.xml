@@ -75,4 +75,7 @@
     <string name="locker_box_status_1">未使用</string>
     <string name="locker_box_status_2">已使用（随机）</string>
     <string name="locker_box_status_3">已使用（固定）</string>
+    <string name="custom_dialog_locker_box_renlian">人脸</string>
+    <string name="custom_dialog_locker_box_zhiwen">指纹</string>
+    <string name="custom_dialog_locker_box_iccard">IC卡</string>
 </resources>

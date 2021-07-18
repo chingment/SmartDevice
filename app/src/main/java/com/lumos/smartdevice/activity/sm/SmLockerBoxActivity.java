@@ -19,6 +19,7 @@ import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.ui.dialog.CustomDialogCabinetConfig;
+import com.lumos.smartdevice.ui.dialog.CustomDialogLockerBox;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.HashMap;
@@ -35,6 +36,8 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     private CabinetBean cabinet;
 
     private CustomDialogCabinetConfig dialog_CabinetConfig;
+
+    private CustomDialogLockerBox dialog_LockerBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,8 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         tv_CabinetName = findViewById(R.id.tv_CabinetName);
         tl_Boxs = findViewById(R.id.tl_Boxs);
         dialog_CabinetConfig = new CustomDialogCabinetConfig(SmLockerBoxActivity.this);
+        dialog_LockerBox=new CustomDialogLockerBox(SmLockerBoxActivity.this);
+
     }
 
     private void initEvent() {
@@ -108,6 +113,14 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                 if(isUse.equals("1")){
                     convertView.setVisibility(View.INVISIBLE);
                 }
+                else {
+                    convertView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog_LockerBox.show();
+                        }
+                    });
+                }
 
                 if(id.equals("2"))
                     tv_Name.setBackgroundResource(R.drawable.locker_box_status_2);
@@ -141,6 +154,10 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         super.onDestroy();
         if (dialog_CabinetConfig != null) {
             dialog_CabinetConfig.cancel();
+        }
+
+        if (dialog_LockerBox != null) {
+            dialog_LockerBox.cancel();
         }
     }
 }

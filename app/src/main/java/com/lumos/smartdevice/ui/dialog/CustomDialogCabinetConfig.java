@@ -18,21 +18,6 @@ import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.ui.ViewHolder;
 
-
-/**
- * <p>
- * Title: CustomDialog
- * </p>
- * <p>
- * Description:自定义Dialog（参数传入Dialog样式文件，Dialog布局文件）
- * </p>
- * <p>
- * Copyright: Copyright (c) 2013
- * </p>
- *
- * @author archie
- * @version 1.0
- */
 public class CustomDialogCabinetConfig extends Dialog {
     private static final String TAG = "CustomDialogCabinetConfig";
     private Dialog mThis;
@@ -49,7 +34,7 @@ public class CustomDialogCabinetConfig extends Dialog {
     private TextView tv_Layout;
 
     public CustomDialogCabinetConfig(Context context) {
-        super(context, R.style.custom_dialog_confirm);
+        super(context, R.style.custom_dialog);
         mThis = this;
         mContext = context;
         mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_cabinetconfig, null);
