@@ -99,19 +99,23 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             for (int j = 0; j < colsSize; j++) {
                 //tv用于显示
 
+                String box_Id=cols.get(j);
 
-                String[] col=cols.get(j).split("-");
+                String[] box_Prams=box_Id.split("-");
 
-                String id=col[0];
-                String plate=col[1];
-                String name=col[2];
-                String isUse=col[3];
+                String id=box_Prams[0];
+                String plate=box_Prams[1];
+                String name=box_Prams[2];
+                String isUse=box_Prams[3];
 
                 final View convertView = LayoutInflater.from(SmLockerBoxActivity.this).inflate(R.layout.item_list_lockerbox, tableRow, false);
+
 
                 TextView tv_Name = ViewHolder.get(convertView, R.id.tv_Name);
 
                 tv_Name.setText(name);
+
+                convertView.setTag(box_Id);
 
                 if(isUse.equals("1")){
                     convertView.setVisibility(View.INVISIBLE);
@@ -120,9 +124,8 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                     convertView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
-
-                            dialog_LockerBox.setLockerBox(cabinet,"");
+                            String l_Box_Id=v.getTag().toString();
+                            dialog_LockerBox.setLockerBox(cabinet,l_Box_Id);
                             dialog_LockerBox.show();
                         }
                     });

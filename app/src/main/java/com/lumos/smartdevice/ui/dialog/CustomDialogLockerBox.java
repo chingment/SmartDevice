@@ -26,7 +26,7 @@ public class CustomDialogLockerBox extends Dialog {
     private TextView tv_RenLian;
     private TextView tv_ZhiWen;
     private TextView tv_IcCard;
-
+    private TextView tv_BoxName;
 
     public CustomDialogLockerBox(Context context) {
         super(context, R.style.custom_dialog);
@@ -45,7 +45,7 @@ public class CustomDialogLockerBox extends Dialog {
         tv_RenLian = ViewHolder.get(mLayoutRes, R.id.tv_RenLian);
         tv_ZhiWen = ViewHolder.get(mLayoutRes, R.id.tv_ZhiWen);
         tv_IcCard = ViewHolder.get(mLayoutRes, R.id.tv_IcCard);
-
+        tv_BoxName= ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
     }
 
     @Override
@@ -55,7 +55,10 @@ public class CustomDialogLockerBox extends Dialog {
     }
 
     public void setLockerBox(CabinetBean cabinet,String boxId) {
+        String[] box_Prams=boxId.split("-");
 
+
+        tv_BoxName.setText(box_Prams[2]);
 
     }
 
