@@ -56,6 +56,7 @@ public class CustomDialogLockerBox extends Dialog {
 
     public void setLockerBox(CabinetBean cabinet,String boxId) {
 
+
     }
 
 

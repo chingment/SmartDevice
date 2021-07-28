@@ -38,6 +38,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     private CustomDialogCabinetConfig dialog_CabinetConfig;
 
     private CustomDialogLockerBox dialog_LockerBox;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,18 +98,20 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
             for (int j = 0; j < colsSize; j++) {
                 //tv用于显示
+
+
                 String[] col=cols.get(j).split("-");
 
                 String id=col[0];
-                String nick=col[0];
-                String plate=col[0];
-                String isUse=col[0];
+                String plate=col[1];
+                String name=col[2];
+                String isUse=col[3];
 
                 final View convertView = LayoutInflater.from(SmLockerBoxActivity.this).inflate(R.layout.item_list_lockerbox, tableRow, false);
 
                 TextView tv_Name = ViewHolder.get(convertView, R.id.tv_Name);
 
-                tv_Name.setText(nick);
+                tv_Name.setText(name);
 
                 if(isUse.equals("1")){
                     convertView.setVisibility(View.INVISIBLE);
@@ -117,13 +120,16 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                     convertView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+
+
+                            dialog_LockerBox.setLockerBox(cabinet,"");
                             dialog_LockerBox.show();
                         }
                     });
                 }
 
-                if(id.equals("2"))
-                    tv_Name.setBackgroundResource(R.drawable.locker_box_status_2);
+                //if(id.equals("2"))
+                //    tv_Name.setBackgroundResource(R.drawable.locker_box_status_2);
 
 
                 tableRow.addView(convertView, new TableRow.LayoutParams(MP, WC, 1));

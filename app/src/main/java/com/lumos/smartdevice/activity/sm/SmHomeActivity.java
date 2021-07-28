@@ -63,7 +63,7 @@ public class SmHomeActivity extends BaseFragmentActivity {
 
                 CabinetBean cabinet = cabinets.get(o);
 
-                gdv_Nine_Items.add(new GridNineItemBean(cabinet.getName(), GridNineItemType.Function, "gdv.lockerbox", R.drawable.ic_sm_checkupdateapp, cabinet));
+                gdv_Nine_Items.add(new GridNineItemBean(cabinet.getName(), GridNineItemType.Function, "gdv.lockerbox", R.drawable.ic_sm_lockerbox_0, cabinet));
 
             }
         }

@@ -90,7 +90,7 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
 
         //
 
-        et_Com_Prl.setText("[{\"cabinet_id\":\"locker_1\",\"name\":\"箱子01\",\"com_id\":\"sys1\",\"com_baud\":19200,\"com_prl\":\"lbl_ss\",\"layout\":[[\"1-1-1-0\",\"2-2-1-0\"],[\"3-3-1-0\",\"3-3-1-1\"]]}]");
+        et_Com_Prl.setText("[{\"cabinet_id\":\"locker_1\",\"name\":\"箱子01\",\"com_id\":\"sys1\",\"com_baud\":19200,\"com_prl\":\"lbl_ss\",\"layout\":[[\"1-1-1-0\",\"2-1-2-0\"],[\"3-1-3-0\",\"4-1-4-1\"]]}]");
     }
 
     @Override
