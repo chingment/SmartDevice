@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.adapter.SmLockerBoxCabinetSelectAdapter;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
@@ -22,6 +25,9 @@ import com.lumos.smartdevice.ui.dialog.CustomDialogCabinetConfig;
 import com.lumos.smartdevice.ui.dialog.CustomDialogLockerBox;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,9 +37,12 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     private final int MP = ViewGroup.LayoutParams.MATCH_PARENT;
 
     private TextView tv_CabinetName;
+    private ListView lv_Cabinets;
     private TableLayout tl_Boxs;
 
-    private CabinetBean cabinet;
+    private CabinetBean cur_Cabinet;
+    private List<CabinetBean> cabinets;
+    private static int cur_Cabinet_Position = 0;
 
     private CustomDialogCabinetConfig dialog_CabinetConfig;
 
@@ -44,10 +53,21 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smlockerbox);
 
-        cabinet = (CabinetBean)getIntent().getSerializableExtra("cabinet");
-
         setNavHeaderTtile(R.string.aty_smlockerbox_nav_title);
         setNavHeaderBtnByGoBackIsVisible(true);
+
+        HashMap<String, CabinetBean> l_Cabinets=getDevice().getCabinets();
+        if(l_Cabinets!=null) {
+
+            cabinets = new ArrayList<>(l_Cabinets.values());
+
+            Collections.sort(cabinets, new Comparator<CabinetBean>() {
+                @Override
+                public int compare(CabinetBean t1, CabinetBean t2) {
+                    return t2.getPriority() - t1.getPriority();
+                }
+            });
+        }
 
         initView();
         initEvent();
@@ -56,6 +76,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     }
 
     private void initView() {
+        lv_Cabinets = findViewById(R.id.lv_Cabinets);
         tv_CabinetName = findViewById(R.id.tv_CabinetName);
         tl_Boxs = findViewById(R.id.tl_Boxs);
         dialog_CabinetConfig = new CustomDialogCabinetConfig(SmLockerBoxActivity.this);
@@ -65,14 +86,43 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
     private void initEvent() {
         tv_CabinetName.setOnClickListener(this);
+        lv_Cabinets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                cur_Cabinet_Position = position;
+                loadCabinetData();
+            }
+        });
     }
 
     private void initData() {
-        tv_CabinetName.setText(cabinet.getCabinetId());
-
-        drawsBoxs(cabinet.getLayout());
+        loadCabinetData();
     }
 
+    private void loadCabinetData(){
+
+        if (cabinets == null)
+            return;
+        if (cabinets.size() == 0)
+            return;
+
+        if(cabinets.size()==1){
+            lv_Cabinets.setVisibility(View.GONE);
+        }
+
+        cur_Cabinet = cabinets.get(cur_Cabinet_Position);
+
+        if (cur_Cabinet == null)
+            return;
+
+        SmLockerBoxCabinetSelectAdapter list_cabinet_adapter = new SmLockerBoxCabinetSelectAdapter(getAppContext(), cabinets, cur_Cabinet_Position);
+        lv_Cabinets.setAdapter(list_cabinet_adapter);
+
+        tv_CabinetName.setText(cur_Cabinet.getCabinetId());
+
+        drawsBoxs(cur_Cabinet.getLayout());
+    }
 
     public void drawsBoxs(String json_layout) {
 
@@ -125,7 +175,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                         @Override
                         public void onClick(View v) {
                             String l_Box_Id=v.getTag().toString();
-                            dialog_LockerBox.setLockerBox(cabinet,l_Box_Id);
+                            dialog_LockerBox.setLockerBox(cur_Cabinet,l_Box_Id);
                             dialog_LockerBox.show();
                         }
                     });
@@ -151,7 +201,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                     finish();
                     break;
                 case R.id.tv_CabinetName:
-                    dialog_CabinetConfig.setCofing(cabinet);
+                    dialog_CabinetConfig.setCofing(cur_Cabinet);
                     dialog_CabinetConfig.show();
                     break;
             }

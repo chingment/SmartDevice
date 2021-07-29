@@ -17,6 +17,8 @@ public class CabinetBean implements Serializable {
     private String comPrl;
     @JSONField(name="layout")
     private String layout;
+    @JSONField(name="priority")
+    private int priority;
 
     public String getCabinetId() {
         return cabinetId;
@@ -65,5 +67,13 @@ public class CabinetBean implements Serializable {
 
     public void setComBaud(int comBaud) {
         this.comBaud = comBaud;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
     }
 }

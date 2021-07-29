@@ -25,6 +25,7 @@
     <string name="aty_smlogin_scene_init_data_help">帮助中心</string>
     <string name="aty_smlogin_scene_manager_center">管理中心</string>
     <string name="aty_smhelptool_nav_title">帮助中心</string>
+    <string name="aty_smhelptool_gdv_nine_it_txt_lockerbox">格子管理</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_factorysetting">出厂设置</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_showsysstatusbar">显示导航</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_checkupdateapp">检查更新</string>

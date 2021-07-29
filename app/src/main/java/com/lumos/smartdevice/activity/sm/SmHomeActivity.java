@@ -17,6 +17,7 @@ import com.lumos.smartdevice.model.api.OwnLogoutResultBean;
 import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppManager;
+import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
 import com.lumos.smartdevice.ui.my.MyGridView;
@@ -28,7 +29,6 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class SmHomeActivity extends BaseFragmentActivity {
@@ -38,6 +38,7 @@ public class SmHomeActivity extends BaseFragmentActivity {
     private CustomDialogConfirm dialog_Confirm;
     private MyGridView gdv_Nine;
     private List<GridNineItemBean> gdv_Nine_Items;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,20 +57,10 @@ public class SmHomeActivity extends BaseFragmentActivity {
 
         gdv_Nine_Items = new ArrayList<GridNineItemBean>();
 
-        HashMap<String, CabinetBean> cabinets=getDevice().getCabinets();
 
-        if(cabinets!=null) {
-            for (String o : cabinets.keySet()) {
-
-                CabinetBean cabinet = cabinets.get(o);
-
-                gdv_Nine_Items.add(new GridNineItemBean(cabinet.getName(), GridNineItemType.Function, "gdv.lockerbox", R.drawable.ic_sm_lockerbox_0, cabinet));
-
-            }
+        if(getDevice().getSceneMode().equals(AppVar.SCENE_MODE_1)) {
+            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_lockerbox), GridNineItemType.Function, "gdv.lockerbox", R.drawable.ic_sm_lockerbox));
         }
-
-
-
 
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "gdv.checkupdateapp", R.drawable.ic_sm_checkupdateapp));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "gdv.closeapp", R.drawable.ic_sm_closeapp));
