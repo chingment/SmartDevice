@@ -7,7 +7,7 @@ android {
 
     flavorDimensions "mode"
     productFlavors {
-        dev{
+        dev {
             //开发版本
             buildConfigField "Boolean", "ISAPPDEBUG", "true"
             buildConfigField "String", "COMNAME", "\"dev\""

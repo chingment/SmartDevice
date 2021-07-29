@@ -55,25 +55,6 @@ public class SmHomeActivity extends BaseFragmentActivity {
     private void initView() {
         gdv_Nine = findViewById(R.id.gdv_Nine);
 
-        gdv_Nine_Items = new ArrayList<GridNineItemBean>();
-
-
-        if(getDevice().getSceneMode().equals(AppVar.SCENE_MODE_1)) {
-            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_lockerbox), GridNineItemType.Function, "gdv.lockerbox", R.drawable.ic_sm_lockerbox));
-        }
-
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "gdv.checkupdateapp", R.drawable.ic_sm_checkupdateapp));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "gdv.closeapp", R.drawable.ic_sm_closeapp));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "gdv.rebootsys", R.drawable.ic_sm_rebootsys));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_exitmanager), GridNineItemType.Function, "gdv.exitmanager", R.drawable.ic_sm_exitmanager));
-
-
-        GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(), gdv_Nine_Items);
-
-        gdv_Nine.setAdapter(gridNineItemAdapter);
-
-
-
     }
 
     private void initEvent() {
@@ -89,8 +70,10 @@ public class SmHomeActivity extends BaseFragmentActivity {
                         case GridNineItemType.Function:
                             switch (action) {
                                 case "gdv.lockerbox":
-                                    CabinetBean cabinet = (CabinetBean)gdv_Nine_Item.getTag();
-                                    gdvLockerBox(cabinet);
+                                    gdvLockerBox();
+                                    break;
+                                case "gdv.usermanager":
+                                    gdvUserManager();
                                     break;
                                 case "gdv.checkupdateapp":
                                     break;
@@ -143,6 +126,26 @@ public class SmHomeActivity extends BaseFragmentActivity {
 
     private void initData() {
 
+        gdv_Nine_Items = new ArrayList<>();
+
+
+        if(getDevice().getSceneMode().equals(AppVar.SCENE_MODE_1)) {
+            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_lockerbox), GridNineItemType.Function, "gdv.lockerbox", R.drawable.ic_sm_lockerbox));
+        }
+
+
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_usermanager), GridNineItemType.Function, "gdv.usermanager", R.drawable.ic_sm_checkupdateapp));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "gdv.checkupdateapp", R.drawable.ic_sm_checkupdateapp));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "gdv.closeapp", R.drawable.ic_sm_closeapp));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "gdv.rebootsys", R.drawable.ic_sm_rebootsys));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_exitmanager), GridNineItemType.Function, "gdv.exitmanager", R.drawable.ic_sm_exitmanager));
+
+
+        GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(), gdv_Nine_Items);
+
+        gdv_Nine.setAdapter(gridNineItemAdapter);
+
+
     }
 
 
@@ -167,9 +170,13 @@ public class SmHomeActivity extends BaseFragmentActivity {
         dialog_Confirm.show();
     }
 
-    private void gdvLockerBox(CabinetBean cabinet){
+    private void gdvLockerBox(){
         Intent intent = new Intent(SmHomeActivity.this, SmLockerBoxActivity.class);
-        intent.putExtra("cabinet", cabinet);
+        startActivity(intent);
+    }
+
+    private void gdvUserManager(){
+        Intent intent = new Intent(SmHomeActivity.this, SmUserManagerActivity.class);
         startActivity(intent);
     }
 

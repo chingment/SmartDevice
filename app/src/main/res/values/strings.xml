@@ -28,6 +28,7 @@
     <string name="aty_smhelptool_gdv_nine_it_txt_lockerbox">格子管理</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_factorysetting">出厂设置</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_showsysstatusbar">显示导航</string>
+    <string name="aty_smhelptool_gdv_nine_it_txt_usermanager">用户管理</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_checkupdateapp">检查更新</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_closeapp">关闭应用</string>
     <string name="aty_smhelptool_gdv_nine_it_txt_rebootsys">重启系统</string>
@@ -47,7 +48,7 @@
     <string name="aty_smhome_nav_title">管理中心</string>
     <string name="aty_smlockerbox_nav_title">箱子管理</string>
     <string name="aty_smlockerbox_tv_txt_cur_cabinet">当前机柜</string>
-
+    <string name="aty_smusermanager_nav_title">用户管理</string>
     <string name="unknown">未知</string>
     <string name="scenemode_1">寄存柜</string>
     <string name="scenemode_2">书柜</string>
