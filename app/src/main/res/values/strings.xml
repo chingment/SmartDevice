@@ -49,6 +49,7 @@
     <string name="aty_smlockerbox_nav_title">箱子管理</string>
     <string name="aty_smlockerbox_tv_txt_cur_cabinet">当前机柜</string>
     <string name="aty_smusermanager_nav_title">用户管理</string>
+    <string name="aty_smusermanager_btn_txt_newuser">新建用户</string>
     <string name="unknown">未知</string>
     <string name="scenemode_1">寄存柜</string>
     <string name="scenemode_2">书柜</string>
@@ -60,6 +61,7 @@
     <string name="ly_nav_header_btn_txt_right">保存</string>
     <string name="title">标题</string>
     <string name="save_success">保存成功</string>
+    <string name="save">保存</string>
     <string name="custom_dialog_confirm_btn_txt_cancle">否</string>
     <string name="custom_dialog_confirm_btn_txt_sure">是</string>
     <string name="confrim_tips_exitmanager">确定退出管理？</string>
@@ -77,7 +79,8 @@
     <string name="locker_box_status_1">未使用</string>
     <string name="locker_box_status_2">已使用（随机）</string>
     <string name="locker_box_status_3">已使用（固定）</string>
-    <string name="custom_dialog_locker_box_renlian">人脸</string>
-    <string name="custom_dialog_locker_box_zhiwen">指纹</string>
-    <string name="custom_dialog_locker_box_iccard">IC卡</string>
+    <string name="renlian">人脸</string>
+    <string name="zhiwen">指纹</string>
+    <string name="iccard">IC卡</string>
+    <string name="distribute_to">分配至</string>
 </resources>

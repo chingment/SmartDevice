@@ -32,6 +32,14 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 			+ UserDao.COLUMN_NAME_FULLNAME + " TEXT , "
 			+ UserDao.COLUMN_NAME_TYPE + " TEXT );";
 
+
+	private static final String USERUNLOCKKEY_TABLE_CREATE = "CREATE TABLE "
+			+ UserUnlockKeyDao.TABLE_NAME + " ("
+			+ UserUnlockKeyDao.COLUMN_NAME_USERID + " INTEGER , "
+			+ UserUnlockKeyDao.COLUMN_NAME_KEYTYPE + " TEXT , "
+			+ UserUnlockKeyDao.COLUMN_NAME_KEYDATA + " TEXT );";
+
+
 	private static final String TRIPMSG_TABLE_CREATE = "CREATE TABLE "
 			+ TripMsgDao.TABLE_NAME + " ("
 			+ TripMsgDao.COLUMN_NAME_MSG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
@@ -56,6 +64,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 		db.execSQL(CONFIG_TABLE_CREATE);
 		db.execSQL(CABINET_TABLE_CREATE);
 		db.execSQL(USER_TABLE_CREATE);
+		db.execSQL(USERUNLOCKKEY_TABLE_CREATE);
 		db.execSQL(TRIPMSG_TABLE_CREATE);
 	}
 
