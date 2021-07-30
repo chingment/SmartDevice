@@ -88,7 +88,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/distribute_to"
+                    android:text="@string/t_distribute_to"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
                 <LinearLayout

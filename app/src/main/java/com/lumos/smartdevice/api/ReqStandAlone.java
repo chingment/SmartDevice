@@ -3,12 +3,14 @@ package com.lumos.smartdevice.api;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
+import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.model.api.DeviceInitDataResultBean;
 import com.lumos.smartdevice.model.api.OwnLoginResultBean;
 import com.lumos.smartdevice.model.api.OwnLogoutResultBean;
+import com.lumos.smartdevice.model.api.UserSaveResultBean;
 import com.lumos.smartdevice.own.AppVar;
 
 public class ReqStandAlone implements IReqVersion{
@@ -80,6 +82,32 @@ public class ReqStandAlone implements IReqVersion{
         ret.setUserId(rop.getUserId());
 
         ResultBean result = new ResultBean<>(ResultCode.SUCCESS, "退出成功",ret);
+
+        reqHandler.sendSuccessMessage(result.toJSONString());
+
+    }
+
+
+    @Override
+    public void userSave(RopUserSave rop, final ReqHandler reqHandler) {
+
+        reqHandler.sendBeforeSendMessage();
+
+        ResultBean result = null;
+
+        Boolean userIsExist = DbManager.getInstance().checkUserIsExist(rop.getUserName());
+
+        if (userIsExist) {
+            result = new ResultBean(ResultCode.FAILURE, "用户名已经存在");
+            reqHandler.sendSuccessMessage(result.toJSONString());
+            return;
+        }
+
+        DbManager.getInstance().addUser(rop.getUserName(),rop.getPassword(),rop.getFullName(), "3");
+
+        UserSaveResultBean ret = new UserSaveResultBean();
+
+        result = new ResultBean<>(ResultCode.SUCCESS, "保存成功", ret);
 
         reqHandler.sendSuccessMessage(result.toJSONString());
 

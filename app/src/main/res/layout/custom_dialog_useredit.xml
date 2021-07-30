@@ -56,7 +56,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,7 +67,127 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/renlian"
+                    android:text="@string/t_username"
+                    android:textColor="@color/field_name"
+                    android:textSize="@dimen/sp_14" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    >
+
+
+                    <EditText
+                        android:id="@+id/et_Username"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="@string/t_clickinput"
+                        android:gravity="right"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/et_txt"
+                        android:textColorHint="@color/et_hint"
+                        android:textSize="@dimen/sp_14"
+
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/size_10"
+                android:paddingTop="@dimen/sp_10"
+                android:background="@drawable/vnav_boder_bottom">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/t_password"
+                    android:textColor="@color/field_name"
+                    android:textSize="@dimen/sp_14" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    >
+
+                    <EditText
+                        android:id="@+id/et_Password"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="@string/t_clickinput"
+                        android:gravity="right"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/et_txt"
+                        android:textColorHint="@color/et_hint"
+                        android:textSize="@dimen/sp_14"
+
+                        />
+
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/size_10"
+                android:paddingTop="@dimen/sp_10"
+                android:background="@drawable/vnav_boder_bottom">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/t_fullname"
+                    android:textColor="@color/field_name"
+                    android:textSize="@dimen/sp_14" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    >
+
+                    <EditText
+                        android:id="@+id/et_Fullname"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:hint="@string/t_clickinput"
+                        android:gravity="right"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/et_txt"
+                        android:textColorHint="@color/et_hint"
+                        android:textSize="@dimen/sp_14"
+
+                        />
+
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/size_10"
+                android:paddingTop="@dimen/sp_10"
+                android:background="@drawable/vnav_boder_bottom">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/t_renlian"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
                 <LinearLayout
@@ -100,7 +219,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/zhiwen"
+                    android:text="@string/t_zhiwen"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
                 <LinearLayout
@@ -132,7 +251,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/iccard"
+                    android:text="@string/t_iccard"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
                 <LinearLayout
@@ -163,7 +282,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-
             android:orientation="vertical">
 
 
@@ -171,9 +289,6 @@
                 android:id="@+id/btn_Save"
                 android:layout_width="@dimen/size_80"
                 android:layout_height="@dimen/size_32"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="32dp"
                 android:background="@drawable/widget_common_btn"
                 android:gravity="center"
                 android:text="@string/save"

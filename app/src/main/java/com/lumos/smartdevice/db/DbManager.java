@@ -135,6 +135,22 @@ public class DbManager {
 
     }
 
+
+    public boolean checkUserIsExist(String username) {
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where "+UserDao.COLUMN_NAME_USERNAME + " = ?",new String[]{username});
+
+        boolean exist = (cursor.getCount() > 0);
+        if(exist){
+          return  true;
+        }
+
+        return false;
+
+    }
+
     public void updateConfig(String field,String value){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         if(db.isOpen()){
