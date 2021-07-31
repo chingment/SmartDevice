@@ -5,6 +5,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
+import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.http.HttpClient;
 import com.lumos.smartdevice.http.HttpResponseHandler;
@@ -48,6 +49,13 @@ public class ReqNetWord implements IReqVersion{
 
     @Override
     public void userSave(RopUserSave rop, final ReqHandler reqHandler) {
+
+
+
+    }
+
+    @Override
+    public void userGetList(RopUserGetList rop, final ReqHandler reqHandler) {
 
 
 

@@ -3,6 +3,7 @@ package com.lumos.smartdevice.api;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
+import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.DeviceBean;
@@ -10,8 +11,12 @@ import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.model.api.DeviceInitDataResultBean;
 import com.lumos.smartdevice.model.api.OwnLoginResultBean;
 import com.lumos.smartdevice.model.api.OwnLogoutResultBean;
+import com.lumos.smartdevice.model.api.UserGetListResultBean;
 import com.lumos.smartdevice.model.api.UserSaveResultBean;
 import com.lumos.smartdevice.own.AppVar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReqStandAlone implements IReqVersion{
 
@@ -112,4 +117,16 @@ public class ReqStandAlone implements IReqVersion{
         reqHandler.sendSuccessMessage(result.toJSONString());
 
     }
+
+    @Override
+    public void userGetList(RopUserGetList rop, final ReqHandler reqHandler) {
+        reqHandler.sendBeforeSendMessage();
+        ResultBean result = null;
+        UserGetListResultBean ret = new UserGetListResultBean();
+        List<UserBean> users=DbManager.getInstance().GetUsers(rop.getPageIndex(),rop.getPageSize(),"3");
+        ret.setItems(users);
+        result = new ResultBean<>(ResultCode.SUCCESS, "保存成功", ret);
+        reqHandler.sendSuccessMessage(result.toJSONString());
+    }
+
 }

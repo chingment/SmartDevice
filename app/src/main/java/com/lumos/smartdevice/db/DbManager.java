@@ -75,7 +75,6 @@ public class DbManager {
         }
     }
 
-
     public void addUser(String username,String password,String fullname, String type){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int id = -1;
@@ -100,7 +99,6 @@ public class DbManager {
             cursor.close();
         }
     }
-
 
     public UserBean checkUserPassword(String username, String password, String type) {
 
@@ -135,7 +133,6 @@ public class DbManager {
 
     }
 
-
     public boolean checkUserIsExist(String username) {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -150,6 +147,34 @@ public class DbManager {
         return false;
 
     }
+
+    public List<UserBean> GetUsers(int pageIndex,int pageSize,String userType){
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        List<UserBean> users = new ArrayList<>();
+        if(db.isOpen()){
+            Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where "+UserDao.COLUMN_NAME_TYPE + " = ? order by "+UserDao.COLUMN_NAME_USERID+" limit ?,?",new String[]{
+                    String.valueOf(userType),
+                    String.valueOf(pageIndex*pageSize),
+                    String.valueOf(pageSize),
+            });
+            while(cursor.moveToNext()){
+                UserBean user = new UserBean();
+                String userId = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERID));
+                String userName = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERNAME));
+                String fullName = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_FULLNAME));
+
+                user.setUserId(userId);
+                user.setUserName(userName);
+                user.setFullName(fullName);
+                users.add(user);
+            }
+            cursor.close();
+        }
+        return users;
+
+    }
+
 
     public void updateConfig(String field,String value){
         SQLiteDatabase db = dbHelper.getWritableDatabase();

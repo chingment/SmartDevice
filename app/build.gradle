@@ -61,4 +61,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
     implementation files('libs/ysapi.jar')
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }

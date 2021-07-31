@@ -1,4 +1,6 @@
 package com.lumos.smartdevice.model.api;
 
-public class UserSaveResultBean {
+import java.io.Serializable;
+
+public class UserSaveResultBean implements Serializable {
 }

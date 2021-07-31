@@ -38,5 +38,50 @@
 
 
     </LinearLayout>
+
+
+        <com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout
+            android:id="@+id/lv_UsersRefresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lv_UsersData"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout>
+
+        <LinearLayout
+            android:id="@+id/lv_UsersEmptyTips"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/default_dataempty" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="暂无数据"
+                android:textSize="11sp" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
+
+
+
 </LinearLayout>
