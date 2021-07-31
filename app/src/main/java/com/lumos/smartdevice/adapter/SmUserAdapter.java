@@ -2,6 +2,7 @@ package com.lumos.smartdevice.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,6 +57,19 @@ public class SmUserAdapter extends RefreshAdapter {
 
         final UserBean bean = beans.get(position);
         String avatar = bean.getAvatar();
+
+        holder.itemView.setTag(bean);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserBean user=(UserBean)view.getTag();
+                if(onClickListener!=null) {
+                    onClickListener.onClick(user);
+                }
+            }
+        });
+
         ImageView img_Avatar = (ImageView) holder.itemView.findViewById(R.id.img_Avatar);
 
         TextView tv_Username = (TextView) holder.itemView.findViewById(R.id.tv_Username);
@@ -73,6 +87,17 @@ public class SmUserAdapter extends RefreshAdapter {
 
         }
 
+    }
+
+
+    public OnClickListener onClickListener;
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
+    public interface OnClickListener {
+        void onClick(UserBean bean);
     }
 
     @Override

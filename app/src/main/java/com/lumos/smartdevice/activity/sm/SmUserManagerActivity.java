@@ -141,6 +141,13 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
 
         lv_UsersAdapter = new SmUserAdapter();
 
+        lv_UsersAdapter.setOnClickListener(new SmUserAdapter.OnClickListener() {
+            @Override
+            public void onClick(UserBean bean) {
+                dialog_UserEdit.show();
+            }
+        });
+
         lv_UsersRefresh.setAdapter(lv_UsersData, lv_UsersAdapter);
         lv_UsersRefresh.setOnRefreshHandler(new OnRefreshHandler() {
             @Override
