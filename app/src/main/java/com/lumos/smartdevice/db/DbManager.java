@@ -48,9 +48,9 @@ public class DbManager {
         addConfig(ConfigDao.FIELD_SCENE_MODE,"0");
     }
 
-    private void initUser(){
-        addUser("system","123456","系统维护员","1");
-        addUser("admin","123456","后台管理员","2");
+    private void initUser() {
+        addUser("system", "123456", "系统维护员", "1", "app://default_avatar");
+        addUser("admin", "123456", "后台管理员", "2", "app://default_avatar");
     }
 
     public void addConfig(String field,String value){
@@ -75,7 +75,7 @@ public class DbManager {
         }
     }
 
-    public void addUser(String username,String password,String fullname, String type){
+    public void addUser(String username,String password,String fullname, String type,String avatar){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int id = -1;
         if(db.isOpen()){
@@ -92,6 +92,7 @@ public class DbManager {
             values.put(UserDao.COLUMN_NAME_USERNAME, username);
             values.put(UserDao.COLUMN_NAME_PASSWORD, password);
             values.put(UserDao.COLUMN_NAME_FULLNAME, fullname);
+            values.put(UserDao.COLUMN_NAME_AVATAR,avatar);
             values.put(UserDao.COLUMN_NAME_TYPE, type);
 
             db.insert(UserDao.TABLE_NAME, null, values);
@@ -163,10 +164,12 @@ public class DbManager {
                 String userId = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERID));
                 String userName = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERNAME));
                 String fullName = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_FULLNAME));
+                String avatar=cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_AVATAR));
 
                 user.setUserId(userId);
                 user.setUserName(userName);
                 user.setFullName(fullName);
+                user.setAvatar(avatar);
                 users.add(user);
             }
             cursor.close();

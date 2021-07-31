@@ -122,6 +122,7 @@ public class ReqStandAlone implements IReqVersion{
         String userName=rop.getUserName().trim();
         String password=rop.getPassword().trim();
         String fullName=rop.getFullName().trim();
+        String avatar=rop.getAvatar();
 
         Boolean userIsExist = DbManager.getInstance().checkUserIsExist(userName);
 
@@ -130,7 +131,7 @@ public class ReqStandAlone implements IReqVersion{
             return;
         }
 
-        DbManager.getInstance().addUser(userName,password,fullName, "3");
+        DbManager.getInstance().addUser(userName,password,fullName, "3",avatar);
 
         UserSaveResultBean ret = new UserSaveResultBean();
 

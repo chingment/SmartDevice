@@ -6,13 +6,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.refreshview.MyViewHolder;
 import com.lumos.smartdevice.ui.refreshview.RefreshAdapter;
+import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
+import com.lumos.smartdevice.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,13 +55,23 @@ public class SmUserAdapter extends RefreshAdapter {
     public void onBindItemHolder(final RecyclerView.ViewHolder holder, int position) {
 
         final UserBean bean = beans.get(position);
-
+        String avatar = bean.getAvatar();
         ImageView img_Avatar = (ImageView) holder.itemView.findViewById(R.id.img_Avatar);
+
         TextView tv_Username = (TextView) holder.itemView.findViewById(R.id.tv_Username);
 
 
         tv_Username.setText(bean.getUserName());
 
+        if (!StringUtil.isEmptyNotNull(avatar)) {
+
+            if(avatar.contains("app://")) {
+                String imgName = avatar.split("//")[1];
+                int imgId = CommonUtil.getAppDrawableImages(imgName);
+                img_Avatar.setImageDrawable(ContextCompat.getDrawable(context,imgId));
+            }
+
+        }
 
     }
 

@@ -30,6 +30,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 			+ UserDao.COLUMN_NAME_USERNAME + " TEXT , "
 			+ UserDao.COLUMN_NAME_PASSWORD + " TEXT , "
 			+ UserDao.COLUMN_NAME_FULLNAME + " TEXT , "
+			+ UserDao.COLUMN_NAME_AVATAR + " TEXT , "
 			+ UserDao.COLUMN_NAME_TYPE + " TEXT );";
 
 

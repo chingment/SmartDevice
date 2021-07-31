@@ -18,6 +18,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +28,20 @@ import java.util.Date;
  */
 
 public class CommonUtil {
+
+    public static int getAppDrawableImages(String name){
+        Class drawable = R.drawable.class;
+        Field field = null;
+        try {
+            field =drawable.getField(name);
+            int images = field.getInt(field.getName());
+            return images;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
 
     public static void loadImageFromUrl(Context context, final ImageView photoView, String imageUrl) {
         if (StringUtil.isEmptyNotNull(imageUrl)) {
@@ -83,7 +98,6 @@ public class CommonUtil {
         listView.setLayoutParams(params);
 
     }
-
 
     public static void setListViewHeightBasedOnChildren(
             View contentlayout, ListView listView) {

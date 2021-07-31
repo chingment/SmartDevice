@@ -27,11 +27,11 @@ public class CustomDialogUserEdit extends Dialog {
     private EditText et_Password;
     private EditText et_Fullname;
 
-
     private TextView tv_RenLian;
     private TextView tv_ZhiWen;
     private TextView tv_IcCard;
     private TextView tv_BoxName;
+
 
     public CustomDialogUserEdit(Context context) {
         super(context, R.style.custom_dialog);
@@ -63,7 +63,7 @@ public class CustomDialogUserEdit extends Dialog {
                     form.put("username",username);
                     form.put("password",password);
                     form.put("fullname",fullname);
-
+                    form.put("avatar","app://default_avatar");
 
                     onDialogHandle.onSave(form);
                 }
@@ -87,6 +87,7 @@ public class CustomDialogUserEdit extends Dialog {
     }
 
 
+
     public OnDialogHandle onDialogHandle;
 
     public void setOnDialogListener(OnDialogHandle onDialogHandle) {
@@ -96,6 +97,8 @@ public class CustomDialogUserEdit extends Dialog {
     public interface OnDialogHandle {
         void onSave(HashMap<String, String> form);
     }
+
+
 
 
 }

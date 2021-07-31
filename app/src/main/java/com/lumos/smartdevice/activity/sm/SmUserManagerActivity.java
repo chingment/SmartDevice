@@ -71,7 +71,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                 String username = form.get("username");
                 String password = form.get("password");
                 String fullname = form.get("fullname");
-
+                String avatar=form.get("avatar");
                 if(StringUtil.isEmptyNotNull(username)) {
                     showToast(R.string.tips_username_isnotnull);
                     return;
@@ -93,6 +93,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                 rop.setUserName(username);
                 rop.setPassword(password);
                 rop.setFullName(fullname);
+                rop.setAvatar(avatar);
 
                 ReqInterface.getInstance().userSave(rop, new ReqHandler(){
 
