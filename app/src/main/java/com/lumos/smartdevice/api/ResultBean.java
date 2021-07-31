@@ -52,4 +52,5 @@ public class ResultBean<T>  {
     public  String toJSONString() {
         return JSON.toJSONString(this);
     }
+
 }

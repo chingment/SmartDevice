@@ -14,6 +14,7 @@ import com.lumos.smartdevice.model.api.OwnLogoutResultBean;
 import com.lumos.smartdevice.model.api.UserGetListResultBean;
 import com.lumos.smartdevice.model.api.UserSaveResultBean;
 import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,21 +99,42 @@ public class ReqStandAlone implements IReqVersion{
 
         reqHandler.sendBeforeSendMessage();
 
-        ResultBean result = null;
-
-        Boolean userIsExist = DbManager.getInstance().checkUserIsExist(rop.getUserName());
-
-        if (userIsExist) {
-            result = new ResultBean(ResultCode.FAILURE, "用户名已经存在");
-            reqHandler.sendSuccessMessage(result.toJSONString());
+        if(rop==null) {
+            reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("参数不能空"));
             return;
         }
 
-        DbManager.getInstance().addUser(rop.getUserName(),rop.getPassword(),rop.getFullName(), "3");
+        if(StringUtil.isEmptyNotNull(rop.getUserName())){
+            reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("用户名不能为空"));
+            return;
+        }
+
+        if(StringUtil.isEmptyNotNull(rop.getPassword())){
+            reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("密码不能为空"));
+            return;
+        }
+
+        if(StringUtil.isEmptyNotNull(rop.getFullName())){
+            reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("姓名不能为空"));
+            return;
+        }
+
+        String userName=rop.getUserName().trim();
+        String password=rop.getPassword().trim();
+        String fullName=rop.getFullName().trim();
+
+        Boolean userIsExist = DbManager.getInstance().checkUserIsExist(userName);
+
+        if (userIsExist) {
+            reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("用户名已经存在"));
+            return;
+        }
+
+        DbManager.getInstance().addUser(userName,password,fullName, "3");
 
         UserSaveResultBean ret = new UserSaveResultBean();
 
-        result = new ResultBean<>(ResultCode.SUCCESS, "保存成功", ret);
+        ResultBean result = new ResultBean<>(ResultCode.SUCCESS, "保存成功", ret);
 
         reqHandler.sendSuccessMessage(result.toJSONString());
 
