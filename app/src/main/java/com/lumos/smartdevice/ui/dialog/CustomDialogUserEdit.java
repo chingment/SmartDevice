@@ -35,6 +35,9 @@ public class CustomDialogUserEdit extends Dialog {
     private TextView tv_BoxName;
 
 
+    private String userId="";
+    private String avatar="";
+
     public CustomDialogUserEdit(Context context) {
         super(context, R.style.custom_dialog);
         mThis = this;
@@ -53,21 +56,20 @@ public class CustomDialogUserEdit extends Dialog {
         btn_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(onClickListener!=null){
-                    HashMap<String, String> form=new HashMap<>();
+                if(onClickListener!=null) {
+                    UserBean user = new UserBean();
 
+                    String userName = et_Username.getText().toString();
+                    String password = et_Password.getText().toString();
+                    String fullName = et_Fullname.getText().toString();
 
-                    String username=et_Username.getText().toString();
-                    String password=et_Password.getText().toString();
-                    String fullname=et_Fullname.getText().toString();
+                    user.setUserId(userId);
+                    user.setUserName(userName);
+                    user.setPassword(password);
+                    user.setFullName(fullName);
+                    user.setAvatar(avatar);
 
-
-                    form.put("username",username);
-                    form.put("password",password);
-                    form.put("fullname",fullname);
-                    form.put("avatar","app://default_avatar");
-
-                    onClickListener.onSave(form);
+                    onClickListener.onSave(user);
                 }
             }
         });
@@ -90,22 +92,34 @@ public class CustomDialogUserEdit extends Dialog {
     }
 
 
-    public void setMode(int mode) {
-        if (mode == 1) {
-            et_Username.setVisibility(View.VISIBLE);
-            tv_Username.setVisibility(View.GONE);
-        } else if (mode == 2) {
-            et_Username.setVisibility(View.GONE);
-            tv_Username.setVisibility(View.VISIBLE);
-        }
-    }
-
     public void setData(UserBean user) {
 
-        et_Username.setText(user.getUserName());
-        tv_Username.setText(user.getUserName());
-        et_Password.setText("");
-        et_Fullname.setText(user.getFullName());
+        if(user==null) {
+
+            et_Username.setVisibility(View.VISIBLE);
+            tv_Username.setVisibility(View.GONE);
+
+            et_Username.setText("");
+            tv_Username.setText("");
+            et_Password.setText("");
+            et_Fullname.setText("");
+
+            userId="";
+            avatar = "app://default_avatar";
+
+        }
+        else {
+            et_Username.setVisibility(View.GONE);
+            tv_Username.setVisibility(View.VISIBLE);
+
+            et_Username.setText(user.getUserName());
+            tv_Username.setText(user.getUserName());
+            et_Password.setText("");
+            et_Fullname.setText(user.getFullName());
+
+            userId=user.getUserId();
+            avatar=user.getAvatar();
+        }
     }
 
 
@@ -116,7 +130,7 @@ public class CustomDialogUserEdit extends Dialog {
     }
 
     public  interface OnClickListener{
-        void onSave(HashMap<String, String> form);
+        void onSave(UserBean user);
     }
 
 

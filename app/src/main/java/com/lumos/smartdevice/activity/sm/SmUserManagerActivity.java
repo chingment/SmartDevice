@@ -66,35 +66,31 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         dialog_UserEdit=new CustomDialogUserEdit(SmUserManagerActivity.this);
         dialog_UserEdit.setOnClickListener(new CustomDialogUserEdit.OnClickListener() {
             @Override
-            public void onSave(HashMap<String, String> form) {
+            public void onSave(UserBean bean) {
 
-                String userid = form.get("userid");
-                String username = form.get("username");
-                String password = form.get("password");
-                String fullname = form.get("fullname");
-                String avatar=form.get("avatar");
-                if(StringUtil.isEmptyNotNull(username)) {
+
+                if(StringUtil.isEmptyNotNull(bean.getUserName())) {
                     showToast(R.string.tips_username_isnotnull);
                     return;
                 }
 
-                if(StringUtil.isEmptyNotNull(password)) {
+                if(StringUtil.isEmptyNotNull(bean.getPassword())) {
                     showToast(R.string.tips_password_isnotnull);
                     return;
                 }
 
-                if(StringUtil.isEmptyNotNull(fullname)) {
+                if(StringUtil.isEmptyNotNull(bean.getFullName())) {
                     showToast(R.string.tips_fullname_isnotnull);
                     return;
                 }
 
 
                 RopUserSave rop=new RopUserSave();
-                rop.setUserId(userid);
-                rop.setUserName(username);
-                rop.setPassword(password);
-                rop.setFullName(fullname);
-                rop.setAvatar(avatar);
+                rop.setUserId(bean.getUserId());
+                rop.setUserName(bean.getUserName());
+                rop.setPassword(bean.getPassword());
+                rop.setFullName(bean.getFullName());
+                rop.setAvatar(bean.getAvatar());
 
                 ReqInterface.getInstance().userSave(rop, new ReqHandler(){
 
@@ -146,7 +142,6 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         lv_UsersAdapter.setOnClickListener(new SmUserAdapter.OnClickListener() {
             @Override
             public void onClick(UserBean bean) {
-                dialog_UserEdit.setMode(2);
                 dialog_UserEdit.setData(bean);
                 dialog_UserEdit.show();
             }
@@ -270,7 +265,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                     finish();
                     break;
                 case  R.id.btn_NewUser:
-                    dialog_UserEdit.setMode(1);
+                    dialog_UserEdit.setData(null);
                     dialog_UserEdit.show();
                     break;
             }

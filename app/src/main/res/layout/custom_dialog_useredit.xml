@@ -76,8 +76,6 @@
                     android:gravity="right"
                     android:orientation="horizontal"
                     >
-
-
                     <EditText
                         android:visibility="gone"
                         android:id="@+id/et_Username"
