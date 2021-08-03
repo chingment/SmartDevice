@@ -95,10 +95,10 @@ public class SmHomeActivity extends BaseFragmentActivity {
         });
 
         dialog_Confirm = new CustomDialogConfirm(SmHomeActivity.this, "", true);
-        dialog_Confirm.getBtnSure().setOnClickListener(new View.OnClickListener() {
+        dialog_Confirm.setOnClickListener(new CustomDialogConfirm.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String tag = v.getTag().toString();
+            public void onSure() {
+                String tag = dialog_Confirm.getTag().toString();
 
                 switch (tag) {
                     case "dlg.closeapp":
@@ -113,11 +113,9 @@ public class SmHomeActivity extends BaseFragmentActivity {
                 }
                 dialog_Confirm.hide();
             }
-        });
 
-        dialog_Confirm.getBtnCancle().setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onCancle() {
                 dialog_Confirm.hide();
             }
         });
@@ -150,23 +148,23 @@ public class SmHomeActivity extends BaseFragmentActivity {
 
 
     private void gdvExitManager(){
-        dialog_Confirm.getTipsImage().setVisibility(View.GONE);
-        dialog_Confirm.getBtnSure().setTag("dlg.exitmanager");
-        dialog_Confirm.getTipsText().setText(getAppContext().getString(R.string.confrim_tips_exitmanager));
+        dialog_Confirm.setTipsImageVisibility(View.GONE);
+        dialog_Confirm.setTag("dlg.exitmanager");
+        dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_exitmanager));
         dialog_Confirm.show();
     }
 
     private void gdvCloseApp(){
-        dialog_Confirm.getTipsImage().setVisibility(View.GONE);
-        dialog_Confirm.getBtnSure().setTag("dlg.closeapp");
-        dialog_Confirm.getTipsText().setText(getAppContext().getString(R.string.confrim_tips_closeapp));
+        dialog_Confirm.setTipsImageVisibility(View.GONE);
+        dialog_Confirm.setTag("dlg.closeapp");
+        dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_closeapp));
         dialog_Confirm.show();
     }
 
     private void gdvRebootSys(){
-        dialog_Confirm.getTipsImage().setVisibility(View.GONE);
-        dialog_Confirm.getBtnSure().setTag("dlg.rebootsys");
-        dialog_Confirm.getTipsText().setText(getAppContext().getString(R.string.confrim_tips_rebootsys));
+        dialog_Confirm.setTipsImageVisibility(View.GONE);
+        dialog_Confirm.setTag("dlg.rebootsys");
+        dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_rebootsys));
         dialog_Confirm.show();
     }
 

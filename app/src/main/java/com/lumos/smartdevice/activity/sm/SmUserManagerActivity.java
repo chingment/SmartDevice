@@ -63,7 +63,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         lv_UsersData = findViewById(R.id.lv_UsersData);
         lv_UsersEmptyTips= findViewById(R.id.lv_UsersEmptyTips);
         dialog_UserEdit=new CustomDialogUserEdit(SmUserManagerActivity.this);
-        dialog_UserEdit.setOnDialogListener(new CustomDialogUserEdit.OnDialogHandle() {
+        dialog_UserEdit.setOnClickListener(new CustomDialogUserEdit.OnClickListener() {
             @Override
             public void onSave(HashMap<String, String> form) {
 

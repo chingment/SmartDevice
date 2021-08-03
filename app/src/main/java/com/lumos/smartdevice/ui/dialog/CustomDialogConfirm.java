@@ -2,6 +2,7 @@ package com.lumos.smartdevice.ui.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.ui.ViewHolder;
+import com.lumos.smartdevice.utils.CommonUtil;
 
 
 /**
@@ -31,80 +33,100 @@ import com.lumos.smartdevice.ui.ViewHolder;
  */
 public class CustomDialogConfirm extends Dialog {
     private static final String TAG = "CustomDialogConfirm";
-    private Dialog mThis;
+    private CustomDialogConfirm mThis;
     private Context mContext;
     private View mLayoutRes;
 
+    private View dlg_Close;
+    private LinearLayout ll_Cancle;
     private Button btn_Sure;
-    private LinearLayout lyt_Sure;
     private Button btn_Cancle;
-    private LinearLayout lyt_Cancle;
-    private LinearLayout lyt_Buttons;
-    private View btn_Close;
-    private TextView txt_Tips;
-    private ImageView img_Tips;
+    private TextView tv_TipsText;
+    private ImageView iv_TipsImage;
+    private Object tag;
 
-    public Button getBtnSure() {
-        return this.btn_Sure;
+
+    public void setTipsImageDrawable(Drawable drawable) {
+        this.iv_TipsImage.setImageDrawable(drawable);
     }
 
-    public Button getBtnCancle() {
-        return this.btn_Cancle;
+    public void  setTipsImageNetwork(String url){
+        CommonUtil.loadImageFromUrl(mContext,iv_TipsImage, url);
     }
 
-    public TextView getTipsText() {
-        return this.txt_Tips;
+    public void setTipsImageVisibility(int visibility){
+        iv_TipsImage.setVisibility(visibility);
     }
 
-    public ImageView getTipsImage() {
-        return this.img_Tips;
+    public  ImageView getTipsImage(){
+        return iv_TipsImage;
     }
 
-    public LinearLayout getBtnArea() {
-        return this.lyt_Buttons;
+    public void setTipsText(String tips){
+        tv_TipsText.setText(tips);
+    }
+
+    public void setTipsText(int tips){
+        tv_TipsText.setText(tips);
+    }
+
+    public void setCloseVisibility(int visibility){
+        dlg_Close.setVisibility(visibility);
+    }
+
+    public void setCancleVisibility(int visibility){
+    }
+    public void setTag(Object tag){
+        this.tag=tag;
+    }
+
+    public Object getTag(){
+        return this.tag;
     }
 
     public CustomDialogConfirm(Context context, String tips, boolean isCancle) {
         super(context, R.style.custom_dialog);
-
         mThis=this;
-
         mContext = context;
         mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_confirm, null);
 
-        txt_Tips = ViewHolder.get(mLayoutRes,R.id.dialog_Confirm_Tips_Txt);
-        img_Tips = ViewHolder.get(mLayoutRes,R.id.dialog_Confirm_Tips_Img);
-        btn_Sure = ViewHolder.get(mLayoutRes,R.id.dialog_Confirm_Btn_Sure);
-        lyt_Sure=ViewHolder.get(mLayoutRes,R.id.dialog_Confirm_Lyt_Sure);
-        btn_Cancle = ViewHolder.get(mLayoutRes,R.id.dialog_Confirm_Btn_Cancle);
-        lyt_Cancle= ViewHolder.get(mLayoutRes,R.id.dialog_Confirm_Lyt_Cancle);
-        btn_Close =ViewHolder.get(mLayoutRes,R.id.dialog_Btn_Close);
-        lyt_Buttons=ViewHolder.get(mLayoutRes,R.id.dialog_Confirm_Lyt_Buttons);
-        txt_Tips.setText(tips);
+        dlg_Close =ViewHolder.get(mLayoutRes,R.id.dlg_Close);
+        tv_TipsText = ViewHolder.get(mLayoutRes,R.id.tv_TipsText);
+        tv_TipsText.setText(tips);
+        iv_TipsImage = ViewHolder.get(mLayoutRes,R.id.iv_TipsImage);
+        btn_Sure = ViewHolder.get(mLayoutRes,R.id.btn_Sure);
+        btn_Cancle = ViewHolder.get(mLayoutRes,R.id.btn_Cancle);
+        ll_Cancle = ViewHolder.get(mLayoutRes,R.id.ll_Cancle);
 
         if (!isCancle) {
-            btn_Cancle.setVisibility(View.GONE);
+            ll_Cancle.setVisibility(View.GONE);
         }
 
-        btn_Close.setOnClickListener(new View.OnClickListener() {
+        dlg_Close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mThis.hide();
             }
         });
-    }
 
-    public void setBtnCloseVisibility(int visibility) {
-        btn_Close.setVisibility(visibility);
-        lyt_Cancle.setVisibility(visibility);
-    }
+        btn_Sure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onClickListener!=null){
+                    onClickListener.onSure();
+                }
+            }
+        });
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (backListener != null) {
-            backListener.onBackClick();
-        }
-        return super.onKeyDown(keyCode, event);
+        btn_Cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onClickListener!=null){
+                    onClickListener.onCancle();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -113,14 +135,15 @@ public class CustomDialogConfirm extends Dialog {
         this.setContentView(mLayoutRes);
     }
 
-    public OnDialogBackKeyDown backListener;
+    private OnClickListener onClickListener;
 
-    public void setOnBackListener(OnDialogBackKeyDown backListener) {
-        this.backListener = backListener;
+    public void  setOnClickListener(OnClickListener onClickListener){
+        this.onClickListener=onClickListener;
     }
 
-    public interface OnDialogBackKeyDown {
-        void onBackClick();
+    public  interface OnClickListener{
+        void onSure();
+        void onCancle();
     }
 
 }

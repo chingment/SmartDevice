@@ -51,7 +51,7 @@ public class CustomDialogUserEdit extends Dialog {
         btn_Save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(onDialogHandle!=null){
+                if(onClickListener!=null){
                     HashMap<String, String> form=new HashMap<>();
 
 
@@ -65,7 +65,7 @@ public class CustomDialogUserEdit extends Dialog {
                     form.put("fullname",fullname);
                     form.put("avatar","app://default_avatar");
 
-                    onDialogHandle.onSave(form);
+                    onClickListener.onSave(form);
                 }
             }
         });
@@ -88,17 +88,15 @@ public class CustomDialogUserEdit extends Dialog {
 
 
 
-    public OnDialogHandle onDialogHandle;
+    private OnClickListener onClickListener;
 
-    public void setOnDialogListener(OnDialogHandle onDialogHandle) {
-        this.onDialogHandle = onDialogHandle;
+    public void  setOnClickListener(OnClickListener onClickListener){
+        this.onClickListener=onClickListener;
     }
 
-    public interface OnDialogHandle {
+    public  interface OnClickListener{
         void onSave(HashMap<String, String> form);
     }
-
-
 
 
 }
