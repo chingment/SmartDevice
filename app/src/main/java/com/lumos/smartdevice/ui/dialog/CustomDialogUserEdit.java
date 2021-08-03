@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class CustomDialogUserEdit extends Dialog {
     private View btn_Save;
 
     private EditText et_Username;
+    private TextView tv_Username;
     private EditText et_Password;
     private EditText et_Fullname;
 
@@ -76,6 +78,7 @@ public class CustomDialogUserEdit extends Dialog {
         tv_BoxName= ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
 
         et_Username = ViewHolder.get(mLayoutRes, R.id.et_Username);
+        tv_Username = ViewHolder.get(mLayoutRes, R.id.tv_Username);
         et_Password = ViewHolder.get(mLayoutRes, R.id.et_Password);
         et_Fullname = ViewHolder.get(mLayoutRes, R.id.et_Fullname);
     }
@@ -86,6 +89,24 @@ public class CustomDialogUserEdit extends Dialog {
         this.setContentView(mLayoutRes);
     }
 
+
+    public void setMode(int mode) {
+        if (mode == 1) {
+            et_Username.setVisibility(View.VISIBLE);
+            tv_Username.setVisibility(View.GONE);
+        } else if (mode == 2) {
+            et_Username.setVisibility(View.GONE);
+            tv_Username.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setData(UserBean user) {
+
+        et_Username.setText(user.getUserName());
+        tv_Username.setText(user.getUserName());
+        et_Password.setText("");
+        et_Fullname.setText(user.getFullName());
+    }
 
 
     private OnClickListener onClickListener;

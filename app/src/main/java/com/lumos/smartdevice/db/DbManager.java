@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 
 import com.lumos.smartdevice.model.CabinetBean;
+import com.lumos.smartdevice.model.PageDataBean;
 import com.lumos.smartdevice.model.TripMsgBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppContext;
@@ -149,12 +150,31 @@ public class DbManager {
 
     }
 
-    public List<UserBean> GetUsers(int pageIndex,int pageSize,String userType){
+    public PageDataBean<UserBean> GetUsers(int pageIndex, int pageSize, String userType){
+
+        PageDataBean<UserBean> pageData=new PageDataBean<UserBean>();
+
+        pageData.setPageSize(pageSize);
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<UserBean> users = new ArrayList<>();
         if(db.isOpen()){
-            Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where "+UserDao.COLUMN_NAME_TYPE + " = ? order by "+UserDao.COLUMN_NAME_USERID+" limit ?,?",new String[]{
+
+            Cursor cursor1 = db.rawQuery("select count(*) from " + UserDao.TABLE_NAME + "" +
+                    " where "+UserDao.COLUMN_NAME_TYPE + " = ? ",new String[]{
+                    String.valueOf(userType)
+            });
+
+            cursor1.moveToFirst();
+
+            int total = cursor1.getInt(0);
+
+            cursor1.close();
+
+            pageData.setTotal(total);
+
+            Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + "" +
+                    " where "+UserDao.COLUMN_NAME_TYPE + " = ? order by "+UserDao.COLUMN_NAME_USERID+" limit ?,?",new String[]{
                     String.valueOf(userType),
                     String.valueOf(pageIndex*pageSize),
                     String.valueOf(pageSize),
@@ -174,7 +194,10 @@ public class DbManager {
             }
             cursor.close();
         }
-        return users;
+
+        pageData.setItems(users);
+
+        return pageData;
 
     }
 

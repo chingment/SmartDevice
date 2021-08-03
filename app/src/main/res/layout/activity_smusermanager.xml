@@ -48,11 +48,12 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/lv_UsersData"
                 android:layout_width="match_parent"
+                android:divider="@color/dividerline"
                 android:layout_height="match_parent" />
         </com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout>
 
         <LinearLayout
-            android:id="@+id/lv_UsersEmptyTips"
+            android:id="@+id/ll_UsersEmpty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"

@@ -42,8 +42,9 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
     private SuperRefreshLayout lv_UsersRefresh;
     private RecyclerView lv_UsersData;
     private int lv_Users_PageIndex=0;
-    private LinearLayout lv_UsersEmptyTips;
+    private LinearLayout ll_UsersEmpty;
     private SmUserAdapter lv_UsersAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +62,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         btn_NewUser = findViewById(R.id.btn_NewUser);
         lv_UsersRefresh =  findViewById(R.id.lv_UsersRefresh);
         lv_UsersData = findViewById(R.id.lv_UsersData);
-        lv_UsersEmptyTips= findViewById(R.id.lv_UsersEmptyTips);
+        ll_UsersEmpty= findViewById(R.id.ll_UsersEmpty);
         dialog_UserEdit=new CustomDialogUserEdit(SmUserManagerActivity.this);
         dialog_UserEdit.setOnClickListener(new CustomDialogUserEdit.OnClickListener() {
             @Override
@@ -117,6 +118,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
 
                         if(rt.getCode()== ResultCode.SUCCESS) {
                             UserSaveResultBean d=rt.getData();
+                            lv_Users_PageIndex=0;
                             getUsers();
                             dialog_UserEdit.hide();
                         }
@@ -144,6 +146,8 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         lv_UsersAdapter.setOnClickListener(new SmUserAdapter.OnClickListener() {
             @Override
             public void onClick(UserBean bean) {
+                dialog_UserEdit.setMode(2);
+                dialog_UserEdit.setData(bean);
                 dialog_UserEdit.show();
             }
         });
@@ -206,6 +210,14 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                     UserGetListResultBean d=rt.getData();
 
                     List<UserBean> users = d.getItems();
+
+                    if(d.getTotal()==0){
+                        ll_UsersEmpty.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        ll_UsersEmpty.setVisibility(View.GONE);
+                    }
+
                     if (users != null && users.size() > 0) {
                         if (lv_Users_PageIndex == 0) {
                             lv_UsersRefresh.setRefreshing(false);
@@ -216,14 +228,11 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                             lv_UsersAdapter.addData(users, SmUserManagerActivity.this);
                         }
                         lv_UsersRefresh.setVisibility(View.VISIBLE);
-                        lv_UsersEmptyTips.setVisibility(View.GONE);
                     } else {
                         if (lv_Users_PageIndex == 0) {
                             lv_UsersRefresh.setRefreshing(false);
                             lv_UsersAdapter.setData(new ArrayList<UserBean>(), SmUserManagerActivity.this);
-
                             lv_UsersRefresh.setVisibility(View.GONE);
-                            lv_UsersEmptyTips.setVisibility(View.VISIBLE);
                         }
 
                         lv_UsersRefresh.loadComplete(false);
@@ -261,6 +270,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                     finish();
                     break;
                 case  R.id.btn_NewUser:
+                    dialog_UserEdit.setMode(1);
                     dialog_UserEdit.show();
                     break;
             }
