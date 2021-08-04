@@ -3,6 +3,7 @@ package com.lumos.smartdevice.activity.sm;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.lumos.smartdevice.model.api.UserGetListResultBean;
 import com.lumos.smartdevice.model.api.UserSaveResultBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogUserEdit;
+import com.lumos.smartdevice.ui.my.MyRecycleViewDivider;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -69,14 +71,16 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
             public void onSave(UserBean bean) {
 
 
-                if(StringUtil.isEmptyNotNull(bean.getUserName())) {
+                if (StringUtil.isEmptyNotNull(bean.getUserName())) {
                     showToast(R.string.tips_username_isnotnull);
                     return;
                 }
 
-                if(StringUtil.isEmptyNotNull(bean.getPassword())) {
-                    showToast(R.string.tips_password_isnotnull);
-                    return;
+                if (StringUtil.isEmptyNotNull(bean.getUserId())) {
+                    if (StringUtil.isEmptyNotNull(bean.getPassword())) {
+                        showToast(R.string.tips_password_isnotnull);
+                        return;
+                    }
                 }
 
                 if(StringUtil.isEmptyNotNull(bean.getFullName())) {
@@ -112,14 +116,12 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                         ResultBean<UserSaveResultBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<UserSaveResultBean>>() {
                         });
 
+                        showToast(rt.getMsg());
+
                         if(rt.getCode()== ResultCode.SUCCESS) {
-                            UserSaveResultBean d=rt.getData();
-                            lv_Users_PageIndex=0;
+                            lv_Users_PageIndex = 0;
                             getUsers();
                             dialog_UserEdit.hide();
-                        }
-                        else {
-                            showToast(rt.getMsg());
                         }
                     }
 
@@ -136,6 +138,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         lv_UsersData.setLayoutManager(new GridLayoutManager(getAppContext(), 1));
 
         lv_UsersData.setItemAnimator(new DefaultItemAnimator());
+
 
         lv_UsersAdapter = new SmUserAdapter();
 
@@ -213,11 +216,14 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                         ll_UsersEmpty.setVisibility(View.GONE);
                     }
 
+
+
                     if (users != null && users.size() > 0) {
                         if (lv_Users_PageIndex == 0) {
                             lv_UsersRefresh.setRefreshing(false);
                             lv_UsersRefresh.loadComplete(true);
                             lv_UsersAdapter.setData(users, SmUserManagerActivity.this);
+
                         } else {
                             lv_UsersRefresh.loadComplete(true);
                             lv_UsersAdapter.addData(users, SmUserManagerActivity.this);

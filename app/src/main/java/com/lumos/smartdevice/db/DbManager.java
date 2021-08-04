@@ -76,30 +76,48 @@ public class DbManager {
         }
     }
 
-    public void addUser(String username,String password,String fullname, String type,String avatar){
+    public long addUser(String username,String password,String fullname, String type,String avatar) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int id = -1;
-        if(db.isOpen()){
+        long rows = 0;
+        if (db.isOpen()) {
 
-            Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where "+UserDao.COLUMN_NAME_USERNAME + " = ?",new String[]{username});
+            Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where " + UserDao.COLUMN_NAME_USERNAME + " = ?", new String[]{username});
 
             boolean exist = (cursor.getCount() > 0);
-            if(exist){
+            if (exist) {
                 cursor.close();
-                return;
+                return rows;
             }
 
             ContentValues values = new ContentValues();
             values.put(UserDao.COLUMN_NAME_USERNAME, username);
             values.put(UserDao.COLUMN_NAME_PASSWORD, password);
             values.put(UserDao.COLUMN_NAME_FULLNAME, fullname);
-            values.put(UserDao.COLUMN_NAME_AVATAR,avatar);
+            values.put(UserDao.COLUMN_NAME_AVATAR, avatar);
             values.put(UserDao.COLUMN_NAME_TYPE, type);
 
-            db.insert(UserDao.TABLE_NAME, null, values);
+            rows = db.insert(UserDao.TABLE_NAME, null, values);
 
             cursor.close();
         }
+
+        return rows;
+    }
+
+    public int updateUser(String userid,String fullname, String avatar) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        int rows = 0;
+        if (db.isOpen()) {
+
+            ContentValues values = new ContentValues();
+            values.put(UserDao.COLUMN_NAME_FULLNAME, fullname);
+            values.put(UserDao.COLUMN_NAME_AVATAR, avatar);
+
+            rows = db.update(UserDao.TABLE_NAME, values, UserDao.COLUMN_NAME_USERID + " = ?", new String[]{String.valueOf(userid)});
+
+        }
+
+        return rows;
     }
 
     public UserBean checkUserPassword(String username, String password, String type) {

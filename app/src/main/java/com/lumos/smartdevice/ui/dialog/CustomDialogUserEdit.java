@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
@@ -33,7 +34,7 @@ public class CustomDialogUserEdit extends Dialog {
     private TextView tv_ZhiWen;
     private TextView tv_IcCard;
     private TextView tv_BoxName;
-
+    private LinearLayout ll_Password;
 
     private String userId="";
     private String avatar="";
@@ -83,6 +84,8 @@ public class CustomDialogUserEdit extends Dialog {
         tv_Username = ViewHolder.get(mLayoutRes, R.id.tv_Username);
         et_Password = ViewHolder.get(mLayoutRes, R.id.et_Password);
         et_Fullname = ViewHolder.get(mLayoutRes, R.id.et_Fullname);
+
+        ll_Password = ViewHolder.get(mLayoutRes, R.id.ll_Password);
     }
 
     @Override
@@ -95,10 +98,10 @@ public class CustomDialogUserEdit extends Dialog {
     public void setData(UserBean user) {
 
         if(user==null) {
-
             et_Username.setVisibility(View.VISIBLE);
+            et_Username.requestFocus();
             tv_Username.setVisibility(View.GONE);
-
+            ll_Password.setVisibility(View.VISIBLE);
             et_Username.setText("");
             tv_Username.setText("");
             et_Password.setText("");
@@ -111,12 +114,12 @@ public class CustomDialogUserEdit extends Dialog {
         else {
             et_Username.setVisibility(View.GONE);
             tv_Username.setVisibility(View.VISIBLE);
-
+            ll_Password.setVisibility(View.GONE);
             et_Username.setText(user.getUserName());
             tv_Username.setText(user.getUserName());
             et_Password.setText("");
             et_Fullname.setText(user.getFullName());
-
+            et_Fullname.requestFocus();
             userId=user.getUserId();
             avatar=user.getAvatar();
         }

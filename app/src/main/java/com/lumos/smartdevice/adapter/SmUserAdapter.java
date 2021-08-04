@@ -63,26 +63,36 @@ public class SmUserAdapter extends RefreshAdapter {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserBean user=(UserBean)view.getTag();
-                if(onClickListener!=null) {
+                UserBean user = (UserBean) view.getTag();
+                if (onClickListener != null) {
                     onClickListener.onClick(user);
                 }
             }
         });
 
-        ImageView img_Avatar = (ImageView) holder.itemView.findViewById(R.id.img_Avatar);
+        View ll_DividerLine = holder.itemView.findViewById(R.id.ll_DividerLine);
 
-        TextView tv_Username = (TextView) holder.itemView.findViewById(R.id.tv_Username);
+        if((beans.size()-position-1)==0){
+            ll_DividerLine.setVisibility(View.INVISIBLE);
+        }
+        else {
+            ll_DividerLine.setVisibility(View.VISIBLE);
+        }
 
+        ImageView img_Avatar = holder.itemView.findViewById(R.id.img_Avatar);
 
-        tv_Username.setText(bean.getUserName());
+        TextView tv_UserName = holder.itemView.findViewById(R.id.tv_UserName);
+        TextView tv_FullName = holder.itemView.findViewById(R.id.tv_FullName);
+
+        tv_UserName.setText(bean.getUserName());
+        tv_FullName.setText(bean.getFullName());
 
         if (!StringUtil.isEmptyNotNull(avatar)) {
 
-            if(avatar.contains("app://")) {
+            if (avatar.contains("app://")) {
                 String imgName = avatar.split("//")[1];
                 int imgId = CommonUtil.getAppDrawableImages(imgName);
-                img_Avatar.setImageDrawable(ContextCompat.getDrawable(context,imgId));
+                img_Avatar.setImageDrawable(ContextCompat.getDrawable(context, imgId));
             }
 
         }

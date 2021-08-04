@@ -43,7 +43,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_30"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:orientation="vertical"
@@ -52,18 +52,36 @@
 
 
             <TextView
-                android:id="@+id/tv_Username"
+                android:id="@+id/tv_UserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:gravity="left"
                 android:maxLines="3"
-                android:text="商品名称"
-                android:textColor="#333333"
-                android:textSize="@dimen/sp_10" />
+                android:text="用户名"
+                android:textColor="@color/field_value"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/tv_FullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="left"
+                android:maxLines="3"
+                android:text="姓名"
+                android:textColor="@color/field_name"
+                android:textSize="@dimen/sp_12" />
+
+
+            <View
+                android:id="@+id/ll_DividerLine"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/size_5"
+                android:background="@color/dividerline2"/>
         </LinearLayout>
 
     </LinearLayout>

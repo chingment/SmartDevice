@@ -112,6 +112,7 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/ll_Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -141,6 +142,7 @@
                         android:gravity="right"
                         android:maxLength="20"
                         android:maxLines="1"
+                        android:inputType="textPassword"
                         android:singleLine="true"
                         android:textColor="@color/et_txt"
                         android:textColorHint="@color/et_hint"

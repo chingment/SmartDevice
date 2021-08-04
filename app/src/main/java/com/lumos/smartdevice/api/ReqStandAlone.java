@@ -110,9 +110,11 @@ public class ReqStandAlone implements IReqVersion{
             return;
         }
 
-        if(StringUtil.isEmptyNotNull(rop.getPassword())){
-            reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("密码不能为空"));
-            return;
+        if(StringUtil.isEmptyNotNull(rop.getUserId())) {
+            if (StringUtil.isEmptyNotNull(rop.getPassword())) {
+                reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("密码不能为空"));
+                return;
+            }
         }
 
         if(StringUtil.isEmptyNotNull(rop.getFullName())){
@@ -120,19 +122,24 @@ public class ReqStandAlone implements IReqVersion{
             return;
         }
 
+        String userId=rop.getUserId().trim();
         String userName=rop.getUserName().trim();
         String password=rop.getPassword().trim();
         String fullName=rop.getFullName().trim();
         String avatar=rop.getAvatar();
 
-        Boolean userIsExist = DbManager.getInstance().checkUserIsExist(userName);
-
-        if (userIsExist) {
-            reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("用户名已经存在"));
-            return;
+        if(StringUtil.isEmptyNotNull(rop.getUserId())) {
+            Boolean userIsExist = DbManager.getInstance().checkUserIsExist(userName);
+            if (userIsExist) {
+                reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("用户名已经存在"));
+                return;
+            }
+            DbManager.getInstance().addUser(userName,password,fullName, "3",avatar);
+        }
+        else {
+            DbManager.getInstance().updateUser(userId, fullName, avatar);
         }
 
-        DbManager.getInstance().addUser(userName,password,fullName, "3",avatar);
 
         UserSaveResultBean ret = new UserSaveResultBean();
 
