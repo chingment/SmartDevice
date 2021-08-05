@@ -12,6 +12,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.CabinetBean;
+import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 public class CustomDialogLockerBox extends Dialog {
@@ -62,6 +63,10 @@ public class CustomDialogLockerBox extends Dialog {
         String[] box_Prams=boxId.split("-");
         
         tv_BoxName.setText(box_Prams[2]);
+
+    }
+
+    public void setLockerBoxUser(UserBean user){
 
     }
 

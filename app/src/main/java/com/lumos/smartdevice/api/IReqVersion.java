@@ -1,6 +1,8 @@
 package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
+import com.lumos.smartdevice.api.rop.RopLockerBoxBelongToUser;
+import com.lumos.smartdevice.api.rop.RopLockerBoxGetBelongUser;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
@@ -13,4 +15,6 @@ public interface IReqVersion {
     void ownLogout(RopOwnLogout rop, final ReqHandler reqHandler);
     void userSave(RopUserSave rop, final ReqHandler reqHandler);
     void userGetList(RopUserGetList rop, final ReqHandler reqHandler);
+    void lockerBoxBelongToUser(RopLockerBoxBelongToUser rop, final ReqHandler reqHandler);
+    void lockerBoxGetBelongUser(RopLockerBoxGetBelongUser rop, final ReqHandler reqHandler);
 }

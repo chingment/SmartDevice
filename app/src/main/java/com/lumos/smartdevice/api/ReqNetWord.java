@@ -3,6 +3,8 @@ package com.lumos.smartdevice.api;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
+import com.lumos.smartdevice.api.rop.RopLockerBoxBelongToUser;
+import com.lumos.smartdevice.api.rop.RopLockerBoxGetBelongUser;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
@@ -58,6 +60,16 @@ public class ReqNetWord implements IReqVersion{
     public void userGetList(RopUserGetList rop, final ReqHandler reqHandler) {
 
 
+
+    }
+
+    @Override
+    public void lockerBoxBelongToUser(RopLockerBoxBelongToUser rop,final ReqHandler reqHandler) {
+
+    }
+
+    @Override
+    public void lockerBoxGetBelongUser(RopLockerBoxGetBelongUser rop,final ReqHandler reqHandler) {
 
     }
 }

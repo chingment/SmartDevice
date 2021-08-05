@@ -219,7 +219,6 @@ public class DbManager {
 
     }
 
-
     public void updateConfig(String field,String value){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         if(db.isOpen()){
@@ -376,4 +375,77 @@ public class DbManager {
         }
     }
 
+    public long savelockerBoxUser(String cabinetId,String slotId, String userId) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        long rows = 0;
+        if (db.isOpen()) {
+
+            Cursor cursor = db.rawQuery("select * from " + LockerBoxUserDao.TABLE_NAME + " where " + LockerBoxUserDao.COLUMN_NAME_CABINET_ID + "=? and " + LockerBoxUserDao.COLUMN_NAME_SLOT_ID + "=? and " + LockerBoxUserDao.COLUMN_NAME_USER_ID + "=?", new String[]{cabinetId, slotId, userId});
+
+            boolean exist = (cursor.getCount() > 0);
+            if (exist) {
+                cursor.close();
+                return rows;
+            }
+
+            ContentValues values = new ContentValues();
+            values.put(LockerBoxUserDao.COLUMN_NAME_CABINET_ID, cabinetId);
+            values.put(LockerBoxUserDao.COLUMN_NAME_SLOT_ID, slotId);
+            values.put(LockerBoxUserDao.COLUMN_NAME_USER_ID, userId);
+
+            rows = db.insert(LockerBoxUserDao.TABLE_NAME, null, values);
+
+            cursor.close();
+        }
+
+        return rows;
+    }
+
+    public int deleteLockBoxUser(String cabinetId,String slotId, String userId) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        int rows = 0;
+        if (db.isOpen()) {
+
+            rows = db.delete(LockerBoxUserDao.TABLE_NAME, LockerBoxUserDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUserDao.COLUMN_NAME_SLOT_ID + " = ? and " + LockerBoxUserDao.COLUMN_NAME_USER_ID + " = ?", new String[]{cabinetId, slotId, userId});
+        }
+
+        return rows;
+    }
+
+    public UserBean getLockerBoxUser(String cabinetId,String slotId){
+
+        UserBean user=null;
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("select * from " + LockerBoxUserDao.TABLE_NAME + " where "+LockerBoxUserDao.COLUMN_NAME_CABINET_ID + " = ? and "+LockerBoxUserDao.COLUMN_NAME_USER_ID+" = ? ",new String[]{cabinetId,slotId});
+        boolean exist = (cursor.getCount() > 0);
+        if(exist){
+
+            String user_id="";
+            while(cursor.moveToNext()) {
+                user_id = cursor.getString(cursor.getColumnIndex(LockerBoxUserDao.COLUMN_NAME_USER_ID));
+            }
+            cursor.close();
+
+            Cursor cursor1 = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where "+UserDao.COLUMN_NAME_USERID + " = ? ",new String[]{user_id});
+            exist = (cursor1.getCount() > 0);
+            if(exist){
+
+                while(cursor1.moveToNext()) {
+
+                    user = new UserBean();
+
+                    String user_name = cursor1.getString(cursor1.getColumnIndex(UserDao.COLUMN_NAME_USERNAME));
+                    String fullname = cursor1.getString(cursor1.getColumnIndex(UserDao.COLUMN_NAME_FULLNAME));
+
+                    user.setUserId(user_id);
+                    user.setUserName(user_name);
+                    user.setFullName(fullname);
+                }
+                cursor1.close();
+            }
+        }
+        return user;
+    }
 }

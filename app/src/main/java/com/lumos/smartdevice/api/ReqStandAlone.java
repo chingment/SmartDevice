@@ -1,6 +1,8 @@
 package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
+import com.lumos.smartdevice.api.rop.RopLockerBoxBelongToUser;
+import com.lumos.smartdevice.api.rop.RopLockerBoxGetBelongUser;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
@@ -162,4 +164,17 @@ public class ReqStandAlone implements IReqVersion{
         reqHandler.sendSuccessMessage(result.toJSONString());
     }
 
+    @Override
+    public void lockerBoxBelongToUser(RopLockerBoxBelongToUser rop,final ReqHandler reqHandler) {
+
+    }
+
+    @Override
+    public void lockerBoxGetBelongUser(RopLockerBoxGetBelongUser rop, final ReqHandler reqHandler) {
+        reqHandler.sendBeforeSendMessage();
+        ResultBean result = null;
+        UserBean user = DbManager.getInstance().getLockerBoxUser(rop.getCabinetId(), rop.getSlotId());
+        result = new ResultBean<>(ResultCode.SUCCESS, "", user);
+        reqHandler.sendSuccessMessage(result.toJSONString());
+    }
 }

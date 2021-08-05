@@ -18,7 +18,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.adapter.SmLockerBoxCabinetSelectAdapter;
+import com.lumos.smartdevice.api.ReqHandler;
+import com.lumos.smartdevice.api.ReqInterface;
+import com.lumos.smartdevice.api.ResultBean;
+import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RopLockerBoxGetBelongUser;
 import com.lumos.smartdevice.model.CabinetBean;
+import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.ui.dialog.CustomDialogCabinetConfig;
@@ -80,13 +86,13 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         tv_CabinetName = findViewById(R.id.tv_CabinetName);
         tl_Boxs = findViewById(R.id.tl_Boxs);
         dialog_CabinetConfig = new CustomDialogCabinetConfig(SmLockerBoxActivity.this);
-        dialog_LockerBox=new CustomDialogLockerBox(SmLockerBoxActivity.this);
+        dialog_LockerBox = new CustomDialogLockerBox(SmLockerBoxActivity.this);
         dialog_LockerBox.setOnClickListener(new CustomDialogLockerBox.OnClickListener() {
             @Override
             public void onSelectUser() {
 
                 Intent intent = new Intent(SmLockerBoxActivity.this, SmUserManagerActivity.class);
-                intent.putExtra("scene",2);
+                intent.putExtra("scene", 2);
                 startActivity(intent);
             }
         });
@@ -183,8 +189,44 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                     convertView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String l_Box_Id=v.getTag().toString();
-                            dialog_LockerBox.setLockerBox(cur_Cabinet,l_Box_Id);
+                            String l_Box_Id = v.getTag().toString();
+                            dialog_LockerBox.setLockerBox(cur_Cabinet, l_Box_Id);
+
+                            RopLockerBoxGetBelongUser rop=new RopLockerBoxGetBelongUser();
+                            rop.setDeviceId(getDevice().getDeviceId());
+                            rop.setCabinetId(cur_Cabinet.getCabinetId());
+                            rop.setSlotId(l_Box_Id);
+                            ReqInterface.getInstance().lockerBoxGetBelongUser(rop, new ReqHandler(){
+
+                                        @Override
+                                        public void onBeforeSend() {
+                                            super.onBeforeSend();
+                                        }
+
+                                        @Override
+                                        public void onAfterSend() {
+                                            super.onAfterSend();
+                                        }
+
+                                        @Override
+                                        public void onSuccess(String response) {
+                                            super.onSuccess(response);
+
+                                            ResultBean<UserBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<UserBean>>() {
+                                            });
+
+                                            if(rt.getCode()== ResultCode.SUCCESS) {
+                                                dialog_LockerBox.setLockerBoxUser(null);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(String msg, Exception e) {
+                                            super.onFailure(msg, e);
+                                        }
+                                    }
+                            );
+
                             dialog_LockerBox.show();
                         }
                     });
