@@ -18,8 +18,10 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RopLockerBoxBelongToUser;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
+import com.lumos.smartdevice.model.SceneParamBySelectUserBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.model.api.UserGetListResultBean;
 import com.lumos.smartdevice.model.api.UserSaveResultBean;
@@ -45,6 +47,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
 
     private int activity_scene=1;//页面场景
 
+    private SceneParamBySelectUserBean sceneParamBySelectUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +61,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
             setNavHeaderTtile(R.string.aty_smusermanager_nav_title);
         }
         else if(activity_scene==2) {
+            sceneParamBySelectUser = (SceneParamBySelectUserBean) getIntent().getSerializableExtra("scene_param");
             setNavHeaderTtile(R.string.aty_smusermanager_nav_title_select_user);
         }
 
@@ -157,6 +161,40 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
 
             @Override
             public void onSelectClick(UserBean bean) {
+
+                RopLockerBoxBelongToUser rop=new RopLockerBoxBelongToUser();
+                rop.setDeviceId(sceneParamBySelectUser.getDeviceId());
+                rop.setCabinetId(sceneParamBySelectUser.getCabinetId());
+                rop.setSlotId(sceneParamBySelectUser.getSlotId());
+                ReqInterface.getInstance().lockerBoxBelongToUser(rop, new ReqHandler(){
+
+                    @Override
+                    public void onBeforeSend() {
+                        super.onBeforeSend();
+                    }
+
+                    @Override
+                    public void onAfterSend() {
+                        super.onAfterSend();
+                    }
+
+                    @Override
+                    public void onSuccess(String response) {
+                        super.onSuccess(response);
+
+                        ResultBean<Object> rt = JSON.parseObject(response, new TypeReference<ResultBean<Object>>() {
+                        });
+
+                        if (rt.getCode() == ResultCode.SUCCESS) {
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg, Exception e) {
+                        super.onFailure(msg, e);
+                    }
+                });
 
             }
         });

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
@@ -25,8 +26,12 @@ public class CustomDialogLockerBox extends Dialog {
     private View btn_Close;
 
     private TextView tv_BoxName;
-
+    private TextView tv_UserFullName;
     private TextView btn_SelectUser;
+    private ImageView btn_DeleteUser;
+
+    private String cabinetId;
+    private String slotId;
     public CustomDialogLockerBox(Context context) {
         super(context, R.style.custom_dialog);
         mThis = this;
@@ -42,12 +47,23 @@ public class CustomDialogLockerBox extends Dialog {
         });
 
         tv_BoxName = ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
+        tv_UserFullName=ViewHolder.get(mLayoutRes, R.id.tv_UserFullName);
+        btn_DeleteUser=ViewHolder.get(mLayoutRes, R.id.btn_DeleteUser);
         btn_SelectUser = ViewHolder.get(mLayoutRes, R.id.btn_SelectUser);
         btn_SelectUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(onClickListener!=null) {
                     onClickListener.onSelectUser();
+                }
+            }
+        });
+
+        btn_DeleteUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onClickListener!=null) {
+                    onClickListener.onDeleteUser();
                 }
             }
         });
@@ -59,15 +75,37 @@ public class CustomDialogLockerBox extends Dialog {
         this.setContentView(mLayoutRes);
     }
 
-    public void setLockerBox(CabinetBean cabinet,String boxId) {
-        String[] box_Prams=boxId.split("-");
-        
+    public String getCabinetId(){
+        return cabinetId;
+    }
+
+    public String getSlotId(){
+        return slotId;
+    }
+
+
+    public void setLockerBox(CabinetBean cabinet,String slotId) {
+
+        this.cabinetId = cabinet.getCabinetId();
+        this.slotId = slotId;
+
+        String[] box_Prams = slotId.split("-");
+
         tv_BoxName.setText(box_Prams[2]);
 
     }
 
-    public void setLockerBoxUser(UserBean user){
+    public void setLockerBoxUser(UserBean user) {
 
+        if (user == null) {
+            btn_SelectUser.setVisibility(View.VISIBLE);
+            btn_DeleteUser.setVisibility(View.GONE);
+            tv_UserFullName.setVisibility(View.GONE);
+        } else {
+            btn_SelectUser.setVisibility(View.GONE);
+            btn_DeleteUser.setVisibility(View.VISIBLE);
+            tv_UserFullName.setVisibility(View.VISIBLE);
+        }
     }
 
     private OnClickListener onClickListener;
@@ -78,6 +116,7 @@ public class CustomDialogLockerBox extends Dialog {
 
     public  interface OnClickListener{
         void onSelectUser();
+        void onDeleteUser();
     }
 
 

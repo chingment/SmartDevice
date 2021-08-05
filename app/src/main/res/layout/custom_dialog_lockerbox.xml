@@ -98,7 +98,25 @@
                     android:orientation="horizontal"
                     >
 
+
                     <TextView
+                        android:visibility="gone"
+                        android:id="@+id/tv_UserFullName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/field_value"
+                        android:textSize="@dimen/sp_14" />
+
+                    <ImageView
+                        android:id="@+id/btn_DeleteUser"
+                        android:visibility="gone"
+                        android:layout_marginLeft="@dimen/size_10"
+                        android:layout_width="@dimen/size_16"
+                        android:layout_height="@dimen/size_16"
+                        android:background="@drawable/ic_delete_round" />
+
+                    <TextView
+                        android:visibility="gone"
                         android:id="@+id/btn_SelectUser"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

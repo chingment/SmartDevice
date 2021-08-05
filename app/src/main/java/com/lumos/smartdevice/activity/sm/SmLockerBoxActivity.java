@@ -24,6 +24,7 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RopLockerBoxGetBelongUser;
 import com.lumos.smartdevice.model.CabinetBean;
+import com.lumos.smartdevice.model.SceneParamBySelectUserBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
@@ -93,7 +94,17 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
                 Intent intent = new Intent(SmLockerBoxActivity.this, SmUserManagerActivity.class);
                 intent.putExtra("scene", 2);
+
+                SceneParamBySelectUserBean  sceneParam=new SceneParamBySelectUserBean();
+                sceneParam.setCabinetId(dialog_LockerBox.getCabinetId());
+                sceneParam.setSlotId(dialog_LockerBox.getSlotId());
+                intent.putExtra("scene_param",sceneParam);
                 startActivity(intent);
+            }
+
+            @Override
+            public void onDeleteUser() {
+
             }
         });
 
@@ -189,44 +200,9 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                     convertView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String l_Box_Id = v.getTag().toString();
-                            dialog_LockerBox.setLockerBox(cur_Cabinet, l_Box_Id);
-
-                            RopLockerBoxGetBelongUser rop=new RopLockerBoxGetBelongUser();
-                            rop.setDeviceId(getDevice().getDeviceId());
-                            rop.setCabinetId(cur_Cabinet.getCabinetId());
-                            rop.setSlotId(l_Box_Id);
-                            ReqInterface.getInstance().lockerBoxGetBelongUser(rop, new ReqHandler(){
-
-                                        @Override
-                                        public void onBeforeSend() {
-                                            super.onBeforeSend();
-                                        }
-
-                                        @Override
-                                        public void onAfterSend() {
-                                            super.onAfterSend();
-                                        }
-
-                                        @Override
-                                        public void onSuccess(String response) {
-                                            super.onSuccess(response);
-
-                                            ResultBean<UserBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<UserBean>>() {
-                                            });
-
-                                            if(rt.getCode()== ResultCode.SUCCESS) {
-                                                dialog_LockerBox.setLockerBoxUser(null);
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(String msg, Exception e) {
-                                            super.onFailure(msg, e);
-                                        }
-                                    }
-                            );
-
+                            String l_Slot_Id = v.getTag().toString();
+                            dialog_LockerBox.setLockerBox(cur_Cabinet, l_Slot_Id);
+                            lockerBoxGetBelongUser(cur_Cabinet.getCabinetId(),l_Slot_Id);
                             dialog_LockerBox.show();
                         }
                     });
@@ -242,6 +218,48 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             tl_Boxs.addView(tableRow, new TableLayout.LayoutParams(MP, WC, 1));
 
         }
+    }
+
+    public void lockerBoxGetBelongUser(String cabinetId,String slotId){
+        RopLockerBoxGetBelongUser rop=new RopLockerBoxGetBelongUser();
+        rop.setDeviceId(getDevice().getDeviceId());
+        rop.setCabinetId(cabinetId);
+        rop.setSlotId(slotId);
+        ReqInterface.getInstance().lockerBoxGetBelongUser(rop, new ReqHandler(){
+
+                    @Override
+                    public void onBeforeSend() {
+                        super.onBeforeSend();
+                    }
+
+                    @Override
+                    public void onAfterSend() {
+                        super.onAfterSend();
+                    }
+
+                    @Override
+                    public void onSuccess(String response) {
+                        super.onSuccess(response);
+
+                        ResultBean<UserBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<UserBean>>() {
+                        });
+
+                        if (rt.getCode() == ResultCode.SUCCESS) {
+                            dialog_LockerBox.setLockerBoxUser(rt.getData());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg, Exception e) {
+                        super.onFailure(msg, e);
+                    }
+                }
+        );
+    }
+
+    @Override
+    public  void onResume() {
+        super.onResume();
     }
 
     @Override
