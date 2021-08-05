@@ -94,26 +94,27 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         dialog_LockerBox = new CustomDialogLockerBox(SmLockerBoxActivity.this);
         dialog_LockerBox.setOnClickListener(new CustomDialogLockerBox.OnClickListener() {
             @Override
-            public void onSelectUser() {
+            public void onGoSelectUser(String cabinetId,String slotId) {
 
                 Intent intent = new Intent(SmLockerBoxActivity.this, SmUserManagerActivity.class);
                 intent.putExtra("scene_mode", 2);
                 HashMap<String, String> scene_param=new HashMap<String, String>();
-                scene_param.put("device_id","");
-                scene_param.put("cabinet_id",dialog_LockerBox.getCabinetId());
-                scene_param.put("slot_id",dialog_LockerBox.getSlotId());
+                scene_param.put("device_id",device.getDeviceId());
+                scene_param.put("cabinet_id",cabinetId);
+                scene_param.put("slot_id",slotId);
 
                 intent.putExtra("scene_param",scene_param);
                 startActivity(intent);
             }
 
             @Override
-            public void onDeleteUser() {
+            public void onDeleteUser(String cabinetId,String slotId,String userId) {
 
                 RopLockerBoxDeleteBelongUser rop=new RopLockerBoxDeleteBelongUser();
                 rop.setDeviceId(device.getDeviceId());
-                rop.setCabinetId(dialog_LockerBox.getCabinetId());
-                rop.setSlotId(dialog_LockerBox.getSlotId());
+                rop.setCabinetId(cabinetId);
+                rop.setSlotId(slotId);
+                rop.setUserId(userId);
 
                 ReqInterface.getInstance().lockerBoxDeleteBelongUser(rop, new ReqHandler(){
 

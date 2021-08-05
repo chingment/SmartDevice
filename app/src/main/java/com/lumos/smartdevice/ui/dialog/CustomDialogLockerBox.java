@@ -33,6 +33,7 @@ public class CustomDialogLockerBox extends Dialog {
 
     private String cabinetId;
     private String slotId;
+    private String userId;
     public CustomDialogLockerBox(Context context) {
         super(context, R.style.custom_dialog);
         mThis = this;
@@ -56,7 +57,7 @@ public class CustomDialogLockerBox extends Dialog {
             @Override
             public void onClick(View view) {
                 if(onClickListener!=null) {
-                    onClickListener.onSelectUser();
+                    onClickListener.onGoSelectUser(cabinetId,slotId);
                 }
             }
         });
@@ -65,7 +66,7 @@ public class CustomDialogLockerBox extends Dialog {
             @Override
             public void onClick(View view) {
                 if(onClickListener!=null) {
-                    onClickListener.onDeleteUser();
+                    onClickListener.onDeleteUser(cabinetId,slotId,userId);
                 }
             }
         });
@@ -85,7 +86,6 @@ public class CustomDialogLockerBox extends Dialog {
         return slotId;
     }
 
-
     public void setLockerBox(CabinetBean cabinet,String slotId) {
 
         this.cabinetId = cabinet.getCabinetId();
@@ -100,11 +100,13 @@ public class CustomDialogLockerBox extends Dialog {
     public void setLockerBoxUser(UserBean user) {
 
         if (user == null) {
+            userId=null;
             btn_SelectUser.setVisibility(View.VISIBLE);
             btn_DeleteUser.setVisibility(View.GONE);
             tv_FullName.setVisibility(View.GONE);
             tv_UserName.setVisibility(View.GONE);
         } else {
+            userId=user.getUserId();
             btn_SelectUser.setVisibility(View.GONE);
             btn_DeleteUser.setVisibility(View.VISIBLE);
             tv_FullName.setVisibility(View.VISIBLE);
@@ -121,8 +123,8 @@ public class CustomDialogLockerBox extends Dialog {
     }
 
     public  interface OnClickListener{
-        void onSelectUser();
-        void onDeleteUser();
+        void onGoSelectUser(String cabinetId,String slotId);
+        void onDeleteUser(String cabinetId,String slotId,String userId);
     }
 
 

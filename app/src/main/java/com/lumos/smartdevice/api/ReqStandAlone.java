@@ -185,7 +185,7 @@ public class ReqStandAlone implements IReqVersion{
     public void lockerBoxDeleteBelongUser(RopLockerBoxDeleteBelongUser rop, final ReqHandler reqHandler) {
         reqHandler.sendBeforeSendMessage();
         ResultBean result = null;
-        long rows = DbManager.getInstance().deleteLockBoxUser(rop.getCabinetId(), rop.getSlotId());
+        long rows = DbManager.getInstance().deleteLockBoxUser(rop.getCabinetId(), rop.getSlotId(),rop.getUserId());
         result = new ResultBean<>(ResultCode.SUCCESS, "");
         reqHandler.sendSuccessMessage(result.toJSONString());
     }

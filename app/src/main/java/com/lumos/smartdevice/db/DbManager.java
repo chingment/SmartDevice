@@ -401,12 +401,12 @@ public class DbManager {
         return rows;
     }
 
-    public int deleteLockBoxUser(String cabinetId,String slotId) {
+    public int deleteLockBoxUser(String cabinetId,String slotId,String userId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int rows = 0;
         if (db.isOpen()) {
 
-            rows = db.delete(LockerBoxUserDao.TABLE_NAME, LockerBoxUserDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUserDao.COLUMN_NAME_SLOT_ID + " = ? ", new String[]{cabinetId, slotId});
+            rows = db.delete(LockerBoxUserDao.TABLE_NAME, LockerBoxUserDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUserDao.COLUMN_NAME_SLOT_ID + " = ? and " + LockerBoxUserDao.COLUMN_NAME_USER_ID + " = ? ", new String[]{cabinetId, slotId,userId});
         }
 
         return rows;
