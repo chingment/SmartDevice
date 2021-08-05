@@ -192,7 +192,7 @@ public class InitDataActivity extends BaseFragmentActivity {
 
                         new Thread(new Runnable() {
                             public void run() {
-                                SystemClock.sleep(6000);
+                                //SystemClock.sleep(6000);
 
 
                                 setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_setting_end));
