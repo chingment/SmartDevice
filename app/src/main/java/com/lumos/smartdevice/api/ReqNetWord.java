@@ -1,9 +1,8 @@
 package com.lumos.smartdevice.api;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
-import com.lumos.smartdevice.api.rop.RopLockerBoxBelongToUser;
+import com.lumos.smartdevice.api.rop.RopLockerBoxDeleteBelongUser;
+import com.lumos.smartdevice.api.rop.RopLockerBoxSaveBelongUser;
 import com.lumos.smartdevice.api.rop.RopLockerBoxGetBelongUser;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
@@ -64,12 +63,17 @@ public class ReqNetWord implements IReqVersion{
     }
 
     @Override
-    public void lockerBoxBelongToUser(RopLockerBoxBelongToUser rop,final ReqHandler reqHandler) {
+    public void lockerBoxSaveBelongUser(RopLockerBoxSaveBelongUser rop, final ReqHandler reqHandler) {
 
     }
 
     @Override
     public void lockerBoxGetBelongUser(RopLockerBoxGetBelongUser rop,final ReqHandler reqHandler) {
+
+    }
+
+    @Override
+    public void lockerBoxDeleteBelongUser(RopLockerBoxDeleteBelongUser rop, final ReqHandler reqHandler) {
 
     }
 }

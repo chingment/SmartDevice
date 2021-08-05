@@ -401,12 +401,12 @@ public class DbManager {
         return rows;
     }
 
-    public int deleteLockBoxUser(String cabinetId,String slotId, String userId) {
+    public int deleteLockBoxUser(String cabinetId,String slotId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int rows = 0;
         if (db.isOpen()) {
 
-            rows = db.delete(LockerBoxUserDao.TABLE_NAME, LockerBoxUserDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUserDao.COLUMN_NAME_SLOT_ID + " = ? and " + LockerBoxUserDao.COLUMN_NAME_USER_ID + " = ?", new String[]{cabinetId, slotId, userId});
+            rows = db.delete(LockerBoxUserDao.TABLE_NAME, LockerBoxUserDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUserDao.COLUMN_NAME_SLOT_ID + " = ? ", new String[]{cabinetId, slotId});
         }
 
         return rows;
@@ -418,7 +418,7 @@ public class DbManager {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("select * from " + LockerBoxUserDao.TABLE_NAME + " where "+LockerBoxUserDao.COLUMN_NAME_CABINET_ID + " = ? and "+LockerBoxUserDao.COLUMN_NAME_USER_ID+" = ? ",new String[]{cabinetId,slotId});
+        Cursor cursor = db.rawQuery("select * from " + LockerBoxUserDao.TABLE_NAME + " where "+LockerBoxUserDao.COLUMN_NAME_CABINET_ID + " = ? and "+LockerBoxUserDao.COLUMN_NAME_SLOT_ID+" = ? ",new String[]{cabinetId,slotId});
         boolean exist = (cursor.getCount() > 0);
         if(exist){
 

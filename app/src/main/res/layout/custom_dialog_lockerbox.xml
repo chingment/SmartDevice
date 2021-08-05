@@ -101,8 +101,16 @@
 
                     <TextView
                         android:visibility="gone"
-                        android:id="@+id/tv_UserFullName"
-                        android:layout_width="match_parent"
+                        android:id="@+id/tv_UserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/field_value"
+                        android:textSize="@dimen/sp_14" />
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/tv_FullName"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/field_value"
                         android:textSize="@dimen/sp_14" />

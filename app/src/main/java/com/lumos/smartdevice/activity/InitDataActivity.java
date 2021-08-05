@@ -108,7 +108,7 @@ public class InitDataActivity extends BaseFragmentActivity {
             @Override
             public boolean onLongClick(View v) {
                 Intent intent = new Intent(getAppContext(), SmLoginActivity.class);
-                intent.putExtra("scene","init_data_help");
+                intent.putExtra("scene_mode","init_data_help");
                 startActivity(intent);
                 //finish();
                 return true;

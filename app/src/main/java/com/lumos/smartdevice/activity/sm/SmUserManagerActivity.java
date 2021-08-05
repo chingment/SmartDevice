@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -18,10 +17,9 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
-import com.lumos.smartdevice.api.rop.RopLockerBoxBelongToUser;
+import com.lumos.smartdevice.api.rop.RopLockerBoxSaveBelongUser;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
-import com.lumos.smartdevice.model.SceneParamBySelectUserBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.model.api.UserGetListResultBean;
 import com.lumos.smartdevice.model.api.UserSaveResultBean;
@@ -33,7 +31,9 @@ import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SmUserManagerActivity extends BaseFragmentActivity {
 
@@ -45,9 +45,10 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
     private LinearLayout ll_UsersEmpty;
     private SmUserAdapter lv_UsersAdapter;
 
-    private int activity_scene=1;//页面场景
+    private int scene_mode=1;//页面场景
 
-    private SceneParamBySelectUserBean sceneParamBySelectUser;
+    private Map<String,String> scene_param=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +56,13 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
 
         setNavHeaderBtnByGoBackIsVisible(true);
 
-        activity_scene = getIntent().getIntExtra("scene", 1);
+        scene_mode = getIntent().getIntExtra("scene_mode", 1);
 
-        if(activity_scene==1){
+        if(scene_mode==1){
             setNavHeaderTtile(R.string.aty_smusermanager_nav_title);
         }
-        else if(activity_scene==2) {
-            sceneParamBySelectUser = (SceneParamBySelectUserBean) getIntent().getSerializableExtra("scene_param");
+        else if(scene_mode==2) {
+            scene_param = (HashMap<String, String>) getIntent().getSerializableExtra("scene_param");
             setNavHeaderTtile(R.string.aty_smusermanager_nav_title_select_user);
         }
 
@@ -150,7 +151,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         lv_UsersData.setItemAnimator(new DefaultItemAnimator());
 
 
-        lv_UsersAdapter = new SmUserAdapter(activity_scene);
+        lv_UsersAdapter = new SmUserAdapter(scene_mode);
 
         lv_UsersAdapter.setOnClickListener(new SmUserAdapter.OnClickListener() {
             @Override
@@ -162,11 +163,12 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
             @Override
             public void onSelectClick(UserBean bean) {
 
-                RopLockerBoxBelongToUser rop=new RopLockerBoxBelongToUser();
-                rop.setDeviceId(sceneParamBySelectUser.getDeviceId());
-                rop.setCabinetId(sceneParamBySelectUser.getCabinetId());
-                rop.setSlotId(sceneParamBySelectUser.getSlotId());
-                ReqInterface.getInstance().lockerBoxBelongToUser(rop, new ReqHandler(){
+                RopLockerBoxSaveBelongUser rop=new RopLockerBoxSaveBelongUser();
+                rop.setDeviceId(scene_param.get("device_id"));
+                rop.setCabinetId(scene_param.get("cabinet_id"));
+                rop.setSlotId(scene_param.get("slot_id"));
+                rop.setUserId(bean.getUserId());
+                ReqInterface.getInstance().lockerBoxSaveBelongUser(rop, new ReqHandler(){
 
                     @Override
                     public void onBeforeSend() {

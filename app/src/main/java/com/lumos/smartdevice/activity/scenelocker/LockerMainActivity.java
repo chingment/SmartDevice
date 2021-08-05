@@ -41,7 +41,7 @@ public class LockerMainActivity  extends BaseFragmentActivity {
             @Override
             public boolean onLongClick(View v) {
                 Intent intent = new Intent(getAppContext(), SmLoginActivity.class);
-                intent.putExtra("scene","manager_center");
+                intent.putExtra("scene_mode","manager_center");
                 startActivity(intent);
                 //finish();
                 return true;

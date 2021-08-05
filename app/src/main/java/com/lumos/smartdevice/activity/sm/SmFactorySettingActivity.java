@@ -49,15 +49,15 @@ public class SmFactorySettingActivity extends BaseFragmentActivity implements Vi
 
     private void setNavAppSceneTips(){
 
-        String version_mode = DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
-        String scene_mode = DbManager.getInstance().getConfigValue(ConfigDao.FIELD_SCENE_MODE);
-        if (version_mode == null || version_mode.equals("0")) {
+        String app_version_mode = DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
+        String app_scene_mode = DbManager.getInstance().getConfigValue(ConfigDao.FIELD_SCENE_MODE);
+        if (app_version_mode == null || app_version_mode.equals("0")) {
             tv_Nav_AppScene_Tips.setText(R.string.aty_smfactorysetting_tips_nosetversion);
-        } else if (scene_mode == null || scene_mode.equals("0")) {
+        } else if (app_scene_mode == null || app_scene_mode.equals("0")) {
             tv_Nav_AppScene_Tips.setText(R.string.aty_smfactorysetting_tips_nosetscene);
         }
         else {
-            tv_Nav_AppScene_Tips.setText(ConfigDao.getSceneModeName(scene_mode)+"["+ConfigDao.getVersionModeName(version_mode)+"]");
+            tv_Nav_AppScene_Tips.setText(ConfigDao.getSceneModeName(app_scene_mode)+"["+ConfigDao.getVersionModeName(app_version_mode)+"]");
         }
     }
 

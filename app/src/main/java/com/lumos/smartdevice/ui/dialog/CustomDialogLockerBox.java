@@ -26,7 +26,8 @@ public class CustomDialogLockerBox extends Dialog {
     private View btn_Close;
 
     private TextView tv_BoxName;
-    private TextView tv_UserFullName;
+    private TextView tv_UserName;
+    private TextView tv_FullName;
     private TextView btn_SelectUser;
     private ImageView btn_DeleteUser;
 
@@ -47,7 +48,8 @@ public class CustomDialogLockerBox extends Dialog {
         });
 
         tv_BoxName = ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
-        tv_UserFullName=ViewHolder.get(mLayoutRes, R.id.tv_UserFullName);
+        tv_UserName=ViewHolder.get(mLayoutRes, R.id.tv_UserName);
+        tv_FullName=ViewHolder.get(mLayoutRes, R.id.tv_FullName);
         btn_DeleteUser=ViewHolder.get(mLayoutRes, R.id.btn_DeleteUser);
         btn_SelectUser = ViewHolder.get(mLayoutRes, R.id.btn_SelectUser);
         btn_SelectUser.setOnClickListener(new View.OnClickListener() {
@@ -100,11 +102,15 @@ public class CustomDialogLockerBox extends Dialog {
         if (user == null) {
             btn_SelectUser.setVisibility(View.VISIBLE);
             btn_DeleteUser.setVisibility(View.GONE);
-            tv_UserFullName.setVisibility(View.GONE);
+            tv_FullName.setVisibility(View.GONE);
+            tv_UserName.setVisibility(View.GONE);
         } else {
             btn_SelectUser.setVisibility(View.GONE);
             btn_DeleteUser.setVisibility(View.VISIBLE);
-            tv_UserFullName.setVisibility(View.VISIBLE);
+            tv_FullName.setVisibility(View.VISIBLE);
+            tv_UserName.setVisibility(View.VISIBLE);
+            tv_FullName.setText(user.getFullName());
+            tv_UserName.setText("["+user.getUserName()+"]");
         }
     }
 

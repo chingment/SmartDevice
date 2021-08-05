@@ -1,7 +1,8 @@
 package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
-import com.lumos.smartdevice.api.rop.RopLockerBoxBelongToUser;
+import com.lumos.smartdevice.api.rop.RopLockerBoxDeleteBelongUser;
+import com.lumos.smartdevice.api.rop.RopLockerBoxSaveBelongUser;
 import com.lumos.smartdevice.api.rop.RopLockerBoxGetBelongUser;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
@@ -18,9 +19,6 @@ import com.lumos.smartdevice.model.api.UserGetListResultBean;
 import com.lumos.smartdevice.model.api.UserSaveResultBean;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.utils.StringUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ReqStandAlone implements IReqVersion{
 
@@ -165,8 +163,13 @@ public class ReqStandAlone implements IReqVersion{
     }
 
     @Override
-    public void lockerBoxBelongToUser(RopLockerBoxBelongToUser rop,final ReqHandler reqHandler) {
+    public void lockerBoxSaveBelongUser(RopLockerBoxSaveBelongUser rop, final ReqHandler reqHandler) {
 
+        reqHandler.sendBeforeSendMessage();
+        ResultBean result = null;
+        long rows = DbManager.getInstance().savelockerBoxUser(rop.getCabinetId(), rop.getSlotId(),rop.getUserId());
+        result = new ResultBean<>(ResultCode.SUCCESS, "");
+        reqHandler.sendSuccessMessage(result.toJSONString());
     }
 
     @Override
@@ -175,6 +178,15 @@ public class ReqStandAlone implements IReqVersion{
         ResultBean result = null;
         UserBean user = DbManager.getInstance().getLockerBoxUser(rop.getCabinetId(), rop.getSlotId());
         result = new ResultBean<>(ResultCode.SUCCESS, "", user);
+        reqHandler.sendSuccessMessage(result.toJSONString());
+    }
+
+    @Override
+    public void lockerBoxDeleteBelongUser(RopLockerBoxDeleteBelongUser rop, final ReqHandler reqHandler) {
+        reqHandler.sendBeforeSendMessage();
+        ResultBean result = null;
+        long rows = DbManager.getInstance().deleteLockBoxUser(rop.getCabinetId(), rop.getSlotId());
+        result = new ResultBean<>(ResultCode.SUCCESS, "");
         reqHandler.sendSuccessMessage(result.toJSONString());
     }
 }

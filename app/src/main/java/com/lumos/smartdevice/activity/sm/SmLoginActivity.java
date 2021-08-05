@@ -37,8 +37,8 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
     private EditText et_UserName;
     private EditText et_Password;
     private TextView tv_Scene;
-    private String scene;//登录场景
-    private String version_mode;//版本模式
+    private String scene_mode;//登录场景
+    private String app_version_mode;//版本模式
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +47,8 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
         setNavHeaderTtile(R.string.aty_smlogin_nav_title);
         setNavHeaderBtnByGoBackIsVisible(true);
 
-        scene = getIntent().getStringExtra("scene");
-        version_mode= DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
+        scene_mode = getIntent().getStringExtra("scene_mode");
+        app_version_mode= DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
 
         initView();
         initEvent();
@@ -73,27 +73,27 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
     private void initEvent() {
         btn_LoginByAccount.setOnClickListener(this);
 
-        if(scene!="1"){
-            LongClickUtil.setLongClick(new Handler(), btn_HelpTool, 500, new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    if(!scene.equals("init_data_help")) {
-                        Intent intent = new Intent(getAppContext(), SmLoginActivity.class);
-                        intent.putExtra("scene", "init_data_help");
-                        startActivity(intent);
-                    }
-                    //finish();
-                    return true;
+
+        LongClickUtil.setLongClick(new Handler(), btn_HelpTool, 500, new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (!scene_mode.equals("init_data_help")) {
+                    Intent intent = new Intent(getAppContext(), SmLoginActivity.class);
+                    intent.putExtra("scene", "init_data_help");
+                    startActivity(intent);
                 }
-            });
-        }
+                //finish();
+                return true;
+            }
+        });
+
     }
 
     private void initData() {
 
-        String lastUsername=AppCacheManager.getLastUserName(scene);
+        String lastUsername=AppCacheManager.getLastUserName(scene_mode);
         et_UserName.setText(lastUsername);
-        switch (scene){
+        switch (scene_mode){
             case "init_data_help":
                 tv_Scene.setText(R.string.aty_smlogin_scene_init_data_help);
                 break;
@@ -133,7 +133,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
             return;
         }
 
-        switch (scene){
+        switch (scene_mode){
             case "init_data_help":
 
                 UserBean user1=DbManager.getInstance().checkUserPassword(username,password,"1");
@@ -143,7 +143,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                     return;
                 }
 
-                AppCacheManager.setLastUserName(scene,username);
+                AppCacheManager.setLastUserName(scene_mode,username);
                 AppCacheManager.setCurrentUser(user1);
                 Intent  var1 = new Intent(getAppContext(), SmHelpToolActivity.class);
                 startActivity(var1);
@@ -179,7 +179,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                         if(rt.getCode()== ResultCode.SUCCESS) {
                             OwnLoginResultBean d=rt.getData();
 
-                            AppCacheManager.setLastUserName(scene,rt.getData().getUserName());
+                            AppCacheManager.setLastUserName(scene_mode,rt.getData().getUserName());
 
                             UserBean user=new UserBean();
                             user.setUserId(d.getUserId());

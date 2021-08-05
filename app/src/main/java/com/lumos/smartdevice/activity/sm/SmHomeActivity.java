@@ -175,7 +175,7 @@ public class SmHomeActivity extends BaseFragmentActivity {
 
     private void gdvUserManager(){
         Intent intent = new Intent(SmHomeActivity.this, SmUserManagerActivity.class);
-        intent.putExtra("scene",1);
+        intent.putExtra("scene_mode",1);
         startActivity(intent);
     }
 

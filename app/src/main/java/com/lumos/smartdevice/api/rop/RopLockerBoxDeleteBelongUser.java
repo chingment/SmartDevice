@@ -1,10 +1,9 @@
 package com.lumos.smartdevice.api.rop;
 
-public class RopLockerBoxBelongToUser {
+public class RopLockerBoxDeleteBelongUser {
     private String deviceId;
     private String cabinetId;
     private String slotId;
-    private String userId;
 
     public String getDeviceId() {
         return deviceId;
@@ -28,13 +27,5 @@ public class RopLockerBoxBelongToUser {
 
     public void setSlotId(String slotId) {
         this.slotId = slotId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 }

@@ -32,10 +32,10 @@ public class SmUserAdapter extends RefreshAdapter {
     private List<UserBean> beans = new ArrayList<>();
     private LayoutInflater inflater;
 
-    private int scene=1;
+    private int scene_mode=1;
 
-    public SmUserAdapter(int scene) {
-        this.scene = scene;
+    public SmUserAdapter(int scene_mode) {
+        this.scene_mode = scene_mode;
     }
 
     public void setData(List<UserBean> beans, Context context) {
@@ -106,10 +106,10 @@ public class SmUserAdapter extends RefreshAdapter {
         tv_UserName.setText(bean.getUserName());
         tv_FullName.setText(bean.getFullName());
 
-        if(scene==1){
+        if(scene_mode==1){
             btn_SelectUser.setVisibility(View.GONE);
         }
-        else if(scene==2) {
+        else if(scene_mode==2) {
             btn_SelectUser.setVisibility(View.VISIBLE);
             btn_SelectUser.setTag(bean);
             btn_SelectUser.setOnClickListener(new View.OnClickListener() {
