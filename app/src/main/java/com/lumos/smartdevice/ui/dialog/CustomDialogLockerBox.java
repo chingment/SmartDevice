@@ -109,8 +109,8 @@ public class CustomDialogLockerBox extends Dialog {
             btn_DeleteUser.setVisibility(View.VISIBLE);
             tv_FullName.setVisibility(View.VISIBLE);
             tv_UserName.setVisibility(View.VISIBLE);
-            tv_FullName.setText(user.getFullName());
-            tv_UserName.setText("["+user.getUserName()+"]");
+            tv_FullName.setText("["+user.getFullName()+"]");
+            tv_UserName.setText(user.getUserName());
         }
     }
 

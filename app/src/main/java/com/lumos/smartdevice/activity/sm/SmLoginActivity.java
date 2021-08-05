@@ -79,7 +79,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
             public boolean onLongClick(View v) {
                 if (!scene_mode.equals("init_data_help")) {
                     Intent intent = new Intent(getAppContext(), SmLoginActivity.class);
-                    intent.putExtra("scene", "init_data_help");
+                    intent.putExtra("scene_mode", "init_data_help");
                     startActivity(intent);
                 }
                 //finish();
