@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.db.UserDao;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.refreshview.MyViewHolder;
 import com.lumos.smartdevice.ui.refreshview.RefreshAdapter;
@@ -30,6 +31,12 @@ public class SmUserAdapter extends RefreshAdapter {
     private Context context;
     private List<UserBean> beans = new ArrayList<>();
     private LayoutInflater inflater;
+
+    private int scene=1;
+
+    public SmUserAdapter(int scene) {
+        this.scene = scene;
+    }
 
     public void setData(List<UserBean> beans, Context context) {
         this.beans = beans;
@@ -56,21 +63,38 @@ public class SmUserAdapter extends RefreshAdapter {
     public void onBindItemHolder(final RecyclerView.ViewHolder holder, int position) {
 
         final UserBean bean = beans.get(position);
+
         String avatar = bean.getAvatar();
 
-        holder.itemView.setTag(bean);
+        View ll_Info = holder.itemView.findViewById(R.id.ll_Info);
+        View ll_DividerLine = holder.itemView.findViewById(R.id.ll_DividerLine);
+        ImageView img_Avatar = holder.itemView.findViewById(R.id.img_Avatar);
+        TextView tv_UserName = holder.itemView.findViewById(R.id.tv_UserName);
+        TextView tv_FullName = holder.itemView.findViewById(R.id.tv_FullName);
+        TextView btn_SelectUser = holder.itemView.findViewById(R.id.btn_SelectUser);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        ll_Info.setTag(bean);
+        ll_Info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 UserBean user = (UserBean) view.getTag();
                 if (onClickListener != null) {
-                    onClickListener.onClick(user);
+                    onClickListener.onItemClick(user);
                 }
             }
         });
 
-        View ll_DividerLine = holder.itemView.findViewById(R.id.ll_DividerLine);
+
+        img_Avatar.setTag(bean);
+        img_Avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UserBean user = (UserBean) view.getTag();
+                if (onClickListener != null) {
+                    onClickListener.onItemClick(user);
+                }
+            }
+        });
 
         if((beans.size()-position-1)==0){
             ll_DividerLine.setVisibility(View.INVISIBLE);
@@ -79,13 +103,25 @@ public class SmUserAdapter extends RefreshAdapter {
             ll_DividerLine.setVisibility(View.VISIBLE);
         }
 
-        ImageView img_Avatar = holder.itemView.findViewById(R.id.img_Avatar);
-
-        TextView tv_UserName = holder.itemView.findViewById(R.id.tv_UserName);
-        TextView tv_FullName = holder.itemView.findViewById(R.id.tv_FullName);
-
         tv_UserName.setText(bean.getUserName());
         tv_FullName.setText(bean.getFullName());
+
+        if(scene==1){
+            btn_SelectUser.setVisibility(View.GONE);
+        }
+        else if(scene==2) {
+            btn_SelectUser.setVisibility(View.VISIBLE);
+            btn_SelectUser.setTag(bean);
+            btn_SelectUser.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    UserBean user = (UserBean) view.getTag();
+                    if (onClickListener != null) {
+                        onClickListener.onSelectClick(user);
+                    }
+                }
+            });
+        }
 
         if (!StringUtil.isEmptyNotNull(avatar)) {
 
@@ -107,7 +143,8 @@ public class SmUserAdapter extends RefreshAdapter {
     }
 
     public interface OnClickListener {
-        void onClick(UserBean bean);
+        void onItemClick(UserBean bean);
+        void onSelectClick(UserBean bean);
     }
 
     @Override

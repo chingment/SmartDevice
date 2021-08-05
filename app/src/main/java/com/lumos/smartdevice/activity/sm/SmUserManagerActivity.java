@@ -1,14 +1,12 @@
 package com.lumos.smartdevice.activity.sm;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,19 +25,17 @@ import com.lumos.smartdevice.model.api.UserGetListResultBean;
 import com.lumos.smartdevice.model.api.UserSaveResultBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogUserEdit;
-import com.lumos.smartdevice.ui.my.MyRecycleViewDivider;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class SmUserManagerActivity extends BaseFragmentActivity {
 
-    private TextView btn_NewUser;
+    private ImageView btn_NewUser;
     private CustomDialogUserEdit dialog_UserEdit;
     private SuperRefreshLayout lv_UsersRefresh;
     private RecyclerView lv_UsersData;
@@ -47,13 +43,23 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
     private LinearLayout ll_UsersEmpty;
     private SmUserAdapter lv_UsersAdapter;
 
+    private int activity_scene=1;//页面场景
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smusermanager);
 
-        setNavHeaderTtile(R.string.aty_smusermanager_nav_title);
         setNavHeaderBtnByGoBackIsVisible(true);
+
+        activity_scene = getIntent().getIntExtra("scene", 1);
+
+        if(activity_scene==1){
+            setNavHeaderTtile(R.string.aty_smusermanager_nav_title);
+        }
+        else if(activity_scene==2) {
+            setNavHeaderTtile(R.string.aty_smusermanager_nav_title_select_user);
+        }
 
         initView();
         initEvent();
@@ -140,13 +146,18 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         lv_UsersData.setItemAnimator(new DefaultItemAnimator());
 
 
-        lv_UsersAdapter = new SmUserAdapter();
+        lv_UsersAdapter = new SmUserAdapter(activity_scene);
 
         lv_UsersAdapter.setOnClickListener(new SmUserAdapter.OnClickListener() {
             @Override
-            public void onClick(UserBean bean) {
+            public void onItemClick(UserBean bean) {
                 dialog_UserEdit.setData(bean);
                 dialog_UserEdit.show();
+            }
+
+            @Override
+            public void onSelectClick(UserBean bean) {
+
             }
         });
 

@@ -81,6 +81,15 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         tl_Boxs = findViewById(R.id.tl_Boxs);
         dialog_CabinetConfig = new CustomDialogCabinetConfig(SmLockerBoxActivity.this);
         dialog_LockerBox=new CustomDialogLockerBox(SmLockerBoxActivity.this);
+        dialog_LockerBox.setOnClickListener(new CustomDialogLockerBox.OnClickListener() {
+            @Override
+            public void onSelectUser() {
+
+                Intent intent = new Intent(SmLockerBoxActivity.this, SmUserManagerActivity.class);
+                intent.putExtra("scene",2);
+                startActivity(intent);
+            }
+        });
 
     }
 

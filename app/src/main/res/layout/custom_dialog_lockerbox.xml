@@ -7,9 +7,9 @@
 
     <LinearLayout
 
-        android:layout_width="@dimen/size_200"
+        android:layout_width="@dimen/size_300"
         android:padding="@dimen/size_10"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/size_300"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@drawable/dialog"
@@ -99,18 +99,16 @@
                     >
 
                     <TextView
-                        android:id="@+id/tv_RenLian"
+                        android:id="@+id/btn_SelectUser"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=""
-                        android:textColor="@color/field_value"
+                        android:text="选择"
+                        android:textColor="@color/colorPrimary"
                         android:textSize="@dimen/sp_14" />
 
 
                 </LinearLayout>
             </LinearLayout>
-
-
 
 
         </LinearLayout>

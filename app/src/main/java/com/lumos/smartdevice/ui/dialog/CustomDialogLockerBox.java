@@ -25,6 +25,7 @@ public class CustomDialogLockerBox extends Dialog {
 
     private TextView tv_BoxName;
 
+    private TextView btn_SelectUser;
     public CustomDialogLockerBox(Context context) {
         super(context, R.style.custom_dialog);
         mThis = this;
@@ -39,7 +40,16 @@ public class CustomDialogLockerBox extends Dialog {
             }
         });
 
-        tv_BoxName= ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
+        tv_BoxName = ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
+        btn_SelectUser = ViewHolder.get(mLayoutRes, R.id.btn_SelectUser);
+        btn_SelectUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onClickListener!=null) {
+                    onClickListener.onSelectUser();
+                }
+            }
+        });
     }
 
     @Override
@@ -53,6 +63,16 @@ public class CustomDialogLockerBox extends Dialog {
         
         tv_BoxName.setText(box_Prams[2]);
 
+    }
+
+    private OnClickListener onClickListener;
+
+    public void  setOnClickListener(OnClickListener onClickListener){
+        this.onClickListener=onClickListener;
+    }
+
+    public  interface OnClickListener{
+        void onSelectUser();
     }
 
 
