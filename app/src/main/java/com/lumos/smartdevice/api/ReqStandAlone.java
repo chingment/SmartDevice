@@ -25,9 +25,9 @@ public class ReqStandAlone implements IReqVersion{
     @Override
     public void deviceInitData(RopDeviceInitData rop, final ReqHandler reqHandler) {
 
+        reqHandler.sendBeforeSendMessage();
 
-        ResultBean result = null;
-
+        ResultBean result;
 
         RetDeviceInitData ret = new RetDeviceInitData();
 
@@ -57,7 +57,7 @@ public class ReqStandAlone implements IReqVersion{
 
         reqHandler.sendBeforeSendMessage();
 
-        ResultBean result = null;
+        ResultBean result;
 
         UserBean user=DbManager.getInstance().checkUserPassword(rop.getUserName(), rop.getPassword(), "2");
 
@@ -72,6 +72,7 @@ public class ReqStandAlone implements IReqVersion{
         ret.setUserId(user.getUserId());
         ret.setUserName(user.getUserName());
         ret.setFullName(user.getFullName());
+
         result = new ResultBean<>(ResultCode.SUCCESS, "登录成功",ret);
 
         reqHandler.sendSuccessMessage(result.toJSONString());
@@ -82,7 +83,6 @@ public class ReqStandAlone implements IReqVersion{
     public void ownLogout(RopOwnLogout rop, final ReqHandler reqHandler) {
 
         reqHandler.sendBeforeSendMessage();
-
 
         RetOwnLogout ret=new RetOwnLogout();
 
@@ -166,7 +166,7 @@ public class ReqStandAlone implements IReqVersion{
     public void lockerBoxSaveBelongUser(RopLockerBoxSaveBelongUser rop, final ReqHandler reqHandler) {
 
         reqHandler.sendBeforeSendMessage();
-        ResultBean result = null;
+        ResultBean result;
         long rows = DbManager.getInstance().savelockerBoxUser(rop.getCabinetId(), rop.getSlotId(),rop.getUserId());
         result = new ResultBean<>(ResultCode.SUCCESS, "");
         reqHandler.sendSuccessMessage(result.toJSONString());
@@ -175,7 +175,7 @@ public class ReqStandAlone implements IReqVersion{
     @Override
     public void lockerBoxGetBelongUser(RopLockerBoxGetBelongUser rop, final ReqHandler reqHandler) {
         reqHandler.sendBeforeSendMessage();
-        ResultBean result = null;
+        ResultBean result;
         UserBean user = DbManager.getInstance().getLockerBoxUser(rop.getCabinetId(), rop.getSlotId());
         result = new ResultBean<>(ResultCode.SUCCESS, "", user);
         reqHandler.sendSuccessMessage(result.toJSONString());
@@ -184,7 +184,7 @@ public class ReqStandAlone implements IReqVersion{
     @Override
     public void lockerBoxDeleteBelongUser(RopLockerBoxDeleteBelongUser rop, final ReqHandler reqHandler) {
         reqHandler.sendBeforeSendMessage();
-        ResultBean result = null;
+        ResultBean result;
         long rows = DbManager.getInstance().deleteLockBoxUser(rop.getCabinetId(), rop.getSlotId(),rop.getUserId());
         result = new ResultBean<>(ResultCode.SUCCESS, "");
         reqHandler.sendSuccessMessage(result.toJSONString());
