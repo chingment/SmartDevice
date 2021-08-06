@@ -94,12 +94,12 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         dialog_LockerBox = new CustomDialogLockerBox(SmLockerBoxActivity.this);
         dialog_LockerBox.setOnClickListener(new CustomDialogLockerBox.OnClickListener() {
             @Override
-            public void onGoSelectUser(String cabinetId,String slotId) {
+            public void onGoSelectUser(String deviceId, String cabinetId,String slotId) {
 
                 Intent intent = new Intent(SmLockerBoxActivity.this, SmUserManagerActivity.class);
                 intent.putExtra("scene_mode", 2);
                 HashMap<String, String> scene_param=new HashMap<String, String>();
-                scene_param.put("device_id",device.getDeviceId());
+                scene_param.put("device_id",deviceId);
                 scene_param.put("cabinet_id",cabinetId);
                 scene_param.put("slot_id",slotId);
 
@@ -108,10 +108,10 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             }
 
             @Override
-            public void onDeleteUser(String cabinetId,String slotId,String userId) {
+            public void onDeleteUser( String deviceId, String cabinetId,String slotId,String userId) {
 
                 RopLockerBoxDeleteBelongUser rop=new RopLockerBoxDeleteBelongUser();
-                rop.setDeviceId(device.getDeviceId());
+                rop.setDeviceId(deviceId);
                 rop.setCabinetId(cabinetId);
                 rop.setSlotId(slotId);
                 rop.setUserId(userId);
@@ -136,7 +136,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                                 });
 
                                 if (rt.getCode() == ResultCode.SUCCESS) {
-                                   lockerBoxGetBelongUser(device.getDeviceId(),dialog_LockerBox.getCabinetId(),dialog_LockerBox.getSlotId());
+                                   lockerBoxGetBelongUser(dialog_LockerBox.getDeviceId(),dialog_LockerBox.getCabinetId(),dialog_LockerBox.getSlotId());
                                 }
                             }
 
@@ -243,7 +243,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                         @Override
                         public void onClick(View v) {
                             String l_Slot_Id = v.getTag().toString();
-                            dialog_LockerBox.setLockerBox(cur_Cabinet, l_Slot_Id);
+                            dialog_LockerBox.setLockerBox(device, cur_Cabinet, l_Slot_Id);
                             lockerBoxGetBelongUser(device.getDeviceId(), cur_Cabinet.getCabinetId(),l_Slot_Id);
                             dialog_LockerBox.show();
                         }
@@ -312,7 +312,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         super.onResume();
 
         if(dialog_LockerBox!=null) {
-            lockerBoxGetBelongUser(device.getDeviceId(), dialog_LockerBox.getCabinetId(), dialog_LockerBox.getSlotId());
+            lockerBoxGetBelongUser(dialog_LockerBox.getDeviceId(), dialog_LockerBox.getCabinetId(), dialog_LockerBox.getSlotId());
         }
     }
 

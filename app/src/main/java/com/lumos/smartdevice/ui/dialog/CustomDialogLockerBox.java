@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.CabinetBean;
+import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.ViewHolder;
 
@@ -31,6 +32,7 @@ public class CustomDialogLockerBox extends Dialog {
     private TextView btn_SelectUser;
     private ImageView btn_DeleteUser;
 
+    private DeviceBean device;
     private String cabinetId;
     private String slotId;
     private String userId;
@@ -49,15 +51,15 @@ public class CustomDialogLockerBox extends Dialog {
         });
 
         tv_BoxName = ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
-        tv_UserName=ViewHolder.get(mLayoutRes, R.id.tv_UserName);
-        tv_FullName=ViewHolder.get(mLayoutRes, R.id.tv_FullName);
-        btn_DeleteUser=ViewHolder.get(mLayoutRes, R.id.btn_DeleteUser);
+        tv_UserName = ViewHolder.get(mLayoutRes, R.id.tv_UserName);
+        tv_FullName = ViewHolder.get(mLayoutRes, R.id.tv_FullName);
+        btn_DeleteUser = ViewHolder.get(mLayoutRes, R.id.btn_DeleteUser);
         btn_SelectUser = ViewHolder.get(mLayoutRes, R.id.btn_SelectUser);
         btn_SelectUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(onClickListener!=null) {
-                    onClickListener.onGoSelectUser(cabinetId,slotId);
+                if (onClickListener != null) {
+                    onClickListener.onGoSelectUser(device.getDeviceId(), cabinetId, slotId);
                 }
             }
         });
@@ -65,8 +67,8 @@ public class CustomDialogLockerBox extends Dialog {
         btn_DeleteUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(onClickListener!=null) {
-                    onClickListener.onDeleteUser(cabinetId,slotId,userId);
+                if (onClickListener != null) {
+                    onClickListener.onDeleteUser(device.getDeviceId(), cabinetId, slotId, userId);
                 }
             }
         });
@@ -78,6 +80,10 @@ public class CustomDialogLockerBox extends Dialog {
         this.setContentView(mLayoutRes);
     }
 
+    public String getDeviceId() {
+        return device == null ? null : device.getDeviceId();
+    }
+
     public String getCabinetId(){
         return cabinetId;
     }
@@ -86,8 +92,9 @@ public class CustomDialogLockerBox extends Dialog {
         return slotId;
     }
 
-    public void setLockerBox(CabinetBean cabinet,String slotId) {
+    public void setLockerBox(DeviceBean device, CabinetBean cabinet, String slotId) {
 
+        this.device = device;
         this.cabinetId = cabinet.getCabinetId();
         this.slotId = slotId;
 
@@ -123,8 +130,8 @@ public class CustomDialogLockerBox extends Dialog {
     }
 
     public  interface OnClickListener{
-        void onGoSelectUser(String cabinetId,String slotId);
-        void onDeleteUser(String cabinetId,String slotId,String userId);
+        void onGoSelectUser(String deviceId, String cabinetId,String slotId);
+        void onDeleteUser(String deviceId, String cabinetId,String slotId,String userId);
     }
 
 
