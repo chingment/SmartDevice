@@ -23,12 +23,12 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LogTipsBean;
-import com.lumos.smartdevice.model.api.DeviceInitDataResultBean;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
@@ -166,12 +166,12 @@ public class InitDataActivity extends BaseFragmentActivity {
                     case WHAT_READ_CONFIG_SUCCESS:
                         setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_setting_config));
 
-                        if (bundle.getSerializable("deviceInitDataResultBean") == null) {
+                        if (bundle.getSerializable("ret_device_init_data") == null) {
                             setHandleMessage(WHAT_SET_CONFIG_FALURE, getAppContext().getString(R.string.aty_initdata_tips_setting_config_is_null));
                             return false;
                         }
 
-                        DeviceInitDataResultBean initData = (DeviceInitDataResultBean) bundle.getSerializable("deviceInitDataResultBean");//全局数据
+                        RetDeviceInitData initData = (RetDeviceInitData) bundle.getSerializable("ret_device_init_data");//全局数据
 
                         if (initData == null) {
                             setHandleMessage(WHAT_SET_CONFIG_FALURE, getAppContext().getString(R.string.aty_initdata_tips_setting_object_is_null));
@@ -250,13 +250,13 @@ public class InitDataActivity extends BaseFragmentActivity {
 
     }
 
-    public void setHandleMessage(int what, String tips, DeviceInitDataResultBean deviceInitDataResult) {
+    public void setHandleMessage(int what, String tips, RetDeviceInitData retDeviceInitData) {
         final Message m = new Message();
         m.what = what;
         Bundle bundle = new Bundle();
         bundle.putString("tips", tips);
-        if(deviceInitDataResult!=null) {
-            bundle.putSerializable("deviceInitDataResultBean", deviceInitDataResult);
+        if(retDeviceInitData!=null) {
+            bundle.putSerializable("ret_device_init_data", retDeviceInitData);
         }
         m.setData(bundle);
         handler_msg.sendMessage(m);
@@ -304,7 +304,7 @@ public class InitDataActivity extends BaseFragmentActivity {
             public void onSuccess(String response) {
                 super.onSuccess(response);
 
-                ResultBean<DeviceInitDataResultBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<DeviceInitDataResultBean>>() {
+                ResultBean<RetDeviceInitData> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetDeviceInitData>>() {
                 });
 
                 if(rt.getCode()==ResultCode.SUCCESS){

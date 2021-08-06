@@ -17,12 +17,12 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetUserGetList;
+import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopLockerBoxSaveBelongUser;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.model.UserBean;
-import com.lumos.smartdevice.model.api.UserGetListResultBean;
-import com.lumos.smartdevice.model.api.UserSaveResultBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogUserEdit;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
@@ -124,7 +124,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                     @Override
                     public void onSuccess(String response) {
                         super.onSuccess(response);
-                        ResultBean<UserSaveResultBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<UserSaveResultBean>>() {
+                        ResultBean<RetUserSave> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetUserSave>>() {
                         });
 
                         showToast(rt.getMsg());
@@ -252,11 +252,11 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
             @Override
             public void onSuccess(String response) {
                 super.onSuccess(response);
-                ResultBean<UserGetListResultBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<UserGetListResultBean>>() {
+                ResultBean<RetUserGetList> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetUserGetList>>() {
                 });
 
                 if(rt.getCode()== ResultCode.SUCCESS) {
-                    UserGetListResultBean d=rt.getData();
+                    RetUserGetList d=rt.getData();
 
                     List<UserBean> users = d.getItems();
 

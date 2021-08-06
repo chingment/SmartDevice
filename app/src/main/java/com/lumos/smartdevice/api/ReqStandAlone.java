@@ -1,5 +1,10 @@
 package com.lumos.smartdevice.api;
 
+import com.lumos.smartdevice.api.rop.RetDeviceInitData;
+import com.lumos.smartdevice.api.rop.RetOwnLogin;
+import com.lumos.smartdevice.api.rop.RetOwnLogout;
+import com.lumos.smartdevice.api.rop.RetUserGetList;
+import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopLockerBoxDeleteBelongUser;
 import com.lumos.smartdevice.api.rop.RopLockerBoxSaveBelongUser;
@@ -12,11 +17,6 @@ import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.PageDataBean;
 import com.lumos.smartdevice.model.UserBean;
-import com.lumos.smartdevice.model.api.DeviceInitDataResultBean;
-import com.lumos.smartdevice.model.api.OwnLoginResultBean;
-import com.lumos.smartdevice.model.api.OwnLogoutResultBean;
-import com.lumos.smartdevice.model.api.UserGetListResultBean;
-import com.lumos.smartdevice.model.api.UserSaveResultBean;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.utils.StringUtil;
 
@@ -29,7 +29,7 @@ public class ReqStandAlone implements IReqVersion{
         ResultBean result = null;
 
 
-        DeviceInitDataResultBean rt = new DeviceInitDataResultBean();
+        RetDeviceInitData ret = new RetDeviceInitData();
 
         if (rop.getSceneMode().equals(AppVar.SCENE_MODE_1)) {
 
@@ -39,9 +39,9 @@ public class ReqStandAlone implements IReqVersion{
             device.setVersionMode(rop.getVesionMode());
             device.setCabinets(DbManager.getInstance().getCabinets());
 
-            rt.setDevice(device);
+            ret.setDevice(device);
 
-            result = new ResultBean<>(ResultCode.SUCCESS, "获取成功", rt);
+            result = new ResultBean<>(ResultCode.SUCCESS, "获取成功", ret);
 
         } else {
 
@@ -68,7 +68,7 @@ public class ReqStandAlone implements IReqVersion{
         }
 
 
-        OwnLoginResultBean ret=new OwnLoginResultBean();
+        RetOwnLogin ret=new RetOwnLogin();
         ret.setUserId(user.getUserId());
         ret.setUserName(user.getUserName());
         ret.setFullName(user.getFullName());
@@ -84,7 +84,7 @@ public class ReqStandAlone implements IReqVersion{
         reqHandler.sendBeforeSendMessage();
 
 
-        OwnLogoutResultBean ret=new OwnLogoutResultBean();
+        RetOwnLogout ret=new RetOwnLogout();
 
         ret.setUserId(rop.getUserId());
 
@@ -141,7 +141,7 @@ public class ReqStandAlone implements IReqVersion{
         }
 
 
-        UserSaveResultBean ret = new UserSaveResultBean();
+        RetUserSave ret = new RetUserSave();
 
         ResultBean result = new ResultBean<>(ResultCode.SUCCESS, "保存成功", ret);
 
@@ -153,7 +153,7 @@ public class ReqStandAlone implements IReqVersion{
     public void userGetList(RopUserGetList rop, final ReqHandler reqHandler) {
         reqHandler.sendBeforeSendMessage();
         ResultBean result = null;
-        UserGetListResultBean ret = new UserGetListResultBean();
+        RetUserGetList ret = new RetUserGetList();
         PageDataBean<UserBean> users = DbManager.getInstance().GetUsers(rop.getPageIndex(), rop.getPageSize(), "3");
         ret.setTotal(users.getTotal());
         ret.setPageSize(users.getPageSize());

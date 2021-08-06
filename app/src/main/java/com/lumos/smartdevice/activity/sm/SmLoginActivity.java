@@ -18,11 +18,11 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetOwnLogin;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.UserBean;
-import com.lumos.smartdevice.model.api.OwnLoginResultBean;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
@@ -173,11 +173,11 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                     @Override
                     public void onSuccess(String response) {
                         super.onSuccess(response);
-                        ResultBean<OwnLoginResultBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<OwnLoginResultBean>>() {
+                        ResultBean<RetOwnLogin> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetOwnLogin>>() {
                         });
 
                         if(rt.getCode()== ResultCode.SUCCESS) {
-                            OwnLoginResultBean d=rt.getData();
+                            RetOwnLogin d=rt.getData();
 
                             AppCacheManager.setLastUserName(scene_mode,rt.getData().getUserName());
 
