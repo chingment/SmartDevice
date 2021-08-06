@@ -189,10 +189,10 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
         tv_CabinetName.setText(cur_Cabinet.getCabinetId());
 
-        drawsBoxs(cur_Cabinet.getLayout());
+        drawsLayout(cur_Cabinet.getLayout());
     }
 
-    public void drawsBoxs(String json_layout) {
+    public void drawsLayout(String json_layout) {
 
 
         List<List<String>> layout = JSON.parseObject(json_layout, new TypeReference< List<List<String>>>() {});
@@ -217,23 +217,22 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             for (int j = 0; j < colsSize; j++) {
                 //tv用于显示
 
-                String box_Id=cols.get(j);
+                String col=cols.get(j);
+                String slot_Id=col;
+                String[] col_Prams=col.split("-");
 
-                String[] box_Prams=box_Id.split("-");
-
-                String id=box_Prams[0];
-                String plate=box_Prams[1];
-                String name=box_Prams[2];
-                String isUse=box_Prams[3];
+                String id=col_Prams[0];
+                String plate=col_Prams[1];
+                String name=col_Prams[2];
+                String isUse=col_Prams[3];
 
                 final View convertView = LayoutInflater.from(SmLockerBoxActivity.this).inflate(R.layout.item_list_lockerbox, tableRow, false);
-
 
                 TextView tv_Name = ViewHolder.get(convertView, R.id.tv_Name);
 
                 tv_Name.setText(name);
 
-                convertView.setTag(box_Id);
+                convertView.setTag(slot_Id);
 
                 if(isUse.equals("1")){
                     convertView.setVisibility(View.INVISIBLE);
