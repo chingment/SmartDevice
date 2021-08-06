@@ -1,12 +1,9 @@
 package com.lumos.smartdevice.activity.scenelocker;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.lumos.smartdevice.R;
@@ -15,8 +12,8 @@ import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
 
 public class LockerMainActivity  extends BaseFragmentActivity {
-    private static final String TAG = "LockerMainActivity";
 
+    private static final String TAG = "LockerMainActivity";
     private RelativeLayout lyt_Body;
 
     @Override
