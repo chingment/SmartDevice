@@ -16,14 +16,14 @@ import com.lumos.smartdevice.ui.ViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SmLockerBoxCabinetSelectAdapter extends BaseAdapter {
+public class SmCabinetNameAdapter extends BaseAdapter {
 
-    private static final String TAG = "SmLockerBoxCabinetSelectAdapter";
+    private static final String TAG = "SmCabinetNameAdapter";
     private Context context;
     private List<CabinetBean> items = new ArrayList<>();
     private int current_position;
 
-    public SmLockerBoxCabinetSelectAdapter(Context context, List<CabinetBean> items, int position) {
+    public SmCabinetNameAdapter(Context context, List<CabinetBean> items, int position) {
         this.context = context;
         this.items = items;
         this.current_position = position;

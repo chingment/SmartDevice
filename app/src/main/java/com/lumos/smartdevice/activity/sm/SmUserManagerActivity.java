@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SmUserManagerActivity extends BaseFragmentActivity {
-
+    private static final String TAG = "SmUserManagerActivity";
     private ImageView btn_NewUser;
     private CustomDialogUserEdit dialog_UserEdit;
     private SuperRefreshLayout lv_UsersRefresh;

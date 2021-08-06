@@ -16,7 +16,7 @@ import java.util.List;
 
 public class LogTipsAdapter extends BaseAdapter {
 
-    private static final String TAG = "LogAdapter";
+    private static final String TAG = "LogTipsAdapter";
     private Context context;
     private List<LogTipsBean> items;
 

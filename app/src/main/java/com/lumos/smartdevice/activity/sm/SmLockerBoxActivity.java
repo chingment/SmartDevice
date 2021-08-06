@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.adapter.SmLockerBoxCabinetSelectAdapter;
+import com.lumos.smartdevice.adapter.SmCabinetNameAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SmLockerBoxActivity extends BaseFragmentActivity {
-
+    private static final String TAG = "SmLockerBoxActivity";
     private final int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
     private final int MP = ViewGroup.LayoutParams.MATCH_PARENT;
 
@@ -184,7 +184,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         if (cur_Cabinet == null)
             return;
 
-        SmLockerBoxCabinetSelectAdapter list_cabinet_adapter = new SmLockerBoxCabinetSelectAdapter(getAppContext(), cabinets, cur_Cabinet_Position);
+        SmCabinetNameAdapter list_cabinet_adapter = new SmCabinetNameAdapter(getAppContext(), cabinets, cur_Cabinet_Position);
         lv_Cabinets.setAdapter(list_cabinet_adapter);
 
         tv_CabinetName.setText(cur_Cabinet.getCabinetId());

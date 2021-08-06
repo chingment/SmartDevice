@@ -129,7 +129,7 @@ public class ReqStandAlone implements IReqVersion{
         String avatar=rop.getAvatar();
 
         if(StringUtil.isEmptyNotNull(rop.getUserId())) {
-            Boolean userIsExist = DbManager.getInstance().checkUserIsExist(userName);
+            boolean userIsExist = DbManager.getInstance().checkUserIsExist(userName);
             if (userIsExist) {
                 reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("用户名已经存在"));
                 return;

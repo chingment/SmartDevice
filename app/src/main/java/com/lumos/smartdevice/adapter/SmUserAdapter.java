@@ -27,7 +27,7 @@ import java.util.List;
  */
 
 public class SmUserAdapter extends RefreshAdapter {
-
+    private static final String TAG = "SmUserAdapter";
     private Context context;
     private List<UserBean> beans = new ArrayList<>();
     private LayoutInflater inflater;
@@ -41,7 +41,6 @@ public class SmUserAdapter extends RefreshAdapter {
     public void setData(List<UserBean> beans, Context context) {
         this.beans = beans;
         this.context = context;
-        LogUtil.e("测试2");
         notifyDataSetChanged();
 
     }

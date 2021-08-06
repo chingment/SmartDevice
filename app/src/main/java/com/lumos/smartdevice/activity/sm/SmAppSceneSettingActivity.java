@@ -23,7 +23,7 @@ import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import java.util.List;
 
 public class SmAppSceneSettingActivity extends BaseFragmentActivity {
-
+    private static final String TAG = "SmAppSceneSettingActivity";
     private RadioGroup rg_VesionMode;
     private RadioGroup rg_SceneMode;
     private EditText et_Com_Prl;

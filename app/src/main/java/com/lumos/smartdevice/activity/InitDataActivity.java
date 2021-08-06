@@ -45,7 +45,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class InitDataActivity extends BaseFragmentActivity {
-
+    private static final String TAG = "InitDataActivity";
     private TextView tv_DeviceId;
     private TextView tv_VersionName;
     private MyListView ls_Logs;

@@ -15,6 +15,7 @@ import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
 
 public class LockerMainActivity  extends BaseFragmentActivity {
+    private static final String TAG = "LockerMainActivity";
 
     private RelativeLayout lyt_Body;
 
