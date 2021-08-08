@@ -93,5 +93,6 @@
     <string name="t_zhiwen">指纹</string>
     <string name="t_iccard">IC卡</string>
     <string name="t_search">搜索</string>
+    <string name="t_change">更改</string>
     <string name="t_distribute_to">分配至</string>
 </resources>
