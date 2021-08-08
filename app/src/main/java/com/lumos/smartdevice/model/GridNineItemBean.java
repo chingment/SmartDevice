@@ -22,7 +22,6 @@ public class GridNineItemBean {
         this.title = title;
     }
 
-
     public Object getIcon() {
         return icon;
     }

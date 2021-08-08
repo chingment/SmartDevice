@@ -148,6 +148,12 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                 );
 
             }
+
+
+            @Override
+            public void onOpenBox(String deviceId, String cabinetId,String slotId){
+                
+            }
         });
 
     }

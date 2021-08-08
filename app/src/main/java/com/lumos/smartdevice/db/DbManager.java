@@ -106,7 +106,7 @@ public class DbManager {
         return rows;
     }
 
-    public int updateUser(String userid,String fullname, String avatar) {
+    public int updateUser(String userid,String password,String fullname, String avatar) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int rows = 0;
         if (db.isOpen()) {
@@ -114,6 +114,11 @@ public class DbManager {
             ContentValues values = new ContentValues();
             values.put(UserDao.COLUMN_NAME_FULLNAME, fullname);
             values.put(UserDao.COLUMN_NAME_AVATAR, avatar);
+
+            if(!StringUtil.isEmptyNotNull(password)){
+                values.put(UserDao.COLUMN_NAME_PASSWORD, password);
+            }
+
 
             rows = db.update(UserDao.TABLE_NAME, values, UserDao.COLUMN_NAME_USERID + " = ?", new String[]{String.valueOf(userid)});
 

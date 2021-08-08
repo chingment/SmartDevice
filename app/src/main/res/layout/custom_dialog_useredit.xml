@@ -82,7 +82,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
-                        android:hint="@string/t_clickinput"
+                        android:hint="@string/t_hint_phonenumner"
                         android:gravity="right"
                         android:maxLength="20"
                         android:maxLines="1"
@@ -112,7 +112,6 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/ll_Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -134,11 +133,13 @@
                     >
 
                     <EditText
+                        android:visibility="gone"
                         android:id="@+id/et_Password"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:background="@null"
-                        android:hint="@string/t_clickinput"
+                        android:hint="@string/t_hint_password"
                         android:gravity="right"
                         android:maxLength="20"
                         android:maxLines="1"
@@ -147,7 +148,30 @@
                         android:textColor="@color/et_txt"
                         android:textColorHint="@color/et_hint"
                         android:textSize="@dimen/sp_14"
+                        />
 
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/btn_OpenEditPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size_24"
+                        android:paddingLeft="@dimen/size_10"
+                        android:gravity="center"
+                        android:text="修改"
+                        android:textSize="@dimen/sp_10"
+                        android:textColor="@color/colorPrimary"
+                        />
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/btn_CloseEditPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size_24"
+                        android:paddingLeft="@dimen/size_10"
+                        android:gravity="center"
+                        android:text="取消"
+                        android:textSize="@dimen/sp_10"
+                        android:textColor="@color/colorPrimary"
                         />
 
 

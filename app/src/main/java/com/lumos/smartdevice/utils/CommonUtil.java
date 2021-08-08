@@ -22,6 +22,8 @@ import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by chingment on 2017/12/18.
@@ -242,6 +244,18 @@ public class CommonUtil {
             return true;
         }
         return false;
+    }
+
+    public static boolean isPhone(String phone){
+        String regex="^1[3456789]\\d{9}$";
+        if (phone.length()!=11){
+            return false;
+        }else {
+            Pattern p=Pattern.compile(regex);
+            Matcher m=p.matcher(phone);
+            boolean isMatch=m.matches();
+            return isMatch;
+        }
     }
 
 

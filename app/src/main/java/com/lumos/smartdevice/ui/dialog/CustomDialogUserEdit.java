@@ -34,7 +34,8 @@ public class CustomDialogUserEdit extends Dialog {
     private TextView tv_ZhiWen;
     private TextView tv_IcCard;
     private TextView tv_BoxName;
-    private LinearLayout ll_Password;
+    private TextView btn_OpenEditPassword;
+    private TextView btn_CloseEditPassword;
 
     private String userId="";
     private String avatar="";
@@ -85,7 +86,29 @@ public class CustomDialogUserEdit extends Dialog {
         et_Password = ViewHolder.get(mLayoutRes, R.id.et_Password);
         et_Fullname = ViewHolder.get(mLayoutRes, R.id.et_Fullname);
 
-        ll_Password = ViewHolder.get(mLayoutRes, R.id.ll_Password);
+        btn_OpenEditPassword = ViewHolder.get(mLayoutRes, R.id.btn_OpenEditPassword);
+        btn_CloseEditPassword = ViewHolder.get(mLayoutRes, R.id.btn_CloseEditPassword);
+
+        btn_OpenEditPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                et_Password.setVisibility(View.VISIBLE);
+                btn_OpenEditPassword.setVisibility(View.GONE);
+                btn_CloseEditPassword.setVisibility(View.VISIBLE);
+                et_Password.requestFocus();
+            }
+        });
+
+        btn_CloseEditPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                et_Password.setText("");
+                et_Password.setVisibility(View.GONE);
+                btn_OpenEditPassword.setVisibility(View.VISIBLE);
+                btn_CloseEditPassword.setVisibility(View.GONE);
+            }
+        });
+
     }
 
     @Override
@@ -101,7 +124,9 @@ public class CustomDialogUserEdit extends Dialog {
             et_Username.setVisibility(View.VISIBLE);
             et_Username.requestFocus();
             tv_Username.setVisibility(View.GONE);
-            ll_Password.setVisibility(View.VISIBLE);
+            et_Password.setVisibility(View.VISIBLE);
+            btn_OpenEditPassword.setVisibility(View.GONE);
+            btn_CloseEditPassword.setVisibility(View.GONE);
             et_Username.setText("");
             tv_Username.setText("");
             et_Password.setText("");
@@ -114,7 +139,9 @@ public class CustomDialogUserEdit extends Dialog {
         else {
             et_Username.setVisibility(View.GONE);
             tv_Username.setVisibility(View.VISIBLE);
-            ll_Password.setVisibility(View.GONE);
+            et_Password.setVisibility(View.GONE);
+            btn_OpenEditPassword.setVisibility(View.VISIBLE);
+            btn_CloseEditPassword.setVisibility(View.GONE);
             et_Username.setText(user.getUserName());
             tv_Username.setText(user.getUserName());
             et_Password.setText("");

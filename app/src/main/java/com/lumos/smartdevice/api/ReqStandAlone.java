@@ -137,7 +137,7 @@ public class ReqStandAlone implements IReqVersion{
             DbManager.getInstance().addUser(userName,password,fullName, "3",avatar);
         }
         else {
-            DbManager.getInstance().updateUser(userId, fullName, avatar);
+            DbManager.getInstance().updateUser(userId,password, fullName, avatar);
         }
 
 

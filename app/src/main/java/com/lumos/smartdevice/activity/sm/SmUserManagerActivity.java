@@ -30,6 +30,7 @@ import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogUserEdit;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
+import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
@@ -38,6 +39,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SmUserManagerActivity extends BaseFragmentActivity {
     private static final String TAG = "SmUserManagerActivity";
@@ -73,6 +76,12 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         initView();
         initEvent();
         initData();
+    }
+
+    public static boolean isPassword(String password) {
+        Pattern p = Pattern.compile("[0-9a-zA-Z_]{6,18}");
+        Matcher m = p.matcher(password);
+        return m.matches();
     }
 
     private void initView() {
@@ -112,11 +121,35 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                     showToast(R.string.tips_username_isnotnull);
                     return;
                 }
+                else
+                {
+                    if(!CommonUtil.isPhone(bean.getUserName())){
+                        showToast(R.string.tips_username_formatnoright);
+                        return;
+                    }
+                }
+
 
                 if (StringUtil.isEmptyNotNull(bean.getUserId())) {
                     if (StringUtil.isEmptyNotNull(bean.getPassword())) {
                         showToast(R.string.tips_password_isnotnull);
                         return;
+                    }
+                    else
+                    {
+                        if(!isPassword(bean.getPassword())){
+                            showToast(R.string.tips_password_formatnoright);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    if (!StringUtil.isEmptyNotNull(bean.getPassword())) {
+                        if(!isPassword(bean.getPassword())){
+                            showToast(R.string.tips_password_formatnoright);
+                            return;
+                        }
                     }
                 }
 

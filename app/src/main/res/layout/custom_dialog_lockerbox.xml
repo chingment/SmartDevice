@@ -57,7 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|left"
-                android:padding="@dimen/size_10"
+                android:paddingTop="@dimen/size_10"
+                android:paddingBottom="@dimen/size_10"
                 android:orientation="horizontal">
 
                 <TextView

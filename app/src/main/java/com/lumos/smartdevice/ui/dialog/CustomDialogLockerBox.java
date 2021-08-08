@@ -132,6 +132,7 @@ public class CustomDialogLockerBox extends Dialog {
     public  interface OnClickListener{
         void onGoSelectUser(String deviceId, String cabinetId,String slotId);
         void onDeleteUser(String deviceId, String cabinetId,String slotId,String userId);
+        void onOpenBox(String deviceId, String cabinetId,String slotId);
     }
 
 
