@@ -19,7 +19,7 @@
         <ImageView
             android:layout_width="@dimen/size_8"
             android:layout_height="@dimen/size_14"
-            android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginLeft="@dimen/size_14"
             android:background="@null"
             android:contentDescription="@string/img_content_description_empty"
             android:scaleType="fitXY"
