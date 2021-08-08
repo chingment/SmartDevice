@@ -86,6 +86,37 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/rly_LoginArea_Password"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_42"
+        android:layout_below="@+id/rly_LoginArea_UserName"
+        android:background="@drawable/aty_smlogin_input_boder_bottom">
+
+
+        <ImageView
+            android:id="@+id/ic_Search"
+            android:layout_width="@dimen/size_16"
+            android:layout_height="@dimen/size_16"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/size_10"
+            android:layout_marginRight="@dimen/size_5"
+            android:background="@drawable/ic_search" />
+
+        <EditText
+            android:id="@+id/et_Search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/ic_Search"
+            android:background="@null"
+            android:hint="@string/t_search"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@color/aty_smlogin_et_txt"
+            android:textColorHint="@color/aty_smlogin_et_hint"
+            android:textSize="@dimen/sp_12" />
+    </RelativeLayout>
 
     <LinearLayout
         android:background="@color/white"

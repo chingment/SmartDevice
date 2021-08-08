@@ -154,7 +154,7 @@ public class ReqStandAlone implements IReqVersion{
         reqHandler.sendBeforeSendMessage();
         ResultBean result = null;
         RetUserGetList ret = new RetUserGetList();
-        PageDataBean<UserBean> users = DbManager.getInstance().GetUsers(rop.getPageIndex(), rop.getPageSize(), "3");
+        PageDataBean<UserBean> users = DbManager.getInstance().GetUsers(rop.getPageIndex(), rop.getPageSize(), "3",rop.getKeyWord());
         ret.setTotal(users.getTotal());
         ret.setPageSize(users.getPageSize());
         ret.setItems(users.getItems());

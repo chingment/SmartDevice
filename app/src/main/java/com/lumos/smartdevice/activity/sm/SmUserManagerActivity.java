@@ -5,7 +5,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -27,6 +30,7 @@ import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogUserEdit;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
+import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
@@ -44,7 +48,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
     private int lv_Users_PageIndex=0;
     private LinearLayout ll_UsersEmpty;
     private SmUserAdapter lv_UsersAdapter;
-
+    private EditText et_Search;
     private int scene_mode=1;//页面场景
 
     private Map<String,String> scene_param=null;
@@ -76,6 +80,28 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         lv_UsersRefresh =  findViewById(R.id.lv_UsersRefresh);
         lv_UsersData = findViewById(R.id.lv_UsersData);
         ll_UsersEmpty= findViewById(R.id.ll_UsersEmpty);
+        et_Search= findViewById(R.id.et_Search);
+        et_Search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                String key = charSequence.toString();
+                LogUtil.d("key:"+key);
+
+                getUsers();
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         dialog_UserEdit=new CustomDialogUserEdit(SmUserManagerActivity.this);
         dialog_UserEdit.setOnClickListener(new CustomDialogUserEdit.OnClickListener() {
             @Override
@@ -235,6 +261,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         RopUserGetList rop=new RopUserGetList();
         rop.setPageIndex(lv_Users_PageIndex);
         rop.setPageSize(10);
+        rop.setKeyWord(et_Search.getText().toString());
         ReqInterface.getInstance().userGetList(rop, new ReqHandler(){
 
             @Override

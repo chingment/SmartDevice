@@ -11,7 +11,9 @@ import com.lumos.smartdevice.model.PageDataBean;
 import com.lumos.smartdevice.model.TripMsgBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppContext;
+import com.lumos.smartdevice.utils.StringUtil;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -168,7 +170,7 @@ public class DbManager {
 
     }
 
-    public PageDataBean<UserBean> GetUsers(int pageIndex, int pageSize, String userType){
+    public PageDataBean<UserBean> GetUsers(int pageIndex, int pageSize,String userType,String keyWord){
 
         PageDataBean<UserBean> pageData=new PageDataBean<UserBean>();
 
@@ -178,10 +180,17 @@ public class DbManager {
         List<UserBean> users = new ArrayList<>();
         if(db.isOpen()){
 
-            Cursor cursor1 = db.rawQuery("select count(*) from " + UserDao.TABLE_NAME + "" +
-                    " where "+UserDao.COLUMN_NAME_TYPE + " = ? ",new String[]{
-                    String.valueOf(userType)
-            });
+            String sql= "SELECT {0} FROM "+UserDao.TABLE_NAME +" where "+UserDao.COLUMN_NAME_TYPE+" = "+"'"+userType+"' ";
+
+
+            if(!StringUtil.isEmptyNotNull(keyWord)) {
+                sql += " and ( " + UserDao.COLUMN_NAME_USERNAME + " like '%" + keyWord + "%' ";
+                sql += " or  " + UserDao.COLUMN_NAME_FULLNAME + " like '%" + keyWord + "%' ) ";
+            }
+
+            String sqlQuery=sql.replace("{0}","*")+" limit "+ String.valueOf(pageIndex*pageSize)+","+pageSize;
+            String sqlCount= sql.replace("{0}","count(*)");
+            Cursor cursor1 = db.rawQuery(sqlCount,null);
 
             cursor1.moveToFirst();
 
@@ -191,12 +200,8 @@ public class DbManager {
 
             pageData.setTotal(total);
 
-            Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + "" +
-                    " where "+UserDao.COLUMN_NAME_TYPE + " = ? order by "+UserDao.COLUMN_NAME_USERID+" limit ?,?",new String[]{
-                    String.valueOf(userType),
-                    String.valueOf(pageIndex*pageSize),
-                    String.valueOf(pageSize),
-            });
+            Cursor cursor = db.rawQuery(sqlQuery,null);
+
             while(cursor.moveToNext()){
                 UserBean user = new UserBean();
                 String userId = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERID));
