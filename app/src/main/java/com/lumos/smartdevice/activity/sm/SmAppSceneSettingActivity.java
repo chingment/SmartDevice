@@ -128,4 +128,6 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
             }
         }
     }
+
+
 }

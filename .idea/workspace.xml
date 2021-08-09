@@ -11,11 +11,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc9a5615-753f-4d27-ba9c-39ff462585f0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmAppSceneSettingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmAppSceneSettingActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/LockerBoxDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/LockerBoxDao.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +25,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="H4K5T20B03004762" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="246RAM_API_25" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -35,7 +34,55 @@
     </system>
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/LockerBoxDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmAppSceneSettingActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="387">
+              <caret line="131" column="4" selection-start-line="131" selection-start-column="4" selection-end-line="131" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/DbManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="27">
+              <caret line="296" column="35" selection-start-line="296" selection-start-column="35" selection-end-line="296" selection-end-column="35" />
+              <folding>
+                <element signature="method#closeDB#0;class#DbManager#0" />
+                <element signature="method#init#0;class#DbManager#0" />
+                <element signature="method#initConfig#0;class#DbManager#0" />
+                <element signature="method#initUser#0;class#DbManager#0" />
+                <element signature="method#addConfig#0;class#DbManager#0" />
+                <element signature="method#addUser#0;class#DbManager#0" />
+                <element signature="method#checkUserPassword#0;class#DbManager#0" />
+                <element signature="method#checkUserIsExist#0;class#DbManager#0" />
+                <element signature="method#GetUsers#0;class#DbManager#0" />
+                <element signature="method#updateConfig#0;class#DbManager#0" />
+                <element signature="method#getConfigValue#0;class#DbManager#0" />
+                <element signature="method#getCabinets#0;class#DbManager#0" />
+                <element signature="method#saveTripMsg#0;class#DbManager#0" />
+                <element signature="method#getTripMsgs#0;class#DbManager#0" />
+                <element signature="method#deleteTripMsg#0;class#DbManager#0" />
+                <element signature="method#savelockerBoxUser#0;class#DbManager#0" />
+                <element signature="method#deleteLockBoxUser#0;class#DbManager#0" />
+                <element signature="method#getLockerBoxUser#0;class#DbManager#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -114,11 +161,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/adapter/SmUserAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmAppSceneSettingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmFactorySettingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/scenelocker/LockerMainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/model/DeviceBean.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/LockerBoxDao.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopUserGetList.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHomeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/adapter/GridNineItemAdapter.java" />
@@ -135,6 +180,8 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/custom_dialog_useredit.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_smusermanager.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_nav_header.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/LockerBoxDao.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmAppSceneSettingActivity.java" />
       </list>
     </option>
   </component>
@@ -151,6 +198,55 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="smartdevice" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="smartdevice" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="activity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="smartdevice" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="activity" type="462c0819:PsiDirectoryNode" />
+              <item name="sm" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="smartdevice" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="db" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -212,23 +308,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="SmartDevice" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -466,25 +546,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1229" height="775" extended-state="6" />
+    <frame x="0" y="25" width="1230" height="775" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.24347094" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.24326599" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
-      <window_info id="Resources Explorer" order="7" weight="0.32996634" />
+      <window_info id="Resources Explorer" order="7" weight="0.32940185" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.63437235" weight="0.47706422" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49873632" weight="0.32874617" />
-      <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.6790227" weight="0.20948012" />
-      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.505476" side_tool="true" visible="true" weight="0.34862384" />
-      <window_info anchor="bottom" id="Build" order="5" sideWeight="0.47262004" weight="0.29969418" />
-      <window_info anchor="bottom" id="Android Profiler" order="6" />
-      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.494524" visible="true" weight="0.34862384" />
+      <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.51094276" weight="0.3853211" />
+      <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.5277778" side_tool="true" visible="true" weight="0.24159022" />
+      <window_info anchor="bottom" id="Build" order="5" sideWeight="0.4722222" visible="true" weight="0.24159022" />
+      <window_info anchor="bottom" id="Android Profiler" order="6" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.494524" weight="0.34862384" />
       <window_info anchor="bottom" id="Debug" order="8" sideWeight="0.73631" weight="0.41590214" />
       <window_info anchor="bottom" id="Find" order="9" sideWeight="0.4970514" weight="0.45259938" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" weight="0.32942164" />
@@ -527,64 +608,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/local.properties">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmAppSceneSettingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHelpToolActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="201" column="114" selection-start-line="201" selection-start-column="114" selection-end-line="201" selection-end-column="114" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmFactorySettingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/model/DeviceBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="4" lean-forward="true" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-          <folding>
-            <element signature="e#322#323#0" expanded="true" />
-            <element signature="e#353#354#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/model/CabinetBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-190">
-          <caret line="13" column="3" lean-forward="true" selection-start-line="13" selection-start-column="3" selection-end-line="13" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build/generated/source/buildConfig/dev/debug/com/lumos/smartdevice/BuildConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/scenelocker/LockerMainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -606,18 +629,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/aty_smlogin_input_ic_password.png">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="135" column="27" selection-start-line="135" selection-start-column="27" selection-end-line="135" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4508#7166#0" />
-            <element signature="class#5346:7130" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_smlogin.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -790,41 +801,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/LockerBoxDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="63" lean-forward="true" selection-start-line="6" selection-start-column="63" selection-end-line="6" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/DbManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="118" column="65" selection-start-line="118" selection-start-column="65" selection-end-line="118" selection-end-column="65" />
-          <folding>
-            <element signature="method#closeDB#0;class#DbManager#0" />
-            <element signature="method#init#0;class#DbManager#0" />
-            <element signature="method#initConfig#0;class#DbManager#0" />
-            <element signature="method#initUser#0;class#DbManager#0" />
-            <element signature="method#addConfig#0;class#DbManager#0" />
-            <element signature="method#addUser#0;class#DbManager#0" />
-            <element signature="method#checkUserPassword#0;class#DbManager#0" />
-            <element signature="method#checkUserIsExist#0;class#DbManager#0" />
-            <element signature="method#GetUsers#0;class#DbManager#0" />
-            <element signature="method#updateConfig#0;class#DbManager#0" />
-            <element signature="method#getConfigValue#0;class#DbManager#0" />
-            <element signature="method#getCabinets#0;class#DbManager#0" />
-            <element signature="method#saveCabinet#0;class#DbManager#0" />
-            <element signature="method#saveTripMsg#0;class#DbManager#0" />
-            <element signature="method#getTripMsgs#0;class#DbManager#0" />
-            <element signature="method#deleteTripMsg#0;class#DbManager#0" />
-            <element signature="method#savelockerBoxUser#0;class#DbManager#0" />
-            <element signature="method#deleteLockBoxUser#0;class#DbManager#0" />
-            <element signature="method#getLockerBoxUser#0;class#DbManager#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="560">
@@ -952,6 +928,93 @@
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="135" column="27" lean-forward="true" selection-start-line="135" selection-start-column="27" selection-end-line="135" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4508#7166#0" />
+            <element signature="class#5346:7130" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="46" column="13" selection-start-line="46" selection-start-column="13" selection-end-line="46" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/LockerBoxUserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/model/CabinetBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/DbManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="296" column="35" selection-start-line="296" selection-start-column="35" selection-end-line="296" selection-end-column="35" />
+          <folding>
+            <element signature="method#closeDB#0;class#DbManager#0" />
+            <element signature="method#init#0;class#DbManager#0" />
+            <element signature="method#initConfig#0;class#DbManager#0" />
+            <element signature="method#initUser#0;class#DbManager#0" />
+            <element signature="method#addConfig#0;class#DbManager#0" />
+            <element signature="method#addUser#0;class#DbManager#0" />
+            <element signature="method#checkUserPassword#0;class#DbManager#0" />
+            <element signature="method#checkUserIsExist#0;class#DbManager#0" />
+            <element signature="method#GetUsers#0;class#DbManager#0" />
+            <element signature="method#updateConfig#0;class#DbManager#0" />
+            <element signature="method#getConfigValue#0;class#DbManager#0" />
+            <element signature="method#getCabinets#0;class#DbManager#0" />
+            <element signature="method#saveTripMsg#0;class#DbManager#0" />
+            <element signature="method#getTripMsgs#0;class#DbManager#0" />
+            <element signature="method#deleteTripMsg#0;class#DbManager#0" />
+            <element signature="method#savelockerBoxUser#0;class#DbManager#0" />
+            <element signature="method#deleteLockBoxUser#0;class#DbManager#0" />
+            <element signature="method#getLockerBoxUser#0;class#DbManager#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/LockerBoxDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmAppSceneSettingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="131" column="4" selection-start-line="131" selection-start-column="4" selection-end-line="131" selection-end-column="4" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">
