@@ -159,7 +159,7 @@
                         android:paddingLeft="@dimen/size_10"
                         android:gravity="center"
                         android:text="@string/t_change"
-                        android:textSize="@dimen/sp_10"
+                        android:textSize="@dimen/sp_12"
                         android:textColor="@color/colorPrimary"
                         />
                     <TextView
@@ -170,7 +170,7 @@
                         android:paddingLeft="@dimen/size_10"
                         android:gravity="center"
                         android:text="取消"
-                        android:textSize="@dimen/sp_10"
+                        android:textSize="@dimen/sp_12"
                         android:textColor="@color/colorPrimary"
                         />
 
