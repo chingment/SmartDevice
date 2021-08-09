@@ -29,6 +29,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppContext;
@@ -67,6 +68,10 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
         }
 
         return device;
+    }
+
+    public UserBean getCurrentUser() {
+        return AppCacheManager.getCurrentUser();
     }
 
     @Override

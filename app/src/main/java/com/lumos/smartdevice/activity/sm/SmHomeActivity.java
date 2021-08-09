@@ -14,6 +14,7 @@ import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
+import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppManager;
@@ -21,12 +22,15 @@ import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
 import com.lumos.smartdevice.ui.my.MyGridView;
+import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +42,8 @@ public class SmHomeActivity extends BaseFragmentActivity {
     private CustomDialogConfirm dialog_Confirm;
     private MyGridView gdv_Nine;
     private List<GridNineItemBean> gdv_Nine_Items;
-
+    private TextView tv_UserFullName;
+    private ImageView iv_UserAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +59,8 @@ public class SmHomeActivity extends BaseFragmentActivity {
 
     private void initView() {
         gdv_Nine = findViewById(R.id.gdv_Nine);
-
+        tv_UserFullName= findViewById(R.id.tv_UserFullName);
+        iv_UserAvatar= findViewById(R.id.iv_UserAvatar);
     }
 
     private void initEvent() {
@@ -124,6 +130,12 @@ public class SmHomeActivity extends BaseFragmentActivity {
 
     private void initData() {
 
+        UserBean currentUser= getCurrentUser();
+        if(currentUser!=null) {
+            tv_UserFullName.setText(currentUser.getFullName());
+            CommonUtil.loadImageFromUrl(SmHomeActivity.this, iv_UserAvatar, currentUser.getAvatar());
+        }
+
         gdv_Nine_Items = new ArrayList<>();
 
 
@@ -142,6 +154,8 @@ public class SmHomeActivity extends BaseFragmentActivity {
         GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(), gdv_Nine_Items);
 
         gdv_Nine.setAdapter(gridNineItemAdapter);
+
+
 
 
     }

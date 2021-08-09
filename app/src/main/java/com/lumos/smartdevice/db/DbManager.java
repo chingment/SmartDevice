@@ -145,11 +145,12 @@ public class DbManager {
                 String user_id = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERID));
                 String user_name = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERNAME));
                 String fullname = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_FULLNAME));
-
+                String avatar = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_AVATAR));
 
                 user.setUserId(user_id);
                 user.setUserName(user_name);
                 user.setFullName(fullname);
+                user.setAvatar(avatar);
 
             }
             cursor.close();

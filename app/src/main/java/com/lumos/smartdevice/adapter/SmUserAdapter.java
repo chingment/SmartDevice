@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.sm.SmHomeActivity;
 import com.lumos.smartdevice.db.UserDao;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.refreshview.MyViewHolder;
@@ -122,15 +123,8 @@ public class SmUserAdapter extends RefreshAdapter {
             });
         }
 
-        if (!StringUtil.isEmptyNotNull(avatar)) {
 
-            if (avatar.contains("app://")) {
-                String imgName = avatar.split("//")[1];
-                int imgId = CommonUtil.getAppDrawableImages(imgName);
-                img_Avatar.setImageDrawable(ContextCompat.getDrawable(context, imgId));
-            }
-
-        }
+        CommonUtil.loadImageFromUrl(context, img_Avatar, avatar);
 
     }
 

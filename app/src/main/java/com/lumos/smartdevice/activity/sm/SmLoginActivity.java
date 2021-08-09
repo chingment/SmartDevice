@@ -185,6 +185,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                             user.setUserId(d.getUserId());
                             user.setUserName(d.getUserName());
                             user.setFullName(d.getFullName());
+                            user.setAvatar(d.getAvatar());
 
                             AppCacheManager.setCurrentUser(user);
 

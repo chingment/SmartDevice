@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.ViewHolder;
+import com.lumos.smartdevice.utils.CommonUtil;
 
 import java.util.HashMap;
 
@@ -25,6 +27,7 @@ public class CustomDialogUserEdit extends Dialog {
     private View btn_Close;
     private View btn_Save;
 
+    private ImageView iv_Avatar;
     private EditText et_Username;
     private TextView tv_Username;
     private EditText et_Password;
@@ -81,6 +84,7 @@ public class CustomDialogUserEdit extends Dialog {
         tv_IcCard = ViewHolder.get(mLayoutRes, R.id.tv_IcCard);
         tv_BoxName= ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
 
+        iv_Avatar = ViewHolder.get(mLayoutRes, R.id.iv_Avatar);
         et_Username = ViewHolder.get(mLayoutRes, R.id.et_Username);
         tv_Username = ViewHolder.get(mLayoutRes, R.id.tv_Username);
         et_Password = ViewHolder.get(mLayoutRes, R.id.et_Password);
@@ -131,10 +135,9 @@ public class CustomDialogUserEdit extends Dialog {
             tv_Username.setText("");
             et_Password.setText("");
             et_Fullname.setText("");
-
-            userId="";
+            userId = "";
             avatar = "app://default_avatar";
-
+            CommonUtil.loadImageFromUrl(mContext, iv_Avatar, avatar);
         }
         else {
             et_Username.setVisibility(View.GONE);
@@ -149,6 +152,7 @@ public class CustomDialogUserEdit extends Dialog {
             et_Fullname.requestFocus();
             userId=user.getUserId();
             avatar=user.getAvatar();
+            CommonUtil.loadImageFromUrl(mContext, iv_Avatar, avatar);
         }
     }
 

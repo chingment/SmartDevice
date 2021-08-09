@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import androidx.core.content.ContextCompat;
+
 import com.lumos.smartdevice.R;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -45,10 +47,15 @@ public class CommonUtil {
     }
 
 
+
     public static void loadImageFromUrl(Context context, final ImageView photoView, String imageUrl) {
         if (StringUtil.isEmptyNotNull(imageUrl)) {
             photoView.setBackgroundResource(R.drawable.default_image);
-        } else
+        } else if(imageUrl.contains("app://")){
+            String imgName = imageUrl.split("//")[1];
+            int imgId = CommonUtil.getAppDrawableImages(imgName);
+            photoView.setImageDrawable(ContextCompat.getDrawable(context, imgId));
+        }else
             //.centerCrop()
             Picasso.with(context).load(imageUrl)
                     .placeholder(R.drawable.default_image).fit().centerInside()

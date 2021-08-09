@@ -72,7 +72,7 @@ public class ReqStandAlone implements IReqVersion{
         ret.setUserId(user.getUserId());
         ret.setUserName(user.getUserName());
         ret.setFullName(user.getFullName());
-
+        ret.setAvatar(user.getAvatar());
         result = new ResultBean<>(ResultCode.SUCCESS, "登录成功",ret);
 
         reqHandler.sendSuccessMessage(result.toJSONString());
