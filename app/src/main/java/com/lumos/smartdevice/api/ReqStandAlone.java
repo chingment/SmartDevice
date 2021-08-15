@@ -78,24 +78,17 @@ public class ReqStandAlone implements IReqVersion{
         ret.setFullName(user.getFullName());
         ret.setAvatar(user.getAvatar());
         result = new ResultBean<>(ResultCode.SUCCESS, "登录成功",ret);
-
         reqHandler.sendSuccessMessage(result.toJSONString());
 
     }
 
     @Override
     public void ownLogout(RopOwnLogout rop, final ReqHandler reqHandler) {
-
         reqHandler.sendBeforeSendMessage();
-
         RetOwnLogout ret=new RetOwnLogout();
-
         ret.setUserId(rop.getUserId());
-
         ResultBean result = new ResultBean<>(ResultCode.SUCCESS, "退出成功",ret);
-
         reqHandler.sendSuccessMessage(result.toJSONString());
-
     }
 
 
@@ -144,11 +137,8 @@ public class ReqStandAlone implements IReqVersion{
             DbManager.getInstance().updateUser(userId,password, fullName, avatar);
         }
 
-
         RetUserSave ret = new RetUserSave();
-
         ResultBean result = new ResultBean<>(ResultCode.SUCCESS, "保存成功", ret);
-
         reqHandler.sendSuccessMessage(result.toJSONString());
 
     }
@@ -168,7 +158,6 @@ public class ReqStandAlone implements IReqVersion{
 
     @Override
     public void lockerBoxSaveUsage(RopLockerBoxSaveUsage rop, final ReqHandler reqHandler) {
-
         reqHandler.sendBeforeSendMessage();
         ResultBean result;
         long rows = DbManager.getInstance().savelockerBoxUsage(rop.getCabinetId(), rop.getSlotId(),rop.getUsageType(),rop.getUsageData());
@@ -180,14 +169,10 @@ public class ReqStandAlone implements IReqVersion{
     public void lockerBoxGetUsages(RopLockerBoxGetUsages rop, final ReqHandler reqHandler) {
         reqHandler.sendBeforeSendMessage();
         ResultBean result;
-
         List<LockerBoxUsageBean> usages = DbManager.getInstance().getLockerBoxUsages(rop.getCabinetId(), rop.getSlotId());
-
         RetLockerBoxGetUsages ret=new RetLockerBoxGetUsages();
-
         ret.setUsages(usages);
         result = new ResultBean<>(ResultCode.SUCCESS, "", ret);
-
         reqHandler.sendSuccessMessage(result.toJSONString());
     }
 
