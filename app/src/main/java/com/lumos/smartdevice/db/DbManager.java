@@ -464,7 +464,7 @@ public class DbManager {
                             user.setUserId(usageData);
                             user.setUserName(user_name);
                             user.setFullName(fullname);
-                            usage.setUsageCumstom(JSON.toJSONString(user));
+                            usage.setCustomData(JSON.toJSONString(user));
                         }
 
                         cursor1.close();

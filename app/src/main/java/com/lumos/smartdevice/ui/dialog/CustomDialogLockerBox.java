@@ -115,10 +115,10 @@ public class CustomDialogLockerBox extends Dialog {
         for (LockerBoxUsageBean usage :
                 usages  ) {
             String usageType=usage.getUsageType();
-            String usageCumstom=usage.getUsageCumstom();
+            String customData=usage.getCustomData();
             switch (usageType){
                 case "1":
-                    user= JSON.parseObject(usageCumstom, new TypeReference<UserBean>() {
+                    user= JSON.parseObject(customData, new TypeReference<UserBean>() {
                     });
                     break;
             }

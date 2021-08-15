@@ -9,7 +9,7 @@ public class LockerBoxUsageBean implements Serializable {
     private String slotId;
     private String usageType;
     private String usageData;
-    private String usageCumstom;
+    private String customData;
 
     public String getDeviceId() {
         return deviceId;
@@ -51,11 +51,12 @@ public class LockerBoxUsageBean implements Serializable {
         this.usageData = usageData;
     }
 
-    public String getUsageCumstom() {
-        return usageCumstom;
+
+    public String getCustomData() {
+        return customData;
     }
 
-    public void setUsageCumstom(String usageCumstom) {
-        this.usageCumstom = usageCumstom;
+    public void setCustomData(String customData) {
+        this.customData = customData;
     }
 }
