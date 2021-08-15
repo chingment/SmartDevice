@@ -6,24 +6,6 @@ android {
 
 
     flavorDimensions "mode"
-    productFlavors {
-        dev {
-            //开发版本
-            buildConfigField "Boolean", "ISAPPDEBUG", "true"
-            buildConfigField "String", "COMNAME", "\"dev\""
-            buildConfigField "String", "ENVIRONMENT", "\"http://api.term.17fanju.com\""
-            buildConfigField "String", "APPKEY", "\"test\""
-            buildConfigField "String", "APPSECRET", "\"6ZB97cdVz211O08EKZ6yriAYrHXFBowC\""
-        }
-        uplink {
-            //全线通版本
-            buildConfigField "Boolean", "ISAPPDEBUG", "true"
-            buildConfigField "String", "COMNAME", "\"uplink\""
-            buildConfigField "String", "ENVIRONMENT", "\"http://api.term.17fanju.com\""
-            buildConfigField "String", "APPKEY", "\"fanju\""
-            buildConfigField "String", "APPSECRET", "\"7460e6512f1940f68c00fe1fdb2b7eb1\""
-        }
-    }
 
     defaultConfig {
         applicationId "com.lumos.smartdevice"
@@ -34,7 +16,19 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug{
+            buildConfigField "Boolean", "ISAPPDEBUG", "true"
+            buildConfigField "String", "COMNAME", "\"uplink\""
+            buildConfigField "String", "ENVIRONMENT", "\"http://api.term.17fanju.com\""
+            buildConfigField "String", "APPKEY", "\"fanju\""
+            buildConfigField "String", "APPSECRET", "\"7460e6512f1940f68c00fe1fdb2b7eb1\""
+        }
         release {
+            buildConfigField "Boolean", "ISAPPDEBUG", "true"
+            buildConfigField "String", "COMNAME", "\"uplink\""
+            buildConfigField "String", "ENVIRONMENT", "\"http://api.term.17fanju.com\""
+            buildConfigField "String", "APPKEY", "\"fanju\""
+            buildConfigField "String", "APPSECRET", "\"7460e6512f1940f68c00fe1fdb2b7eb1\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
