@@ -1,9 +1,9 @@
 package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
-import com.lumos.smartdevice.api.rop.RopLockerBoxDeleteBelongUser;
-import com.lumos.smartdevice.api.rop.RopLockerBoxSaveBelongUser;
-import com.lumos.smartdevice.api.rop.RopLockerBoxGetBelongUser;
+import com.lumos.smartdevice.api.rop.RopLockerBoxDeleteUsage;
+import com.lumos.smartdevice.api.rop.RopLockerBoxSaveUsage;
+import com.lumos.smartdevice.api.rop.RopLockerBoxGetUsageByUser;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
@@ -16,7 +16,7 @@ public interface IReqVersion {
     void ownLogout(RopOwnLogout rop, final ReqHandler reqHandler);
     void userSave(RopUserSave rop, final ReqHandler reqHandler);
     void userGetList(RopUserGetList rop, final ReqHandler reqHandler);
-    void lockerBoxSaveBelongUser(RopLockerBoxSaveBelongUser rop, final ReqHandler reqHandler);
-    void lockerBoxGetBelongUser(RopLockerBoxGetBelongUser rop, final ReqHandler reqHandler);
-    void lockerBoxDeleteBelongUser(RopLockerBoxDeleteBelongUser rop, final ReqHandler reqHandler);
+    void lockerBoxSaveUsage(RopLockerBoxSaveUsage rop, final ReqHandler reqHandler);
+    void lockerBoxGetUsageByUser(RopLockerBoxGetUsageByUser rop, final ReqHandler reqHandler);
+    void lockerBoxDeleteUsage(RopLockerBoxDeleteUsage rop, final ReqHandler reqHandler);
 }

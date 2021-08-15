@@ -13,7 +13,6 @@ import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.utils.StringUtil;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -386,12 +385,12 @@ public class DbManager {
         }
     }
 
-    public long savelockerBoxUser(String cabinetId,String slotId, String userId) {
+    public long savelockerBoxUsage(String cabinetId,String slotId, String usageType,String usageData) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         long rows = 0;
         if (db.isOpen()) {
 
-            Cursor cursor = db.rawQuery("select * from " + LockerBoxUserDao.TABLE_NAME + " where " + LockerBoxUserDao.COLUMN_NAME_CABINET_ID + "=? and " + LockerBoxUserDao.COLUMN_NAME_SLOT_ID + "=? and " + LockerBoxUserDao.COLUMN_NAME_USER_ID + "=?", new String[]{cabinetId, slotId, userId});
+            Cursor cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME + " where " + LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + "=? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + "=? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE + "=? and "+ LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA + "=?", new String[]{cabinetId, slotId, usageType,usageData});
 
             boolean exist = (cursor.getCount() > 0);
             if (exist) {
@@ -400,11 +399,11 @@ public class DbManager {
             }
 
             ContentValues values = new ContentValues();
-            values.put(LockerBoxUserDao.COLUMN_NAME_CABINET_ID, cabinetId);
-            values.put(LockerBoxUserDao.COLUMN_NAME_SLOT_ID, slotId);
-            values.put(LockerBoxUserDao.COLUMN_NAME_USER_ID, userId);
-
-            rows = db.insert(LockerBoxUserDao.TABLE_NAME, null, values);
+            values.put(LockerBoxUsageDao.COLUMN_NAME_CABINET_ID, cabinetId);
+            values.put(LockerBoxUsageDao.COLUMN_NAME_SLOT_ID, slotId);
+            values.put(LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE, usageType);
+            values.put(LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA, usageData);
+            rows = db.insert(LockerBoxUsageDao.TABLE_NAME, null, values);
 
             cursor.close();
         }
@@ -412,12 +411,12 @@ public class DbManager {
         return rows;
     }
 
-    public int deleteLockBoxUser(String cabinetId,String slotId,String userId) {
+    public int deleteLockBoxUsage(String cabinetId,String slotId,String usageType,String usageData) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int rows = 0;
         if (db.isOpen()) {
 
-            rows = db.delete(LockerBoxUserDao.TABLE_NAME, LockerBoxUserDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUserDao.COLUMN_NAME_SLOT_ID + " = ? and " + LockerBoxUserDao.COLUMN_NAME_USER_ID + " = ? ", new String[]{cabinetId, slotId,userId});
+            rows = db.delete(LockerBoxUsageDao.TABLE_NAME, LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE + " = ? and "+ LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA + " = ?", new String[]{cabinetId, slotId,usageType,usageData});
         }
 
         return rows;
@@ -429,13 +428,13 @@ public class DbManager {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("select * from " + LockerBoxUserDao.TABLE_NAME + " where "+LockerBoxUserDao.COLUMN_NAME_CABINET_ID + " = ? and "+LockerBoxUserDao.COLUMN_NAME_SLOT_ID+" = ? ",new String[]{cabinetId,slotId});
+        Cursor cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME + " where "+ LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and "+ LockerBoxUsageDao.COLUMN_NAME_SLOT_ID+" = ? and "+ LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE+" = ? ",new String[]{cabinetId,slotId,"1"});
         boolean exist = (cursor.getCount() > 0);
         if(exist){
 
             String user_id="";
             while(cursor.moveToNext()) {
-                user_id = cursor.getString(cursor.getColumnIndex(LockerBoxUserDao.COLUMN_NAME_USER_ID));
+                user_id = cursor.getString(cursor.getColumnIndex(LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA));
             }
             cursor.close();
 

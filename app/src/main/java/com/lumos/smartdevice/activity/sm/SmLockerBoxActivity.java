@@ -1,14 +1,11 @@
 package com.lumos.smartdevice.activity.sm;
 
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -22,8 +19,8 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
-import com.lumos.smartdevice.api.rop.RopLockerBoxDeleteBelongUser;
-import com.lumos.smartdevice.api.rop.RopLockerBoxGetBelongUser;
+import com.lumos.smartdevice.api.rop.RopLockerBoxDeleteUsage;
+import com.lumos.smartdevice.api.rop.RopLockerBoxGetUsageByUser;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.UserBean;
@@ -39,7 +36,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SmLockerBoxActivity extends BaseFragmentActivity {
     private static final String TAG = "SmLockerBoxActivity";
@@ -110,13 +106,14 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             @Override
             public void onDeleteUser( String deviceId, String cabinetId,String slotId,String userId) {
 
-                RopLockerBoxDeleteBelongUser rop=new RopLockerBoxDeleteBelongUser();
+                RopLockerBoxDeleteUsage rop=new RopLockerBoxDeleteUsage();
                 rop.setDeviceId(deviceId);
                 rop.setCabinetId(cabinetId);
                 rop.setSlotId(slotId);
-                rop.setUserId(userId);
+                rop.setUsageType("1");
+                rop.setUsageData(userId);
 
-                ReqInterface.getInstance().lockerBoxDeleteBelongUser(rop, new ReqHandler(){
+                ReqInterface.getInstance().lockerBoxDeleteUsage(rop, new ReqHandler(){
 
                             @Override
                             public void onBeforeSend() {
@@ -136,7 +133,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                                 });
 
                                 if (rt.getCode() == ResultCode.SUCCESS) {
-                                   lockerBoxGetBelongUser(dialog_LockerBox.getDeviceId(),dialog_LockerBox.getCabinetId(),dialog_LockerBox.getSlotId());
+                                   lockerBoxGetUsageByUser(dialog_LockerBox.getDeviceId(),dialog_LockerBox.getCabinetId(),dialog_LockerBox.getSlotId());
                                 }
                             }
 
@@ -249,7 +246,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                         public void onClick(View v) {
                             String l_Slot_Id = v.getTag().toString();
                             dialog_LockerBox.setLockerBox(device, cur_Cabinet, l_Slot_Id);
-                            lockerBoxGetBelongUser(device.getDeviceId(), cur_Cabinet.getCabinetId(),l_Slot_Id);
+                            lockerBoxGetUsageByUser(device.getDeviceId(), cur_Cabinet.getCabinetId(),l_Slot_Id);
                             dialog_LockerBox.show();
                         }
                     });
@@ -267,7 +264,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         }
     }
 
-    public void lockerBoxGetBelongUser(String deviceId, String cabinetId,String slotId){
+    public void lockerBoxGetUsageByUser(String deviceId, String cabinetId,String slotId){
 
 
         if(StringUtil.isEmptyNotNull(deviceId))
@@ -276,11 +273,11 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             return;
         if(StringUtil.isEmptyNotNull(slotId))
             return;
-        RopLockerBoxGetBelongUser rop=new RopLockerBoxGetBelongUser();
+        RopLockerBoxGetUsageByUser rop=new RopLockerBoxGetUsageByUser();
         rop.setDeviceId(deviceId);
         rop.setCabinetId(cabinetId);
         rop.setSlotId(slotId);
-        ReqInterface.getInstance().lockerBoxGetBelongUser(rop, new ReqHandler(){
+        ReqInterface.getInstance().lockerBoxGetUsageByUser(rop, new ReqHandler(){
 
                     @Override
                     public void onBeforeSend() {
@@ -317,7 +314,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         super.onResume();
 
         if(dialog_LockerBox!=null) {
-            lockerBoxGetBelongUser(dialog_LockerBox.getDeviceId(), dialog_LockerBox.getCabinetId(), dialog_LockerBox.getSlotId());
+            lockerBoxGetUsageByUser(dialog_LockerBox.getDeviceId(), dialog_LockerBox.getCabinetId(), dialog_LockerBox.getSlotId());
         }
     }
 
