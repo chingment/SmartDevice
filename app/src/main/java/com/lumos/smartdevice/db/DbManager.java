@@ -471,6 +471,8 @@ public class DbManager {
                     }
                 }
 
+                usages.add(usage);
+
             }
             cursor.close();
 

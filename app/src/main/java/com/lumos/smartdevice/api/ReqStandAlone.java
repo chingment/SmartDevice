@@ -185,7 +185,8 @@ public class ReqStandAlone implements IReqVersion{
 
         RetLockerBoxGetUsages ret=new RetLockerBoxGetUsages();
 
-        result = new ResultBean<>(ResultCode.SUCCESS, "", usages);
+        ret.setUsages(usages);
+        result = new ResultBean<>(ResultCode.SUCCESS, "", ret);
 
         reqHandler.sendSuccessMessage(result.toJSONString());
     }
