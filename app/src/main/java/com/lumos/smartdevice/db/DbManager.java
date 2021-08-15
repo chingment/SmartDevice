@@ -5,8 +5,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 
-
+import com.alibaba.fastjson.JSON;
 import com.lumos.smartdevice.model.CabinetBean;
+import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.model.PageDataBean;
 import com.lumos.smartdevice.model.TripMsgBean;
 import com.lumos.smartdevice.model.UserBean;
@@ -422,40 +423,58 @@ public class DbManager {
         return rows;
     }
 
-    public UserBean getLockerBoxUser(String cabinetId,String slotId){
+    public List<LockerBoxUsageBean> getLockerBoxUsages(String cabinetId, String slotId){
 
-        UserBean user=null;
+        List<LockerBoxUsageBean> usages=new ArrayList<>();
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        Cursor cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME + " where "+ LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and "+ LockerBoxUsageDao.COLUMN_NAME_SLOT_ID+" = ? and "+ LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE+" = ? ",new String[]{cabinetId,slotId,"1"});
+        Cursor cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME + " where "+ LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and "+ LockerBoxUsageDao.COLUMN_NAME_SLOT_ID+" = ? ",new String[]{cabinetId,slotId});
         boolean exist = (cursor.getCount() > 0);
         if(exist){
 
-            String user_id="";
+
             while(cursor.moveToNext()) {
-                user_id = cursor.getString(cursor.getColumnIndex(LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA));
+
+                String usageType = cursor.getString(cursor.getColumnIndex(LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE));
+                String usageData = cursor.getString(cursor.getColumnIndex(LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA));
+
+
+                LockerBoxUsageBean usage=new LockerBoxUsageBean();
+
+                usage.setCabinetId(cabinetId);
+                usage.setSlotId(slotId);
+                usage.setUsageType(usageType);
+                usage.setUsageData(usageData);
+
+
+                if(usageType.equals("1")) {
+
+                    Cursor cursor1 = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where " + UserDao.COLUMN_NAME_USERID + " = ? ", new String[]{usageData});
+                    exist = (cursor1.getCount() > 0);
+                    if (exist) {
+
+                        while (cursor1.moveToNext()) {
+
+                            UserBean user = new UserBean();
+
+                            String user_name = cursor1.getString(cursor1.getColumnIndex(UserDao.COLUMN_NAME_USERNAME));
+                            String fullname = cursor1.getString(cursor1.getColumnIndex(UserDao.COLUMN_NAME_FULLNAME));
+
+                            user.setUserId(usageData);
+                            user.setUserName(user_name);
+                            user.setFullName(fullname);
+                            usage.setUsageCumstom(JSON.toJSONString(user));
+                        }
+
+                        cursor1.close();
+                    }
+                }
+
             }
             cursor.close();
 
-            Cursor cursor1 = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where "+UserDao.COLUMN_NAME_USERID + " = ? ",new String[]{user_id});
-            exist = (cursor1.getCount() > 0);
-            if(exist){
-
-                while(cursor1.moveToNext()) {
-
-                    user = new UserBean();
-
-                    String user_name = cursor1.getString(cursor1.getColumnIndex(UserDao.COLUMN_NAME_USERNAME));
-                    String fullname = cursor1.getString(cursor1.getColumnIndex(UserDao.COLUMN_NAME_FULLNAME));
-
-                    user.setUserId(user_id);
-                    user.setUserName(user_name);
-                    user.setFullName(fullname);
-                }
-                cursor1.close();
-            }
         }
-        return user;
+        return usages;
     }
 }

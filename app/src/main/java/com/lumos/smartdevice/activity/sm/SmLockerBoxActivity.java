@@ -19,8 +19,9 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetLockerBoxGetUsages;
 import com.lumos.smartdevice.api.rop.RopLockerBoxDeleteUsage;
-import com.lumos.smartdevice.api.rop.RopLockerBoxGetUsageByUser;
+import com.lumos.smartdevice.api.rop.RopLockerBoxGetUsages;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.UserBean;
@@ -273,11 +274,11 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             return;
         if(StringUtil.isEmptyNotNull(slotId))
             return;
-        RopLockerBoxGetUsageByUser rop=new RopLockerBoxGetUsageByUser();
+        RopLockerBoxGetUsages rop=new RopLockerBoxGetUsages();
         rop.setDeviceId(deviceId);
         rop.setCabinetId(cabinetId);
         rop.setSlotId(slotId);
-        ReqInterface.getInstance().lockerBoxGetUsageByUser(rop, new ReqHandler(){
+        ReqInterface.getInstance().lockerBoxGetUsages(rop, new ReqHandler(){
 
                     @Override
                     public void onBeforeSend() {
@@ -293,11 +294,12 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                     public void onSuccess(String response) {
                         super.onSuccess(response);
 
-                        ResultBean<UserBean> rt = JSON.parseObject(response, new TypeReference<ResultBean<UserBean>>() {
+                        ResultBean<RetLockerBoxGetUsages> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetLockerBoxGetUsages>>() {
                         });
 
                         if (rt.getCode() == ResultCode.SUCCESS) {
-                            dialog_LockerBox.setLockerBoxUser(rt.getData());
+                            RetLockerBoxGetUsages ret = rt.getData();
+                            dialog_LockerBox.setLockerBoxUsages(ret.getUsages());
                         }
                     }
 

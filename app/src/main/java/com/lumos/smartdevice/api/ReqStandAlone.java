@@ -1,6 +1,7 @@
 package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RetDeviceInitData;
+import com.lumos.smartdevice.api.rop.RetLockerBoxGetUsages;
 import com.lumos.smartdevice.api.rop.RetOwnLogin;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
 import com.lumos.smartdevice.api.rop.RetUserGetList;
@@ -8,17 +9,20 @@ import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopLockerBoxDeleteUsage;
 import com.lumos.smartdevice.api.rop.RopLockerBoxSaveUsage;
-import com.lumos.smartdevice.api.rop.RopLockerBoxGetUsageByUser;
+import com.lumos.smartdevice.api.rop.RopLockerBoxGetUsages;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.model.PageDataBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.utils.StringUtil;
+
+import java.util.List;
 
 public class ReqStandAlone implements IReqVersion{
 
@@ -173,11 +177,16 @@ public class ReqStandAlone implements IReqVersion{
     }
 
     @Override
-    public void lockerBoxGetUsageByUser(RopLockerBoxGetUsageByUser rop, final ReqHandler reqHandler) {
+    public void lockerBoxGetUsages(RopLockerBoxGetUsages rop, final ReqHandler reqHandler) {
         reqHandler.sendBeforeSendMessage();
         ResultBean result;
-        UserBean user = DbManager.getInstance().getLockerBoxUser(rop.getCabinetId(), rop.getSlotId());
-        result = new ResultBean<>(ResultCode.SUCCESS, "", user);
+
+        List<LockerBoxUsageBean> usages = DbManager.getInstance().getLockerBoxUsages(rop.getCabinetId(), rop.getSlotId());
+
+        RetLockerBoxGetUsages ret=new RetLockerBoxGetUsages();
+
+        result = new ResultBean<>(ResultCode.SUCCESS, "", usages);
+
         reqHandler.sendSuccessMessage(result.toJSONString());
     }
 

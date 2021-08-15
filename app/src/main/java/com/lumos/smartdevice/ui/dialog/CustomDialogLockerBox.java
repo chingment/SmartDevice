@@ -9,13 +9,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.ViewHolder;
+
+import java.util.List;
 
 public class CustomDialogLockerBox extends Dialog {
 
@@ -104,7 +109,21 @@ public class CustomDialogLockerBox extends Dialog {
 
     }
 
-    public void setLockerBoxUser(UserBean user) {
+    public void setLockerBoxUsages(List<LockerBoxUsageBean> usages) {
+
+        UserBean user=null;
+        for (LockerBoxUsageBean usage :
+                usages  ) {
+            String usageType=usage.getUsageType();
+            String usageCumstom=usage.getUsageCumstom();
+            switch (usageType){
+                case "1":
+                    user= JSON.parseObject(usageCumstom, new TypeReference<UserBean>() {
+                    });
+                    break;
+            }
+
+        }
 
         if (user == null) {
             userId=null;
