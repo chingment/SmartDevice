@@ -229,35 +229,28 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                 rop.setUsageType("1");
                 rop.setUsageData(bean.getUserId());
                 ReqInterface.getInstance().lockerBoxSaveUsage(rop, new ReqHandler(){
-
                     @Override
                     public void onBeforeSend() {
                         super.onBeforeSend();
                     }
-
                     @Override
                     public void onAfterSend() {
                         super.onAfterSend();
                     }
-
                     @Override
                     public void onSuccess(String response) {
                         super.onSuccess(response);
-
                         ResultBean<Object> rt = JSON.parseObject(response, new TypeReference<ResultBean<Object>>() {
                         });
-
                         if (rt.getCode() == ResultCode.SUCCESS) {
                             finish();
                         }
                     }
-
                     @Override
                     public void onFailure(String msg, Exception e) {
                         super.onFailure(msg, e);
                     }
                 });
-
             }
         });
 
@@ -269,7 +262,6 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                 lv_Users_PageIndex = 0;
                 getUsers();
             }
-
             @Override
             public void loadMore() {
                 super.loadMore();

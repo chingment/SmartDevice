@@ -134,7 +134,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                                 });
 
                                 if (rt.getCode() == ResultCode.SUCCESS) {
-                                   lockerBoxGetUsageByUser(dialog_LockerBox.getDeviceId(),dialog_LockerBox.getCabinetId(),dialog_LockerBox.getSlotId());
+                                   lockerBoxGetUsages(dialog_LockerBox.getDeviceId(),dialog_LockerBox.getCabinetId(),dialog_LockerBox.getSlotId());
                                 }
                             }
 
@@ -247,7 +247,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                         public void onClick(View v) {
                             String l_Slot_Id = v.getTag().toString();
                             dialog_LockerBox.setLockerBox(device, cur_Cabinet, l_Slot_Id);
-                            lockerBoxGetUsageByUser(device.getDeviceId(), cur_Cabinet.getCabinetId(),l_Slot_Id);
+                            lockerBoxGetUsages(device.getDeviceId(), cur_Cabinet.getCabinetId(),l_Slot_Id);
                             dialog_LockerBox.show();
                         }
                     });
@@ -265,7 +265,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         }
     }
 
-    public void lockerBoxGetUsageByUser(String deviceId, String cabinetId,String slotId){
+    public void lockerBoxGetUsages(String deviceId, String cabinetId,String slotId){
 
 
         if(StringUtil.isEmptyNotNull(deviceId))
@@ -316,7 +316,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         super.onResume();
 
         if(dialog_LockerBox!=null) {
-            lockerBoxGetUsageByUser(dialog_LockerBox.getDeviceId(), dialog_LockerBox.getCabinetId(), dialog_LockerBox.getSlotId());
+            lockerBoxGetUsages(dialog_LockerBox.getDeviceId(), dialog_LockerBox.getCabinetId(), dialog_LockerBox.getSlotId());
         }
     }
 
