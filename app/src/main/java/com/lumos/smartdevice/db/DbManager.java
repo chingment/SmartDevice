@@ -443,12 +443,21 @@ public class DbManager {
             }
 
 
-            ContentValues values = new ContentValues();
-            values.put(LockerBoxUsageDao.COLUMN_NAME_CABINET_ID, cabinetId);
-            values.put(LockerBoxUsageDao.COLUMN_NAME_SLOT_ID, slotId);
-            values.put(LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE, usageType);
-            values.put(LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA, usageData);
-            rows = db.insert(LockerBoxUsageDao.TABLE_NAME, null, values);
+            ContentValues ct_LockerBoxUsage = new ContentValues();
+            ct_LockerBoxUsage.put(LockerBoxUsageDao.COLUMN_NAME_CABINET_ID, cabinetId);
+            ct_LockerBoxUsage.put(LockerBoxUsageDao.COLUMN_NAME_SLOT_ID, slotId);
+            ct_LockerBoxUsage.put(LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE, usageType);
+            ct_LockerBoxUsage.put(LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA, usageData);
+
+            rows = db.insert(LockerBoxUsageDao.TABLE_NAME, null, ct_LockerBoxUsage);
+
+
+            ContentValues ct_LockerBox = new ContentValues();
+            ct_LockerBox.put(LockerBoxDao.COLUMN_NAME_IS_USED, "1");
+            ct_LockerBox.put(LockerBoxDao.COLUMN_NAME_USAGE_TYPE, usageType);
+
+            rows = db.update(LockerBoxDao.TABLE_NAME, ct_LockerBox, LockerBoxDao.COLUMN_NAME_CABINET_ID + " = ? and "+LockerBoxDao.COLUMN_NAME_SLOT_ID + " = ?", new String[]{cabinetId,slotId});
+
 
             cursor.close();
         }
@@ -461,7 +470,24 @@ public class DbManager {
         int rows = 0;
         if (db.isOpen()) {
 
-            rows = db.delete(LockerBoxUsageDao.TABLE_NAME, LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE + " = ? and "+ LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA + " = ?", new String[]{cabinetId, slotId,usageType,usageData});
+            rows = db.delete(LockerBoxUsageDao.TABLE_NAME, LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA + " = ?", new String[]{cabinetId, slotId, usageType, usageData});
+
+            Cursor cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME + " where " + LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + "=? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + "=? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE + "=? ", new String[]{cabinetId, slotId, usageType});
+
+            int count = cursor.getCount();
+
+            String is_Used = "0";
+            if (count > 0) {
+                is_Used = "1";
+            }
+
+            ContentValues ct_LockerBox = new ContentValues();
+            ct_LockerBox.put(LockerBoxDao.COLUMN_NAME_IS_USED, is_Used);
+
+            rows = db.update(LockerBoxDao.TABLE_NAME, ct_LockerBox, LockerBoxDao.COLUMN_NAME_CABINET_ID + " = ? and "+LockerBoxDao.COLUMN_NAME_SLOT_ID + " = ?", new String[]{cabinetId,slotId});
+
+            cursor.close();
+
         }
 
         return rows;
