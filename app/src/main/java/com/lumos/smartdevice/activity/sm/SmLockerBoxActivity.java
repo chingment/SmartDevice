@@ -24,7 +24,6 @@ import com.lumos.smartdevice.api.rop.RopLockerBoxDeleteUsage;
 import com.lumos.smartdevice.api.rop.RopLockerBoxGetUsages;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
-import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.ui.dialog.CustomDialogCabinetConfig;
