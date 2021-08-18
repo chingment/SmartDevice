@@ -6,12 +6,14 @@ import android.database.sqlite.SQLiteDatabase;
 
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.model.PageDataBean;
 import com.lumos.smartdevice.model.TripMsgBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppContext;
+import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.utils.StringUtil;
 
 import java.util.ArrayList;
@@ -295,44 +297,85 @@ public class DbManager {
         return cabinets;
     }
 
-    public  void saveCabinet(CabinetBean cabinet){
+    public  int saveAppSceneComPrl(String appVesionMode,String appSceneMode,String comPrl) {
 
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        int result = -1;
 
-        if(db.isOpen()){
-            Cursor cursor = db.rawQuery("select * from " + CabinetDao.TABLE_NAME + " where "+CabinetDao.COLUMN_NAME_CABINET_ID + " = ?",new String[]{String.valueOf(cabinet.getCabinetId())});
+        if(appSceneMode.equals(AppVar.SCENE_MODE_1)) {
 
-            boolean exist = (cursor.getCount() > 0);
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            if (db.isOpen()) {
 
-            if(!exist){
+                Cursor cursor = db.rawQuery("select * from " + LockerBoxDao.TABLE_NAME + " where " + LockerBoxDao.COLUMN_NAME_IS_USED + " = ?", new String[]{"1"});
+                boolean isHasUsed = (cursor.getCount() > 0);
 
-                ContentValues values = new ContentValues();
-                values.put(CabinetDao.COLUMN_NAME_CABINET_ID, cabinet.getCabinetId());
-                values.put(CabinetDao.COLUMN_NAME_NAME, cabinet.getName());
-                values.put(CabinetDao.COLUMN_NAME_COM_ID, cabinet.getComId());
-                values.put(CabinetDao.COLUMN_NAME_COM_BAUD, cabinet.getComBaud());
-                values.put(CabinetDao.COLUMN_NAME_COM_PRL, cabinet.getComPrl());
-                values.put(CabinetDao.COLUMN_NAME_LAYOUT, cabinet.getLayout());
+                if (isHasUsed) {
+                    cursor.close();
+                    return 1;
+                }
 
-                db.insert(CabinetDao.TABLE_NAME, null, values);
+                cursor= db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME, null);
 
+                isHasUsed = (cursor.getCount() > 0);
+
+                if (isHasUsed) {
+                    cursor.close();
+                    return 1;
+                }
+
+                List<CabinetBean> cabinets = JSON.parseObject(comPrl, new TypeReference<List<CabinetBean>>() {
+                });
+
+                if (cabinets == null || cabinets.size() <= 0) {
+                    return 2;
+                }
+
+                db.delete(LockerBoxDao.TABLE_NAME, null, null);
+                db.delete(CabinetDao.TABLE_NAME, null, null);
+
+                for (CabinetBean cabinet : cabinets) {
+
+                    ContentValues cv_Cabinet = new ContentValues();
+                    cv_Cabinet.put(CabinetDao.COLUMN_NAME_CABINET_ID, cabinet.getCabinetId());
+                    cv_Cabinet.put(CabinetDao.COLUMN_NAME_NAME, cabinet.getName());
+                    cv_Cabinet.put(CabinetDao.COLUMN_NAME_COM_ID, cabinet.getComId());
+                    cv_Cabinet.put(CabinetDao.COLUMN_NAME_COM_BAUD, cabinet.getComBaud());
+                    cv_Cabinet.put(CabinetDao.COLUMN_NAME_COM_PRL, cabinet.getComPrl());
+                    cv_Cabinet.put(CabinetDao.COLUMN_NAME_LAYOUT, cabinet.getLayout());
+
+                    db.insert(CabinetDao.TABLE_NAME, null, cv_Cabinet);
+
+
+                    List<List<String>> layout = JSON.parseObject(cabinet.getLayout(), new TypeReference<List<List<String>>>() {
+                    });
+
+                    if (layout == null || layout.size() <= 0)
+                        return 3;
+
+                    int rowsSize=layout.size();
+                    for (int i = 0; i <rowsSize; i++) {
+                        List<String> cols=layout.get(i);
+                        int colsSize=cols.size();
+                        for (int j = 0; j < colsSize; j++) {
+                            String slotId=cols.get(j);
+                            String[] col_Prams=cols.get(j).split("-");
+                            String isUse=col_Prams[3];
+                            if(isUse.equals("0")) {
+                                ContentValues cv_LockerBox = new ContentValues();
+                                cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_CABINET_ID, cabinet.getCabinetId());
+                                cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_SLOT_ID, slotId);
+                                cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_IS_USED, "0");
+                                cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_USAGE_TYPE, "");
+                                db.insert(LockerBoxDao.TABLE_NAME, null, cv_LockerBox);
+                            }
+                        }
+                    }
+
+                }
             }
-            else {
-
-
-                ContentValues values = new ContentValues();
-                values.put(CabinetDao.COLUMN_NAME_NAME, cabinet.getName());
-                values.put(CabinetDao.COLUMN_NAME_COM_ID, cabinet.getComId());
-                values.put(CabinetDao.COLUMN_NAME_COM_BAUD, cabinet.getComBaud());
-                values.put(CabinetDao.COLUMN_NAME_COM_PRL, cabinet.getComPrl());
-                values.put(CabinetDao.COLUMN_NAME_LAYOUT, cabinet.getLayout());
-
-                db.update(CabinetDao.TABLE_NAME, values, CabinetDao.COLUMN_NAME_CABINET_ID + " = ?", new String[]{String.valueOf(cabinet.getCabinetId())});
-
-            }
-
-            cursor.close();
         }
+
+        return 0;
 
     }
 
@@ -398,6 +441,7 @@ public class DbManager {
                 cursor.close();
                 return rows;
             }
+
 
             ContentValues values = new ContentValues();
             values.put(LockerBoxUsageDao.COLUMN_NAME_CABINET_ID, cabinetId);
@@ -479,4 +523,41 @@ public class DbManager {
         }
         return usages;
     }
+
+//    public int createLockerBox(String comPrl, String jsonLayout) {
+//
+//        int result = 0;
+//
+//
+//        List<CabinetBean> layout = JSON.parseObject(jsonLayout, new TypeReference<List<CabinetBean>() {
+//        });
+//
+//        int rowsSize = layout.size();
+//
+//        for (int i = 0; i < rowsSize; i++) {
+//
+//            List<String> cols = layout.get(i);
+//            int colsSize = cols.size();
+//
+//            for (int j = 0; j < colsSize; j++) {
+//
+//                String[] col_Prams = cols.get(j).split("-");
+//
+//                String id = col_Prams[0];
+//                String plate = col_Prams[1];
+//                String name = col_Prams[2];
+//                String isUse = col_Prams[3];
+//
+//                if (isUse.equals("0")){
+//
+//
+//
+//                }
+//            }
+//        }
+//
+//
+//        return result;
+//
+//    }
 }

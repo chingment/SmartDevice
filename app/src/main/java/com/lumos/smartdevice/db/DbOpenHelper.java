@@ -56,6 +56,13 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 			+ LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA + " TEXT , "
 			+ LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE + " TEXT );";
 
+	private static final String LOCKERBOX_TABLE_CREATE = "CREATE TABLE "
+			+ LockerBoxDao.TABLE_NAME + " ("
+			+ LockerBoxDao.COLUMN_NAME_CABINET_ID + " TEXT , "
+			+ LockerBoxDao.COLUMN_NAME_SLOT_ID + " TEXT , "
+			+ LockerBoxDao.COLUMN_NAME_IS_USED + " TEXT , "
+			+ LockerBoxDao.COLUMN_NAME_USAGE_TYPE + " TEXT );";
+
 
 	private DbOpenHelper(Context context) {
 		super(context, "smartdevice.db", null, DATABASE_VERSION);
@@ -76,6 +83,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 		db.execSQL(USERUNLOCKKEY_TABLE_CREATE);
 		db.execSQL(TRIPMSG_TABLE_CREATE);
 		db.execSQL(LOCKERBOXUSAGE_TABLE_CREATE);
+		db.execSQL(LOCKERBOX_TABLE_CREATE);
 	}
 
 	@Override

@@ -97,32 +97,29 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
                     break;
                 case R.id.btn_Nav_Header_Right:
                     RadioButton rb_VesionMode = findViewById(rg_VesionMode.getCheckedRadioButtonId());
+                    String version_mode = "0";
                     if (rb_VesionMode != null) {
-                       String  version_mode= rb_VesionMode.getTag().toString();
-                       DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE,version_mode);
+                        version_mode = rb_VesionMode.getTag().toString();
+                        DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE, version_mode);
                     }
 
+                    String scene_mode = "0";
                     RadioButton rb_SceneMode = findViewById(rg_SceneMode.getCheckedRadioButtonId());
                     if (rb_SceneMode != null) {
-                        String  scene_mode= rb_SceneMode.getTag().toString();
-                        DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE,scene_mode);
+                        scene_mode = rb_SceneMode.getTag().toString();
+                        DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE, scene_mode);
                     }
 
 
-                    String json_Com_Prl=et_Com_Prl.getText().toString();
+                    String json_Com_Prl = et_Com_Prl.getText().toString();
 
+                    int result = DbManager.getInstance().saveAppSceneComPrl(version_mode, scene_mode, json_Com_Prl);
 
-                    List<CabinetBean> cabinets = JSON.parseObject(json_Com_Prl, new TypeReference<List<CabinetBean>>() {
-                    });
-
-                    if(cabinets!=null){
-                        for (CabinetBean cabinet: cabinets ) {
-                            DbManager.getInstance().saveCabinet(cabinet);
-                        }
+                    if (result == 0) {
+                        showToast(getAppContext().getString(R.string.save_success));
+                    } else if (result == 1) {
+                        showToast(getAppContext().getString(R.string.tips_lockerbox_has_existuse));
                     }
-
-
-                    showToast(getAppContext().getString(R.string.save_success));
                     break;
 
             }

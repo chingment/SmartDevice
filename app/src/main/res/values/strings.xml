@@ -80,6 +80,7 @@
     <string name="tips_password_formatnoright">密码格式有误</string>
     <string name="tips_password_noright">用户密码不正确</string>
     <string name="tips_fullname_isnotnull">姓名不能为空</string>
+    <string name="tips_lockerbox_has_existuse">保存失败，检查到格子存在使用中</string>
     <string name="locker_box_status_1">未使用</string>
     <string name="locker_box_status_2">已使用（随机）</string>
     <string name="locker_box_status_3">已使用（固定）</string>
