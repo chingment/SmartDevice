@@ -20,10 +20,13 @@ import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetLockerGetBoxUsages;
+import com.lumos.smartdevice.api.rop.RetLockerGetBoxs;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBoxUsages;
+import com.lumos.smartdevice.api.rop.RopLockerGetBoxs;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.ui.dialog.CustomDialogCabinetConfig;
@@ -133,7 +136,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                                 });
 
                                 if (rt.getCode() == ResultCode.SUCCESS) {
-                                   lockerBoxGetUsages(dialog_LockerBox.getDeviceId(),dialog_LockerBox.getCabinetId(),dialog_LockerBox.getSlotId());
+                                    lockerGetBoxUsages(dialog_LockerBox.getDeviceId(),dialog_LockerBox.getCabinetId(),dialog_LockerBox.getSlotId());
                                 }
                             }
 
@@ -192,10 +195,12 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
         tv_CabinetName.setText(cur_Cabinet.getCabinetId());
 
-        drawsLayout(cur_Cabinet.getLayout());
+        lockerGetBoxs(device.getDeviceId(),cur_Cabinet.getCabinetId());
+
+
     }
 
-    public void drawsLayout(String json_layout) {
+    public void drawsLayout(String json_layout,HashMap<String, LockerBoxBean> boxs) {
 
 
         List<List<String>> layout = JSON.parseObject(json_layout, new TypeReference< List<List<String>>>() {});
@@ -246,14 +251,31 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                         public void onClick(View v) {
                             String l_Slot_Id = v.getTag().toString();
                             dialog_LockerBox.setLockerBox(device, cur_Cabinet, l_Slot_Id);
-                            lockerBoxGetUsages(device.getDeviceId(), cur_Cabinet.getCabinetId(),l_Slot_Id);
+                            lockerGetBoxUsages(device.getDeviceId(), cur_Cabinet.getCabinetId(),l_Slot_Id);
                             dialog_LockerBox.show();
                         }
                     });
                 }
 
-                //if(id.equals("2"))
-                //    tv_Name.setBackgroundResource(R.drawable.locker_box_status_2);
+                LockerBoxBean box=boxs.get(slot_Id);
+                if(box!=null){
+
+                    String box_IsUsed=box.getIsUsed();
+                    String box_UsageType=box.getUsageType();
+                    if(box_IsUsed.equals("0")){
+                        tv_Name.setBackgroundResource(R.drawable.locker_box_status_1);
+                    }
+                    else {
+
+                        if(box_UsageType.equals("1")){
+                            tv_Name.setBackgroundResource(R.drawable.locker_box_status_3);
+                        }
+                        else {
+                            tv_Name.setBackgroundResource(R.drawable.locker_box_status_2);
+                        }
+
+                    }
+                }
 
 
                 tableRow.addView(convertView, new TableRow.LayoutParams(MP, WC, 1));
@@ -264,7 +286,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         }
     }
 
-    public void lockerBoxGetUsages(String deviceId, String cabinetId,String slotId){
+    public void lockerGetBoxUsages(String deviceId, String cabinetId,String slotId){
 
 
         if(StringUtil.isEmptyNotNull(deviceId))
@@ -310,12 +332,53 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         );
     }
 
+    public void lockerGetBoxs(String deviceId,String cabinetId){
+
+
+        RopLockerGetBoxs rop=new RopLockerGetBoxs();
+        rop.setDeviceId(deviceId);
+        rop.setCabinetId(cabinetId);
+
+        ReqInterface.getInstance().lockerGetBoxs(rop, new ReqHandler(){
+
+                    @Override
+                    public void onBeforeSend() {
+                        super.onBeforeSend();
+                    }
+
+                    @Override
+                    public void onAfterSend() {
+                        super.onAfterSend();
+                    }
+
+                    @Override
+                    public void onSuccess(String response) {
+                        super.onSuccess(response);
+
+                        ResultBean<RetLockerGetBoxs> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetLockerGetBoxs>>() {
+                        });
+
+                        if (rt.getCode() == ResultCode.SUCCESS) {
+                            RetLockerGetBoxs ret = rt.getData();
+                            drawsLayout(cur_Cabinet.getLayout(), ret.getBoxs());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg, Exception e) {
+                        super.onFailure(msg, e);
+                    }
+                }
+        );
+
+    }
+
     @Override
     public  void onResume() {
         super.onResume();
 
         if(dialog_LockerBox!=null) {
-            lockerBoxGetUsages(dialog_LockerBox.getDeviceId(), dialog_LockerBox.getCabinetId(), dialog_LockerBox.getSlotId());
+            lockerGetBoxUsages(dialog_LockerBox.getDeviceId(), dialog_LockerBox.getCabinetId(), dialog_LockerBox.getSlotId());
         }
     }
 

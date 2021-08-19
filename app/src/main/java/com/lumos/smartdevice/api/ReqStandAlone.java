@@ -2,6 +2,7 @@ package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RetLockerGetBoxUsages;
+import com.lumos.smartdevice.api.rop.RetLockerGetBoxs;
 import com.lumos.smartdevice.api.rop.RetOwnLogin;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
 import com.lumos.smartdevice.api.rop.RetUserGetList;
@@ -17,12 +18,14 @@ import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.model.PageDataBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.utils.StringUtil;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class ReqStandAlone implements IReqVersion{
@@ -159,8 +162,13 @@ public class ReqStandAlone implements IReqVersion{
 
     @Override
     public void lockerGetBoxs(RopLockerGetBoxs rop, final ReqHandler reqHandler) {
-
-
+        reqHandler.sendBeforeSendMessage();
+        ResultBean result;
+        HashMap<String, LockerBoxBean>  lockerBoxs = DbManager.getInstance().getLockerBoxs(rop.getCabinetId());
+        RetLockerGetBoxs ret=new RetLockerGetBoxs();
+        ret.setBoxs(lockerBoxs);
+        result = new ResultBean<>(ResultCode.SUCCESS, "",ret);
+        reqHandler.sendSuccessMessage(result.toJSONString());
     }
 
     @Override
