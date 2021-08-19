@@ -84,53 +84,65 @@ public class DbManager {
         }
     }
 
-    public long addUser(String username, String password, String fullname, String type, String avatar) {
+    public ResultBean addUser(String username, String password, String fullname, String type, String avatar) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        long rows = 0;
-        if (db.isOpen()) {
-
-            Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where " + UserDao.COLUMN_NAME_USERNAME + " = ?", new String[]{username});
-
-            boolean exist = (cursor.getCount() > 0);
-            if (exist) {
-                cursor.close();
-                return rows;
-            }
-
-            ContentValues values = new ContentValues();
-            values.put(UserDao.COLUMN_NAME_USERNAME, username);
-            values.put(UserDao.COLUMN_NAME_PASSWORD, password);
-            values.put(UserDao.COLUMN_NAME_FULLNAME, fullname);
-            values.put(UserDao.COLUMN_NAME_AVATAR, avatar);
-            values.put(UserDao.COLUMN_NAME_TYPE, type);
-
-            rows = db.insert(UserDao.TABLE_NAME, null, values);
-
-            cursor.close();
+        if (!db.isOpen()) {
+            return ResultUtil.isFailure("数据库文件未打开");
         }
 
-        return rows;
+
+        Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where " + UserDao.COLUMN_NAME_USERNAME + " = ?", new String[]{username});
+
+        boolean exist = (cursor.getCount() > 0);
+        if (exist) {
+            cursor.close();
+            return ResultUtil.isFailure("用户名已存在");
+        }
+
+        ContentValues ct_User = new ContentValues();
+        ct_User.put(UserDao.COLUMN_NAME_USERNAME, username);
+        ct_User.put(UserDao.COLUMN_NAME_PASSWORD, password);
+        ct_User.put(UserDao.COLUMN_NAME_FULLNAME, fullname);
+        ct_User.put(UserDao.COLUMN_NAME_AVATAR, avatar);
+        ct_User.put(UserDao.COLUMN_NAME_TYPE, type);
+
+        long rows = db.insert(UserDao.TABLE_NAME, null, ct_User);
+
+        if(rows>0){
+            return ResultUtil.isSuccess("保存成功");
+        }
+        else{
+            return ResultUtil.isFailure("保存失败");
+        }
+
     }
 
-    public int updateUser(String userid, String password, String fullname, String avatar) {
+    public ResultBean updateUser(String userid, String password, String fullname, String avatar) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int rows = 0;
-        if (db.isOpen()) {
 
-            ContentValues values = new ContentValues();
-            values.put(UserDao.COLUMN_NAME_FULLNAME, fullname);
-            values.put(UserDao.COLUMN_NAME_AVATAR, avatar);
-
-            if (!StringUtil.isEmptyNotNull(password)) {
-                values.put(UserDao.COLUMN_NAME_PASSWORD, password);
-            }
-
-
-            rows = db.update(UserDao.TABLE_NAME, values, UserDao.COLUMN_NAME_USERID + " = ?", new String[]{String.valueOf(userid)});
-
+        if (!db.isOpen()) {
+            return ResultUtil.isFailure("数据库文件未打开");
         }
 
-        return rows;
+
+        ContentValues ct_User = new ContentValues();
+        ct_User.put(UserDao.COLUMN_NAME_FULLNAME, fullname);
+        ct_User.put(UserDao.COLUMN_NAME_AVATAR, avatar);
+
+        if (!StringUtil.isEmptyNotNull(password)) {
+            ct_User.put(UserDao.COLUMN_NAME_PASSWORD, password);
+        }
+
+
+        long rows = db.update(UserDao.TABLE_NAME, ct_User, UserDao.COLUMN_NAME_USERID + " = ?", new String[]{String.valueOf(userid)});
+
+        if(rows>0){
+            return ResultUtil.isSuccess("保存成功");
+        }
+        else{
+            return ResultUtil.isFailure("保存失败");
+        }
+
     }
 
     public UserBean checkUserPassword(String username, String password, String type) {
@@ -296,11 +308,11 @@ public class DbManager {
 
     public ResultBean saveAppScene(String appVesionMode, String appSceneMode, String comPrl) {
 
+
         DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE, appSceneMode);
         DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE, appVesionMode);
 
         if (appSceneMode.equals(AppVar.SCENE_MODE_1)) {
-
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             if (db.isOpen()) {
 
@@ -309,7 +321,7 @@ public class DbManager {
 
                 if (isHasUsed) {
                     cursor.close();
-                    return ResultUtil.isFailure("有柜子正在使用中");
+                    return ResultUtil.isFailure("保存失败，有柜子正在使用中");
                 }
 
                 cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME, null);
@@ -318,14 +330,14 @@ public class DbManager {
 
                 if (isHasUsed) {
                     cursor.close();
-                    return ResultUtil.isFailure("有柜子正在使用中");
+                    return ResultUtil.isFailure("保存失败，有柜子正在使用中");
                 }
 
                 List<CabinetBean> cabinets = JSON.parseObject(comPrl, new TypeReference<List<CabinetBean>>() {
                 });
 
                 if (cabinets == null || cabinets.size() <= 0) {
-                    return ResultUtil.isFailure("解释串口协议失败");
+                    return ResultUtil.isFailure("保存失败，解释串口协议不成功");
                 }
 
                 db.delete(LockerBoxDao.TABLE_NAME, null, null);
@@ -348,7 +360,7 @@ public class DbManager {
                     });
 
                     if (layout == null || layout.size() <= 0)
-                        return ResultUtil.isFailure("解释布局协议失败");
+                        return ResultUtil.isFailure("保存失败，解释布局协议失败");
 
                     int rowsSize = layout.size();
                     for (int i = 0; i < rowsSize; i++) {

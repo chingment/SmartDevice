@@ -20,7 +20,6 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmAppSceneSettingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmAppSceneSettingActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ResultUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ResultUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/DbManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/DbManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,11 +41,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/DbManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="297" lean-forward="true" selection-start-line="297" selection-end-line="297" />
+            <state relative-caret-position="407">
+              <caret line="86" column="109" selection-start-line="86" selection-start-column="109" selection-end-line="86" selection-end-column="109" />
               <folding>
                 <element signature="method#addConfig#0;class#DbManager#0" />
                 <element signature="method#addUser#0;class#DbManager#0" />
@@ -57,6 +56,8 @@
                 <element signature="method#updateConfig#0;class#DbManager#0" />
                 <element signature="method#getConfigValue#0;class#DbManager#0" />
                 <element signature="method#getCabinets#0;class#DbManager#0" />
+                <element signature="method#saveAppSceneComPrl#0;class#DbManager#0" />
+                <element signature="e#10615#13765#1" />
                 <element signature="method#saveTripMsg#0;class#DbManager#0" />
                 <element signature="method#getTripMsgs#0;class#DbManager#0" />
                 <element signature="method#deleteTripMsg#0;class#DbManager#0" />
@@ -69,20 +70,22 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmAppSceneSettingActivity.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="113" column="70" selection-start-line="113" selection-start-column="70" selection-end-line="113" selection-end-column="70" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ResultUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="23" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="23" />
+            <state relative-caret-position="102">
+              <caret line="127" column="18" lean-forward="true" selection-start-line="127" selection-start-column="18" selection-end-line="127" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#deviceInitData#0;class#ReqStandAlone#0" />
+                <element signature="method#ownLoginByAccount#0;class#ReqStandAlone#0" />
+                <element signature="method#ownLogout#0;class#ReqStandAlone#0" />
+                <element signature="method#userGetList#0;class#ReqStandAlone#0" />
+                <element signature="method#lockerGetBoxs#0;class#ReqStandAlone#0" />
+                <element signature="method#lockerGetBox#0;class#ReqStandAlone#0" />
+                <element signature="method#lockerSaveBoxUsage#0;class#ReqStandAlone#0" />
+                <element signature="method#lockerDeleteBoxUsage#0;class#ReqStandAlone#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,8 +102,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>color</find>
-      <find>shapeloading_color</find>
       <find>backgrounL</find>
       <find>insert</find>
       <find>CREATE_PREF_TABLE</find>
@@ -129,6 +130,8 @@
       <find>db.update</find>
       <find>lockerGetBox</find>
       <find>saveAppSceneComPrl</find>
+      <find>$PROJECT_DIR$/app</find>
+      <find>updateUser</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -190,10 +193,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLockerBoxActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqNetWord.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/IReqVersion.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ResultUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmAppSceneSettingActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/DbManager.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java" />
       </list>
     </option>
   </component>
@@ -608,7 +611,7 @@
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.6335299" weight="0.27522936" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49620894" weight="0.32874617" />
-      <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.4903117" visible="true" weight="0.1529052" />
+      <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.4903117" visible="true" weight="0.23394495" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.39258635" side_tool="true" weight="0.31039757" />
       <window_info anchor="bottom" id="Build" order="5" sideWeight="0.60741365" weight="0.16972478" />
       <window_info anchor="bottom" id="Android Profiler" order="6" sideWeight="0.49789384" weight="0.32874617" />
@@ -1065,13 +1068,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ResultBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ResultCode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -1086,25 +1082,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="93" column="4" selection-start-line="93" selection-start-column="4" selection-end-line="93" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#deviceInitData#0;class#ReqStandAlone#0" />
-            <element signature="method#ownLoginByAccount#0;class#ReqStandAlone#0" />
-            <element signature="method#ownLogout#0;class#ReqStandAlone#0" />
-            <element signature="method#userSave#0;class#ReqStandAlone#0" />
-            <element signature="method#userGetList#0;class#ReqStandAlone#0" />
-            <element signature="method#lockerGetBoxs#0;class#ReqStandAlone#0" />
-            <element signature="method#lockerGetBox#0;class#ReqStandAlone#0" />
-            <element signature="method#lockerSaveBoxUsage#0;class#ReqStandAlone#0" />
-            <element signature="method#lockerDeleteBoxUsage#0;class#ReqStandAlone#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ResultUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -1114,15 +1091,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmAppSceneSettingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="113" column="70" selection-start-line="113" selection-start-column="70" selection-end-line="113" selection-end-column="70" />
+        <state relative-caret-position="299">
+          <caret line="111" column="71" lean-forward="true" selection-start-line="111" selection-start-column="71" selection-end-line="111" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ResultBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+          <folding>
+            <element signature="e#768#769#0" expanded="true" />
+            <element signature="e#800#801#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/db/DbManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="297" lean-forward="true" selection-start-line="297" selection-end-line="297" />
+        <state relative-caret-position="407">
+          <caret line="86" column="109" selection-start-line="86" selection-start-column="109" selection-end-line="86" selection-end-column="109" />
           <folding>
             <element signature="method#addConfig#0;class#DbManager#0" />
             <element signature="method#addUser#0;class#DbManager#0" />
@@ -1133,6 +1121,8 @@
             <element signature="method#updateConfig#0;class#DbManager#0" />
             <element signature="method#getConfigValue#0;class#DbManager#0" />
             <element signature="method#getCabinets#0;class#DbManager#0" />
+            <element signature="method#saveAppSceneComPrl#0;class#DbManager#0" />
+            <element signature="e#10615#13765#1" />
             <element signature="method#saveTripMsg#0;class#DbManager#0" />
             <element signature="method#getTripMsgs#0;class#DbManager#0" />
             <element signature="method#deleteTripMsg#0;class#DbManager#0" />
@@ -1140,6 +1130,24 @@
             <element signature="method#deleteLockBoxUsage#0;class#DbManager#0" />
             <element signature="method#getLockerBox#0;class#DbManager#0" />
             <element signature="method#getLockerBoxs#0;class#DbManager#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="127" column="18" lean-forward="true" selection-start-line="127" selection-start-column="18" selection-end-line="127" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#deviceInitData#0;class#ReqStandAlone#0" />
+            <element signature="method#ownLoginByAccount#0;class#ReqStandAlone#0" />
+            <element signature="method#ownLogout#0;class#ReqStandAlone#0" />
+            <element signature="method#userGetList#0;class#ReqStandAlone#0" />
+            <element signature="method#lockerGetBoxs#0;class#ReqStandAlone#0" />
+            <element signature="method#lockerGetBox#0;class#ReqStandAlone#0" />
+            <element signature="method#lockerSaveBoxUsage#0;class#ReqStandAlone#0" />
+            <element signature="method#lockerDeleteBoxUsage#0;class#ReqStandAlone#0" />
           </folding>
         </state>
       </provider>
