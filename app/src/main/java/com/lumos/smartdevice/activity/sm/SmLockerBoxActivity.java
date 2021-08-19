@@ -193,11 +193,9 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
         SmCabinetNameAdapter list_cabinet_adapter = new SmCabinetNameAdapter(getAppContext(), cabinets, cur_Cabinet_Position);
         lv_Cabinets.setAdapter(list_cabinet_adapter);
-
         tv_CabinetName.setText(cur_Cabinet.getCabinetId());
 
         lockerGetBoxs();
-
 
     }
 
@@ -205,11 +203,8 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
         List<List<String>> layout = JSON.parseObject(json_layout, new TypeReference< List<List<String>>>() {});
 
-        //清除表格所有行
         tl_Boxs.removeAllViews();
-        //全部列自动填充空白处
         tl_Boxs.setStretchAllColumns(true);
-        //生成X行，Y列的表格
 
         int rowsSize=layout.size();
 
@@ -387,10 +382,8 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     public  void onResume() {
         super.onResume();
 
-        if(dialog_LockerBox!=null) {
-            lockerGetBoxs();
-            lockerGetBox();
-        }
+        lockerGetBoxs();
+        lockerGetBox();
     }
 
     @Override

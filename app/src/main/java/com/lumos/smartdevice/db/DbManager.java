@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.lumos.smartdevice.api.ResultBean;
+import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
@@ -429,19 +431,21 @@ public class DbManager {
         }
     }
 
-    public long savelockerBoxUsage(String cabinetId, String slotId, String usageType, String usageData) {
+    public ResultBean savelockerBoxUsage(String cabinetId, String slotId, String usageType, String usageData) {
+
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        long rows = 0;
-        if (db.isOpen()) {
+
+        db.beginTransaction();
+
+        try {
 
             Cursor cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME + " where " + LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + "=? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + "=? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE + "=? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA + "=?", new String[]{cabinetId, slotId, usageType, usageData});
-
             boolean exist = (cursor.getCount() > 0);
+            cursor.close();
             if (exist) {
-                cursor.close();
-                return rows;
+                db.endTransaction();
+                return new ResultBean(ResultCode.FAILURE,"保存失败，已存在");
             }
-
 
             ContentValues ct_LockerBoxUsage = new ContentValues();
             ct_LockerBoxUsage.put(LockerBoxUsageDao.COLUMN_NAME_CABINET_ID, cabinetId);
@@ -449,32 +453,50 @@ public class DbManager {
             ct_LockerBoxUsage.put(LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE, usageType);
             ct_LockerBoxUsage.put(LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA, usageData);
 
-            rows = db.insert(LockerBoxUsageDao.TABLE_NAME, null, ct_LockerBoxUsage);
-
+            long rows = db.insert(LockerBoxUsageDao.TABLE_NAME, null, ct_LockerBoxUsage);
+            if(rows<0) {
+                return new ResultBean(ResultCode.FAILURE,"保存失败，记录增加不成功");
+            }
 
             ContentValues ct_LockerBox = new ContentValues();
             ct_LockerBox.put(LockerBoxDao.COLUMN_NAME_IS_USED, "1");
             ct_LockerBox.put(LockerBoxDao.COLUMN_NAME_USAGE_TYPE, usageType);
 
-            rows = db.update(LockerBoxDao.TABLE_NAME, ct_LockerBox, LockerBoxDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxDao.COLUMN_NAME_SLOT_ID + " = ?", new String[]{cabinetId, slotId});
+            rows=db.update(LockerBoxDao.TABLE_NAME, ct_LockerBox, LockerBoxDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxDao.COLUMN_NAME_SLOT_ID + " = ?", new String[]{cabinetId, slotId});
 
+            if(rows<0) {
+                return new ResultBean(ResultCode.FAILURE,"保存失败，修改记录不成功");
+            }
 
-            cursor.close();
+            db.setTransactionSuccessful();
+
+            return new ResultBean(ResultCode.SUCCESS,"保存成功");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ResultBean(ResultCode.EXCEPTION,"保存发生异常:"+ex.getMessage());
+        } finally {
+            db.endTransaction();
         }
-
-        return rows;
     }
 
-    public int deleteLockBoxUsage(String cabinetId, String slotId, String usageType, String usageData) {
+    public ResultBean deleteLockBoxUsage(String cabinetId, String slotId, String usageType, String usageData) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int rows = 0;
-        if (db.isOpen()) {
 
-            rows = db.delete(LockerBoxUsageDao.TABLE_NAME, LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA + " = ?", new String[]{cabinetId, slotId, usageType, usageData});
+        db.beginTransaction();
+
+        try {
+
+            long rows = db.delete(LockerBoxUsageDao.TABLE_NAME, LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA + " = ?", new String[]{cabinetId, slotId, usageType, usageData});
+            if(rows<0) {
+                return new ResultBean(ResultCode.FAILURE,"删除失败，记录找不到");
+            }
 
             Cursor cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME + " where " + LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + "=? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + "=? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE + "=? ", new String[]{cabinetId, slotId, usageType});
 
             int count = cursor.getCount();
+
+            cursor.close();
 
             String is_Used = "0";
             if (count > 0) {
@@ -485,12 +507,20 @@ public class DbManager {
             ct_LockerBox.put(LockerBoxDao.COLUMN_NAME_IS_USED, is_Used);
 
             rows = db.update(LockerBoxDao.TABLE_NAME, ct_LockerBox, LockerBoxDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxDao.COLUMN_NAME_SLOT_ID + " = ?", new String[]{cabinetId, slotId});
+            if(rows<0) {
+                return new ResultBean(ResultCode.FAILURE,"删除失败，更新不成功");
+            }
 
-            cursor.close();
+            db.setTransactionSuccessful();
 
+            return new ResultBean(ResultCode.SUCCESS,"删除成功");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ResultBean(ResultCode.EXCEPTION,"删除发生异常:"+ex.getMessage());
+        } finally {
+            db.endTransaction();
         }
-
-        return rows;
     }
 
     public LockerBoxBean getLockerBox(String cabinetId, String slotId) {
