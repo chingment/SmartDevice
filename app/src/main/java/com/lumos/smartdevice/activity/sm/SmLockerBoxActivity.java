@@ -225,6 +225,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
                 String col=cols.get(j);
                 String slot_Id=col;
+                LockerBoxBean box=boxs.get(slot_Id);
                 String[] col_Prams=col.split("-");
 
                 String id=col_Prams[0];
@@ -238,7 +239,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
                 tv_Name.setText(name);
 
-                convertView.setTag(slot_Id);
+                convertView.setTag(box);
 
                 if(isUse.equals("1")){
                     convertView.setVisibility(View.INVISIBLE);
@@ -247,15 +248,14 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                     convertView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String l_Slot_Id = v.getTag().toString();
-                            dialog_LockerBox.setLockerBox(device, cur_Cabinet, l_Slot_Id);
+                            LockerBoxBean l_Box = (LockerBoxBean)v.getTag();
+                            dialog_LockerBox.setConfig(device, cur_Cabinet, l_Box);
                             lockerGetBox();
                             dialog_LockerBox.show();
                         }
                     });
                 }
 
-                LockerBoxBean box=boxs.get(slot_Id);
                 if(box!=null){
 
                     String box_IsUsed=box.getIsUsed();
@@ -388,8 +388,8 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         super.onResume();
 
         if(dialog_LockerBox!=null) {
-            lockerGetBox();
             lockerGetBoxs();
+            lockerGetBox();
         }
     }
 

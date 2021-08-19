@@ -10,7 +10,17 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc9a5615-753f-4d27-ba9c-39ff462585f0" name="Default Changelist" comment="" />
+    <list default="true" id="bc9a5615-753f-4d27-ba9c-39ff462585f0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLockerBoxActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLockerBoxActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/dialog/CustomDialogLockerBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/dialog/CustomDialogLockerBox.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,33 +40,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/dialog/CustomDialogLockerBox.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLockerBoxActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="102" selection-start-line="102" selection-end-line="108" selection-end-column="41" />
+            <state relative-caret-position="397">
+              <caret line="250" column="75" selection-start-line="250" selection-start-column="75" selection-end-line="250" selection-end-column="75" />
               <folding>
-                <element signature="e#3042#3043#0" expanded="true" />
-                <element signature="e#3109#3110#0" expanded="true" />
-                <element signature="method#setOnClickListener#0;class#CustomDialogLockerBox#0" />
+                <element signature="imports" expanded="true" />
+                <element signature="method#onGoSelectUser#0;class#3461:5965" />
+                <element signature="method#onDeleteUser#0;class#3461:5965" />
+                <element signature="method#loadCabinetData#0;class#SmLockerBoxActivity#0" />
+                <element signature="e#8601#9006#0" expanded="true" />
+                <element signature="e#9005#9006#0" expanded="true" />
+                <element signature="method#lockerGetBox#0;class#SmLockerBoxActivity#0" />
+                <element signature="method#lockerGetBoxs#0;class#SmLockerBoxActivity#0" />
+                <element signature="method#onResume#0;class#SmLockerBoxActivity#0" />
+                <element signature="method#onClick#0;class#SmLockerBoxActivity#0" />
+                <element signature="method#onDestroy#0;class#SmLockerBoxActivity#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLockerBoxActivity.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/dialog/CustomDialogLockerBox.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="257" selection-start-line="257" selection-end-line="257" selection-end-column="52" />
+            <state relative-caret-position="60">
+              <caret line="109" lean-forward="true" selection-start-line="109" selection-end-line="109" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#loadCabinetData#0;class#SmLockerBoxActivity#0" />
-                <element signature="e#8601#9006#0" expanded="true" />
-                <element signature="e#9005#9006#0" expanded="true" />
-                <element signature="method#lockerGetBoxs#0;class#SmLockerBoxActivity#0" />
-                <element signature="method#onClick#0;class#SmLockerBoxActivity#0" />
-                <element signature="method#onDestroy#0;class#SmLockerBoxActivity#0" />
+                <element signature="e#3042#3043#0" expanded="true" />
+                <element signature="e#3109#3110#0" expanded="true" />
+                <element signature="method#setOnClickListener#0;class#CustomDialogLockerBox#0" />
               </folding>
             </state>
           </provider>
@@ -564,7 +578,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.22999157" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.22999157" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -575,7 +589,7 @@
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.6335299" weight="0.47706422" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49620894" weight="0.32874617" />
-      <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.4903117" visible="true" weight="0.1529052" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" sideWeight="0.4903117" visible="true" weight="0.1529052" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.39258635" side_tool="true" weight="0.31039757" />
       <window_info anchor="bottom" id="Build" order="5" sideWeight="0.60741365" weight="0.16972478" />
       <window_info anchor="bottom" id="Android Profiler" order="6" sideWeight="0.49789384" weight="0.32874617" />
@@ -1072,8 +1086,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/dialog/CustomDialogLockerBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="102" selection-start-line="102" selection-end-line="108" selection-end-column="41" />
+        <state relative-caret-position="60">
+          <caret line="109" lean-forward="true" selection-start-line="109" selection-end-line="109" />
           <folding>
             <element signature="e#3042#3043#0" expanded="true" />
             <element signature="e#3109#3110#0" expanded="true" />
@@ -1084,14 +1098,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLockerBoxActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="257" selection-start-line="257" selection-end-line="257" selection-end-column="52" />
+        <state relative-caret-position="397">
+          <caret line="250" column="75" selection-start-line="250" selection-start-column="75" selection-end-line="250" selection-end-column="75" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#onGoSelectUser#0;class#3461:5965" />
+            <element signature="method#onDeleteUser#0;class#3461:5965" />
             <element signature="method#loadCabinetData#0;class#SmLockerBoxActivity#0" />
             <element signature="e#8601#9006#0" expanded="true" />
             <element signature="e#9005#9006#0" expanded="true" />
+            <element signature="method#lockerGetBox#0;class#SmLockerBoxActivity#0" />
             <element signature="method#lockerGetBoxs#0;class#SmLockerBoxActivity#0" />
+            <element signature="method#onResume#0;class#SmLockerBoxActivity#0" />
             <element signature="method#onClick#0;class#SmLockerBoxActivity#0" />
             <element signature="method#onDestroy#0;class#SmLockerBoxActivity#0" />
           </folding>

@@ -98,11 +98,11 @@ public class CustomDialogLockerBox extends Dialog {
         return slotId;
     }
 
-    public void setLockerBox(DeviceBean device, CabinetBean cabinet, String slotId) {
+    public void setConfig(DeviceBean device, CabinetBean cabinet, LockerBoxBean lockerBox) {
 
         this.device = device;
         this.cabinetId = cabinet.getCabinetId();
-        this.slotId = slotId;
+        this.slotId = lockerBox.getSlotId();
 
         String[] box_Prams = slotId.split("-");
 
