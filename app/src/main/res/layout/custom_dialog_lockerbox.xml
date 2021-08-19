@@ -74,9 +74,50 @@
                     android:background="@drawable/widget_btn_1"
                     />
 
+                <TextView
+                    android:id="@+id/btn_DistUser"
+                    android:layout_marginStart="@dimen/size_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/size_24"
+                    android:paddingLeft="@dimen/size_10"
+                    android:paddingRight="@dimen/size_10"
+                    android:gravity="center"
+                    android:text="分配用户"
+                    android:textSize="@dimen/sp_10"
+                    android:textColor="@color/black"
+                    android:background="@drawable/widget_btn_1"
+                    />
+
 
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="@dimen/size_2"
+                    android:layout_height="@dimen/size_14">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary" />
+                </LinearLayout>
+                <TextView
+                    android:paddingLeft="@dimen/size_5"
+                    android:paddingRight="@dimen/size_5"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    android:text="@string/t_usage"
+                    android:textColor="@color/text"
+                    android:textSize="@dimen/sp_16" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -86,56 +127,18 @@
                 android:paddingBottom="@dimen/size_10"
                 android:paddingTop="@dimen/sp_10"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/t_distribute_to"
-                    android:textColor="@color/field_name"
-                    android:textSize="@dimen/sp_14" />
-                <LinearLayout
+
+                <ListView
+                    android:id="@+id/lv_Usages"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:orientation="horizontal"
-                    >
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:divider="@null"
+                    android:fadingEdge="none"
+                    android:overScrollMode="never"
+                    android:scrollbars="none" />
 
 
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/tv_UserName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/field_value"
-                        android:textSize="@dimen/sp_14" />
-
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/tv_FullName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
-
-                        android:textSize="@dimen/sp_14" />
-
-                    <ImageView
-                        android:id="@+id/btn_DeleteUser"
-                        android:visibility="gone"
-                        android:layout_marginLeft="@dimen/size_10"
-                        android:layout_width="@dimen/size_16"
-                        android:layout_height="@dimen/size_16"
-                        android:background="@drawable/ic_delete_round" />
-
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/btn_SelectUser"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="选择"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/sp_14" />
-
-
-                </LinearLayout>
             </LinearLayout>
 
 

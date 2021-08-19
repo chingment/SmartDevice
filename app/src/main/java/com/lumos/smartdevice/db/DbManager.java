@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.api.ResultBean;
-import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.ResultUtil;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
@@ -453,7 +452,6 @@ public class DbManager {
             boolean exist = (cursor.getCount() > 0);
             cursor.close();
             if (exist) {
-                db.endTransaction();
                 return ResultUtil.isFailure("保存失败，已存在");
             }
 

@@ -245,6 +245,9 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                         if (rt.getCode() == ResultCode.SUCCESS) {
                             finish();
                         }
+                        else {
+                            showToast(rt.getMsg());
+                        }
                     }
                     @Override
                     public void onFailure(String msg, Exception e) {

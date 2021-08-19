@@ -7,6 +7,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -14,6 +15,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.adapter.SmLockerBoxUsageAdapter;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
@@ -33,15 +35,12 @@ public class CustomDialogLockerBox extends Dialog {
     private View btn_Close;
 
     private TextView tv_BoxName;
-    private TextView tv_UserName;
-    private TextView tv_FullName;
-    private TextView btn_SelectUser;
-    private ImageView btn_DeleteUser;
-
+    private TextView btn_DistUser;
+    private ListView lv_Usages;
     private DeviceBean device;
     private String cabinetId;
     private String slotId;
-    private String userId;
+
     public CustomDialogLockerBox(Context context) {
         super(context, R.style.custom_dialog);
         mThis = this;
@@ -57,11 +56,9 @@ public class CustomDialogLockerBox extends Dialog {
         });
 
         tv_BoxName = ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
-        tv_UserName = ViewHolder.get(mLayoutRes, R.id.tv_UserName);
-        tv_FullName = ViewHolder.get(mLayoutRes, R.id.tv_FullName);
-        btn_DeleteUser = ViewHolder.get(mLayoutRes, R.id.btn_DeleteUser);
-        btn_SelectUser = ViewHolder.get(mLayoutRes, R.id.btn_SelectUser);
-        btn_SelectUser.setOnClickListener(new View.OnClickListener() {
+        lv_Usages = ViewHolder.get(mLayoutRes, R.id.lv_Usages);
+        btn_DistUser = ViewHolder.get(mLayoutRes, R.id.btn_DistUser);
+        btn_DistUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (onClickListener != null) {
@@ -70,14 +67,14 @@ public class CustomDialogLockerBox extends Dialog {
             }
         });
 
-        btn_DeleteUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onClickListener != null) {
-                    onClickListener.onDeleteUser(device.getDeviceId(), cabinetId, slotId, userId);
-                }
-            }
-        });
+//        btn_DeleteUser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (onClickListener != null) {
+//                    onClickListener.onDeleteUser(device.getDeviceId(), cabinetId, slotId, userId);
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -116,20 +113,6 @@ public class CustomDialogLockerBox extends Dialog {
         String usageType=lockerBox.getUsageType();
         List<LockerBoxUsageBean> usages=lockerBox.getUsages();
 
-        UserBean user=null;
-        for (LockerBoxUsageBean usage :
-                usages  ) {
-            String l_UsageType = usage.getUsageType();
-            String l_CustomData = usage.getCustomData();
-            switch (l_UsageType) {
-                case "1":
-                    user = JSON.parseObject(l_CustomData, new TypeReference<UserBean>() {
-                    });
-                    break;
-            }
-        }
-
-
         if(isUsed.equals("0")){
             tv_BoxName.setBackgroundResource(R.drawable.locker_box_status_1);
         }
@@ -141,22 +124,16 @@ public class CustomDialogLockerBox extends Dialog {
                 tv_BoxName.setBackgroundResource(R.drawable.locker_box_status_2);
             }
         }
-
-        if (user == null) {
-            userId=null;
-            btn_SelectUser.setVisibility(View.VISIBLE);
-            btn_DeleteUser.setVisibility(View.GONE);
-            tv_FullName.setVisibility(View.GONE);
-            tv_UserName.setVisibility(View.GONE);
-        } else {
-            userId=user.getUserId();
-            btn_SelectUser.setVisibility(View.GONE);
-            btn_DeleteUser.setVisibility(View.VISIBLE);
-            tv_FullName.setVisibility(View.VISIBLE);
-            tv_UserName.setVisibility(View.VISIBLE);
-            tv_FullName.setText("["+user.getFullName()+"]");
-            tv_UserName.setText(user.getUserName());
-        }
+        SmLockerBoxUsageAdapter  smLockerBoxUsageAdapter=new SmLockerBoxUsageAdapter(mContext,usages);
+        smLockerBoxUsageAdapter.setOnClickListener(new SmLockerBoxUsageAdapter.OnClickListener() {
+            @Override
+            public void onDeleteClick(LockerBoxUsageBean usage) {
+                if(onClickListener!=null) {
+                    onClickListener.onDeleteUsage(usage);
+                }
+            }
+        });
+        lv_Usages.setAdapter(smLockerBoxUsageAdapter);
     }
 
     private OnClickListener onClickListener;
@@ -167,7 +144,7 @@ public class CustomDialogLockerBox extends Dialog {
 
     public  interface OnClickListener{
         void onGoSelectUser(String deviceId, String cabinetId,String slotId);
-        void onDeleteUser(String deviceId, String cabinetId,String slotId,String userId);
+        void onDeleteUsage(LockerBoxUsageBean usage);
         void onOpenBox(String deviceId, String cabinetId,String slotId);
     }
 

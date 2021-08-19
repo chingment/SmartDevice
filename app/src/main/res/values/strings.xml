@@ -97,4 +97,5 @@
     <string name="t_search">搜索</string>
     <string name="t_change">更改</string>
     <string name="t_distribute_to">分配至</string>
+    <string name="t_usage">使用情况</string>
 </resources>

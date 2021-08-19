@@ -27,6 +27,7 @@ import com.lumos.smartdevice.api.rop.RopLockerGetBoxs;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
+import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.ui.dialog.CustomDialogCabinetConfig;
@@ -107,14 +108,14 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             }
 
             @Override
-            public void onDeleteUser( String deviceId, String cabinetId,String slotId,String userId) {
+            public void onDeleteUsage(LockerBoxUsageBean usage) {
 
                 RopLockerDeleteBoxUsage rop=new RopLockerDeleteBoxUsage();
-                rop.setDeviceId(deviceId);
-                rop.setCabinetId(cabinetId);
-                rop.setSlotId(slotId);
-                rop.setUsageType("1");
-                rop.setUsageData(userId);
+                rop.setDeviceId(usage.getDeviceId());
+                rop.setCabinetId(usage.getCabinetId());
+                rop.setSlotId(usage.getSlotId());
+                rop.setUsageType(usage.getUsageType());
+                rop.setUsageData(usage.getUsageData());
 
                 ReqInterface.getInstance().lockerDeleteBoxUsage(rop, new ReqHandler(){
 
