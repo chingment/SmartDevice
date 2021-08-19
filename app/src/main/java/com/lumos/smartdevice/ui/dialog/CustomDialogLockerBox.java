@@ -16,6 +16,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.ViewHolder;
@@ -109,20 +110,36 @@ public class CustomDialogLockerBox extends Dialog {
 
     }
 
-    public void setLockerBoxUsages(List<LockerBoxUsageBean> usages) {
+    public void setLockerBox(LockerBoxBean lockerBox) {
+
+        String isUsed=lockerBox.getIsUsed();
+        String usageType=lockerBox.getUsageType();
+        List<LockerBoxUsageBean> usages=lockerBox.getUsages();
 
         UserBean user=null;
         for (LockerBoxUsageBean usage :
                 usages  ) {
-            String usageType=usage.getUsageType();
-            String customData=usage.getCustomData();
-            switch (usageType){
+            String l_UsageType = usage.getUsageType();
+            String l_CustomData = usage.getCustomData();
+            switch (l_UsageType) {
                 case "1":
-                    user= JSON.parseObject(customData, new TypeReference<UserBean>() {
+                    user = JSON.parseObject(l_CustomData, new TypeReference<UserBean>() {
                     });
                     break;
             }
+        }
 
+
+        if(isUsed.equals("0")){
+            tv_BoxName.setBackgroundResource(R.drawable.locker_box_status_1);
+        }
+        else {
+
+            if (usageType.equals("1")) {
+                tv_BoxName.setBackgroundResource(R.drawable.locker_box_status_3);
+            } else {
+                tv_BoxName.setBackgroundResource(R.drawable.locker_box_status_2);
+            }
         }
 
         if (user == null) {

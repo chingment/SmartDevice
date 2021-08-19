@@ -19,10 +19,10 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
-import com.lumos.smartdevice.api.rop.RetLockerGetBoxUsages;
+import com.lumos.smartdevice.api.rop.RetLockerGetBox;
 import com.lumos.smartdevice.api.rop.RetLockerGetBoxs;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
-import com.lumos.smartdevice.api.rop.RopLockerGetBoxUsages;
+import com.lumos.smartdevice.api.rop.RopLockerGetBox;
 import com.lumos.smartdevice.api.rop.RopLockerGetBoxs;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
@@ -136,7 +136,8 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                                 });
 
                                 if (rt.getCode() == ResultCode.SUCCESS) {
-                                    lockerGetBoxUsages(dialog_LockerBox.getDeviceId(),dialog_LockerBox.getCabinetId(),dialog_LockerBox.getSlotId());
+                                    lockerGetBoxs();
+                                    lockerGetBox();
                                 }
                             }
 
@@ -195,16 +196,14 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
         tv_CabinetName.setText(cur_Cabinet.getCabinetId());
 
-        lockerGetBoxs(device.getDeviceId(),cur_Cabinet.getCabinetId());
+        lockerGetBoxs();
 
 
     }
 
     public void drawsLayout(String json_layout,HashMap<String, LockerBoxBean> boxs) {
 
-
         List<List<String>> layout = JSON.parseObject(json_layout, new TypeReference< List<List<String>>>() {});
-
 
         //清除表格所有行
         tl_Boxs.removeAllViews();
@@ -217,7 +216,6 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         for (int i = 0; i <rowsSize; i++) {
 
             TableRow tableRow = new TableRow(SmLockerBoxActivity.this);
-
 
             List<String> cols=layout.get(i);
             int colsSize=cols.size();
@@ -251,7 +249,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                         public void onClick(View v) {
                             String l_Slot_Id = v.getTag().toString();
                             dialog_LockerBox.setLockerBox(device, cur_Cabinet, l_Slot_Id);
-                            lockerGetBoxUsages(device.getDeviceId(), cur_Cabinet.getCabinetId(),l_Slot_Id);
+                            lockerGetBox();
                             dialog_LockerBox.show();
                         }
                     });
@@ -286,20 +284,26 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         }
     }
 
-    public void lockerGetBoxUsages(String deviceId, String cabinetId,String slotId){
+    public void lockerGetBox() {
+
+        String deviceId = dialog_LockerBox.getDeviceId();
+        String cabinetId = dialog_LockerBox.getCabinetId();
+        String slotId = dialog_LockerBox.getSlotId();
 
 
-        if(StringUtil.isEmptyNotNull(deviceId))
+        if (StringUtil.isEmptyNotNull(deviceId))
             return;
-        if(StringUtil.isEmptyNotNull(cabinetId))
+        if (StringUtil.isEmptyNotNull(cabinetId))
             return;
-        if(StringUtil.isEmptyNotNull(slotId))
+        if (StringUtil.isEmptyNotNull(slotId))
             return;
-        RopLockerGetBoxUsages rop=new RopLockerGetBoxUsages();
+
+
+        RopLockerGetBox rop = new RopLockerGetBox();
         rop.setDeviceId(deviceId);
         rop.setCabinetId(cabinetId);
         rop.setSlotId(slotId);
-        ReqInterface.getInstance().lockerGetBoxUsages(rop, new ReqHandler(){
+        ReqInterface.getInstance().lockerGetBox(rop, new ReqHandler() {
 
                     @Override
                     public void onBeforeSend() {
@@ -315,12 +319,19 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                     public void onSuccess(String response) {
                         super.onSuccess(response);
 
-                        ResultBean<RetLockerGetBoxUsages> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetLockerGetBoxUsages>>() {
+                        ResultBean<RetLockerGetBox> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetLockerGetBox>>() {
                         });
 
                         if (rt.getCode() == ResultCode.SUCCESS) {
-                            RetLockerGetBoxUsages ret = rt.getData();
-                            dialog_LockerBox.setLockerBoxUsages(ret.getUsages());
+                            RetLockerGetBox ret = rt.getData();
+                            LockerBoxBean lockerBox=new LockerBoxBean();
+                            lockerBox.setDeviceId(ret.getDeviceId());
+                            lockerBox.setCabinetId(ret.getCabinetId());
+                            lockerBox.setSlotId(ret.getSlotId());
+                            lockerBox.setIsUsed(ret.getIsUsed());
+                            lockerBox.setUsageType(ret.getUsageType());
+                            lockerBox.setUsages(ret.getUsages());
+                            dialog_LockerBox.setLockerBox(lockerBox);
                         }
                     }
 
@@ -332,12 +343,11 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         );
     }
 
-    public void lockerGetBoxs(String deviceId,String cabinetId){
-
+    public void lockerGetBoxs(){
 
         RopLockerGetBoxs rop=new RopLockerGetBoxs();
-        rop.setDeviceId(deviceId);
-        rop.setCabinetId(cabinetId);
+        rop.setDeviceId(device.getDeviceId());
+        rop.setCabinetId(cur_Cabinet.getCabinetId());
 
         ReqInterface.getInstance().lockerGetBoxs(rop, new ReqHandler(){
 
@@ -378,7 +388,8 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         super.onResume();
 
         if(dialog_LockerBox!=null) {
-            lockerGetBoxUsages(dialog_LockerBox.getDeviceId(), dialog_LockerBox.getCabinetId(), dialog_LockerBox.getSlotId());
+            lockerGetBox();
+            lockerGetBoxs();
         }
     }
 

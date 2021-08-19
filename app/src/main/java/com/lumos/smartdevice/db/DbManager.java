@@ -493,22 +493,42 @@ public class DbManager {
         return rows;
     }
 
-    public List<LockerBoxUsageBean> getLockerBoxUsages(String cabinetId, String slotId) {
+    public LockerBoxBean getLockerBox(String cabinetId, String slotId) {
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from " + LockerBoxDao.TABLE_NAME + " where " + LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + " = ? ", new String[]{cabinetId, slotId});
+        boolean exist = (cursor.getCount() > 0);
+        if(!exist){
+            cursor.close();
+            return null;
+        }
+
+        LockerBoxBean lockerBox=new LockerBoxBean();
+
+        while (cursor.moveToNext()) {
+
+            String l_CabinetId = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_CABINET_ID));
+            String l_SlotId = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_SLOT_ID));
+            String l_IsUsed = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_IS_USED));
+            String l_UsageType = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_USAGE_TYPE));
+
+            lockerBox.setCabinetId(l_CabinetId);
+            lockerBox.setSlotId(l_SlotId);
+            lockerBox.setIsUsed(l_IsUsed);
+            lockerBox.setUsageType(l_UsageType);
+        }
+
 
         List<LockerBoxUsageBean> usages = new ArrayList<>();
 
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME + " where " + LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + " = ? ", new String[]{cabinetId, slotId});
-        boolean exist = (cursor.getCount() > 0);
+        cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME + " where " + LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + " = ? ", new String[]{cabinetId, slotId});
+        exist = (cursor.getCount() > 0);
         if (exist) {
-
 
             while (cursor.moveToNext()) {
 
                 String usageType = cursor.getString(cursor.getColumnIndex(LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE));
                 String usageData = cursor.getString(cursor.getColumnIndex(LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA));
-
 
                 LockerBoxUsageBean usage = new LockerBoxUsageBean();
 
@@ -547,7 +567,10 @@ public class DbManager {
             cursor.close();
 
         }
-        return usages;
+
+        lockerBox.setUsages(usages);
+
+        return lockerBox;
     }
 
     public HashMap<String, LockerBoxBean>  getLockerBoxs(String cabinetId) {
@@ -562,14 +585,13 @@ public class DbManager {
             while (cursor.moveToNext()) {
 
 
-                String l_cabinetId = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_CABINET_ID));
                 String slotId = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_SLOT_ID));
                 String isUsed = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_IS_USED));
                 String usageType = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_USAGE_TYPE));
 
                 LockerBoxBean lockerBox = new LockerBoxBean();
 
-                lockerBox.setCabinetId(l_cabinetId);
+                lockerBox.setCabinetId(cabinetId);
                 lockerBox.setSlotId(slotId);
                 lockerBox.setUsageType(usageType);
                 lockerBox.setIsUsed(isUsed);

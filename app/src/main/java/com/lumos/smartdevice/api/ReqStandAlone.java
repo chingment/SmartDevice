@@ -1,7 +1,7 @@
 package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RetDeviceInitData;
-import com.lumos.smartdevice.api.rop.RetLockerGetBoxUsages;
+import com.lumos.smartdevice.api.rop.RetLockerGetBox;
 import com.lumos.smartdevice.api.rop.RetLockerGetBoxs;
 import com.lumos.smartdevice.api.rop.RetOwnLogin;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
@@ -11,7 +11,7 @@ import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBoxs;
 import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
-import com.lumos.smartdevice.api.rop.RopLockerGetBoxUsages;
+import com.lumos.smartdevice.api.rop.RopLockerGetBox;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
@@ -181,12 +181,16 @@ public class ReqStandAlone implements IReqVersion{
     }
 
     @Override
-    public void lockerGetBoxUsages(RopLockerGetBoxUsages rop, final ReqHandler reqHandler) {
+    public void lockerGetBox(RopLockerGetBox rop, final ReqHandler reqHandler) {
         reqHandler.sendBeforeSendMessage();
         ResultBean result;
-        List<LockerBoxUsageBean> usages = DbManager.getInstance().getLockerBoxUsages(rop.getCabinetId(), rop.getSlotId());
-        RetLockerGetBoxUsages ret=new RetLockerGetBoxUsages();
-        ret.setUsages(usages);
+        LockerBoxBean lockerBox = DbManager.getInstance().getLockerBox(rop.getCabinetId(), rop.getSlotId());
+        RetLockerGetBox ret=new RetLockerGetBox();
+        ret.setDeviceId(lockerBox.getDeviceId());
+        ret.setCabinetId(lockerBox.getCabinetId());
+        ret.setIsUsed(lockerBox.getIsUsed());
+        ret.setUsageType(lockerBox.getUsageType());
+        ret.setUsages(lockerBox.getUsages());
         result = new ResultBean<>(ResultCode.SUCCESS, "", ret);
         reqHandler.sendSuccessMessage(result.toJSONString());
     }

@@ -1,9 +1,10 @@
-package com.lumos.smartdevice.model;
+package com.lumos.smartdevice.api.rop;
 
-import java.io.Serializable;
+import com.lumos.smartdevice.model.LockerBoxUsageBean;
+
 import java.util.List;
 
-public class LockerBoxBean implements Serializable {
+public class RetLockerGetBox {
 
     private String deviceId;
     private String cabinetId;
