@@ -62,7 +62,7 @@ public class DbManager {
         addUser("admin", "123456", "后台管理员", "2", "app://default_avatar");
     }
 
-    public void addConfig(String field, String value) {
+    private void addConfig(String field, String value) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int id = -1;
         if (db.isOpen()) {
