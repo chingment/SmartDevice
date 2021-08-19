@@ -1,9 +1,10 @@
 package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
-import com.lumos.smartdevice.api.rop.RopLockerBoxDeleteUsage;
-import com.lumos.smartdevice.api.rop.RopLockerBoxSaveUsage;
-import com.lumos.smartdevice.api.rop.RopLockerBoxGetUsages;
+import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
+import com.lumos.smartdevice.api.rop.RopLockerGetBoxs;
+import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
+import com.lumos.smartdevice.api.rop.RopLockerGetBoxUsages;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
@@ -63,17 +64,22 @@ public class ReqNetWord implements IReqVersion{
     }
 
     @Override
-    public void lockerBoxSaveUsage(RopLockerBoxSaveUsage rop, final ReqHandler reqHandler) {
+    public void lockerGetBoxs(RopLockerGetBoxs rop, final ReqHandler reqHandler) {
 
     }
 
     @Override
-    public void lockerBoxGetUsages(RopLockerBoxGetUsages rop, final ReqHandler reqHandler) {
+    public void lockerSaveBoxUsage(RopLockerSaveBoxUsage rop, final ReqHandler reqHandler) {
 
     }
 
     @Override
-    public void lockerBoxDeleteUsage(RopLockerBoxDeleteUsage rop, final ReqHandler reqHandler) {
+    public void lockerGetBoxUsages(RopLockerGetBoxUsages rop, final ReqHandler reqHandler) {
+
+    }
+
+    @Override
+    public void lockerDeleteBoxUsage(RopLockerDeleteBoxUsage rop, final ReqHandler reqHandler) {
 
     }
 }

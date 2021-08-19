@@ -22,7 +22,7 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RetUserSave;
-import com.lumos.smartdevice.api.rop.RopLockerBoxSaveUsage;
+import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.model.UserBean;
@@ -222,13 +222,13 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
             @Override
             public void onSelectClick(UserBean bean) {
 
-                RopLockerBoxSaveUsage rop=new RopLockerBoxSaveUsage();
+                RopLockerSaveBoxUsage rop=new RopLockerSaveBoxUsage();
                 rop.setDeviceId(scene_param.get("device_id"));
                 rop.setCabinetId(scene_param.get("cabinet_id"));
                 rop.setSlotId(scene_param.get("slot_id"));
                 rop.setUsageType("1");
                 rop.setUsageData(bean.getUserId());
-                ReqInterface.getInstance().lockerBoxSaveUsage(rop, new ReqHandler(){
+                ReqInterface.getInstance().lockerSaveBoxUsage(rop, new ReqHandler(){
                     @Override
                     public void onBeforeSend() {
                         super.onBeforeSend();

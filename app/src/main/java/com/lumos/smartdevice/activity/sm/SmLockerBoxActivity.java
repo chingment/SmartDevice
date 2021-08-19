@@ -19,9 +19,9 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
-import com.lumos.smartdevice.api.rop.RetLockerBoxGetUsages;
-import com.lumos.smartdevice.api.rop.RopLockerBoxDeleteUsage;
-import com.lumos.smartdevice.api.rop.RopLockerBoxGetUsages;
+import com.lumos.smartdevice.api.rop.RetLockerGetBoxUsages;
+import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
+import com.lumos.smartdevice.api.rop.RopLockerGetBoxUsages;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
@@ -106,14 +106,14 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             @Override
             public void onDeleteUser( String deviceId, String cabinetId,String slotId,String userId) {
 
-                RopLockerBoxDeleteUsage rop=new RopLockerBoxDeleteUsage();
+                RopLockerDeleteBoxUsage rop=new RopLockerDeleteBoxUsage();
                 rop.setDeviceId(deviceId);
                 rop.setCabinetId(cabinetId);
                 rop.setSlotId(slotId);
                 rop.setUsageType("1");
                 rop.setUsageData(userId);
 
-                ReqInterface.getInstance().lockerBoxDeleteUsage(rop, new ReqHandler(){
+                ReqInterface.getInstance().lockerDeleteBoxUsage(rop, new ReqHandler(){
 
                             @Override
                             public void onBeforeSend() {
@@ -273,11 +273,11 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             return;
         if(StringUtil.isEmptyNotNull(slotId))
             return;
-        RopLockerBoxGetUsages rop=new RopLockerBoxGetUsages();
+        RopLockerGetBoxUsages rop=new RopLockerGetBoxUsages();
         rop.setDeviceId(deviceId);
         rop.setCabinetId(cabinetId);
         rop.setSlotId(slotId);
-        ReqInterface.getInstance().lockerBoxGetUsages(rop, new ReqHandler(){
+        ReqInterface.getInstance().lockerGetBoxUsages(rop, new ReqHandler(){
 
                     @Override
                     public void onBeforeSend() {
@@ -293,11 +293,11 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                     public void onSuccess(String response) {
                         super.onSuccess(response);
 
-                        ResultBean<RetLockerBoxGetUsages> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetLockerBoxGetUsages>>() {
+                        ResultBean<RetLockerGetBoxUsages> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetLockerGetBoxUsages>>() {
                         });
 
                         if (rt.getCode() == ResultCode.SUCCESS) {
-                            RetLockerBoxGetUsages ret = rt.getData();
+                            RetLockerGetBoxUsages ret = rt.getData();
                             dialog_LockerBox.setLockerBoxUsages(ret.getUsages());
                         }
                     }

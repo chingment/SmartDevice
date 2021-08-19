@@ -1,15 +1,16 @@
 package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RetDeviceInitData;
-import com.lumos.smartdevice.api.rop.RetLockerBoxGetUsages;
+import com.lumos.smartdevice.api.rop.RetLockerGetBoxUsages;
 import com.lumos.smartdevice.api.rop.RetOwnLogin;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
 import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
-import com.lumos.smartdevice.api.rop.RopLockerBoxDeleteUsage;
-import com.lumos.smartdevice.api.rop.RopLockerBoxSaveUsage;
-import com.lumos.smartdevice.api.rop.RopLockerBoxGetUsages;
+import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
+import com.lumos.smartdevice.api.rop.RopLockerGetBoxs;
+import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
+import com.lumos.smartdevice.api.rop.RopLockerGetBoxUsages;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
@@ -157,7 +158,13 @@ public class ReqStandAlone implements IReqVersion{
     }
 
     @Override
-    public void lockerBoxSaveUsage(RopLockerBoxSaveUsage rop, final ReqHandler reqHandler) {
+    public void lockerGetBoxs(RopLockerGetBoxs rop, final ReqHandler reqHandler) {
+
+
+    }
+
+    @Override
+    public void lockerSaveBoxUsage(RopLockerSaveBoxUsage rop, final ReqHandler reqHandler) {
         reqHandler.sendBeforeSendMessage();
         ResultBean result;
         long rows = DbManager.getInstance().savelockerBoxUsage(rop.getCabinetId(), rop.getSlotId(),rop.getUsageType(),rop.getUsageData());
@@ -166,18 +173,18 @@ public class ReqStandAlone implements IReqVersion{
     }
 
     @Override
-    public void lockerBoxGetUsages(RopLockerBoxGetUsages rop, final ReqHandler reqHandler) {
+    public void lockerGetBoxUsages(RopLockerGetBoxUsages rop, final ReqHandler reqHandler) {
         reqHandler.sendBeforeSendMessage();
         ResultBean result;
         List<LockerBoxUsageBean> usages = DbManager.getInstance().getLockerBoxUsages(rop.getCabinetId(), rop.getSlotId());
-        RetLockerBoxGetUsages ret=new RetLockerBoxGetUsages();
+        RetLockerGetBoxUsages ret=new RetLockerGetBoxUsages();
         ret.setUsages(usages);
         result = new ResultBean<>(ResultCode.SUCCESS, "", ret);
         reqHandler.sendSuccessMessage(result.toJSONString());
     }
 
     @Override
-    public void lockerBoxDeleteUsage(RopLockerBoxDeleteUsage rop, final ReqHandler reqHandler) {
+    public void lockerDeleteBoxUsage(RopLockerDeleteBoxUsage rop, final ReqHandler reqHandler) {
         reqHandler.sendBeforeSendMessage();
         ResultBean result;
         long rows = DbManager.getInstance().deleteLockBoxUsage(rop.getCabinetId(), rop.getSlotId(),rop.getUsageType(),rop.getUsageData());
