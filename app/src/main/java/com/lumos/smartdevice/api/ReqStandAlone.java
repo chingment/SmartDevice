@@ -92,7 +92,6 @@ public class ReqStandAlone implements IReqVersion{
         reqHandler.sendSuccessMessage(result.toJSONString());
     }
 
-
     @Override
     public void userSave(RopUserSave rop, final ReqHandler reqHandler) {
 

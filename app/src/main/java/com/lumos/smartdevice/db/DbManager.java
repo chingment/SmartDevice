@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.ResultUtil;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
@@ -238,11 +239,9 @@ public class DbManager {
     public void updateConfig(String field, String value) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         if (db.isOpen()) {
-
             ContentValues values = new ContentValues();
             values.put(ConfigDao.COLUMN_NAME_FIELD, field);
             values.put(ConfigDao.COLUMN_NAME_VALUE, value);
-
             db.update(ConfigDao.TABLE_NAME, values, ConfigDao.COLUMN_NAME_FIELD + " = ?", new String[]{String.valueOf(field)});
         }
     }
@@ -253,11 +252,7 @@ public class DbManager {
         if (db.isOpen()) {
             Cursor cursor = db.rawQuery("select * from " + ConfigDao.TABLE_NAME + " where " + ConfigDao.COLUMN_NAME_FIELD + " = ?", new String[]{String.valueOf(field)});
             while (cursor.moveToNext()) {
-
-
                 val = cursor.getString(cursor.getColumnIndex(ConfigDao.COLUMN_NAME_VALUE));
-
-
             }
             cursor.close();
         }
@@ -299,9 +294,10 @@ public class DbManager {
         return cabinets;
     }
 
-    public int saveAppSceneComPrl(String appVesionMode, String appSceneMode, String comPrl) {
+    public ResultBean saveAppScene(String appVesionMode, String appSceneMode, String comPrl) {
 
-        int result = -1;
+        DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE, appSceneMode);
+        DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE, appVesionMode);
 
         if (appSceneMode.equals(AppVar.SCENE_MODE_1)) {
 
@@ -313,7 +309,7 @@ public class DbManager {
 
                 if (isHasUsed) {
                     cursor.close();
-                    return 1;
+                    return ResultUtil.isFailure("有柜子正在使用中");
                 }
 
                 cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME, null);
@@ -322,14 +318,14 @@ public class DbManager {
 
                 if (isHasUsed) {
                     cursor.close();
-                    return 1;
+                    return ResultUtil.isFailure("有柜子正在使用中");
                 }
 
                 List<CabinetBean> cabinets = JSON.parseObject(comPrl, new TypeReference<List<CabinetBean>>() {
                 });
 
                 if (cabinets == null || cabinets.size() <= 0) {
-                    return 2;
+                    return ResultUtil.isFailure("解释串口协议失败");
                 }
 
                 db.delete(LockerBoxDao.TABLE_NAME, null, null);
@@ -352,7 +348,7 @@ public class DbManager {
                     });
 
                     if (layout == null || layout.size() <= 0)
-                        return 3;
+                        return ResultUtil.isFailure("解释布局协议失败");
 
                     int rowsSize = layout.size();
                     for (int i = 0; i < rowsSize; i++) {
@@ -374,10 +370,12 @@ public class DbManager {
                     }
 
                 }
+
+                return ResultUtil.isSuccess("保存成功");
             }
         }
 
-        return 0;
+        return ResultUtil.isFailure("保存失败，未提供支持");
 
     }
 
@@ -444,7 +442,7 @@ public class DbManager {
             cursor.close();
             if (exist) {
                 db.endTransaction();
-                return new ResultBean(ResultCode.FAILURE,"保存失败，已存在");
+                return ResultUtil.isFailure("保存失败，已存在");
             }
 
             ContentValues ct_LockerBoxUsage = new ContentValues();
@@ -455,7 +453,7 @@ public class DbManager {
 
             long rows = db.insert(LockerBoxUsageDao.TABLE_NAME, null, ct_LockerBoxUsage);
             if(rows<0) {
-                return new ResultBean(ResultCode.FAILURE,"保存失败，记录增加不成功");
+                return ResultUtil.isFailure("保存失败，记录增加不成功");
             }
 
             ContentValues ct_LockerBox = new ContentValues();
@@ -465,16 +463,16 @@ public class DbManager {
             rows=db.update(LockerBoxDao.TABLE_NAME, ct_LockerBox, LockerBoxDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxDao.COLUMN_NAME_SLOT_ID + " = ?", new String[]{cabinetId, slotId});
 
             if(rows<0) {
-                return new ResultBean(ResultCode.FAILURE,"保存失败，修改记录不成功");
+                return ResultUtil.isFailure("保存失败，修改记录不成功");
             }
 
             db.setTransactionSuccessful();
 
-            return new ResultBean(ResultCode.SUCCESS,"保存成功");
+            return ResultUtil.isSuccess("保存成功");
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            return new ResultBean(ResultCode.EXCEPTION,"保存发生异常:"+ex.getMessage());
+            return ResultUtil.isException("保存发生异常:"+ex.getMessage());
         } finally {
             db.endTransaction();
         }
@@ -489,7 +487,7 @@ public class DbManager {
 
             long rows = db.delete(LockerBoxUsageDao.TABLE_NAME, LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA + " = ?", new String[]{cabinetId, slotId, usageType, usageData});
             if(rows<0) {
-                return new ResultBean(ResultCode.FAILURE,"删除失败，记录找不到");
+                return ResultUtil.isFailure("删除失败，记录找不到");
             }
 
             Cursor cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME + " where " + LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + "=? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + "=? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE + "=? ", new String[]{cabinetId, slotId, usageType});
@@ -508,16 +506,16 @@ public class DbManager {
 
             rows = db.update(LockerBoxDao.TABLE_NAME, ct_LockerBox, LockerBoxDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxDao.COLUMN_NAME_SLOT_ID + " = ?", new String[]{cabinetId, slotId});
             if(rows<0) {
-                return new ResultBean(ResultCode.FAILURE,"删除失败，更新不成功");
+                return ResultUtil.isFailure("删除失败，更新不成功");
             }
 
             db.setTransactionSuccessful();
 
-            return new ResultBean(ResultCode.SUCCESS,"删除成功");
+            return ResultUtil.isSuccess("删除成功");
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            return new ResultBean(ResultCode.EXCEPTION,"删除发生异常:"+ex.getMessage());
+            return ResultUtil.isException("删除发生异常:"+ex.getMessage());
         } finally {
             db.endTransaction();
         }

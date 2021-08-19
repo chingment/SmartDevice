@@ -9,6 +9,7 @@ import android.widget.RadioGroup;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.CabinetBean;
@@ -100,26 +101,20 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
                     String version_mode = "0";
                     if (rb_VesionMode != null) {
                         version_mode = rb_VesionMode.getTag().toString();
-                        DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE, version_mode);
                     }
 
                     String scene_mode = "0";
                     RadioButton rb_SceneMode = findViewById(rg_SceneMode.getCheckedRadioButtonId());
                     if (rb_SceneMode != null) {
                         scene_mode = rb_SceneMode.getTag().toString();
-                        DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE, scene_mode);
                     }
-
 
                     String json_Com_Prl = et_Com_Prl.getText().toString();
 
-                    int result = DbManager.getInstance().saveAppSceneComPrl(version_mode, scene_mode, json_Com_Prl);
+                    ResultBean result = DbManager.getInstance().saveAppScene(version_mode, scene_mode, json_Com_Prl);
 
-                    if (result == 0) {
-                        showToast(getAppContext().getString(R.string.save_success));
-                    } else if (result == 1) {
-                        showToast(getAppContext().getString(R.string.tips_lockerbox_has_existuse));
-                    }
+                    showToast(result.getMsg());
+
                     break;
 
             }
