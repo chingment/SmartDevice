@@ -55,7 +55,6 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     private static int cur_Cabinet_Position = 0;
 
     private CustomDialogCabinetConfig dialog_CabinetConfig;
-
     private CustomDialogLockerBox dialog_LockerBox;
 
     private DeviceBean device;

@@ -586,10 +586,12 @@ public class DbManager {
 
                             UserBean user = new UserBean();
 
+                            String avatar = cursor1.getString(cursor1.getColumnIndex(UserDao.COLUMN_NAME_AVATAR));
                             String user_name = cursor1.getString(cursor1.getColumnIndex(UserDao.COLUMN_NAME_USERNAME));
                             String fullname = cursor1.getString(cursor1.getColumnIndex(UserDao.COLUMN_NAME_FULLNAME));
 
                             user.setUserId(usageData);
+                            user.setAvatar(avatar);
                             user.setUserName(user_name);
                             user.setFullName(fullname);
                             usage.setCustomData(JSON.toJSONString(user));
