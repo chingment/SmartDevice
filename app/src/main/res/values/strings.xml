@@ -84,6 +84,7 @@
     <string name="locker_box_status_1">未使用</string>
     <string name="locker_box_status_2">已使用</string>
     <string name="t_clickinput">请输入</string>
+    <string name="t_hint_fullname">请输入姓名</string>
     <string name="t_hint_phonenumner">请输入手机号码</string>
     <string name="t_hint_password">请输入6到18位数字或字母</string>
     <string name="t_hello">您好</string>

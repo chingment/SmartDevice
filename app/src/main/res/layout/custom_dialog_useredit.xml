@@ -203,7 +203,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
-                        android:hint="@string/t_clickinput"
+                        android:hint="@string/t_hint_fullname"
                         android:gravity="right"
                         android:maxLength="20"
                         android:maxLines="1"

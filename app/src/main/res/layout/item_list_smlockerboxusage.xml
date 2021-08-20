@@ -25,6 +25,7 @@
             android:background="@null"
             android:contentDescription="@string/img_content_description_empty"
             android:scaleType="fitXY"
+            android:src="@drawable/default_avatar"
              />
 
     </LinearLayout>
