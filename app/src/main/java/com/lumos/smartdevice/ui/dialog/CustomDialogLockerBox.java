@@ -66,15 +66,6 @@ public class CustomDialogLockerBox extends Dialog {
                 }
             }
         });
-
-//        btn_DeleteUser.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (onClickListener != null) {
-//                    onClickListener.onDeleteUser(device.getDeviceId(), cabinetId, slotId, userId);
-//                }
-//            }
-//        });
     }
 
     @Override
@@ -104,6 +95,14 @@ public class CustomDialogLockerBox extends Dialog {
         String[] box_Prams = slotId.split("-");
 
         tv_BoxName.setText(box_Prams[2]);
+
+    }
+
+    public void loadData(){
+
+    }
+
+    public void refeshData(){
 
     }
 

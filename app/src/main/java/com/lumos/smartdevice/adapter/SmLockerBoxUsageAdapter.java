@@ -55,6 +55,7 @@ public class SmLockerBoxUsageAdapter extends BaseAdapter {
 
         String usageType=item.getUsageType();
 
+        View ll_DividerLine = ViewHolder.get(convertView,R.id.ll_DividerLine);
         ImageView img_Avatar =ViewHolder.get(convertView,R.id.img_Avatar);
         TextView tv_BigTitle = ViewHolder.get(convertView, R.id.tv_BigTitle);
         TextView tv_SmallTtile = ViewHolder.get(convertView, R.id.tv_SmallTtile);
@@ -79,6 +80,13 @@ public class SmLockerBoxUsageAdapter extends BaseAdapter {
                 }
             }
         });
+
+        if((items.size()-position-1)==0){
+            ll_DividerLine.setVisibility(View.INVISIBLE);
+        }
+        else {
+            ll_DividerLine.setVisibility(View.VISIBLE);
+        }
 
         return convertView;
     }
