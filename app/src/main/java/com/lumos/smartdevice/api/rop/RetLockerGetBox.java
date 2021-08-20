@@ -10,7 +10,6 @@ public class RetLockerGetBox {
     private String cabinetId;
     private String slotId;
     private String isUsed;
-    private String usageType;
     private List<LockerBoxUsageBean> usages;
 
     public String getDeviceId() {
@@ -45,13 +44,6 @@ public class RetLockerGetBox {
         this.isUsed = isUsed;
     }
 
-    public String getUsageType() {
-        return usageType;
-    }
-
-    public void setUsageType(String usageType) {
-        this.usageType = usageType;
-    }
 
     public List<LockerBoxUsageBean> getUsages() {
         return usages;

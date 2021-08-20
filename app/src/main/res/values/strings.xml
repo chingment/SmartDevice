@@ -82,8 +82,7 @@
     <string name="tips_fullname_isnotnull">姓名不能为空</string>
     <string name="tips_lockerbox_has_existuse">保存失败，检查到格子存在使用中</string>
     <string name="locker_box_status_1">未使用</string>
-    <string name="locker_box_status_2">已使用（随机）</string>
-    <string name="locker_box_status_3">已使用（固定）</string>
+    <string name="locker_box_status_2">已使用</string>
     <string name="t_clickinput">请输入</string>
     <string name="t_hint_phonenumner">请输入手机号码</string>
     <string name="t_hint_password">请输入6到18位数字或字母</string>

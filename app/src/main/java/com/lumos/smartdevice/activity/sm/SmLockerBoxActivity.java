@@ -252,21 +252,12 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                 }
 
                 if(box!=null){
-
                     String box_IsUsed=box.getIsUsed();
-                    String box_UsageType=box.getUsageType();
                     if(box_IsUsed.equals("0")){
                         tv_Name.setBackgroundResource(R.drawable.locker_box_status_1);
                     }
                     else {
-
-                        if(box_UsageType.equals("1")){
-                            tv_Name.setBackgroundResource(R.drawable.locker_box_status_3);
-                        }
-                        else {
-                            tv_Name.setBackgroundResource(R.drawable.locker_box_status_2);
-                        }
-
+                        tv_Name.setBackgroundResource(R.drawable.locker_box_status_2);
                     }
                 }
 
@@ -324,7 +315,6 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                             lockerBox.setCabinetId(ret.getCabinetId());
                             lockerBox.setSlotId(ret.getSlotId());
                             lockerBox.setIsUsed(ret.getIsUsed());
-                            lockerBox.setUsageType(ret.getUsageType());
                             lockerBox.setUsages(ret.getUsages());
                             dialog_LockerBox.setLockerBox(lockerBox);
                         }

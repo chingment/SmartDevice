@@ -9,7 +9,6 @@ public class LockerBoxBean implements Serializable {
     private String cabinetId;
     private String slotId;
     private String isUsed;
-    private String usageType;
     private List<LockerBoxUsageBean> usages;
 
     public String getDeviceId() {
@@ -42,14 +41,6 @@ public class LockerBoxBean implements Serializable {
 
     public void setIsUsed(String isUsed) {
         this.isUsed = isUsed;
-    }
-
-    public String getUsageType() {
-        return usageType;
-    }
-
-    public void setUsageType(String usageType) {
-        this.usageType = usageType;
     }
 
     public List<LockerBoxUsageBean> getUsages() {

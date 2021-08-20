@@ -374,7 +374,6 @@ public class DbManager {
                                 cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_CABINET_ID, cabinet.getCabinetId());
                                 cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_SLOT_ID, slotId);
                                 cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_IS_USED, "0");
-                                cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_USAGE_TYPE, "");
                                 db.insert(LockerBoxDao.TABLE_NAME, null, cv_LockerBox);
                             }
                         }
@@ -468,7 +467,6 @@ public class DbManager {
 
             ContentValues ct_LockerBox = new ContentValues();
             ct_LockerBox.put(LockerBoxDao.COLUMN_NAME_IS_USED, "1");
-            ct_LockerBox.put(LockerBoxDao.COLUMN_NAME_USAGE_TYPE, usageType);
 
             rows=db.update(LockerBoxDao.TABLE_NAME, ct_LockerBox, LockerBoxDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxDao.COLUMN_NAME_SLOT_ID + " = ?", new String[]{cabinetId, slotId});
 
@@ -548,12 +546,12 @@ public class DbManager {
             String l_CabinetId = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_CABINET_ID));
             String l_SlotId = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_SLOT_ID));
             String l_IsUsed = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_IS_USED));
-            String l_UsageType = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_USAGE_TYPE));
+
 
             lockerBox.setCabinetId(l_CabinetId);
             lockerBox.setSlotId(l_SlotId);
             lockerBox.setIsUsed(l_IsUsed);
-            lockerBox.setUsageType(l_UsageType);
+
         }
 
 
@@ -627,13 +625,12 @@ public class DbManager {
 
                 String slotId = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_SLOT_ID));
                 String isUsed = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_IS_USED));
-                String usageType = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_USAGE_TYPE));
+
 
                 LockerBoxBean lockerBox = new LockerBoxBean();
 
                 lockerBox.setCabinetId(cabinetId);
                 lockerBox.setSlotId(slotId);
-                lockerBox.setUsageType(usageType);
                 lockerBox.setIsUsed(isUsed);
 
 

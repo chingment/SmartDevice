@@ -70,6 +70,12 @@ public class SmLockerBoxUsageAdapter extends BaseAdapter {
             CommonUtil.loadImageFromUrl(context,img_Avatar,user.getAvatar());
 
         }
+        else {
+            tv_BigTitle.setText("匿名");
+            tv_SmallTtile.setText("匿名用户");
+        }
+
+
         btn_Delete.setTag(item);
         btn_Delete.setOnClickListener(new View.OnClickListener() {
             @Override

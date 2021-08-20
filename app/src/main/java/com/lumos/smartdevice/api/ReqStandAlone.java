@@ -180,7 +180,6 @@ public class ReqStandAlone implements IReqVersion{
         ret.setDeviceId(lockerBox.getDeviceId());
         ret.setCabinetId(lockerBox.getCabinetId());
         ret.setIsUsed(lockerBox.getIsUsed());
-        ret.setUsageType(lockerBox.getUsageType());
         ret.setUsages(lockerBox.getUsages());
         result = new ResultBean<>(ResultCode.SUCCESS, "", ret);
         reqHandler.sendSuccessMessage(result.toJSONString());

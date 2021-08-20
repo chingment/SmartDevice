@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
+import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
 
@@ -24,6 +25,8 @@ public class LockerMainActivity  extends BaseFragmentActivity {
         initView();
         initEvent();
         initData();
+
+        DbManager.getInstance().savelockerBoxUsage("locker_1","1-1-1-0","2","dsdaasda");
 
     }
 

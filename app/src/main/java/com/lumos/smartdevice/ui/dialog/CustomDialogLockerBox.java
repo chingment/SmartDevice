@@ -109,20 +109,16 @@ public class CustomDialogLockerBox extends Dialog {
     public void setLockerBox(LockerBoxBean lockerBox) {
 
         String isUsed=lockerBox.getIsUsed();
-        String usageType=lockerBox.getUsageType();
+
         List<LockerBoxUsageBean> usages=lockerBox.getUsages();
 
         if(isUsed.equals("0")){
             tv_BoxName.setBackgroundResource(R.drawable.locker_box_status_1);
         }
         else {
-
-            if (usageType.equals("1")) {
-                tv_BoxName.setBackgroundResource(R.drawable.locker_box_status_3);
-            } else {
-                tv_BoxName.setBackgroundResource(R.drawable.locker_box_status_2);
-            }
+            tv_BoxName.setBackgroundResource(R.drawable.locker_box_status_2);
         }
+
         SmLockerBoxUsageAdapter  smLockerBoxUsageAdapter=new SmLockerBoxUsageAdapter(mContext,usages);
         smLockerBoxUsageAdapter.setOnClickListener(new SmLockerBoxUsageAdapter.OnClickListener() {
             @Override
