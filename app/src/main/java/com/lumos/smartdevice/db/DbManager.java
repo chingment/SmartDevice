@@ -498,7 +498,7 @@ public class DbManager {
                 return ResultUtil.isFailure("删除失败，记录找不到");
             }
 
-            Cursor cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME + " where " + LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + "=? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + "=? and " + LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE + "=? ", new String[]{cabinetId, slotId, usageType});
+            Cursor cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME + " where " + LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + "=? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + "=?", new String[]{cabinetId, slotId});
 
             int count = cursor.getCount();
 
