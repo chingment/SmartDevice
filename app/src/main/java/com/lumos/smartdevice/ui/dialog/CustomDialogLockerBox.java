@@ -7,6 +7,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -40,7 +41,7 @@ public class CustomDialogLockerBox extends Dialog {
     private DeviceBean device;
     private String cabinetId;
     private String slotId;
-
+    private LinearLayout ll_UsagesEmpty;
     public CustomDialogLockerBox(Context context) {
         super(context, R.style.custom_dialog);
         mThis = this;
@@ -57,6 +58,7 @@ public class CustomDialogLockerBox extends Dialog {
 
         tv_BoxName = ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
         lv_Usages = ViewHolder.get(mLayoutRes, R.id.lv_Usages);
+        ll_UsagesEmpty= ViewHolder.get(mLayoutRes, R.id.ll_UsagesEmpty);
         btn_DistUser = ViewHolder.get(mLayoutRes, R.id.btn_DistUser);
         btn_DistUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +121,15 @@ public class CustomDialogLockerBox extends Dialog {
             tv_BoxName.setBackgroundResource(R.drawable.locker_box_status_2);
         }
 
+        if(usages.size()<=0){
+            ll_UsagesEmpty.setVisibility(View.VISIBLE);
+            lv_Usages.setVisibility(View.GONE);
+        }
+        else {
+            ll_UsagesEmpty.setVisibility(View.GONE);
+            lv_Usages.setVisibility(View.VISIBLE);
+        }
+
         SmLockerBoxUsageAdapter  smLockerBoxUsageAdapter=new SmLockerBoxUsageAdapter(mContext,usages);
         smLockerBoxUsageAdapter.setOnClickListener(new SmLockerBoxUsageAdapter.OnClickListener() {
             @Override
@@ -129,6 +140,7 @@ public class CustomDialogLockerBox extends Dialog {
             }
         });
         lv_Usages.setAdapter(smLockerBoxUsageAdapter);
+
     }
 
     private OnClickListener onClickListener;
