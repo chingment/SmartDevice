@@ -72,7 +72,7 @@ public class SmLockerBoxUsageAdapter extends BaseAdapter {
         }
         else {
             tv_BigTitle.setText("匿名");
-            tv_SmallTtile.setText("匿名用户");
+            tv_SmallTtile.setText("临时用户");
         }
 
 
