@@ -3,11 +3,14 @@ package com.lumos.smartdevice.activity.sm;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,10 +38,13 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
     private Button btn_LoginByAccount;
     private LinearLayout btn_HelpTool;
     private EditText et_UserName;
+    private ImageView btn_UserName_Del;
     private EditText et_Password;
+    private ImageView btn_Password_Del;
     private TextView tv_Scene;
     private String scene_mode;//登录场景
     private String app_version_mode;//版本模式
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +68,8 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
         et_UserName = findViewById(R.id.et_UserName);
         et_Password = findViewById(R.id.et_Password);
         tv_Scene = findViewById(R.id.tv_Scene);
-
-
+        btn_UserName_Del= findViewById(R.id.btn_UserName_Del);
+        btn_Password_Del= findViewById(R.id.btn_Password_Del);
         et_Password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
         et_Password.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
@@ -72,7 +78,8 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
 
     private void initEvent() {
         btn_LoginByAccount.setOnClickListener(this);
-
+        btn_UserName_Del.setOnClickListener(this);
+        btn_Password_Del.setOnClickListener(this);
 
         LongClickUtil.setLongClick(new Handler(), btn_HelpTool, 500, new View.OnLongClickListener() {
             @Override
@@ -87,6 +94,47 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
             }
         });
 
+
+        et_UserName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (StringUtil.isEmpty(editable + "")) {
+                    btn_UserName_Del.setVisibility(View.INVISIBLE);
+
+                } else {
+                    btn_UserName_Del.setVisibility(View.VISIBLE);
+
+                }
+            }
+        });
+
+        et_Password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (StringUtil.isEmpty(editable + "")) {
+                    btn_Password_Del.setVisibility(View.INVISIBLE);
+
+                } else {
+                    btn_Password_Del.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
 
     private void initData() {
@@ -112,6 +160,12 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                     break;
                 case R.id.btn_LoginByAccount:
                     loginByAccount();
+                    break;
+                case R.id.btn_Password_Del:
+                    et_Password.setText("");
+                    break;
+                case R.id.btn_UserName_Del:
+                    et_UserName.setText("");
                     break;
             }
         }

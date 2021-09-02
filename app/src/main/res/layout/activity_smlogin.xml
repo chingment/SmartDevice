@@ -81,6 +81,16 @@
 
                         />
 
+
+                    <ImageView
+                        android:id="@+id/btn_UserName_Del"
+                        android:layout_width="@dimen/size_26"
+                        android:layout_height="@dimen/size_26"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:paddingTop="@dimen/size_10"
+                        android:src="@drawable/ic_input_delete"
+                        android:visibility="invisible" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -113,6 +123,16 @@
                         android:textColor="@color/aty_smlogin_et_txt"
                         android:textColorHint="@color/aty_smlogin_et_hint"
                         android:textSize="@dimen/sp_12" />
+
+                    <ImageView
+                        android:id="@+id/btn_Password_Del"
+                        android:layout_width="@dimen/size_26"
+                        android:layout_height="@dimen/size_26"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:paddingTop="@dimen/size_10"
+                        android:src="@drawable/ic_input_delete"
+                        android:visibility="invisible" />
                 </RelativeLayout>
 
             </RelativeLayout>
