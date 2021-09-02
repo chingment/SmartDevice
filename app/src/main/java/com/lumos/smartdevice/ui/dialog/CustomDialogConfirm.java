@@ -44,6 +44,7 @@ public class CustomDialogConfirm extends Dialog {
     private TextView tv_TipsText;
     private ImageView iv_TipsImage;
     private Object tag;
+    private String function;
 
 
     public void setTipsImageDrawable(Drawable drawable) {
@@ -82,6 +83,14 @@ public class CustomDialogConfirm extends Dialog {
 
     public Object getTag(){
         return this.tag;
+    }
+
+    public void setFunction(String function){
+        this.function=function;
+    }
+
+    public String getFunction(){
+        return this.function;
     }
 
     public CustomDialogConfirm(Context context, String tips, boolean isCancle) {

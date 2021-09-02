@@ -104,9 +104,9 @@ public class SmHomeActivity extends BaseFragmentActivity {
         dialog_Confirm.setOnClickListener(new CustomDialogConfirm.OnClickListener() {
             @Override
             public void onSure() {
-                String tag = dialog_Confirm.getTag().toString();
+                String fun = dialog_Confirm.getFunction();
 
-                switch (tag) {
+                switch (fun) {
                     case "dlg.closeapp":
                         dlgCloseApp();
                         break;
@@ -163,21 +163,21 @@ public class SmHomeActivity extends BaseFragmentActivity {
 
     private void gdvExitManager(){
         dialog_Confirm.setTipsImageVisibility(View.GONE);
-        dialog_Confirm.setTag("dlg.exitmanager");
+        dialog_Confirm.setFunction("dlg.exitmanager");
         dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_exitmanager));
         dialog_Confirm.show();
     }
 
     private void gdvCloseApp(){
         dialog_Confirm.setTipsImageVisibility(View.GONE);
-        dialog_Confirm.setTag("dlg.closeapp");
+        dialog_Confirm.setFunction("dlg.closeapp");
         dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_closeapp));
         dialog_Confirm.show();
     }
 
     private void gdvRebootSys(){
         dialog_Confirm.setTipsImageVisibility(View.GONE);
-        dialog_Confirm.setTag("dlg.rebootsys");
+        dialog_Confirm.setFunction("dlg.rebootsys");
         dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_rebootsys));
         dialog_Confirm.show();
     }

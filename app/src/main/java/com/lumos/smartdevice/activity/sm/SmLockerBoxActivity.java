@@ -31,6 +31,7 @@ import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.ui.dialog.CustomDialogCabinetConfig;
+import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
 import com.lumos.smartdevice.ui.dialog.CustomDialogLockerBox;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
@@ -56,7 +57,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
     private CustomDialogCabinetConfig dialog_CabinetConfig;
     private CustomDialogLockerBox dialog_LockerBox;
-
+    private CustomDialogConfirm dialog_Confirm;
     private DeviceBean device;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,29 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         tv_CabinetName = findViewById(R.id.tv_CabinetName);
         tl_Boxs = findViewById(R.id.tl_Boxs);
         dialog_CabinetConfig = new CustomDialogCabinetConfig(SmLockerBoxActivity.this);
+
+
+        dialog_Confirm = new CustomDialogConfirm(SmLockerBoxActivity.this, "", true);
+        dialog_Confirm.setOnClickListener(new CustomDialogConfirm.OnClickListener() {
+            @Override
+            public void onSure() {
+                String fun = dialog_Confirm.getFunction();
+                switch (fun) {
+                    case "dlg.deleteusage":
+                        LockerBoxUsageBean usage=(LockerBoxUsageBean)dialog_Confirm.getTag();
+                        lockerBoxDeleteUsage(usage);
+                        break;
+                }
+                dialog_Confirm.hide();
+            }
+
+            @Override
+            public void onCancle() {
+                dialog_Confirm.hide();
+            }
+        });
+
+
         dialog_LockerBox = new CustomDialogLockerBox(SmLockerBoxActivity.this);
         dialog_LockerBox.setOnClickListener(new CustomDialogLockerBox.OnClickListener() {
             @Override
@@ -109,44 +133,13 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             @Override
             public void onDeleteUsage(LockerBoxUsageBean usage) {
 
-                RopLockerDeleteBoxUsage rop=new RopLockerDeleteBoxUsage();
-                rop.setDeviceId(usage.getDeviceId());
-                rop.setCabinetId(usage.getCabinetId());
-                rop.setSlotId(usage.getSlotId());
-                rop.setUsageType(usage.getUsageType());
-                rop.setUsageData(usage.getUsageData());
 
-                ReqInterface.getInstance().lockerDeleteBoxUsage(rop, new ReqHandler(){
+                dialog_Confirm.setTipsImageVisibility(View.GONE);
+                dialog_Confirm.setFunction("dlg.deleteusage");
+                dialog_Confirm.setTag(usage);
+                dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_delete));
+                dialog_Confirm.show();
 
-                            @Override
-                            public void onBeforeSend() {
-                                super.onBeforeSend();
-                            }
-
-                            @Override
-                            public void onAfterSend() {
-                                super.onAfterSend();
-                            }
-
-                            @Override
-                            public void onSuccess(String response) {
-                                super.onSuccess(response);
-
-                                ResultBean<Object> rt = JSON.parseObject(response, new TypeReference<ResultBean<Object>>() {
-                                });
-
-                                if (rt.getCode() == ResultCode.SUCCESS) {
-                                    lockerGetBoxs();
-                                    lockerGetBox();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(String msg, Exception e) {
-                                super.onFailure(msg, e);
-                            }
-                        }
-                );
 
             }
 
@@ -368,6 +361,48 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
     }
 
+    public void lockerBoxDeleteUsage(LockerBoxUsageBean usage){
+
+        RopLockerDeleteBoxUsage rop=new RopLockerDeleteBoxUsage();
+        rop.setDeviceId(usage.getDeviceId());
+        rop.setCabinetId(usage.getCabinetId());
+        rop.setSlotId(usage.getSlotId());
+        rop.setUsageType(usage.getUsageType());
+        rop.setUsageData(usage.getUsageData());
+
+        ReqInterface.getInstance().lockerDeleteBoxUsage(rop, new ReqHandler(){
+
+                    @Override
+                    public void onBeforeSend() {
+                        super.onBeforeSend();
+                    }
+
+                    @Override
+                    public void onAfterSend() {
+                        super.onAfterSend();
+                    }
+
+                    @Override
+                    public void onSuccess(String response) {
+                        super.onSuccess(response);
+
+                        ResultBean<Object> rt = JSON.parseObject(response, new TypeReference<ResultBean<Object>>() {
+                        });
+
+                        if (rt.getCode() == ResultCode.SUCCESS) {
+                            lockerGetBoxs();
+                            lockerGetBox();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg, Exception e) {
+                        super.onFailure(msg, e);
+                    }
+                }
+        );
+
+    }
     @Override
     public  void onResume() {
         super.onResume();
