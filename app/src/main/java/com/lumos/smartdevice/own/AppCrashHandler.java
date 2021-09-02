@@ -8,8 +8,6 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.lumos.smartdevice.http.HttpClient;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;

@@ -28,6 +28,7 @@ public class LockerMainActivity  extends BaseFragmentActivity {
 
         DbManager.getInstance().savelockerBoxUsage("locker_1","1-1-1-0","2","dsdaasda");
 
+        int a=1/0;
     }
 
     private void initView() {

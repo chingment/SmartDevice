@@ -75,13 +75,6 @@ public class AppContext extends Application {
         DbManager.getInstance().init();
         OstCtrlInterface.init(context);
 
-        AppCrashHandler.getInstance().init(context, new AppCrashHandler.HandlerResult() {
-            @Override
-            public void complete(Thread thread, Throwable ex) {
-                Intent intent = new Intent(app.getApplicationContext(), SmExcepitonViewer.class);
-                app.startActivity(intent);
-            }
-        });
     }
 
     @Override
