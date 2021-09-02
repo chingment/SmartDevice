@@ -436,5 +436,9 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         if (dialog_LockerBox != null) {
             dialog_LockerBox.cancel();
         }
+
+        if (dialog_Confirm != null) {
+            dialog_Confirm.cancel();
+        }
     }
 }

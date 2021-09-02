@@ -58,6 +58,10 @@ public class CustomDialogLockerBox extends Dialog {
 
         tv_BoxName = ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
         lv_Usages = ViewHolder.get(mLayoutRes, R.id.lv_Usages);
+        lv_Usages.setFocusable(false);
+        lv_Usages.setClickable(false);
+        lv_Usages.setPressed(false);
+        lv_Usages.setEnabled(false);
         ll_UsagesEmpty= ViewHolder.get(mLayoutRes, R.id.ll_UsagesEmpty);
         btn_DistUser = ViewHolder.get(mLayoutRes, R.id.btn_DistUser);
         btn_DistUser.setOnClickListener(new View.OnClickListener() {

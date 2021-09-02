@@ -9,7 +9,7 @@
 
         android:layout_width="@dimen/size_300"
         android:padding="@dimen/size_10"
-        android:layout_height="@dimen/size_300"
+        android:layout_height="@dimen/size_320"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@drawable/dialog"

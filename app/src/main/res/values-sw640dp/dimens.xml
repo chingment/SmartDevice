@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
+	<dimen name="size_320">568.8889dp</dimen>
+	<dimen name="size_310">551.1111dp</dimen>
 	<dimen name="size_302">536.8889dp</dimen>
 	<dimen name="size_301">535.1111dp</dimen>
 	<dimen name="size_300">533.3333dp</dimen>

@@ -1,5 +1,7 @@
 <resources>
     <!-- 通用 -->
+    <dimen name="size_320">320.0dp</dimen>
+    <dimen name="size_310">310.0dp</dimen>
     <dimen name="size_302">302.0dp</dimen>
     <dimen name="size_301">301.0dp</dimen>
     <dimen name="size_300">300.0dp</dimen>
