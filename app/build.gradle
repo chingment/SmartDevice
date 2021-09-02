@@ -16,7 +16,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        debug{
+        debug {
             buildConfigField "Boolean", "ISAPPDEBUG", "true"
             buildConfigField "String", "COMNAME", "\"uplink\""
             buildConfigField "String", "ENVIRONMENT", "\"http://api.term.17fanju.com\""

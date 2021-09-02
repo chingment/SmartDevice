@@ -38,6 +38,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".activity.sm.SmExcepitonViewer"></activity>
         <activity android:name=".activity.sm.SmUserManagerActivity" />
         <activity android:name=".activity.sm.SmLockerBoxActivity" />
         <activity android:name=".activity.sm.SmHomeActivity" />

@@ -11,6 +11,7 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 
+import com.lumos.smartdevice.activity.sm.SmExcepitonViewer;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
@@ -73,6 +74,14 @@ public class AppContext extends Application {
         Context context = getApplicationContext();
         DbManager.getInstance().init();
         OstCtrlInterface.init(context);
+
+        AppCrashHandler.getInstance().init(context, new AppCrashHandler.HandlerResult() {
+            @Override
+            public void complete(Thread thread, Throwable ex) {
+                Intent intent = new Intent(app.getApplicationContext(), SmExcepitonViewer.class);
+                app.startActivity(intent);
+            }
+        });
     }
 
     @Override
