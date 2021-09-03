@@ -188,7 +188,7 @@ public class ReqStandAlone implements IReqVersion{
     @Override
     public void lockerSaveBoxUsage(RopLockerSaveBoxUsage rop, final ReqHandler reqHandler) {
         reqHandler.sendBeforeSendMessage();
-        ResultBean result = DbManager.getInstance().savelockerBoxUsage(rop.getCabinetId(), rop.getSlotId(),rop.getUsageType(),rop.getUsageData());
+        ResultBean result = DbManager.getInstance().saveLockerBoxUsage(rop.getCabinetId(), rop.getSlotId(),rop.getUsageType(),rop.getUsageData());
         reqHandler.sendSuccessMessage(result.toJSONString());
     }
 

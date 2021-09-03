@@ -439,7 +439,7 @@ public class DbManager {
         }
     }
 
-    public ResultBean savelockerBoxUsage(String cabinetId, String slotId, String usageType, String usageData) {
+    public ResultBean saveLockerBoxUsage(String cabinetId, String slotId, String usageType, String usageData) {
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
