@@ -7,16 +7,21 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
+import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 public class SmFactorySettingActivity extends BaseFragmentActivity implements View.OnClickListener {
     private static final String TAG = "SmFactorySettingActivity";
     private LinearLayout btn_Nav_AppSceneSetting;
     private TextView tv_Nav_AppScene_Tips;
+
+    private TextView tv_DeviceId;
+    private TextView tv_VersionName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +39,8 @@ public class SmFactorySettingActivity extends BaseFragmentActivity implements Vi
     private void initView() {
         btn_Nav_AppSceneSetting = findViewById(R.id.btn_Nav_AppSceneSetting);
         tv_Nav_AppScene_Tips = findViewById(R.id.tv_Nav_AppScene_Tips);
+        tv_DeviceId  = findViewById(R.id.tv_DeviceId);
+        tv_VersionName  = findViewById(R.id.tv_VersionName);
     }
 
     private void initEvent() {
@@ -41,6 +48,9 @@ public class SmFactorySettingActivity extends BaseFragmentActivity implements Vi
     }
 
     private void initData() {
+
+        tv_DeviceId.setText(DeviceUtil.getDeviceId());
+        tv_VersionName.setText(BuildConfig.VERSION_NAME);
 
         setNavAppSceneTips();
 
