@@ -25,7 +25,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="246RAM_API_25" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="H4K5T20B03004762" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -38,13 +38,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmUserManagerActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="349" column="21" selection-start-line="349" selection-start-column="21" selection-end-line="349" selection-end-column="21" />
+            <state relative-caret-position="319">
+              <caret line="51" column="36" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="class#7599:9375" />
-                <element signature="method#onSelectClick#0;class#7599:9375" />
-                <element signature="class#9494:9890" />
+                <element signature="e#12641#12642#0" expanded="true" />
+                <element signature="e#12696#12697#0" expanded="true" />
                 <element signature="method#onDestroy#0;class#SmUserManagerActivity#0" />
               </folding>
             </state>
@@ -519,7 +518,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1324" height="775" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.2605304" />
@@ -533,12 +531,12 @@
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.6335299" weight="0.37767583" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49620894" weight="0.32874617" />
-      <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.4903117" weight="0.23394495" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" sideWeight="0.4903117" visible="true" weight="0.23394495" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.39258635" side_tool="true" weight="0.31039757" />
       <window_info anchor="bottom" id="Build" order="5" sideWeight="0.60741365" weight="0.29510704" />
       <window_info anchor="bottom" id="Android Profiler" order="6" sideWeight="0.49789384" weight="0.32874617" />
       <window_info anchor="bottom" id="Run" order="7" sideWeight="0.4928391" weight="0.25993884" />
-      <window_info active="true" anchor="bottom" id="Debug" order="8" sideWeight="0.7312553" visible="true" weight="0.21100917" />
+      <window_info anchor="bottom" id="Debug" order="8" sideWeight="0.7312553" weight="0.21100917" />
       <window_info anchor="bottom" id="Find" order="9" sideWeight="0.494524" weight="0.45259938" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" weight="0.32942164" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -1068,13 +1066,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmUserManagerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="349" column="21" selection-start-line="349" selection-start-column="21" selection-end-line="349" selection-end-column="21" />
+        <state relative-caret-position="319">
+          <caret line="51" column="36" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="class#7599:9375" />
-            <element signature="method#onSelectClick#0;class#7599:9375" />
-            <element signature="class#9494:9890" />
+            <element signature="e#12641#12642#0" expanded="true" />
+            <element signature="e#12696#12697#0" expanded="true" />
             <element signature="method#onDestroy#0;class#SmUserManagerActivity#0" />
           </folding>
         </state>
