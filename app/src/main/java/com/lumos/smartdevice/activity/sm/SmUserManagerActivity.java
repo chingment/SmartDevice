@@ -49,7 +49,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
     private SuperRefreshLayout lv_UsersRefresh;
     private RecyclerView lv_UsersData;
     private int lv_Users_PageIndex=0;
-    private int lv_Users_PageSize=2;
+    private int lv_Users_PageSize=10;
     private LinearLayout ll_UsersEmpty;
     private SmUserAdapter lv_UsersAdapter;
     private EditText et_Search;
