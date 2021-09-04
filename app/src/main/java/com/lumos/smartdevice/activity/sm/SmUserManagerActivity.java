@@ -49,6 +49,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
     private SuperRefreshLayout lv_UsersRefresh;
     private RecyclerView lv_UsersData;
     private int lv_Users_PageIndex=0;
+    private int lv_Users_PageSize=2;
     private LinearLayout ll_UsersEmpty;
     private SmUserAdapter lv_UsersAdapter;
     private EditText et_Search;
@@ -289,7 +290,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
 
         RopUserGetList rop=new RopUserGetList();
         rop.setPageIndex(lv_Users_PageIndex);
-        rop.setPageSize(10);
+        rop.setPageSize(lv_Users_PageSize);
         rop.setKeyWord(et_Search.getText().toString());
         ReqInterface.getInstance().userGetList(rop, new ReqHandler(){
 
@@ -314,37 +315,40 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                 if(rt.getCode()== ResultCode.SUCCESS) {
                     RetUserGetList d=rt.getData();
 
+
+                    int total=d.getTotal();
+                    int totalPage = (total + lv_Users_PageSize - 1)/lv_Users_PageSize;
                     List<UserBean> users = d.getItems();
 
-                    if(d.getTotal()==0){
+                    if(total==0){
                         ll_UsersEmpty.setVisibility(View.VISIBLE);
                     }
                     else {
                         ll_UsersEmpty.setVisibility(View.GONE);
                     }
 
-
-
-                    if (users != null && users.size() > 0) {
-                        if (lv_Users_PageIndex == 0) {
-                            lv_UsersRefresh.setRefreshing(false);
-                            lv_UsersRefresh.loadComplete(true);
-                            lv_UsersAdapter.setData(users, SmUserManagerActivity.this);
-
-                        } else {
-                            lv_UsersRefresh.loadComplete(true);
-                            lv_UsersAdapter.addData(users, SmUserManagerActivity.this);
-                        }
-                        lv_UsersRefresh.setVisibility(View.VISIBLE);
-                    } else {
-                        if (lv_Users_PageIndex == 0) {
-                            lv_UsersRefresh.setRefreshing(false);
-                            lv_UsersAdapter.setData(new ArrayList<UserBean>(), SmUserManagerActivity.this);
-                            lv_UsersRefresh.setVisibility(View.GONE);
-                        }
-
-                        lv_UsersRefresh.loadComplete(false);
+                    boolean hasMore=true;
+                    if(totalPage==(lv_Users_PageIndex+1)) {
+                        hasMore = false;
                     }
+
+                    if(users==null||users.size()==0) {
+                        users = new ArrayList<>();
+                        lv_UsersRefresh.setVisibility(View.GONE);
+                    }
+                    else {
+                        lv_UsersRefresh.setVisibility(View.VISIBLE);
+                    }
+
+                    if (lv_Users_PageIndex == 0) {
+                        lv_UsersRefresh.setRefreshing(false);
+                        lv_UsersAdapter.setData(users, SmUserManagerActivity.this);
+                    }
+                    else {
+                        lv_UsersAdapter.addData(users, SmUserManagerActivity.this);
+                    }
+
+                    lv_UsersRefresh.loadComplete(hasMore);
                 }
                 else {
                     showToast(rt.getMsg());
