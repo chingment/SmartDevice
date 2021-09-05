@@ -80,7 +80,6 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
                     }
                 }
 
-
                 if (StringUtil.isEmptyNotNull(bean.getFullName())) {
                     showToast(R.string.tips_fullname_isnotnull);
                     return;

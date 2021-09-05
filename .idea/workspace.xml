@@ -48,20 +48,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHomeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="95" column="38" selection-start-line="95" selection-start-column="28" selection-end-line="95" selection-end-column="38" />
+            <state relative-caret-position="203">
+              <caret line="83" column="19" selection-start-line="83" selection-start-column="19" selection-end-line="83" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2909#3021#1" />
-                <element signature="e#2936#2968#0" expanded="true" />
-                <element signature="e#3155#3191#0" expanded="true" />
-                <element signature="e#3442#3474#0" expanded="true" />
-                <element signature="e#3677#3713#0" expanded="true" />
+                <element signature="e#2720#4886#0" expanded="true" />
                 <element signature="e#4030#4066#0" expanded="true" />
                 <element signature="e#4270#4302#0" expanded="true" />
+                <element signature="e#4786#4787#0" expanded="true" />
+                <element signature="e#4885#4886#0" expanded="true" />
                 <element signature="class#4150:4983" />
                 <element signature="method#dlgExitManager#0;class#SmHomeActivity#0" />
                 <element signature="e#11379#11380#0" expanded="true" />
@@ -70,114 +68,6 @@
                 <element signature="e#11665#11666#0" expanded="true" />
                 <element signature="e#12095#12096#0" expanded="true" />
                 <element signature="e#12166#12167#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLoginActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="243" column="43" selection-start-line="243" selection-start-column="28" selection-end-line="243" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLockerBoxActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="43">
-              <caret line="372" lean-forward="true" selection-start-line="372" selection-end-line="402" selection-end-column="10" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#loadCabinetData#0;class#SmLockerBoxActivity#0" />
-                <element signature="method#drawsLayout#0;class#SmLockerBoxActivity#0" />
-                <element signature="method#lockerGetBox#0;class#SmLockerBoxActivity#0" />
-                <element signature="method#lockerGetBoxs#0;class#SmLockerBoxActivity#0" />
-                <element signature="method#onSuccess#0;class#13088:14077" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmUserManagerActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="80" selection-start-line="80" selection-end-line="80" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4301#4413#1" />
-                <element signature="e#4451#4662#1" />
-                <element signature="method#onDestroy#0;class#SmUserManagerActivity#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/utils/DensityHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/utils/CommonUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="271" column="5" selection-start-line="271" selection-start-column="5" selection-end-line="271" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="165" column="82" selection-start-line="165" selection-start-column="82" selection-end-line="165" selection-end-column="82" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#deviceInitData#0;class#ReqStandAlone#0" />
-                <element signature="method#ownLoginByAccount#0;class#ReqStandAlone#0" />
-                <element signature="method#ownLogout#0;class#ReqStandAlone#0" />
-                <element signature="method#userSave#0;class#ReqStandAlone#0" />
-                <element signature="method#lockerGetBoxs#0;class#ReqStandAlone#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/model/UserBean.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" selection-start-line="6" selection-end-line="50" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RetUserGetDetail.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="48" column="5" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopUserGetDetail.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="31" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
-              <folding>
-                <element signature="e#159#160#0" expanded="true" />
-                <element signature="e#203#204#0" expanded="true" />
-                <element signature="e#239#240#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -223,8 +113,8 @@
       <find>state</find>
       <find>setState</find>
       <find>aty_smlogin_input_boder_bottom</find>
-      <find>dialog_UserEdit</find>
       <find>isPassword</find>
+      <find>dialog_UserEdit</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -287,9 +177,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopUserGetDetail.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RetUserGetDetail.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHomeActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmUserManagerActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/utils/CommonUtil.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmUserManagerActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHomeActivity.java" />
       </list>
     </option>
   </component>
@@ -670,10 +560,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="25" width="1229" height="775" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.16512215" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.16512215" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -684,9 +573,9 @@
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Logcat" order="1" sideWeight="0.6335299" weight="0.37767583" />
       <window_info anchor="bottom" id="TODO" order="2" sideWeight="0.49620894" weight="0.32874617" />
-      <window_info anchor="bottom" id="Terminal" order="3" sideWeight="0.4903117" weight="0.23394495" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" sideWeight="0.4903117" visible="true" weight="0.23394495" />
       <window_info anchor="bottom" id="Event Log" order="4" sideWeight="0.39258635" side_tool="true" weight="0.31039757" />
-      <window_info anchor="bottom" id="Build" order="5" sideWeight="0.60741365" visible="true" weight="0.29510704" />
+      <window_info anchor="bottom" id="Build" order="5" sideWeight="0.60741365" weight="0.29510704" />
       <window_info anchor="bottom" id="Android Profiler" order="6" sideWeight="0.49789384" weight="0.32874617" />
       <window_info anchor="bottom" id="Run" order="7" sideWeight="0.4928391" weight="0.26299694" />
       <window_info anchor="bottom" id="Debug" order="8" sideWeight="0.7312553" weight="0.21100917" />
@@ -759,18 +648,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/own/AppCrashHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2229#2472#0" expanded="true" />
-            <element signature="e#2471#2472#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/own/AppContext.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1087,44 +964,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHomeActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="95" column="38" selection-start-line="95" selection-start-column="28" selection-end-line="95" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2909#3021#1" />
-            <element signature="e#2936#2968#0" expanded="true" />
-            <element signature="e#3155#3191#0" expanded="true" />
-            <element signature="e#3442#3474#0" expanded="true" />
-            <element signature="e#3677#3713#0" expanded="true" />
-            <element signature="e#4030#4066#0" expanded="true" />
-            <element signature="e#4270#4302#0" expanded="true" />
-            <element signature="class#4150:4983" />
-            <element signature="method#dlgExitManager#0;class#SmHomeActivity#0" />
-            <element signature="e#11379#11380#0" expanded="true" />
-            <element signature="e#11471#11472#0" expanded="true" />
-            <element signature="e#11574#11575#0" expanded="true" />
-            <element signature="e#11665#11666#0" expanded="true" />
-            <element signature="e#12095#12096#0" expanded="true" />
-            <element signature="e#12166#12167#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmUserManagerActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="80" selection-start-line="80" selection-end-line="80" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4301#4413#1" />
-            <element signature="e#4451#4662#1" />
-            <element signature="method#onDestroy#0;class#SmUserManagerActivity#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/utils/DensityHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -1136,6 +975,49 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="354">
           <caret line="271" column="5" selection-start-line="271" selection-start-column="5" selection-end-line="271" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmUserManagerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-111">
+          <caret line="144" column="39" selection-start-line="144" selection-start-column="39" selection-end-line="144" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4301#4413#1" />
+            <element signature="e#4451#4662#1" />
+            <element signature="method#onDestroy#0;class#SmUserManagerActivity#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/dialog/CustomDialogUserEdit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1200">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHomeActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="83" column="19" selection-start-line="83" selection-start-column="19" selection-end-line="83" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2720#4886#0" expanded="true" />
+            <element signature="e#4030#4066#0" expanded="true" />
+            <element signature="e#4270#4302#0" expanded="true" />
+            <element signature="e#4786#4787#0" expanded="true" />
+            <element signature="e#4885#4886#0" expanded="true" />
+            <element signature="class#4150:4983" />
+            <element signature="method#dlgExitManager#0;class#SmHomeActivity#0" />
+            <element signature="e#11379#11380#0" expanded="true" />
+            <element signature="e#11471#11472#0" expanded="true" />
+            <element signature="e#11574#11575#0" expanded="true" />
+            <element signature="e#11665#11666#0" expanded="true" />
+            <element signature="e#12095#12096#0" expanded="true" />
+            <element signature="e#12166#12167#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
