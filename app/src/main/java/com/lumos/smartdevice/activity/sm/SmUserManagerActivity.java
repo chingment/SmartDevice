@@ -79,11 +79,6 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         initData();
     }
 
-    public static boolean isPassword(String password) {
-        Pattern p = Pattern.compile("[0-9a-zA-Z_]{6,18}");
-        Matcher m = p.matcher(password);
-        return m.matches();
-    }
 
     private void initView() {
         btn_NewUser = findViewById(R.id.btn_NewUser);
@@ -138,7 +133,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                     }
                     else
                     {
-                        if(!isPassword(bean.getPassword())){
+                        if(!CommonUtil.isPassword(bean.getPassword())){
                             showToast(R.string.tips_password_formatnoright);
                             return;
                         }
@@ -147,7 +142,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                 else
                 {
                     if (!StringUtil.isEmptyNotNull(bean.getPassword())) {
-                        if(!isPassword(bean.getPassword())){
+                        if(!CommonUtil.isPassword(bean.getPassword())){
                             showToast(R.string.tips_password_formatnoright);
                             return;
                         }

@@ -265,5 +265,11 @@ public class CommonUtil {
         }
     }
 
+    public static boolean isPassword(String password) {
+        Pattern p = Pattern.compile("[0-9a-zA-Z_]{6,18}");
+        Matcher m = p.matcher(password);
+        return m.matches();
+    }
+
 
 }

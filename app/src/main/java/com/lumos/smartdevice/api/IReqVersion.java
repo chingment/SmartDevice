@@ -8,6 +8,7 @@ import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBox;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
+import com.lumos.smartdevice.api.rop.RopUserGetDetail;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 
@@ -18,6 +19,7 @@ public interface IReqVersion {
     void ownLogout(RopOwnLogout rop, final ReqHandler reqHandler);
     void userSave(RopUserSave rop, final ReqHandler reqHandler);
     void userGetList(RopUserGetList rop, final ReqHandler reqHandler);
+    void userGetDetail(RopUserGetDetail rop, final ReqHandler reqHandler);
     void lockerGetBoxs(RopLockerGetBoxs rop, final ReqHandler reqHandler);
     void lockerGetBox(RopLockerGetBox rop, final ReqHandler reqHandler);
     void lockerSaveBoxUsage(RopLockerSaveBoxUsage rop, final ReqHandler reqHandler);

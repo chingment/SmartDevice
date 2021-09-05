@@ -247,6 +247,34 @@ public class DbManager {
 
     }
 
+    public UserBean GetUser(String userId) {
+
+        UserBean user = null;
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        if (db.isOpen()) {
+
+            Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where " + UserDao.COLUMN_NAME_USERID + " = ?", new String[]{String.valueOf(userId)});
+
+            while (cursor.moveToNext()) {
+                user = new UserBean();
+
+                String userName = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERNAME));
+                String fullName = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_FULLNAME));
+                String avatar = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_AVATAR));
+
+                user.setUserId(userId);
+                user.setUserName(userName);
+                user.setFullName(fullName);
+                user.setAvatar(avatar);
+            }
+            cursor.close();
+        }
+
+        return user;
+    }
+
     public void updateConfig(String field, String value) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         if (db.isOpen()) {

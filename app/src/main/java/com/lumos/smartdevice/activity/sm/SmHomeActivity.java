@@ -10,7 +10,11 @@ import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
+import com.lumos.smartdevice.api.rop.RetUserGetDetail;
+import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
+import com.lumos.smartdevice.api.rop.RopUserGetDetail;
+import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
 import com.lumos.smartdevice.model.UserBean;
@@ -20,9 +24,11 @@ import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
+import com.lumos.smartdevice.ui.dialog.CustomDialogUserEdit;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
+import com.lumos.smartdevice.utils.StringUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,7 +40,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SmHomeActivity extends BaseFragmentActivity {
+public class SmHomeActivity extends BaseFragmentActivity implements View.OnClickListener {
 
     private static final String TAG = "SmHomeActivity";
 
@@ -43,6 +49,7 @@ public class SmHomeActivity extends BaseFragmentActivity {
     private List<GridNineItemBean> gdv_Nine_Items;
     private TextView tv_UserFullName;
     private ImageView iv_UserAvatar;
+    private CustomDialogUserEdit dialog_UserEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +67,68 @@ public class SmHomeActivity extends BaseFragmentActivity {
         gdv_Nine = findViewById(R.id.gdv_Nine);
         tv_UserFullName= findViewById(R.id.tv_UserFullName);
         iv_UserAvatar= findViewById(R.id.iv_UserAvatar);
+        dialog_UserEdit=new CustomDialogUserEdit(SmHomeActivity.this);
+        dialog_UserEdit.setOnClickListener(new CustomDialogUserEdit.OnClickListener() {
+            @Override
+            public void onSave(UserBean bean) {
+
+
+                if (!StringUtil.isEmptyNotNull(bean.getPassword())) {
+                    if (!CommonUtil.isPassword(bean.getPassword())) {
+                        showToast(R.string.tips_password_formatnoright);
+                        return;
+                    }
+                }
+
+
+                if (StringUtil.isEmptyNotNull(bean.getFullName())) {
+                    showToast(R.string.tips_fullname_isnotnull);
+                    return;
+                }
+
+
+                RopUserSave rop = new RopUserSave();
+                rop.setUserId(bean.getUserId());
+                rop.setUserName(bean.getUserName());
+                rop.setPassword(bean.getPassword());
+                rop.setFullName(bean.getFullName());
+                rop.setAvatar(bean.getAvatar());
+
+                ReqInterface.getInstance().userSave(rop, new ReqHandler() {
+
+                    @Override
+                    public void onBeforeSend() {
+                        super.onBeforeSend();
+                        showLoading(SmHomeActivity.this);
+                    }
+
+                    @Override
+                    public void onAfterSend() {
+                        super.onAfterSend();
+                        hideLoading(SmHomeActivity.this);
+                    }
+
+                    @Override
+                    public void onSuccess(String response) {
+                        super.onSuccess(response);
+                        ResultBean<RetUserSave> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetUserSave>>() {
+                        });
+
+                        showToast(rt.getMsg());
+
+                        if (rt.getCode() == ResultCode.SUCCESS) {
+                            dialog_UserEdit.hide();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg, Exception e) {
+                        super.onFailure(msg, e);
+                    }
+                });
+
+            }
+        });
     }
 
     private void initEvent() {
@@ -131,6 +200,7 @@ public class SmHomeActivity extends BaseFragmentActivity {
             }
         });
 
+        iv_UserAvatar.setOnClickListener(this);
     }
 
     private void initData() {
@@ -162,9 +232,6 @@ public class SmHomeActivity extends BaseFragmentActivity {
         GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(), gdv_Nine_Items);
 
         gdv_Nine.setAdapter(gridNineItemAdapter);
-
-
-
 
     }
 
@@ -263,6 +330,67 @@ public class SmHomeActivity extends BaseFragmentActivity {
     private void dlgOpenDoor(){
 
     }
+
+
+    private void getOwnInfo(){
+
+        RopUserGetDetail rop=new RopUserGetDetail();
+        rop.setUserId(AppCacheManager.getCurrentUser().getUserId());
+        ReqInterface.getInstance().userGetDetail(rop, new ReqHandler(){
+
+                    @Override
+                    public void onBeforeSend() {
+                        super.onBeforeSend();
+                    }
+
+                    @Override
+                    public void onAfterSend() {
+                        super.onAfterSend();
+                    }
+
+                    @Override
+                    public void onSuccess(String response) {
+                        super.onSuccess(response);
+
+                        ResultBean<RetUserGetDetail> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetUserGetDetail>>() {
+                        });
+
+                        if (rt.getCode() == ResultCode.SUCCESS) {
+                            RetUserGetDetail ret=rt.getData();
+
+                            UserBean user=new UserBean();
+                            user.setUserId(ret.getUserId());
+                            user.setUserName(ret.getUserName());
+                            user.setFullName(ret.getFullName());
+                            user.setAvatar(ret.getAvatar());
+
+                            dialog_UserEdit.setData(user);
+                            dialog_UserEdit.show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg, Exception e) {
+                        super.onFailure(msg, e);
+                    }
+                }
+        );
+
+
+    }
+    @Override
+    public void onClick(View v) {
+        if (!NoDoubleClickUtil.isDoubleClick()) {
+            switch (v.getId()) {
+                case R.id.iv_UserAvatar:
+                    getOwnInfo();
+                    break;
+            }
+        }
+    }
+
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();

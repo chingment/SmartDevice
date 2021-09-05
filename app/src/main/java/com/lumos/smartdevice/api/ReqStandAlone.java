@@ -5,6 +5,7 @@ import com.lumos.smartdevice.api.rop.RetLockerGetBox;
 import com.lumos.smartdevice.api.rop.RetLockerGetBoxs;
 import com.lumos.smartdevice.api.rop.RetOwnLogin;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
+import com.lumos.smartdevice.api.rop.RetUserGetDetail;
 import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
@@ -15,6 +16,7 @@ import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBox;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
+import com.lumos.smartdevice.api.rop.RopUserGetDetail;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.db.DbManager;
@@ -143,7 +145,6 @@ public class ReqStandAlone implements IReqVersion{
 
         result.setData(ret);
 
-        //ResultBean result = new ResultBean<>(ResultCode.SUCCESS, "保存成功", ret);
         reqHandler.sendSuccessMessage(result.toJSONString());
 
     }
@@ -157,6 +158,20 @@ public class ReqStandAlone implements IReqVersion{
         ret.setTotal(users.getTotal());
         ret.setPageSize(users.getPageSize());
         ret.setItems(users.getItems());
+        result = new ResultBean<>(ResultCode.SUCCESS, "", ret);
+        reqHandler.sendSuccessMessage(result.toJSONString());
+    }
+
+    @Override
+    public void userGetDetail(RopUserGetDetail rop, final ReqHandler reqHandler) {
+        reqHandler.sendBeforeSendMessage();
+        ResultBean result = null;
+        RetUserGetDetail ret = new RetUserGetDetail();
+        UserBean user = DbManager.getInstance().GetUser(rop.getUserId());
+        ret.setUserId(user.getUserId());
+        ret.setFullName(user.getFullName());
+        ret.setUserName(user.getUserName());
+        ret.setAvatar(user.getAvatar());
         result = new ResultBean<>(ResultCode.SUCCESS, "", ret);
         reqHandler.sendSuccessMessage(result.toJSONString());
     }
