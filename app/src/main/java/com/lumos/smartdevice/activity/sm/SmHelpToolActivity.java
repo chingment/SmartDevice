@@ -54,6 +54,7 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
         gdv_Nine_Items = new ArrayList<>();
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_factorysetting), GridNineItemType.Function, "gdv.factorysetting", R.drawable.ic_sm_factorysetting));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_showsysstatusbar), GridNineItemType.Function, "gdv.showsysstatusbar", R.drawable.ic_sm_showsysstatusbar));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_opendoor), GridNineItemType.Function, "gdv.opendoor", R.drawable.ic_sm_opendoor));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "gdv.checkupdateapp", R.drawable.ic_sm_checkupdateapp));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "gdv.closeapp", R.drawable.ic_sm_closeapp));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "gdv.rebootsys", R.drawable.ic_sm_rebootsys));
@@ -97,6 +98,9 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
                                 case "gdv.exitmanager":
                                     gdvExitManager();
                                     break;
+                                case "gdv.opendoor":
+                                    gdvOpenDoor();
+                                    break;
                             }
                          case GridNineItemType.Url:
                              break;
@@ -120,6 +124,9 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
                         break;
                     case "dlg.exitmanager":
                         dlgExitManager();
+                        break;
+                    case "dlg.opendoor":
+                        dlgOpenDoor();
                         break;
                 }
                 dialog_Confirm.hide();
@@ -165,6 +172,13 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
         dialog_Confirm.setTipsImageVisibility(View.GONE);
         dialog_Confirm.setFunction("dlg.rebootsys");
         dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_rebootsys));
+        dialog_Confirm.show();
+    }
+
+    private void gdvOpenDoor(){
+        dialog_Confirm.setTipsImageVisibility(View.GONE);
+        dialog_Confirm.setFunction("dlg.opendoor");
+        dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_opendoor));
         dialog_Confirm.show();
     }
 
@@ -217,6 +231,10 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
                 super.onFailure(msg, e);
             }
         });
+    }
+
+    private void dlgOpenDoor(){
+
     }
 
     @Override

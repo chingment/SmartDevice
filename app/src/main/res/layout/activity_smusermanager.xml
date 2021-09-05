@@ -91,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_42"
         android:layout_below="@+id/rly_LoginArea_UserName"
-        android:background="@drawable/aty_smlogin_input_boder_bottom">
+        android:background="@drawable/nav_colum_boder_bottom">
 
 
         <ImageView

@@ -91,6 +91,9 @@ public class SmHomeActivity extends BaseFragmentActivity {
                                 case "gdv.exitmanager":
                                     gdvExitManager();
                                     break;
+                                case "gdv.opendoor":
+                                    gdvOpenDoor();
+                                    break;
                             }
                         case GridNineItemType.Url:
                             break;
@@ -114,6 +117,9 @@ public class SmHomeActivity extends BaseFragmentActivity {
                         break;
                     case "dlg.exitmanager":
                         dlgExitManager();
+                        break;
+                    case "dlg.opendoor":
+                        dlgOpenDoor();
                         break;
                 }
                 dialog_Confirm.hide();
@@ -146,6 +152,7 @@ public class SmHomeActivity extends BaseFragmentActivity {
 
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_deviceinfo), GridNineItemType.Function, "gdv.deviceinfo", R.drawable.ic_sm_deviceinfo));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_usermanager), GridNineItemType.Function, "gdv.usermanager", R.drawable.ic_sm_usermanager));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_opendoor), GridNineItemType.Function, "gdv.opendoor", R.drawable.ic_sm_opendoor));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "gdv.checkupdateapp", R.drawable.ic_sm_checkupdateapp));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "gdv.closeapp", R.drawable.ic_sm_closeapp));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "gdv.rebootsys", R.drawable.ic_sm_rebootsys));
@@ -180,6 +187,13 @@ public class SmHomeActivity extends BaseFragmentActivity {
         dialog_Confirm.setTipsImageVisibility(View.GONE);
         dialog_Confirm.setFunction("dlg.rebootsys");
         dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_rebootsys));
+        dialog_Confirm.show();
+    }
+
+    private void gdvOpenDoor(){
+        dialog_Confirm.setTipsImageVisibility(View.GONE);
+        dialog_Confirm.setFunction("dlg.opendoor");
+        dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_opendoor));
         dialog_Confirm.show();
     }
 
@@ -245,6 +259,10 @@ public class SmHomeActivity extends BaseFragmentActivity {
         });
     }
 
+
+    private void dlgOpenDoor(){
+
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
