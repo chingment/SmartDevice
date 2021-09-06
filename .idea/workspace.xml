@@ -11,7 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc9a5615-753f-4d27-ba9c-39ff462585f0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmUserManagerActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmUserManagerActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/dialog/CustomDialogUserEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/dialog/CustomDialogUserEdit.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,17 +32,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmUserManagerActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="125" column="8" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="8" />
+            <state relative-caret-position="597">
+              <caret line="128" column="9" selection-start-line="128" selection-start-column="9" selection-end-line="128" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4211#4232#0" expanded="true" />
                 <element signature="class#4601:6346" />
                 <element signature="method#onDestroy#0;class#SmUserManagerActivity#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/dialog/CustomDialogUserEdit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="263">
+              <caret line="240" column="49" selection-start-line="240" selection-start-column="49" selection-end-line="240" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#5559#5560#0" expanded="true" />
+                <element signature="e#5630#5631#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/BaseFragmentActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="229" column="43" selection-start-line="229" selection-start-column="36" selection-end-line="229" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -151,9 +174,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RetUserGetDetail.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/utils/CommonUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/dialog/CustomDialogUserEdit.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmHomeActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmUserManagerActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/dialog/CustomDialogUserEdit.java" />
       </list>
     </option>
   </component>
@@ -617,13 +640,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/refreshview/SuperRefreshLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="87" column="63" selection-start-line="87" selection-start-column="63" selection-end-line="87" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_sm_checkupdateapp.png" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable-v24/ic_sm_checkupdateapp.png">
       <provider selected="true" editor-type-id="images" />
@@ -940,26 +956,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/dialog/CustomDialogUserEdit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1071">
-          <caret line="118" lean-forward="true" selection-start-line="118" selection-end-line="118" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2544#5708#0" expanded="true" />
-            <element signature="e#2887#2919#0" expanded="true" />
-            <element signature="e#4218#4250#0" expanded="true" />
-            <element signature="class#4623:5580" />
-            <element signature="e#4885#4886#0" expanded="true" />
-            <element signature="e#5031#5032#0" expanded="true" />
-            <element signature="e#5662#5663#0" expanded="true" />
-            <element signature="e#5707#5708#0" expanded="true" />
-            <element signature="e#7563#7564#0" expanded="true" />
-            <element signature="method#show#0;class#CustomDialogUserEdit#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -981,13 +977,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmUserManagerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="52">
-          <caret line="125" column="8" selection-start-line="125" selection-start-column="8" selection-end-line="125" selection-end-column="8" />
+        <state relative-caret-position="597">
+          <caret line="128" column="9" selection-start-line="128" selection-start-column="9" selection-end-line="128" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4211#4232#0" expanded="true" />
             <element signature="class#4601:6346" />
             <element signature="method#onDestroy#0;class#SmUserManagerActivity#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/ui/BaseFragmentActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="229" column="43" selection-start-line="229" selection-start-column="36" selection-end-line="229" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/dialog/CustomDialogUserEdit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="263">
+          <caret line="240" column="49" selection-start-line="240" selection-start-column="49" selection-end-line="240" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5559#5560#0" expanded="true" />
+            <element signature="e#5630#5631#0" expanded="true" />
           </folding>
         </state>
       </provider>

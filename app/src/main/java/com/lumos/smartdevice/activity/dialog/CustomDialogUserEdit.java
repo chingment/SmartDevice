@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.sm.SmUserManagerActivity;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
@@ -21,8 +20,6 @@ import com.lumos.smartdevice.api.rop.RetUserGetDetail;
 import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopUserGetDetail;
 import com.lumos.smartdevice.api.rop.RopUserSave;
-import com.lumos.smartdevice.model.UserBean;
-import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.utils.CommonUtil;
@@ -135,11 +132,13 @@ public class CustomDialogUserEdit extends Dialog {
                     @Override
                     public void onBeforeSend() {
                         super.onBeforeSend();
+                        mContext.showLoading(mContext);
                     }
 
                     @Override
                     public void onAfterSend() {
                         super.onAfterSend();
+                        mContext.hideLoading(mContext);
                     }
 
                     @Override
@@ -226,7 +225,6 @@ public class CustomDialogUserEdit extends Dialog {
             avatar = "app://default_avatar";
             CommonUtil.loadImageFromUrl(mContext, iv_Avatar, avatar);
         } else {
-
             RopUserGetDetail rop = new RopUserGetDetail();
             rop.setUserId(userId);
             ReqInterface.getInstance().userGetDetail(rop, new ReqHandler() {
@@ -234,11 +232,13 @@ public class CustomDialogUserEdit extends Dialog {
                         @Override
                         public void onBeforeSend() {
                             super.onBeforeSend();
+                            mContext.showLoading(mContext);
                         }
 
                         @Override
                         public void onAfterSend() {
                             super.onAfterSend();
+                            mContext.hideLoading(mContext);
                         }
 
                         @Override
@@ -250,7 +250,6 @@ public class CustomDialogUserEdit extends Dialog {
 
                             if (rt.getCode() == ResultCode.SUCCESS) {
                                 RetUserGetDetail ret = rt.getData();
-
 
                                 et_Username.setVisibility(View.GONE);
                                 tv_Username.setVisibility(View.VISIBLE);
@@ -264,7 +263,6 @@ public class CustomDialogUserEdit extends Dialog {
                                 et_Fullname.requestFocus();
                                 avatar = ret.getAvatar();
                                 CommonUtil.loadImageFromUrl(mContext, iv_Avatar, avatar);
-
                             }
                         }
 
@@ -274,7 +272,6 @@ public class CustomDialogUserEdit extends Dialog {
                         }
                     }
             );
-
         }
     }
 
