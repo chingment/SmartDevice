@@ -122,7 +122,7 @@ public class ReqStandAlone implements IReqVersion{
             return;
         }
 
-        String userId = rop.getUserId().trim();
+        String userId = rop.getUserId() == null ? null : rop.getUserId().trim();
         String userName = rop.getUserName().trim();
         String password = rop.getPassword().trim();
         String fullName = rop.getFullName().trim();
@@ -130,7 +130,7 @@ public class ReqStandAlone implements IReqVersion{
 
         ResultBean result;
 
-        if (StringUtil.isEmptyNotNull(rop.getUserId())) {
+        if (StringUtil.isEmptyNotNull(userId)) {
             boolean userIsExist = DbManager.getInstance().checkUserIsExist(userName);
             if (userIsExist) {
                 reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("用户名已经存在"));

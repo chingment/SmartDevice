@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.dialog.CustomDialogUserEdit;
 import com.lumos.smartdevice.adapter.SmUserAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -27,7 +28,6 @@ import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
-import com.lumos.smartdevice.ui.dialog.CustomDialogUserEdit;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
 import com.lumos.smartdevice.utils.CommonUtil;
@@ -110,95 +110,107 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         dialog_UserEdit=new CustomDialogUserEdit(SmUserManagerActivity.this);
         dialog_UserEdit.setOnClickListener(new CustomDialogUserEdit.OnClickListener() {
             @Override
-            public void onSave(UserBean bean) {
-
-
-                if (StringUtil.isEmptyNotNull(bean.getUserName())) {
-                    showToast(R.string.tips_username_isnotnull);
-                    return;
+            public void onSaveResult(ResultBean<RetUserSave> rt) {
+                if(rt.getCode()== ResultCode.SUCCESS) {
+                    lv_Users_PageIndex = 0;
+                    getUsers();
+                    dialog_UserEdit.hide();
                 }
-                else
-                {
-                    if(!CommonUtil.isPhone(bean.getUserName())){
-                        showToast(R.string.tips_username_formatnoright);
-                        return;
-                    }
-                }
-
-
-                if (StringUtil.isEmptyNotNull(bean.getUserId())) {
-                    if (StringUtil.isEmptyNotNull(bean.getPassword())) {
-                        showToast(R.string.tips_password_isnotnull);
-                        return;
-                    }
-                    else
-                    {
-                        if(!CommonUtil.isPassword(bean.getPassword())){
-                            showToast(R.string.tips_password_formatnoright);
-                            return;
-                        }
-                    }
-                }
-                else
-                {
-                    if (!StringUtil.isEmptyNotNull(bean.getPassword())) {
-                        if(!CommonUtil.isPassword(bean.getPassword())){
-                            showToast(R.string.tips_password_formatnoright);
-                            return;
-                        }
-                    }
-                }
-
-                if(StringUtil.isEmptyNotNull(bean.getFullName())) {
-                    showToast(R.string.tips_fullname_isnotnull);
-                    return;
-                }
-
-
-                RopUserSave rop=new RopUserSave();
-                rop.setUserId(bean.getUserId());
-                rop.setUserName(bean.getUserName());
-                rop.setPassword(bean.getPassword());
-                rop.setFullName(bean.getFullName());
-                rop.setAvatar(bean.getAvatar());
-
-                ReqInterface.getInstance().userSave(rop, new ReqHandler(){
-
-                    @Override
-                    public void onBeforeSend() {
-                        super.onBeforeSend();
-                        showLoading(SmUserManagerActivity.this);
-                    }
-
-                    @Override
-                    public void onAfterSend() {
-                        super.onAfterSend();
-                        hideLoading(SmUserManagerActivity.this);
-                    }
-
-                    @Override
-                    public void onSuccess(String response) {
-                        super.onSuccess(response);
-                        ResultBean<RetUserSave> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetUserSave>>() {
-                        });
-
-                        showToast(rt.getMsg());
-
-                        if(rt.getCode()== ResultCode.SUCCESS) {
-                            lv_Users_PageIndex = 0;
-                            getUsers();
-                            dialog_UserEdit.hide();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(String msg, Exception e) {
-                        super.onFailure(msg, e);
-                    }
-                });
-
             }
         });
+
+
+//        dialog_UserEdit.setOnClickListener(new CustomDialogUserEdit.OnClickListener() {
+//            @Override
+//            public void onSave(UserBean bean) {
+//
+//
+//                if (StringUtil.isEmptyNotNull(bean.getUserName())) {
+//                    showToast(R.string.tips_username_isnotnull);
+//                    return;
+//                }
+//                else
+//                {
+//                    if(!CommonUtil.isPhone(bean.getUserName())){
+//                        showToast(R.string.tips_username_formatnoright);
+//                        return;
+//                    }
+//                }
+//
+//
+//                if (StringUtil.isEmptyNotNull(bean.getUserId())) {
+//                    if (StringUtil.isEmptyNotNull(bean.getPassword())) {
+//                        showToast(R.string.tips_password_isnotnull);
+//                        return;
+//                    }
+//                    else
+//                    {
+//                        if(!CommonUtil.isPassword(bean.getPassword())){
+//                            showToast(R.string.tips_password_formatnoright);
+//                            return;
+//                        }
+//                    }
+//                }
+//                else
+//                {
+//                    if (!StringUtil.isEmptyNotNull(bean.getPassword())) {
+//                        if(!CommonUtil.isPassword(bean.getPassword())){
+//                            showToast(R.string.tips_password_formatnoright);
+//                            return;
+//                        }
+//                    }
+//                }
+//
+//                if(StringUtil.isEmptyNotNull(bean.getFullName())) {
+//                    showToast(R.string.tips_fullname_isnotnull);
+//                    return;
+//                }
+//
+//
+//                RopUserSave rop=new RopUserSave();
+//                rop.setUserId(bean.getUserId());
+//                rop.setUserName(bean.getUserName());
+//                rop.setPassword(bean.getPassword());
+//                rop.setFullName(bean.getFullName());
+//                rop.setAvatar(bean.getAvatar());
+//
+//                ReqInterface.getInstance().userSave(rop, new ReqHandler(){
+//
+//                    @Override
+//                    public void onBeforeSend() {
+//                        super.onBeforeSend();
+//                        showLoading(SmUserManagerActivity.this);
+//                    }
+//
+//                    @Override
+//                    public void onAfterSend() {
+//                        super.onAfterSend();
+//                        hideLoading(SmUserManagerActivity.this);
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(String response) {
+//                        super.onSuccess(response);
+//                        ResultBean<RetUserSave> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetUserSave>>() {
+//                        });
+//
+//                        showToast(rt.getMsg());
+//
+//                        if(rt.getCode()== ResultCode.SUCCESS) {
+//                            lv_Users_PageIndex = 0;
+//                            getUsers();
+//                            dialog_UserEdit.hide();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(String msg, Exception e) {
+//                        super.onFailure(msg, e);
+//                    }
+//                });
+//
+//            }
+//        });
 
 
         lv_UsersData.setLayoutManager(new GridLayoutManager(getAppContext(), 1));
@@ -211,8 +223,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         lv_UsersAdapter.setOnClickListener(new SmUserAdapter.OnClickListener() {
             @Override
             public void onItemClick(UserBean bean) {
-                dialog_UserEdit.setData(bean);
-                dialog_UserEdit.show();
+                dialog_UserEdit.show(bean.getUserId());
             }
 
             @Override
@@ -377,8 +388,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                     finish();
                     break;
                 case  R.id.btn_NewUser:
-                    dialog_UserEdit.setData(null);
-                    dialog_UserEdit.show();
+                    dialog_UserEdit.show(null);
                     break;
             }
         }

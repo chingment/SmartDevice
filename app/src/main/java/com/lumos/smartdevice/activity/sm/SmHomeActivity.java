@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.InitDataActivity;
+import com.lumos.smartdevice.activity.dialog.CustomDialogUserEdit;
 import com.lumos.smartdevice.adapter.GridNineItemAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -24,7 +25,6 @@ import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
-import com.lumos.smartdevice.ui.dialog.CustomDialogUserEdit;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -68,66 +68,6 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
         tv_UserFullName= findViewById(R.id.tv_UserFullName);
         iv_UserAvatar= findViewById(R.id.iv_UserAvatar);
         dialog_UserEdit=new CustomDialogUserEdit(SmHomeActivity.this);
-        dialog_UserEdit.setOnClickListener(new CustomDialogUserEdit.OnClickListener() {
-            @Override
-            public void onSave(UserBean bean) {
-
-
-                if (!StringUtil.isEmptyNotNull(bean.getPassword())) {
-                    if (!CommonUtil.isPassword(bean.getPassword())) {
-                        showToast(R.string.tips_password_formatnoright);
-                        return;
-                    }
-                }
-
-                if (StringUtil.isEmptyNotNull(bean.getFullName())) {
-                    showToast(R.string.tips_fullname_isnotnull);
-                    return;
-                }
-
-
-                RopUserSave rop = new RopUserSave();
-                rop.setUserId(bean.getUserId());
-                rop.setUserName(bean.getUserName());
-                rop.setPassword(bean.getPassword());
-                rop.setFullName(bean.getFullName());
-                rop.setAvatar(bean.getAvatar());
-
-                ReqInterface.getInstance().userSave(rop, new ReqHandler() {
-
-                    @Override
-                    public void onBeforeSend() {
-                        super.onBeforeSend();
-                        showLoading(SmHomeActivity.this);
-                    }
-
-                    @Override
-                    public void onAfterSend() {
-                        super.onAfterSend();
-                        hideLoading(SmHomeActivity.this);
-                    }
-
-                    @Override
-                    public void onSuccess(String response) {
-                        super.onSuccess(response);
-                        ResultBean<RetUserSave> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetUserSave>>() {
-                        });
-
-                        showToast(rt.getMsg());
-
-                        if (rt.getCode() == ResultCode.SUCCESS) {
-                            dialog_UserEdit.hide();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(String msg, Exception e) {
-                        super.onFailure(msg, e);
-                    }
-                });
-
-            }
-        });
     }
 
     private void initEvent() {
@@ -332,50 +272,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
 
 
     private void getOwnInfo(){
-
-        RopUserGetDetail rop=new RopUserGetDetail();
-        rop.setUserId(AppCacheManager.getCurrentUser().getUserId());
-        ReqInterface.getInstance().userGetDetail(rop, new ReqHandler(){
-
-                    @Override
-                    public void onBeforeSend() {
-                        super.onBeforeSend();
-                    }
-
-                    @Override
-                    public void onAfterSend() {
-                        super.onAfterSend();
-                    }
-
-                    @Override
-                    public void onSuccess(String response) {
-                        super.onSuccess(response);
-
-                        ResultBean<RetUserGetDetail> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetUserGetDetail>>() {
-                        });
-
-                        if (rt.getCode() == ResultCode.SUCCESS) {
-                            RetUserGetDetail ret=rt.getData();
-
-                            UserBean user=new UserBean();
-                            user.setUserId(ret.getUserId());
-                            user.setUserName(ret.getUserName());
-                            user.setFullName(ret.getFullName());
-                            user.setAvatar(ret.getAvatar());
-
-                            dialog_UserEdit.setData(user);
-                            dialog_UserEdit.show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(String msg, Exception e) {
-                        super.onFailure(msg, e);
-                    }
-                }
-        );
-
-
+        dialog_UserEdit.show(AppCacheManager.getCurrentUser().getUserId());
     }
     @Override
     public void onClick(View v) {
