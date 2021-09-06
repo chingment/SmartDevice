@@ -124,7 +124,6 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
 
         lv_UsersData.setItemAnimator(new DefaultItemAnimator());
 
-
         lv_UsersAdapter = new SmUserAdapter(scene_mode);
 
         lv_UsersAdapter.setOnClickListener(new SmUserAdapter.OnClickListener() {
