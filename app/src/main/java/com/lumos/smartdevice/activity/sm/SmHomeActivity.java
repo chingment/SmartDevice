@@ -11,11 +11,8 @@ import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
-import com.lumos.smartdevice.api.rop.RetUserGetDetail;
 import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
-import com.lumos.smartdevice.api.rop.RopUserGetDetail;
-import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
 import com.lumos.smartdevice.model.UserBean;
@@ -28,7 +25,6 @@ import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
-import com.lumos.smartdevice.utils.StringUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -68,6 +64,15 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
         tv_UserFullName= findViewById(R.id.tv_UserFullName);
         iv_UserAvatar= findViewById(R.id.iv_UserAvatar);
         dialog_UserEdit=new CustomDialogUserEdit(SmHomeActivity.this);
+        dialog_UserEdit.checkUserNameIsPhoneFormat(false);
+        dialog_UserEdit.setOnClickListener(new CustomDialogUserEdit.OnClickListener() {
+            @Override
+            public void onSaveResult(ResultBean<RetUserSave> rt) {
+                if(rt.getCode()== ResultCode.SUCCESS) {
+                    showToast(R.string.save_success);
+                }
+            }
+        });
     }
 
     private void initEvent() {

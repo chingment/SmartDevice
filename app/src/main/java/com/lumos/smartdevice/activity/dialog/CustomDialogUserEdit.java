@@ -54,6 +54,8 @@ public class CustomDialogUserEdit extends Dialog {
     private String userId="";
     private String avatar="";
 
+    private boolean checkUserNameIsPhoneFormat=false;
+
     public CustomDialogUserEdit(Context context) {
         super(context, R.style.custom_dialog);
         mThis = this;
@@ -82,13 +84,14 @@ public class CustomDialogUserEdit extends Dialog {
                     mContext.showToast(R.string.tips_username_isnotnull);
                     return;
                 }
-                else
-                {
-                    if(!CommonUtil.isPhone(userName)){
+
+                if(checkUserNameIsPhoneFormat) {
+                    if (!CommonUtil.isPhone(userName)) {
                         mContext.showToast(R.string.tips_username_formatnoright);
                         return;
                     }
                 }
+
 
 
                 if (StringUtil.isEmptyNotNull(userId)) {
@@ -200,6 +203,9 @@ public class CustomDialogUserEdit extends Dialog {
         this.setContentView(mLayoutRes);
     }
 
+    public void checkUserNameIsPhoneFormat(boolean flag) {
+        this.checkUserNameIsPhoneFormat = flag;
+    }
 
     public void show(String userId) {
 
@@ -271,7 +277,6 @@ public class CustomDialogUserEdit extends Dialog {
 
         }
     }
-
 
     private OnClickListener onClickListener;
 
