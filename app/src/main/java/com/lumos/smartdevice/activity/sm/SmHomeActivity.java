@@ -69,6 +69,9 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
             @Override
             public void onSaveResult(ResultBean<RetUserSave> rt) {
                 if(rt.getCode()== ResultCode.SUCCESS) {
+                    RetUserSave ret = rt.getData();
+
+
                     showToast(R.string.save_success);
                 }
             }
