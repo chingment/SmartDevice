@@ -50,7 +50,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     private TextView tv_CabinetName;
     private ListView lv_Cabinets;
     private TableLayout tl_Boxs;
-
+    private TextView btn_OpenAllBox;
     private CabinetBean cur_Cabinet;
     private List<CabinetBean> cabinets;
     private static int cur_Cabinet_Position = 0;
@@ -89,6 +89,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     private void initView() {
         lv_Cabinets = findViewById(R.id.lv_Cabinets);
         tv_CabinetName = findViewById(R.id.tv_CabinetName);
+        btn_OpenAllBox=findViewById(R.id.btn_OpenAllBox);
         tl_Boxs = findViewById(R.id.tl_Boxs);
         dialog_CabinetConfig = new CustomDialogCabinetConfig(SmLockerBoxActivity.this);
 
@@ -103,6 +104,10 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                         LockerBoxUsageBean usage=(LockerBoxUsageBean)dialog_Confirm.getTag();
                         lockerBoxDeleteUsage(usage);
                         break;
+                    case "dlg.openallbox":
+
+                        break;
+
                 }
                 dialog_Confirm.hide();
             }
@@ -146,13 +151,19 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
             @Override
             public void onOpenBox(String deviceId, String cabinetId,String slotId){
-                
+
+                dialog_Confirm.setTipsImageVisibility(View.GONE);
+                dialog_Confirm.setTipsText("确定打开箱子？");
+                dialog_Confirm.setFunction("dlg.openonebox");
+                dialog_Confirm.show();
+
             }
         });
 
     }
 
     private void initEvent() {
+        btn_OpenAllBox.setOnClickListener(this);
         tv_CabinetName.setOnClickListener(this);
         lv_Cabinets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -422,6 +433,12 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                     dialog_CabinetConfig.setCofing(cur_Cabinet);
                     dialog_CabinetConfig.show();
                     break;
+                case R.id.btn_OpenAllBox:
+                    dialog_Confirm.setTipsImageVisibility(View.GONE);
+                    dialog_Confirm.setTipsText("确定打开全部箱子？");
+                    dialog_Confirm.setFunction("dlg.openallbox");
+                    dialog_Confirm.show();
+                    break ;
             }
         }
     }

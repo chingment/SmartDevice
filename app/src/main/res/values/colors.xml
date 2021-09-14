@@ -25,6 +25,7 @@
     <color name="vnav_boder_bottom_bg">#FFFFFF</color>
     <color name="nav_boder_bottom_bg">#FFFFFF</color>
     <color name="dialog_tips">#333333</color>
+    <color name="dialog_confirm_bg">#2000</color>
     <color name="custom_dialog_confirm_btn_sure">#000000</color>
     <color name="custom_dialog_confirm_btn_sure_bg">#FFFFFF</color>
     <color name="custom_dialog_confirm_btn_cancle">#000000</color>

@@ -37,16 +37,20 @@ public class CustomDialogLockerBox extends Dialog {
 
     private TextView tv_BoxName;
     private TextView btn_DistUser;
+    private TextView btn_OpenBox;
     private ListView lv_Usages;
     private DeviceBean device;
     private String cabinetId;
     private String slotId;
     private LinearLayout ll_UsagesEmpty;
+
+
     public CustomDialogLockerBox(Context context) {
         super(context, R.style.custom_dialog);
         mThis = this;
         mContext = context;
         mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_lockerbox, null);
+
 
         btn_Close = ViewHolder.get(mLayoutRes, R.id.dialog_Btn_Close);
         btn_Close.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +62,7 @@ public class CustomDialogLockerBox extends Dialog {
 
         tv_BoxName = ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
         lv_Usages = ViewHolder.get(mLayoutRes, R.id.lv_Usages);
+
         lv_Usages.setFocusable(false);
         lv_Usages.setClickable(false);
         lv_Usages.setPressed(false);
@@ -69,6 +74,15 @@ public class CustomDialogLockerBox extends Dialog {
             public void onClick(View view) {
                 if (onClickListener != null) {
                     onClickListener.onGoSelectUser(device.getDeviceId(), cabinetId, slotId);
+                }
+            }
+        });
+        btn_OpenBox = ViewHolder.get(mLayoutRes, R.id.btn_OpenBox);
+        btn_OpenBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onClickListener != null) {
+                    onClickListener.onOpenBox(device.getDeviceId(), cabinetId, slotId);
                 }
             }
         });
