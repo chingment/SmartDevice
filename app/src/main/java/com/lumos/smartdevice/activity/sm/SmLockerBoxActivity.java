@@ -100,11 +100,11 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             public void onSure() {
                 String fun = dialog_Confirm.getFunction();
                 switch (fun) {
-                    case "dlg.deleteusage":
+                    case "deleteusage":
                         LockerBoxUsageBean usage=(LockerBoxUsageBean)dialog_Confirm.getTag();
                         lockerBoxDeleteUsage(usage);
                         break;
-                    case "dlg.openallbox":
+                    case "openallbox":
 
                         break;
 
@@ -140,7 +140,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
 
                 dialog_Confirm.setTipsImageVisibility(View.GONE);
-                dialog_Confirm.setFunction("dlg.deleteusage");
+                dialog_Confirm.setFunction("deleteusage");
                 dialog_Confirm.setTag(usage);
                 dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_delete));
                 dialog_Confirm.show();
@@ -154,7 +154,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
                 dialog_Confirm.setTipsImageVisibility(View.GONE);
                 dialog_Confirm.setTipsText("确定打开箱子？");
-                dialog_Confirm.setFunction("dlg.openonebox");
+                dialog_Confirm.setFunction("openonebox");
                 dialog_Confirm.show();
 
             }
@@ -436,7 +436,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                 case R.id.btn_OpenAllBox:
                     dialog_Confirm.setTipsImageVisibility(View.GONE);
                     dialog_Confirm.setTipsText("确定打开全部箱子？");
-                    dialog_Confirm.setFunction("dlg.openallbox");
+                    dialog_Confirm.setFunction("openallbox");
                     dialog_Confirm.show();
                     break ;
             }

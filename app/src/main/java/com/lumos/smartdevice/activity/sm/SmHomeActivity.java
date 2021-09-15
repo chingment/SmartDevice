@@ -90,24 +90,24 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
                     switch (type) {
                         case GridNineItemType.Function:
                             switch (action) {
-                                case "gdv.lockerbox":
+                                case "lockerbox":
                                     gdvLockerBox();
                                     break;
-                                case "gdv.usermanager":
+                                case "usermanager":
                                     gdvUserManager();
                                     break;
-                                case "gdv.checkupdateapp":
+                                case "checkupdateapp":
                                     break;
-                                case "gdv.closeapp":
+                                case "closeapp":
                                     gdvCloseApp();
                                     break;
-                                case "gdv.rebootsys":
+                                case "rebootsys":
                                     gdvRebootSys();
                                     break;
-                                case "gdv.exitmanager":
+                                case "exitmanager":
                                     gdvExitManager();
                                     break;
-                                case "gdv.opendoor":
+                                case "opendoor":
                                     gdvOpenDoor();
                                     break;
                             }
@@ -125,16 +125,16 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
                 String fun = dialog_Confirm.getFunction();
 
                 switch (fun) {
-                    case "dlg.closeapp":
+                    case "closeapp":
                         dlgCloseApp();
                         break;
-                    case "dlg.rebootsys":
+                    case "rebootsys":
                         dlgRebootSys();
                         break;
-                    case "dlg.exitmanager":
+                    case "exitmanager":
                         dlgExitManager();
                         break;
-                    case "dlg.opendoor":
+                    case "opendoor":
                         dlgOpenDoor();
                         break;
                 }
@@ -162,18 +162,18 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
 
 
         if(getDevice().getSceneMode().equals(AppVar.SCENE_MODE_1)) {
-            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_lockerbox), GridNineItemType.Function, "gdv.lockerbox", R.drawable.ic_sm_lockerbox));
-            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_lockerboxuserecord), GridNineItemType.Function, "gdv.lockerboxuserecord", R.drawable.ic_sm_lockerboxuserecord));
+            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_lockerbox), GridNineItemType.Function, "lockerbox", R.drawable.ic_sm_lockerbox));
+            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_lockerboxuserecord), GridNineItemType.Function, "lockerboxuserecord", R.drawable.ic_sm_lockerboxuserecord));
         }
 
 
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_deviceinfo), GridNineItemType.Function, "gdv.deviceinfo", R.drawable.ic_sm_deviceinfo));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_usermanager), GridNineItemType.Function, "gdv.usermanager", R.drawable.ic_sm_usermanager));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_opendoor), GridNineItemType.Function, "gdv.opendoor", R.drawable.ic_sm_opendoor));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "gdv.checkupdateapp", R.drawable.ic_sm_checkupdateapp));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "gdv.closeapp", R.drawable.ic_sm_closeapp));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "gdv.rebootsys", R.drawable.ic_sm_rebootsys));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_exitmanager), GridNineItemType.Function, "gdv.exitmanager", R.drawable.ic_sm_exitmanager));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_deviceinfo), GridNineItemType.Function, "deviceinfo", R.drawable.ic_sm_deviceinfo));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_usermanager), GridNineItemType.Function, "usermanager", R.drawable.ic_sm_usermanager));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_opendoor), GridNineItemType.Function, "opendoor", R.drawable.ic_sm_opendoor));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "checkupdateapp", R.drawable.ic_sm_checkupdateapp));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "closeapp", R.drawable.ic_sm_closeapp));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "rebootsys", R.drawable.ic_sm_rebootsys));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_exitmanager), GridNineItemType.Function, "exitmanager", R.drawable.ic_sm_exitmanager));
 
 
         GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(), gdv_Nine_Items);
@@ -185,28 +185,28 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
 
     private void gdvExitManager(){
         dialog_Confirm.setTipsImageVisibility(View.GONE);
-        dialog_Confirm.setFunction("dlg.exitmanager");
+        dialog_Confirm.setFunction("exitmanager");
         dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_exitmanager));
         dialog_Confirm.show();
     }
 
     private void gdvCloseApp(){
         dialog_Confirm.setTipsImageVisibility(View.GONE);
-        dialog_Confirm.setFunction("dlg.closeapp");
+        dialog_Confirm.setFunction("closeapp");
         dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_closeapp));
         dialog_Confirm.show();
     }
 
     private void gdvRebootSys(){
         dialog_Confirm.setTipsImageVisibility(View.GONE);
-        dialog_Confirm.setFunction("dlg.rebootsys");
+        dialog_Confirm.setFunction("rebootsys");
         dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_rebootsys));
         dialog_Confirm.show();
     }
 
     private void gdvOpenDoor(){
         dialog_Confirm.setTipsImageVisibility(View.GONE);
-        dialog_Confirm.setFunction("dlg.opendoor");
+        dialog_Confirm.setFunction("opendoor");
         dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_opendoor));
         dialog_Confirm.show();
     }
