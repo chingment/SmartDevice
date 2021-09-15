@@ -40,7 +40,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_42"
+                android:layout_height="@dimen/size_50"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -48,8 +48,8 @@
 
                 <ImageView
                     android:id="@+id/ic_UserName"
-                    android:layout_width="@dimen/size_16"
-                    android:layout_height="@dimen/size_16"
+                    android:layout_width="@dimen/size_20"
+                    android:layout_height="@dimen/size_20"
                     android:contentDescription="@string/img_content_description_empty"
                     android:layout_marginEnd="@dimen/size_12"
                     android:background="@drawable/aty_smlogin_input_ic_username" />
@@ -65,7 +65,7 @@
                     android:singleLine="true"
                     android:textColor="@color/aty_smlogin_et_txt"
                     android:textColorHint="@color/aty_smlogin_et_hint"
-                    android:textSize="@dimen/sp_12"
+                    android:textSize="@dimen/sp_18"
 
                     />
 
@@ -80,8 +80,8 @@
 
                    <ImageView
                     android:id="@+id/btn_UserName_Del"
-                       android:layout_width="@dimen/size_14"
-                       android:layout_height="@dimen/size_14"
+                       android:layout_width="@dimen/size_18"
+                       android:layout_height="@dimen/size_18"
                     android:src="@drawable/ic_input_delete"
                        android:contentDescription="@string/img_content_description_empty"
                        android:visibility="invisible"
@@ -92,15 +92,15 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_42"
+                android:layout_height="@dimen/size_50"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:background="@drawable/aty_smlogin_input_boder_bottom">
 
                 <ImageView
                     android:id="@+id/ic_Password"
-                    android:layout_width="@dimen/size_16"
-                    android:layout_height="@dimen/size_16"
+                    android:layout_width="@dimen/size_20"
+                    android:layout_height="@dimen/size_20"
                     android:contentDescription="@string/img_content_description_empty"
                     android:layout_marginEnd="@dimen/size_12"
                     android:background="@drawable/aty_smlogin_input_ic_password" />
@@ -117,7 +117,7 @@
                     android:singleLine="true"
                     android:textColor="@color/aty_smlogin_et_txt"
                     android:textColorHint="@color/aty_smlogin_et_hint"
-                    android:textSize="@dimen/sp_12" />
+                    android:textSize="@dimen/sp_18"/>
 
                 <LinearLayout
                     android:layout_width="@dimen/size_50"
@@ -128,8 +128,8 @@
 
                     <ImageView
                         android:id="@+id/btn_Password_Del"
-                        android:layout_width="@dimen/size_14"
-                        android:layout_height="@dimen/size_14"
+                        android:layout_width="@dimen/size_18"
+                        android:layout_height="@dimen/size_18"
                         android:src="@drawable/ic_input_delete"
                         android:contentDescription="@string/img_content_description_empty"
                         android:visibility="invisible" />
@@ -143,13 +143,13 @@
         <Button
             android:id="@+id/btn_LoginByAccount"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_32"
+            android:layout_height="@dimen/size_38"
             android:layout_marginTop="@dimen/size_30"
             android:background="@drawable/widget_common_btn"
             android:gravity="center"
             android:text="@string/aty_smlogin_btn_txt_login"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_12"/>
+            android:textSize="@dimen/sp_16"/>
 
 
         <LinearLayout
