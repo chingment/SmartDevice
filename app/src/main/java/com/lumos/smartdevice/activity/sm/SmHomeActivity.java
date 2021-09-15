@@ -110,6 +110,9 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
                                 case "opendoor":
                                     gdvOpenDoor();
                                     break;
+                                case "deviceinfo":
+                                    gdvDeviceInfo();
+                                    break;
                             }
                         case GridNineItemType.Url:
                             break;
@@ -222,6 +225,11 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
         startActivity(intent);
     }
 
+    private void gdvDeviceInfo(){
+        Intent intent = new Intent(SmHomeActivity.this, SmDeviceInfoActivity.class);
+        startActivity(intent);
+    }
+
 
     private void dlgCloseApp(){
         setHideSysStatusBar(false);
@@ -277,6 +285,8 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
     private void dlgOpenDoor(){
 
     }
+
+
 
 
     private void getOwnInfo(){

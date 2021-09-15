@@ -21,7 +21,7 @@ public class SmFactorySettingActivity extends BaseFragmentActivity implements Vi
     private TextView tv_Nav_AppScene_Tips;
 
     private TextView tv_DeviceId;
-    private TextView tv_VersionName;
+    private TextView tv_AppVersion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +40,7 @@ public class SmFactorySettingActivity extends BaseFragmentActivity implements Vi
         btn_Nav_AppSceneSetting = findViewById(R.id.btn_Nav_AppSceneSetting);
         tv_Nav_AppScene_Tips = findViewById(R.id.tv_Nav_AppScene_Tips);
         tv_DeviceId  = findViewById(R.id.tv_DeviceId);
-        tv_VersionName  = findViewById(R.id.tv_VersionName);
+        tv_AppVersion  = findViewById(R.id.tv_AppVersion);
     }
 
     private void initEvent() {
@@ -50,7 +50,7 @@ public class SmFactorySettingActivity extends BaseFragmentActivity implements Vi
     private void initData() {
 
         tv_DeviceId.setText(DeviceUtil.getDeviceId());
-        tv_VersionName.setText(BuildConfig.VERSION_NAME);
+        tv_AppVersion.setText(BuildConfig.VERSION_NAME);
 
         setNavAppSceneTips();
 

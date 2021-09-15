@@ -61,7 +61,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/aty_initdata_tv_txt_deviceid"
+                    android:text="@string/t_deviceid"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_16" />
 
@@ -86,12 +86,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/aty_initdata_tv_txt_appversion"
+                    android:text="@string/t_appversion"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:id="@+id/tv_VersionName"
+                    android:id="@+id/tv_AppVersion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"

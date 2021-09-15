@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">SmartDevice</string>
-    <string name="aty_initdata_tv_txt_deviceid">设备标识</string>
-    <string name="aty_initdata_tv_txt_appversion">应用版本</string>
+    <string name="t_deviceid">设备标识</string>
+    <string name="t_appversion">应用版本</string>
+    <string name="t_ctrlversion">控制版本</string>
     <string name="aty_initdata_ld_txt_animation">初始数据加载中</string>
     <string name="aty_initdata_tips_settingdevice">正在配置商户设备信息</string>
     <string name="aty_initdata_tips_verion_mode">请先在帮助中心配置版本模式</string>
@@ -103,4 +104,9 @@
     <string name="t_change">更改</string>
     <string name="t_distribute_to">分配至</string>
     <string name="t_usage">使用情况</string>
+    <string name="t_merch_name">商户</string>
+    <string name="t_store_name">店铺</string>
+    <string name="t_shop_name">门店</string>
+    <string name="t_address">地址</string>
+    <string name="t_comname">COM.N</string>
 </resources>

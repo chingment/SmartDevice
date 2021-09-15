@@ -47,7 +47,7 @@ import java.util.Locale;
 public class InitDataActivity extends BaseFragmentActivity {
     private static final String TAG = "InitDataActivity";
     private TextView tv_DeviceId;
-    private TextView tv_VersionName;
+    private TextView tv_AppVersion;
     private MyListView ls_Logs;
     private LinearLayout btn_HelpTool;
     private LoadingView ld_Animation;
@@ -96,7 +96,7 @@ public class InitDataActivity extends BaseFragmentActivity {
     private void initView() {
 
         tv_DeviceId = findViewById(R.id.tv_DeviceId);
-        tv_VersionName = findViewById(R.id.tv_VersionName);
+        tv_AppVersion = findViewById(R.id.tv_AppVersion);
         ls_Logs = findViewById(R.id.ls_Logs);
         btn_HelpTool= findViewById(R.id.btn_HelpTool);
         ld_Animation=findViewById(R.id.ld_Animation);
@@ -219,7 +219,7 @@ public class InitDataActivity extends BaseFragmentActivity {
 
     private void initData() {
         tv_DeviceId.setText(DeviceUtil.getDeviceId());
-        tv_VersionName.setText(BuildConfig.VERSION_NAME);
+        tv_AppVersion.setText(BuildConfig.VERSION_NAME);
 
     }
 
