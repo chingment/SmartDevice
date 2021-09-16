@@ -119,33 +119,38 @@
                     android:textSize="@dimen/sp_16" />
             </LinearLayout>
 
+
+            <com.lumos.smartdevice.ui.my.MyScrollView
+                android:layout_marginTop="@dimen/size_10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                tools:ignore="ObsoleteLayoutParam">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingBottom="@dimen/size_10"
-                android:paddingTop="@dimen/sp_10"
+                android:orientation="vertical"
                 >
 
-                <ListView
+                <com.lumos.smartdevice.ui.my.MyListView
                     android:id="@+id/lv_Usages"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white"
                     android:divider="@null"
                     android:fadingEdge="none"
                     android:overScrollMode="never"
-                    android:scrollbars="none" />
+                    android:scrollbars="none"/>
 
 
                 <LinearLayout
                     android:id="@+id/ll_UsagesEmpty"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     >
                     <ImageView
                         android:layout_width="60dp"
@@ -167,6 +172,7 @@
 
             </LinearLayout>
 
+          </com.lumos.smartdevice.ui.my.MyScrollView>
 
         </LinearLayout>
 

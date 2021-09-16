@@ -61,6 +61,7 @@
                 android:columnWidth="90dp"
                 android:listSelector="@color/transparent"
                 android:gravity="center"
+                android:padding="@dimen/size_20"
                 android:horizontalSpacing="@dimen/size_20"
                 android:numColumns="4"
                 android:stretchMode="columnWidth"

@@ -23,7 +23,7 @@ import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.ViewHolder;
-
+import com.lumos.smartdevice.ui.my.MyListView;
 import java.util.List;
 
 public class CustomDialogLockerBox extends Dialog {
@@ -38,7 +38,7 @@ public class CustomDialogLockerBox extends Dialog {
     private TextView tv_BoxName;
     private TextView btn_DistUser;
     private TextView btn_OpenBox;
-    private ListView lv_Usages;
+    private MyListView lv_Usages;
     private DeviceBean device;
     private String cabinetId;
     private String slotId;
