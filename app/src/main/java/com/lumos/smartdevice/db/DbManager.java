@@ -89,7 +89,6 @@ public class DbManager {
             return ResultUtil.isFailure("数据库文件未打开");
         }
 
-
         Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where " + UserDao.COLUMN_NAME_USERNAME + " = ?", new String[]{username});
 
         boolean exist = (cursor.getCount() > 0);

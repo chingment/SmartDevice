@@ -32,7 +32,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
     private TextView tv_UserFullName;
     private ImageView iv_UserAvatar;
     private CustomDialogUserEdit dialog_UserEdit;
-
+    private Button btn_Logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +60,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
     }
 
     private void initView() {
+        btn_Logout= findViewById(R.id.btn_Logout);
         gdv_Nine = findViewById(R.id.gdv_Nine);
         tv_UserFullName= findViewById(R.id.tv_UserFullName);
         iv_UserAvatar= findViewById(R.id.iv_UserAvatar);
@@ -70,8 +71,8 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
             public void onSaveResult(ResultBean<RetUserSave> rt) {
                 if(rt.getCode()== ResultCode.SUCCESS) {
                     RetUserSave ret = rt.getData();
-
-
+                    tv_UserFullName.setText(ret.getFullName());
+                    CommonUtil.loadImageFromUrl(SmHomeActivity.this,iv_UserAvatar,ret.getAvatar());
                     showToast(R.string.save_success);
                 }
             }
@@ -150,6 +151,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
             }
         });
 
+        btn_Logout.setOnClickListener(this);
         iv_UserAvatar.setOnClickListener(this);
     }
 
@@ -176,7 +178,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "checkupdateapp", R.drawable.ic_sm_checkupdateapp));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "closeapp", R.drawable.ic_sm_closeapp));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "rebootsys", R.drawable.ic_sm_rebootsys));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_exitmanager), GridNineItemType.Function, "exitmanager", R.drawable.ic_sm_exitmanager));
+        //gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_exitmanager), GridNineItemType.Function, "exitmanager", R.drawable.ic_sm_exitmanager));
 
 
         GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(), gdv_Nine_Items);
@@ -287,17 +289,20 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
     }
 
 
-
-
     private void getOwnInfo(){
         dialog_UserEdit.show(AppCacheManager.getCurrentUser().getUserId());
     }
+
+
     @Override
     public void onClick(View v) {
         if (!NoDoubleClickUtil.isDoubleClick()) {
             switch (v.getId()) {
                 case R.id.iv_UserAvatar:
                     getOwnInfo();
+                    break;
+                case R.id.btn_Logout:
+                    gdvExitManager();
                     break;
             }
         }

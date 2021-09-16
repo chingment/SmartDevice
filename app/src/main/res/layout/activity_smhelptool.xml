@@ -6,20 +6,52 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:fitsSystemWindows="true"
-        android:orientation="vertical">
-
         <include layout="@layout/layout_nav_header" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/size_20">
+
+
+                <ImageView
+                    android:id="@+id/iv_UserAvatar"
+                    android:layout_width="@dimen/size_50"
+                    android:layout_height="@dimen/size_50"
+                    android:background="@null"
+                    android:contentDescription="@string/img_content_description_empty"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/default_image" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingTop="@dimen/size_10">
+
+                    <TextView
+                        android:id="@+id/tv_UserFullName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/field_name"
+                        android:textSize="@dimen/sp_14" />
+                </LinearLayout>
+
+            </LinearLayout>
 
             <com.lumos.smartdevice.ui.my.MyGridView
                 android:id="@+id/gdv_Nine"
@@ -33,7 +65,28 @@
                 android:numColumns="4"
                 android:stretchMode="columnWidth"
                 android:verticalSpacing="@dimen/size_20" />
-        </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/size_20"
+                android:orientation="vertical">
+
+
+                <Button
+                    android:id="@+id/btn_Logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_38"
+                    android:background="@drawable/widget_common_btn"
+                    android:layout_marginTop="@dimen/size_15"
+                    android:gravity="center"
+                    android:text="@string/t_logout"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_16" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
 </LinearLayout>

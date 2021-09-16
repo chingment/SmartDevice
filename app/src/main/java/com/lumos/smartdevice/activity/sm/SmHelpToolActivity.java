@@ -4,27 +4,34 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.InitDataActivity;
+import com.lumos.smartdevice.activity.dialog.CustomDialogUserEdit;
 import com.lumos.smartdevice.adapter.GridNineItemAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
+import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
+import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
 import com.lumos.smartdevice.ui.my.MyGridView;
+import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +42,10 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
     private CustomDialogConfirm dialog_Confirm;
     private MyGridView gdv_Nine;
     private List<GridNineItemBean> gdv_Nine_Items;
-
+    private TextView tv_UserFullName;
+    private ImageView iv_UserAvatar;
+    private CustomDialogUserEdit dialog_UserEdit;
+    private Button btn_Logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,22 +59,25 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
     }
 
     private void initView() {
+        btn_Logout= findViewById(R.id.btn_Logout);
+        tv_UserFullName= findViewById(R.id.tv_UserFullName);
+        iv_UserAvatar= findViewById(R.id.iv_UserAvatar);
         gdv_Nine = findViewById(R.id.gdv_Nine);
 
-        gdv_Nine_Items = new ArrayList<>();
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_factorysetting), GridNineItemType.Function, "factorysetting", R.drawable.ic_sm_factorysetting));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_showsysstatusbar), GridNineItemType.Function, "showsysstatusbar", R.drawable.ic_sm_showsysstatusbar));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_opendoor), GridNineItemType.Function, "opendoor", R.drawable.ic_sm_opendoor));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "checkupdateapp", R.drawable.ic_sm_checkupdateapp));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "closeapp", R.drawable.ic_sm_closeapp));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "rebootsys", R.drawable.ic_sm_rebootsys));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_exitmanager), GridNineItemType.Function, "exitmanager", R.drawable.ic_sm_exitmanager));
 
-
-        GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(), gdv_Nine_Items);
-
-        gdv_Nine.setAdapter(gridNineItemAdapter);
-
+        dialog_UserEdit=new CustomDialogUserEdit(SmHelpToolActivity.this);
+        dialog_UserEdit.checkUserNameIsPhoneFormat(false);
+        dialog_UserEdit.setOnClickListener(new CustomDialogUserEdit.OnClickListener() {
+            @Override
+            public void onSaveResult(ResultBean<RetUserSave> rt) {
+                if(rt.getCode()== ResultCode.SUCCESS) {
+                    RetUserSave ret = rt.getData();
+                    tv_UserFullName.setText(ret.getFullName());
+                    CommonUtil.loadImageFromUrl(SmHelpToolActivity.this,iv_UserAvatar,ret.getAvatar());
+                    showToast(R.string.save_success);
+                }
+            }
+        });
 
 
     }
@@ -138,9 +151,34 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
             }
         });
 
+        btn_Logout.setOnClickListener(this);
+        iv_UserAvatar.setOnClickListener(this);
+
     }
 
     private void initData() {
+
+        UserBean currentUser= getCurrentUser();
+        if(currentUser!=null) {
+            tv_UserFullName.setText(currentUser.getFullName());
+            CommonUtil.loadImageFromUrl(SmHelpToolActivity.this, iv_UserAvatar, currentUser.getAvatar());
+        }
+
+        gdv_Nine_Items = new ArrayList<>();
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_factorysetting), GridNineItemType.Function, "factorysetting", R.drawable.ic_sm_factorysetting));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_showsysstatusbar), GridNineItemType.Function, "showsysstatusbar", R.drawable.ic_sm_showsysstatusbar));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_opendoor), GridNineItemType.Function, "opendoor", R.drawable.ic_sm_opendoor));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "checkupdateapp", R.drawable.ic_sm_checkupdateapp));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "closeapp", R.drawable.ic_sm_closeapp));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "rebootsys", R.drawable.ic_sm_rebootsys));
+        // gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_exitmanager), GridNineItemType.Function, "exitmanager", R.drawable.ic_sm_exitmanager));
+
+        GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(), gdv_Nine_Items);
+
+        gdv_Nine.setAdapter(gridNineItemAdapter);
+
+
+
 
     }
 
@@ -236,6 +274,27 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
     private void dlgOpenDoor(){
 
     }
+
+
+    private void getOwnInfo(){
+        dialog_UserEdit.show(AppCacheManager.getCurrentUser().getUserId());
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        if (!NoDoubleClickUtil.isDoubleClick()) {
+            switch (v.getId()) {
+                case R.id.iv_UserAvatar:
+                    getOwnInfo();
+                    break;
+                case R.id.btn_Logout:
+                    gdvExitManager();
+                    break;
+            }
+        }
+    }
+
 
     @Override
     public void onDestroy() {

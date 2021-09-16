@@ -142,9 +142,10 @@ public class ReqStandAlone implements IReqVersion{
         }
 
         RetUserSave ret = new RetUserSave();
-
+        ret.setUserName(userName);
+        ret.setFullName(fullName);
+        ret.setAvatar(avatar);
         result.setData(ret);
-
         reqHandler.sendSuccessMessage(result.toJSONString());
 
     }

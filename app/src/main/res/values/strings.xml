@@ -109,4 +109,5 @@
     <string name="t_shop_name">门店</string>
     <string name="t_address">地址</string>
     <string name="t_comname">COM.N</string>
+    <string name="t_logout">退出</string>
 </resources>
