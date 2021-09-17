@@ -7,7 +7,7 @@
         android:id="@+id/tv_Box"
         android:textSize="@dimen/sp_16"
         android:gravity="center"
-        android:layout_margin="@dimen/size_6"
+        android:layout_margin="@dimen/size_3"
         android:background="#ffcccc"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_100" />

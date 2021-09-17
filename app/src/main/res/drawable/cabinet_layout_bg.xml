@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#917186" />
+    <solid android:color="@color/locker_cabinet_bg" />
     <!-- 这里是设置为四周 也可以单独设置某个位置为圆角-->
     <corners android:topLeftRadius="0dp"
         android:topRightRadius="0dp"
         android:bottomRightRadius="0dp"
         android:bottomLeftRadius="0dp"/>
-    <stroke android:width="2dp" android:color="@color/locker_box_status_1" />
+    <stroke android:width="2dp" android:color="@color/locker_cabinet_bd" />
 </shape>

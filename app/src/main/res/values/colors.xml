@@ -29,9 +29,8 @@
     <color name="custom_dialog_confirm_btn_sure">#000000</color>
     <color name="custom_dialog_confirm_btn_sure_bg">#FFFFFF</color>
     <color name="custom_dialog_confirm_btn_cancle">#000000</color>
-
-    <color name="locker_box_status_1">#8c2312</color>
-    <color name="locker_box_status_2">#dcb44c</color>
-
-
+    <color name="locker_cabinet_bg">#e2ecf6</color>
+    <color name="locker_cabinet_bd">#bbd2e3</color>
+    <color name="locker_box_status_1">#ea3a25</color>
+    <color name="locker_box_status_2">#34c07a</color>
 </resources>

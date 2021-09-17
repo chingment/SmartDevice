@@ -6,6 +6,7 @@
         <entry key="../../../../../layout/custom_preview.xml" value="0.11875" />
         <entry key="app/src/main/res/drawable-v24/locker_box_status_doc_3.xml" value="0.11574074074074074" />
         <entry key="app/src/main/res/drawable/cabinet_layout_bg.xml" value="0.11574074074074074" />
+        <entry key="app/src/main/res/drawable/custom_dialog_loading_bg.xml" value="0.11574074074074074" />
         <entry key="app/src/main/res/drawable/locker_box_status_1.xml" value="0.1359375" />
         <entry key="app/src/main/res/drawable/locker_box_status_2.xml" value="0.1359375" />
         <entry key="app/src/main/res/drawable/locker_box_status_3.xml" value="0.1359375" />
@@ -19,6 +20,8 @@
         <entry key="app/src/main/res/layout/activity_smusermanager.xml" value="0.1265625" />
         <entry key="app/src/main/res/layout/custom_dialog_confirm.xml" value="0.13269927536231885" />
         <entry key="app/src/main/res/layout/custom_dialog_lockerbox.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/item_smcabinet_layout_box.xml" value="0.11979166666666667" />
+        <entry key="app/src/main/res/layout/item_smlockerbox_cabinet.xml" value="0.11979166666666667" />
         <entry key="app/src/main/res/layout/recycler_item_layout.xml" value="0.1265625" />
       </map>
     </option>
