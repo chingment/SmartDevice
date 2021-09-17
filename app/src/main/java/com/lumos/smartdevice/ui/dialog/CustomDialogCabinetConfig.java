@@ -66,7 +66,7 @@ public class CustomDialogCabinetConfig extends Dialog {
         tv_CabinetId.setText(cabinet.getCabinetId());
         tv_CabinetName.setText(cabinet.getName());
         tv_ComId.setText(cabinet.getComId());
-        tv_ComBaud.setText(cabinet.getComBaud() + "");
+        tv_ComBaud.setText(String.valueOf(cabinet.getComBaud()));
         tv_ComPrl.setText(cabinet.getComPrl());
         String layout=prettyJson(cabinet.getLayout()) ;
         tv_Layout.setText(layout);
@@ -74,14 +74,14 @@ public class CustomDialogCabinetConfig extends Dialog {
 
     private String prettyJson(String json) {
 
-
-        JSONArray jsonObject = null;
+        JSONObject jsonObject = null;
         try {
-            jsonObject = JSONObject.parseArray(json);
+            jsonObject = JSONObject.parseObject(json);
         } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
-         return JSONArray.toJSONString(jsonObject,true);
+        return JSONObject.toJSONString(jsonObject, true);
     }
 
 }

@@ -2,13 +2,9 @@ package com.lumos.smartdevice.activity.sm;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -18,7 +14,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.adapter.MyRecyclerViewAdapter;
+import com.lumos.smartdevice.adapter.SmCabinetLayoutBoxAdapter;
 import com.lumos.smartdevice.adapter.SmCabinetNameAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -35,7 +31,6 @@ import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
-import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.ui.dialog.CustomDialogCabinetConfig;
 import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
 import com.lumos.smartdevice.ui.dialog.CustomDialogLockerBox;
@@ -50,12 +45,8 @@ import java.util.List;
 
 public class SmLockerBoxActivity extends BaseFragmentActivity {
     private static final String TAG = "SmLockerBoxActivity";
-    private final int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
-    private final int MP = ViewGroup.LayoutParams.MATCH_PARENT;
-
     private TextView tv_CabinetName;
     private ListView lv_Cabinets;
-    //private TableLayout tl_Boxs;
     private TextView btn_OpenAllBox;
     private CabinetBean cur_Cabinet;
     private List<CabinetBean> cabinets;
@@ -66,10 +57,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     private CustomDialogConfirm dialog_Confirm;
     private DeviceBean device;
 
-
     private RecyclerView tl_Boxs;
-
-    private MyRecyclerViewAdapter tl_Boxs_Adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,53 +84,12 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         initEvent();
         initData();
 
-        //mDatas = new ArrayList<String>();
-        //for (int i = 'a'; i < 'g'; i++){
-        //    mDatas.add("" + (char) i);
-        //}
-
-        //1.找到控件
-
-//        //2.声名为瀑布流的布局方式: 3列,垂直方向
-//        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
-//        //3.为recyclerView设置布局管理器
-//        recyclerView.setLayoutManager(staggeredGridLayoutManager);
-//
-//        //3.创建适配器
-//        adapter = new MyRecyclerViewAdapter(this, mDatas);
-//        //设置添加,移除item的动画,DefaultItemAnimator为默认的
-//        recyclerView.setItemAnimator(new DefaultItemAnimator());
-//        //4.设置适配器
-//        recyclerView.setAdapter(adapter);
-
-//        //添加点击事件
-//        adapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnRecyclerItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int position) {
-//                //Toast.makeText(MainActivity.this,"单击了:"+mDatas.get(position),Toast.LENGTH_SHORT).show();
-//                //adapter.addItem(position,"添加的内容");
-//                //Log.i("tag", "onItemClick: "+position);
-//                //Log.i("tag", "集合: "+mDatas.toString());
-//            }
-//        });
-//        //设置长按事件
-//        adapter.setOnItemLongClickListener(new MyRecyclerViewAdapter.onRecyclerItemLongClickListener() {
-//            @Override
-//            public void onItemLongClick(View view, int position) {
-//                //Toast.makeText(MainActivity.this,"长按了:"+mDatas.get(position),Toast.LENGTH_SHORT).show();
-//               // adapter.removeItem(position);
-//                //Log.i("tag", "onItemLongClick: "+position);
-//                //Log.i("tag", "集合: "+mDatas.toString());
-//            }
-//        });
     }
 
     private void initView() {
         lv_Cabinets = findViewById(R.id.lv_Cabinets);
         tv_CabinetName = findViewById(R.id.tv_CabinetName);
         btn_OpenAllBox=findViewById(R.id.btn_OpenAllBox);
-        //tl_Boxs = findViewById(R.id.tl_Boxs);
-
         tl_Boxs = findViewById(R.id.tl_Boxs);
 
         dialog_CabinetConfig = new CustomDialogCabinetConfig(SmLockerBoxActivity.this);
@@ -249,7 +196,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
         SmCabinetNameAdapter list_cabinet_adapter = new SmCabinetNameAdapter(getAppContext(), cabinets, cur_Cabinet_Position);
         lv_Cabinets.setAdapter(list_cabinet_adapter);
-        tv_CabinetName.setText(cur_Cabinet.getCabinetId());
+        tv_CabinetName.setText(cur_Cabinet.getName());
 
         lockerGetBoxs();
 
@@ -261,11 +208,11 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(layout.getSpanCount(),StaggeredGridLayoutManager.VERTICAL);
         tl_Boxs.setLayoutManager(staggeredGridLayoutManager);
-        tl_Boxs_Adapter = new MyRecyclerViewAdapter(this, layout.getCells(),boxs);
+        SmCabinetLayoutBoxAdapter tl_Boxs_Adapter = new SmCabinetLayoutBoxAdapter(this, layout.getCells(),boxs);
         tl_Boxs.setItemAnimator(new DefaultItemAnimator());
         tl_Boxs.setAdapter(tl_Boxs_Adapter);
                 //添加点击事件
-        tl_Boxs_Adapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnRecyclerItemClickListener() {
+        tl_Boxs_Adapter.setOnItemClickListener(new SmCabinetLayoutBoxAdapter.OnRecyclerItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
@@ -277,7 +224,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             }
         });
         //设置长按事件
-        tl_Boxs_Adapter.setOnItemLongClickListener(new MyRecyclerViewAdapter.onRecyclerItemLongClickListener() {
+        tl_Boxs_Adapter.setOnItemLongClickListener(new SmCabinetLayoutBoxAdapter.onRecyclerItemLongClickListener() {
             @Override
             public void onItemLongClick(View view, int position) {
                 //Toast.makeText(MainActivity.this,"长按了:"+mDatas.get(position),Toast.LENGTH_SHORT).show();
