@@ -10,6 +10,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultUtil;
 import com.lumos.smartdevice.model.CabinetBean;
+import com.lumos.smartdevice.model.CabinetLayoutBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.model.PageDataBean;
@@ -382,29 +383,33 @@ public class DbManager {
                     db.insert(CabinetDao.TABLE_NAME, null, cv_Cabinet);
 
 
-                    List<List<String>> layout = JSON.parseObject(cabinet.getLayout(), new TypeReference<List<List<String>>>() {
+                    CabinetLayoutBean layout = JSON.parseObject(cabinet.getLayout(), new TypeReference<CabinetLayoutBean>() {
                     });
 
-                    if (layout == null || layout.size() <= 0)
+                    if (layout == null)
                         return ResultUtil.isFailure("保存失败，解释布局协议失败");
 
-                    int rowsSize = layout.size();
-                    for (int i = 0; i < rowsSize; i++) {
-                        List<String> cols = layout.get(i);
-                        int colsSize = cols.size();
-                        for (int j = 0; j < colsSize; j++) {
-                            String slotId = cols.get(j);
-                            String[] col_Prams = cols.get(j).split("-");
-                            String isUse = col_Prams[3];
-                            if (isUse.equals("0")) {
-                                ContentValues cv_LockerBox = new ContentValues();
-                                cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_CABINET_ID, cabinet.getCabinetId());
-                                cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_SLOT_ID, slotId);
-                                cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_IS_USED, "0");
-                                db.insert(LockerBoxDao.TABLE_NAME, null, cv_LockerBox);
-                            }
+                    if (layout.getSpanCount() == 0)
+                        return ResultUtil.isFailure("保存失败，解释布局协议失败,SpanCount不能为0");
+
+                    if (layout.getCells() == null || layout.getCells().size() == 0)
+                        return ResultUtil.isFailure("保存失败，解释布局协议失败,Cells不能为空");
+
+
+                    List<String> cells = layout.getCells();
+                    for (int j = 0; j < cells.size(); j++) {
+                        String slotId = cells.get(j);
+                        String[] cell_Prams = cells.get(j).split("-");
+                        String isUse = cell_Prams[3];
+                        if (isUse.equals("0")) {
+                            ContentValues cv_LockerBox = new ContentValues();
+                            cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_CABINET_ID, cabinet.getCabinetId());
+                            cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_SLOT_ID, slotId);
+                            cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_IS_USED, "0");
+                            db.insert(LockerBoxDao.TABLE_NAME, null, cv_LockerBox);
                         }
                     }
+
 
                 }
 

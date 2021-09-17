@@ -157,10 +157,6 @@
                 </LinearLayout>
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
 
                 <ScrollView
                     android:layout_width="fill_parent"
@@ -168,11 +164,24 @@
                     android:background="@color/white"
                     android:scrollbars="vertical">
 
-                    <TableLayout
-                        android:id="@+id/tl_Boxs"
+                    <LinearLayout
+                        android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white" />
+                        android:layout_height="match_parent">
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/tl_Boxs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+<!--                        <TableLayout-->
+<!--                            android:id="@+id/tl_Boxs"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:background="@color/white" />-->
+                    </LinearLayout>
+
 
 
                 </ScrollView>

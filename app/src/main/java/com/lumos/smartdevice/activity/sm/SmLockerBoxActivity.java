@@ -11,9 +11,14 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.adapter.MyRecyclerViewAdapter;
 import com.lumos.smartdevice.adapter.SmCabinetNameAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -25,6 +30,7 @@ import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBox;
 import com.lumos.smartdevice.api.rop.RopLockerGetBoxs;
 import com.lumos.smartdevice.model.CabinetBean;
+import com.lumos.smartdevice.model.CabinetLayoutBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
@@ -49,7 +55,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
     private TextView tv_CabinetName;
     private ListView lv_Cabinets;
-    private TableLayout tl_Boxs;
+    //private TableLayout tl_Boxs;
     private TextView btn_OpenAllBox;
     private CabinetBean cur_Cabinet;
     private List<CabinetBean> cabinets;
@@ -59,6 +65,12 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     private CustomDialogLockerBox dialog_LockerBox;
     private CustomDialogConfirm dialog_Confirm;
     private DeviceBean device;
+
+
+    private RecyclerView tl_Boxs;
+
+    private MyRecyclerViewAdapter tl_Boxs_Adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,16 +96,56 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         initEvent();
         initData();
 
+        //mDatas = new ArrayList<String>();
+        //for (int i = 'a'; i < 'g'; i++){
+        //    mDatas.add("" + (char) i);
+        //}
+
+        //1.找到控件
+
+//        //2.声名为瀑布流的布局方式: 3列,垂直方向
+//        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+//        //3.为recyclerView设置布局管理器
+//        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+//
+//        //3.创建适配器
+//        adapter = new MyRecyclerViewAdapter(this, mDatas);
+//        //设置添加,移除item的动画,DefaultItemAnimator为默认的
+//        recyclerView.setItemAnimator(new DefaultItemAnimator());
+//        //4.设置适配器
+//        recyclerView.setAdapter(adapter);
+
+//        //添加点击事件
+//        adapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnRecyclerItemClickListener() {
+//            @Override
+//            public void onItemClick(View view, int position) {
+//                //Toast.makeText(MainActivity.this,"单击了:"+mDatas.get(position),Toast.LENGTH_SHORT).show();
+//                //adapter.addItem(position,"添加的内容");
+//                //Log.i("tag", "onItemClick: "+position);
+//                //Log.i("tag", "集合: "+mDatas.toString());
+//            }
+//        });
+//        //设置长按事件
+//        adapter.setOnItemLongClickListener(new MyRecyclerViewAdapter.onRecyclerItemLongClickListener() {
+//            @Override
+//            public void onItemLongClick(View view, int position) {
+//                //Toast.makeText(MainActivity.this,"长按了:"+mDatas.get(position),Toast.LENGTH_SHORT).show();
+//               // adapter.removeItem(position);
+//                //Log.i("tag", "onItemLongClick: "+position);
+//                //Log.i("tag", "集合: "+mDatas.toString());
+//            }
+//        });
     }
 
     private void initView() {
         lv_Cabinets = findViewById(R.id.lv_Cabinets);
         tv_CabinetName = findViewById(R.id.tv_CabinetName);
         btn_OpenAllBox=findViewById(R.id.btn_OpenAllBox);
+        //tl_Boxs = findViewById(R.id.tl_Boxs);
+
         tl_Boxs = findViewById(R.id.tl_Boxs);
+
         dialog_CabinetConfig = new CustomDialogCabinetConfig(SmLockerBoxActivity.this);
-
-
         dialog_Confirm = new CustomDialogConfirm(SmLockerBoxActivity.this, "", true);
         dialog_Confirm.setOnClickListener(new CustomDialogConfirm.OnClickListener() {
             @Override
@@ -205,74 +257,108 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
     public void drawsLayout(String json_layout,HashMap<String, LockerBoxBean> boxs) {
 
-        List<List<String>> layout = JSON.parseObject(json_layout, new TypeReference< List<List<String>>>() {});
+        CabinetLayoutBean layout = JSON.parseObject(json_layout, new TypeReference<CabinetLayoutBean>() {});
 
-        tl_Boxs.removeAllViews();
-        tl_Boxs.setStretchAllColumns(true);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(layout.getSpanCount(),StaggeredGridLayoutManager.VERTICAL);
+        tl_Boxs.setLayoutManager(staggeredGridLayoutManager);
+        tl_Boxs_Adapter = new MyRecyclerViewAdapter(this, layout.getCells(),boxs);
+        tl_Boxs.setItemAnimator(new DefaultItemAnimator());
+        tl_Boxs.setAdapter(tl_Boxs_Adapter);
+                //添加点击事件
+        tl_Boxs_Adapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnRecyclerItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
 
-        int rowsSize=layout.size();
+                LockerBoxBean l_Box = (LockerBoxBean)view.getTag();
+                dialog_LockerBox.setConfig(device, cur_Cabinet, l_Box);
+                lockerGetBox();
+                dialog_LockerBox.show();
 
-        for (int i = 0; i <rowsSize; i++) {
-
-            TableRow tableRow = new TableRow(SmLockerBoxActivity.this);
-
-            List<String> cols=layout.get(i);
-            int colsSize=cols.size();
-
-            for (int j = 0; j < colsSize; j++) {
-                //tv用于显示
-
-                String col=cols.get(j);
-                String slot_Id=col;
-                LockerBoxBean box=boxs.get(slot_Id);
-                String[] col_Prams=col.split("-");
-
-                String id=col_Prams[0];
-                String plate=col_Prams[1];
-                String name=col_Prams[2];
-                String isUse=col_Prams[3];
-
-                final View convertView = LayoutInflater.from(SmLockerBoxActivity.this).inflate(R.layout.item_list_lockerbox, tableRow, false);
-
-                TextView tv_Name = ViewHolder.get(convertView, R.id.tv_Name);
-
-                tv_Name.setText(name);
-
-                convertView.setTag(box);
-
-                if(isUse.equals("1")){
-                    convertView.setVisibility(View.INVISIBLE);
-                }
-                else {
-                    convertView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            LockerBoxBean l_Box = (LockerBoxBean)v.getTag();
-                            dialog_LockerBox.setConfig(device, cur_Cabinet, l_Box);
-                            lockerGetBox();
-                            dialog_LockerBox.show();
-                        }
-                    });
-                }
-
-                if(box!=null){
-                    String box_IsUsed=box.getIsUsed();
-                    if(box_IsUsed.equals("0")){
-                        tv_Name.setBackgroundResource(R.drawable.locker_box_status_1);
-                    }
-                    else {
-                        tv_Name.setBackgroundResource(R.drawable.locker_box_status_2);
-                    }
-                }
-
-
-                tableRow.addView(convertView, new TableRow.LayoutParams(MP, WC, 1));
             }
+        });
+        //设置长按事件
+        tl_Boxs_Adapter.setOnItemLongClickListener(new MyRecyclerViewAdapter.onRecyclerItemLongClickListener() {
+            @Override
+            public void onItemLongClick(View view, int position) {
+                //Toast.makeText(MainActivity.this,"长按了:"+mDatas.get(position),Toast.LENGTH_SHORT).show();
+               // adapter.removeItem(position);
+                //Log.i("tag", "onItemLongClick: "+position);
+                //Log.i("tag", "集合: "+mDatas.toString());
+            }
+        });
 
-            tl_Boxs.addView(tableRow, new TableLayout.LayoutParams(MP, WC, 1));
-
-        }
     }
+
+//    public void drawsLayout(String json_layout,HashMap<String, LockerBoxBean> boxs) {
+//
+//        List<List<String>> layout = JSON.parseObject(json_layout, new TypeReference< List<List<String>>>() {});
+//
+//        tl_Boxs.removeAllViews();
+//        tl_Boxs.setStretchAllColumns(true);
+//
+//        int rowsSize=layout.size();
+//
+//        for (int i = 0; i <rowsSize; i++) {
+//
+//            TableRow tableRow = new TableRow(SmLockerBoxActivity.this);
+//
+//            List<String> cols=layout.get(i);
+//            int colsSize=cols.size();
+//
+//            for (int j = 0; j < colsSize; j++) {
+//                //tv用于显示
+//
+//                String col=cols.get(j);
+//                String slot_Id=col;
+//                LockerBoxBean box=boxs.get(slot_Id);
+//                String[] col_Prams=col.split("-");
+//
+//                String id=col_Prams[0];
+//                String plate=col_Prams[1];
+//                String name=col_Prams[2];
+//                String isUse=col_Prams[3];
+//
+//                final View convertView = LayoutInflater.from(SmLockerBoxActivity.this).inflate(R.layout.item_list_lockerbox, tableRow, false);
+//
+//                TextView tv_Name = ViewHolder.get(convertView, R.id.tv_Name);
+//
+//                tv_Name.setText(name);
+//
+//                convertView.setTag(box);
+//
+//                if(isUse.equals("1")){
+//                    convertView.setVisibility(View.INVISIBLE);
+//                }
+//                else {
+//                    convertView.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            LockerBoxBean l_Box = (LockerBoxBean)v.getTag();
+//                            dialog_LockerBox.setConfig(device, cur_Cabinet, l_Box);
+//                            lockerGetBox();
+//                            dialog_LockerBox.show();
+//                        }
+//                    });
+//                }
+//
+//                if(box!=null){
+//                    String box_IsUsed=box.getIsUsed();
+//                    if(box_IsUsed.equals("0")){
+//                        tv_Name.setBackgroundResource(R.drawable.locker_box_status_1);
+//                    }
+//                    else {
+//                        tv_Name.setBackgroundResource(R.drawable.locker_box_status_2);
+//                    }
+//                }
+//
+//
+//                tableRow.addView(convertView, new TableRow.LayoutParams(MP, WC, 1));
+//            }
+//
+//            tl_Boxs.addView(tableRow, new TableLayout.LayoutParams(MP, WC, 1));
+//
+//        }
+//    }
 
     public void lockerGetBox() {
 
