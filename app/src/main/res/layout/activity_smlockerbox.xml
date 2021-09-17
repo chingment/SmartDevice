@@ -164,7 +164,6 @@
                     android:background="@color/white"
                     android:gravity="center"
                     android:scrollbars="vertical">
-
                     <LinearLayout
                         android:id="@+id/tl_Body"
                         android:background="@drawable/cabinet_layout_bg"
@@ -172,8 +171,6 @@
                         android:layout_width="wrap_content"
                         android:layout_gravity="center"
                         android:layout_height="wrap_content">
-
-
                         <androidx.recyclerview.widget.RecyclerView
                             android:layout_marginTop="@dimen/size_3"
                             android:layout_marginBottom="@dimen/size_3"
@@ -182,16 +179,7 @@
                             android:id="@+id/tl_Boxs"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
-
-<!--                        <TableLayout-->
-<!--                            android:id="@+id/tl_Boxs"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:background="@color/white" />-->
                     </LinearLayout>
-
-
-
                 </ScrollView>
 
 
