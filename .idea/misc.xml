@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/layout/activity_smhome.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_smlockerbox.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_smlogin.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_smusermanager.xml" value="0.1265625" />
         <entry key="app/src/main/res/layout/custom_dialog_confirm.xml" value="0.13269927536231885" />
         <entry key="app/src/main/res/layout/custom_dialog_lockerbox.xml" value="0.335" />
       </map>
