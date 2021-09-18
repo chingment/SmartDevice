@@ -168,9 +168,25 @@
                         android:id="@+id/tl_Body"
                         android:background="@drawable/cabinet_layout_bg"
                         android:orientation="vertical"
+                        android:padding="@dimen/size_6"
                         android:layout_width="wrap_content"
                         android:layout_gravity="center"
                         android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:background="@drawable/cabinet_layout_top_bg"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_height="@dimen/size_18">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text=""
+                                />
+                        </LinearLayout>
+
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:layout_marginTop="@dimen/size_3"
                             android:layout_marginBottom="@dimen/size_3"
@@ -179,6 +195,20 @@
                             android:id="@+id/tl_Boxs"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
+
+                        <LinearLayout
+                            android:background="@color/locker_cabinet_bd"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_height="@dimen/size_9">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text=""
+                                />
+                        </LinearLayout>
+
                     </LinearLayout>
                 </ScrollView>
 
