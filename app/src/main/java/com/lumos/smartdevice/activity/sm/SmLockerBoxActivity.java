@@ -21,10 +21,10 @@ import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetLockerGetBox;
-import com.lumos.smartdevice.api.rop.RetLockerGetBoxs;
+import com.lumos.smartdevice.api.rop.RetLockerGetCabinet;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBox;
-import com.lumos.smartdevice.api.rop.RopLockerGetBoxs;
+import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.CabinetLayoutBean;
 import com.lumos.smartdevice.model.DeviceBean;
@@ -198,15 +198,19 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         lv_Cabinets.setAdapter(list_cabinet_adapter);
         tv_CabinetName.setText(cur_Cabinet.getName());
 
-        lockerGetBoxs();
+        lockerGetCabinet();
 
     }
 
-    public void drawsLayout(String json_layout,HashMap<String, LockerBoxBean> boxs) {
+    public void drawsLayout(String json_layout,List<LockerBoxBean> boxs) {
         CabinetLayoutBean layout = JSON.parseObject(json_layout, new TypeReference<CabinetLayoutBean>() {});
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(layout.getSpanCount(),StaggeredGridLayoutManager.VERTICAL);
         tl_Boxs.setLayoutManager(staggeredGridLayoutManager);
-        SmCabinetLayoutBoxAdapter tl_Boxs_Adapter = new SmCabinetLayoutBoxAdapter(this, layout.getCells(),boxs);
+
+
+        SmCabinetLayoutBoxAdapter tl_Boxs_Adapter = new SmCabinetLayoutBoxAdapter(this, boxs);
+
+
         tl_Boxs.setItemAnimator(new DefaultItemAnimator());
         tl_Boxs.setAdapter(tl_Boxs_Adapter);
         tl_Boxs_Adapter.setOnItemClickListener(new SmCabinetLayoutBoxAdapter.OnRecyclerItemClickListener() {
@@ -281,13 +285,13 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         );
     }
 
-    public void lockerGetBoxs(){
+    public void lockerGetCabinet(){
 
-        RopLockerGetBoxs rop=new RopLockerGetBoxs();
+        RopLockerGetCabinet rop=new RopLockerGetCabinet();
         rop.setDeviceId(device.getDeviceId());
         rop.setCabinetId(cur_Cabinet.getCabinetId());
 
-        ReqInterface.getInstance().lockerGetBoxs(rop, new ReqHandler(){
+        ReqInterface.getInstance().lockerGetCabinet(rop, new ReqHandler(){
 
                     @Override
                     public void onBeforeSend() {
@@ -303,12 +307,19 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                     public void onSuccess(String response) {
                         super.onSuccess(response);
 
-                        ResultBean<RetLockerGetBoxs> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetLockerGetBoxs>>() {
+                        ResultBean<RetLockerGetCabinet> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetLockerGetCabinet>>() {
                         });
 
                         if (rt.getCode() == ResultCode.SUCCESS) {
-                            RetLockerGetBoxs ret = rt.getData();
-                            drawsLayout(cur_Cabinet.getLayout(), ret.getBoxs());
+                            RetLockerGetCabinet ret = rt.getData();
+
+                            cur_Cabinet.setName(ret.getName());
+                            cur_Cabinet.setComBaud(ret.getComBaud());
+                            cur_Cabinet.setComId(ret.getComId());
+                            cur_Cabinet.setComPrl(ret.getComPrl());
+                            cur_Cabinet.setLayout(ret.getLayout());
+
+                            drawsLayout(ret.getLayout(), ret.getBoxs());
                         }
                     }
 
@@ -350,7 +361,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                         });
 
                         if (rt.getCode() == ResultCode.SUCCESS) {
-                            lockerGetBoxs();
+                            lockerGetCabinet();
                             lockerGetBox();
                         }
                     }
@@ -367,7 +378,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     public  void onResume() {
         super.onResume();
 
-        lockerGetBoxs();
+        lockerGetCabinet();
         lockerGetBox();
     }
 

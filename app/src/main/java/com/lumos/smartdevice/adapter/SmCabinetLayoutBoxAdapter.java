@@ -21,16 +21,14 @@ import java.util.List;
 public class SmCabinetLayoutBoxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private List<String> list;//数据
-    private HashMap<String, LockerBoxBean> boxs;//数据
+    private List<LockerBoxBean> list;//数据
     private OnRecyclerItemClickListener mOnItemClickListener;//单击事件
     private onRecyclerItemLongClickListener mOnItemLongClickListener;//长按事件
 
 
-    public SmCabinetLayoutBoxAdapter(Context context, List<String> list, HashMap<String, LockerBoxBean> boxs) {
+    public SmCabinetLayoutBoxAdapter(Context context, List<LockerBoxBean> list) {
         this.context = context;
         this.list = list;
-        this.boxs = boxs;
     }
 
     @Override
@@ -49,10 +47,9 @@ public class SmCabinetLayoutBoxAdapter extends RecyclerView.Adapter<RecyclerView
         TextView tv_Name = holder.itemView.findViewById(R.id.tv_Name);
         TextView tv_UseStatus = holder.itemView.findViewById(R.id.tv_UseStatus);
 
-        String cell = list.get(position);
-        String[] cell_prams = cell.split("-");
+        LockerBoxBean item = list.get(position);
 
-        LockerBoxBean box = boxs.get(cell);
+        String[] cell_prams = item.getSlotId().split("-");
 
         String id = cell_prams[0];
         String plate = cell_prams[1];
@@ -61,24 +58,24 @@ public class SmCabinetLayoutBoxAdapter extends RecyclerView.Adapter<RecyclerView
         tv_Name.setText(name);
 
         ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
-        params.width = box.getWidth();
-        params.height = box.getHeight();
+        params.width = item.getWidth();
+        params.height = item.getHeight();
         holder.itemView.setLayoutParams(params);
 
-        if (box.isOpen()) {
+        if (item.isOpen()) {
             holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.locker_box_open_status_2));
         } else {
             holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.locker_box_open_status_1));
         }
 
-        if (box.isUsed()) {
+        if (item.isUsed()) {
             tv_UseStatus.setBackgroundResource(R.drawable.locker_box_use_status_doc_2);
         } else {
             tv_UseStatus.setBackgroundResource(R.drawable.locker_box_use_status_doc_1);
         }
 
         if (mOnItemClickListener != null) {
-            holder.itemView.setTag(box);
+            holder.itemView.setTag(item);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

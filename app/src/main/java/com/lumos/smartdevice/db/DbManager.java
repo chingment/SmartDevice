@@ -649,9 +649,9 @@ public class DbManager {
         return lockerBox;
     }
 
-    public HashMap<String, LockerBoxBean>  getLockerBoxs(String cabinetId) {
+    public List<LockerBoxBean>  getLockerBoxs(String cabinetId) {
 
-        HashMap<String, LockerBoxBean> lockerBoxs = new HashMap<>();
+        List<LockerBoxBean> lockerBoxs = new ArrayList<>();
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -671,14 +671,12 @@ public class DbManager {
 
                 lockerBox.setCabinetId(cabinetId);
                 lockerBox.setSlotId(slotId);
-                lockerBox.setUsed(isUsed!=0);
+                lockerBox.setUsed(isUsed != 0);
                 lockerBox.setType(type);
                 lockerBox.setHeight(height);
                 lockerBox.setWidth(width);
 
-                if (!lockerBoxs.containsKey(slotId)) {
-                    lockerBoxs.put(slotId, lockerBox);
-                }
+                lockerBoxs.add(lockerBox);
             }
 
             cursor.close();

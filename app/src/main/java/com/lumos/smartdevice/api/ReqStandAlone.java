@@ -2,7 +2,7 @@ package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RetLockerGetBox;
-import com.lumos.smartdevice.api.rop.RetLockerGetBoxs;
+import com.lumos.smartdevice.api.rop.RetLockerGetCabinet;
 import com.lumos.smartdevice.api.rop.RetOwnLogin;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
 import com.lumos.smartdevice.api.rop.RetUserGetDetail;
@@ -11,7 +11,7 @@ import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBoxUseRecords;
-import com.lumos.smartdevice.api.rop.RopLockerGetBoxs;
+import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
 import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBox;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
@@ -20,6 +20,7 @@ import com.lumos.smartdevice.api.rop.RopUserGetDetail;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.db.DbManager;
+import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.PageDataBean;
@@ -27,6 +28,7 @@ import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.utils.StringUtil;
 import java.util.HashMap;
+import java.util.List;
 
 public class ReqStandAlone implements IReqVersion{
 
@@ -178,12 +180,21 @@ public class ReqStandAlone implements IReqVersion{
     }
 
     @Override
-    public void lockerGetBoxs(RopLockerGetBoxs rop, final ReqHandler reqHandler) {
+    public void lockerGetCabinet(RopLockerGetCabinet rop, final ReqHandler reqHandler) {
         reqHandler.sendBeforeSendMessage();
         ResultBean result;
-        HashMap<String, LockerBoxBean>  lockerBoxs = DbManager.getInstance().getLockerBoxs(rop.getCabinetId());
-        RetLockerGetBoxs ret=new RetLockerGetBoxs();
-        ret.setBoxs(lockerBoxs);
+
+        CabinetBean cabinet=DbManager.getInstance().getCabinets().get(rop.getCabinetId());
+
+        List<LockerBoxBean> boxs = DbManager.getInstance().getLockerBoxs(rop.getCabinetId());
+        RetLockerGetCabinet ret=new RetLockerGetCabinet();
+        ret.setCabinetId(cabinet.getCabinetId());
+        ret.setName(cabinet.getName());
+        ret.setComBaud(cabinet.getComBaud());
+        ret.setComId(cabinet.getComId());
+        ret.setComPrl(cabinet.getComPrl());
+        ret.setLayout(cabinet.getLayout());
+        ret.setBoxs(boxs);
         result = new ResultBean<>(ResultCode.SUCCESS, "",ret);
         reqHandler.sendSuccessMessage(result.toJSONString());
     }
