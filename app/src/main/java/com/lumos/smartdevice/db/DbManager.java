@@ -400,14 +400,16 @@ public class DbManager {
                     for (int j = 0; j < cells.size(); j++) {
                         String slotId = cells.get(j);
                         String[] cell_Prams = cells.get(j).split("-");
-                        String isUse = cell_Prams[3];
-                        if (isUse.equals("0")) {
-                            ContentValues cv_LockerBox = new ContentValues();
-                            cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_CABINET_ID, cabinet.getCabinetId());
-                            cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_SLOT_ID, slotId);
-                            cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_IS_USED, "0");
-                            db.insert(LockerBoxDao.TABLE_NAME, null, cv_LockerBox);
-                        }
+                        String type = cell_Prams[3];
+                        ContentValues cv_LockerBox = new ContentValues();
+                        cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_CABINET_ID, cabinet.getCabinetId());
+                        cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_SLOT_ID, slotId);
+                        cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_IS_USED, 0);
+                        cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_TYPE, type);
+                        cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_HEIGHT,100);
+                        cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_WIDTH,200);
+                        db.insert(LockerBoxDao.TABLE_NAME, null, cv_LockerBox);
+
                     }
 
 
@@ -657,14 +659,18 @@ public class DbManager {
 
                 String slotId = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_SLOT_ID));
                 String isUsed = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_IS_USED));
-
+                int type = cursor.getInt(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_TYPE));
+                int width = cursor.getInt(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_WIDTH));
+                int height = cursor.getInt(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_HEIGHT));
 
                 LockerBoxBean lockerBox = new LockerBoxBean();
 
                 lockerBox.setCabinetId(cabinetId);
                 lockerBox.setSlotId(slotId);
                 lockerBox.setIsUsed(isUsed);
-
+                lockerBox.setType(type);
+                lockerBox.setHeight(height);
+                lockerBox.setWidth(width);
 
                 if (!lockerBoxs.containsKey(slotId)) {
                     lockerBoxs.put(slotId, lockerBox);

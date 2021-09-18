@@ -2,6 +2,7 @@ package com.lumos.smartdevice.api;
 
 import com.alibaba.fastjson.JSON;
 
+
 public class ResultBean<T>  {
 
     private int code;

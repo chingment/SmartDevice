@@ -60,6 +60,9 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 			+ LockerBoxDao.TABLE_NAME + " ("
 			+ LockerBoxDao.COLUMN_NAME_CABINET_ID + " TEXT , "
 			+ LockerBoxDao.COLUMN_NAME_SLOT_ID + " TEXT , "
+			+ LockerBoxDao.COLUMN_NAME_TYPE + " INTEGER , "
+			+ LockerBoxDao.COLUMN_NAME_HEIGHT + " INTEGER , "
+			+ LockerBoxDao.COLUMN_NAME_WIDTH + " INTEGER , "
 			+ LockerBoxDao.COLUMN_NAME_IS_USED + " TEXT );";
 
 

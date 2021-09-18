@@ -59,25 +59,22 @@ public class SmCabinetLayoutBoxAdapter extends RecyclerView.Adapter<RecyclerView
         String id = cell_prams[0];
         String plate = cell_prams[1];
         String name = cell_prams[2];
-        String isUse = cell_prams[3];
-        Integer height = Integer.valueOf(cell_prams[4]);
 
         tv_Box.setText(name);
 
-        ViewGroup.LayoutParams params = tv_Box.getLayoutParams();
-        params.width=200;
-        params.height = height;
-        tv_Box.setLayoutParams(params);
+        ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
+        params.width = box.getWidth();
+        params.height = box.getHeight();
+        holder.itemView.setLayoutParams(params);
 
+        String box_IsUsed = box.getIsUsed();
 
-        if (box != null) {
-            String box_IsUsed = box.getIsUsed();
-            if (box_IsUsed.equals("0")) {
-                tv_Box.setBackgroundColor(context.getResources().getColor(R.color.locker_box_open_status_1));
-            } else {
-                tv_Box.setBackgroundColor(context.getResources().getColor(R.color.locker_box_open_status_2));
-            }
+        if (box_IsUsed.equals("0")) {
+            tv_Box.setBackgroundColor(context.getResources().getColor(R.color.locker_box_open_status_1));
+        } else {
+            tv_Box.setBackgroundColor(context.getResources().getColor(R.color.locker_box_open_status_2));
         }
+
 
         if (mOnItemClickListener != null) {
             tv_Box.setTag(box);
