@@ -88,8 +88,11 @@
     <string name="tips_password_noright">用户密码不正确</string>
     <string name="tips_fullname_isnotnull">姓名不能为空</string>
     <string name="tips_lockerbox_has_existuse">保存失败，检查到格子存在使用中</string>
-    <string name="locker_box_open_status_1">未使用</string>
-    <string name="locker_box_open_status_2">已使用</string>
+    <string name="locker_box_open_status_1">未打开</string>
+    <string name="locker_box_open_status_2">已打开</string>
+    <string name="locker_box_use_status_1">未使用</string>
+    <string name="locker_box_use_status_2">已使用</string>
+
     <string name="t_clickinput">请输入</string>
     <string name="t_hint_fullname">请输入姓名</string>
     <string name="t_hint_phonenumner">请输入手机号码</string>

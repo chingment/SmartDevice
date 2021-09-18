@@ -27,7 +27,10 @@ public class CustomDialogLockerBox extends Dialog {
 
     private View btn_Close;
 
-    private TextView tv_BoxName;
+    private TextView tv_Name;
+    private TextView tv_UseStatus;
+    private LinearLayout ll_OpenStatus;
+
     private TextView btn_DistUser;
     private TextView btn_OpenBox;
     private MyListView lv_Usages;
@@ -52,7 +55,11 @@ public class CustomDialogLockerBox extends Dialog {
             }
         });
 
-        tv_BoxName = ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
+        tv_Name = ViewHolder.get(mLayoutRes, R.id.tv_Name);
+        tv_UseStatus = ViewHolder.get(mLayoutRes, R.id.tv_UseStatus);
+        ll_OpenStatus = ViewHolder.get(mLayoutRes, R.id.ll_OpenStatus);
+
+
         lv_Usages = ViewHolder.get(mLayoutRes, R.id.lv_Usages);
 
         lv_Usages.setFocusable(false);
@@ -106,7 +113,7 @@ public class CustomDialogLockerBox extends Dialog {
 
         String[] box_Prams = slotId.split("-");
 
-        tv_BoxName.setText(box_Prams[2]);
+        tv_Name.setText(box_Prams[2]);
 
     }
 
@@ -120,16 +127,22 @@ public class CustomDialogLockerBox extends Dialog {
 
     public void setLockerBox(LockerBoxBean lockerBox) {
 
-        String isUsed=lockerBox.getIsUsed();
+        //String isUsed=lockerBox.isUsed();
 
         List<LockerBoxUsageBean> usages=lockerBox.getUsages();
 
-        if(isUsed.equals("0")){
-            tv_BoxName.setBackgroundResource(R.drawable.locker_box_open_status_1);
+        if (lockerBox.isOpen()) {
+            ll_OpenStatus.setBackgroundColor(mContext.getResources().getColor(R.color.locker_box_open_status_2));
+        } else {
+            ll_OpenStatus.setBackgroundColor(mContext.getResources().getColor(R.color.locker_box_open_status_1));
         }
-        else {
-            tv_BoxName.setBackgroundResource(R.drawable.locker_box_open_status_2);
+
+        if (lockerBox.isUsed()) {
+            tv_UseStatus.setBackgroundResource(R.drawable.locker_box_use_status_doc_2);
+        } else {
+            tv_UseStatus.setBackgroundResource(R.drawable.locker_box_use_status_doc_1);
         }
+
 
         if(usages.size()<=0){
             ll_UsagesEmpty.setVisibility(View.VISIBLE);

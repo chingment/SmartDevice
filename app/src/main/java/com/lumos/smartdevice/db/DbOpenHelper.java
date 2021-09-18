@@ -63,7 +63,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 			+ LockerBoxDao.COLUMN_NAME_TYPE + " INTEGER , "
 			+ LockerBoxDao.COLUMN_NAME_HEIGHT + " INTEGER , "
 			+ LockerBoxDao.COLUMN_NAME_WIDTH + " INTEGER , "
-			+ LockerBoxDao.COLUMN_NAME_IS_USED + " TEXT );";
+			+ LockerBoxDao.COLUMN_NAME_IS_USED + " INTEGER );";
 
 
 	private DbOpenHelper(Context context) {

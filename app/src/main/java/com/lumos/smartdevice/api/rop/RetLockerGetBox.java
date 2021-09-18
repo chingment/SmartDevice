@@ -9,7 +9,11 @@ public class RetLockerGetBox {
     private String deviceId;
     private String cabinetId;
     private String slotId;
-    private String isUsed;
+    private boolean isUsed;
+    private int type;
+    private int height;
+    private int width;
+
     private List<LockerBoxUsageBean> usages;
 
     public String getDeviceId() {
@@ -36,14 +40,14 @@ public class RetLockerGetBox {
         this.slotId = slotId;
     }
 
-    public String getIsUsed() {
+
+    public boolean isUsed() {
         return isUsed;
     }
 
-    public void setIsUsed(String isUsed) {
-        this.isUsed = isUsed;
+    public void setUsed(boolean used) {
+        isUsed = used;
     }
-
 
     public List<LockerBoxUsageBean> getUsages() {
         return usages;
@@ -51,5 +55,29 @@ public class RetLockerGetBox {
 
     public void setUsages(List<LockerBoxUsageBean> usages) {
         this.usages = usages;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
     }
 }

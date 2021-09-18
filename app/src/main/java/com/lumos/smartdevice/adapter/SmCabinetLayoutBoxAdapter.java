@@ -46,12 +46,10 @@ public class SmCabinetLayoutBoxAdapter extends RecyclerView.Adapter<RecyclerView
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        //填充数据
-
-        TextView tv_Box = holder.itemView.findViewById(R.id.tv_Box);
+        TextView tv_Name = holder.itemView.findViewById(R.id.tv_Name);
+        TextView tv_UseStatus = holder.itemView.findViewById(R.id.tv_UseStatus);
 
         String cell = list.get(position);
-
         String[] cell_prams = cell.split("-");
 
         LockerBoxBean box = boxs.get(cell);
@@ -60,25 +58,28 @@ public class SmCabinetLayoutBoxAdapter extends RecyclerView.Adapter<RecyclerView
         String plate = cell_prams[1];
         String name = cell_prams[2];
 
-        tv_Box.setText(name);
+        tv_Name.setText(name);
 
         ViewGroup.LayoutParams params = holder.itemView.getLayoutParams();
         params.width = box.getWidth();
         params.height = box.getHeight();
         holder.itemView.setLayoutParams(params);
 
-        String box_IsUsed = box.getIsUsed();
-
-        if (box_IsUsed.equals("0")) {
-            tv_Box.setBackgroundColor(context.getResources().getColor(R.color.locker_box_open_status_1));
+        if (box.isOpen()) {
+            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.locker_box_open_status_2));
         } else {
-            tv_Box.setBackgroundColor(context.getResources().getColor(R.color.locker_box_open_status_2));
+            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.locker_box_open_status_1));
         }
 
+        if (box.isUsed()) {
+            tv_UseStatus.setBackgroundResource(R.drawable.locker_box_use_status_doc_2);
+        } else {
+            tv_UseStatus.setBackgroundResource(R.drawable.locker_box_use_status_doc_1);
+        }
 
         if (mOnItemClickListener != null) {
-            tv_Box.setTag(box);
-            tv_Box.setOnClickListener(new View.OnClickListener() {
+            holder.itemView.setTag(box);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mOnItemClickListener.onItemClick(v, holder.getLayoutPosition());
@@ -87,7 +88,7 @@ public class SmCabinetLayoutBoxAdapter extends RecyclerView.Adapter<RecyclerView
         }
 
         if (mOnItemLongClickListener != null) {
-            tv_Box.setOnLongClickListener(new View.OnLongClickListener() {
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     mOnItemLongClickListener.onItemLongClick(v, holder.getLayoutPosition());

@@ -406,8 +406,8 @@ public class DbManager {
                         cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_SLOT_ID, slotId);
                         cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_IS_USED, 0);
                         cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_TYPE, type);
-                        cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_HEIGHT,100);
-                        cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_WIDTH,200);
+                        cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_HEIGHT,140);
+                        cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_WIDTH,280);
                         db.insert(LockerBoxDao.TABLE_NAME, null, cv_LockerBox);
 
                     }
@@ -579,13 +579,17 @@ public class DbManager {
 
             String l_CabinetId = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_CABINET_ID));
             String l_SlotId = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_SLOT_ID));
-            String l_IsUsed = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_IS_USED));
-
+            int l_IsUsed = cursor.getInt(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_IS_USED));
+            int l_Type = cursor.getInt(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_TYPE));
+            int l_Width = cursor.getInt(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_WIDTH));
+            int l_Height = cursor.getInt(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_HEIGHT));
 
             lockerBox.setCabinetId(l_CabinetId);
             lockerBox.setSlotId(l_SlotId);
-            lockerBox.setIsUsed(l_IsUsed);
-
+            lockerBox.setUsed(l_IsUsed != 0);
+            lockerBox.setType(l_Type);
+            lockerBox.setWidth(l_Width);
+            lockerBox.setHeight(l_Height);
         }
 
 
@@ -658,7 +662,7 @@ public class DbManager {
 
 
                 String slotId = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_SLOT_ID));
-                String isUsed = cursor.getString(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_IS_USED));
+                int isUsed = cursor.getInt(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_IS_USED));
                 int type = cursor.getInt(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_TYPE));
                 int width = cursor.getInt(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_WIDTH));
                 int height = cursor.getInt(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_HEIGHT));
@@ -667,7 +671,7 @@ public class DbManager {
 
                 lockerBox.setCabinetId(cabinetId);
                 lockerBox.setSlotId(slotId);
-                lockerBox.setIsUsed(isUsed);
+                lockerBox.setUsed(isUsed!=0);
                 lockerBox.setType(type);
                 lockerBox.setHeight(height);
                 lockerBox.setWidth(width);

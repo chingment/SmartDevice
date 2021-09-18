@@ -220,77 +220,6 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         });
     }
 
-//    public void drawsLayout(String json_layout,HashMap<String, LockerBoxBean> boxs) {
-//
-//        List<List<String>> layout = JSON.parseObject(json_layout, new TypeReference< List<List<String>>>() {});
-//
-//        tl_Boxs.removeAllViews();
-//        tl_Boxs.setStretchAllColumns(true);
-//
-//        int rowsSize=layout.size();
-//
-//        for (int i = 0; i <rowsSize; i++) {
-//
-//            TableRow tableRow = new TableRow(SmLockerBoxActivity.this);
-//
-//            List<String> cols=layout.get(i);
-//            int colsSize=cols.size();
-//
-//            for (int j = 0; j < colsSize; j++) {
-//                //tv用于显示
-//
-//                String col=cols.get(j);
-//                String slot_Id=col;
-//                LockerBoxBean box=boxs.get(slot_Id);
-//                String[] col_Prams=col.split("-");
-//
-//                String id=col_Prams[0];
-//                String plate=col_Prams[1];
-//                String name=col_Prams[2];
-//                String isUse=col_Prams[3];
-//
-//                final View convertView = LayoutInflater.from(SmLockerBoxActivity.this).inflate(R.layout.item_list_lockerbox, tableRow, false);
-//
-//                TextView tv_Name = ViewHolder.get(convertView, R.id.tv_Name);
-//
-//                tv_Name.setText(name);
-//
-//                convertView.setTag(box);
-//
-//                if(isUse.equals("1")){
-//                    convertView.setVisibility(View.INVISIBLE);
-//                }
-//                else {
-//                    convertView.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            LockerBoxBean l_Box = (LockerBoxBean)v.getTag();
-//                            dialog_LockerBox.setConfig(device, cur_Cabinet, l_Box);
-//                            lockerGetBox();
-//                            dialog_LockerBox.show();
-//                        }
-//                    });
-//                }
-//
-//                if(box!=null){
-//                    String box_IsUsed=box.getIsUsed();
-//                    if(box_IsUsed.equals("0")){
-//                        tv_Name.setBackgroundResource(R.drawable.locker_box_status_1);
-//                    }
-//                    else {
-//                        tv_Name.setBackgroundResource(R.drawable.locker_box_status_2);
-//                    }
-//                }
-//
-//
-//                tableRow.addView(convertView, new TableRow.LayoutParams(MP, WC, 1));
-//            }
-//
-//            tl_Boxs.addView(tableRow, new TableLayout.LayoutParams(MP, WC, 1));
-//
-//        }
-//    }
-
     public void lockerGetBox() {
 
         String deviceId = dialog_LockerBox.getDeviceId();
@@ -335,7 +264,10 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                             lockerBox.setDeviceId(ret.getDeviceId());
                             lockerBox.setCabinetId(ret.getCabinetId());
                             lockerBox.setSlotId(ret.getSlotId());
-                            lockerBox.setIsUsed(ret.getIsUsed());
+                            lockerBox.setUsed(ret.isUsed());
+                            lockerBox.setType(ret.getType());
+                            lockerBox.setHeight(ret.getHeight());
+                            lockerBox.setWidth(ret.getWidth());
                             lockerBox.setUsages(ret.getUsages());
                             dialog_LockerBox.setLockerBox(lockerBox);
                         }

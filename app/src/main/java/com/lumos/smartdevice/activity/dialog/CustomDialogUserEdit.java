@@ -44,7 +44,7 @@ public class CustomDialogUserEdit extends Dialog {
     private TextView tv_RenLian;
     private TextView tv_ZhiWen;
     private TextView tv_IcCard;
-    private TextView tv_BoxName;
+
     private TextView btn_OpenEditPassword;
     private TextView btn_CloseEditPassword;
 
@@ -163,7 +163,7 @@ public class CustomDialogUserEdit extends Dialog {
         tv_RenLian = ViewHolder.get(mLayoutRes, R.id.tv_RenLian);
         tv_ZhiWen = ViewHolder.get(mLayoutRes, R.id.tv_ZhiWen);
         tv_IcCard = ViewHolder.get(mLayoutRes, R.id.tv_IcCard);
-        tv_BoxName= ViewHolder.get(mLayoutRes, R.id.tv_BoxName);
+
 
         iv_Avatar = ViewHolder.get(mLayoutRes, R.id.iv_Avatar);
         et_Username = ViewHolder.get(mLayoutRes, R.id.et_Username);
