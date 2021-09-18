@@ -31,6 +31,6 @@
     <color name="custom_dialog_confirm_btn_cancle">#000000</color>
     <color name="locker_cabinet_bg">#e2ecf6</color>
     <color name="locker_cabinet_bd">#bbd2e3</color>
-    <color name="locker_box_status_1">#D2460A</color>
-    <color name="locker_box_status_2">#34c07a</color>
+    <color name="locker_box_open_status_1">#D2460A</color>
+    <color name="locker_box_open_status_2">#34c07a</color>
 </resources>

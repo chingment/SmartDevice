@@ -3,25 +3,17 @@ package com.lumos.smartdevice.ui.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.adapter.SmLockerBoxUsageAdapter;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
-import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.ui.my.MyListView;
 import java.util.List;
@@ -133,10 +125,10 @@ public class CustomDialogLockerBox extends Dialog {
         List<LockerBoxUsageBean> usages=lockerBox.getUsages();
 
         if(isUsed.equals("0")){
-            tv_BoxName.setBackgroundResource(R.drawable.locker_box_status_1);
+            tv_BoxName.setBackgroundResource(R.drawable.locker_box_open_status_1);
         }
         else {
-            tv_BoxName.setBackgroundResource(R.drawable.locker_box_status_2);
+            tv_BoxName.setBackgroundResource(R.drawable.locker_box_open_status_2);
         }
 
         if(usages.size()<=0){

@@ -48,7 +48,7 @@
                     android:gravity="center"
                     android:text="0"
                     android:textColor="@color/field_name"
-                    android:background="@drawable/locker_box_status_1"
+                    android:background="@drawable/locker_box_open_status_1"
                     android:textSize="@dimen/sp_14" />
             </LinearLayout>
 

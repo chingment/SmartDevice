@@ -203,37 +203,21 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     }
 
     public void drawsLayout(String json_layout,HashMap<String, LockerBoxBean> boxs) {
-
         CabinetLayoutBean layout = JSON.parseObject(json_layout, new TypeReference<CabinetLayoutBean>() {});
-
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(layout.getSpanCount(),StaggeredGridLayoutManager.VERTICAL);
         tl_Boxs.setLayoutManager(staggeredGridLayoutManager);
         SmCabinetLayoutBoxAdapter tl_Boxs_Adapter = new SmCabinetLayoutBoxAdapter(this, layout.getCells(),boxs);
         tl_Boxs.setItemAnimator(new DefaultItemAnimator());
         tl_Boxs.setAdapter(tl_Boxs_Adapter);
-                //添加点击事件
         tl_Boxs_Adapter.setOnItemClickListener(new SmCabinetLayoutBoxAdapter.OnRecyclerItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
                 LockerBoxBean l_Box = (LockerBoxBean)view.getTag();
                 dialog_LockerBox.setConfig(device, cur_Cabinet, l_Box);
                 lockerGetBox();
                 dialog_LockerBox.show();
-
             }
         });
-        //设置长按事件
-        tl_Boxs_Adapter.setOnItemLongClickListener(new SmCabinetLayoutBoxAdapter.onRecyclerItemLongClickListener() {
-            @Override
-            public void onItemLongClick(View view, int position) {
-                //Toast.makeText(MainActivity.this,"长按了:"+mDatas.get(position),Toast.LENGTH_SHORT).show();
-               // adapter.removeItem(position);
-                //Log.i("tag", "onItemLongClick: "+position);
-                //Log.i("tag", "集合: "+mDatas.toString());
-            }
-        });
-
     }
 
 //    public void drawsLayout(String json_layout,HashMap<String, LockerBoxBean> boxs) {

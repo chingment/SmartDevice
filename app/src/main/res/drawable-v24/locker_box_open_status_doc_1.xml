@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
 	android:shape="oval" >
 
-	<solid android:color="@color/locker_box_status_1" />
+	<solid android:color="@color/locker_box_open_status_1" />
 
 	<corners android:radius="5dip" />
 
