@@ -227,10 +227,6 @@
 
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:layout_marginTop="@dimen/size_3"
-                            android:layout_marginBottom="@dimen/size_3"
-                            android:layout_marginStart="@dimen/size_3"
-                            android:layout_marginEnd="@dimen/size_3"
                             android:id="@+id/tl_Boxs"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>

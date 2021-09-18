@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="right"
+            android:gravity="end"
             >
             <ImageView
                 android:id="@+id/dialog_Btn_Close"
@@ -35,7 +35,13 @@
             android:orientation="vertical">
 
 
-
+            <LinearLayout
+                android:background="@drawable/cabinet_layout_bg"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
             <LinearLayout
                 android:id="@+id/ll_OpenStatus"
                 android:layout_gravity="center"
@@ -81,6 +87,8 @@
 
                 </LinearLayout>
             </LinearLayout>
+
+        </LinearLayout>
 
             <LinearLayout
                 android:background="@color/white"
