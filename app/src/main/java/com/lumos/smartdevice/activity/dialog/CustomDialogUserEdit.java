@@ -196,6 +196,8 @@ public class CustomDialogUserEdit extends Dialog {
 
     }
 
+    private int editType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -206,12 +208,17 @@ public class CustomDialogUserEdit extends Dialog {
         this.checkUserNameIsPhoneFormat = flag;
     }
 
+    public int getEditType() {
+        return editType;
+    }
+
     public void show(String userId) {
 
         super.show();
 
         this.userId = userId;
         if (StringUtil.isEmptyNotNull(userId)) {
+            editType=1;
             et_Username.setVisibility(View.VISIBLE);
             et_Username.requestFocus();
             tv_Username.setVisibility(View.GONE);
@@ -225,6 +232,7 @@ public class CustomDialogUserEdit extends Dialog {
             avatar = "app://default_avatar";
             CommonUtil.loadImageFromUrl(mContext, iv_Avatar, avatar);
         } else {
+            editType=2;
             RopUserGetDetail rop = new RopUserGetDetail();
             rop.setUserId(userId);
             ReqInterface.getInstance().userGetDetail(rop, new ReqHandler() {

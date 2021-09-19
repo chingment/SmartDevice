@@ -111,6 +111,10 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                     showToast(R.string.save_success);
                     lv_Users_PageIndex = 0;
                     getUsers();
+
+                    if(dialog_UserEdit.getEditType()==1) {
+                        dialog_UserEdit.hide();
+                    }
                 }
             }
         });
@@ -277,8 +281,6 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         if (dialog_UserEdit != null) {
             dialog_UserEdit.cancel();
         }
-
-
     }
 
     @Override
