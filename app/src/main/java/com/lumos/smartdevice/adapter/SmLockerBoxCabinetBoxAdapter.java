@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * 实现瀑布流效果的适配器
  */
-public class SmCabinetLayoutBoxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SmLockerBoxCabinetBoxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private final Context context;
     private final List<LockerBoxBean> list;//数据
@@ -25,14 +25,14 @@ public class SmCabinetLayoutBoxAdapter extends RecyclerView.Adapter<RecyclerView
     private onRecyclerItemLongClickListener mOnItemLongClickListener;//长按事件
 
 
-    public SmCabinetLayoutBoxAdapter(Context context, List<LockerBoxBean> list) {
+    public SmLockerBoxCabinetBoxAdapter(Context context, List<LockerBoxBean> list) {
         this.context = context;
         this.list = list;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.item_smcabinet_layout_box,parent,false);
+        View view= LayoutInflater.from(context).inflate(R.layout.item_smlockerbox_cabinetbox,parent,false);
         return new MyViewHolder(view);
     }
 

@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.adapter.SmCabinetLayoutBoxAdapter;
-import com.lumos.smartdevice.adapter.SmCabinetNameAdapter;
+import com.lumos.smartdevice.adapter.SmLockerBoxCabinetBoxAdapter;
+import com.lumos.smartdevice.adapter.SmLockerBoxCabinetNameAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
@@ -187,7 +187,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         if (cur_Cabinet == null)
             return;
 
-        SmCabinetNameAdapter list_cabinet_adapter = new SmCabinetNameAdapter(getAppContext(), cabinets, cur_Cabinet_Position);
+        SmLockerBoxCabinetNameAdapter list_cabinet_adapter = new SmLockerBoxCabinetNameAdapter(getAppContext(), cabinets, cur_Cabinet_Position);
         lv_Cabinets.setAdapter(list_cabinet_adapter);
         tv_CabinetName.setText(cur_Cabinet.getName());
 
@@ -201,12 +201,12 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         tl_Boxs.setLayoutManager(staggeredGridLayoutManager);
 
 
-        SmCabinetLayoutBoxAdapter tl_Boxs_Adapter = new SmCabinetLayoutBoxAdapter(this, boxs);
+        SmLockerBoxCabinetBoxAdapter tl_Boxs_Adapter = new SmLockerBoxCabinetBoxAdapter(this, boxs);
 
 
         tl_Boxs.setItemAnimator(new DefaultItemAnimator());
         tl_Boxs.setAdapter(tl_Boxs_Adapter);
-        tl_Boxs_Adapter.setOnItemClickListener(new SmCabinetLayoutBoxAdapter.OnRecyclerItemClickListener() {
+        tl_Boxs_Adapter.setOnItemClickListener(new SmLockerBoxCabinetBoxAdapter.OnRecyclerItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 LockerBoxBean l_Box = (LockerBoxBean)view.getTag();

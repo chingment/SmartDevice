@@ -13,17 +13,16 @@ import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.ui.ViewHolder;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class SmCabinetNameAdapter extends BaseAdapter {
+public class SmLockerBoxCabinetNameAdapter extends BaseAdapter {
 
     private static final String TAG = "SmCabinetNameAdapter";
     private final Context context;
     private final List<CabinetBean> items;
     private final int current_position;
 
-    public SmCabinetNameAdapter(Context context, List<CabinetBean> items, int position) {
+    public SmLockerBoxCabinetNameAdapter(Context context, List<CabinetBean> items, int position) {
         this.context = context;
         this.items = items;
         this.current_position = position;
@@ -48,7 +47,7 @@ public class SmCabinetNameAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_smlockerbox_cabinet, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_smlockerbox_cabinetname, parent, false);
         }
         CabinetBean item = items.get(position);
 
