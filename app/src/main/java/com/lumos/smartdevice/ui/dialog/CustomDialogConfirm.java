@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -17,20 +16,6 @@ import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.utils.CommonUtil;
 
 
-/**
- * <p>
- * Title: CustomDialog
- * </p>
- * <p>
- * Description:自定义Dialog（参数传入Dialog样式文件，Dialog布局文件）
- * </p>
- * <p>
- * Copyright: Copyright (c) 2013
- * </p>
- *
- * @author archie
- * @version 1.0
- */
 public class CustomDialogConfirm extends Dialog {
     private static final String TAG = "CustomDialogConfirm";
     private CustomDialogConfirm mThis;

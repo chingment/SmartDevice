@@ -28,25 +28,25 @@ import com.lumos.smartdevice.utils.StringUtil;
 public class CustomDialogUserEdit extends Dialog {
 
     private static final String TAG = "CustomDialogUserEdit";
-    private Dialog mThis;
-    private BaseFragmentActivity mContext;
-    private View mLayoutRes;
+    private final Dialog mThis;
+    private final BaseFragmentActivity mContext;
+    private final View mLayoutRes;
 
-    private View btn_Close;
-    private View btn_Save;
+    private final View btn_Close;
+    private final View btn_Save;
 
-    private ImageView iv_Avatar;
-    private EditText et_Username;
-    private TextView tv_Username;
-    private EditText et_Password;
-    private EditText et_Fullname;
+    private final ImageView iv_Avatar;
+    private final EditText et_Username;
+    private final TextView tv_Username;
+    private final EditText et_Password;
+    private final EditText et_Fullname;
 
-    private TextView tv_RenLian;
-    private TextView tv_ZhiWen;
-    private TextView tv_IcCard;
+    private final TextView tv_RenLian;
+    private final TextView tv_ZhiWen;
+    private final TextView tv_IcCard;
 
-    private TextView btn_OpenEditPassword;
-    private TextView btn_CloseEditPassword;
+    private final TextView btn_OpenEditPassword;
+    private final TextView btn_CloseEditPassword;
 
     private String userId="";
     private String avatar="";
