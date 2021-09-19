@@ -21,8 +21,8 @@ import java.util.List;
 
 public class GridNineItemAdapter extends BaseAdapter {
     private static final String TAG = "GridNineItemAdapter";
-    private List<GridNineItemBean> items;
-    private Context context;
+    private final List<GridNineItemBean> items;
+    private final Context context;
 
     public GridNineItemAdapter(Context context, List<GridNineItemBean> items) {
         this.items = items;

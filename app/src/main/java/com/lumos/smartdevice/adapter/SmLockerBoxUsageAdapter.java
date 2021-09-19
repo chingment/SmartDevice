@@ -21,8 +21,8 @@ import java.util.List;
 public class SmLockerBoxUsageAdapter extends BaseAdapter {
 
     private static final String TAG = "SmLockerBoxUsageAdapter";
-    private Context context;
-    private List<LockerBoxUsageBean> items;
+    private final Context context;
+    private final List<LockerBoxUsageBean> items;
 
 
     public SmLockerBoxUsageAdapter(Context context, List<LockerBoxUsageBean> items) {

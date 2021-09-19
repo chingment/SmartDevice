@@ -12,7 +12,6 @@ import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.ui.refreshview.MyViewHolder;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -20,8 +19,8 @@ import java.util.List;
  */
 public class SmCabinetLayoutBoxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private Context context;
-    private List<LockerBoxBean> list;//数据
+    private final Context context;
+    private final List<LockerBoxBean> list;//数据
     private OnRecyclerItemClickListener mOnItemClickListener;//单击事件
     private onRecyclerItemLongClickListener mOnItemLongClickListener;//长按事件
 

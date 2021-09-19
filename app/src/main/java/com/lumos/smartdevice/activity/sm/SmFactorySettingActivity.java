@@ -66,7 +66,8 @@ public class SmFactorySettingActivity extends BaseFragmentActivity implements Vi
             tv_Nav_AppScene_Tips.setText(R.string.aty_smfactorysetting_tips_nosetscene);
         }
         else {
-            tv_Nav_AppScene_Tips.setText(ConfigDao.getSceneModeName(app_scene_mode)+"["+ConfigDao.getVersionModeName(app_version_mode)+"]");
+            String appScene_Tips = ConfigDao.getSceneModeName(app_scene_mode) + "[" + ConfigDao.getVersionModeName(app_version_mode) + "]";
+            tv_Nav_AppScene_Tips.setText(appScene_Tips);
         }
     }
 

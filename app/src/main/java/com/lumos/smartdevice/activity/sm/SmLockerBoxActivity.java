@@ -124,7 +124,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
                 Intent intent = new Intent(SmLockerBoxActivity.this, SmUserManagerActivity.class);
                 intent.putExtra("scene_mode", 2);
-                HashMap<String, String> scene_param=new HashMap<String, String>();
+                HashMap<String, String> scene_param=new HashMap<>();
                 scene_param.put("device_id",deviceId);
                 scene_param.put("cabinet_id",cabinetId);
                 scene_param.put("slot_id",slotId);

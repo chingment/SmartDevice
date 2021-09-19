@@ -19,9 +19,9 @@ import java.util.List;
 public class SmCabinetNameAdapter extends BaseAdapter {
 
     private static final String TAG = "SmCabinetNameAdapter";
-    private Context context;
-    private List<CabinetBean> items = new ArrayList<>();
-    private int current_position;
+    private final Context context;
+    private final List<CabinetBean> items;
+    private final int current_position;
 
     public SmCabinetNameAdapter(Context context, List<CabinetBean> items, int position) {
         this.context = context;

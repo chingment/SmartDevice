@@ -7,18 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.sm.SmHomeActivity;
-import com.lumos.smartdevice.db.UserDao;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.refreshview.MyViewHolder;
 import com.lumos.smartdevice.ui.refreshview.RefreshAdapter;
 import com.lumos.smartdevice.utils.CommonUtil;
-import com.lumos.smartdevice.utils.LogUtil;
-import com.lumos.smartdevice.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +26,8 @@ public class SmUserAdapter extends RefreshAdapter {
     private static final String TAG = "SmUserAdapter";
     private Context context;
     private List<UserBean> beans = new ArrayList<>();
-    private LayoutInflater inflater;
 
-    private int scene_mode=1;
+    private final int scene_mode;
 
     public SmUserAdapter(int scene_mode) {
         this.scene_mode = scene_mode;

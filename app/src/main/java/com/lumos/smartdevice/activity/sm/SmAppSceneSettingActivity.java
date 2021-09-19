@@ -6,17 +6,12 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
-import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
-
-import java.util.List;
 
 public class SmAppSceneSettingActivity extends BaseFragmentActivity {
     private static final String TAG = "SmAppSceneSettingActivity";
@@ -84,7 +79,8 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
             }
         }
 
-        et_Com_Prl.setText("[{\"cabinet_id\":\"locker_1\",\"name\":\"A柜\",\"com_id\":\"sys1\",\"com_baud\":19200,\"com_prl\":\"lbl_ss\",\"layout\":{\"span_count\":2,\"cells\":[\"1-1-1-0\",\"2-1-2-0\",\"3-1-3-0\",\"4-1-4-0\",\"5-1-5-0\",\"6-1-6-0\",\"7-1-7-0\",\"8-1-8-0\",\"9-1-9-0\",\"10-1-10-0\",\"11-1-11-0\",\"12-1-12-0\"]}}]");
+        String com_Prl = "[{\"cabinet_id\":\"locker_1\",\"name\":\"A柜\",\"com_id\":\"sys1\",\"com_baud\":19200,\"com_prl\":\"lbl_ss\",\"layout\":{\"span_count\":2,\"cells\":[\"1-1-1-0\",\"2-1-2-0\",\"3-1-3-0\",\"4-1-4-0\",\"5-1-5-0\",\"6-1-6-0\",\"7-1-7-0\",\"8-1-8-0\",\"9-1-9-0\",\"10-1-10-0\",\"11-1-11-0\",\"12-1-12-0\"]}}]";
+        et_Com_Prl.setText(com_Prl);
         //et_Com_Prl.setText("[{\"cabinet_id\":\"locker_1\",\"name\":\"箱子01\",\"com_id\":\"sys1\",\"com_baud\":19200,\"com_prl\":\"lbl_ss\",\"layout\":[[\"1-1-1-0\",\"2-1-2-0\"],[\"3-1-3-0\",\"4-1-4-0\"],[\"5-1-5-0\",\"6-1-6-0\"],[\"7-1-7-0\",\"8-1-8-0\"],[\"9-1-9-0\",\"10-1-10-0\"],[\"11-1-11-0\",\"12-1-12-0\"]]}]");
     }
 

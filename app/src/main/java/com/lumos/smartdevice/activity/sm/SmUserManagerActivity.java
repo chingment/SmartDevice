@@ -25,22 +25,17 @@ import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
-import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
-import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
-import com.lumos.smartdevice.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class SmUserManagerActivity extends BaseFragmentActivity {
     private static final String TAG = "SmUserManagerActivity";
@@ -49,7 +44,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
     private SuperRefreshLayout lv_UsersRefresh;
     private RecyclerView lv_UsersData;
     private int lv_Users_PageIndex=0;
-    private int lv_Users_PageSize=10;
+    private final int lv_Users_PageSize=10;
     private LinearLayout ll_UsersEmpty;
     private SmUserAdapter lv_UsersAdapter;
     private EditText et_Search;
