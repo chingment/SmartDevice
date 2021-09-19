@@ -135,26 +135,20 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
             @Override
             public void onDeleteUsage(LockerBoxUsageBean usage) {
-
-
                 dialog_Confirm.setTipsImageVisibility(View.GONE);
                 dialog_Confirm.setFunction("deleteusage");
                 dialog_Confirm.setTag(usage);
                 dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_delete));
                 dialog_Confirm.show();
-
-
             }
 
 
             @Override
             public void onOpenBox(String deviceId, String cabinetId,String slotId){
-
                 dialog_Confirm.setTipsImageVisibility(View.GONE);
                 dialog_Confirm.setTipsText("确定打开箱子？");
                 dialog_Confirm.setFunction("openonebox");
                 dialog_Confirm.show();
-
             }
         });
 
