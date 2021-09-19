@@ -16,7 +16,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.dialog.CustomDialogUserEdit;
-import com.lumos.smartdevice.adapter.SmUserAdapter;
+import com.lumos.smartdevice.adapter.SmUserManagerUserAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
@@ -46,7 +46,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
     private int lv_Users_PageIndex=0;
     private final int lv_Users_PageSize=10;
     private LinearLayout ll_UsersEmpty;
-    private SmUserAdapter lv_UsersAdapter;
+    private SmUserManagerUserAdapter lv_UsersAdapter;
     private EditText et_Search;
     private int scene_mode=1;//页面场景
 
@@ -123,9 +123,9 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
 
         lv_UsersData.setItemAnimator(new DefaultItemAnimator());
 
-        lv_UsersAdapter = new SmUserAdapter(scene_mode);
+        lv_UsersAdapter = new SmUserManagerUserAdapter(scene_mode);
 
-        lv_UsersAdapter.setOnClickListener(new SmUserAdapter.OnClickListener() {
+        lv_UsersAdapter.setOnClickListener(new SmUserManagerUserAdapter.OnClickListener() {
             @Override
             public void onItemClick(UserBean bean) {
                 dialog_UserEdit.show(bean.getUserId());

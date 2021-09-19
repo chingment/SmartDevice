@@ -22,14 +22,14 @@ import java.util.List;
  * Created by chingment on 2018/6/13.
  */
 
-public class SmUserAdapter extends RefreshAdapter {
+public class SmUserManagerUserAdapter extends RefreshAdapter {
     private static final String TAG = "SmUserAdapter";
     private Context context;
     private List<UserBean> beans = new ArrayList<>();
 
     private final int scene_mode;
 
-    public SmUserAdapter(int scene_mode) {
+    public SmUserManagerUserAdapter(int scene_mode) {
         this.scene_mode = scene_mode;
     }
 
