@@ -289,13 +289,13 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
     @Override
     public void onClick(View v) {
         if (!NoDoubleClickUtil.isDoubleClick()) {
-            switch (v.getId()) {
-                case R.id.btn_Nav_Header_Goback:
-                    finish();
-                    break;
-                case  R.id.btn_NewUser:
-                    dialog_UserEdit.show(null);
-                    break;
+
+            int id = v.getId();
+
+            if (id == R.id.btn_Nav_Header_Goback) {
+                finish();
+            } else if (id == R.id.btn_NewUser) {
+                dialog_UserEdit.show(null);
             }
         }
     }

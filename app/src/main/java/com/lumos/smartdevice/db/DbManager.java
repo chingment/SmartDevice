@@ -84,7 +84,7 @@ public class DbManager {
         }
     }
 
-    public ResultBean addUser(String username, String password, String fullname, String type, String avatar) {
+    public ResultBean<Object> addUser(String username, String password, String fullname, String type, String avatar) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         if (!db.isOpen()) {
             return ResultUtil.isFailure("数据库文件未打开");
@@ -116,7 +116,7 @@ public class DbManager {
 
     }
 
-    public ResultBean updateUser(String userid, String password, String fullname, String avatar) {
+    public ResultBean<Object> updateUser(String userid, String password, String fullname, String avatar) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         if (!db.isOpen()) {
@@ -333,7 +333,7 @@ public class DbManager {
         return cabinets;
     }
 
-    public ResultBean saveAppScene(String appVesionMode, String appSceneMode, String comPrl) {
+    public ResultBean<Object> saveAppScene(String appVesionMode, String appSceneMode, String comPrl) {
 
 
         DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE, appSceneMode);
@@ -473,7 +473,7 @@ public class DbManager {
         }
     }
 
-    public ResultBean saveLockerBoxUsage(String cabinetId, String slotId, String usageType, String usageData) {
+    public ResultBean<Object> saveLockerBoxUsage(String cabinetId, String slotId, String usageType, String usageData) {
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
@@ -520,7 +520,7 @@ public class DbManager {
         }
     }
 
-    public ResultBean deleteLockBoxUsage(String cabinetId, String slotId, String usageType, String usageData) {
+    public ResultBean<Object> deleteLockBoxUsage(String cabinetId, String slotId, String usageType, String usageData) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         db.beginTransaction();

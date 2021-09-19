@@ -297,13 +297,13 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         if (!NoDoubleClickUtil.isDoubleClick()) {
-            switch (v.getId()) {
-                case R.id.iv_UserAvatar:
-                    getOwnInfo();
-                    break;
-                case R.id.btn_Logout:
-                    gdvExitManager();
-                    break;
+            int id=v.getId();
+
+            if(id==R.id.iv_UserAvatar){
+                getOwnInfo();
+            }
+            else if(id==R.id.btn_Logout){
+                gdvExitManager();
             }
         }
     }

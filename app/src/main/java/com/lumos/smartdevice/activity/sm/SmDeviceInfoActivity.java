@@ -61,11 +61,13 @@ public class SmDeviceInfoActivity extends BaseFragmentActivity {
     public void onClick(View v) {
 
         if (!NoDoubleClickUtil.isDoubleClick()) {
-            switch (v.getId()) {
-                case R.id.btn_Nav_Header_Goback:
-                    finish();
-                    break;
+
+            int id = v.getId();
+
+            if (id == R.id.btn_Nav_Header_Goback) {
+                finish();
             }
+
         }
     }
 }

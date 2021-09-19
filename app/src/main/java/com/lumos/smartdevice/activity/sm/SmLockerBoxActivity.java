@@ -83,7 +83,6 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         initView();
         initEvent();
         initData();
-
     }
 
     private void initView() {
@@ -169,16 +168,16 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
                 cur_Cabinet_Position = position;
-                loadCabinetData();
+                loadData();
             }
         });
     }
 
     private void initData() {
-        loadCabinetData();
+        loadData();
     }
 
-    private void loadCabinetData(){
+    private void loadData(){
 
         if (cabinets == null)
             return;
@@ -274,6 +273,8 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                             lockerBox.setWidth(ret.getWidth());
                             lockerBox.setUsages(ret.getUsages());
                             dialog_LockerBox.setLockerBox(lockerBox);
+
+
                         }
                     }
 
@@ -320,6 +321,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                             cur_Cabinet.setLayout(ret.getLayout());
 
                             drawsLayout(ret.getLayout(), ret.getBoxs());
+
                         }
                     }
 
@@ -385,20 +387,19 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
     @Override
     public void onClick(View v) {
         if (!NoDoubleClickUtil.isDoubleClick()) {
-            switch (v.getId()) {
-                case R.id.btn_Nav_Header_Goback:
-                    finish();
-                    break;
-                case R.id.tv_CabinetName:
-                    dialog_CabinetConfig.setCofing(cur_Cabinet);
-                    dialog_CabinetConfig.show();
-                    break;
-                case R.id.btn_OpenAllBox:
-                    dialog_Confirm.setTipsImageVisibility(View.GONE);
-                    dialog_Confirm.setTipsText("确定打开全部箱子？");
-                    dialog_Confirm.setFunction("openallbox");
-                    dialog_Confirm.show();
-                    break ;
+
+            int id = v.getId();
+
+            if (id == R.id.btn_Nav_Header_Goback) {
+                finish();
+            } else if (id == R.id.tv_CabinetName) {
+                dialog_CabinetConfig.setCofing(cur_Cabinet);
+                dialog_CabinetConfig.show();
+            } else if (id == R.id.btn_OpenAllBox) {
+                dialog_Confirm.setTipsImageVisibility(View.GONE);
+                dialog_Confirm.setTipsText("确定打开全部箱子？");
+                dialog_Confirm.setFunction("openallbox");
+                dialog_Confirm.show();
             }
         }
     }

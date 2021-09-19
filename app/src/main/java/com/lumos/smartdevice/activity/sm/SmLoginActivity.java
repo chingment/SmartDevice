@@ -154,19 +154,17 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         if (!NoDoubleClickUtil.isDoubleClick()) {
-            switch (v.getId()) {
-                case R.id.btn_Nav_Header_Goback:
-                    finish();
-                    break;
-                case R.id.btn_LoginByAccount:
-                    loginByAccount();
-                    break;
-                case R.id.btn_Password_Del:
-                    et_Password.setText("");
-                    break;
-                case R.id.btn_UserName_Del:
-                    et_UserName.setText("");
-                    break;
+
+            int id = v.getId();
+
+            if (id == R.id.btn_Nav_Header_Goback) {
+                finish();
+            } else if (id == R.id.btn_LoginByAccount) {
+                loginByAccount();
+            } else if (id == R.id.btn_Password_Del) {
+                et_Password.setText("");
+            } else if (id == R.id.btn_UserName_Del) {
+                et_UserName.setText("");
             }
         }
     }

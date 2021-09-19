@@ -91,31 +91,29 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
     @Override
     public void onClick(View v) {
         if (!NoDoubleClickUtil.isDoubleClick()) {
-            switch (v.getId()) {
-                case R.id.btn_Nav_Header_Goback:
-                    finish();
-                    break;
-                case R.id.btn_Nav_Header_Right:
-                    RadioButton rb_VesionMode = findViewById(rg_VesionMode.getCheckedRadioButtonId());
-                    String version_mode = "0";
-                    if (rb_VesionMode != null) {
-                        version_mode = rb_VesionMode.getTag().toString();
-                    }
 
-                    String scene_mode = "0";
-                    RadioButton rb_SceneMode = findViewById(rg_SceneMode.getCheckedRadioButtonId());
-                    if (rb_SceneMode != null) {
-                        scene_mode = rb_SceneMode.getTag().toString();
-                    }
+            int id = v.getId();
 
-                    String json_Com_Prl = et_Com_Prl.getText().toString();
+            if (id == R.id.btn_Nav_Header_Goback) {
+                finish();
+            } else if (id == R.id.btn_Nav_Header_Right) {
+                RadioButton rb_VesionMode = findViewById(rg_VesionMode.getCheckedRadioButtonId());
+                String version_mode = "0";
+                if (rb_VesionMode != null) {
+                    version_mode = rb_VesionMode.getTag().toString();
+                }
 
-                    ResultBean result = DbManager.getInstance().saveAppScene(version_mode, scene_mode, json_Com_Prl);
+                String scene_mode = "0";
+                RadioButton rb_SceneMode = findViewById(rg_SceneMode.getCheckedRadioButtonId());
+                if (rb_SceneMode != null) {
+                    scene_mode = rb_SceneMode.getTag().toString();
+                }
 
-                    showToast(result.getMsg());
+                String json_Com_Prl = et_Com_Prl.getText().toString();
 
-                    break;
+                ResultBean<Object> result = DbManager.getInstance().saveAppScene(version_mode, scene_mode, json_Com_Prl);
 
+                showToast(result.getMsg());
             }
         }
     }
