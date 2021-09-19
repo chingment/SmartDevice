@@ -41,7 +41,6 @@
                 android:layout_width="@dimen/size_60"
                 android:layout_height="@dimen/size_60"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:contentDescription="@string/img_content_description_empty"
                 android:src="@drawable/default_image" />
 
@@ -53,7 +52,7 @@
                 android:gravity="center_horizontal|center"
                 android:text="提示信息"
                 android:textColor="@color/dialog_tips"
-                android:textSize="@dimen/size_10" />
+                android:textSize="@dimen/sp_12" />
         </LinearLayout>
 
 
@@ -84,7 +83,7 @@
                     android:text="@string/custom_dialog_confirm_btn_txt_cancle"
                     android:background="@drawable/dialog_btn_cancle"
                     android:textColor="#fff"
-                    android:textSize="@dimen/size_8" />
+                    android:textSize="@dimen/sp_10" />
 
             </LinearLayout>
 
@@ -108,7 +107,7 @@
                     android:text="@string/custom_dialog_confirm_btn_txt_sure"
                     android:background="@drawable/dialog_btn_sure"
                     android:textColor="@color/custom_dialog_confirm_btn_sure"
-                    android:textSize="@dimen/size_8"
+                    android:textSize="@dimen/sp_10"
                     tools:ignore="RtlHardcoded" />
 
             </LinearLayout>
