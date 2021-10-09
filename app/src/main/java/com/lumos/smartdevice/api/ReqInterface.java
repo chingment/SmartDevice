@@ -3,6 +3,7 @@ package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
+import com.lumos.smartdevice.own.AppVar;
 
 public class ReqInterface {
 
@@ -23,6 +24,26 @@ public class ReqInterface {
             }
         }
 
+
+        return iReq;
+    }
+
+    public static IReqVersion getInstance(String version_mode) {
+
+        if (version_mode.equals(AppVar.VERSION_MODE_0))
+            return getInstance();
+
+        IReqVersion iReq = null;
+
+
+        switch (version_mode) {
+            case "1":
+                iReq = new ReqStandAlone();
+                break;
+            case "2":
+                iReq = new ReqNetWord();
+                break;
+        }
 
         return iReq;
     }

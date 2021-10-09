@@ -14,12 +14,14 @@ import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
+import com.lumos.smartdevice.api.ReqStandAlone;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetUserGetDetail;
 import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopUserGetDetail;
 import com.lumos.smartdevice.api.rop.RopUserSave;
+import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.utils.CommonUtil;
@@ -52,6 +54,9 @@ public class CustomDialogUserEdit extends Dialog {
     private String avatar="";
 
     private boolean checkUserNameIsPhoneFormat=false;
+
+
+    private String version_mode=AppVar.VERSION_MODE_0;
 
     public CustomDialogUserEdit(Context context) {
         super(context, R.style.custom_dialog);
@@ -127,7 +132,7 @@ public class CustomDialogUserEdit extends Dialog {
                 rop.setFullName(fullName);
                 rop.setAvatar(avatar);
 
-                ReqInterface.getInstance().userSave(rop, new ReqHandler() {
+                ReqInterface.getInstance(version_mode).userSave(rop, new ReqHandler() {
 
                     @Override
                     public void onBeforeSend() {
@@ -212,13 +217,14 @@ public class CustomDialogUserEdit extends Dialog {
         return editType;
     }
 
-    public void show(String userId) {
+    public void show(String userId,String version_mode) {
 
         super.show();
 
         this.userId = userId;
+        this.version_mode = version_mode;
         if (StringUtil.isEmptyNotNull(userId)) {
-            editType=1;
+            editType = 1;
             et_Username.setVisibility(View.VISIBLE);
             et_Username.requestFocus();
             tv_Username.setVisibility(View.GONE);
@@ -232,10 +238,12 @@ public class CustomDialogUserEdit extends Dialog {
             avatar = "app://default_avatar";
             CommonUtil.loadImageFromUrl(mContext, iv_Avatar, avatar);
         } else {
-            editType=2;
+            editType = 2;
             RopUserGetDetail rop = new RopUserGetDetail();
             rop.setUserId(userId);
-            ReqInterface.getInstance().userGetDetail(rop, new ReqHandler() {
+
+
+            ReqInterface.getInstance(version_mode).userGetDetail(rop, new ReqHandler() {
 
                         @Override
                         public void onBeforeSend() {
@@ -280,8 +288,10 @@ public class CustomDialogUserEdit extends Dialog {
                         }
                     }
             );
+
         }
     }
+
 
     private OnClickListener onClickListener;
 

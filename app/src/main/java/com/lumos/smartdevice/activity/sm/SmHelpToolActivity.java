@@ -19,6 +19,7 @@ import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppManager;
+import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
 import com.lumos.smartdevice.ui.my.MyGridView;
@@ -235,7 +236,7 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
 
         RopOwnLogout rop = new RopOwnLogout();
         rop.setUserId(AppCacheManager.getCurrentUser().getUserId());
-        ReqInterface.getInstance().ownLogout(rop, new ReqHandler() {
+        ReqInterface.getInstance(AppVar.VERSION_MODE_1).ownLogout(rop, new ReqHandler() {
             @Override
             public void onBeforeSend() {
                 super.onBeforeSend();
@@ -277,7 +278,7 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
 
 
     private void getOwnInfo(){
-        dialog_UserEdit.show(AppCacheManager.getCurrentUser().getUserId());
+        dialog_UserEdit.show(AppCacheManager.getCurrentUser().getUserId(), AppVar.VERSION_MODE_1);
     }
 
 

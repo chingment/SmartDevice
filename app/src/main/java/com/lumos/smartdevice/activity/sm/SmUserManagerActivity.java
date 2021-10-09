@@ -26,6 +26,7 @@ import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
@@ -128,7 +129,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         lv_UsersAdapter.setOnClickListener(new SmUserManagerUserAdapter.OnClickListener() {
             @Override
             public void onItemClick(UserBean bean) {
-                dialog_UserEdit.show(bean.getUserId());
+                dialog_UserEdit.show(bean.getUserId(),AppVar.VERSION_MODE_0);
             }
 
             @Override
@@ -292,7 +293,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
             if (id == R.id.btn_Nav_Header_Goback) {
                 finish();
             } else if (id == R.id.btn_NewUser) {
-                dialog_UserEdit.show(null);
+                dialog_UserEdit.show(null, AppVar.VERSION_MODE_0);
             }
         }
     }

@@ -290,7 +290,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
 
 
     private void getOwnInfo(){
-        dialog_UserEdit.show(AppCacheManager.getCurrentUser().getUserId());
+        dialog_UserEdit.show(AppCacheManager.getCurrentUser().getUserId(),AppVar.VERSION_MODE_0);
     }
 
 
