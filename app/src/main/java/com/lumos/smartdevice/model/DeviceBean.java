@@ -7,6 +7,11 @@ public class DeviceBean implements Serializable {
     private String deviceId;
     private String sceneMode;
     private String versionMode;
+    private String merchName;
+    private String storeName;
+    private String shopName;
+    private String address;
+
 
     private HashMap<String, CabinetBean> cabinets;
     public String getDeviceId() {
@@ -39,5 +44,37 @@ public class DeviceBean implements Serializable {
 
     public void setCabinets(HashMap<String, CabinetBean> cabinets) {
         this.cabinets = cabinets;
+    }
+
+    public String getMerchName() {
+        return merchName;
+    }
+
+    public void setMerchName(String merchName) {
+        this.merchName = merchName;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

@@ -51,7 +51,7 @@
                     android:layout_gravity="left"
                     android:gravity="left"
                     android:layout_weight="1"
-                    android:text="@string/aty_smappscenesetting_tv_txt_vesionmode"
+                    android:text="@string/t_vesionmode"
                     android:textColor="@color/text"
                     android:textSize="@dimen/sp_16" />
             </LinearLayout>
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size_5"
                     android:tag="1"
-                    android:text="@string/aty_smappscenesetting_rbtn_txt_vesionmode_1"
+                    android:text="@string/t_vesionmode_1"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
 
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/size_5"
                     android:tag="2"
-                    android:text="@string/aty_smappscenesetting_rbtn_txt_vesionmode_2"
+                    android:text="@string/t_vesionmode_2"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
 
@@ -125,7 +125,7 @@
                         android:layout_gravity="left"
                         android:gravity="left"
                         android:layout_weight="1"
-                        android:text="@string/aty_smappscenesetting_tv_txt_scenemode"
+                        android:text="@string/t_scenemode"
                         android:textColor="@color/text"
                         android:textSize="@dimen/sp_16" />
                 </LinearLayout>
@@ -148,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:paddingLeft="@dimen/size_5"
                         android:tag="1"
-                        android:text="@string/aty_smappscenesetting_rbtn_txt_scenemode_1"
+                        android:text="@string/t_scenemode_1"
                         android:textColor="@color/field_name"
                         android:textSize="@dimen/sp_14" />
 
@@ -158,7 +158,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="@dimen/size_5"
-                        android:text="@string/aty_smappscenesetting_rbtn_txt_scenemode_2"
+                        android:text="@string/t_scenemode_2"
                         android:tag="2"
                         android:textColor="@color/field_name"
                         android:textSize="@dimen/sp_14" />

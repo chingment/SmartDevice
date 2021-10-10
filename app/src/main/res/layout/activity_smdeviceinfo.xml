@@ -185,12 +185,37 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/t_comname"
+                    android:text="@string/t_scenemode"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:id="@+id/tv_ComName"
+                    android:id="@+id/tv_SceneMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:textColor="@color/field_value"
+                    android:textSize="@dimen/sp_16" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/size_10"
+                android:paddingTop="@dimen/size_10"
+                android:background="@drawable/vnav_boder_bottom"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/t_vesionmode"
+                    android:textColor="@color/field_name"
+                    android:textSize="@dimen/sp_16" />
+
+                <TextView
+                    android:id="@+id/tv_VersionMode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
