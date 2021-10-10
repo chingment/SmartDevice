@@ -1,29 +1,16 @@
 package com.lumos.smartdevice.own;
 
-import android.app.AlarmManager;
 import android.app.Application;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 
-import com.lumos.smartdevice.activity.sm.SmExcepitonViewer;
-import com.lumos.smartdevice.db.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.NetworkInterface;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by chingment on 2017/8/23.

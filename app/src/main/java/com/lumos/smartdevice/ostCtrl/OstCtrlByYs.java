@@ -4,10 +4,6 @@ import android.content.Context;
 
 import com.ys.rkapi.MyManager;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-
 public class OstCtrlByYs implements IOstCtrl {
 
     private static final String TAG = "OstCtrlByYs";

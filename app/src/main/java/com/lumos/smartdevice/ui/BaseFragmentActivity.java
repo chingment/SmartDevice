@@ -1,29 +1,14 @@
 package com.lumos.smartdevice.ui;
 
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.ServiceConnection;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
 import android.os.Message;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 
 
@@ -37,12 +22,6 @@ import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.ui.dialog.CustomDialogLoading;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.ToastUtil;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * Created by chingment on 2017/8/23.
