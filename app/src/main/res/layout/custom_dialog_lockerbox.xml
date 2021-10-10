@@ -35,13 +35,7 @@
             android:orientation="vertical">
 
 
-            <LinearLayout
-                android:background="@drawable/cabinet_layout_bg"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+
             <LinearLayout
                 android:id="@+id/ll_OpenStatus"
                 android:layout_gravity="center"
@@ -51,31 +45,6 @@
                 android:layout_width="@dimen/size_120"
                 android:layout_height="@dimen/size_60"
                 android:baselineAligned="false">
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="@dimen/size_20"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/tv_UseStatus"
-                        android:layout_width="@dimen/size_12"
-                        android:layout_height="@dimen/size_12"
-                        android:background="@drawable/locker_box_use_status_doc_1"
-                        android:gravity="center"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_10" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:gravity="center|end"
-                    android:layout_height="match_parent">
-
                     <TextView
                         android:id="@+id/tv_Name"
                         android:textSize="@dimen/sp_16"
@@ -83,12 +52,9 @@
                         android:layout_margin="@dimen/size_3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-
-
-                </LinearLayout>
             </LinearLayout>
 
-        </LinearLayout>
+
 
             <LinearLayout
                 android:background="@color/white"

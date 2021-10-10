@@ -44,7 +44,7 @@ public class SmLockerBoxCabinetBoxAdapter extends RecyclerView.Adapter<RecyclerV
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         TextView tv_Name = holder.itemView.findViewById(R.id.tv_Name);
-        TextView tv_UseStatus = holder.itemView.findViewById(R.id.tv_UseStatus);
+        //TextView tv_UseStatus = holder.itemView.findViewById(R.id.tv_UseStatus);
 
         LockerBoxBean item = list.get(position);
 
@@ -68,9 +68,9 @@ public class SmLockerBoxCabinetBoxAdapter extends RecyclerView.Adapter<RecyclerV
         }
 
         if (item.isUsed()) {
-            tv_UseStatus.setBackgroundResource(R.drawable.locker_box_use_status_doc_2);
+            tv_Name.setTextColor(context.getResources().getColor(R.color.locker_box_use_status_2));
         } else {
-            tv_UseStatus.setBackgroundResource(R.drawable.locker_box_use_status_doc_1);
+            tv_Name.setTextColor(context.getResources().getColor(R.color.locker_box_use_status_1));
         }
 
         if (mOnItemClickListener != null) {

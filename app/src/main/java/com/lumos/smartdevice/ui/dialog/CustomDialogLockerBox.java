@@ -28,7 +28,7 @@ public class CustomDialogLockerBox extends Dialog {
     private View btn_Close;
 
     private TextView tv_Name;
-    private TextView tv_UseStatus;
+
     private LinearLayout ll_OpenStatus;
 
     private TextView btn_DistUser;
@@ -56,7 +56,6 @@ public class CustomDialogLockerBox extends Dialog {
         });
 
         tv_Name = ViewHolder.get(mLayoutRes, R.id.tv_Name);
-        tv_UseStatus = ViewHolder.get(mLayoutRes, R.id.tv_UseStatus);
         ll_OpenStatus = ViewHolder.get(mLayoutRes, R.id.ll_OpenStatus);
 
 
@@ -138,11 +137,10 @@ public class CustomDialogLockerBox extends Dialog {
         }
 
         if (lockerBox.isUsed()) {
-            tv_UseStatus.setBackgroundResource(R.drawable.locker_box_use_status_doc_2);
+            tv_Name.setTextColor(mContext.getResources().getColor(R.color.locker_box_use_status_2));
         } else {
-            tv_UseStatus.setBackgroundResource(R.drawable.locker_box_use_status_doc_1);
+            tv_Name.setTextColor(mContext.getResources().getColor(R.color.locker_box_use_status_1));
         }
-
 
         if(usages.size()<=0){
             ll_UsagesEmpty.setVisibility(View.VISIBLE);
