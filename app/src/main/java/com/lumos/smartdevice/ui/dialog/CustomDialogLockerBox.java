@@ -131,9 +131,9 @@ public class CustomDialogLockerBox extends Dialog {
         List<LockerBoxUsageBean> usages=lockerBox.getUsages();
 
         if (lockerBox.isOpen()) {
-            ll_OpenStatus.setBackgroundColor(mContext.getResources().getColor(R.color.locker_box_open_status_2));
+            ll_OpenStatus.setBackgroundResource(R.drawable.locker_box_door_status_2);
         } else {
-            ll_OpenStatus.setBackgroundColor(mContext.getResources().getColor(R.color.locker_box_open_status_1));
+            ll_OpenStatus.setBackgroundResource(R.drawable.locker_box_door_status_1);
         }
 
         if (lockerBox.isUsed()) {

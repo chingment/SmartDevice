@@ -38,6 +38,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_OpenStatus"
+                android:background="@drawable/locker_box_door_status_1"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:orientation="horizontal"
@@ -47,6 +48,7 @@
                 android:baselineAligned="false">
                     <TextView
                         android:id="@+id/tv_Name"
+                        android:textStyle="bold"
                         android:textSize="@dimen/sp_16"
                         android:gravity="center"
                         android:layout_margin="@dimen/size_3"

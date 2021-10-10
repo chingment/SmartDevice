@@ -4,6 +4,7 @@
     android:layout_margin="@dimen/size_3"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/locker_box_door_status_1"
     android:baselineAligned="false">
     <LinearLayout
         android:orientation="vertical"

@@ -34,7 +34,7 @@
         <entry key="app/src/main/res/layout/item_list_smuser.xml" value="0.13125" />
         <entry key="app/src/main/res/layout/item_smcabinet_layout_box.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_smlockerbox_cabinet.xml" value="0.11979166666666667" />
-        <entry key="app/src/main/res/layout/item_smlockerbox_cabinetbox.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/item_smlockerbox_cabinetbox.xml" value="0.11" />
         <entry key="app/src/main/res/layout/recycler_item_layout.xml" value="0.1265625" />
       </map>
     </option>

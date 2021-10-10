@@ -62,9 +62,9 @@ public class SmLockerBoxCabinetBoxAdapter extends RecyclerView.Adapter<RecyclerV
         holder.itemView.setLayoutParams(params);
 
         if (item.isOpen()) {
-            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.locker_box_open_status_2));
+            holder.itemView.setBackgroundResource(R.drawable.locker_box_door_status_2);
         } else {
-            holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.locker_box_open_status_1));
+            holder.itemView.setBackgroundResource(R.drawable.locker_box_door_status_1);
         }
 
         if (item.isUsed()) {
