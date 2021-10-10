@@ -1,6 +1,7 @@
 package com.lumos.smartdevice.activity.sm;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -42,6 +44,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
     private EditText et_Password;
     private ImageView btn_Password_Del;
     private TextView tv_Scene;
+    private TextView tv_AppVersion;
     private String scene_mode;//登录场景
     private String app_version_mode;//版本模式
 
@@ -70,6 +73,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
         tv_Scene = findViewById(R.id.tv_Scene);
         btn_UserName_Del= findViewById(R.id.btn_UserName_Del);
         btn_Password_Del= findViewById(R.id.btn_Password_Del);
+        tv_AppVersion= findViewById(R.id.tv_AppVersion);
         et_Password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
         et_Password.setTransformationMethod(PasswordTransformationMethod.getInstance());
 
@@ -149,6 +153,8 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                 tv_Scene.setText(R.string.aty_smlogin_scene_manager_center);
                 break;
         }
+
+        tv_AppVersion.setText(BuildConfig.VERSION_NAME);
     }
 
     @Override
