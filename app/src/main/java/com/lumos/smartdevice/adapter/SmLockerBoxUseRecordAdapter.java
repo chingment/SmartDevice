@@ -69,6 +69,13 @@ public class SmLockerBoxUseRecordAdapter extends RefreshAdapter {
         tv_UseTime.setText(bean.getUseTime());
         tv_UseRemark.setText(bean.getUseRemark());
 
+        if(bean.getUseResult()==1){
+            tv_UseResult.setText("成功");
+        }
+        else if(bean.getUseResult()==2) {
+            tv_UseRemark.setText("失败");
+        }
+
         if((beans.size()-position-1)==0){
             ll_DividerLine.setVisibility(View.INVISIBLE);
         }

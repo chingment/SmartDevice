@@ -34,6 +34,7 @@
         <entry key="app/src/main/res/layout/custom_dialog_confirm.xml" value="0.375" />
         <entry key="app/src/main/res/layout/custom_dialog_lockerbox.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_list_lockerbox.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/item_list_smlockerboxusage.xml" value="0.75" />
         <entry key="app/src/main/res/layout/item_list_smlockerboxuserecord.xml" value="0.5120112301822977" />
         <entry key="app/src/main/res/layout/item_list_smuser.xml" value="0.13125" />
         <entry key="app/src/main/res/layout/item_smcabinet_layout_box.xml" value="0.25" />

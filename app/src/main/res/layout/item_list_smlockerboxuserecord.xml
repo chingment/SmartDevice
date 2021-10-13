@@ -18,14 +18,15 @@
         android:orientation="horizontal"
         tools:ignore="UselessParent">
 
-        <ImageView
-            android:id="@+id/img_Avatar"
+        <TextView
+            android:id="@+id/tv_BoxName"
             android:layout_width="@dimen/size_30"
             android:layout_height="@dimen/size_30"
-            android:background="@null"
-            android:contentDescription="@string/img_content_description_empty"
-            android:scaleType="fitXY"
-            android:src="@drawable/default_avatar" />
+            android:gravity="center"
+            android:background="@drawable/locker_box_open_status_1"
+            android:text="1"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_14" />
 
     </LinearLayout>
 
@@ -67,7 +68,7 @@
                     android:ellipsize="end"
                     android:gravity="left"
                     android:maxLines="3"
-                    android:text="用户名"
+                    android:text="日期"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/sp_14" />
 
@@ -79,7 +80,7 @@
                     android:ellipsize="end"
                     android:gravity="left"
                     android:maxLines="3"
-                    android:text="姓名"
+                    android:text="备注"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_12" />
 
@@ -98,7 +99,7 @@
                     android:id="@+id/tv_UseResult"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="选择"
+                    android:text="结果"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/sp_14" />
 
