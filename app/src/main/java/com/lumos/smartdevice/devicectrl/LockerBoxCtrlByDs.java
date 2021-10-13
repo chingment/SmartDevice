@@ -24,6 +24,7 @@ public class LockerBoxCtrlByDs implements  ILockerBoxCtrl{
 
     public void  open(String id,OnOpenListener onOpenListener){
 
+        onOpenListener.onSuccess();
 
     }
 }

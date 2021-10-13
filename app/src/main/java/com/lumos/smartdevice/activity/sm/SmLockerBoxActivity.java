@@ -25,6 +25,7 @@ import com.lumos.smartdevice.api.rop.RetLockerGetCabinet;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBox;
 import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
+import com.lumos.smartdevice.api.rop.RopLockerOpenResult;
 import com.lumos.smartdevice.devicectrl.ILockerBoxCtrl;
 import com.lumos.smartdevice.devicectrl.LockerBoxInterface;
 import com.lumos.smartdevice.model.CabinetBean;
@@ -36,6 +37,7 @@ import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.CustomDialogCabinetConfig;
 import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
 import com.lumos.smartdevice.ui.dialog.CustomDialogLockerBox;
+import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
@@ -98,9 +100,9 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         dialog_Confirm.setOnClickListener(new CustomDialogConfirm.OnClickListener() {
             @Override
             public void onSure() {
-                String device_id=null;
-                String cabinet_id=null;
-                String slot_id=null;
+               final String device_id;
+               final String cabinet_id;
+               final  String slot_id;
                 String fun = dialog_Confirm.getFunction();
                 Object tag=dialog_Confirm.getTag();
                 switch (fun) {
@@ -122,12 +124,30 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                         LockerBoxInterface.getInstance(cabinet.getComId(), cabinet.getComBaud(), cabinet.getComPrl()).open(slot_id, new ILockerBoxCtrl.OnOpenListener() {
                             @Override
                             public void onSuccess() {
+                                LogUtil.i(TAG, "开锁成功");
 
-
+                                RopLockerOpenResult rop = new RopLockerOpenResult();
+                                rop.setDeviceId(device_id);
+                                rop.setCabinetId(cabinet_id);
+                                rop.setSlotId(slot_id);
+                                rop.setResult(1);
+                                rop.setAction("admin_open_one");
+                                rop.setRemark("后台人员操作打开");
+                                ReqInterface.getInstance().lockerBoxOpenResult(rop, null);
                             }
 
                             @Override
                             public void onFailure() {
+                                LogUtil.i(TAG, "开锁失败");
+
+                                RopLockerOpenResult rop = new RopLockerOpenResult();
+                                rop.setDeviceId(device_id);
+                                rop.setCabinetId(cabinet_id);
+                                rop.setSlotId(slot_id);
+                                rop.setResult(2);
+                                rop.setAction("admin_open_one");
+                                rop.setRemark("后台人员操作打开");
+                                ReqInterface.getInstance().lockerBoxOpenResult(rop, null);
 
                             }
                         });

@@ -8,7 +8,7 @@ import android.widget.RadioGroup;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.api.ResultBean;
-import com.lumos.smartdevice.db.ConfigDao;
+import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;

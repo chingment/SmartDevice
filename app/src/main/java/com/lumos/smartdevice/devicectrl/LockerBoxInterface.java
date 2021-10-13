@@ -8,7 +8,7 @@ public class LockerBoxInterface
 
     public static ILockerBoxCtrl getInstance(String comId,int comBaud, String comPrl) {
 
-        LogUtil.i(TAG, "comId:" + comId + ",comBaud:" + comBaud + ",comPrl:" + comBaud);
+        LogUtil.i(TAG, "comId:" + comId + ",comBaud:" + comBaud + ",comPrl:" + comPrl);
 
         ILockerBoxCtrl lockerBoxCtrl = null;
 

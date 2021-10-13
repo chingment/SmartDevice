@@ -1,7 +1,6 @@
 package com.lumos.smartdevice.activity.sm;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -25,7 +24,7 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetOwnLogin;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
-import com.lumos.smartdevice.db.ConfigDao;
+import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppCacheManager;
