@@ -20,6 +20,7 @@ import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.CabinetLayoutBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
+import com.lumos.smartdevice.model.LockerBoxUseRecordBean;
 import com.lumos.smartdevice.model.PageDataBean;
 import com.lumos.smartdevice.model.TripMsgBean;
 import com.lumos.smartdevice.model.UserBean;
@@ -709,6 +710,63 @@ public class DbManager {
         }
 
         return ResultUtil.isSuccess("保存成功");
+    }
+
+
+    public PageDataBean<LockerBoxUseRecordBean> GetLockBoxUseRecords(int pageIndex, int pageSize) {
+
+        PageDataBean<LockerBoxUseRecordBean> pageData = new PageDataBean<>();
+
+        pageData.setPageSize(pageSize);
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        List<LockerBoxUseRecordBean> records = new ArrayList<>();
+        if (db.isOpen()) {
+
+            String sql = "SELECT {0} FROM " + LockerBoxUseRecordDao.TABLE_NAME + " ";
+
+
+
+            String sqlQuery = sql.replace("{0}", "*") + " limit " + String.valueOf(pageIndex * pageSize) + "," + pageSize;
+            String sqlCount = sql.replace("{0}", "count(*)");
+            Cursor cursor1 = db.rawQuery(sqlCount, null);
+
+            cursor1.moveToFirst();
+
+            int total = cursor1.getInt(0);
+
+            cursor1.close();
+
+            pageData.setTotal(total);
+
+            Cursor cursor = db.rawQuery(sqlQuery, null);
+
+            while (cursor.moveToNext()) {
+                LockerBoxUseRecordBean record = new LockerBoxUseRecordBean();
+                String recordId = cursor.getString(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_RECORD_ID));
+                String cabinetId = cursor.getString(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_CABINET_ID));
+                String slotId = cursor.getString(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_SLOT_ID));
+                String useAction = cursor.getString(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_USE_ACTION));
+                int useResult = cursor.getInt(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_USE_RESULT));
+                String useRemark = cursor.getString(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_USE_REMARK));
+                String useTime = cursor.getString(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_USE_TIME));
+                record.setRecordId(recordId);
+                record.setCabinetId(cabinetId);
+                record.setSlotId(slotId);
+                record.setUseAction(useAction);
+                record.setUseResult(useResult);
+                record.setUseRemark(useRemark);
+                record.setUseTime(useTime);
+
+                records.add(record);
+            }
+            cursor.close();
+        }
+
+        pageData.setItems(records);
+
+        return pageData;
+
     }
 
 

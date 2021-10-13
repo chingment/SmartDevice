@@ -230,7 +230,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
 
                     int total=d.getTotal();
                     int totalPage = (total + lv_Users_PageSize - 1)/lv_Users_PageSize;
-                    List<UserBean> users = d.getItems();
+                    List<UserBean> items = d.getItems();
 
                     if(total==0){
                         ll_UsersEmpty.setVisibility(View.VISIBLE);
@@ -244,8 +244,8 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                         hasMore = false;
                     }
 
-                    if(users==null||users.size()==0) {
-                        users = new ArrayList<>();
+                    if(items==null||items.size()==0) {
+                        items = new ArrayList<>();
                         lv_UsersRefresh.setVisibility(View.GONE);
                     }
                     else {
@@ -254,10 +254,10 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
 
                     if (lv_Users_PageIndex == 0) {
                         lv_UsersRefresh.setRefreshing(false);
-                        lv_UsersAdapter.setData(users, SmUserManagerActivity.this);
+                        lv_UsersAdapter.setData(items, SmUserManagerActivity.this);
                     }
                     else {
-                        lv_UsersAdapter.addData(users, SmUserManagerActivity.this);
+                        lv_UsersAdapter.addData(items, SmUserManagerActivity.this);
                     }
 
                     lv_UsersRefresh.loadComplete(hasMore);

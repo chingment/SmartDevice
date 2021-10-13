@@ -39,11 +39,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".activity.sm.SmLockerBoxUseRecordActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.sm.SmDeviceInfoActivity"
             android:exported="true" />
         <activity android:name=".activity.sm.SmExcepitonViewer" />
         <activity android:name=".activity.sm.SmUserManagerActivity" />
-        <activity android:name=".activity.sm.SmLockerBoxActivity" />
+        <activity android:name=".activity.sm.SmLockerBoxManagerActivity" />
         <activity android:name=".activity.sm.SmHomeActivity" />
         <activity android:name=".activity.scenelocker.LockerMainActivity" />
         <activity android:name=".activity.sm.SmAppSceneSettingActivity" />

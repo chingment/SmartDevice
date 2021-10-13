@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_nav_header" />
+
+    <RelativeLayout
+        android:id="@+id/layout_body"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ly_Header"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+            <ListView
+                android:id="@+id/lv_Cabinets"
+                android:layout_width="@dimen/size_60"
+                android:layout_height="match_parent"
+                android:background="@color/gray"
+                android:divider="@null"
+                android:fadingEdge="none"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/size_4"
+                android:paddingRight="@dimen/size_4">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center_vertical|start"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:baselineAligned="false"
+                        android:paddingTop="@dimen/size_5"
+                        android:paddingBottom="@dimen/size_5">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/size_100"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/aty_smlockerboxmanager_tv_txt_cur_cabinet"
+                                android:textColor="@color/field_name"
+                                android:textSize="@dimen/sp_14" />
+
+                            <TextView
+                                android:id="@+id/tv_CabinetName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/size_10"
+                                android:gravity="start"
+                                android:textColor="@color/field_value"
+                                android:textSize="@dimen/sp_14" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/btn_OpenAllBox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/size_24"
+                                android:background="@drawable/widget_btn_1"
+                                android:gravity="center"
+                                android:paddingLeft="@dimen/size_10"
+                                android:paddingRight="@dimen/size_10"
+                                android:text="@string/t_open_all"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp_10" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center_vertical|start"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/size_12"
+                        android:layout_height="@dimen/size_12"
+                        android:layout_marginEnd="@dimen/size_5"
+                        android:background="@drawable/locker_box_open_status_doc_1"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_10" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size_24"
+                        android:layout_marginEnd="@dimen/size_5"
+                        android:gravity="center"
+                        android:text="@string/locker_box_open_status_1"
+                        android:textColor="@color/locker_box_open_status_1"
+                        android:textSize="@dimen/sp_10" />
+
+                    <TextView
+                        android:layout_width="@dimen/size_12"
+                        android:layout_height="@dimen/size_12"
+                        android:layout_marginEnd="@dimen/size_5"
+                        android:background="@drawable/locker_box_open_status_doc_2"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_10" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size_24"
+                        android:layout_marginEnd="@dimen/size_5"
+                        android:gravity="center"
+                        android:text="@string/locker_box_open_status_2"
+                        android:textColor="@color/locker_box_open_status_2"
+                        android:textSize="@dimen/sp_10" />
+
+
+                    <TextView
+                        android:layout_width="@dimen/size_12"
+                        android:layout_height="@dimen/size_12"
+                        android:layout_marginEnd="@dimen/size_5"
+                        android:background="@drawable/locker_box_use_status_doc_1"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_10" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size_24"
+                        android:layout_marginEnd="@dimen/size_5"
+                        android:gravity="center"
+                        android:text="@string/locker_box_use_status_1"
+                        android:textColor="@color/locker_box_use_status_1"
+                        android:textSize="@dimen/sp_10" />
+
+
+                    <TextView
+                        android:layout_width="@dimen/size_12"
+                        android:layout_height="@dimen/size_12"
+                        android:layout_marginEnd="@dimen/size_5"
+                        android:background="@drawable/locker_box_use_status_doc_2"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_10" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/size_24"
+                        android:layout_marginEnd="@dimen/size_5"
+                        android:gravity="center"
+                        android:text="@string/locker_box_use_status_2"
+                        android:textColor="@color/locker_box_use_status_2"
+                        android:textSize="@dimen/sp_10" />
+
+
+                </LinearLayout>
+
+
+
+                <ScrollView
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:scrollbars="vertical">
+                    <LinearLayout
+                        android:id="@+id/tl_Body"
+                        android:orientation="vertical"
+                        android:padding="@dimen/size_6"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/tl_Boxs"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+
+                    </LinearLayout>
+                </ScrollView>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

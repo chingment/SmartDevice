@@ -91,8 +91,11 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
                     switch (type) {
                         case GridNineItemType.Function:
                             switch (action) {
-                                case "lockerbox":
-                                    gdvLockerBox();
+                                case "lockerboxmanager":
+                                    gdvLockerBoxManager();
+                                    break;
+                                case "lockerboxuserecord":
+                                    gdvLockerBoxUseRecord();
                                     break;
                                 case "usermanager":
                                     gdvUserManager();
@@ -214,10 +217,16 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
         dialog_Confirm.show();
     }
 
-    private void gdvLockerBox(){
-        Intent intent = new Intent(SmHomeActivity.this, SmLockerBoxActivity.class);
+    private void gdvLockerBoxManager(){
+        Intent intent = new Intent(SmHomeActivity.this, SmLockerBoxManagerActivity.class);
         startActivity(intent);
     }
+
+    private void gdvLockerBoxUseRecord(){
+        Intent intent = new Intent(SmHomeActivity.this, SmLockerBoxUseRecordActivity.class);
+        startActivity(intent);
+    }
+
 
     private void gdvUserManager(){
         Intent intent = new Intent(SmHomeActivity.this, SmUserManagerActivity.class);

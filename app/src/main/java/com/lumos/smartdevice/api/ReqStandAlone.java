@@ -2,6 +2,7 @@ package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RetLockerGetBox;
+import com.lumos.smartdevice.api.rop.RetLockerGetBoxUseRecords;
 import com.lumos.smartdevice.api.rop.RetLockerGetCabinet;
 import com.lumos.smartdevice.api.rop.RetOwnLogin;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
@@ -24,6 +25,7 @@ import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
+import com.lumos.smartdevice.model.LockerBoxUseRecordBean;
 import com.lumos.smartdevice.model.PageDataBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppVar;
@@ -234,6 +236,16 @@ public class ReqStandAlone implements IReqVersion{
 
     @Override
     public void lockerGetBoxUseRecords(RopLockerGetBoxUseRecords rop, final ReqHandler reqHandler) {
+
+        reqHandler.sendBeforeSendMessage();
+        ResultBean<RetLockerGetBoxUseRecords> result = null;
+        RetLockerGetBoxUseRecords ret = new RetLockerGetBoxUseRecords();
+        PageDataBean<LockerBoxUseRecordBean> users = DbManager.getInstance().GetLockBoxUseRecords(rop.getPageIndex(), rop.getPageSize());
+        ret.setTotal(users.getTotal());
+        ret.setPageSize(users.getPageSize());
+        ret.setItems(users.getItems());
+        result = new ResultBean<>(ResultCode.SUCCESS, "", ret);
+        reqHandler.sendSuccessMessage(result.toJSONString());
 
     }
 

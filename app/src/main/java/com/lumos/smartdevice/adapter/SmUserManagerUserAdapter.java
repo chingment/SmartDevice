@@ -23,7 +23,7 @@ import java.util.List;
  */
 
 public class SmUserManagerUserAdapter extends RefreshAdapter {
-    private static final String TAG = "SmUserAdapter";
+    private static final String TAG = "SmUserManagerUserAdapter";
     private Context context;
     private List<UserBean> beans = new ArrayList<>();
 
