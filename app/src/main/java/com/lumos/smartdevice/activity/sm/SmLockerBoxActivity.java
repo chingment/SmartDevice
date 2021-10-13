@@ -25,6 +25,8 @@ import com.lumos.smartdevice.api.rop.RetLockerGetCabinet;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBox;
 import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
+import com.lumos.smartdevice.devicectrl.ILockerBoxCtrl;
+import com.lumos.smartdevice.devicectrl.LockerBoxInterface;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.CabinetLayoutBean;
 import com.lumos.smartdevice.model.DeviceBean;
@@ -67,7 +69,7 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         setNavHeaderTtile(R.string.aty_smlockerbox_nav_title);
         setNavHeaderBtnByGoBackIsVisible(true);
         device=getDevice();
-        HashMap<String, CabinetBean> l_Cabinets=getDevice().getCabinets();
+        HashMap<String, CabinetBean> l_Cabinets=device.getCabinets();
         if(l_Cabinets!=null) {
 
             cabinets = new ArrayList<>(l_Cabinets.values());
@@ -96,13 +98,39 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
         dialog_Confirm.setOnClickListener(new CustomDialogConfirm.OnClickListener() {
             @Override
             public void onSure() {
+                String device_id=null;
+                String cabinet_id=null;
+                String slot_id=null;
                 String fun = dialog_Confirm.getFunction();
+                Object tag=dialog_Confirm.getTag();
                 switch (fun) {
                     case "deleteusage":
-                        LockerBoxUsageBean usage=(LockerBoxUsageBean)dialog_Confirm.getTag();
+                        LockerBoxUsageBean usage = (LockerBoxUsageBean) dialog_Confirm.getTag();
                         lockerBoxDeleteUsage(usage);
                         break;
                     case "openallbox":
+                        break;
+                    case "openonebox":
+
+                        HashMap<String, String> hash_tag = (HashMap<String, String>) tag;
+                        device_id = hash_tag.get("device_id");
+                        cabinet_id = hash_tag.get("cabinet_id");
+                        slot_id = hash_tag.get("slot_id");
+
+                        CabinetBean cabinet = device.getCabinets().get(cabinet_id);
+
+                        LockerBoxInterface.getInstance(cabinet.getComId(), cabinet.getComBaud(), cabinet.getComPrl()).open(slot_id, new ILockerBoxCtrl.OnOpenListener() {
+                            @Override
+                            public void onSuccess() {
+
+
+                            }
+
+                            @Override
+                            public void onFailure() {
+
+                            }
+                        });
 
                         break;
 
@@ -144,10 +172,15 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
 
 
             @Override
-            public void onOpenBox(String deviceId, String cabinetId,String slotId){
+            public void onOpenBox(String deviceId, String cabinetId,String slotId) {
                 dialog_Confirm.setTipsImageVisibility(View.GONE);
                 dialog_Confirm.setTipsText("确定打开箱子？");
                 dialog_Confirm.setFunction("openonebox");
+                HashMap<String, String> tag = new HashMap<>();
+                tag.put("device_id", deviceId);
+                tag.put("cabinet_id", cabinetId);
+                tag.put("slot_id", slotId);
+                dialog_Confirm.setTag(tag);
                 dialog_Confirm.show();
             }
         });

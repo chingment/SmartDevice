@@ -6,7 +6,7 @@ import android.text.TextUtils;
 
 
 import com.lumos.smartdevice.db.DbManager;
-import com.lumos.smartdevice.ostCtrl.OstCtrlInterface;
+import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

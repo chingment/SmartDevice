@@ -1,4 +1,4 @@
-package com.lumos.smartdevice.ostCtrl;
+package com.lumos.smartdevice.ostctrl;
 
 import android.content.Context;
 import android.os.Build;
