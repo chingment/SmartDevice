@@ -13,6 +13,7 @@ import com.lumos.smartdevice.db.dao.CabinetDao;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.dao.LockerBoxDao;
 import com.lumos.smartdevice.db.dao.LockerBoxUsageDao;
+import com.lumos.smartdevice.db.dao.LockerBoxUseRecordDao;
 import com.lumos.smartdevice.db.dao.TripMsgDao;
 import com.lumos.smartdevice.db.dao.UserDao;
 import com.lumos.smartdevice.model.CabinetBean;
@@ -690,6 +691,24 @@ public class DbManager {
 
         return lockerBoxs;
 
+    }
+
+
+    public ResultBean<Object> saveLockBoxUseRecord(String cabinetId, String slotId, String use_action,int use_result,String use_remark) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        if (db.isOpen()) {
+            ContentValues values = new ContentValues();
+            values.put(LockerBoxUseRecordDao.COLUMN_NAME_CABINET_ID, cabinetId);
+            values.put(LockerBoxUseRecordDao.COLUMN_NAME_SLOT_ID, slotId);
+            values.put(LockerBoxUseRecordDao.COLUMN_NAME_USE_ACTION, use_action);
+            values.put(LockerBoxUseRecordDao.COLUMN_NAME_USE_RESULT, use_result);
+            values.put(LockerBoxUseRecordDao.COLUMN_NAME_USE_REMARK, use_remark);
+            values.put(LockerBoxUseRecordDao.COLUMN_NAME_USE_TIME, "");
+            db.insert(LockerBoxUseRecordDao.TABLE_NAME, null, values);
+        }
+
+        return ResultUtil.isSuccess("保存成功");
     }
 
 

@@ -77,6 +77,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
 	private static final String TABLE_CREATE_LOCKERBOXUSERECORD = "CREATE TABLE "
 			+ LockerBoxUseRecordDao.TABLE_NAME + " ("
+			+ LockerBoxUseRecordDao.COLUMN_NAME_RECORD_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
 			+ LockerBoxUseRecordDao.COLUMN_NAME_CABINET_ID + " TEXT , "
 			+ LockerBoxUseRecordDao.COLUMN_NAME_SLOT_ID + " TEXT , "
 			+ LockerBoxUseRecordDao.COLUMN_NAME_USE_ACTION + " TEXT , "

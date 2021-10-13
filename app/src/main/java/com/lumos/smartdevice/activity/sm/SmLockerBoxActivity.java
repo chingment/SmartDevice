@@ -133,7 +133,20 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                                 rop.setResult(1);
                                 rop.setAction("admin_open_one");
                                 rop.setRemark("后台人员操作打开");
-                                ReqInterface.getInstance().lockerBoxOpenResult(rop, null);
+                                ReqInterface.getInstance().lockerBoxOpenResult(rop, new ReqHandler() {
+                                            @Override
+                                            public void onBeforeSend() {
+                                                super.onBeforeSend();
+                                            }
+                                            @Override
+                                            public void onAfterSend() {
+                                                super.onAfterSend();
+                                            }
+                                            @Override
+                                            public void onSuccess(String response) {
+                                            }
+                                        }
+                                );
                             }
 
                             @Override
@@ -147,8 +160,20 @@ public class SmLockerBoxActivity extends BaseFragmentActivity {
                                 rop.setResult(2);
                                 rop.setAction("admin_open_one");
                                 rop.setRemark("后台人员操作打开");
-                                ReqInterface.getInstance().lockerBoxOpenResult(rop, null);
-
+                                ReqInterface.getInstance().lockerBoxOpenResult(rop,new ReqHandler() {
+                                            @Override
+                                            public void onBeforeSend() {
+                                                super.onBeforeSend();
+                                            }
+                                            @Override
+                                            public void onAfterSend() {
+                                                super.onAfterSend();
+                                            }
+                                            @Override
+                                            public void onSuccess(String response) {
+                                            }
+                                        }
+                                );
                             }
                         });
 
