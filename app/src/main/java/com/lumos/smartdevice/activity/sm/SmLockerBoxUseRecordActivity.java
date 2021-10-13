@@ -63,6 +63,8 @@ public class SmLockerBoxUseRecordActivity  extends BaseFragmentActivity {
 
         setNavHeaderBtnByGoBackIsVisible(true);
 
+        setNavHeaderTtile(R.string.aty_smlockerboxuserecord_nav_title);
+
         initView();
         initEvent();
         initData();
