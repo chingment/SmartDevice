@@ -170,7 +170,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
 
 
         if(getDevice().getSceneMode().equals(AppVar.SCENE_MODE_1)) {
-            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_lockerbox), GridNineItemType.Function, "lockerbox", R.drawable.ic_sm_lockerbox));
+            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_lockerbox), GridNineItemType.Function, "lockerboxmanager", R.drawable.ic_sm_lockerboxmanager));
             gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_lockerboxuserecord), GridNineItemType.Function, "lockerboxuserecord", R.drawable.ic_sm_lockerboxuserecord));
         }
 
