@@ -61,10 +61,14 @@ public class SmLockerBoxUseRecordAdapter extends RefreshAdapter {
         View ll_DividerLine = holder.itemView.findViewById(R.id.ll_DividerLine);
 
 
+        TextView tv_BoxName = holder.itemView.findViewById(R.id.tv_BoxName);
         TextView tv_UseTime = holder.itemView.findViewById(R.id.tv_UseTime);
         TextView tv_UseRemark = holder.itemView.findViewById(R.id.tv_UseRemark);
         TextView tv_UseResult = holder.itemView.findViewById(R.id.tv_UseResult);
 
+        String slotId=bean.getSlotId();
+
+        tv_BoxName.setText(slotId.split("-")[2]);
 
         tv_UseTime.setText(bean.getUseTime());
         tv_UseRemark.setText(bean.getUseRemark());
