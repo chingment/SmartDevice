@@ -28,7 +28,10 @@ import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.utils.StringUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -705,7 +708,13 @@ public class DbManager {
             values.put(LockerBoxUseRecordDao.COLUMN_NAME_USE_ACTION, use_action);
             values.put(LockerBoxUseRecordDao.COLUMN_NAME_USE_RESULT, use_result);
             values.put(LockerBoxUseRecordDao.COLUMN_NAME_USE_REMARK, use_remark);
-            values.put(LockerBoxUseRecordDao.COLUMN_NAME_USE_TIME, "");
+
+            long datetime =System.currentTimeMillis();
+
+
+
+            values.put(LockerBoxUseRecordDao.COLUMN_NAME_USE_TIME, datetime);
+
             db.insert(LockerBoxUseRecordDao.TABLE_NAME, null, values);
         }
 
@@ -727,7 +736,7 @@ public class DbManager {
 
 
 
-            String sqlQuery = sql.replace("{0}", "*") + " limit " + String.valueOf(pageIndex * pageSize) + "," + pageSize;
+            String sqlQuery = sql.replace("{0}", "*") + " order by use_time desc limit " + String.valueOf(pageIndex * pageSize) + "," + pageSize;
             String sqlCount = sql.replace("{0}", "count(*)");
             Cursor cursor1 = db.rawQuery(sqlCount, null);
 
@@ -749,14 +758,22 @@ public class DbManager {
                 String useAction = cursor.getString(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_USE_ACTION));
                 int useResult = cursor.getInt(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_USE_RESULT));
                 String useRemark = cursor.getString(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_USE_REMARK));
-                String useTime = cursor.getString(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_USE_TIME));
+                long useTime = cursor.getLong(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_USE_TIME));
                 record.setRecordId(recordId);
                 record.setCabinetId(cabinetId);
                 record.setSlotId(slotId);
                 record.setUseAction(useAction);
                 record.setUseResult(useResult);
                 record.setUseRemark(useRemark);
-                record.setUseTime(useTime);
+
+
+
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date(useTime);
+                String str_useTime = simpleDateFormat.format(date);
+
+
+                record.setUseTime(str_useTime);
 
                 records.add(record);
             }

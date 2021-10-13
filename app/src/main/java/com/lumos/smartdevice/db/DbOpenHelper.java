@@ -83,7 +83,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 			+ LockerBoxUseRecordDao.COLUMN_NAME_USE_ACTION + " TEXT , "
 			+ LockerBoxUseRecordDao.COLUMN_NAME_USE_RESULT + " INTEGER , "
 			+ LockerBoxUseRecordDao.COLUMN_NAME_USE_REMARK + " TEXT , "
-			+ LockerBoxUseRecordDao.COLUMN_NAME_USE_TIME + " TEXT );";
+			+ LockerBoxUseRecordDao.COLUMN_NAME_USE_TIME + " INTEGER );";
 
 	private DbOpenHelper(Context context) {
 		super(context, "smartdevice.db", null, DATABASE_VERSION);
