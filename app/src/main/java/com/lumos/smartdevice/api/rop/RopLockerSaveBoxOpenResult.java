@@ -1,6 +1,6 @@
 package com.lumos.smartdevice.api.rop;
 
-public class RopLockerOpenResult {
+public class RopLockerSaveBoxOpenResult {
     private String deviceId;
     private String cabinetId;
     private String slotId;

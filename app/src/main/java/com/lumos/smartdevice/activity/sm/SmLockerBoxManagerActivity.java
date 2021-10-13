@@ -25,7 +25,7 @@ import com.lumos.smartdevice.api.rop.RetLockerGetCabinet;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBox;
 import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
-import com.lumos.smartdevice.api.rop.RopLockerOpenResult;
+import com.lumos.smartdevice.api.rop.RopLockerSaveBoxOpenResult;
 import com.lumos.smartdevice.devicectrl.ILockerBoxCtrl;
 import com.lumos.smartdevice.devicectrl.LockerBoxInterface;
 import com.lumos.smartdevice.model.CabinetBean;
@@ -126,14 +126,14 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
                             public void onSuccess() {
                                 LogUtil.i(TAG, "开锁成功");
 
-                                RopLockerOpenResult rop = new RopLockerOpenResult();
+                                RopLockerSaveBoxOpenResult rop = new RopLockerSaveBoxOpenResult();
                                 rop.setDeviceId(device_id);
                                 rop.setCabinetId(cabinet_id);
                                 rop.setSlotId(slot_id);
                                 rop.setResult(1);
                                 rop.setAction("admin_open_one");
                                 rop.setRemark("后台人员操作打开");
-                                ReqInterface.getInstance().lockerBoxOpenResult(rop, new ReqHandler() {
+                                ReqInterface.getInstance().lockerSaveBoxOpenResult(rop, new ReqHandler() {
                                             @Override
                                             public void onBeforeSend() {
                                                 super.onBeforeSend();
@@ -153,14 +153,14 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
                             public void onFailure() {
                                 LogUtil.i(TAG, "开锁失败");
 
-                                RopLockerOpenResult rop = new RopLockerOpenResult();
+                                RopLockerSaveBoxOpenResult rop = new RopLockerSaveBoxOpenResult();
                                 rop.setDeviceId(device_id);
                                 rop.setCabinetId(cabinet_id);
                                 rop.setSlotId(slot_id);
                                 rop.setResult(2);
                                 rop.setAction("admin_open_one");
                                 rop.setRemark("后台人员操作打开");
-                                ReqInterface.getInstance().lockerBoxOpenResult(rop,new ReqHandler() {
+                                ReqInterface.getInstance().lockerSaveBoxOpenResult(rop,new ReqHandler() {
                                             @Override
                                             public void onBeforeSend() {
                                                 super.onBeforeSend();
