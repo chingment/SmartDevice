@@ -35,7 +35,7 @@ public class SmDeviceInfoActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smdeviceinfo);
 
-        setNavHeaderTtile(R.string.aty_deviceinfo_nav_title);
+        setNavHeaderTtile(R.string.aty_nav_title_smdeviceinfo);
         setNavHeaderBtnByGoBackIsVisible(true);
 
         device = getDevice();

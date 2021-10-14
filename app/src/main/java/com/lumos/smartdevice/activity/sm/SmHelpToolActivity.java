@@ -52,7 +52,7 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smhelptool);
 
-        setNavHeaderTtile(R.string.aty_smhelptool_nav_title);
+        setNavHeaderTtile(R.string.aty_nav_title_smhelptool);
 
         initView();
         initEvent();
@@ -166,12 +166,12 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
         }
 
         gdv_Nine_Items = new ArrayList<>();
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_factorysetting), GridNineItemType.Function, "factorysetting", R.drawable.ic_sm_factorysetting));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_showsysstatusbar), GridNineItemType.Function, "showsysstatusbar", R.drawable.ic_sm_showsysstatusbar));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_opendoor), GridNineItemType.Function, "opendoor", R.drawable.ic_sm_opendoor));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "checkupdateapp", R.drawable.ic_sm_checkupdateapp));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "closeapp", R.drawable.ic_sm_closeapp));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "rebootsys", R.drawable.ic_sm_rebootsys));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smfactorysetting), GridNineItemType.Function, "factorysetting", R.drawable.ic_sm_factorysetting));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smshowsysstatusbar), GridNineItemType.Function, "showsysstatusbar", R.drawable.ic_sm_showsysstatusbar));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smopendoor), GridNineItemType.Function, "opendoor", R.drawable.ic_sm_opendoor));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smcheckupdateapp), GridNineItemType.Function, "checkupdateapp", R.drawable.ic_sm_checkupdateapp));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smcloseapp), GridNineItemType.Function, "closeapp", R.drawable.ic_sm_closeapp));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smrebootsys), GridNineItemType.Function, "rebootsys", R.drawable.ic_sm_rebootsys));
 
         GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(), gdv_Nine_Items);
 

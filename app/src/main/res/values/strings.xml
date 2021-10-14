@@ -1,9 +1,6 @@
 <resources>
     <string name="app_name">SmartDevice</string>
-    <string name="t_deviceid">设备标识</string>
-    <string name="t_appversion">应用版本</string>
-    <string name="t_ctrlversion">控制版本</string>
-    <string name="aty_initdata_ld_txt_animation">初始数据加载中</string>
+    <string name="aty_initdata_tips_loading">初始数据加载中</string>
     <string name="aty_initdata_tips_settingdevice">正在配置商户设备信息</string>
     <string name="aty_initdata_tips_verion_mode">请先在帮助中心配置版本模式</string>
     <string name="aty_initdata_tips_scene_mode">请先在帮助中心配置场景模式</string>
@@ -18,46 +15,37 @@
     <string name="aty_initdata_tips_setting_complete">配置设备信息完成，正在启动设备恢复原始状态</string>
     <string name="aty_initdata_tips_setting_end">配置设备信息结束，进入应用</string>
 
-    <string name="aty_smlogin_nav_title">登录</string>
+    <string name="aty_nav_title_smlogin">登录</string>
+    <string name="aty_nav_title_smhelptool">帮助中心</string>
+    <string name="aty_nav_title_smlockerboxmanager">格子管理</string>
+    <string name="aty_nav_title_smlockerboxuserecord">使用记录</string>
+    <string name="aty_nav_title_smfactorysetting">出厂设置</string>
+    <string name="aty_nav_title_smshowsysstatusbar">显示导航</string>
+    <string name="aty_nav_title_smdeviceinfo">设备信息</string>
+    <string name="aty_nav_title_smusermanager">用户管理</string>
+    <string name="aty_nav_title_smselectuser">选择用户</string>
+    <string name="aty_nav_title_smopendoor">打开门柜</string>
+    <string name="aty_nav_title_smcheckupdateapp">检查更新</string>
+    <string name="aty_nav_title_smcloseapp">关闭应用</string>
+    <string name="aty_nav_title_smrebootsys">重启系统</string>
+    <string name="aty_nav_title_smexitmanager">退出管理</string>
+    <string name="aty_nav_title_smsmfactorysetting">出厂设置</string>
+    <string name="aty_nav_title_smappscenesetting">应用场景</string>
+    <string name="aty_nav_title_smhome">管理中心</string>
+
+
     <string name="aty_smlogin_tv_txt_scene">场景</string>
     <string name="aty_smlogin_et_hint_username">用户名</string>
     <string name="aty_smlogin_et_hint_password">密码</string>
     <string name="aty_smlogin_btn_txt_login">登录</string>
     <string name="aty_smlogin_scene_init_data_help">帮助中心</string>
     <string name="aty_smlogin_scene_manager_center">管理中心</string>
-    <string name="aty_smhelptool_nav_title">帮助中心</string>
-    <string name="aty_smhelptool_gdv_nine_it_txt_lockerbox">格子管理</string>
-    <string name="aty_smhelptool_gdv_nine_it_txt_lockerboxuserecord">使用记录</string>
-    <string name="aty_smhelptool_gdv_nine_it_txt_factorysetting">出厂设置</string>
-    <string name="aty_smhelptool_gdv_nine_it_txt_showsysstatusbar">显示导航</string>
-    <string name="aty_smhelptool_gdv_nine_it_txt_deviceinfo">设备信息</string>
-    <string name="aty_smhelptool_gdv_nine_it_txt_usermanager">用户管理</string>
-    <string name="aty_smhelptool_gdv_nine_it_txt_opendoor">打开门柜</string>
-    <string name="aty_smhelptool_gdv_nine_it_txt_checkupdateapp">检查更新</string>
-    <string name="aty_smhelptool_gdv_nine_it_txt_closeapp">关闭应用</string>
-    <string name="aty_smhelptool_gdv_nine_it_txt_rebootsys">重启系统</string>
-    <string name="aty_smhelptool_gdv_nine_it_txt_exitmanager">退出管理</string>
-    <string name="aty_smfactorysetting_nav_title">出厂设置</string>
-    <string name="aty_smfactorysetting_nav_txt_appscene">应用场景</string>
     <string name="aty_smfactorysetting_tips_nosetversion">未设置版本模式</string>
     <string name="aty_smfactorysetting_tips_nosetscene">未设置场景模式</string>
-    <string name="aty_smappscenesetting_nav_title">应用场景</string>
-    <string name="t_vesionmode">版本模式</string>
-    <string name="t_scenemode">场景模式</string>
-    <string name="t_vesionmode_1">单机版</string>
-    <string name="t_vesionmode_2">网络版</string>
-    <string name="t_scenemode_1">寄存柜</string>
-    <string name="t_scenemode_2">书柜</string>
     <string name="aty_smappscenesetting_com_prl">串口协议(JSON)</string>
-    <string name="aty_smhome_nav_title">管理中心</string>
-    <string name="aty_smlockerboxmanager_nav_title">箱子管理</string>
     <string name="aty_smlockerboxmanager_tv_txt_cur_cabinet">当前机柜</string>
-    <string name="aty_smusermanager_nav_title">用户管理</string>
     <string name="aty_smusermanager_btn_txt_newuser">新建用户</string>
-    <string name="aty_smusermanager_nav_title_select_user">选择用户</string>
-    <string name="aty_deviceinfo_nav_title">设备信息</string>
 
-    <string name="aty_smlockerboxuserecord_nav_title">使用记录</string>
 
     <string name="unknown">未知</string>
     <string name="scenemode_1">寄存柜</string>
@@ -96,6 +84,15 @@
     <string name="locker_box_use_status_1">未使用</string>
     <string name="locker_box_use_status_2">已使用</string>
 
+    <string name="t_deviceid">设备标识</string>
+    <string name="t_appversion">应用版本</string>
+    <string name="t_ctrlversion">控制版本</string>
+    <string name="t_vesionmode">版本模式</string>
+    <string name="t_scenemode">场景模式</string>
+    <string name="t_vesionmode_1">单机版</string>
+    <string name="t_vesionmode_2">网络版</string>
+    <string name="t_scenemode_1">寄存柜</string>
+    <string name="t_scenemode_2">书柜</string>
     <string name="t_clickinput">请输入</string>
     <string name="t_hint_fullname">请输入姓名</string>
     <string name="t_hint_phonenumner">请输入手机号码</string>

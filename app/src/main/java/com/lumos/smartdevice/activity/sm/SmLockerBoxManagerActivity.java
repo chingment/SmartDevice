@@ -68,7 +68,7 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smlockerboxmanager);
 
-        setNavHeaderTtile(R.string.aty_smlockerboxmanager_nav_title);
+        setNavHeaderTtile(R.string.aty_nav_title_smlockerboxmanager);
         setNavHeaderBtnByGoBackIsVisible(true);
         device=getDevice();
         HashMap<String, CabinetBean> l_Cabinets=device.getCabinets();

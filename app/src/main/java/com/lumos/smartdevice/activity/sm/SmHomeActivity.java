@@ -52,7 +52,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smhome);
 
-        setNavHeaderTtile(R.string.aty_smhome_nav_title);
+        setNavHeaderTtile(R.string.aty_nav_title_smhome);
 
         initView();
         initEvent();
@@ -170,17 +170,17 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
 
 
         if(getDevice().getSceneMode().equals(AppVar.SCENE_MODE_1)) {
-            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_lockerbox), GridNineItemType.Function, "lockerboxmanager", R.drawable.ic_sm_lockerboxmanager));
-            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_lockerboxuserecord), GridNineItemType.Function, "lockerboxuserecord", R.drawable.ic_sm_lockerboxuserecord));
+            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smlockerboxmanager), GridNineItemType.Function, "lockerboxmanager", R.drawable.ic_sm_lockerboxmanager));
+            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smlockerboxuserecord), GridNineItemType.Function, "lockerboxuserecord", R.drawable.ic_sm_lockerboxuserecord));
         }
 
 
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_deviceinfo), GridNineItemType.Function, "deviceinfo", R.drawable.ic_sm_deviceinfo));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_usermanager), GridNineItemType.Function, "usermanager", R.drawable.ic_sm_usermanager));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_opendoor), GridNineItemType.Function, "opendoor", R.drawable.ic_sm_opendoor));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_checkupdateapp), GridNineItemType.Function, "checkupdateapp", R.drawable.ic_sm_checkupdateapp));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_closeapp), GridNineItemType.Function, "closeapp", R.drawable.ic_sm_closeapp));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_smhelptool_gdv_nine_it_txt_rebootsys), GridNineItemType.Function, "rebootsys", R.drawable.ic_sm_rebootsys));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smdeviceinfo), GridNineItemType.Function, "deviceinfo", R.drawable.ic_sm_deviceinfo));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smusermanager), GridNineItemType.Function, "usermanager", R.drawable.ic_sm_usermanager));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smopendoor), GridNineItemType.Function, "opendoor", R.drawable.ic_sm_opendoor));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smcheckupdateapp), GridNineItemType.Function, "checkupdateapp", R.drawable.ic_sm_checkupdateapp));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smcloseapp), GridNineItemType.Function, "closeapp", R.drawable.ic_sm_closeapp));
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smrebootsys), GridNineItemType.Function, "rebootsys", R.drawable.ic_sm_rebootsys));
 
         GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(), gdv_Nine_Items);
 

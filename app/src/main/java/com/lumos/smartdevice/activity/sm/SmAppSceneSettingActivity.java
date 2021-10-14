@@ -23,7 +23,7 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smappscenesetting);
 
-        setNavHeaderTtile(R.string.aty_smappscenesetting_nav_title);
+        setNavHeaderTtile(R.string.aty_nav_title_smappscenesetting);
         setNavHeaderBtnByGoBackIsVisible(true);
         setNavHeaderBtnByRightIsVisible(true);
 

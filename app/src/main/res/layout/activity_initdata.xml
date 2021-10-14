@@ -37,7 +37,7 @@
         android:id="@+id/ld_Animation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:loadingText="@string/aty_initdata_ld_txt_animation" />
+        app:loadingText="@string/aty_initdata_tips_loading" />
 
     </LinearLayout>
 

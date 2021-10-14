@@ -52,7 +52,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smlogin);
 
-        setNavHeaderTtile(R.string.aty_smlogin_nav_title);
+        setNavHeaderTtile(R.string.aty_nav_title_smlogin);
         setNavHeaderBtnByGoBackIsVisible(true);
 
         scene_mode = getIntent().getStringExtra("scene_mode");

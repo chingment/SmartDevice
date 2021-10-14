@@ -63,11 +63,11 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
         scene_mode = getIntent().getIntExtra("scene_mode", 1);
 
         if(scene_mode==1){
-            setNavHeaderTtile(R.string.aty_smusermanager_nav_title);
+            setNavHeaderTtile(R.string.aty_nav_title_smusermanager);
         }
         else if(scene_mode==2) {
             scene_param = (HashMap<String, String>) getIntent().getSerializableExtra("scene_param");
-            setNavHeaderTtile(R.string.aty_smusermanager_nav_title_select_user);
+            setNavHeaderTtile(R.string.aty_nav_title_smselectuser);
         }
 
         initView();
