@@ -33,10 +33,8 @@
     <color name="locker_cabinet_bd">#3b414f</color>
     <color name="locker_box_open_status_1">#e2e0e1</color>
     <color name="locker_box_open_status_2">#fab207</color>
-
     <color name="locker_box_use_status_1">#4cd445</color>
     <color name="locker_box_use_status_2">#de646a</color>
-
     <color name="locker_box_open_result_1">#fab207</color>
     <color name="locker_box_open_result_2">#de646a</color>
 
