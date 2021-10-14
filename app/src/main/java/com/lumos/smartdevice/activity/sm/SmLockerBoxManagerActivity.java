@@ -48,7 +48,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
-    private static final String TAG = "SmLockerBoxActivity";
+    private static final String TAG = "SmLockerBoxManagerActivity";
     private TextView tv_CabinetName;
     private ListView lv_Cabinets;
     private TextView btn_OpenAllBox;

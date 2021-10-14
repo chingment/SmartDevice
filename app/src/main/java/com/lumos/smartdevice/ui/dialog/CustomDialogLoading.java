@@ -11,7 +11,7 @@ import com.lumos.smartdevice.R;
 
 
 public class CustomDialogLoading extends Dialog {
-
+	private static final String TAG = "CustomDialogLoading";
 	public CustomDialogLoading(Context context) {
 		super(context, R.style.custom_dialog);
 		this.context = context;

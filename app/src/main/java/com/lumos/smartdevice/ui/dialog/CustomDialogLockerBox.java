@@ -21,6 +21,7 @@ import java.util.List;
 public class CustomDialogLockerBox extends Dialog {
 
     private static final String TAG = "CustomDialogLockerBox";
+
     private Dialog mThis;
     private Context mContext;
     private View mLayoutRes;

@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SmLockerBoxCabinetNameAdapter extends BaseAdapter {
 
-    private static final String TAG = "SmCabinetNameAdapter";
+    private static final String TAG = "SmLockerBoxCabinetNameAdapter";
     private final Context context;
     private final List<CabinetBean> items;
     private final int current_position;

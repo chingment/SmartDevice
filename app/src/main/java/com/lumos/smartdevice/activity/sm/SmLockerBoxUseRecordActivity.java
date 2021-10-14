@@ -45,7 +45,7 @@ import java.util.Map;
 
 public class SmLockerBoxUseRecordActivity  extends BaseFragmentActivity {
 
-    private static final String TAG = "SmUserManagerActivity";
+    private static final String TAG = "SmLockerBoxUseRecordActivity";
 
 
     private SuperRefreshLayout lv_UseRecordsRefresh;

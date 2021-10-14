@@ -19,6 +19,8 @@ import java.util.List;
  */
 public class SmLockerBoxCabinetBoxAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
+    private static final String TAG = "SmLockerBoxCabinetBoxAdapter";
+
     private final Context context;
     private final List<LockerBoxBean> list;//数据
     private OnRecyclerItemClickListener mOnItemClickListener;//单击事件
