@@ -5,21 +5,38 @@ import java.util.HashMap;
 
 public class DeviceBean implements Serializable {
     private String deviceId;
+    private String name;
+    private String type;
     private String sceneMode;
     private String versionMode;
-    private String merchName;
-    private String storeName;
-    private String shopName;
-    private String address;
-
-
+    private MerchBean merch;
+    private StoreBean store;
+    private ShopBean shop;
     private HashMap<String, CabinetBean> cabinets;
+    private MqttBean mqtt;
+
     public String getDeviceId() {
         return deviceId;
     }
 
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getSceneMode() {
@@ -38,6 +55,30 @@ public class DeviceBean implements Serializable {
         this.versionMode = versionMode;
     }
 
+    public MerchBean getMerch() {
+        return merch;
+    }
+
+    public void setMerch(MerchBean merch) {
+        this.merch = merch;
+    }
+
+    public StoreBean getStore() {
+        return store;
+    }
+
+    public void setStore(StoreBean store) {
+        this.store = store;
+    }
+
+    public ShopBean getShop() {
+        return shop;
+    }
+
+    public void setShop(ShopBean shop) {
+        this.shop = shop;
+    }
+
     public HashMap<String, CabinetBean> getCabinets() {
         return cabinets;
     }
@@ -46,35 +87,11 @@ public class DeviceBean implements Serializable {
         this.cabinets = cabinets;
     }
 
-    public String getMerchName() {
-        return merchName;
+    public MqttBean getMqtt() {
+        return mqtt;
     }
 
-    public void setMerchName(String merchName) {
-        this.merchName = merchName;
-    }
-
-    public String getStoreName() {
-        return storeName;
-    }
-
-    public void setStoreName(String storeName) {
-        this.storeName = storeName;
-    }
-
-    public String getShopName() {
-        return shopName;
-    }
-
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
+    public void setMqtt(MqttBean mqtt) {
+        this.mqtt = mqtt;
     }
 }

@@ -287,12 +287,12 @@ public class InitDataActivity extends BaseFragmentActivity {
             }
         }
 
-
         RopDeviceInitData rop=new RopDeviceInitData();
         rop.setDeviceId(DeviceUtil.getDeviceId());
         rop.setSceneMode(scene_mode);
         rop.setVesionMode(version_mode);
-
+        rop.setAppVerCode(String.valueOf(BuildConfig.VERSION_CODE));
+        rop.setAppVerName(BuildConfig.VERSION_NAME);
         ReqInterface.getInstance().deviceInitData(rop, new ReqHandler(){
 
             @Override

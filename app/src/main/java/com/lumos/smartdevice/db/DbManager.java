@@ -429,6 +429,9 @@ public class DbManager {
                 return ResultUtil.isSuccess("保存成功");
             }
         }
+        else if(appSceneMode.equals(AppVar.SCENE_MODE_2)){
+            return ResultUtil.isSuccess("保存成功");
+        }
 
         return ResultUtil.isFailure("保存失败，未提供支持");
 

@@ -31,6 +31,7 @@
                 android:paddingTop="@dimen/size_10">
 
                 <TextView
+                    android:id="@+id/tv_MerchNameK"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/t_merch_name"
@@ -38,7 +39,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:id="@+id/tv_MerchName"
+                    android:id="@+id/tv_MerchNameV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -56,6 +57,7 @@
                 android:paddingTop="@dimen/size_10">
 
                 <TextView
+                    android:id="@+id/tv_StoreNameK"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/t_store_name"
@@ -63,7 +65,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:id="@+id/tv_StoreName"
+                    android:id="@+id/tv_StoreNameV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -82,6 +84,7 @@
                 android:paddingTop="@dimen/size_10">
 
                 <TextView
+                    android:id="@+id/tv_ShopNameK"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/t_shop_name"
@@ -89,7 +92,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:id="@+id/tv_ShopName"
+                    android:id="@+id/tv_ShopNameV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
@@ -114,7 +117,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:id="@+id/tv_Address"
+                    android:id="@+id/tv_ShopAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"

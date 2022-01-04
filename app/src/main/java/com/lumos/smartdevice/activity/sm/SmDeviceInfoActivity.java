@@ -19,10 +19,13 @@ public class SmDeviceInfoActivity extends BaseFragmentActivity {
     private static final String TAG = "SmLockerBoxActivity";
 
 
-    private TextView tv_MerchName;
-    private TextView tv_StoreName;
-    private TextView tv_ShopName;
-    private TextView tv_Address;
+    private TextView tv_MerchNameK;
+    private TextView tv_MerchNameV;
+    private TextView tv_StoreNameK;
+    private TextView tv_StoreNameV;
+    private TextView tv_ShopNameK;
+    private TextView tv_ShopNameV;
+    private TextView tv_ShopAddress;
     private TextView tv_DeviceId;
     private TextView tv_AppVersion;
     private TextView tv_VersionMode;
@@ -46,10 +49,13 @@ public class SmDeviceInfoActivity extends BaseFragmentActivity {
     }
 
     private void initView() {
-        tv_MerchName = findViewById(R.id.tv_MerchName);
-        tv_StoreName = findViewById(R.id.tv_StoreName);
-        tv_ShopName = findViewById(R.id.tv_ShopName);
-        tv_Address = findViewById(R.id.tv_Address);
+        tv_MerchNameK = findViewById(R.id.tv_MerchNameK);
+        tv_MerchNameV = findViewById(R.id.tv_MerchNameV);
+        tv_StoreNameK = findViewById(R.id.tv_StoreNameK);
+        tv_StoreNameV = findViewById(R.id.tv_StoreNameV);
+        tv_ShopNameK = findViewById(R.id.tv_ShopNameK);
+        tv_ShopNameV = findViewById(R.id.tv_ShopNameV);
+        tv_ShopAddress = findViewById(R.id.tv_ShopAddress);
         tv_DeviceId = findViewById(R.id.tv_DeviceId);
         tv_AppVersion = findViewById(R.id.tv_AppVersion);
         tv_VersionMode = findViewById(R.id.tv_VersionMode);
@@ -64,10 +70,13 @@ public class SmDeviceInfoActivity extends BaseFragmentActivity {
         tv_DeviceId.setText(DeviceUtil.getDeviceId());
         tv_AppVersion.setText(BuildConfig.VERSION_NAME);
 
-        tv_MerchName.setText(device.getMerchName());
-        tv_StoreName.setText(device.getStoreName());
-        tv_ShopName.setText(device.getShopName());
-        tv_Address.setText(device.getAddress());
+        tv_MerchNameK.setText(device.getMerch().getNameK());
+        tv_MerchNameV.setText(device.getMerch().getNameV());
+        tv_StoreNameK.setText(device.getStore().getNameK());
+        tv_StoreNameV.setText(device.getStore().getNameV());
+        tv_ShopNameK.setText(device.getShop().getNameK());
+        tv_ShopNameV.setText(device.getShop().getNameV());
+        tv_ShopAddress.setText(device.getShop().getAddress());
 
         if (device.getSceneMode().equals("1")) {
             tv_SceneMode.setText(getAppContext().getString(R.string.t_scenemode_1));

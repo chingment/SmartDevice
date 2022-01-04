@@ -26,7 +26,7 @@ public class Config {
     }
 
     public class URL {
-        public static final String device_InitData = BuildConfig.ENVIRONMENT + "/api/device/InitData";
+        public static final String device_InitData = BuildConfig.ENVIRONMENT + "/device/initData";
     }
 
 }
