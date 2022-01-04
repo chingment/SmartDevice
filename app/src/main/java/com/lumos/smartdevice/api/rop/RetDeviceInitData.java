@@ -14,4 +14,14 @@ public class RetDeviceInitData implements Serializable {
     public void setDevice(DeviceBean device) {
         this.device = device;
     }
+
+    private Object customData;
+
+    public Object getCustomData() {
+        return customData;
+    }
+
+    public void setCustomData(Object customData) {
+        this.customData = customData;
+    }
 }

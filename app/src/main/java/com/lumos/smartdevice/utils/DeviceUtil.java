@@ -32,7 +32,7 @@ public class DeviceUtil {
 
             if(StringUtil.isEmptyNotNull(deviceId))
             {
-                deviceId=getMacAddress();
+                deviceId=getMacAddr();
             }
         }
         catch (Exception ex)
@@ -64,7 +64,7 @@ public class DeviceUtil {
     }
 
 
-    public static String getMacAddress() {
+    public static String getMacAddr() {
 //        String mac = "02:00:00:00:00:00";
 //        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
 //            mac = getMacDefault(app.getApplicationContext());
@@ -142,5 +142,9 @@ public class DeviceUtil {
             mac = mac.toUpperCase(Locale.ENGLISH);
         }
         return mac;
+    }
+
+    public static String getCtrlVerName(){
+        return "";
     }
 }

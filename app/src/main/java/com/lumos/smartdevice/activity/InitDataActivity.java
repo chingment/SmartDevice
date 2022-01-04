@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.system.Os;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.scenebooker.BookerMainActivity;
 import com.lumos.smartdevice.activity.scenelocker.LockerMainActivity;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
 import com.lumos.smartdevice.adapter.LogTipsAdapter;
@@ -189,11 +191,17 @@ public class InitDataActivity extends BaseFragmentActivity {
                             public void run() {
                                 //SystemClock.sleep(6000);
 
+                                String scene=device.getSceneMode();
 
                                 setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_setting_end));
 
-                                if (device.getSceneMode().equals(AppVar.SCENE_MODE_1)) {
+                                if (scene.equals(AppVar.SCENE_MODE_1)) {
                                     Intent intent = new Intent(getAppContext(), LockerMainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                                else if(scene.equals(AppVar.SCENE_MODE_2)){
+                                    Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -289,10 +297,15 @@ public class InitDataActivity extends BaseFragmentActivity {
 
         RopDeviceInitData rop=new RopDeviceInitData();
         rop.setDeviceId(DeviceUtil.getDeviceId());
+        rop.setImeiId(DeviceUtil.getImeiId());
+        rop.setMacAddr(DeviceUtil.getMacAddr());
         rop.setSceneMode(scene_mode);
         rop.setVesionMode(version_mode);
+        rop.setCtrlVerName(DeviceUtil.getCtrlVerName());
         rop.setAppVerCode(String.valueOf(BuildConfig.VERSION_CODE));
         rop.setAppVerName(BuildConfig.VERSION_NAME);
+        rop.setSysVerName(android.os.Build.VERSION.RELEASE);
+
         ReqInterface.getInstance().deviceInitData(rop, new ReqHandler(){
 
             @Override

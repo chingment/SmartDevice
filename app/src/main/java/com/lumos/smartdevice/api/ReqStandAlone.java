@@ -4,8 +4,10 @@ import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RetLockerGetBox;
 import com.lumos.smartdevice.api.rop.RetLockerGetBoxUseRecords;
 import com.lumos.smartdevice.api.rop.RetLockerGetCabinet;
+import com.lumos.smartdevice.api.rop.RetOwnGetInfo;
 import com.lumos.smartdevice.api.rop.RetOwnLogin;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
+import com.lumos.smartdevice.api.rop.RetOwnSaveInfo;
 import com.lumos.smartdevice.api.rop.RetUserGetDetail;
 import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RetUserSave;
@@ -16,8 +18,10 @@ import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
 import com.lumos.smartdevice.api.rop.RopLockerSaveBoxOpenResult;
 import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBox;
+import com.lumos.smartdevice.api.rop.RopOwnGetInfo;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
+import com.lumos.smartdevice.api.rop.RopOwnSaveInfo;
 import com.lumos.smartdevice.api.rop.RopUserGetDetail;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
@@ -99,6 +103,75 @@ public class ReqStandAlone implements IReqVersion{
         ResultBean<RetOwnLogout> result = new ResultBean<>(ResultCode.SUCCESS, "退出成功",ret);
         reqHandler.sendSuccessMessage(result.toJSONString());
     }
+
+    @Override
+    public void ownGetInfo(RopOwnGetInfo rop, final ReqHandler reqHandler) {
+        reqHandler.sendBeforeSendMessage();
+        ResultBean<RetOwnGetInfo> result = null;
+        RetOwnGetInfo ret = new RetOwnGetInfo();
+        UserBean user = DbManager.getInstance().GetUser(rop.getUserId());
+        ret.setUserId(user.getUserId());
+        ret.setFullName(user.getFullName());
+        ret.setUserName(user.getUserName());
+        ret.setAvatar(user.getAvatar());
+        result = new ResultBean<>(ResultCode.SUCCESS, "", ret);
+        reqHandler.sendSuccessMessage(result.toJSONString());
+    }
+
+    @Override
+    public void ownSaveInfo(RopOwnSaveInfo rop, final ReqHandler reqHandler) {
+        reqHandler.sendBeforeSendMessage();
+
+        if (rop == null) {
+            reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("参数不能空"));
+            return;
+        }
+
+        if (StringUtil.isEmptyNotNull(rop.getUserName())) {
+            reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("用户名不能为空"));
+            return;
+        }
+
+        if (StringUtil.isEmptyNotNull(rop.getUserId())) {
+            if (StringUtil.isEmptyNotNull(rop.getPassword())) {
+                reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("密码不能为空"));
+                return;
+            }
+        }
+
+        if (StringUtil.isEmptyNotNull(rop.getFullName())) {
+            reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("姓名不能为空"));
+            return;
+        }
+
+        String userId = rop.getUserId() == null ? null : rop.getUserId().trim();
+        String userName = rop.getUserName().trim();
+        String password = rop.getPassword().trim();
+        String fullName = rop.getFullName().trim();
+        String avatar = rop.getAvatar();
+
+        ResultBean<Object> result;
+
+        if (StringUtil.isEmptyNotNull(userId)) {
+            boolean userIsExist = DbManager.getInstance().checkUserIsExist(userName);
+            if (userIsExist) {
+                reqHandler.sendSuccessMessage(ResultUtil.isFailureJson("用户名已经存在"));
+                return;
+            }
+            result = DbManager.getInstance().addUser(userName, password, fullName, "3", avatar);
+        } else {
+            result = DbManager.getInstance().updateUser(userId, password, fullName, avatar);
+        }
+
+
+        RetOwnSaveInfo ret = new RetOwnSaveInfo();
+        ret.setUserName(userName);
+        ret.setFullName(fullName);
+        ret.setAvatar(avatar);
+        result.setData(ret);
+        reqHandler.sendSuccessMessage(result.toJSONString());
+    }
+
 
     @Override
     public void userSave(RopUserSave rop, final ReqHandler reqHandler) {

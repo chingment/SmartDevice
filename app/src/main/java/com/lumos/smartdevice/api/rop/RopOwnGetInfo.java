@@ -2,17 +2,8 @@ package com.lumos.smartdevice.api.rop;
 
 import java.io.Serializable;
 
-public class RopOwnLogout  implements Serializable {
-    private String deviceId;
+public class RopOwnGetInfo implements Serializable {
     private String userId;
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
 
     public String getUserId() {
         return userId;

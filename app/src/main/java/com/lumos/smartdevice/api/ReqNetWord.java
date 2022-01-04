@@ -7,8 +7,10 @@ import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
 import com.lumos.smartdevice.api.rop.RopLockerSaveBoxOpenResult;
 import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBox;
+import com.lumos.smartdevice.api.rop.RopOwnGetInfo;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
+import com.lumos.smartdevice.api.rop.RopOwnSaveInfo;
 import com.lumos.smartdevice.api.rop.RopUserGetDetail;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
@@ -47,6 +49,20 @@ public class ReqNetWord implements IReqVersion{
 
     @Override
     public void ownLogout(RopOwnLogout rop, final ReqHandler reqHandler) {
+
+
+
+    }
+
+    @Override
+    public void ownGetInfo(RopOwnGetInfo rop, final ReqHandler reqHandler) {
+
+
+
+    }
+
+    @Override
+    public void ownSaveInfo(RopOwnSaveInfo rop, final ReqHandler reqHandler) {
 
 
 

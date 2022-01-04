@@ -1,23 +1,15 @@
 package com.lumos.smartdevice.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
 
 import java.io.Serializable;
 
 public class CabinetBean implements Serializable {
-    @JSONField(name="cabinet_id")
     private String cabinetId;
-    @JSONField(name="name")
     private String name;
-    @JSONField(name="com_id")
     private String comId;
-    @JSONField(name="com_baud")
     private int comBaud;
-    @JSONField(name="com_prl")
     private String comPrl;
-    @JSONField(name="layout")
     private String layout;
-    @JSONField(name="priority")
     private int priority;
 
     public String getCabinetId() {

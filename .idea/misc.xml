@@ -20,7 +20,10 @@
         <entry key="app/src/main/res/drawable/locker_box_use_status_doc_1.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/locker_box_use_status_doc_2.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/nav_colum_boder_bottom.xml" value="0.10462962962962963" />
+        <entry key="app/src/main/res/layout/activity_bookermain.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_initdata.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_lockermain.xml" value="0.10364583333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_smappscenesetting.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_smdeviceinfo.xml" value="0.16451612903225807" />
         <entry key="app/src/main/res/layout/activity_smfactorysetting.xml" value="0.1" />
@@ -33,6 +36,7 @@
         <entry key="app/src/main/res/layout/activity_smusermanager.xml" value="0.1265625" />
         <entry key="app/src/main/res/layout/custom_dialog_confirm.xml" value="0.375" />
         <entry key="app/src/main/res/layout/custom_dialog_lockerbox.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/custom_dialog_owninfo.xml" value="0.14427083333333332" />
         <entry key="app/src/main/res/layout/item_list_lockerbox.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_list_smlockerboxusage.xml" value="0.75" />
         <entry key="app/src/main/res/layout/item_list_smlockerboxuserecord.xml" value="0.335" />

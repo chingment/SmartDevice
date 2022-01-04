@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.InitDataActivity;
+import com.lumos.smartdevice.activity.dialog.CustomDialogOwnInfo;
 import com.lumos.smartdevice.activity.dialog.CustomDialogUserEdit;
 import com.lumos.smartdevice.adapter.GridNineItemAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
@@ -11,7 +12,7 @@ import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
-import com.lumos.smartdevice.api.rop.RetUserSave;
+import com.lumos.smartdevice.api.rop.RetOwnSaveInfo;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
@@ -45,7 +46,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
     private List<GridNineItemBean> gdv_Nine_Items;
     private TextView tv_UserFullName;
     private ImageView iv_UserAvatar;
-    private CustomDialogUserEdit dialog_UserEdit;
+    private CustomDialogOwnInfo dialog_OwnInfo;
     private Button btn_Logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +65,13 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
         gdv_Nine = findViewById(R.id.gdv_Nine);
         tv_UserFullName= findViewById(R.id.tv_UserFullName);
         iv_UserAvatar= findViewById(R.id.iv_UserAvatar);
-        dialog_UserEdit=new CustomDialogUserEdit(SmHomeActivity.this);
-        dialog_UserEdit.checkUserNameIsPhoneFormat(false);
-        dialog_UserEdit.setOnClickListener(new CustomDialogUserEdit.OnClickListener() {
+        dialog_OwnInfo=new CustomDialogOwnInfo(SmHomeActivity.this);
+        dialog_OwnInfo.checkUserNameIsPhoneFormat(false);
+        dialog_OwnInfo.setOnClickListener(new CustomDialogOwnInfo.OnClickListener() {
             @Override
-            public void onSaveResult(ResultBean<RetUserSave> rt) {
+            public void onSaveResult(ResultBean<RetOwnSaveInfo> rt) {
                 if(rt.getCode()== ResultCode.SUCCESS) {
-                    RetUserSave ret = rt.getData();
+                    RetOwnSaveInfo ret = rt.getData();
                     tv_UserFullName.setText(ret.getFullName());
                     CommonUtil.loadImageFromUrl(SmHomeActivity.this,iv_UserAvatar,ret.getAvatar());
                     showToast(R.string.save_success);
@@ -297,7 +298,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
 
 
     private void getOwnInfo(){
-        dialog_UserEdit.show(AppCacheManager.getCurrentUser().getUserId(),AppVar.VERSION_MODE_0);
+        dialog_OwnInfo.show(AppCacheManager.getCurrentUser().getUserId(),AppVar.VERSION_MODE_0);
     }
 
 
