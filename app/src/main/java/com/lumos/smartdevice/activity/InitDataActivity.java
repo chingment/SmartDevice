@@ -299,8 +299,6 @@ public class InitDataActivity extends BaseFragmentActivity {
         rop.setDeviceId(DeviceUtil.getDeviceId());
         rop.setImeiId(DeviceUtil.getImeiId());
         rop.setMacAddr(DeviceUtil.getMacAddr());
-        rop.setSceneMode(scene_mode);
-        rop.setVesionMode(version_mode);
         rop.setCtrlVerName(DeviceUtil.getCtrlVerName());
         rop.setAppVerCode(String.valueOf(BuildConfig.VERSION_CODE));
         rop.setAppVerName(BuildConfig.VERSION_NAME);

@@ -96,15 +96,15 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
                 finish();
             } else if (id == R.id.btn_Nav_Header_Right) {
                 RadioButton rb_VesionMode = findViewById(rg_VesionMode.getCheckedRadioButtonId());
-                String version_mode = "0";
+                int version_mode = AppVar.VERSION_MODE_0;
                 if (rb_VesionMode != null) {
-                    version_mode = rb_VesionMode.getTag().toString();
+                    version_mode =Integer.parseInt(rb_VesionMode.getTag().toString());
                 }
 
-                String scene_mode = "0";
+                int scene_mode = AppVar.SCENE_MODE_0;
                 RadioButton rb_SceneMode = findViewById(rg_SceneMode.getCheckedRadioButtonId());
                 if (rb_SceneMode != null) {
-                    scene_mode = rb_SceneMode.getTag().toString();
+                    scene_mode = Integer.parseInt(rb_SceneMode.getTag().toString());
                 }
 
                 String json_Com_Prl = et_Com_Prl.getText().toString();

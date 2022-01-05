@@ -359,13 +359,13 @@ public class DbManager {
         return cabinets;
     }
 
-    public ResultBean<Object> saveAppScene(String appVesionMode, String appSceneMode, String comPrl) {
+    public ResultBean<Object> saveAppScene(int appVesionMode, int appSceneMode, String json_cabinets) {
 
 
-        DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE, appSceneMode);
-        DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE, appVesionMode);
+        DbManager.getInstance().updateConfig(ConfigDao.FIELD_SCENE_MODE,String.valueOf(appSceneMode));
+        DbManager.getInstance().updateConfig(ConfigDao.FIELD_VERSION_MODE,String.valueOf(appVesionMode));
 
-        if (appSceneMode.equals(AppVar.SCENE_MODE_1)) {
+        if (appSceneMode==AppVar.SCENE_MODE_1) {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             if (db.isOpen()) {
 
@@ -386,7 +386,7 @@ public class DbManager {
                     return ResultUtil.isFailure("保存失败，有柜子正在使用中");
                 }
 
-                List<CabinetBean> cabinets = JSON.parseObject(comPrl, new TypeReference<List<CabinetBean>>() {
+                List<CabinetBean> cabinets = JSON.parseObject(json_cabinets, new TypeReference<List<CabinetBean>>() {
                 });
 
                 if (cabinets == null || cabinets.size() <= 0) {
@@ -444,7 +444,7 @@ public class DbManager {
                 return ResultUtil.isSuccess("保存成功");
             }
         }
-        else if(appSceneMode.equals(AppVar.SCENE_MODE_2)){
+        else if(appSceneMode==AppVar.SCENE_MODE_2){
             return ResultUtil.isSuccess("保存成功");
         }
 

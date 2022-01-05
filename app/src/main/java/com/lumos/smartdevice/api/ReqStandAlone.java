@@ -26,6 +26,7 @@ import com.lumos.smartdevice.api.rop.RopUserGetDetail;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.db.DbManager;
+import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
@@ -48,12 +49,14 @@ public class ReqStandAlone implements IReqVersion{
 
         RetDeviceInitData ret = new RetDeviceInitData();
 
-        if (rop.getSceneMode()==AppVar.SCENE_MODE_1) {
+        int version_mode=DbManager.getInstance().getConfigIntValue(ConfigDao.FIELD_VERSION_MODE);
+        int scene_mode= DbManager.getInstance().getConfigIntValue(ConfigDao.FIELD_SCENE_MODE);
+        if (scene_mode==AppVar.SCENE_MODE_1) {
 
             DeviceBean device = new DeviceBean();
             device.setDeviceId("1224567");
-            device.setSceneMode(rop.getSceneMode());
-            device.setVersionMode(rop.getVesionMode());
+            device.setSceneMode(scene_mode);
+            device.setVersionMode(version_mode);
             device.setCabinets(DbManager.getInstance().getCabinets());
 
             ret.setDevice(device);

@@ -5,8 +5,6 @@ public class RopDeviceInitData {
     private String deviceId;
     private String imeiId;
     private String macAddr;
-    private int sceneMode;
-    private int vesionMode;
     private String appVerCode;
     private String appVerName;
     private String sysVerName;
@@ -34,22 +32,6 @@ public class RopDeviceInitData {
 
     public void setMacAddr(String macAddr) {
         this.macAddr = macAddr;
-    }
-
-    public int getSceneMode() {
-        return sceneMode;
-    }
-
-    public void setSceneMode(int sceneMode) {
-        this.sceneMode = sceneMode;
-    }
-
-    public int getVesionMode() {
-        return vesionMode;
-    }
-
-    public void setVesionMode(int vesionMode) {
-        this.vesionMode = vesionMode;
     }
 
     public String getAppVerCode() {
