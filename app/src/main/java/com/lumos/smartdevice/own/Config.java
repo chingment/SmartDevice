@@ -30,6 +30,7 @@ public class Config {
         public static final String own_LoginByAccount = BuildConfig.ENVIRONMENT + "/own/loginByAccount";
         public static final String own_Logout = BuildConfig.ENVIRONMENT + "/own/logout";
         public static final String own_GetInfo = BuildConfig.ENVIRONMENT + "/own/getInfo";
+        public static final String own_SaveInfo = BuildConfig.ENVIRONMENT + "/own/saveInfo";
     }
 
 }

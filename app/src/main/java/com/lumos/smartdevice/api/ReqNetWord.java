@@ -108,7 +108,21 @@ public class ReqNetWord implements IReqVersion{
     @Override
     public void ownSaveInfo(RopOwnSaveInfo rop, final ReqHandler reqHandler) {
 
+        reqHandler.sendBeforeSendMessage();
 
+        HttpClient.myPost(Config.URL.own_SaveInfo, rop, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onFailure(msg,e);
+            }
+        });
 
     }
 
