@@ -111,9 +111,6 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
                                 case "rebootsys":
                                     gdvRebootSys();
                                     break;
-                                case "exitmanager":
-                                    gdvExitManager();
-                                    break;
                                 case "opendoor":
                                     gdvOpenDoor();
                                     break;
@@ -138,8 +135,8 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
                     case "rebootsys":
                         dlgRebootSys();
                         break;
-                    case "exitmanager":
-                        dlgExitManager();
+                    case "logout":
+                        logout();
                         break;
                     case "opendoor":
                         dlgOpenDoor();
@@ -194,12 +191,6 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
         OstCtrlInterface.getInstance().setHideStatusBar(SmHelpToolActivity.this,false);
     }
 
-    private void gdvExitManager(){
-        dialog_Confirm.setTipsImageVisibility(View.GONE);
-        dialog_Confirm.setFunction("exitmanager");
-        dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_exitmanager));
-        dialog_Confirm.show();
-    }
 
     private void gdvCloseApp(){
         dialog_Confirm.setTipsImageVisibility(View.GONE);
@@ -233,7 +224,7 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
         OstCtrlInterface.getInstance().reboot(SmHelpToolActivity.this);
     }
 
-    private void dlgExitManager() {
+    private void logout() {
 
         RopOwnLogout rop = new RopOwnLogout();
         rop.setUserId(AppCacheManager.getCurrentUser().getUserId());
@@ -278,20 +269,18 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
     }
 
 
-    private void getOwnInfo(){
-        dialog_OwnInfo.show(AppCacheManager.getCurrentUser().getUserId(), AppVar.VERSION_MODE_1);
-    }
-
-
     @Override
     public void onClick(View v) {
         if (!NoDoubleClickUtil.isDoubleClick()) {
             int id = v.getId();
 
             if (id == R.id.iv_UserAvatar) {
-                getOwnInfo();
+                dialog_OwnInfo.show(AppCacheManager.getCurrentUser().getUserId(), AppVar.VERSION_MODE_1);
             } else if (id == R.id.btn_Logout) {
-                gdvExitManager();
+                dialog_Confirm.setTipsImageVisibility(View.GONE);
+                dialog_Confirm.setFunction("logout");
+                dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_exitmanager));
+                dialog_Confirm.show();
             }
         }
     }

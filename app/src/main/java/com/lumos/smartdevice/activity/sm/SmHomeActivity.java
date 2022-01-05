@@ -14,6 +14,7 @@ import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
 import com.lumos.smartdevice.api.rop.RetOwnSaveInfo;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
+import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
 import com.lumos.smartdevice.model.UserBean;
@@ -48,13 +49,13 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
     private ImageView iv_UserAvatar;
     private CustomDialogOwnInfo dialog_OwnInfo;
     private Button btn_Logout;
+    private DeviceBean device;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_smhome);
-
         setNavHeaderTtile(R.string.aty_nav_title_smhome);
-
+        device=getDevice();
         initView();
         initEvent();
         initData();
@@ -109,9 +110,6 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
                                 case "rebootsys":
                                     gdvRebootSys();
                                     break;
-                                case "exitmanager":
-                                    gdvExitManager();
-                                    break;
                                 case "opendoor":
                                     gdvOpenDoor();
                                     break;
@@ -139,8 +137,8 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
                     case "rebootsys":
                         dlgRebootSys();
                         break;
-                    case "exitmanager":
-                        dlgExitManager();
+                    case "logout":
+                        dlgLogout();
                         break;
                     case "opendoor":
                         dlgOpenDoor();
@@ -189,13 +187,6 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
 
     }
 
-
-    private void gdvExitManager(){
-        dialog_Confirm.setTipsImageVisibility(View.GONE);
-        dialog_Confirm.setFunction("exitmanager");
-        dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_exitmanager));
-        dialog_Confirm.show();
-    }
 
     private void gdvCloseApp(){
         dialog_Confirm.setTipsImageVisibility(View.GONE);
@@ -251,7 +242,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
         OstCtrlInterface.getInstance().reboot(SmHomeActivity.this);
     }
 
-    private void dlgExitManager() {
+    private void dlgLogout() {
 
         RopOwnLogout rop = new RopOwnLogout();
         rop.setUserId(AppCacheManager.getCurrentUser().getUserId());
@@ -297,21 +288,19 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
     }
 
 
-    private void getOwnInfo(){
-        dialog_OwnInfo.show(AppCacheManager.getCurrentUser().getUserId(),AppVar.VERSION_MODE_0);
-    }
-
-
     @Override
     public void onClick(View v) {
         if (!NoDoubleClickUtil.isDoubleClick()) {
-            int id=v.getId();
+            int id = v.getId();
 
-            if(id==R.id.iv_UserAvatar){
-                getOwnInfo();
-            }
-            else if(id==R.id.btn_Logout){
-                gdvExitManager();
+
+            if (id == R.id.iv_UserAvatar) {
+                dialog_OwnInfo.show(AppCacheManager.getCurrentUser().getUserId(), device.getVersionMode());
+            } else if (id == R.id.btn_Logout) {
+                dialog_Confirm.setTipsImageVisibility(View.GONE);
+                dialog_Confirm.setFunction("logout");
+                dialog_Confirm.setTipsText(getAppContext().getString(R.string.confrim_tips_exitmanager));
+                dialog_Confirm.show();
             }
         }
     }

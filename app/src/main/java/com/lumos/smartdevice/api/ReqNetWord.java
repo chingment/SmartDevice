@@ -49,11 +49,13 @@ public class ReqNetWord implements IReqVersion{
         HttpClient.myPost(Config.URL.own_LoginByAccount, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
+                reqHandler.handleAfterSendMessage();
                 reqHandler.onSuccess(response);
             }
 
             @Override
             public void onFailure(String msg, Exception e) {
+                reqHandler.handleAfterSendMessage();
                 reqHandler.onFailure(msg,e);
             }
         });
@@ -64,14 +66,42 @@ public class ReqNetWord implements IReqVersion{
     @Override
     public void ownLogout(RopOwnLogout rop, final ReqHandler reqHandler) {
 
+        reqHandler.sendBeforeSendMessage();
 
+        HttpClient.myPost(Config.URL.own_Logout, rop, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onFailure(msg,e);
+            }
+        });
 
     }
 
     @Override
     public void ownGetInfo(RopOwnGetInfo rop, final ReqHandler reqHandler) {
 
+        reqHandler.sendBeforeSendMessage();
 
+        HttpClient.myPost(Config.URL.own_GetInfo, rop, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onFailure(msg,e);
+            }
+        });
 
     }
 
