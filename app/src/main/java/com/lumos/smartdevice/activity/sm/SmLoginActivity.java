@@ -45,7 +45,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
     private TextView tv_Scene;
     private TextView tv_AppVersion;
     private String scene_mode;//登录场景
-    private String app_version_mode;//版本模式
+    private int app_version_mode;//版本模式
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
         setNavHeaderBtnByGoBackIsVisible(true);
 
         scene_mode = getIntent().getStringExtra("scene_mode");
-        app_version_mode= DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
+        app_version_mode= DbManager.getInstance().getConfigIntValue(ConfigDao.FIELD_VERSION_MODE);
 
         initView();
         initEvent();

@@ -191,16 +191,16 @@ public class InitDataActivity extends BaseFragmentActivity {
                             public void run() {
                                 //SystemClock.sleep(6000);
 
-                                String scene=device.getSceneMode();
+                                int scene_mode=device.getSceneMode();
 
                                 setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_setting_end));
 
-                                if (scene.equals(AppVar.SCENE_MODE_1)) {
+                                if (scene_mode==AppVar.SCENE_MODE_1) {
                                     Intent intent = new Intent(getAppContext(), LockerMainActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }
-                                else if(scene.equals(AppVar.SCENE_MODE_2)){
+                                else if(scene_mode==AppVar.SCENE_MODE_2){
                                     Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
                                     startActivity(intent);
                                     finish();
@@ -273,21 +273,21 @@ public class InitDataActivity extends BaseFragmentActivity {
 
         setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_settingdevice));
 
-        String version_mode= DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
-        if(version_mode==null||version_mode.equals(AppVar.VERSION_MODE_0)) {
+        int version_mode=DbManager.getInstance().getConfigIntValue(ConfigDao.FIELD_VERSION_MODE);
+        if(version_mode==AppVar.VERSION_MODE_0) {
             initActionIsRun = false;
             setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_verion_mode));
             return;
         }
 
-        String scene_mode= DbManager.getInstance().getConfigValue(ConfigDao.FIELD_SCENE_MODE);
-        if(scene_mode==null||scene_mode.equals(AppVar.SCENE_MODE_0)) {
+        int scene_mode= DbManager.getInstance().getConfigIntValue(ConfigDao.FIELD_SCENE_MODE);
+        if(scene_mode==AppVar.SCENE_MODE_0) {
             initActionIsRun=false;
             setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_scene_mode));
             return;
         }
 
-        if(version_mode.equals(AppVar.VERSION_MODE_1)){
+        if(version_mode==AppVar.VERSION_MODE_1){
             if(DbManager.getInstance().getCabinets().size()==0) {
                 initActionIsRun = false;
                 setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_set_cabinet));

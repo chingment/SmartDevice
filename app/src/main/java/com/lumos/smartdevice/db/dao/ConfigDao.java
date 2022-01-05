@@ -31,7 +31,7 @@ public class ConfigDao {
 	public static final String FIELD_VERSION_MODE = "version_mode";
 	public static final String FIELD_SCENE_MODE = "scen_mode";
 
-	public static String getVersionModeName(String val) {
+	public static String getVersionModeName(int val) {
 
 		int id = R.string.unknown;
 		switch (val) {
@@ -46,7 +46,7 @@ public class ConfigDao {
 
 	}
 
-	public static String getSceneModeName(String val){
+	public static String getSceneModeName(int val){
 
 		int id =R.string.unknown;
 		switch (val) {

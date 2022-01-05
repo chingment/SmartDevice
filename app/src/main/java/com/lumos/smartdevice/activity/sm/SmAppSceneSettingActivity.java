@@ -10,6 +10,7 @@ import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
+import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
@@ -60,21 +61,21 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
 
     private void initData() {
 
-        String version_mode = DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
+        int version_mode = DbManager.getInstance().getConfigIntValue(ConfigDao.FIELD_VERSION_MODE);
 
-        if (version_mode != null) {
-            if (version_mode.equals("1")) {
+        if (version_mode != AppVar.VERSION_MODE_0) {
+            if (version_mode==AppVar.VERSION_MODE_1) {
                 rg_VesionMode.check(R.id.rbtn_VesionMode_1);
-            } else if (version_mode.equals("2")) {
+            } else if (version_mode==AppVar.VERSION_MODE_2) {
                 rg_VesionMode.check(R.id.rbtn_VesionMode_2);
             }
         }
 
-        String scene_mode = DbManager.getInstance().getConfigValue(ConfigDao.FIELD_SCENE_MODE);
-        if (scene_mode != null) {
-            if (scene_mode.equals("1")) {
+        int scene_mode = DbManager.getInstance().getConfigIntValue(ConfigDao.FIELD_SCENE_MODE);
+        if (scene_mode != AppVar.SCENE_MODE_0) {
+            if (scene_mode==AppVar.SCENE_MODE_1) {
                 rg_SceneMode.check(R.id.rbtn_SceneMode_1);
-            } else if (scene_mode.equals("2")) {
+            } else if (scene_mode==AppVar.SCENE_MODE_2) {
                 rg_SceneMode.check(R.id.rbtn_SceneMode_2);
             }
         }

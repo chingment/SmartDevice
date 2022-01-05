@@ -55,7 +55,7 @@ public class CustomDialogOwnInfo extends Dialog {
     private boolean checkUserNameIsPhoneFormat=false;
 
 
-    private String version_mode= AppVar.VERSION_MODE_0;
+    private int version_mode= AppVar.VERSION_MODE_0;
 
     public CustomDialogOwnInfo(Context context) {
         super(context, R.style.custom_dialog);
@@ -216,7 +216,7 @@ public class CustomDialogOwnInfo extends Dialog {
         return editType;
     }
 
-    public void show(String userId,String version_mode) {
+    public void show(String userId,int version_mode) {
 
         super.show();
 

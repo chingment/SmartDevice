@@ -26,6 +26,7 @@ import com.lumos.smartdevice.model.TripMsgBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
 import java.text.SimpleDateFormat;
@@ -296,7 +297,7 @@ public class DbManager {
         }
     }
 
-    public String getConfigValue(String field) {
+    public String getConfigStringValue(String field) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String val = null;
         if (db.isOpen()) {
@@ -308,6 +309,20 @@ public class DbManager {
         }
         return val;
     }
+
+    public int getConfigIntValue(String field){
+        try {
+            String v = getConfigStringValue(field);
+            if (StringUtil.isEmptyNotNull(field))
+                return 0;
+            return Integer.valueOf(v);
+        }
+        catch (Exception ex)
+        {
+            return  0;
+        }
+    }
+
 
     public HashMap<String, CabinetBean> getCabinets() {
 

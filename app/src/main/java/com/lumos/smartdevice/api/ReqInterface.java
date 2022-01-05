@@ -12,13 +12,13 @@ public class ReqInterface {
     public static IReqVersion getInstance(){
 
         if (iReq == null) {
-            String version_mode= DbManager.getInstance().getConfigValue(ConfigDao.FIELD_VERSION_MODE);
+            int version_mode= DbManager.getInstance().getConfigIntValue(ConfigDao.FIELD_VERSION_MODE);
 
             switch (version_mode) {
-                case "1":
+                case AppVar.VERSION_MODE_1:
                     iReq = new ReqStandAlone();
                     break;
-                case "2":
+                case AppVar.VERSION_MODE_2:
                     iReq = new ReqNetWord();
                     break;
             }
@@ -28,19 +28,19 @@ public class ReqInterface {
         return iReq;
     }
 
-    public static IReqVersion getInstance(String version_mode) {
+    public static IReqVersion getInstance(int version_mode) {
 
-        if (version_mode.equals(AppVar.VERSION_MODE_0))
+        if (version_mode==AppVar.VERSION_MODE_0)
             return getInstance();
 
         IReqVersion iReq = null;
 
 
         switch (version_mode) {
-            case "1":
+            case 1:
                 iReq = new ReqStandAlone();
                 break;
-            case "2":
+            case 2:
                 iReq = new ReqNetWord();
                 break;
         }

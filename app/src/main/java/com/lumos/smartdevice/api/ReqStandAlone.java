@@ -48,7 +48,7 @@ public class ReqStandAlone implements IReqVersion{
 
         RetDeviceInitData ret = new RetDeviceInitData();
 
-        if (rop.getSceneMode().equals(AppVar.SCENE_MODE_1)) {
+        if (rop.getSceneMode()==AppVar.SCENE_MODE_1) {
 
             DeviceBean device = new DeviceBean();
             device.setDeviceId("1224567");

@@ -6,9 +6,8 @@ import java.util.HashMap;
 public class DeviceBean implements Serializable {
     private String deviceId;
     private String name;
-    private String type;
-    private String sceneMode;
-    private String versionMode;
+    private int sceneMode;
+    private int versionMode;
     private MerchBean merch;
     private StoreBean store;
     private ShopBean shop;
@@ -31,27 +30,19 @@ public class DeviceBean implements Serializable {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getSceneMode() {
+    public int getSceneMode() {
         return sceneMode;
     }
 
-    public void setSceneMode(String sceneMode) {
+    public void setSceneMode(int sceneMode) {
         this.sceneMode = sceneMode;
     }
 
-    public String getVersionMode() {
+    public int getVersionMode() {
         return versionMode;
     }
 
-    public void setVersionMode(String versionMode) {
+    public void setVersionMode(int versionMode) {
         this.versionMode = versionMode;
     }
 

@@ -78,15 +78,15 @@ public class SmDeviceInfoActivity extends BaseFragmentActivity {
         tv_ShopNameV.setText(device.getShop().getNameV());
         tv_ShopAddress.setText(device.getShop().getAddress());
 
-        if (device.getSceneMode().equals("1")) {
+        if (device.getSceneMode() == 1) {
             tv_SceneMode.setText(getAppContext().getString(R.string.t_scenemode_1));
-        } else if (device.getSceneMode().equals("2")) {
+        } else if (device.getSceneMode() == 2) {
             tv_SceneMode.setText(getAppContext().getString(R.string.t_scenemode_2));
         }
 
-        if (device.getVersionMode().equals("1")) {
+        if (device.getVersionMode() == 1) {
             tv_VersionMode.setText(getAppContext().getString(R.string.t_vesionmode_1));
-        } else if (device.getVersionMode().equals("2")) {
+        } else if (device.getVersionMode() == 2) {
             tv_VersionMode.setText(getAppContext().getString(R.string.t_vesionmode_2));
         }
     }

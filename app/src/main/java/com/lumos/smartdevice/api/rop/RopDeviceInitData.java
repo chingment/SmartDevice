@@ -5,8 +5,8 @@ public class RopDeviceInitData {
     private String deviceId;
     private String imeiId;
     private String macAddr;
-    private String sceneMode;
-    private String vesionMode;
+    private int sceneMode;
+    private int vesionMode;
     private String appVerCode;
     private String appVerName;
     private String sysVerName;
@@ -20,19 +20,35 @@ public class RopDeviceInitData {
         this.deviceId = deviceId;
     }
 
-    public String getSceneMode() {
+    public String getImeiId() {
+        return imeiId;
+    }
+
+    public void setImeiId(String imeiId) {
+        this.imeiId = imeiId;
+    }
+
+    public String getMacAddr() {
+        return macAddr;
+    }
+
+    public void setMacAddr(String macAddr) {
+        this.macAddr = macAddr;
+    }
+
+    public int getSceneMode() {
         return sceneMode;
     }
 
-    public void setSceneMode(String sceneMode) {
+    public void setSceneMode(int sceneMode) {
         this.sceneMode = sceneMode;
     }
 
-    public String getVesionMode() {
+    public int getVesionMode() {
         return vesionMode;
     }
 
-    public void setVesionMode(String vesionMode) {
+    public void setVesionMode(int vesionMode) {
         this.vesionMode = vesionMode;
     }
 
@@ -50,22 +66,6 @@ public class RopDeviceInitData {
 
     public void setAppVerName(String appVerName) {
         this.appVerName = appVerName;
-    }
-
-    public String getMacAddr() {
-        return macAddr;
-    }
-
-    public void setMacAddr(String macAddr) {
-        this.macAddr = macAddr;
-    }
-
-    public String getImeiId() {
-        return imeiId;
-    }
-
-    public void setImeiId(String imeiId) {
-        this.imeiId = imeiId;
     }
 
     public String getSysVerName() {
