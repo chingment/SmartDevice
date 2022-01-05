@@ -161,6 +161,8 @@ public class CustomDialogOwnInfo extends Dialog {
                         super.onFailure(msg, e);
                     }
                 });
+
+
             }
         });
 
@@ -240,7 +242,6 @@ public class CustomDialogOwnInfo extends Dialog {
             editType = 2;
             RopOwnGetInfo rop = new RopOwnGetInfo();
             rop.setUserId(userId);
-
 
             ReqInterface.getInstance(version_mode).ownGetInfo(rop, new ReqHandler() {
 

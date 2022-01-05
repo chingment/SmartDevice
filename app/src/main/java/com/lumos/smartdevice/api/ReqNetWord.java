@@ -44,6 +44,20 @@ public class ReqNetWord implements IReqVersion{
     @Override
     public void ownLoginByAccount(RopOwnLoginByAccount rop, final ReqHandler reqHandler) {
 
+        reqHandler.sendBeforeSendMessage();
+
+        HttpClient.myPost(Config.URL.own_LoginByAccount, rop, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                reqHandler.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                reqHandler.onFailure(msg,e);
+            }
+        });
+
 
     }
 

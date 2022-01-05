@@ -27,6 +27,7 @@ public class Config {
 
     public class URL {
         public static final String device_InitData = BuildConfig.ENVIRONMENT + "/device/initData";
+        public static final String own_LoginByAccount = BuildConfig.ENVIRONMENT + "/own/loginByAccount";
     }
 
 }
