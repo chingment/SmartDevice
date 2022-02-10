@@ -180,7 +180,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smcloseapp), GridNineItemType.Function, "closeapp", R.drawable.ic_sm_closeapp));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smrebootsys), GridNineItemType.Function, "rebootsys", R.drawable.ic_sm_rebootsys));
 
-        GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(), gdv_Nine_Items);
+        GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(),R.layout.item_grid_nine, gdv_Nine_Items);
 
         gdv_Nine.setAdapter(gridNineItemAdapter);
 

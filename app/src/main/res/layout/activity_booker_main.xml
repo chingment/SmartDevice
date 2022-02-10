@@ -31,6 +31,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/btn_QueryBook"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -51,11 +52,12 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/aty_bookermain_query"
-                    android:textColor="@color/grid_nine_tv_txt_title"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/sp_12" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_BorrowBook"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -81,6 +83,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_ReturnBook"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

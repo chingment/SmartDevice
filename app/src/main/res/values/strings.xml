@@ -33,6 +33,8 @@
     <string name="aty_nav_title_smappscenesetting">应用场景</string>
     <string name="aty_nav_title_smhome">管理中心</string>
 
+    <string name="aty_nav_title_booker_identity_verify_way_select">【借/还】方式</string>
+    <string name="aty_nav_title_booker_identity_verify_by_iccard">刷卡方式</string>
 
     <string name="aty_smlogin_tv_txt_scene">场景</string>
     <string name="aty_smlogin_et_hint_username">用户名</string>
@@ -123,15 +125,6 @@
     <string name="t_contactus">联系我们</string>
     <string name="t_feedback">问题反馈</string>
     <string name="t_contactaddr">联系地址</string>
-    <string name="title_activity_booker_identity_verify_ic_card">
-        BookerIdentityVerifyIcCardActivity
-    </string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="t_brush_iccard">刷卡</string>
+    <string name="t_goback">返回</string>
 </resources>

@@ -39,5 +39,5 @@
     <color name="locker_box_open_result_2">#de646a</color>
     <color name="booker_primary_bg">#f6f3e9</color>
     <color name="booker_primary">#498250</color>
-
+    <color name="booker_nav_header_top_bg">#E6E6E6</color>
 </resources>
