@@ -35,6 +35,7 @@
 
     <string name="aty_nav_title_booker_identity_verify_way_select">【借/还】方式</string>
     <string name="aty_nav_title_booker_identity_verify_by_iccard">刷卡方式</string>
+    <string name="aty_nav_title_booker_borrow_return_inspect">借/还</string>
 
     <string name="aty_smlogin_tv_txt_scene">场景</string>
     <string name="aty_smlogin_et_hint_username">用户名</string>
@@ -123,6 +124,10 @@
     <string name="t_logout">退出</string>
     <string name="t_open_all">全部打开</string>
     <string name="t_contactus">联系我们</string>
+    <string name="t_borrower">借阅人</string>
+    <string name="t_borrowcardno">借阅卡号</string>
+    <string name="t_borrowyjquantity">可借数量</string>
+    <string name="t_borrowkjquantity">已借数量</string>
     <string name="t_feedback">问题反馈</string>
     <string name="t_contactaddr">联系地址</string>
     <string name="t_brush_iccard">刷卡</string>

@@ -33,8 +33,9 @@
         <entry key="app/src/main/res/layout-v21/booker_footer.xml" value="0.12604166666666666" />
         <entry key="app/src/main/res/layout-v21/booker_nav_footer.xml" value="0.140625" />
         <entry key="app/src/main/res/layout-v21/booker_nav_header.xml" value="0.140625" />
-        <entry key="app/src/main/res/layout/activity_booker_borrow_return_inspect.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/activity_booker_identity_verify_by_iccard.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_booker_borrow_return_inspect.xml" value="0.3958333333333333" />
+        <entry key="app/src/main/res/layout/activity_booker_borrow_return_overview.xml" value="0.12604166666666666" />
+        <entry key="app/src/main/res/layout/activity_booker_identity_verify_by_iccard.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_booker_identity_verify_ic_card.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_booker_identity_verify_select.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_booker_identity_verify_way_select.xml" value="0.165" />
