@@ -22,7 +22,7 @@ public class SmAppSceneSettingActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_smappscenesetting);
+        setContentView(R.layout.activity_sm_app_scene_setting);
 
         setNavHeaderTtile(R.string.aty_nav_title_smappscenesetting);
         setNavHeaderBtnByGoBackIsVisible(true);

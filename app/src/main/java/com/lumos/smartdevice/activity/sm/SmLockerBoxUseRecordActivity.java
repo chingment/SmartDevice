@@ -1,47 +1,31 @@
 package com.lumos.smartdevice.activity.sm;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.dialog.CustomDialogUserEdit;
 import com.lumos.smartdevice.adapter.SmLockerBoxUseRecordAdapter;
-import com.lumos.smartdevice.adapter.SmUserManagerUserAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetLockerGetBoxUseRecords;
-import com.lumos.smartdevice.api.rop.RetUserGetList;
-import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopLockerGetBoxUseRecords;
-import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
-import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.model.LockerBoxUseRecordBean;
-import com.lumos.smartdevice.model.UserBean;
-import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
-import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class SmLockerBoxUseRecordActivity  extends BaseFragmentActivity {
 
@@ -59,7 +43,7 @@ public class SmLockerBoxUseRecordActivity  extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_smlockerboxuserecord);
+        setContentView(R.layout.activity_sm_locker_box_use_record);
 
         setNavHeaderBtnByGoBackIsVisible(true);
 

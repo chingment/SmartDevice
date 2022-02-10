@@ -13,7 +13,7 @@ public class SmExcepitonViewer extends BaseFragmentActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_smexcepitonviewer);
+        setContentView(R.layout.activity_sm_excepiton_viewer);
 
         setNavHeaderTtile(R.string.aty_nav_title_smfactorysetting);
     }

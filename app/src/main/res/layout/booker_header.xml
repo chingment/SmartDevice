@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_30"
+    android:layout_gravity="center"
+    android:gravity="center|start">
+
+    <TextView
+        android:id="@+id/tv_MerchNameK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="图书自助借阅平台"
+        android:textColor="@color/field_name"
+        android:textSize="@dimen/sp_16" />
+
+
+</RelativeLayout>

@@ -56,7 +56,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_smusermanager);
+        setContentView(R.layout.activity_sm_user_manager);
 
         setNavHeaderBtnByGoBackIsVisible(true);
 

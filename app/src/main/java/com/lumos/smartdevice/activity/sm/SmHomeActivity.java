@@ -5,7 +5,6 @@ import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.InitDataActivity;
 import com.lumos.smartdevice.activity.dialog.CustomDialogOwnInfo;
-import com.lumos.smartdevice.activity.dialog.CustomDialogUserEdit;
 import com.lumos.smartdevice.adapter.GridNineItemAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -53,7 +52,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_smhome);
+        setContentView(R.layout.activity_sm_home);
         setNavHeaderTtile(R.string.aty_nav_title_smhome);
         device=getDevice();
         initView();

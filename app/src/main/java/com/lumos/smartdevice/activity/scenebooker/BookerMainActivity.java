@@ -1,7 +1,5 @@
 package com.lumos.smartdevice.activity.scenebooker;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,11 +20,11 @@ public class BookerMainActivity  extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lockermain);
+        setContentView(R.layout.activity_booker_main);
 
-        initView();
-        initEvent();
-        initData();
+        //initView();
+        //initEvent();
+        //initData();
 
         //DbManager.getInstance().saveLockerBoxUsage("locker_1","1-1-1-0","2","dsdaasda");
         //DbManager.getInstance().saveLockerBoxUsage("locker_1","2-1-2-0","2","dsdaasdDDa");

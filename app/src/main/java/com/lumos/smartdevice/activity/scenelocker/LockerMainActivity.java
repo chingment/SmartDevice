@@ -8,7 +8,6 @@ import android.widget.RelativeLayout;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
-import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
 
@@ -20,7 +19,7 @@ public class LockerMainActivity  extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lockermain);
+        setContentView(R.layout.activity_locker_main);
 
         initView();
         initEvent();

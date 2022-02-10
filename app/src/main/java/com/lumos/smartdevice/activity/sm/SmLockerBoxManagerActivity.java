@@ -66,7 +66,7 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_smlockerboxmanager);
+        setContentView(R.layout.activity_sm_locker_box_manager);
 
         setNavHeaderTtile(R.string.aty_nav_title_smlockerboxmanager);
         setNavHeaderBtnByGoBackIsVisible(true);

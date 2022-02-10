@@ -1,8 +1,5 @@
 package com.lumos.smartdevice.activity.sm;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -36,7 +33,7 @@ public class SmDeviceInfoActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_smdeviceinfo);
+        setContentView(R.layout.activity_sm_device_info);
 
         setNavHeaderTtile(R.string.aty_nav_title_smdeviceinfo);
         setNavHeaderBtnByGoBackIsVisible(true);

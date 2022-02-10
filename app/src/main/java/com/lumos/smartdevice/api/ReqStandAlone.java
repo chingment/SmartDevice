@@ -51,7 +51,7 @@ public class ReqStandAlone implements IReqVersion{
 
         int version_mode=DbManager.getInstance().getConfigIntValue(ConfigDao.FIELD_VERSION_MODE);
         int scene_mode= DbManager.getInstance().getConfigIntValue(ConfigDao.FIELD_SCENE_MODE);
-        if (scene_mode==AppVar.SCENE_MODE_1) {
+        if (scene_mode==AppVar.SCENE_MODE_1||scene_mode==AppVar.SCENE_MODE_2) {
 
             DeviceBean device = new DeviceBean();
             device.setDeviceId("1224567");

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.system.Os;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -81,7 +80,7 @@ public class InitDataActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_initdata);
+        setContentView(R.layout.activity_init_data);
 
         initView();
         initEvent();

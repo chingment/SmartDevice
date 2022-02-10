@@ -50,7 +50,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_smlogin);
+        setContentView(R.layout.activity_sm_login);
 
         setNavHeaderTtile(R.string.aty_nav_title_smlogin);
         setNavHeaderBtnByGoBackIsVisible(true);

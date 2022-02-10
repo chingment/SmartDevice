@@ -26,7 +26,7 @@ public class SmFactorySettingActivity extends BaseFragmentActivity implements Vi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_smfactorysetting);
+        setContentView(R.layout.activity_sm_factory_setting);
 
         setNavHeaderTtile(R.string.aty_nav_title_smfactorysetting);
         setNavHeaderBtnByGoBackIsVisible(true);

@@ -5,7 +5,6 @@ import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.InitDataActivity;
 import com.lumos.smartdevice.activity.dialog.CustomDialogOwnInfo;
-import com.lumos.smartdevice.activity.dialog.CustomDialogUserEdit;
 import com.lumos.smartdevice.adapter.GridNineItemAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -13,7 +12,6 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
 import com.lumos.smartdevice.api.rop.RetOwnSaveInfo;
-import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
@@ -52,7 +50,7 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_smhelptool);
+        setContentView(R.layout.activity_sm_help_tool);
 
         setNavHeaderTtile(R.string.aty_nav_title_smhelptool);
 

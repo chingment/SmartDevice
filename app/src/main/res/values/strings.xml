@@ -47,11 +47,16 @@
     <string name="aty_smusermanager_btn_txt_newuser">新建用户</string>
 
 
+    <string name="aty_bookermain_query">查询</string>
+    <string name="aty_bookermain_borrow">借书</string>
+    <string name="aty_bookermain_return">还书</string>
+
     <string name="unknown">未知</string>
     <string name="scenemode_1">寄存柜</string>
     <string name="scenemode_2">书柜</string>
     <string name="vesionmode_1">单机版</string>
     <string name="vesionmode_2">网络版</string>
+    <string name="empty"> </string>
     <string name="it_ls_logtips_tv_txt_datetime">时间</string>
     <string name="it_ls_logtips_tv_txt_content">内容</string>
     <string name="img_content_description_empty">图片</string>
@@ -115,4 +120,18 @@
     <string name="t_comname">COM.N</string>
     <string name="t_logout">退出</string>
     <string name="t_open_all">全部打开</string>
+    <string name="t_contactus">联系我们</string>
+    <string name="t_feedback">问题反馈</string>
+    <string name="t_contactaddr">联系地址</string>
+    <string name="title_activity_booker_identity_verify_ic_card">
+        BookerIdentityVerifyIcCardActivity
+    </string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

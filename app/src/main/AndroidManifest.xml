@@ -41,6 +41,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".activity.scenebooker.BookerBorrowReturnInspectActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.scenebooker.BookerBorrowReturnOverviewActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.scenebooker.BookerIdentityVerifyIcCardActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.scenebooker.BookerIdentityVerifySelectActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.scenebooker.BookerMainActivity"
             android:exported="true" />
         <activity
@@ -58,7 +70,6 @@
         <activity android:name=".activity.sm.SmFactorySettingActivity" />
         <activity android:name=".activity.sm.SmLoginActivity" />
         <activity android:name=".activity.sm.SmHelpToolActivity" />
-        <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.InitDataActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
