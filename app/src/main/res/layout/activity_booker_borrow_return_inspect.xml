@@ -14,12 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rl_Bodyer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/rl_Footer"
         android:layout_below="@+id/rl_Header"
+        android:orientation="vertical"
         android:paddingStart="@dimen/size_20"
         android:paddingEnd="@dimen/size_20">
 
@@ -31,10 +32,9 @@
             android:gravity="center|top"
             android:orientation="vertical"
             android:paddingStart="@dimen/size_20"
-            android:paddingEnd="@dimen/size_20"
             android:paddingTop="@dimen/size_16"
-            android:paddingBottom="@dimen/size_10"
-            >
+            android:paddingEnd="@dimen/size_20"
+            android:paddingBottom="@dimen/size_10">
 
 
             <LinearLayout
@@ -48,15 +48,15 @@
                 <TextView
                     android:layout_width="@dimen/size_64"
                     android:layout_height="wrap_content"
-                    android:textAlignment="textEnd"
                     android:text="@string/t_borrower"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:layout_marginStart="@dimen/size_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_10"
                     android:text="邱庆文"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
@@ -73,15 +73,15 @@
                 <TextView
                     android:layout_width="@dimen/size_64"
                     android:layout_height="wrap_content"
-                    android:textAlignment="textEnd"
                     android:text="@string/t_borrowcardno"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:layout_marginStart="@dimen/size_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_10"
                     android:text="844344434"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
@@ -98,15 +98,15 @@
                 <TextView
                     android:layout_width="@dimen/size_64"
                     android:layout_height="wrap_content"
-                    android:textAlignment="textEnd"
                     android:text="@string/t_borrowyjquantity"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:layout_marginStart="@dimen/size_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/size_10"
                     android:text="10"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
@@ -123,24 +123,53 @@
                 <TextView
                     android:layout_width="@dimen/size_64"
                     android:layout_height="wrap_content"
-                    android:textAlignment="textEnd"
                     android:text="@string/t_borrowkjquantity"
+                    android:textAlignment="textEnd"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:layout_marginStart="@dimen/size_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/size_10"
                     android:text="1"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
             </LinearLayout>
 
         </LinearLayout>
 
 
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/size_10"
+                android:layout_marginBottom="@dimen/size_10"
+                android:text="请选择图书柜门"
+                android:textColor="@color/field_name"
+                android:textSize="@dimen/sp_16" />
+
+            <com.lumos.smartdevice.ui.my.MyGridView
+                android:id="@+id/gdv_Boxs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:horizontalSpacing="0dp"
+                android:listSelector="@color/transparent"
+                android:numColumns="5"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="0dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
     <include

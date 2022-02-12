@@ -28,7 +28,7 @@ public class GridNineItemAdapter extends BaseAdapter {
 
     public GridNineItemAdapter(Context context,int resource, List<GridNineItemBean> items) {
         this.items = items;
-        this.resource=resource;
+        this.resource = resource;
         this.context = context;
     }
 

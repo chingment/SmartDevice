@@ -33,7 +33,7 @@
         <entry key="app/src/main/res/layout-v21/booker_footer.xml" value="0.12604166666666666" />
         <entry key="app/src/main/res/layout-v21/booker_nav_footer.xml" value="0.140625" />
         <entry key="app/src/main/res/layout-v21/booker_nav_header.xml" value="0.140625" />
-        <entry key="app/src/main/res/layout/activity_booker_borrow_return_inspect.xml" value="0.3958333333333333" />
+        <entry key="app/src/main/res/layout/activity_booker_borrow_return_inspect.xml" value="0.36533957845433257" />
         <entry key="app/src/main/res/layout/activity_booker_borrow_return_overview.xml" value="0.12604166666666666" />
         <entry key="app/src/main/res/layout/activity_booker_identity_verify_by_iccard.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_booker_identity_verify_ic_card.xml" value="0.375" />
@@ -48,6 +48,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_sm_device_info.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/activity_sm_home.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/layout/activity_sm_locker_box_manager.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_sm_user_manager.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_smappscenesetting.xml" value="0.3486111111111111" />
         <entry key="app/src/main/res/layout/activity_smdeviceinfo.xml" value="0.16451612903225807" />
@@ -72,6 +73,7 @@
         <entry key="app/src/main/res/layout/custom_dialog_lockerbox.xml" value="0.335" />
         <entry key="app/src/main/res/layout/custom_dialog_owninfo.xml" value="0.14427083333333332" />
         <entry key="app/src/main/res/layout/item_grid_nine.xml" value="0.15260416666666668" />
+        <entry key="app/src/main/res/layout/item_grid_nine_booker_borrow_return_inspect_cabinet_box.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_grid_nine_booker_identity_verify_option.xml" value="0.337037037037037" />
         <entry key="app/src/main/res/layout/item_list_lockerbox.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_list_smlockerboxusage.xml" value="0.75" />

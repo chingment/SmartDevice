@@ -6,9 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class CabinetLayoutBean implements Serializable {
-    @JSONField(name="span_count")
     private int spanCount;
-    @JSONField(name="cells")
     private List<String> Cells;
 
     public int getSpanCount() {
