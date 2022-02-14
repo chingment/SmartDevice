@@ -70,7 +70,8 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
             });
 
             for (CabinetBean cabinet: cabinets ) {
-                CabinetLayoutBean cabinetLayout = JSON.parseObject(cabinet.getLayout(), new TypeReference<CabinetLayoutBean>() {
+                String layout=cabinet.getLayout();
+                CabinetLayoutBean cabinetLayout = JSON.parseObject(layout, new TypeReference<CabinetLayoutBean>() {
                 });
                 if (cabinetLayout != null) {
                     List<String> cabinetCells = cabinetLayout.getCells();
