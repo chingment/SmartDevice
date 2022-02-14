@@ -2,16 +2,27 @@ package com.lumos.smartdevice.activity.scenebooker;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.dialog.CustomDialogBookerBorrowReturnCabinetHandle;
+import com.lumos.smartdevice.activity.sm.SmUserManagerActivity;
 import com.lumos.smartdevice.adapter.BookerBorrowReturnInspectCabinetBoxAdapter;
+import com.lumos.smartdevice.api.ReqHandler;
+import com.lumos.smartdevice.api.ReqInterface;
+import com.lumos.smartdevice.api.ResultBean;
+import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetIdentityBorrower;
+import com.lumos.smartdevice.api.rop.RetUserGetList;
+import com.lumos.smartdevice.api.rop.RopIdentityBorrower;
+import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.CabinetBoxBean;
 import com.lumos.smartdevice.model.CabinetLayoutBean;
 import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -28,6 +39,10 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
     private View btn_Nav_Footer_Goback;
     private MyGridView gdv_Boxs;
+    private TextView tv_Borrower;
+    private TextView tv_BorrowCardNo;
+    private TextView tv_CanBorrowQuantity;
+    private TextView tv_BorrowedQuantity;
 
     private DeviceBean device;
 
@@ -93,10 +108,12 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
     private void initView() {
         btn_Nav_Footer_Goback = findViewById(R.id.btn_Nav_Footer_Goback);
-
+        tv_Borrower = findViewById(R.id.tv_Borrower);
+        tv_BorrowCardNo = findViewById(R.id.tv_BorrowCardNo);
+        tv_CanBorrowQuantity = findViewById(R.id.tv_CanBorrowQuantity);
+        tv_BorrowedQuantity = findViewById(R.id.tv_BorrowedQuantity);
         gdv_Boxs = findViewById(R.id.gdv_Boxs);
-
-        dialog_BookerCabinetHandle=new CustomDialogBookerBorrowReturnCabinetHandle(BookerBorrowReturnInspectActivity.this);
+        dialog_BookerCabinetHandle = new CustomDialogBookerBorrowReturnCabinetHandle(BookerBorrowReturnInspectActivity.this);
     }
 
     private void initEvent() {
@@ -119,7 +136,61 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
         });
 
         gdv_Boxs.setAdapter(gridNineItemAdapter);
+
+        getIdentityBorrower("1", "1");
     }
+
+    private void getIdentityBorrower(String identityType,String identityId){
+
+        RopIdentityBorrower rop=new RopIdentityBorrower();
+        rop.setIdentityType(identityType);
+        rop.setIdentityId(identityId);
+
+        ReqInterface.getInstance().identityBorrower(rop, new ReqHandler(){
+
+            @Override
+            public void onBeforeSend() {
+                super.onBeforeSend();
+                showLoading(BookerBorrowReturnInspectActivity.this);
+            }
+
+            @Override
+            public void onAfterSend() {
+                super.onAfterSend();
+                hideLoading(BookerBorrowReturnInspectActivity.this);
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                super.onSuccess(response);
+                ResultBean<RetIdentityBorrower> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetIdentityBorrower>>() {
+                });
+
+                if(rt.getCode()== ResultCode.SUCCESS) {
+                    RetIdentityBorrower d = rt.getData();
+
+                    tv_Borrower.setText(d.getSignName());
+                    tv_BorrowCardNo.setText(d.getCardNo());
+                    tv_BorrowedQuantity.setText(String.valueOf(d.getBorrowedQuantity()));
+                    tv_CanBorrowQuantity.setText(String.valueOf(d.getCanBorrowQuantity()));
+
+                }
+                else {
+                    showToast(rt.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                super.onFailure(msg, e);
+            }
+        });
+
+
+    }
+
+
+
 
     @Override
     public void onClick(View v) {

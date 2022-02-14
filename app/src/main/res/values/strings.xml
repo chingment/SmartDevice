@@ -129,8 +129,8 @@
     <string name="t_contactus">联系我们</string>
     <string name="t_borrower">借阅人</string>
     <string name="t_borrowcardno">借阅卡号</string>
-    <string name="t_borrowyjquantity">可借数量</string>
-    <string name="t_borrowkjquantity">已借数量</string>
+    <string name="t_canborrow_quantity">可借数量</string>
+    <string name="t_borrowed_quantity">已借数量</string>
     <string name="t_feedback">问题反馈</string>
     <string name="t_contactaddr">联系地址</string>
     <string name="t_brush_iccard">刷卡</string>

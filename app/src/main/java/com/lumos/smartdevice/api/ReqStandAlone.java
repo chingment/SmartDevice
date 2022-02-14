@@ -12,6 +12,7 @@ import com.lumos.smartdevice.api.rop.RetUserGetDetail;
 import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
+import com.lumos.smartdevice.api.rop.RopIdentityBorrower;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBoxUseRecords;
 import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
@@ -330,5 +331,10 @@ public class ReqStandAlone implements IReqVersion{
         reqHandler.sendBeforeSendMessage();
         ResultBean<Object> result = DbManager.getInstance().saveLockBoxUseRecord(rop.getCabinetId(), rop.getSlotId(),rop.getAction(),rop.getResult(),rop.getRemark());
         reqHandler.sendSuccessMessage(result.toJSONString());
+    }
+
+    @Override
+    public void identityBorrower(RopIdentityBorrower rop, final ReqHandler reqHandler) {
+
     }
 }

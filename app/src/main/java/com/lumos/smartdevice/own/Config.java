@@ -31,6 +31,7 @@ public class Config {
         public static final String own_Logout = BuildConfig.ENVIRONMENT + "/own/logout";
         public static final String own_GetInfo = BuildConfig.ENVIRONMENT + "/own/getInfo";
         public static final String own_SaveInfo = BuildConfig.ENVIRONMENT + "/own/saveInfo";
+        public static final String identity_Borrower = BuildConfig.ENVIRONMENT + "/identity/borrower";
     }
 
 }

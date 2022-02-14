@@ -1,6 +1,7 @@
 package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
+import com.lumos.smartdevice.api.rop.RopIdentityBorrower;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBoxUseRecords;
 import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
@@ -172,6 +173,27 @@ public class ReqNetWord implements IReqVersion{
 
     @Override
     public void lockerSaveBoxOpenResult(RopLockerSaveBoxOpenResult rop, final ReqHandler reqHandler) {
+
+    }
+
+    @Override
+    public void identityBorrower(RopIdentityBorrower rop, final ReqHandler reqHandler) {
+
+        reqHandler.sendBeforeSendMessage();
+
+        HttpClient.myPost(Config.URL.identity_Borrower, rop, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onFailure(msg,e);
+            }
+        });
 
     }
 }

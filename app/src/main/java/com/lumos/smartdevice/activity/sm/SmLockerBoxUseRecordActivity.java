@@ -43,7 +43,7 @@ public class SmLockerBoxUseRecordActivity  extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sm_locker_box_use_record);
+        setContentView(R.layout.activity_sm_locker_box_userecord);
 
         setNavHeaderBtnByGoBackIsVisible(true);
 
