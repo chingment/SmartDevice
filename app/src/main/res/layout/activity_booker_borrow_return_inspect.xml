@@ -52,7 +52,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:id="@+id/tv_Borrower"
+                    android:id="@+id/tv_SignName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_10"
@@ -78,7 +78,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:id="@+id/tv_BorrowCardNo"
+                    android:id="@+id/tv_CardNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_10"

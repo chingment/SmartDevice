@@ -39,8 +39,8 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
     private View btn_Nav_Footer_Goback;
     private MyGridView gdv_Boxs;
-    private TextView tv_Borrower;
-    private TextView tv_BorrowCardNo;
+    private TextView tv_SignName;
+    private TextView tv_CardNo;
     private TextView tv_CanBorrowQuantity;
     private TextView tv_BorrowedQuantity;
 
@@ -108,8 +108,8 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
     private void initView() {
         btn_Nav_Footer_Goback = findViewById(R.id.btn_Nav_Footer_Goback);
-        tv_Borrower = findViewById(R.id.tv_Borrower);
-        tv_BorrowCardNo = findViewById(R.id.tv_BorrowCardNo);
+        tv_SignName = findViewById(R.id.tv_SignName);
+        tv_CardNo = findViewById(R.id.tv_CardNo);
         tv_CanBorrowQuantity = findViewById(R.id.tv_CanBorrowQuantity);
         tv_BorrowedQuantity = findViewById(R.id.tv_BorrowedQuantity);
         gdv_Boxs = findViewById(R.id.gdv_Boxs);
@@ -143,6 +143,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
     private void getIdentityBorrower(String identityType,String identityId){
 
         RopIdentityBorrower rop=new RopIdentityBorrower();
+        rop.setDeviceId(device.getDeviceId());
         rop.setIdentityType(identityType);
         rop.setIdentityId(identityId);
 
@@ -169,8 +170,8 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                 if(rt.getCode()== ResultCode.SUCCESS) {
                     RetIdentityBorrower d = rt.getData();
 
-                    tv_Borrower.setText(d.getSignName());
-                    tv_BorrowCardNo.setText(d.getCardNo());
+                    tv_SignName.setText(d.getSignName());
+                    tv_CardNo.setText(d.getCardNo());
                     tv_BorrowedQuantity.setText(String.valueOf(d.getBorrowedQuantity()));
                     tv_CanBorrowQuantity.setText(String.valueOf(d.getCanBorrowQuantity()));
 
@@ -185,8 +186,6 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                 super.onFailure(msg, e);
             }
         });
-
-
     }
 
 
