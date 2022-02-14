@@ -435,16 +435,58 @@ public class DbManager {
                         cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_HEIGHT,140);
                         cv_LockerBox.put(LockerBoxDao.COLUMN_NAME_WIDTH,280);
                         db.insert(LockerBoxDao.TABLE_NAME, null, cv_LockerBox);
-
                     }
-
-
                 }
 
                 return ResultUtil.isSuccess("保存成功");
             }
         }
         else if(appSceneMode==AppVar.SCENE_MODE_2){
+
+
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            if (db.isOpen()) {
+
+                List<CabinetBean> cabinets = JSON.parseObject(json_cabinets, new TypeReference<List<CabinetBean>>() {
+                });
+
+                if (cabinets == null || cabinets.size() <= 0) {
+                    return ResultUtil.isFailure("保存失败，解释串口协议不成功");
+                }
+
+                db.delete(CabinetDao.TABLE_NAME, null, null);
+
+                for (CabinetBean cabinet : cabinets) {
+
+                    ContentValues cv_Cabinet = new ContentValues();
+                    cv_Cabinet.put(CabinetDao.COLUMN_NAME_CABINET_ID, cabinet.getCabinetId());
+                    cv_Cabinet.put(CabinetDao.COLUMN_NAME_NAME, cabinet.getName());
+                    cv_Cabinet.put(CabinetDao.COLUMN_NAME_COM_ID, cabinet.getComId());
+                    cv_Cabinet.put(CabinetDao.COLUMN_NAME_COM_BAUD, cabinet.getComBaud());
+                    cv_Cabinet.put(CabinetDao.COLUMN_NAME_COM_PRL, cabinet.getComPrl());
+                    cv_Cabinet.put(CabinetDao.COLUMN_NAME_LAYOUT, cabinet.getLayout());
+
+                    db.insert(CabinetDao.TABLE_NAME, null, cv_Cabinet);
+
+
+                    CabinetLayoutBean layout = JSON.parseObject(cabinet.getLayout(), new TypeReference<CabinetLayoutBean>() {
+                    });
+
+                    if (layout == null)
+                        return ResultUtil.isFailure("保存失败，解释布局协议失败");
+
+                    if (layout.getSpanCount() == 0)
+                        return ResultUtil.isFailure("保存失败，解释布局协议失败,SpanCount不能为0");
+
+                    if (layout.getCells() == null || layout.getCells().size() == 0)
+                        return ResultUtil.isFailure("保存失败，解释布局协议失败,Cells不能为空");
+                }
+
+                return ResultUtil.isSuccess("保存成功");
+            }
+
+
+
             return ResultUtil.isSuccess("保存成功");
         }
 

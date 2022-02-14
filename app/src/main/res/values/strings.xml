@@ -33,9 +33,12 @@
     <string name="aty_nav_title_smappscenesetting">应用场景</string>
     <string name="aty_nav_title_smhome">管理中心</string>
 
-    <string name="aty_nav_title_booker_identity_verify_way_select">【借/还】方式</string>
+    <string name="aty_nav_title_booker_identity_verify_way_select_1">借书方式</string>
+    <string name="aty_nav_title_booker_identity_verify_way_select_2">还书方式</string>
+
     <string name="aty_nav_title_booker_identity_verify_by_iccard">刷卡方式</string>
-    <string name="aty_nav_title_booker_borrow_return_inspect">借/还</string>
+    <string name="aty_nav_title_booker_borrow_return_inspect">借阅信息</string>
+    <string name="aty_nav_title_booker_borrow_return_overview">借/还</string>
 
     <string name="aty_smlogin_tv_txt_scene">场景</string>
     <string name="aty_smlogin_et_hint_username">用户名</string>

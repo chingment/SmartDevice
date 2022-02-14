@@ -45,7 +45,7 @@ public class LogTipsAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_list_logtips, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_logtips, parent, false);
         }
         final LogTipsBean item = items.get(position);
         TextView tv_Content = ViewHolder.get(convertView, R.id.tv_Content);

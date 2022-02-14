@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.dialog.CustomDialogUserEdit;
+import com.lumos.smartdevice.activity.dialog.CustomDialogSmUserEdit;
 import com.lumos.smartdevice.adapter.SmUserManagerUserAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -41,7 +41,7 @@ import java.util.Map;
 public class SmUserManagerActivity extends BaseFragmentActivity {
     private static final String TAG = "SmUserManagerActivity";
     private ImageView btn_NewUser;
-    private CustomDialogUserEdit dialog_UserEdit;
+    private CustomDialogSmUserEdit dialog_UserEdit;
     private SuperRefreshLayout lv_UsersRefresh;
     private RecyclerView lv_UsersData;
     private int lv_Users_PageIndex=0;
@@ -103,9 +103,9 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
 
             }
         });
-        dialog_UserEdit=new CustomDialogUserEdit(SmUserManagerActivity.this);
+        dialog_UserEdit=new CustomDialogSmUserEdit(SmUserManagerActivity.this);
         dialog_UserEdit.checkUserNameIsPhoneFormat(true);
-        dialog_UserEdit.setOnClickListener(new CustomDialogUserEdit.OnClickListener() {
+        dialog_UserEdit.setOnClickListener(new CustomDialogSmUserEdit.OnClickListener() {
             @Override
             public void onSaveResult(ResultBean<RetUserSave> rt) {
                 if(rt.getCode()== ResultCode.SUCCESS) {

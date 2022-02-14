@@ -32,7 +32,7 @@ public class CustomDialogCabinetConfig extends Dialog {
         super(context, R.style.custom_dialog);
         mThis = this;
         mContext = context;
-        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_cabinetconfig, null);
+        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_cabinet_config, null);
 
         btn_Close = ViewHolder.get(mLayoutRes, R.id.dialog_Btn_Close);
         btn_Close.setOnClickListener(new View.OnClickListener() {

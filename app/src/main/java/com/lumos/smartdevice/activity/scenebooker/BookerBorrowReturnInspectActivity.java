@@ -1,12 +1,12 @@
 package com.lumos.smartdevice.activity.scenebooker;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.dialog.CustomDialogBookerBorrowReturnCabinetHandle;
 import com.lumos.smartdevice.adapter.BookerBorrowReturnInspectCabinetBoxAdapter;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.CabinetBoxBean;
@@ -32,6 +32,8 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
     private DeviceBean device;
 
     private List<CabinetBoxBean> cabinetBoxs=new ArrayList<>();
+
+    private CustomDialogBookerBorrowReturnCabinetHandle dialog_BookerCabinetHandle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,8 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
         btn_Nav_Footer_Goback = findViewById(R.id.btn_Nav_Footer_Goback);
 
         gdv_Boxs = findViewById(R.id.gdv_Boxs);
+
+        dialog_BookerCabinetHandle=new CustomDialogBookerBorrowReturnCabinetHandle(BookerBorrowReturnInspectActivity.this);
     }
 
     private void initEvent() {
@@ -106,8 +110,11 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
         gridNineItemAdapter.setOnClickListener(new BookerBorrowReturnInspectCabinetBoxAdapter.OnClickListener() {
             @Override
             public void onClick(CabinetBoxBean v) {
-                Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
-                startActivity(intent);
+
+                dialog_BookerCabinetHandle.show();
+
+                //Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
+                //startActivity(intent);
             }
         });
 

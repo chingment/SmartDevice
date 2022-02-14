@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 
+import androidx.cardview.widget.CardView;
+
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.CabinetBoxBean;
 import com.lumos.smartdevice.ui.ViewHolder;
@@ -45,17 +47,18 @@ public class BookerBorrowReturnInspectCabinetBoxAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_grid_nine_booker_borrow_return_inspect_cabinet_box, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_booker_borrow_return_inspect_cabinet_box, parent, false);
         }
 
         CabinetBoxBean bean = items.get(position);
 
+        CardView cv_Box = ViewHolder.get(convertView, R.id.cv_Box);
         TextView tv_BoxName = ViewHolder.get(convertView, R.id.tv_BoxName);
         tv_BoxName.setText(bean.getBoxName());
 
         if(onClickListener!=null) {
-            tv_BoxName.setTag(bean);
-            tv_BoxName.setOnClickListener(new View.OnClickListener() {
+            cv_Box.setTag(bean);
+            cv_Box.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     CabinetBoxBean l_Bean = (CabinetBoxBean) view.getTag();

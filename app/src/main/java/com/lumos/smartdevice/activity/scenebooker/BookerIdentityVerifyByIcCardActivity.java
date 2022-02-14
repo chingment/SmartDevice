@@ -16,11 +16,18 @@ public class BookerIdentityVerifyByIcCardActivity extends BaseFragmentActivity {
 
     private View btn_Nav_Footer_Goback;
     private View btn_GoInspect;
+
+    private String intent_extra_action="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booker_identity_verify_by_iccard);
+
+        intent_extra_action = getIntent().getStringExtra("action");
+
         setNavHeaderTtile(R.string.aty_nav_title_booker_identity_verify_by_iccard);
+
         initView();
         initEvent();
         initData();
@@ -51,6 +58,7 @@ public class BookerIdentityVerifyByIcCardActivity extends BaseFragmentActivity {
             }
             else if (id == R.id.btn_GoInspect) {
                 Intent intent = new Intent(getAppContext(), BookerBorrowReturnInspectActivity.class);
+                intent.putExtra("action", intent_extra_action);
                 startActivity(intent);
             }
         }

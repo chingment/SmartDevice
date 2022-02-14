@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.adapter.GridNineItemAdapter;
+import com.lumos.smartdevice.adapter.BookerIdentityVerfiyWayAdapter;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
@@ -20,14 +20,25 @@ public class BookerIdentityVerifyWaySelectActivity extends BaseFragmentActivity 
 
     private static final String TAG = "BookerIdentityVerifyWaySelectActivity";
 
-    private List<GridNineItemBean> gdv_Nine_Items;
-    private MyGridView gdv_Nine;
+    private MyGridView gdv_Ways;
     private View btn_Nav_Footer_Goback;
+
+    private List<GridNineItemBean> gdv_Ways_Items;
+
+    private String intent_extra_action="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booker_identity_verify_way_select);
-        setNavHeaderTtile(R.string.aty_nav_title_booker_identity_verify_way_select);
+
+        intent_extra_action = getIntent().getStringExtra("action");
+
+        if (intent_extra_action.equals("borrow_book")) {
+            setNavHeaderTtile(R.string.aty_nav_title_booker_identity_verify_way_select_1);
+        } else {
+            setNavHeaderTtile(R.string.aty_nav_title_booker_identity_verify_way_select_2);
+        }
+
         initView();
         initEvent();
         initData();
@@ -35,16 +46,16 @@ public class BookerIdentityVerifyWaySelectActivity extends BaseFragmentActivity 
 
     private void initView() {
         btn_Nav_Footer_Goback=findViewById(R.id.btn_Nav_Footer_Goback);
-        gdv_Nine = findViewById(R.id.gdv_Nine);
+        gdv_Ways = findViewById(R.id.gdv_Ways);
     }
 
     private void initEvent() {
         btn_Nav_Footer_Goback.setOnClickListener(this);
-        gdv_Nine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gdv_Ways.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (!NoDoubleClickUtil.isDoubleClick()) {
-                    GridNineItemBean gdv_Nine_Item = gdv_Nine_Items.get(position);
+                    GridNineItemBean gdv_Nine_Item = gdv_Ways_Items.get(position);
                     String action = gdv_Nine_Item.getAction();
                     switch (action) {
                         case "iccard":
@@ -60,17 +71,16 @@ public class BookerIdentityVerifyWaySelectActivity extends BaseFragmentActivity 
     }
 
     private void initData() {
-
-        gdv_Nine_Items = new ArrayList<>();
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.t_brush_iccard), GridNineItemType.Function, "iccard", R.drawable.ic_booker_identity_verify_option_iccard));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.t_brush_iccard), GridNineItemType.Function, "iccard", R.drawable.ic_booker_identity_verify_option_iccard));
-        GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(),R.layout.item_grid_nine_booker_identity_verify_option, gdv_Nine_Items);
-        gdv_Nine.setAdapter(gridNineItemAdapter);
+        gdv_Ways_Items = new ArrayList<>();
+        gdv_Ways_Items.add(new GridNineItemBean(getAppContext().getString(R.string.t_brush_iccard), GridNineItemType.Function, "iccard", R.drawable.ic_booker_identity_verify_way_iccard));
+        BookerIdentityVerfiyWayAdapter gdvWaysItemAdapter = new BookerIdentityVerfiyWayAdapter(getAppContext(), gdv_Ways_Items);
+        gdv_Ways.setAdapter(gdvWaysItemAdapter);
 
     }
 
-    private void gdvIcCard(){
+    private void gdvIcCard() {
         Intent intent = new Intent(BookerIdentityVerifyWaySelectActivity.this, BookerIdentityVerifyByIcCardActivity.class);
+        intent.putExtra("action", intent_extra_action);
         startActivity(intent);
     }
 

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly_Header"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_30"
+    >
+
+    <LinearLayout
+        android:id="@+id/btn_Nav_Header_Goback"
+        android:layout_width="@dimen/size_50"
+        android:layout_height="match_parent"
+        android:baselineAligned="false"
+        android:gravity="center_vertical|left"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:layout_width="@dimen/size_8"
+            android:layout_height="@dimen/size_14"
+            android:layout_marginLeft="@dimen/size_14"
+            android:background="@null"
+            android:contentDescription="@string/img_content_description_empty"
+            android:scaleType="fitXY"
+            android:src="@drawable/nav_header_btn_goback" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_Nav_Header_Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/size_4"
+            android:layout_marginTop="@dimen/size_4"
+            android:gravity="center"
+            android:text="@string/title"
+            android:textColor="@color/ly_nav_header_tv_txt_title"
+            android:textSize="@dimen/sp_18" />
+
+        <View
+            android:visibility="gone"
+            android:layout_width="@dimen/size_36"
+            android:layout_height="@dimen/size_2"
+            android:background="@drawable/gradient_box" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btn_Nav_Header_Right"
+        android:layout_width="@dimen/size_50"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:baselineAligned="false"
+        android:gravity="center_vertical|center_horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingRight="@dimen/size_12"
+            android:text="@string/ly_nav_header_btn_txt_right"
+            android:textColor="@color/ly_nav_header_btn_txt_right"
+            android:textSize="@dimen/sp_18" />
+    </LinearLayout>
+
+
+</RelativeLayout>

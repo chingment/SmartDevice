@@ -150,7 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/size_10"
+                android:layout_marginTop="@dimen/size_20"
                 android:layout_marginBottom="@dimen/size_10"
                 android:text="请选择图书柜门"
                 android:textColor="@color/field_name"

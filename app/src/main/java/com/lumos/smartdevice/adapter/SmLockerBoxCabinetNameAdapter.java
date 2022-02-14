@@ -47,7 +47,7 @@ public class SmLockerBoxCabinetNameAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_smlockerbox_cabinetname, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_sm_locker_box_cabinet_name, parent, false);
         }
         CabinetBean item = items.get(position);
 

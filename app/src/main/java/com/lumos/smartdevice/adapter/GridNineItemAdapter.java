@@ -24,11 +24,8 @@ public class GridNineItemAdapter extends BaseAdapter {
     private final List<GridNineItemBean> items;
     private final Context context;
 
-    private int resource=-1;
-
-    public GridNineItemAdapter(Context context,int resource, List<GridNineItemBean> items) {
+    public GridNineItemAdapter(Context context,List<GridNineItemBean> items) {
         this.items = items;
-        this.resource = resource;
         this.context = context;
     }
 
@@ -51,7 +48,7 @@ public class GridNineItemAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(resource, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_grid_nine, parent, false);
         }
 
         GridNineItemBean bean = items.get(position);

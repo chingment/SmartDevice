@@ -45,7 +45,7 @@ public class CustomDialogLockerBox extends Dialog {
         super(context, R.style.custom_dialog);
         mThis = this;
         mContext = context;
-        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_lockerbox, null);
+        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_sm_locker_box, null);
 
 
         btn_Close = ViewHolder.get(mLayoutRes, R.id.dialog_Btn_Close);

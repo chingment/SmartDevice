@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_nav_header" />
+    <include layout="@layout/sm_nav_header" />
 
     <RelativeLayout
         android:id="@+id/layout_body"

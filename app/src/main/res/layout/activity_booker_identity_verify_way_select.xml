@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/booker_primary_bg"
@@ -14,18 +13,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rl_Bodyer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/rl_Footer"
         android:layout_below="@+id/rl_Header"
-        android:paddingStart="@dimen/size_10"
-        android:paddingEnd="@dimen/size_10"
-       >
+        android:orientation="vertical"
+        android:paddingStart="@dimen/size_20"
+        android:paddingEnd="@dimen/size_20">
+
+
 
         <com.lumos.smartdevice.ui.my.MyGridView
-            android:id="@+id/gdv_Nine"
+            android:id="@+id/gdv_Ways"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -35,8 +36,7 @@
             android:numColumns="2"
             android:stretchMode="columnWidth" />
 
-
-    </RelativeLayout>
+    </LinearLayout>
 
 
     <include

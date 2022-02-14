@@ -19,7 +19,7 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booker_borrow_return_overview);
-        setNavHeaderTtile(R.string.aty_nav_title_booker_identity_verify_by_iccard);
+        setNavHeaderTtile(R.string.aty_nav_title_booker_borrow_return_overview);
         initView();
         initEvent();
         initData();

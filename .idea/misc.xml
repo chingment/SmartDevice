@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/drawable-v24/shapeloading_dialog_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/shapeloading_shadow.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/widget_btn_1_n.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/booker_btn_round_primary.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/booker_circle_corner.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/booker_nav_footer_border_top.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/booker_nav_footer_title_bg.xml" value="0.1" />
@@ -46,7 +47,7 @@
         <entry key="app/src/main/res/layout/activity_initdata.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_lockermain.xml" value="0.10364583333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_sm_device_info.xml" value="0.140625" />
+        <entry key="app/src/main/res/layout/activity_sm_device_info.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_sm_home.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/activity_sm_locker_box_manager.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_sm_user_manager.xml" value="0.1" />
@@ -66,25 +67,41 @@
         <entry key="app/src/main/res/layout/booker_m_footer.xml" value="0.13072916666666667" />
         <entry key="app/src/main/res/layout/booker_m_header.xml" value="0.335" />
         <entry key="app/src/main/res/layout/booker_nav_fooer.xml" value="0.140625" />
-        <entry key="app/src/main/res/layout/booker_nav_footer.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/booker_nav_footer.xml" value="0.125" />
         <entry key="app/src/main/res/layout/booker_nav_header.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/custom_dialog_borrow_return_cabinet_handle.xml" value="0.13489583333333333" />
+        <entry key="app/src/main/res/layout/custom_dialog_cabinet_config.xml" value="0.12092391304347826" />
+        <entry key="app/src/main/res/layout/custom_dialog_cabinetconfig.xml" value="0.13489583333333333" />
         <entry key="app/src/main/res/layout/custom_dialog_confirm.xml" value="0.375" />
         <entry key="app/src/main/res/layout/custom_dialog_loading.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/custom_dialog_locker_box.xml" value="0.12092391304347826" />
         <entry key="app/src/main/res/layout/custom_dialog_lockerbox.xml" value="0.335" />
         <entry key="app/src/main/res/layout/custom_dialog_owninfo.xml" value="0.14427083333333332" />
-        <entry key="app/src/main/res/layout/item_grid_nine.xml" value="0.15260416666666668" />
+        <entry key="app/src/main/res/layout/custom_dialog_useredit.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/item_grid_nine.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_grid_nine_booker_borrow_return_inspect_cabinet_box.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_grid_nine_booker_identity_verify_option.xml" value="0.337037037037037" />
+        <entry key="app/src/main/res/layout/item_grid_nine_booker_identity_verify_way.xml" value="0.13489583333333333" />
         <entry key="app/src/main/res/layout/item_list_lockerbox.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/item_list_logtips.xml" value="0.12092391304347826" />
+        <entry key="app/src/main/res/layout/item_list_sm_locker_box_usage.xml" value="0.12092391304347826" />
+        <entry key="app/src/main/res/layout/item_list_sm_locker_box_userecord.xml" value="0.12092391304347826" />
+        <entry key="app/src/main/res/layout/item_list_sm_user.xml" value="0.12092391304347826" />
         <entry key="app/src/main/res/layout/item_list_smlockerboxusage.xml" value="0.75" />
         <entry key="app/src/main/res/layout/item_list_smlockerboxuserecord.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_list_smuser.xml" value="0.13125" />
+        <entry key="app/src/main/res/layout/item_sm_locker_box_cabinet_box.xml" value="0.13489583333333333" />
+        <entry key="app/src/main/res/layout/item_sm_locker_box_cabinet_name.xml" value="0.12092391304347826" />
         <entry key="app/src/main/res/layout/item_smcabinet_layout_box.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_smlockerbox_cabinet.xml" value="0.11979166666666667" />
         <entry key="app/src/main/res/layout/item_smlockerbox_cabinetbox.xml" value="0.11" />
+        <entry key="app/src/main/res/layout/item_smlockerbox_cabinetname.xml" value="0.13489583333333333" />
         <entry key="app/src/main/res/layout/layout_nav_header.xml" value="0.13072916666666667" />
-        <entry key="app/src/main/res/layout/listview_footer.xml" value="0.13072916666666667" />
+        <entry key="app/src/main/res/layout/listview_footer.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/loadmore_default_footer.xml" value="0.12092391304347826" />
         <entry key="app/src/main/res/layout/recycler_item_layout.xml" value="0.1265625" />
+        <entry key="app/src/main/res/layout/shapeloading_layout_dialog.xml" value="0.12092391304347826" />
+        <entry key="app/src/main/res/layout/shapeloading_load_view.xml" value="0.12092391304347826" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
       </map>

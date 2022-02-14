@@ -61,7 +61,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
                         android:contentDescription="@string/empty"
-                        android:src="@drawable/ic_booker_identity_verify_option_iccard" />
+                        android:src="@drawable/ic_booker_identity_verify_way_iccard" />
 
                 </LinearLayout>
                 <LinearLayout

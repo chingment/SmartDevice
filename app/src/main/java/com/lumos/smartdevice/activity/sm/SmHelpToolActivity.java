@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.InitDataActivity;
-import com.lumos.smartdevice.activity.dialog.CustomDialogOwnInfo;
+import com.lumos.smartdevice.activity.dialog.CustomDialogSmOwnInfo;
 import com.lumos.smartdevice.adapter.GridNineItemAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -45,7 +45,7 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
     private List<GridNineItemBean> gdv_Nine_Items;
     private TextView tv_UserFullName;
     private ImageView iv_UserAvatar;
-    private CustomDialogOwnInfo dialog_OwnInfo;
+    private CustomDialogSmOwnInfo dialog_OwnInfo;
     private Button btn_Logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,9 +66,9 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
         gdv_Nine = findViewById(R.id.gdv_Nine);
 
 
-        dialog_OwnInfo=new CustomDialogOwnInfo(SmHelpToolActivity.this);
+        dialog_OwnInfo=new CustomDialogSmOwnInfo(SmHelpToolActivity.this);
         dialog_OwnInfo.checkUserNameIsPhoneFormat(false);
-        dialog_OwnInfo.setOnClickListener(new CustomDialogOwnInfo.OnClickListener() {
+        dialog_OwnInfo.setOnClickListener(new CustomDialogSmOwnInfo.OnClickListener() {
             @Override
             public void onSaveResult(ResultBean<RetOwnSaveInfo> rt) {
                 if(rt.getCode()== ResultCode.SUCCESS) {
@@ -170,7 +170,7 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smcloseapp), GridNineItemType.Function, "closeapp", R.drawable.ic_sm_closeapp));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smrebootsys), GridNineItemType.Function, "rebootsys", R.drawable.ic_sm_rebootsys));
 
-        GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(),R.layout.item_grid_nine ,gdv_Nine_Items);
+        GridNineItemAdapter gridNineItemAdapter = new GridNineItemAdapter(getAppContext(),gdv_Nine_Items);
 
         gdv_Nine.setAdapter(gridNineItemAdapter);
 

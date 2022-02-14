@@ -2,18 +2,21 @@ package com.lumos.smartdevice.activity.scenebooker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.sm.SmLoginActivity;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
+import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 public class BookerMainActivity  extends BaseFragmentActivity {
 
     private static final String TAG = "BookerMainActivity";
 
-
     private View btn_QueryBook;
+    private View rl_Header;
     private View btn_BorrowBook;
     private View btn_ReturnBook;
     @Override
@@ -35,23 +38,24 @@ public class BookerMainActivity  extends BaseFragmentActivity {
         btn_QueryBook = findViewById(R.id.btn_QueryBook);
         btn_BorrowBook = findViewById(R.id.btn_BorrowBook);
         btn_ReturnBook = findViewById(R.id.btn_ReturnBook);
+
+        rl_Header = findViewById(R.id.rl_Header);
     }
 
     private void initEvent() {
         btn_QueryBook.setOnClickListener(this);
         btn_BorrowBook.setOnClickListener(this);
         btn_ReturnBook.setOnClickListener(this);
-//
-//        LongClickUtil.setLongClick(new Handler(), lyt_Body, 500, new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                Intent intent = new Intent(getAppContext(), SmLoginActivity.class);
-//                intent.putExtra("scene_mode","manager_center");
-//                startActivity(intent);
-//                //finish();
-//                return true;
-//            }
-//        });
+
+        LongClickUtil.setLongClick(new Handler(), rl_Header, 500, new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent intent = new Intent(getAppContext(), SmLoginActivity.class);
+                intent.putExtra("scene_mode","manager_center");
+                startActivity(intent);
+                return true;
+            }
+        });
 
     }
 

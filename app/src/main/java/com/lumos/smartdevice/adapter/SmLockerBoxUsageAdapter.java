@@ -49,7 +49,7 @@ public class SmLockerBoxUsageAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_list_smlockerboxusage, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_sm_locker_box_usage, parent, false);
         }
         final LockerBoxUsageBean item = items.get(position);
 

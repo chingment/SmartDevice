@@ -34,7 +34,7 @@ public class SmLockerBoxCabinetBoxAdapter extends RecyclerView.Adapter<RecyclerV
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.item_smlockerbox_cabinetbox,parent,false);
+        View view= LayoutInflater.from(context).inflate(R.layout.item_sm_locker_box_cabinet_box,parent,false);
         return new MyViewHolder(view);
     }
 

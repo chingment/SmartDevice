@@ -49,7 +49,7 @@ public class SmUserManagerUserAdapter extends RefreshAdapter {
 
     @Override
     public MyViewHolder onCreateItemHolder(ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_smuser, parent, false)) {
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sm_user, parent, false)) {
         };
     }
 

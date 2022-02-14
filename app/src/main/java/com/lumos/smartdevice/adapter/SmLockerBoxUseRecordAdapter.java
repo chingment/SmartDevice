@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +13,6 @@ import com.lumos.smartdevice.model.LockerBoxUseRecordBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.refreshview.MyViewHolder;
 import com.lumos.smartdevice.ui.refreshview.RefreshAdapter;
-import com.lumos.smartdevice.utils.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +46,7 @@ public class SmLockerBoxUseRecordAdapter extends RefreshAdapter {
 
     @Override
     public MyViewHolder onCreateItemHolder(ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_smlockerboxuserecord, parent, false)) {
+        return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sm_locker_box_userecord, parent, false)) {
         };
     }
 
