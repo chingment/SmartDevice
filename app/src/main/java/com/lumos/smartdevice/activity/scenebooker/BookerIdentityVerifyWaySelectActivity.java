@@ -21,7 +21,8 @@ public class BookerIdentityVerifyWaySelectActivity extends BaseFragmentActivity 
     private static final String TAG = "BookerIdentityVerifyWaySelectActivity";
 
     private MyGridView gdv_Ways;
-    private View btn_Nav_Footer_Goback;
+    private View btn_Nav_Footer_GoBack;
+    private View btn_Nav_Footer_GoHome;
 
     private List<GridNineItemBean> gdv_Ways_Items;
 
@@ -45,12 +46,14 @@ public class BookerIdentityVerifyWaySelectActivity extends BaseFragmentActivity 
     }
 
     private void initView() {
-        btn_Nav_Footer_Goback=findViewById(R.id.btn_Nav_Footer_Goback);
+        btn_Nav_Footer_GoBack = findViewById(R.id.btn_Nav_Footer_GoBack);
+        btn_Nav_Footer_GoHome = findViewById(R.id.btn_Nav_Footer_GoHome);
         gdv_Ways = findViewById(R.id.gdv_Ways);
     }
 
     private void initEvent() {
-        btn_Nav_Footer_Goback.setOnClickListener(this);
+        btn_Nav_Footer_GoBack.setOnClickListener(this);
+        btn_Nav_Footer_GoHome.setOnClickListener(this);
         gdv_Ways.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -90,7 +93,12 @@ public class BookerIdentityVerifyWaySelectActivity extends BaseFragmentActivity 
 
             int id = v.getId();
 
-            if (id == R.id.btn_Nav_Footer_Goback) {
+            if (id == R.id.btn_Nav_Footer_GoBack) {
+                finish();
+            }
+            else if(id==R.id.btn_Nav_Footer_GoHome) {
+                Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
+                startActivity(intent);
                 finish();
             }
         }

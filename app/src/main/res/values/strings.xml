@@ -135,4 +135,5 @@
     <string name="t_contactaddr">联系地址</string>
     <string name="t_brush_iccard">刷卡</string>
     <string name="t_goback">返回</string>
+    <string name="t_gohome">主页</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.lumos.smartdevice.activity.scenebooker;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -37,7 +38,8 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
     private static final String TAG = "BookerBorrowReturnInspectActivity";
 
-    private View btn_Nav_Footer_Goback;
+    private View btn_Nav_Footer_GoBack;
+    private View btn_Nav_Footer_GoHome;
     private MyGridView gdv_Boxs;
     private TextView tv_SignName;
     private TextView tv_CardNo;
@@ -108,7 +110,8 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
     }
 
     private void initView() {
-        btn_Nav_Footer_Goback = findViewById(R.id.btn_Nav_Footer_Goback);
+        btn_Nav_Footer_GoBack = findViewById(R.id.btn_Nav_Footer_GoBack);
+        btn_Nav_Footer_GoHome = findViewById(R.id.btn_Nav_Footer_GoHome);
         tv_SignName = findViewById(R.id.tv_SignName);
         tv_CardNo = findViewById(R.id.tv_CardNo);
         tv_CanBorrowQuantity = findViewById(R.id.tv_CanBorrowQuantity);
@@ -118,7 +121,8 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
     }
 
     private void initEvent() {
-        btn_Nav_Footer_Goback.setOnClickListener(this);
+        btn_Nav_Footer_GoBack.setOnClickListener(this);
+        btn_Nav_Footer_GoHome.setOnClickListener(this);
     }
 
     private void initData() {
@@ -198,7 +202,11 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
             int id = v.getId();
 
-            if (id == R.id.btn_Nav_Footer_Goback) {
+            if (id == R.id.btn_Nav_Footer_GoBack) {
+                finish();
+            } else if (id == R.id.btn_Nav_Footer_GoHome) {
+                Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
+                startActivity(intent);
                 finish();
             }
         }
