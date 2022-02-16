@@ -16,22 +16,11 @@ public class CustomDialogBookerBorrowReturnCabinetHandle extends Dialog {
     private final BaseFragmentActivity mContext;
     private final View mLayoutRes;
 
-    private final View btn_Close;
-
     public CustomDialogBookerBorrowReturnCabinetHandle(Context context) {
         super(context, R.style.custom_dialog);
         mThis = this;
         mContext = (BaseFragmentActivity)context;
         mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_borrow_return_cabinet_handle, null);
-
-        btn_Close = ViewHolder.get(mLayoutRes, R.id.dialog_Btn_Close);
-        btn_Close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mThis.hide();
-            }
-        });
-
     }
 
     @Override
