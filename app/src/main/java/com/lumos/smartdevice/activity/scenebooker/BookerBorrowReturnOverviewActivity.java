@@ -14,8 +14,8 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
 
     private static final String TAG = "BookerBorrowReturnOverviewActivity";
 
-    private View btn_Nav_Footer_GoBack;
-    private View btn_Nav_Footer_GoHome;
+    private View btn_Nav_Footer_Finish;
+    private View btn_Nav_Footer_GoHelp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +28,13 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
     }
 
     private void initView() {
-        btn_Nav_Footer_GoBack = findViewById(R.id.btn_Nav_Footer_GoBack);
-        btn_Nav_Footer_GoHome = findViewById(R.id.btn_Nav_Footer_GoHome);
+        btn_Nav_Footer_Finish = findViewById(R.id.btn_Nav_Footer_Finish);
+        btn_Nav_Footer_GoHelp = findViewById(R.id.btn_Nav_Footer_GoHelp);
     }
 
     private void initEvent() {
-        btn_Nav_Footer_GoBack.setOnClickListener(this);
-        btn_Nav_Footer_GoHome.setOnClickListener(this);
+        btn_Nav_Footer_Finish.setOnClickListener(this);
+        btn_Nav_Footer_GoHelp.setOnClickListener(this);
     }
 
     private void initData() {
@@ -47,9 +47,11 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
 
             int id = v.getId();
 
-            if (id == R.id.btn_Nav_Footer_GoBack) {
+            if (id == R.id.btn_Nav_Footer_Finish) {
+                Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
+                startActivity(intent);
                 finish();
-            } else if (id == R.id.btn_Nav_Footer_GoHome) {
+            } else if (id == R.id.btn_Nav_Footer_GoHelp) {
                 Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
                 startActivity(intent);
                 finish();

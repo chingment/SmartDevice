@@ -136,4 +136,8 @@
     <string name="t_brush_iccard">刷卡</string>
     <string name="t_goback">返回</string>
     <string name="t_gohome">主页</string>
+    <string name="t_gohelp">帮助</string>
+    <string name="t_finish">完成</string>
+    <string name="t_borrow_out">借出</string>
+    <string name="t_return_in">放入</string>
 </resources>

@@ -194,7 +194,13 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
+        dialog_BookerCabinetHandle.cancel();
+
+    }
 
     @Override
     public void onClick(View v) {
