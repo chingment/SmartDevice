@@ -8,9 +8,7 @@ public class DeviceBean implements Serializable {
     private String name;
     private int sceneMode;
     private int versionMode;
-    private MerchBean merch;
-    private StoreBean store;
-    private ShopBean shop;
+    private String merchId;
     private HashMap<String, CabinetBean> cabinets;
     private MqttBean mqtt;
 
@@ -46,28 +44,12 @@ public class DeviceBean implements Serializable {
         this.versionMode = versionMode;
     }
 
-    public MerchBean getMerch() {
-        return merch;
+    public String getMerchId() {
+        return merchId;
     }
 
-    public void setMerch(MerchBean merch) {
-        this.merch = merch;
-    }
-
-    public StoreBean getStore() {
-        return store;
-    }
-
-    public void setStore(StoreBean store) {
-        this.store = store;
-    }
-
-    public ShopBean getShop() {
-        return shop;
-    }
-
-    public void setShop(ShopBean shop) {
-        this.shop = shop;
+    public void setMerchId(String merchId) {
+        this.merchId = merchId;
     }
 
     public HashMap<String, CabinetBean> getCabinets() {

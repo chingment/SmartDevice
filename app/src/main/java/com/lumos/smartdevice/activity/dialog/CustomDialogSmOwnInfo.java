@@ -151,7 +151,9 @@ public class CustomDialogSmOwnInfo extends Dialog {
                         ResultBean<RetOwnSaveInfo> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetOwnSaveInfo>>() {
                         });
 
-                        if(onClickListener!=null){
+                        mContext.showToast(rt.getMsg());
+
+                        if(onClickListener!=null) {
                             onClickListener.onSaveResult(rt);
                         }
                     }

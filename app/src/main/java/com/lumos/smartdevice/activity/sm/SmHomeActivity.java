@@ -167,14 +167,15 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
         gdv_Nine_Items = new ArrayList<>();
 
 
+        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smdeviceinfo), GridNineItemType.Function, "deviceinfo", R.drawable.ic_sm_deviceinfo));
+
         if(getDevice().getSceneMode()==AppVar.SCENE_MODE_1) {
             gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smlockerboxmanager), GridNineItemType.Function, "lockerboxmanager", R.drawable.ic_sm_lockerboxmanager));
             gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smlockerboxuserecord), GridNineItemType.Function, "lockerboxuserecord", R.drawable.ic_sm_lockerboxuserecord));
+            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smusermanager), GridNineItemType.Function, "usermanager", R.drawable.ic_sm_usermanager));
         }
 
 
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smdeviceinfo), GridNineItemType.Function, "deviceinfo", R.drawable.ic_sm_deviceinfo));
-        gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smusermanager), GridNineItemType.Function, "usermanager", R.drawable.ic_sm_usermanager));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smopendoor), GridNineItemType.Function, "opendoor", R.drawable.ic_sm_opendoor));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smcheckupdateapp), GridNineItemType.Function, "checkupdateapp", R.drawable.ic_sm_checkupdateapp));
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smcloseapp), GridNineItemType.Function, "closeapp", R.drawable.ic_sm_closeapp));
@@ -311,6 +312,10 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
         super.onDestroy();
         if (dialog_Confirm != null) {
             dialog_Confirm.cancel();
+        }
+
+        if (dialog_OwnInfo != null) {
+            dialog_OwnInfo.cancel();
         }
     }
 }

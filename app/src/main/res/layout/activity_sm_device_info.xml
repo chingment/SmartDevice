@@ -39,92 +39,13 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
-                    android:id="@+id/tv_MerchNameV"
+                    android:id="@+id/tv_MerchId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:textColor="@color/field_value"
                     android:textSize="@dimen/sp_16" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:background="@drawable/vnav_boder_bottom"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/size_10"
-                android:paddingTop="@dimen/size_10">
-
-                <TextView
-                    android:id="@+id/tv_StoreNameK"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/t_store_name"
-                    android:textColor="@color/field_name"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:id="@+id/tv_StoreNameV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:textColor="@color/field_value"
-                    android:textSize="@dimen/sp_16" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:background="@drawable/vnav_boder_bottom"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/size_10"
-                android:paddingTop="@dimen/size_10">
-
-                <TextView
-                    android:id="@+id/tv_ShopNameK"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/t_shop_name"
-                    android:textColor="@color/field_name"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:id="@+id/tv_ShopNameV"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:textColor="@color/field_value"
-                    android:textSize="@dimen/sp_16" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:background="@drawable/vnav_boder_bottom"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/size_10"
-                android:paddingTop="@dimen/size_10">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/t_address"
-                    android:textColor="@color/field_name"
-                    android:textSize="@dimen/sp_16" />
-
-                <TextView
-                    android:id="@+id/tv_ShopAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:textColor="@color/field_value"
-                    android:textSize="@dimen/sp_16" />
-            </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
