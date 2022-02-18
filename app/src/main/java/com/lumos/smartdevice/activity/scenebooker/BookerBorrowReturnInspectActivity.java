@@ -9,21 +9,17 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.dialog.CustomDialogBookerBorrowReturnCabinetHandle;
-import com.lumos.smartdevice.activity.sm.SmUserManagerActivity;
 import com.lumos.smartdevice.adapter.BookerBorrowReturnInspectCabinetBoxAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetIdentityBorrower;
-import com.lumos.smartdevice.api.rop.RetUserGetList;
-import com.lumos.smartdevice.api.rop.RopIdentityBorrower;
-import com.lumos.smartdevice.api.rop.RopUserGetList;
+import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.CabinetBoxBean;
 import com.lumos.smartdevice.model.CabinetLayoutBean;
 import com.lumos.smartdevice.model.DeviceBean;
-import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -142,17 +138,17 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
         gdv_Boxs.setAdapter(gridNineItemAdapter);
 
-        getIdentityBorrower("1", "1");
+        getIdentityInfo("1", "1");
     }
 
-    private void getIdentityBorrower(String identityType,String identityId){
+    private void getIdentityInfo(String identityType,String identityId){
 
-        RopIdentityBorrower rop=new RopIdentityBorrower();
+        RopIdentityInfo rop=new RopIdentityInfo();
         rop.setDeviceId(device.getDeviceId());
         rop.setIdentityType(identityType);
         rop.setIdentityId(identityId);
-
-        ReqInterface.getInstance().identityBorrower(rop, new ReqHandler(){
+        rop.setOption("borrower");
+        ReqInterface.getInstance().identityInfo(rop, new ReqHandler(){
 
             @Override
             public void onBeforeSend() {

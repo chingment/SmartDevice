@@ -5,10 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.adapter.BookerBorrowReturnBookAdapter;
+import com.lumos.smartdevice.adapter.SmLockerBoxUsageAdapter;
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
+import com.lumos.smartdevice.model.BookBean;
+import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
+import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
 
@@ -16,6 +26,16 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
 
     private View btn_Nav_Footer_Finish;
     private View btn_Nav_Footer_GoHelp;
+
+
+    private MyListView lv_BorrowBooks;
+    private MyListView lv_ReturnBooks;
+    private TextView tv_BorrowCount;
+    private TextView tv_ReturnCount;
+
+    private RetBookerBorrowReturn retBookerBorrowReturn;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +50,10 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
     private void initView() {
         btn_Nav_Footer_Finish = findViewById(R.id.btn_Nav_Footer_Finish);
         btn_Nav_Footer_GoHelp = findViewById(R.id.btn_Nav_Footer_GoHelp);
+        tv_BorrowCount = findViewById(R.id.tv_BorrowCount);
+        tv_ReturnCount = findViewById(R.id.tv_ReturnCount);
+        lv_BorrowBooks = findViewById(R.id.lv_BorrowBooks);
+        lv_ReturnBooks = findViewById(R.id.lv_ReturnBooks);
     }
 
     private void initEvent() {
@@ -38,6 +62,49 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
     }
 
     private void initData() {
+
+        retBookerBorrowReturn = new RetBookerBorrowReturn();
+        List<BookBean> borrowBooks = new ArrayList<>();
+
+        borrowBooks.add(new BookBean("1", "1", "安徒生童话故事1", "1", "1"));
+        borrowBooks.add(new BookBean("1", "1", "这个杀手不太冷静2", "1", "1"));
+        borrowBooks.add(new BookBean("1", "1", "这个杀手不太冷静3", "1", "1"));
+        borrowBooks.add(new BookBean("1", "1", "这个杀手不太冷静4", "1", "1"));
+        borrowBooks.add(new BookBean("1", "1", "这个杀手不太冷静5", "1", "1"));
+        borrowBooks.add(new BookBean("1", "1", "这个杀手不太冷静6", "1", "1"));
+        borrowBooks.add(new BookBean("1", "1", "这个杀手不太冷静7", "1", "1"));
+        borrowBooks.add(new BookBean("1", "1", "这个杀手不太冷静8", "1", "1"));
+        borrowBooks.add(new BookBean("1", "1", "这个杀手不太冷静9", "1", "1"));
+        borrowBooks.add(new BookBean("1", "1", "这个杀手不太冷静10", "1", "1"));
+        borrowBooks.add(new BookBean("1", "1", "这个杀手不太冷静11", "1", "1"));
+
+        List<BookBean> returnBooks = new ArrayList<>();
+        returnBooks.add(new BookBean("1", "1", "西游记1", "1", "1"));
+        returnBooks.add(new BookBean("1", "1", "红楼梦2", "1", "1"));
+        returnBooks.add(new BookBean("1", "1", "西游记3", "1", "1"));
+        returnBooks.add(new BookBean("1", "1", "红楼梦4", "1", "1"));
+        returnBooks.add(new BookBean("1", "1", "西游记5", "1", "1"));
+        returnBooks.add(new BookBean("1", "1", "红楼梦6", "1", "1"));
+
+        retBookerBorrowReturn.setBorrowBooks(borrowBooks);
+        retBookerBorrowReturn.setReturnBooks(returnBooks);
+
+
+        tv_BorrowCount.setText(String.valueOf(borrowBooks.size()));
+        BookerBorrowReturnBookAdapter borrowBooksAdapter=new BookerBorrowReturnBookAdapter(BookerBorrowReturnOverviewActivity.this,borrowBooks);
+        lv_BorrowBooks.setFocusable(false);
+        lv_BorrowBooks.setClickable(false);
+        lv_BorrowBooks.setPressed(false);
+        lv_BorrowBooks.setEnabled(false);
+        lv_BorrowBooks.setAdapter(borrowBooksAdapter);
+
+        tv_ReturnCount.setText(String.valueOf(returnBooks.size()));
+        BookerBorrowReturnBookAdapter returnBooksAdapter=new BookerBorrowReturnBookAdapter(BookerBorrowReturnOverviewActivity.this,returnBooks);
+        lv_ReturnBooks.setFocusable(false);
+        lv_ReturnBooks.setClickable(false);
+        lv_ReturnBooks.setPressed(false);
+        lv_ReturnBooks.setEnabled(false);
+        lv_ReturnBooks.setAdapter(returnBooksAdapter);
 
     }
 

@@ -59,6 +59,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tv_BorrowCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_4"
@@ -81,6 +82,7 @@
                     android:textSize="@dimen/sp_16" />
 
                 <TextView
+                    android:id="@+id/tv_ReturnCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_4"
@@ -109,8 +111,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_Box_Borrow"
+            android:minHeight="@dimen/size_200"
+            android:maxHeight="@dimen/size_200"
+            android:layout_height="@dimen/size_200"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/size_10"
@@ -119,9 +123,10 @@
             app:cardUseCompatPadding="true">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/size_200"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="start"
+                android:orientation="vertical"
                 android:baselineAligned="false"
                 android:paddingStart="@dimen/size_20"
                 android:paddingTop="@dimen/size_10"
@@ -145,16 +150,44 @@
                     android:textSize="@dimen/sp_16" />
 
 
-            </LinearLayout>
+                <com.lumos.smartdevice.ui.my.MyScrollView
+                    android:layout_marginTop="@dimen/size_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none"
+                    tools:ignore="ObsoleteLayoutParam">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+                        <com.lumos.smartdevice.ui.my.MyListView
+                            android:id="@+id/lv_BorrowBooks"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:divider="@null"
+                            android:fadingEdge="none"
+                            android:overScrollMode="never"
+                            android:scrollbars="none"/>
+                    </LinearLayout>
+
+                </com.lumos.smartdevice.ui.my.MyScrollView>
+
+
+
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_Box_Return"
+            android:minHeight="@dimen/size_200"
+            android:maxHeight="@dimen/size_200"
+            android:layout_height="@dimen/size_200"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/size_10"
@@ -163,9 +196,10 @@
             app:cardUseCompatPadding="true">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/size_200"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="start"
+                android:orientation="vertical"
                 android:baselineAligned="false"
                 android:paddingStart="@dimen/size_20"
                 android:paddingTop="@dimen/size_10"
@@ -187,6 +221,33 @@
                     android:text="@string/t_return_in"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
+
+
+
+                <com.lumos.smartdevice.ui.my.MyScrollView
+                    android:layout_marginTop="@dimen/size_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none"
+                    tools:ignore="ObsoleteLayoutParam">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+                        <com.lumos.smartdevice.ui.my.MyListView
+                            android:id="@+id/lv_ReturnBooks"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:divider="@null"
+                            android:fadingEdge="none"
+                            android:overScrollMode="never"
+                            android:scrollbars="none"/>
+                    </LinearLayout>
+
+                </com.lumos.smartdevice.ui.my.MyScrollView>
 
 
             </LinearLayout>

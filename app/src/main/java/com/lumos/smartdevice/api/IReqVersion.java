@@ -1,7 +1,7 @@
 package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
-import com.lumos.smartdevice.api.rop.RopIdentityBorrower;
+import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBoxUseRecords;
 import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
@@ -32,5 +32,5 @@ public interface IReqVersion {
     void lockerDeleteBoxUsage(RopLockerDeleteBoxUsage rop, final ReqHandler reqHandler);
     void lockerGetBoxUseRecords(RopLockerGetBoxUseRecords rop, final ReqHandler reqHandler);
     void lockerSaveBoxOpenResult(RopLockerSaveBoxOpenResult rop, final ReqHandler reqHandler);
-    void identityBorrower(RopIdentityBorrower rop,final ReqHandler reqHandler);
+    void identityInfo(RopIdentityInfo rop, final ReqHandler reqHandler);
 }
