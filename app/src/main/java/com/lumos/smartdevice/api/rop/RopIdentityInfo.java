@@ -2,9 +2,9 @@ package com.lumos.smartdevice.api.rop;
 
 public class RopIdentityInfo {
     private String deviceId;
-    private String identityType;
+    private int identityType;
     private String identityId;
-    private String option;
+    private int sceneMode;
 
     public String getDeviceId() {
         return deviceId;
@@ -14,11 +14,11 @@ public class RopIdentityInfo {
         this.deviceId = deviceId;
     }
 
-    public String getIdentityType() {
+    public int getIdentityType() {
         return identityType;
     }
 
-    public void setIdentityType(String identityType) {
+    public void setIdentityType(int identityType) {
         this.identityType = identityType;
     }
 
@@ -30,11 +30,12 @@ public class RopIdentityInfo {
         this.identityId = identityId;
     }
 
-    public String getOption() {
-        return option;
+
+    public int getSceneMode() {
+        return sceneMode;
     }
 
-    public void setOption(String option) {
-        this.option = option;
+    public void setSceneMode(int sceneMode) {
+        this.sceneMode = sceneMode;
     }
 }

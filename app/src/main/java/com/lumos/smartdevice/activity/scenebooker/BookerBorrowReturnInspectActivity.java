@@ -14,7 +14,9 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturnCreateFlow;
 import com.lumos.smartdevice.api.rop.RetIdentityBorrower;
+import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCreateFlow;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.CabinetBoxBean;
@@ -47,6 +49,10 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
     private List<CabinetBoxBean> cabinetBoxs=new ArrayList<>();
 
     private CustomDialogBookerBorrowReturnCabinetHandle dialog_BookerCabinetHandle;
+
+
+    private int identityType=1;
+    private String identityId="1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,28 +133,70 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
         gridNineItemAdapter.setOnClickListener(new BookerBorrowReturnInspectCabinetBoxAdapter.OnClickListener() {
             @Override
-            public void onClick(CabinetBoxBean v) {
+            public void onClick(CabinetBoxBean cabinet) {
 
-                dialog_BookerCabinetHandle.show();
 
-                //Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
-                //startActivity(intent);
+                RopBookerBorrowReturnCreateFlow rop=new RopBookerBorrowReturnCreateFlow();
+                rop.setDeviceId(device.getDeviceId());
+                rop.setCabinetId(cabinet.getCabinetId());
+                rop.setSlotId(cabinet.getBoxId());
+                rop.setIdentityType(identityType);
+                rop.setIdentityId(identityId);
+
+
+                ReqInterface.getInstance().bookerBorrowReturnCreateFlow(rop, new ReqHandler(){
+
+                    @Override
+                    public void onBeforeSend() {
+                        super.onBeforeSend();
+                        showLoading(BookerBorrowReturnInspectActivity.this);
+                    }
+
+                    @Override
+                    public void onAfterSend() {
+                        super.onAfterSend();
+                        hideLoading(BookerBorrowReturnInspectActivity.this);
+                    }
+
+                    @Override
+                    public void onSuccess(String response) {
+                        super.onSuccess(response);
+                        ResultBean<RetBookerBorrowReturnCreateFlow> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetBookerBorrowReturnCreateFlow>>() {
+                        });
+
+                        if(rt.getCode()== ResultCode.SUCCESS) {
+
+                            RetBookerBorrowReturnCreateFlow d = rt.getData();
+
+                            dialog_BookerCabinetHandle.show();
+
+                        }
+                        else {
+                            showToast(rt.getMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg, Exception e) {
+                        super.onFailure(msg, e);
+                    }
+                });
             }
         });
 
         gdv_Boxs.setAdapter(gridNineItemAdapter);
 
-        getIdentityInfo("1", "1");
+        getIdentityInfo();
     }
 
-    private void getIdentityInfo(String identityType,String identityId){
+    private void getIdentityInfo() {
 
-        RopIdentityInfo rop=new RopIdentityInfo();
+        RopIdentityInfo rop = new RopIdentityInfo();
         rop.setDeviceId(device.getDeviceId());
         rop.setIdentityType(identityType);
         rop.setIdentityId(identityId);
-        rop.setOption("borrower");
-        ReqInterface.getInstance().identityInfo(rop, new ReqHandler(){
+        rop.setSceneMode(device.getSceneMode());
+        ReqInterface.getInstance().identityInfo(rop, new ReqHandler() {
 
             @Override
             public void onBeforeSend() {
@@ -168,7 +216,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                 ResultBean<RetIdentityBorrower> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetIdentityBorrower>>() {
                 });
 
-                if(rt.getCode()== ResultCode.SUCCESS) {
+                if (rt.getCode() == ResultCode.SUCCESS) {
                     RetIdentityBorrower d = rt.getData();
 
                     tv_SignName.setText(d.getSignName());
@@ -176,8 +224,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                     tv_BorrowedQuantity.setText(String.valueOf(d.getBorrowedQuantity()));
                     tv_CanBorrowQuantity.setText(String.valueOf(d.getCanBorrowQuantity()));
 
-                }
-                else {
+                } else {
                     showToast(rt.getMsg());
                 }
             }

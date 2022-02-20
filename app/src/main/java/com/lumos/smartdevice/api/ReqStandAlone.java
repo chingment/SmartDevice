@@ -11,6 +11,7 @@ import com.lumos.smartdevice.api.rop.RetOwnSaveInfo;
 import com.lumos.smartdevice.api.rop.RetUserGetDetail;
 import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RetUserSave;
+import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCreateFlow;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
@@ -28,6 +29,8 @@ import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.db.dao.ConfigDao;
+import com.lumos.smartdevice.http.HttpClient;
+import com.lumos.smartdevice.http.HttpResponseHandler;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
@@ -35,6 +38,7 @@ import com.lumos.smartdevice.model.LockerBoxUseRecordBean;
 import com.lumos.smartdevice.model.PageDataBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.own.Config;
 import com.lumos.smartdevice.utils.StringUtil;
 
 import java.util.List;
@@ -335,6 +339,12 @@ public class ReqStandAlone implements IReqVersion{
 
     @Override
     public void identityInfo(RopIdentityInfo rop, final ReqHandler reqHandler) {
+
+    }
+
+    @Override
+    public void bookerBorrowReturnCreateFlow(RopBookerBorrowReturnCreateFlow rop, final ReqHandler reqHandler) {
+
 
     }
 }
