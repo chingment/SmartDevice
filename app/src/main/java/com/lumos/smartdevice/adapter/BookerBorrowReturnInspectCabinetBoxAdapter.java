@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.CabinetBoxBean;
+import com.lumos.smartdevice.model.CabinetSlotBean;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 import java.util.List;
@@ -20,10 +20,10 @@ public class BookerBorrowReturnInspectCabinetBoxAdapter extends BaseAdapter {
 
     private static final String TAG = "BookerBorrowReturnInspectCabinetBoxAdapter";
 
-    private final List<CabinetBoxBean> items;
+    private final List<CabinetSlotBean> items;
     private final Context context;
 
-    public BookerBorrowReturnInspectCabinetBoxAdapter(Context context,List<CabinetBoxBean> items) {
+    public BookerBorrowReturnInspectCabinetBoxAdapter(Context context,List<CabinetSlotBean> items) {
         this.items = items;
         this.context = context;
     }
@@ -50,18 +50,18 @@ public class BookerBorrowReturnInspectCabinetBoxAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_booker_borrow_return_inspect_cabinet_box, parent, false);
         }
 
-        CabinetBoxBean bean = items.get(position);
+        CabinetSlotBean bean = items.get(position);
 
-        CardView cv_Box = ViewHolder.get(convertView, R.id.cv_Box);
-        TextView tv_BoxName = ViewHolder.get(convertView, R.id.tv_BoxName);
-        tv_BoxName.setText(bean.getBoxName());
+        CardView cv_Slot = ViewHolder.get(convertView, R.id.cv_Slot);
+        TextView tv_SlotName = ViewHolder.get(convertView, R.id.tv_SlotName);
+        tv_SlotName.setText(bean.getSlotName());
 
         if(onClickListener!=null) {
-            cv_Box.setTag(bean);
-            cv_Box.setOnClickListener(new View.OnClickListener() {
+            cv_Slot.setTag(bean);
+            cv_Slot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CabinetBoxBean l_Bean = (CabinetBoxBean) view.getTag();
+                    CabinetSlotBean l_Bean = (CabinetSlotBean) view.getTag();
                     onClickListener.onClick(l_Bean);
                 }
             });
@@ -77,6 +77,6 @@ public class BookerBorrowReturnInspectCabinetBoxAdapter extends BaseAdapter {
     }
 
     public  interface OnClickListener{
-        void onClick(CabinetBoxBean v);
+        void onClick(CabinetSlotBean v);
     }
 }

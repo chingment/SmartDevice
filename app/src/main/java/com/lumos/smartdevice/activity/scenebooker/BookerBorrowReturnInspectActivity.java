@@ -8,18 +8,22 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.dialog.CustomDialogBookerBorrowReturnCabinetHandle;
+import com.lumos.smartdevice.activity.dialog.CustomDialogBookerBorrowReturnCabinetSlotHandle;
 import com.lumos.smartdevice.adapter.BookerBorrowReturnInspectCabinetBoxAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturnCloseAction;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturnCreateFlow;
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturnOpenAction;
 import com.lumos.smartdevice.api.rop.RetIdentityBorrower;
+import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCloseAction;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCreateFlow;
+import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnOpenAction;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.model.CabinetBean;
-import com.lumos.smartdevice.model.CabinetBoxBean;
+import com.lumos.smartdevice.model.CabinetSlotBean;
 import com.lumos.smartdevice.model.CabinetLayoutBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
@@ -38,7 +42,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
     private View btn_Nav_Footer_GoBack;
     private View btn_Nav_Footer_GoHome;
-    private MyGridView gdv_Boxs;
+    private MyGridView gdv_Slots;
     private TextView tv_SignName;
     private TextView tv_CardNo;
     private TextView tv_CanBorrowQuantity;
@@ -46,9 +50,9 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
     private DeviceBean device;
 
-    private List<CabinetBoxBean> cabinetBoxs=new ArrayList<>();
+    private List<CabinetSlotBean> cabinetSlots=new ArrayList<>();
 
-    private CustomDialogBookerBorrowReturnCabinetHandle dialog_BookerCabinetHandle;
+    private CustomDialogBookerBorrowReturnCabinetSlotHandle dialog_BookerCabinetSlotHandle;
 
 
     private int identityType=1;
@@ -88,13 +92,13 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                             String plate = cell_prams[1];
                             String name = cell_prams[2];
 
-                            CabinetBoxBean cabinetBox = new CabinetBoxBean();
-                            cabinetBox.setCabinetId(cabinet.getCabinetId());
-                            cabinetBox.setBoxId(id);
-                            cabinetBox.setBoxName(name);
-                            cabinetBox.setBoxPlate(plate);
+                            CabinetSlotBean cabinetSlot = new CabinetSlotBean();
+                            cabinetSlot.setCabinetId(cabinet.getCabinetId());
+                            cabinetSlot.setSlotId(id);
+                            cabinetSlot.setSlotName(name);
+                            cabinetSlot.setSlotPlate(plate);
 
-                            cabinetBoxs.add(cabinetBox);
+                            cabinetSlots.add(cabinetSlot);
 
                         }
                     }
@@ -118,28 +122,128 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
         tv_CardNo = findViewById(R.id.tv_CardNo);
         tv_CanBorrowQuantity = findViewById(R.id.tv_CanBorrowQuantity);
         tv_BorrowedQuantity = findViewById(R.id.tv_BorrowedQuantity);
-        gdv_Boxs = findViewById(R.id.gdv_Boxs);
-        dialog_BookerCabinetHandle = new CustomDialogBookerBorrowReturnCabinetHandle(BookerBorrowReturnInspectActivity.this);
+        gdv_Slots = findViewById(R.id.gdv_Slots);
+        dialog_BookerCabinetSlotHandle = new CustomDialogBookerBorrowReturnCabinetSlotHandle(BookerBorrowReturnInspectActivity.this);
     }
 
     private void initEvent() {
         btn_Nav_Footer_GoBack.setOnClickListener(this);
         btn_Nav_Footer_GoHome.setOnClickListener(this);
+
+        dialog_BookerCabinetSlotHandle.setOnClickListener(new CustomDialogBookerBorrowReturnCabinetSlotHandle.OnClickListener() {
+            @Override
+            public void testOpen(String flowId) {
+
+                RopBookerBorrowReturnOpenAction rop=new RopBookerBorrowReturnOpenAction();
+                rop.setDeviceId(device.getDeviceId());
+                rop.setFlowId(flowId);
+                rop.setActionCode("1");
+                rop.setActionResult(1);
+
+
+                ReqInterface.getInstance().bookerBorrowReturnOpenAction(rop, new ReqHandler(){
+
+                    @Override
+                    public void onBeforeSend() {
+                        super.onBeforeSend();
+                        showLoading(BookerBorrowReturnInspectActivity.this);
+                    }
+
+                    @Override
+                    public void onAfterSend() {
+                        super.onAfterSend();
+                        hideLoading(BookerBorrowReturnInspectActivity.this);
+                    }
+
+                    @Override
+                    public void onSuccess(String response) {
+                        super.onSuccess(response);
+                        ResultBean<RetBookerBorrowReturnOpenAction> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetBookerBorrowReturnOpenAction>>() {
+                        });
+
+                        if(rt.getCode()== ResultCode.SUCCESS) {
+
+
+
+                        }
+                        else {
+                            showToast(rt.getMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg, Exception e) {
+                        super.onFailure(msg, e);
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void testClose(String flowId) {
+
+
+                RopBookerBorrowReturnCloseAction rop=new RopBookerBorrowReturnCloseAction();
+                rop.setDeviceId(device.getDeviceId());
+                rop.setFlowId(flowId);
+                rop.setActionCode("2");
+                rop.setActionResult(2);
+
+
+                ReqInterface.getInstance().bookerBorrowReturnCloseAction(rop, new ReqHandler(){
+
+                    @Override
+                    public void onBeforeSend() {
+                        super.onBeforeSend();
+                        showLoading(BookerBorrowReturnInspectActivity.this);
+                    }
+
+                    @Override
+                    public void onAfterSend() {
+                        super.onAfterSend();
+                        hideLoading(BookerBorrowReturnInspectActivity.this);
+                    }
+
+                    @Override
+                    public void onSuccess(String response) {
+                        super.onSuccess(response);
+                        ResultBean<RetBookerBorrowReturnCloseAction> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetBookerBorrowReturnCloseAction>>() {
+                        });
+
+                        if(rt.getCode()== ResultCode.SUCCESS) {
+
+
+
+                        }
+                        else {
+                            showToast(rt.getMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg, Exception e) {
+                        super.onFailure(msg, e);
+                    }
+                });
+
+            }
+        });
     }
 
     private void initData() {
 
-        BookerBorrowReturnInspectCabinetBoxAdapter gridNineItemAdapter = new BookerBorrowReturnInspectCabinetBoxAdapter(getAppContext(), cabinetBoxs);
+        BookerBorrowReturnInspectCabinetBoxAdapter cabinetBoxAdapter = new BookerBorrowReturnInspectCabinetBoxAdapter(getAppContext(), cabinetSlots);
 
-        gridNineItemAdapter.setOnClickListener(new BookerBorrowReturnInspectCabinetBoxAdapter.OnClickListener() {
+        cabinetBoxAdapter.setOnClickListener(new BookerBorrowReturnInspectCabinetBoxAdapter.OnClickListener() {
             @Override
-            public void onClick(CabinetBoxBean cabinet) {
+            public void onClick(CabinetSlotBean cabinetSlot) {
 
 
                 RopBookerBorrowReturnCreateFlow rop=new RopBookerBorrowReturnCreateFlow();
                 rop.setDeviceId(device.getDeviceId());
-                rop.setCabinetId(cabinet.getCabinetId());
-                rop.setSlotId(cabinet.getBoxId());
+                rop.setCabinetId(cabinetSlot.getCabinetId());
+                rop.setSlotId(cabinetSlot.getSlotId());
                 rop.setIdentityType(identityType);
                 rop.setIdentityId(identityId);
 
@@ -167,8 +271,8 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                         if(rt.getCode()== ResultCode.SUCCESS) {
 
                             RetBookerBorrowReturnCreateFlow d = rt.getData();
-
-                            dialog_BookerCabinetHandle.show();
+                            dialog_BookerCabinetSlotHandle.setFlowId(d.getFlowId());
+                            dialog_BookerCabinetSlotHandle.show();
 
                         }
                         else {
@@ -184,7 +288,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
             }
         });
 
-        gdv_Boxs.setAdapter(gridNineItemAdapter);
+        gdv_Slots.setAdapter(cabinetBoxAdapter);
 
         getIdentityInfo();
     }
@@ -241,7 +345,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
     public void onDestroy() {
         super.onDestroy();
 
-        dialog_BookerCabinetHandle.cancel();
+        dialog_BookerCabinetSlotHandle.cancel();
 
     }
 

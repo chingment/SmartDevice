@@ -1,6 +1,8 @@
 package com.lumos.smartdevice.api;
 
+import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCloseAction;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCreateFlow;
+import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnOpenAction;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
@@ -218,4 +220,48 @@ public class ReqNetWord implements IReqVersion{
         });
 
     }
+
+    @Override
+    public void bookerBorrowReturnOpenAction(RopBookerBorrowReturnOpenAction rop, final ReqHandler reqHandler) {
+
+        reqHandler.sendBeforeSendMessage();
+
+        HttpClient.myPost(Config.URL.booker_BorrowReturn_OpenAction, rop, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onFailure(msg,e);
+            }
+        });
+
+    }
+
+
+    @Override
+    public void bookerBorrowReturnCloseAction(RopBookerBorrowReturnCloseAction rop, final ReqHandler reqHandler) {
+
+        reqHandler.sendBeforeSendMessage();
+
+        HttpClient.myPost(Config.URL.booker_BorrowReturn_CloseAction, rop, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onFailure(msg,e);
+            }
+        });
+
+    }
+
 }

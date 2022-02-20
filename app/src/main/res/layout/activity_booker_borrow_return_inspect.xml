@@ -159,7 +159,7 @@
                 android:textSize="@dimen/sp_16" />
 
             <com.lumos.smartdevice.ui.my.MyGridView
-                android:id="@+id/gdv_Boxs"
+                android:id="@+id/gdv_Slots"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

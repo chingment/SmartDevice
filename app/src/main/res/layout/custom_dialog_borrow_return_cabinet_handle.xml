@@ -24,6 +24,7 @@
 
 
 
+
         <TextView
             android:id="@+id/tv_TipsText"
             android:textStyle="bold"

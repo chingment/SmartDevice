@@ -33,6 +33,8 @@ public class Config {
         public static final String own_SaveInfo = BuildConfig.ENVIRONMENT + "/own/saveInfo";
         public static final String identity_Info = BuildConfig.ENVIRONMENT + "/identity/info";
         public static final String booker_BorrowReturn_CreateFlow = BuildConfig.ENVIRONMENT + "/booker/borrowreturn/createflow";
+        public static final String booker_BorrowReturn_OpenAction = BuildConfig.ENVIRONMENT + "/booker/borrowreturn/openaction";
+        public static final String booker_BorrowReturn_CloseAction = BuildConfig.ENVIRONMENT + "/booker/borrowreturn/closeaction";
     }
 
 }
