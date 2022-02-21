@@ -1,7 +1,5 @@
 package com.lumos.smartdevice.activity.scenebooker;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,10 +7,8 @@ import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.adapter.BookerBorrowReturnBookAdapter;
-import com.lumos.smartdevice.adapter.SmLockerBoxUsageAdapter;
-import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturnCloseAction;
 import com.lumos.smartdevice.model.BookBean;
-import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -33,7 +29,7 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
     private TextView tv_BorrowCount;
     private TextView tv_ReturnCount;
 
-    private RetBookerBorrowReturn retBookerBorrowReturn;
+    private RetBookerBorrowReturnCloseAction retBookerBorrowReturnCloseAction;
 
 
 
@@ -63,7 +59,7 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
 
     private void initData() {
 
-        retBookerBorrowReturn = new RetBookerBorrowReturn();
+        retBookerBorrowReturnCloseAction = new RetBookerBorrowReturnCloseAction();
         List<BookBean> borrowBooks = new ArrayList<>();
 
         borrowBooks.add(new BookBean("1", "1", "安徒生童话故事1", "1", "1"));
@@ -86,8 +82,8 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
         returnBooks.add(new BookBean("1", "1", "西游记5", "1", "1"));
         returnBooks.add(new BookBean("1", "1", "红楼梦6", "1", "1"));
 
-        retBookerBorrowReturn.setBorrowBooks(borrowBooks);
-        retBookerBorrowReturn.setReturnBooks(returnBooks);
+        retBookerBorrowReturnCloseAction.setBorrowBooks(borrowBooks);
+        retBookerBorrowReturnCloseAction.setReturnBooks(returnBooks);
 
 
         tv_BorrowCount.setText(String.valueOf(borrowBooks.size()));

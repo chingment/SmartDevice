@@ -4,6 +4,7 @@ public class RopBookerBorrowReturnCreateFlow {
     private String deviceId;
     private String cabinetId;
     private String slotId;
+    private String clientUserId;
     private int identityType;
     private String identityId;
 
@@ -29,6 +30,14 @@ public class RopBookerBorrowReturnCreateFlow {
 
     public void setSlotId(String slotId) {
         this.slotId = slotId;
+    }
+
+    public String getClientUserId() {
+        return clientUserId;
+    }
+
+    public void setClientUserId(String clientUserId) {
+        this.clientUserId = clientUserId;
     }
 
     public int getIdentityType() {

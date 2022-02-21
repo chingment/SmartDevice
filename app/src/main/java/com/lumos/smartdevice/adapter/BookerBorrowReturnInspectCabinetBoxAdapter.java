@@ -47,7 +47,7 @@ public class BookerBorrowReturnInspectCabinetBoxAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_booker_borrow_return_inspect_cabinet_box, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_booker_borrow_return_inspect_cabinet_slot, parent, false);
         }
 
         CabinetSlotBean bean = items.get(position);

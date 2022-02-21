@@ -1,21 +1,14 @@
 package com.lumos.smartdevice.api.rop;
 
+import com.lumos.smartdevice.model.BookBean;
+
+import java.util.List;
+
 public class RetBookerBorrowReturnCloseAction {
 
-    private String deviceId;
     private String flowId;
-    private String actionCode;
-    private String actionResult;
-    private String actionTime;
-    private String rfIds;
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
+    private List<BookBean> borrowBooks;
+    private List<BookBean> returnBooks;
 
     public String getFlowId() {
         return flowId;
@@ -25,35 +18,19 @@ public class RetBookerBorrowReturnCloseAction {
         this.flowId = flowId;
     }
 
-    public String getActionCode() {
-        return actionCode;
+    public List<BookBean> getBorrowBooks() {
+        return borrowBooks;
     }
 
-    public void setActionCode(String actionCode) {
-        this.actionCode = actionCode;
+    public void setBorrowBooks(List<BookBean> borrowBooks) {
+        this.borrowBooks = borrowBooks;
     }
 
-    public String getActionResult() {
-        return actionResult;
+    public List<BookBean> getReturnBooks() {
+        return returnBooks;
     }
 
-    public void setActionResult(String actionResult) {
-        this.actionResult = actionResult;
-    }
-
-    public String getActionTime() {
-        return actionTime;
-    }
-
-    public void setActionTime(String actionTime) {
-        this.actionTime = actionTime;
-    }
-
-    public String getRfIds() {
-        return rfIds;
-    }
-
-    public void setRfIds(String rfIds) {
-        this.rfIds = rfIds;
+    public void setReturnBooks(List<BookBean> returnBooks) {
+        this.returnBooks = returnBooks;
     }
 }

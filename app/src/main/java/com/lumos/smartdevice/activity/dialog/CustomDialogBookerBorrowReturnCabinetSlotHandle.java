@@ -32,7 +32,7 @@ public class CustomDialogBookerBorrowReturnCabinetSlotHandle extends Dialog {
         super(context, R.style.custom_dialog);
         mThis = this;
         mContext = (BaseFragmentActivity) context;
-        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_borrow_return_cabinet_handle, null);
+        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_booker_borrow_return_cabinet_slot_handle, null);
 
         View iv_TipsImage = ViewHolder.get(mLayoutRes, R.id.iv_TipsImage);
         View tv_TipsText = ViewHolder.get(mLayoutRes, R.id.tv_TipsText);

@@ -57,6 +57,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
     private int identityType=1;
     private String identityId="1";
+    private String clientUserId="1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,10 +138,17 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                 RopBookerBorrowReturnOpenAction rop=new RopBookerBorrowReturnOpenAction();
                 rop.setDeviceId(device.getDeviceId());
                 rop.setFlowId(flowId);
-                rop.setActionCode("1");
+                rop.setActionCode("1000");
                 rop.setActionResult(1);
 
+                List<String> rfIds=new ArrayList<>();
+                rfIds.add("31");
+                rfIds.add("32");
+                rfIds.add("33");
+                rfIds.add("34");
+                rfIds.add("35");
 
+                rop.setRfIds(rfIds);
                 ReqInterface.getInstance().bookerBorrowReturnOpenAction(rop, new ReqHandler(){
 
                     @Override
@@ -187,9 +195,15 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                 RopBookerBorrowReturnCloseAction rop=new RopBookerBorrowReturnCloseAction();
                 rop.setDeviceId(device.getDeviceId());
                 rop.setFlowId(flowId);
-                rop.setActionCode("2");
-                rop.setActionResult(2);
+                rop.setActionCode("2000");
+                rop.setActionResult(1);
 
+                List<String> rfIds=new ArrayList<>();
+                rfIds.add("31");
+                rfIds.add("32");
+                rfIds.add("36");
+
+                rop.setRfIds(rfIds);
 
                 ReqInterface.getInstance().bookerBorrowReturnCloseAction(rop, new ReqHandler(){
 
@@ -244,6 +258,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                 rop.setDeviceId(device.getDeviceId());
                 rop.setCabinetId(cabinetSlot.getCabinetId());
                 rop.setSlotId(cabinetSlot.getSlotId());
+                rop.setClientUserId(clientUserId);
                 rop.setIdentityType(identityType);
                 rop.setIdentityId(identityId);
 
@@ -297,6 +312,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
         RopIdentityInfo rop = new RopIdentityInfo();
         rop.setDeviceId(device.getDeviceId());
+        rop.setClientUserId(clientUserId);
         rop.setIdentityType(identityType);
         rop.setIdentityId(identityId);
         rop.setSceneMode(device.getSceneMode());

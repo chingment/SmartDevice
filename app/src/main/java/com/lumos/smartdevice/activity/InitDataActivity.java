@@ -82,6 +82,7 @@ public class InitDataActivity extends BaseFragmentActivity {
 
         setContentView(R.layout.activity_init_data);
 
+        
         initView();
         initEvent();
         initData();
