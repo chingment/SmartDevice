@@ -17,7 +17,7 @@ import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturnCloseAction;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturnCreateFlow;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturnOpenAction;
-import com.lumos.smartdevice.api.rop.RetIdentityBorrower;
+import com.lumos.smartdevice.api.rop.RetIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCloseAction;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnOpenAction;
@@ -26,6 +26,7 @@ import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.CabinetSlotBean;
 import com.lumos.smartdevice.model.CabinetLayoutBean;
 import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.IdentityInfoByBorrowerBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -144,9 +145,9 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                 List<String> rfIds=new ArrayList<>();
                 rfIds.add("31");
                 rfIds.add("32");
-                rfIds.add("33");
-                rfIds.add("34");
-                rfIds.add("35");
+                //rfIds.add("33");
+                //rfIds.add("34");
+                //rfIds.add("35");
 
                 rop.setRfIds(rfIds);
                 ReqInterface.getInstance().bookerBorrowReturnOpenAction(rop, new ReqHandler(){
@@ -201,7 +202,9 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                 List<String> rfIds=new ArrayList<>();
                 rfIds.add("31");
                 rfIds.add("32");
-                rfIds.add("36");
+                rfIds.add("33");
+                rfIds.add("34");
+                rfIds.add("35");
 
                 rop.setRfIds(rfIds);
 
@@ -333,16 +336,18 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
             @Override
             public void onSuccess(String response) {
                 super.onSuccess(response);
-                ResultBean<RetIdentityBorrower> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetIdentityBorrower>>() {
+                ResultBean<RetIdentityInfo> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetIdentityInfo>>() {
                 });
 
                 if (rt.getCode() == ResultCode.SUCCESS) {
-                    RetIdentityBorrower d = rt.getData();
+                    RetIdentityInfo d = rt.getData();
 
-                    tv_SignName.setText(d.getSignName());
-                    tv_CardNo.setText(d.getCardNo());
-                    tv_BorrowedQuantity.setText(String.valueOf(d.getBorrowedQuantity()));
-                    tv_CanBorrowQuantity.setText(String.valueOf(d.getCanBorrowQuantity()));
+                    IdentityInfoByBorrowerBean borrower = JSON.parseObject(JSON.toJSONString(d.getInfo()), IdentityInfoByBorrowerBean.class);
+
+                    tv_SignName.setText(borrower.getSignName());
+                    tv_CardNo.setText(borrower.getCardNo());
+                    tv_BorrowedQuantity.setText(String.valueOf(borrower.getBorrowedQuantity()));
+                    tv_CanBorrowQuantity.setText(String.valueOf(borrower.getCanBorrowQuantity()));
 
                 } else {
                     showToast(rt.getMsg());
