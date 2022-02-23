@@ -1,6 +1,7 @@
 package com.lumos.smartdevice.own;
 
 
+import com.lumos.smartdevice.model.BookerCustomDataBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.utils.ACache;
@@ -20,6 +21,7 @@ public class AppCacheManager {
     private static String Key_Device = "Key_Device";
     private static String Key_LastUserName="Key_LastUserName";
     private static String Key_CurrentUser="Key_CurrentUser";
+    private static String Key_BookerCustomData="Key_BookerCustomData";
 
     private static ACache getCache() {
 
@@ -76,6 +78,11 @@ public class AppCacheManager {
 
         return user;
 
+    }
+
+    public static void setBookerCustomData(BookerCustomDataBean bean) {
+        AppCacheManager.getCache().remove(Key_BookerCustomData);
+        AppCacheManager.getCache().put(Key_BookerCustomData, bean);
     }
 
 }

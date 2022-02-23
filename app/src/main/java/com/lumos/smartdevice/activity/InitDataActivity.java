@@ -26,6 +26,7 @@ import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
+import com.lumos.smartdevice.model.BookerCustomDataBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LogTipsBean;
 import com.lumos.smartdevice.own.AppCacheManager;
@@ -184,6 +185,14 @@ public class InitDataActivity extends BaseFragmentActivity {
 
                         AppCacheManager.setDevice(device);
 
+                        final int scene_mode=device.getSceneMode();
+
+
+                        if(scene_mode==AppVar.SCENE_MODE_2) {
+                            BookerCustomDataBean bookerCustomData = JSON.parseObject(JSON.toJSONString(initData.getCustomData()), BookerCustomDataBean.class);
+                            AppCacheManager.setBookerCustomData(bookerCustomData);
+                        }
+
                         setHandleMessage(WHAT_SET_CONFIG_SUCCESS, getAppContext().getString(R.string.aty_initdata_tips_setting_complete));
 
 
@@ -191,7 +200,6 @@ public class InitDataActivity extends BaseFragmentActivity {
                             public void run() {
                                 //SystemClock.sleep(6000);
 
-                                int scene_mode=device.getSceneMode();
 
                                 setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_setting_end));
 
@@ -201,6 +209,7 @@ public class InitDataActivity extends BaseFragmentActivity {
                                     finish();
                                 }
                                 else if(scene_mode==AppVar.SCENE_MODE_2){
+
                                     Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
                                     startActivity(intent);
                                     finish();
