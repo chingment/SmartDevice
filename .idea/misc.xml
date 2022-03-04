@@ -41,10 +41,11 @@
         <entry key="app/src/main/res/layout/activity_booker_identity_verify_ic_card.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_booker_identity_verify_select.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_booker_identity_verify_way_select.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/activity_booker_main.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_booker_main.xml" value="0.11" />
         <entry key="app/src/main/res/layout/activity_booker_query_book.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_bookeridentityverifyselect.xml" value="0.12604166666666666" />
         <entry key="app/src/main/res/layout/activity_bookermain.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_init_data.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_initdata.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_lockermain.xml" value="0.10364583333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
@@ -70,6 +71,7 @@
         <entry key="app/src/main/res/layout/booker_nav_fooer.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/booker_nav_footer.xml" value="0.55" />
         <entry key="app/src/main/res/layout/booker_nav_header.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/custom_dialog_booker_borrow_return_cabinet_slot_handle.xml" value="0.375" />
         <entry key="app/src/main/res/layout/custom_dialog_borrow_return_cabinet_handle.xml" value="0.375" />
         <entry key="app/src/main/res/layout/custom_dialog_cabinet_config.xml" value="0.12092391304347826" />
         <entry key="app/src/main/res/layout/custom_dialog_cabinetconfig.xml" value="0.13489583333333333" />

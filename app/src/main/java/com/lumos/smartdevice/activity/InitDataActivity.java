@@ -14,8 +14,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.scenebooker.BookerMainActivity;
-import com.lumos.smartdevice.activity.scenelocker.LockerMainActivity;
+import com.lumos.smartdevice.activity.booker.BookerMainActivity;
+import com.lumos.smartdevice.activity.locker.LockerMainActivity;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
 import com.lumos.smartdevice.adapter.LogTipsAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
@@ -43,6 +43,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
 
 public class InitDataActivity extends BaseFragmentActivity {
     private static final String TAG = "InitDataActivity";
@@ -83,7 +86,17 @@ public class InitDataActivity extends BaseFragmentActivity {
 
         setContentView(R.layout.activity_init_data);
 
-        
+//        GifImageView gifImageView = (GifImageView) findViewById(R.id.iv_bird);
+//        GifDrawable gifDrawable = (GifDrawable) gifImageView.getDrawable();
+//        gifDrawable.start(); //开始播放
+////        gifDrawable.stop(); //停止播放
+////        gifDrawable.reset(); //复位，重新开始播放
+////        gifDrawable.isRunning(); //是否正在播放
+//        gifDrawable.setLoopCount(1000 ); //设置播放的次数，播放完了就自动停止
+////        gifDrawable.getCurrentLoop();  //获取正在播放的次数
+////        gifDrawable.getCurrentPosition(); //获取现在到从开始播放所经历的时间
+////        gifDrawable.getDuration() ; //获取播放一次所需要的时间
+
         initView();
         initEvent();
         initData();

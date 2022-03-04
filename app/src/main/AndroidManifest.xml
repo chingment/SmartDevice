@@ -41,19 +41,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".activity.scenebooker.BookerBorrowReturnInspectActivity"
+            android:name=".activity.booker.BookerBorrowReturnInspectActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.scenebooker.BookerBorrowReturnOverviewActivity"
+            android:name=".activity.booker.BookerBorrowReturnOverviewActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.scenebooker.BookerIdentityVerifyByIcCardActivity"
+            android:name=".activity.booker.BookerIdentityVerifyByIcCardActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.scenebooker.BookerIdentityVerifyWaySelectActivity"
+            android:name=".activity.booker.BookerIdentityVerifyWaySelectActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.scenebooker.BookerMainActivity"
+            android:name=".activity.booker.BookerMainActivity"
             android:exported="true" />
         <activity
             android:name=".activity.sm.SmLockerBoxUseRecordActivity"
@@ -65,7 +65,7 @@
         <activity android:name=".activity.sm.SmUserManagerActivity" />
         <activity android:name=".activity.sm.SmLockerBoxManagerActivity" />
         <activity android:name=".activity.sm.SmHomeActivity" />
-        <activity android:name=".activity.scenelocker.LockerMainActivity" />
+        <activity android:name=".activity.locker.LockerMainActivity" />
         <activity android:name=".activity.sm.SmAppSceneSettingActivity" />
         <activity android:name=".activity.sm.SmFactorySettingActivity" />
         <activity android:name=".activity.sm.SmLoginActivity" />

@@ -2,6 +2,7 @@ package com.lumos.smartdevice.model;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 
 public class BookerCustomDataBean implements Serializable {
     private HashMap<String, AdBean> ads;
