@@ -228,12 +228,17 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                         ResultBean<RetBookerBorrowReturnCloseAction> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetBookerBorrowReturnCloseAction>>() {
                         });
 
-                        if(rt.getCode()== ResultCode.SUCCESS) {
+                        if (rt.getCode() == ResultCode.SUCCESS) {
+
+                            Intent intent = new Intent(BookerBorrowReturnInspectActivity.this, BookerBorrowReturnOverviewActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("ret_booker_borrow_return_close_action", rt.getData());
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            finish();
 
 
-
-                        }
-                        else {
+                        } else {
                             showToast(rt.getMsg());
                         }
                     }

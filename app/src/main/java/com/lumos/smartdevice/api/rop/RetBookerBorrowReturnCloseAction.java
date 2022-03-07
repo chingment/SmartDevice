@@ -2,9 +2,10 @@ package com.lumos.smartdevice.api.rop;
 
 import com.lumos.smartdevice.model.BookerBookBean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class RetBookerBorrowReturnCloseAction {
+public class RetBookerBorrowReturnCloseAction implements Serializable {
 
     private String flowId;
     private List<BookerBookBean> borrowBooks;

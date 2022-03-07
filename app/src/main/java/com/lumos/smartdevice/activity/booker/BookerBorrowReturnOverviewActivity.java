@@ -38,6 +38,7 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booker_borrow_return_overview);
         setNavHeaderTtile(R.string.aty_nav_title_booker_borrow_return_overview);
+        retBookerBorrowReturnCloseAction = (RetBookerBorrowReturnCloseAction) getIntent().getSerializableExtra("ret_booker_borrow_return_close_action");
         initView();
         initEvent();
         initData();
@@ -59,28 +60,30 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
 
     private void initData() {
 
-        retBookerBorrowReturnCloseAction = new RetBookerBorrowReturnCloseAction();
-        List<BookerBookBean> borrowBooks = new ArrayList<>();
 
-        borrowBooks.add(new BookerBookBean("1", "1", "安徒生童话故事1", "1", "1"));
-        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静2", "1", "1"));
-        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静3", "1", "1"));
-        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静4", "1", "1"));
-        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静5", "1", "1"));
-        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静6", "1", "1"));
-        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静7", "1", "1"));
-        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静8", "1", "1"));
-        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静9", "1", "1"));
-        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静10", "1", "1"));
-        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静11", "1", "1"));
+        List<BookerBookBean> borrowBooks = retBookerBorrowReturnCloseAction.getBorrowBooks();
 
-        List<BookerBookBean> returnBooks = new ArrayList<>();
-        returnBooks.add(new BookerBookBean("1", "1", "西游记1", "1", "1"));
-        returnBooks.add(new BookerBookBean("1", "1", "红楼梦2", "1", "1"));
-        returnBooks.add(new BookerBookBean("1", "1", "西游记3", "1", "1"));
-        returnBooks.add(new BookerBookBean("1", "1", "红楼梦4", "1", "1"));
-        returnBooks.add(new BookerBookBean("1", "1", "西游记5", "1", "1"));
-        returnBooks.add(new BookerBookBean("1", "1", "红楼梦6", "1", "1"));
+//        borrowBooks.add(new BookerBookBean("1", "1", "安徒生童话故事1", "1", "1"));
+//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静2", "1", "1"));
+//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静3", "1", "1"));
+//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静4", "1", "1"));
+//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静5", "1", "1"));
+//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静6", "1", "1"));
+//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静7", "1", "1"));
+//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静8", "1", "1"));
+//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静9", "1", "1"));
+//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静10", "1", "1"));
+//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静11", "1", "1"));
+
+        List<BookerBookBean> returnBooks = retBookerBorrowReturnCloseAction.getReturnBooks();
+
+//        returnBooks.add(new BookerBookBean("1", "1", "西游记1", "1", "1"));
+//        returnBooks.add(new BookerBookBean("1", "1", "红楼梦2", "1", "1"));
+//        returnBooks.add(new BookerBookBean("1", "1", "西游记3", "1", "1"));
+//        returnBooks.add(new BookerBookBean("1", "1", "红楼梦4", "1", "1"));
+//        returnBooks.add(new BookerBookBean("1", "1", "西游记5", "1", "1"));
+//        returnBooks.add(new BookerBookBean("1", "1", "红楼梦6", "1", "1"));
+
 
         retBookerBorrowReturnCloseAction.setBorrowBooks(borrowBooks);
         retBookerBorrowReturnCloseAction.setReturnBooks(returnBooks);

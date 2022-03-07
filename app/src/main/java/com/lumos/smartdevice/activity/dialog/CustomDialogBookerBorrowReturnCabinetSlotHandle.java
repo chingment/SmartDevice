@@ -41,10 +41,10 @@ public class CustomDialogBookerBorrowReturnCabinetSlotHandle extends Dialog {
 
 
 
-        GifImageView gifImageView = ViewHolder.get(mLayoutRes, R.id.iv_TipsLoading);
-        gifImageView.setImageResource(R.drawable.test2);
-        gifImageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        GifDrawable gifDrawable = (GifDrawable) gifImageView.getDrawable();
+        GifImageView iv_TipsLoading = ViewHolder.get(mLayoutRes, R.id.iv_TipsLoading);
+        iv_TipsLoading.setImageResource(R.drawable.test2);
+        iv_TipsLoading.setScaleType(ImageView.ScaleType.FIT_XY);
+        GifDrawable gifDrawable = (GifDrawable) iv_TipsLoading.getDrawable();
         gifDrawable.start(); //开始播放
 //        gifDrawable.stop(); //停止播放
 //        gifDrawable.reset(); //复位，重新开始播放
@@ -55,16 +55,12 @@ public class CustomDialogBookerBorrowReturnCabinetSlotHandle extends Dialog {
 //        gifDrawable.getDuration() ; //获取播放一次所需要的时间
 
 
-        ImageView iv_TipsImage = ViewHolder.get(mLayoutRes, R.id.iv_TipsImage);
         View tv_TipsText = ViewHolder.get(mLayoutRes, R.id.tv_TipsText);
 
 
-        iv_TipsImage.setOnClickListener(new View.OnClickListener() {
+        iv_TipsLoading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(mContext, BookerBorrowReturnOverviewActivity.class);
-//                mContext.startActivity(intent);
-//                mContext.finish();
 
                 if(onClickListener!=null) {
                     onClickListener.testOpen(flowId);
