@@ -10,7 +10,6 @@ import android.widget.VideoView;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
-import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -113,11 +112,11 @@ public class BookerMainActivity  extends BaseFragmentActivity {
             int id = v.getId();
 
             if (id == R.id.btn_BorrowBook) {
-                Intent intent = new Intent(getAppContext(), BookerIdentityVerifyWaySelectActivity.class);
+                Intent intent = new Intent(getAppContext(), BookerIdentityVerifyActivity.class);
                 intent.putExtra("action", "borrow_book");
                 openActivity(intent);
             } else if (id == R.id.btn_ReturnBook) {
-                Intent intent = new Intent(getAppContext(), BookerIdentityVerifyWaySelectActivity.class);
+                Intent intent = new Intent(getAppContext(), BookerIdentityVerifyActivity.class);
                 intent.putExtra("action", "return_book");
                 openActivity(intent);
             } else if (id == R.id.btn_QueryBook) {

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/booker_primary_bg"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/rl_Header"
+        layout="@layout/booker_nav_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/rl_Bodyer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rl_Footer"
+        android:layout_below="@+id/rl_Header"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/size_20"
+        android:paddingEnd="@dimen/size_20">
+
+
+
+        <com.lumos.smartdevice.ui.my.MyGridView
+            android:id="@+id/gdv_Ways"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:horizontalSpacing="0dp"
+            android:verticalSpacing="0dp"
+            android:listSelector="@color/transparent"
+            android:numColumns="2"
+            android:stretchMode="columnWidth" />
+
+    </LinearLayout>
+
+
+    <include
+        android:id="@+id/rl_Footer"
+        layout="@layout/booker_nav_footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

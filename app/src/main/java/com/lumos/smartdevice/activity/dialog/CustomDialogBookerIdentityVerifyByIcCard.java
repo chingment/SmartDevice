@@ -1,0 +1,72 @@
+package com.lumos.smartdevice.activity.dialog;
+
+import android.app.Dialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.model.CabinetSlotBean;
+import com.lumos.smartdevice.ui.BaseFragmentActivity;
+import com.lumos.smartdevice.ui.ViewHolder;
+
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
+
+public class CustomDialogBookerIdentityVerifyByIcCard extends Dialog {
+
+    private static final String TAG = "CustomDialogBookerIdentityVerifyByIcCard";
+    private final Dialog mThis;
+    private final BaseFragmentActivity mContext;
+    private final View mLayoutRes;
+
+    private final View btn_Close;
+
+    private final View btn_GoInspect;
+
+
+    public CustomDialogBookerIdentityVerifyByIcCard(Context context) {
+        super(context, R.style.custom_dialog);
+        mThis = this;
+        mContext = (BaseFragmentActivity) context;
+        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_booker_identity_verify_by_iccard, null);
+        btn_Close = ViewHolder.get(mLayoutRes, R.id.dialog_Btn_Close);
+        btn_Close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mThis.hide();
+            }
+        });
+
+        btn_GoInspect = ViewHolder.get(mLayoutRes, R.id.btn_GoInspect);
+        btn_GoInspect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (onClickListener != null) {
+                    onClickListener.testSuccesss();
+                }
+            }
+        });
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.setContentView(mLayoutRes);
+    }
+
+    private OnClickListener onClickListener;
+
+    public void  setOnClickListener(OnClickListener onClickListener){
+        this.onClickListener=onClickListener;
+    }
+
+    public  interface OnClickListener{
+        void testSuccesss();
+        void testFailure();
+    }
+
+}

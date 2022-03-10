@@ -50,7 +50,7 @@
             android:name=".activity.booker.BookerIdentityVerifyByIcCardActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.booker.BookerIdentityVerifyWaySelectActivity"
+            android:name=".activity.booker.BookerIdentityVerifyActivity"
             android:exported="true" />
         <activity
             android:name=".activity.booker.BookerMainActivity"

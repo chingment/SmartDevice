@@ -37,6 +37,7 @@
         <entry key="app/src/main/res/layout-v21/booker_nav_header.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/activity_booker_borrow_return_inspect.xml" value="0.36533957845433257" />
         <entry key="app/src/main/res/layout/activity_booker_borrow_return_overview.xml" value="0.4213564213564214" />
+        <entry key="app/src/main/res/layout/activity_booker_identity_verify.xml" value="0.15208333333333332" />
         <entry key="app/src/main/res/layout/activity_booker_identity_verify_by_iccard.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_booker_identity_verify_ic_card.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_booker_identity_verify_select.xml" value="0.375" />
@@ -72,6 +73,7 @@
         <entry key="app/src/main/res/layout/booker_nav_footer.xml" value="0.55" />
         <entry key="app/src/main/res/layout/booker_nav_header.xml" value="0.45" />
         <entry key="app/src/main/res/layout/custom_dialog_booker_borrow_return_cabinet_slot_handle.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/custom_dialog_booker_identity_verify_by_iccard.xml" value="0.375" />
         <entry key="app/src/main/res/layout/custom_dialog_borrow_return_cabinet_handle.xml" value="0.375" />
         <entry key="app/src/main/res/layout/custom_dialog_cabinet_config.xml" value="0.12092391304347826" />
         <entry key="app/src/main/res/layout/custom_dialog_cabinetconfig.xml" value="0.13489583333333333" />
@@ -81,6 +83,7 @@
         <entry key="app/src/main/res/layout/custom_dialog_lockerbox.xml" value="0.335" />
         <entry key="app/src/main/res/layout/custom_dialog_owninfo.xml" value="0.14427083333333332" />
         <entry key="app/src/main/res/layout/custom_dialog_sm_locker_box.xml" value="0.12916666666666668" />
+        <entry key="app/src/main/res/layout/custom_dialog_sm_owninfo.xml" value="0.13072916666666667" />
         <entry key="app/src/main/res/layout/custom_dialog_useredit.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_booker_borrow_return_book.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_booker_borrow_return_inspect_cabinet_box.xml" value="0.335" />
