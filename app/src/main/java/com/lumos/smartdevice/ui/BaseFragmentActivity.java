@@ -1,6 +1,7 @@
 package com.lumos.smartdevice.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -150,10 +151,18 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
 
     }
 
+
+    public void openActivity(Intent intent) {
+        startActivity(intent);
+        overridePendingTransition(R.anim.fragment_fade_enter,R.anim.fragment_fade_exit);
+    }
+
     @Override
     public void finish() {
 
         super.finish();
+
+        overridePendingTransition(R.anim.fragment_fade_enter,R.anim.fragment_fade_exit);
     }
 
     @Override

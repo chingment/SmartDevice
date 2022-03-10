@@ -181,7 +181,7 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
 
     private void gdvFactorySetting(){
         Intent intent = new Intent(SmHelpToolActivity.this, SmFactorySettingActivity.class);
-        startActivity(intent);
+        openActivity(intent);
 
     }
 
@@ -248,7 +248,7 @@ public class SmHelpToolActivity extends BaseFragmentActivity {
                 if (rt.getCode() == ResultCode.SUCCESS) {
                     AppCacheManager.setCurrentUser(null);
                     Intent intent = new Intent(SmHelpToolActivity.this, InitDataActivity.class);
-                    startActivity(intent);
+                    openActivity(intent);
                     AppManager.getAppManager().finishAllActivity();
                 } else {
                     showToast(rt.getMsg());

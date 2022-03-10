@@ -60,13 +60,13 @@ public class BookerIdentityVerifyByIcCardActivity extends BaseFragmentActivity {
             }
             else if (id == R.id.btn_Nav_Footer_GoHome) {
                 Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
-                startActivity(intent);
+                openActivity(intent);
                 finish();
             }
             else if (id == R.id.btn_GoInspect) {
                 Intent intent = new Intent(getAppContext(), BookerBorrowReturnInspectActivity.class);
                 intent.putExtra("action", intent_extra_action);
-                startActivity(intent);
+                openActivity(intent);
             }
         }
     }

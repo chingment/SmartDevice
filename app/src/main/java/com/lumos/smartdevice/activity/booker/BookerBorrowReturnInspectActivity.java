@@ -234,7 +234,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                             Bundle bundle = new Bundle();
                             bundle.putSerializable("ret_booker_borrow_return_close_action", rt.getData());
                             intent.putExtras(bundle);
-                            startActivity(intent);
+                            openActivity(intent);
                             finish();
 
 
@@ -385,7 +385,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                 finish();
             } else if (id == R.id.btn_Nav_Footer_GoHome) {
                 Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
-                startActivity(intent);
+                openActivity(intent);
                 finish();
             }
         }

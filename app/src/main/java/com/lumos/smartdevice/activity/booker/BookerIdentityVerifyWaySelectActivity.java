@@ -84,7 +84,7 @@ public class BookerIdentityVerifyWaySelectActivity extends BaseFragmentActivity 
     private void gdvIcCard() {
         Intent intent = new Intent(BookerIdentityVerifyWaySelectActivity.this, BookerIdentityVerifyByIcCardActivity.class);
         intent.putExtra("action", intent_extra_action);
-        startActivity(intent);
+        openActivity(intent);
     }
 
     @Override
@@ -98,7 +98,7 @@ public class BookerIdentityVerifyWaySelectActivity extends BaseFragmentActivity 
             }
             else if(id==R.id.btn_Nav_Footer_GoHome) {
                 Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
-                startActivity(intent);
+                openActivity(intent);
                 finish();
             }
         }

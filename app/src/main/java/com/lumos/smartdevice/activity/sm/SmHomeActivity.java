@@ -211,24 +211,24 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
 
     private void gdvLockerBoxManager(){
         Intent intent = new Intent(SmHomeActivity.this, SmLockerBoxManagerActivity.class);
-        startActivity(intent);
+        openActivity(intent);
     }
 
     private void gdvLockerBoxUseRecord(){
         Intent intent = new Intent(SmHomeActivity.this, SmLockerBoxUseRecordActivity.class);
-        startActivity(intent);
+        openActivity(intent);
     }
 
 
     private void gdvUserManager(){
         Intent intent = new Intent(SmHomeActivity.this, SmUserManagerActivity.class);
         intent.putExtra("scene_mode",1);
-        startActivity(intent);
+        openActivity(intent);
     }
 
     private void gdvDeviceInfo(){
         Intent intent = new Intent(SmHomeActivity.this, SmDeviceInfoActivity.class);
-        startActivity(intent);
+        openActivity(intent);
     }
 
 
@@ -268,7 +268,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
                 if (rt.getCode() == ResultCode.SUCCESS) {
                     AppCacheManager.setCurrentUser(null);
                     Intent intent = new Intent(SmHomeActivity.this, InitDataActivity.class);
-                    startActivity(intent);
+                    openActivity(intent);
                     AppManager.getAppManager().finishAllActivity();
                 } else {
                     showToast(rt.getMsg());

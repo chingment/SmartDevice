@@ -88,7 +88,7 @@ public class SmFactorySettingActivity extends BaseFragmentActivity implements Vi
                 finish();
             } else if (id == R.id.btn_Nav_AppSceneSetting) {
                 Intent intent = new Intent(getAppContext(), SmAppSceneSettingActivity.class);
-                startActivity(intent);
+                openActivity(intent);
             }
         }
     }

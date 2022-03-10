@@ -90,7 +90,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                 if (!scene_mode.equals("init_data_help")) {
                     Intent intent = new Intent(getAppContext(), SmLoginActivity.class);
                     intent.putExtra("scene_mode", "init_data_help");
-                    startActivity(intent);
+                    openActivity(intent);
                 }
                 //finish();
                 return true;
@@ -203,7 +203,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                 AppCacheManager.setLastUserName(scene_mode,username);
                 AppCacheManager.setCurrentUser(user1);
                 Intent  var1 = new Intent(getAppContext(), SmHelpToolActivity.class);
-                startActivity(var1);
+                openActivity(var1);
                 finish();
                 break;
             case "manager_center":
@@ -247,7 +247,7 @@ public class SmLoginActivity extends BaseFragmentActivity implements View.OnClic
                             AppCacheManager.setCurrentUser(user);
 
                             Intent var2 = new Intent(getAppContext(), SmHomeActivity.class);
-                            startActivity(var2);
+                            openActivity(var2);
                             finish();
                         }
                         else {

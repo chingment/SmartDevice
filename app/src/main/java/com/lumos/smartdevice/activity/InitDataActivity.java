@@ -123,7 +123,7 @@ public class InitDataActivity extends BaseFragmentActivity {
             public boolean onLongClick(View v) {
                 Intent intent = new Intent(getAppContext(), SmLoginActivity.class);
                 intent.putExtra("scene_mode","init_data_help");
-                startActivity(intent);
+                openActivity(intent);
                 //finish();
                 return true;
             }
@@ -218,13 +218,13 @@ public class InitDataActivity extends BaseFragmentActivity {
 
                                 if (scene_mode==AppVar.SCENE_MODE_1) {
                                     Intent intent = new Intent(getAppContext(), LockerMainActivity.class);
-                                    startActivity(intent);
+                                    openActivity(intent);
                                     finish();
                                 }
                                 else if(scene_mode==AppVar.SCENE_MODE_2){
 
                                     Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
-                                    startActivity(intent);
+                                    openActivity(intent);
                                     finish();
                                 }
                             }

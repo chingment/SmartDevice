@@ -56,6 +56,9 @@
             android:name=".activity.booker.BookerMainActivity"
             android:exported="true" />
         <activity
+            android:name=".activity.booker.BookerQueryBookActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.sm.SmLockerBoxUseRecordActivity"
             android:exported="true" />
         <activity

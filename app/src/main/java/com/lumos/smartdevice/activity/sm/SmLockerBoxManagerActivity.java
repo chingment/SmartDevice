@@ -203,7 +203,7 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
                 scene_param.put("slot_id",slotId);
 
                 intent.putExtra("scene_param",scene_param);
-                startActivity(intent);
+                openActivity(intent);
             }
 
             @Override

@@ -61,7 +61,7 @@ public class BookerMainActivity  extends BaseFragmentActivity {
             public boolean onLongClick(View v) {
                 Intent intent = new Intent(getAppContext(), SmLoginActivity.class);
                 intent.putExtra("scene_mode","manager_center");
-                startActivity(intent);
+                openActivity(intent);
                 return true;
             }
         });
@@ -115,15 +115,15 @@ public class BookerMainActivity  extends BaseFragmentActivity {
             if (id == R.id.btn_BorrowBook) {
                 Intent intent = new Intent(getAppContext(), BookerIdentityVerifyWaySelectActivity.class);
                 intent.putExtra("action", "borrow_book");
-                startActivity(intent);
+                openActivity(intent);
             } else if (id == R.id.btn_ReturnBook) {
                 Intent intent = new Intent(getAppContext(), BookerIdentityVerifyWaySelectActivity.class);
                 intent.putExtra("action", "return_book");
-                startActivity(intent);
+                openActivity(intent);
             } else if (id == R.id.btn_QueryBook) {
                 Intent intent = new Intent(getAppContext(), BookerQueryBookActivity.class);
                 intent.putExtra("action", "query_book");
-                startActivity(intent);
+                openActivity(intent);
             }
 
         }

@@ -115,11 +115,11 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
 
             if (id == R.id.btn_Nav_Footer_Finish) {
                 Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
-                startActivity(intent);
+                openActivity(intent);
                 finish();
             } else if (id == R.id.btn_Nav_Footer_GoHelp) {
                 Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
-                startActivity(intent);
+                openActivity(intent);
                 finish();
             }
         }
