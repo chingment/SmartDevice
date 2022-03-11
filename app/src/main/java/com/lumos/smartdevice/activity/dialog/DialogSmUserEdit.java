@@ -58,7 +58,7 @@ public class DialogSmUserEdit extends Dialog {
     private int version_mode=AppVar.VERSION_MODE_0;
 
     public DialogSmUserEdit(Context context) {
-        super(context, R.style.custom_dialog);
+        super(context, R.style.dialog);
         mThis = this;
         mContext = (BaseFragmentActivity)context;
         mLayoutRes = LayoutInflater.from(context).inflate(R.layout.dialog_sm_useredit, null);

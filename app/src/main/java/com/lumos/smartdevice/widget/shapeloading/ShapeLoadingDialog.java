@@ -17,7 +17,7 @@ public class ShapeLoadingDialog extends Dialog {
     private Builder mBuilder;
 
     private ShapeLoadingDialog(Builder builder) {
-        super(builder.mContext, R.style.custom_dialog);
+        super(builder.mContext, R.style.dialog);
         mBuilder = builder;
         setCancelable(mBuilder.mCancelable);
         setCanceledOnTouchOutside(mBuilder.mCanceledOnTouchOutside);

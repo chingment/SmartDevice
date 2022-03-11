@@ -34,7 +34,7 @@ public class DialogBookerFlowHandling extends Dialog {
     }
 
     public DialogBookerFlowHandling(Context context) {
-        super(context, R.style.custom_dialog);
+        super(context, R.style.dialog);
         mThis = this;
         mContext = (BaseFragmentActivity) context;
         mLayoutRes = LayoutInflater.from(context).inflate(R.layout.dialog_booker_flow_handling, null);

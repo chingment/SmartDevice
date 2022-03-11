@@ -23,7 +23,7 @@ public class DialogBookerIdentityVerifyByIcCard extends Dialog {
 
 
     public DialogBookerIdentityVerifyByIcCard(Context context) {
-        super(context, R.style.custom_dialog);
+        super(context, R.style.dialog);
         mThis = this;
         mContext = (BaseFragmentActivity) context;
         mLayoutRes = LayoutInflater.from(context).inflate(R.layout.dialog_booker_identity_verify_by_iccard, null);

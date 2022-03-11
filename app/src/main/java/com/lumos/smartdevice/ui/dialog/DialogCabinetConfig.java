@@ -29,7 +29,7 @@ public class DialogCabinetConfig extends Dialog {
     private TextView tv_Layout;
 
     public DialogCabinetConfig(Context context) {
-        super(context, R.style.custom_dialog);
+        super(context, R.style.dialog);
         mThis = this;
         mContext = context;
         mLayoutRes = LayoutInflater.from(context).inflate(R.layout.dialog_cabinet_config, null);

@@ -13,7 +13,7 @@ import com.lumos.smartdevice.R;
 public class DialogLoading extends Dialog {
 	private static final String TAG = "DialogLoading";
 	public DialogLoading(Context context) {
-		super(context, R.style.custom_dialog);
+		super(context, R.style.dialog);
 		this.context = context;
 		initDialog(context);
 	}
