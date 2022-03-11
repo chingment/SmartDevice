@@ -5,19 +5,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.CabinetSlotBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 
-import pl.droidsonroids.gif.GifDrawable;
-import pl.droidsonroids.gif.GifImageView;
+public class DialogBookerIdentityVerifyByIcCard extends Dialog {
 
-public class CustomDialogBookerIdentityVerifyByIcCard extends Dialog {
-
-    private static final String TAG = "CustomDialogBookerIdentityVerifyByIcCard";
+    private static final String TAG = "DialogBookerIdentityVerifyByIcCard";
     private final Dialog mThis;
     private final BaseFragmentActivity mContext;
     private final View mLayoutRes;
@@ -27,11 +22,11 @@ public class CustomDialogBookerIdentityVerifyByIcCard extends Dialog {
     private final View btn_GoInspect;
 
 
-    public CustomDialogBookerIdentityVerifyByIcCard(Context context) {
+    public DialogBookerIdentityVerifyByIcCard(Context context) {
         super(context, R.style.custom_dialog);
         mThis = this;
         mContext = (BaseFragmentActivity) context;
-        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_booker_identity_verify_by_iccard, null);
+        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.dialog_booker_identity_verify_by_iccard, null);
         btn_Close = ViewHolder.get(mLayoutRes, R.id.dialog_Btn_Close);
         btn_Close.setOnClickListener(new View.OnClickListener() {
             @Override

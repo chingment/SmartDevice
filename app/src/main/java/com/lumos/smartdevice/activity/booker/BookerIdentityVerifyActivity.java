@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.dialog.CustomDialogBookerIdentityVerifyByIcCard;
+import com.lumos.smartdevice.activity.dialog.DialogBookerIdentityVerifyByIcCard;
 import com.lumos.smartdevice.adapter.BookerIdentityVerfiyWayAdapter;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
@@ -27,7 +27,7 @@ public class BookerIdentityVerifyActivity extends BaseFragmentActivity {
 
     private List<GridNineItemBean> gdv_Ways_Items;
  
-    private CustomDialogBookerIdentityVerifyByIcCard dialog_BookerIdentityVerifyByIcCard;
+    private DialogBookerIdentityVerifyByIcCard dialog_BookerIdentityVerifyByIcCard;
 
     private String intent_extra_action="";
     @Override
@@ -49,8 +49,8 @@ public class BookerIdentityVerifyActivity extends BaseFragmentActivity {
         btn_Nav_Footer_GoHome = findViewById(R.id.btn_Nav_Footer_GoHome);
         gdv_Ways = findViewById(R.id.gdv_Ways);
 
-        dialog_BookerIdentityVerifyByIcCard = new CustomDialogBookerIdentityVerifyByIcCard(this);
-        dialog_BookerIdentityVerifyByIcCard.setOnClickListener(new CustomDialogBookerIdentityVerifyByIcCard.OnClickListener() {
+        dialog_BookerIdentityVerifyByIcCard = new DialogBookerIdentityVerifyByIcCard(this);
+        dialog_BookerIdentityVerifyByIcCard.setOnClickListener(new DialogBookerIdentityVerifyByIcCard.OnClickListener() {
             @Override
             public void testSuccesss() {
 

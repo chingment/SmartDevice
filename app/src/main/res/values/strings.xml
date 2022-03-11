@@ -62,19 +62,11 @@
     <string name="title">标题</string>
     <string name="save_success">保存成功</string>
     <string name="save">保存</string>
-    <string name="custom_dialog_confirm_btn_txt_cancle">否</string>
-    <string name="custom_dialog_confirm_btn_txt_sure">是</string>
     <string name="confrim_tips_opendoor">确定打开门柜？</string>
     <string name="confrim_tips_exitmanager">确定退出管理？</string>
     <string name="confrim_tips_delete">确定删除？</string>
     <string name="confrim_tips_closeapp">确定关闭应用？</string>
     <string name="confrim_tips_rebootsys">确定重启系统？</string>
-    <string name="custom_dialog_cabinetconfig_cabinet_id">机柜ID</string>
-    <string name="custom_dialog_cabinetconfig_cabinet_name">机柜名</string>
-    <string name="custom_dialog_cabinetconfig_com_id">串口</string>
-    <string name="custom_dialog_cabinetconfig_com_baud">波特</string>
-    <string name="custom_dialog_cabinetconfig_com_prl">协议</string>
-    <string name="custom_dialog_cabinetconfig_layout">布局</string>
     <string name="tips_username_isnotnull">用户名不能为空</string>
     <string name="tips_username_formatnoright">手机格式有误</string>
     <string name="tips_password_isnotnull">密码不能为空</string>
@@ -132,4 +124,12 @@
     <string name="t_finish">完成</string>
     <string name="t_borrow_out">借出</string>
     <string name="t_return_in">放入</string>
+    <string name="t_cabinet_id">机柜ID</string>
+    <string name="t_cabinet_name">机柜名</string>
+    <string name="t_com_id">串口</string>
+    <string name="t_com_baud">波特</string>
+    <string name="t_com_prl">协议</string>
+    <string name="t_com_layout">布局</string>
+    <string name="t_cancle">否</string>
+    <string name="t_sure">是</string>
 </resources>

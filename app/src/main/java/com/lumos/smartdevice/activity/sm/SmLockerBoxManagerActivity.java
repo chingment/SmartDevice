@@ -34,9 +34,9 @@ import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
-import com.lumos.smartdevice.ui.dialog.CustomDialogCabinetConfig;
-import com.lumos.smartdevice.ui.dialog.CustomDialogConfirm;
-import com.lumos.smartdevice.ui.dialog.CustomDialogLockerBox;
+import com.lumos.smartdevice.ui.dialog.DialogCabinetConfig;
+import com.lumos.smartdevice.ui.dialog.DialogConfirm;
+import com.lumos.smartdevice.ui.dialog.DialogLockerBox;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
@@ -56,9 +56,9 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
     private List<CabinetBean> cabinets;
     private static int cur_Cabinet_Position = 0;
 
-    private CustomDialogCabinetConfig dialog_CabinetConfig;
-    private CustomDialogLockerBox dialog_LockerBox;
-    private CustomDialogConfirm dialog_Confirm;
+    private DialogCabinetConfig dialog_CabinetConfig;
+    private DialogLockerBox dialog_LockerBox;
+    private DialogConfirm dialog_Confirm;
     private DeviceBean device;
 
     private RecyclerView tl_Boxs;
@@ -95,9 +95,9 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
         btn_OpenAllBox=findViewById(R.id.btn_OpenAllBox);
         tl_Boxs = findViewById(R.id.tl_Boxs);
 
-        dialog_CabinetConfig = new CustomDialogCabinetConfig(SmLockerBoxManagerActivity.this);
-        dialog_Confirm = new CustomDialogConfirm(SmLockerBoxManagerActivity.this, "", true);
-        dialog_Confirm.setOnClickListener(new CustomDialogConfirm.OnClickListener() {
+        dialog_CabinetConfig = new DialogCabinetConfig(SmLockerBoxManagerActivity.this);
+        dialog_Confirm = new DialogConfirm(SmLockerBoxManagerActivity.this, "", true);
+        dialog_Confirm.setOnClickListener(new DialogConfirm.OnClickListener() {
             @Override
             public void onSure() {
                final String device_id;
@@ -190,8 +190,8 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
         });
 
 
-        dialog_LockerBox = new CustomDialogLockerBox(SmLockerBoxManagerActivity.this);
-        dialog_LockerBox.setOnClickListener(new CustomDialogLockerBox.OnClickListener() {
+        dialog_LockerBox = new DialogLockerBox(SmLockerBoxManagerActivity.this);
+        dialog_LockerBox.setOnClickListener(new DialogLockerBox.OnClickListener() {
             @Override
             public void onGoSelectUser(String deviceId, String cabinetId,String slotId) {
 

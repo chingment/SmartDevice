@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.dialog.CustomDialogBookerFlowHandling;
+import com.lumos.smartdevice.activity.dialog.DialogBookerFlowHandling;
 import com.lumos.smartdevice.adapter.BookerBorrowReturnInspectCabinetBoxAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -53,7 +53,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
     private List<CabinetSlotBean> cabinetSlots=new ArrayList<>();
 
-    private CustomDialogBookerFlowHandling dialog_BookerFlowHandling;
+    private DialogBookerFlowHandling dialog_BookerFlowHandling;
 
 
     private int identityType=2;
@@ -125,14 +125,14 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
         tv_CanBorrowQuantity = findViewById(R.id.tv_CanBorrowQuantity);
         tv_BorrowedQuantity = findViewById(R.id.tv_BorrowedQuantity);
         gdv_Slots = findViewById(R.id.gdv_Slots);
-        dialog_BookerFlowHandling = new CustomDialogBookerFlowHandling(BookerBorrowReturnInspectActivity.this);
+        dialog_BookerFlowHandling = new DialogBookerFlowHandling(BookerBorrowReturnInspectActivity.this);
     }
 
     private void initEvent() {
         btn_Nav_Footer_GoBack.setOnClickListener(this);
         btn_Nav_Footer_GoHome.setOnClickListener(this);
 
-        dialog_BookerFlowHandling.setOnClickListener(new CustomDialogBookerFlowHandling.OnClickListener() {
+        dialog_BookerFlowHandling.setOnClickListener(new DialogBookerFlowHandling.OnClickListener() {
             @Override
             public void testOpen(String flowId) {
 

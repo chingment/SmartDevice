@@ -15,9 +15,9 @@ import com.lumos.smartdevice.ui.ViewHolder;
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.GifImageView;
 
-public class CustomDialogBookerFlowHandling extends Dialog {
+public class DialogBookerFlowHandling extends Dialog {
 
-    private static final String TAG = "CustomDialogBookerFlowHandling";
+    private static final String TAG = "DialogBookerFlowHandling";
     private final Dialog mThis;
     private final BaseFragmentActivity mContext;
     private final View mLayoutRes;
@@ -33,11 +33,11 @@ public class CustomDialogBookerFlowHandling extends Dialog {
         this.cabinetSlot = cabinetSlot;
     }
 
-    public CustomDialogBookerFlowHandling(Context context) {
+    public DialogBookerFlowHandling(Context context) {
         super(context, R.style.custom_dialog);
         mThis = this;
         mContext = (BaseFragmentActivity) context;
-        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_booker_flow_handling, null);
+        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.dialog_booker_flow_handling, null);
 
 
 

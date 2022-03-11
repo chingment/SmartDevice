@@ -13,8 +13,8 @@ import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.ui.ViewHolder;
 
-public class CustomDialogCabinetConfig extends Dialog {
-    private static final String TAG = "CustomDialogCabinetConfig";
+public class DialogCabinetConfig extends Dialog {
+    private static final String TAG = "DialogCabinetConfig";
     private Dialog mThis;
     private Context mContext;
     private View mLayoutRes;
@@ -28,11 +28,11 @@ public class CustomDialogCabinetConfig extends Dialog {
     private TextView tv_ComPrl;
     private TextView tv_Layout;
 
-    public CustomDialogCabinetConfig(Context context) {
+    public DialogCabinetConfig(Context context) {
         super(context, R.style.custom_dialog);
         mThis = this;
         mContext = context;
-        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_cabinet_config, null);
+        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.dialog_cabinet_config, null);
 
         btn_Close = ViewHolder.get(mLayoutRes, R.id.dialog_Btn_Close);
         btn_Close.setOnClickListener(new View.OnClickListener() {

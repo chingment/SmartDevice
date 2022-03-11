@@ -26,9 +26,9 @@
     <color name="nav_boder_bottom_bg">#FFFFFF</color>
     <color name="dialog_tips">#333333</color>
     <color name="dialog_confirm_bg">#2000</color>
-    <color name="custom_dialog_confirm_btn_sure">#000000</color>
-    <color name="custom_dialog_confirm_btn_sure_bg">#FFFFFF</color>
-    <color name="custom_dialog_confirm_btn_cancle">#000000</color>
+    <color name="dialog_confirm_btn_sure">#000000</color>
+    <color name="dialog_confirm_btn_sure_bg">#FFFFFF</color>
+    <color name="dialog_confirm_btn_cancle">#000000</color>
     <color name="locker_cabinet_bg">#8cbaf8</color>
     <color name="locker_cabinet_bd">#3b414f</color>
     <color name="locker_box_open_status_1">#e2e0e1</color>

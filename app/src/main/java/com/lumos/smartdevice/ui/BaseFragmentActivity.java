@@ -20,7 +20,7 @@ import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppManager;
-import com.lumos.smartdevice.ui.dialog.CustomDialogLoading;
+import com.lumos.smartdevice.ui.dialog.DialogLoading;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.ToastUtil;
 
@@ -35,7 +35,7 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
     private DeviceBean device;
 
     private Handler laodingUIHandler;
-    private CustomDialogLoading dialog_Loading;
+    private DialogLoading dialog_Loading;
 
     public AppContext getAppContext() {
         return appContext;
@@ -86,7 +86,7 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
                 switch (msg.what) {
                     case 1:
                         if(msg.obj!=null) {
-                            dialog_Loading = new CustomDialogLoading((Context) msg.obj);
+                            dialog_Loading = new DialogLoading((Context) msg.obj);
                             dialog_Loading.setProgressText("正在处理中");
                             dialog_Loading.show();
                             new Handler().postDelayed(new Runnable() {

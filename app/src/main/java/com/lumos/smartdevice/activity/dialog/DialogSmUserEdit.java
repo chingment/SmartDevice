@@ -26,9 +26,9 @@ import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
-public class CustomDialogSmUserEdit extends Dialog {
+public class DialogSmUserEdit extends Dialog {
 
-    private static final String TAG = "CustomDialogSmUserEdit";
+    private static final String TAG = "DialogSmUserEdit";
     private final Dialog mThis;
     private final BaseFragmentActivity mContext;
     private final View mLayoutRes;
@@ -57,11 +57,11 @@ public class CustomDialogSmUserEdit extends Dialog {
 
     private int version_mode=AppVar.VERSION_MODE_0;
 
-    public CustomDialogSmUserEdit(Context context) {
+    public DialogSmUserEdit(Context context) {
         super(context, R.style.custom_dialog);
         mThis = this;
         mContext = (BaseFragmentActivity)context;
-        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_sm_useredit, null);
+        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.dialog_sm_useredit, null);
 
         btn_Close = ViewHolder.get(mLayoutRes, R.id.dialog_Btn_Close);
         btn_Close.setOnClickListener(new View.OnClickListener() {

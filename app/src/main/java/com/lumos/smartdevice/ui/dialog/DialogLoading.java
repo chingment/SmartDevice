@@ -10,9 +10,9 @@ import android.widget.TextView;
 import com.lumos.smartdevice.R;
 
 
-public class CustomDialogLoading extends Dialog {
-	private static final String TAG = "CustomDialogLoading";
-	public CustomDialogLoading(Context context) {
+public class DialogLoading extends Dialog {
+	private static final String TAG = "DialogLoading";
+	public DialogLoading(Context context) {
 		super(context, R.style.custom_dialog);
 		this.context = context;
 		initDialog(context);
@@ -24,7 +24,7 @@ public class CustomDialogLoading extends Dialog {
 
 
 	private void initDialog(Context context) {
-		setContentView(R.layout.custom_dialog_loading);
+		setContentView(R.layout.dialog_loading);
 		ivProgress = (ImageView)findViewById(R.id.img);
 		tvInfo = (TextView)findViewById(R.id.tipTextView);
 		// 显示文本

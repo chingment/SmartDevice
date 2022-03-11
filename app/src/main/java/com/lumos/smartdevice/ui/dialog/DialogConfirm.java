@@ -16,9 +16,9 @@ import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.utils.CommonUtil;
 
 
-public class CustomDialogConfirm extends Dialog {
-    private static final String TAG = "CustomDialogConfirm";
-    private CustomDialogConfirm mThis;
+public class DialogConfirm extends Dialog {
+    private static final String TAG = "DialogConfirm";
+    private DialogConfirm mThis;
     private Context mContext;
     private View mLayoutRes;
 
@@ -78,11 +78,11 @@ public class CustomDialogConfirm extends Dialog {
         return this.function;
     }
 
-    public CustomDialogConfirm(Context context, String tips, boolean isCancle) {
+    public DialogConfirm(Context context, String tips, boolean isCancle) {
         super(context, R.style.custom_dialog);
         mThis=this;
         mContext = context;
-        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.custom_dialog_confirm, null);
+        mLayoutRes = LayoutInflater.from(context).inflate(R.layout.dialog_confirm, null);
 
         dlg_Close =ViewHolder.get(mLayoutRes,R.id.dlg_Close);
         tv_TipsText = ViewHolder.get(mLayoutRes,R.id.tv_TipsText);

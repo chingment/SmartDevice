@@ -80,7 +80,7 @@
                     android:layout_height="@dimen/size_20"
                     android:paddingLeft="@dimen/size_5"
                     android:paddingRight="@dimen/size_5"
-                    android:text="@string/custom_dialog_confirm_btn_txt_cancle"
+                    android:text="@string/t_cancle"
                     android:background="@drawable/dialog_btn_cancle"
                     android:textColor="#fff"
                     android:textSize="@dimen/sp_10" />
@@ -104,9 +104,9 @@
                     android:layout_marginLeft="0dp"
                     android:paddingLeft="@dimen/size_5"
                     android:paddingRight="@dimen/size_5"
-                    android:text="@string/custom_dialog_confirm_btn_txt_sure"
+                    android:text="@string/t_sure"
                     android:background="@drawable/dialog_btn_sure"
-                    android:textColor="@color/custom_dialog_confirm_btn_sure"
+                    android:textColor="@color/dialog_confirm_btn_sure"
                     android:textSize="@dimen/sp_10"
                     tools:ignore="RtlHardcoded" />
 

@@ -47,7 +47,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/custom_dialog_cabinetconfig_cabinet_id"
+                    android:text="@string/t_cabinet_id"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
                 <LinearLayout
@@ -80,7 +80,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/custom_dialog_cabinetconfig_cabinet_name"
+                    android:text="@string/t_cabinet_name"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
                 <LinearLayout
@@ -114,7 +114,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/custom_dialog_cabinetconfig_com_id"
+                    android:text="@string/t_com_id"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
                 <LinearLayout
@@ -147,7 +147,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/custom_dialog_cabinetconfig_com_baud"
+                    android:text="@string/t_com_baud"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
                 <LinearLayout
@@ -179,7 +179,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/custom_dialog_cabinetconfig_com_prl"
+                    android:text="@string/t_com_prl"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
                 <LinearLayout
@@ -211,7 +211,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/custom_dialog_cabinetconfig_layout"
+                    android:text="@string/t_com_layout"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_14" />
                 <LinearLayout
