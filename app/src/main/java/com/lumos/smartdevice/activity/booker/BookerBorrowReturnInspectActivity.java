@@ -44,7 +44,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
     private View btn_Nav_Footer_GoBack;
     private View btn_Nav_Footer_GoHome;
     private MyGridView gdv_Slots;
-    private TextView tv_SignName;
+    private TextView tv_FullName;
     private TextView tv_CardNo;
     private TextView tv_CanBorrowQuantity;
     private TextView tv_BorrowedQuantity;
@@ -55,20 +55,22 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
     private DialogBookerFlowHandling dialog_BookerFlowHandling;
 
-
-    private int identityType=2;
-    private String identityId="1";
-    private String clientUserId="c89cae062f9b4b098687969fee260000";
+    private int identityType;
+    private String identityId;
+    private String clientUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booker_borrow_return_inspect);
         setNavHeaderTtile(R.string.aty_nav_title_booker_borrow_return_inspect);
-        device=getDevice();
+        identityType = getIntent().getIntExtra("identityType", 0);
+        identityId = getIntent().getStringExtra("identityId");
+        clientUserId = getIntent().getStringExtra("clientUserId");
+        device = getDevice();
 
-        HashMap<String, CabinetBean> l_Cabinets=device.getCabinets();
-        if(l_Cabinets!=null) {
+        HashMap<String, CabinetBean> l_Cabinets = device.getCabinets();
+        if (l_Cabinets != null) {
 
             List<CabinetBean> cabinets = new ArrayList<>(l_Cabinets.values());
 
@@ -79,13 +81,13 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                 }
             });
 
-            for (CabinetBean cabinet: cabinets ) {
-                String layout=cabinet.getLayout();
+            for (CabinetBean cabinet : cabinets) {
+                String layout = cabinet.getLayout();
                 CabinetLayoutBean cabinetLayout = JSON.parseObject(layout, new TypeReference<CabinetLayoutBean>() {
                 });
                 if (cabinetLayout != null) {
                     List<String> cabinetCells = cabinetLayout.getCells();
-                    if(cabinetCells!=null) {
+                    if (cabinetCells != null) {
                         for (String cabinetCell : cabinetCells) {
 
                             String[] cell_prams = cabinetCell.split("-");
@@ -120,7 +122,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
     private void initView() {
         btn_Nav_Footer_GoBack = findViewById(R.id.btn_Nav_Footer_GoBack);
         btn_Nav_Footer_GoHome = findViewById(R.id.btn_Nav_Footer_GoHome);
-        tv_SignName = findViewById(R.id.tv_SignName);
+        tv_FullName = findViewById(R.id.tv_FullName);
         tv_CardNo = findViewById(R.id.tv_CardNo);
         tv_CanBorrowQuantity = findViewById(R.id.tv_CanBorrowQuantity);
         tv_BorrowedQuantity = findViewById(R.id.tv_BorrowedQuantity);
@@ -349,7 +351,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
                     IdentityInfoByBorrowerBean borrower = JSON.parseObject(JSON.toJSONString(d.getInfo()), IdentityInfoByBorrowerBean.class);
 
-                    tv_SignName.setText(borrower.getSignName());
+                    tv_FullName.setText(borrower.getFullName());
                     tv_CardNo.setText(borrower.getCardNo());
                     tv_BorrowedQuantity.setText(String.valueOf(borrower.getBorrowedQuantity()));
                     tv_CanBorrowQuantity.setText(String.valueOf(borrower.getCanBorrowQuantity()));

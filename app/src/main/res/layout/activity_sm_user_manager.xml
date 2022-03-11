@@ -77,7 +77,7 @@
                 android:layout_height="@dimen/size_20"
                 android:layout_marginRight="@dimen/size_14"
                 android:contentDescription="@string/img_content_description_empty"
-                android:src="@drawable/ic_add_user" />
+                android:src="@drawable/ic_sm_add_user" />
 
 
 

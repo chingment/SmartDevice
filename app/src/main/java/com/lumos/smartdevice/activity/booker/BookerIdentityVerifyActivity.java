@@ -56,6 +56,11 @@ public class BookerIdentityVerifyActivity extends BaseFragmentActivity {
 
                 Intent intent = new Intent(getAppContext(), BookerBorrowReturnInspectActivity.class);
                 intent.putExtra("action", intent_extra_action);
+                intent.putExtra("identityType",2);
+                intent.putExtra("identityId","1");
+                intent.putExtra("clientUserId","c89cae062f9b4b098687969fee260000");
+
+
                 openActivity(intent);
 
             }

@@ -34,9 +34,9 @@ import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
-import com.lumos.smartdevice.ui.dialog.DialogCabinetConfig;
+import com.lumos.smartdevice.ui.dialog.DialogSmCabinetConfig;
 import com.lumos.smartdevice.ui.dialog.DialogConfirm;
-import com.lumos.smartdevice.ui.dialog.DialogLockerBox;
+import com.lumos.smartdevice.ui.dialog.DialogSmLockerBox;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
@@ -56,8 +56,8 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
     private List<CabinetBean> cabinets;
     private static int cur_Cabinet_Position = 0;
 
-    private DialogCabinetConfig dialog_CabinetConfig;
-    private DialogLockerBox dialog_LockerBox;
+    private DialogSmCabinetConfig dialog_SmCabinetConfig;
+    private DialogSmLockerBox dialog_SmLockerBox;
     private DialogConfirm dialog_Confirm;
     private DeviceBean device;
 
@@ -95,7 +95,7 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
         btn_OpenAllBox=findViewById(R.id.btn_OpenAllBox);
         tl_Boxs = findViewById(R.id.tl_Boxs);
 
-        dialog_CabinetConfig = new DialogCabinetConfig(SmLockerBoxManagerActivity.this);
+        dialog_SmCabinetConfig = new DialogSmCabinetConfig(SmLockerBoxManagerActivity.this);
         dialog_Confirm = new DialogConfirm(SmLockerBoxManagerActivity.this, "", true);
         dialog_Confirm.setOnClickListener(new DialogConfirm.OnClickListener() {
             @Override
@@ -190,8 +190,8 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
         });
 
 
-        dialog_LockerBox = new DialogLockerBox(SmLockerBoxManagerActivity.this);
-        dialog_LockerBox.setOnClickListener(new DialogLockerBox.OnClickListener() {
+        dialog_SmLockerBox = new DialogSmLockerBox(SmLockerBoxManagerActivity.this);
+        dialog_SmLockerBox.setOnClickListener(new DialogSmLockerBox.OnClickListener() {
             @Override
             public void onGoSelectUser(String deviceId, String cabinetId,String slotId) {
 
@@ -288,18 +288,18 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
             @Override
             public void onItemClick(View view, int position) {
                 LockerBoxBean l_Box = (LockerBoxBean)view.getTag();
-                dialog_LockerBox.setConfig(device, cur_Cabinet, l_Box);
+                dialog_SmLockerBox.setConfig(device, cur_Cabinet, l_Box);
                 lockerGetBox();
-                dialog_LockerBox.show();
+                dialog_SmLockerBox.show();
             }
         });
     }
 
     public void lockerGetBox() {
 
-        String deviceId = dialog_LockerBox.getDeviceId();
-        String cabinetId = dialog_LockerBox.getCabinetId();
-        String slotId = dialog_LockerBox.getSlotId();
+        String deviceId = dialog_SmLockerBox.getDeviceId();
+        String cabinetId = dialog_SmLockerBox.getCabinetId();
+        String slotId = dialog_SmLockerBox.getSlotId();
 
 
         if (StringUtil.isEmptyNotNull(deviceId))
@@ -344,7 +344,7 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
                             lockerBox.setHeight(ret.getHeight());
                             lockerBox.setWidth(ret.getWidth());
                             lockerBox.setUsages(ret.getUsages());
-                            dialog_LockerBox.setLockerBox(lockerBox);
+                            dialog_SmLockerBox.setLockerBox(lockerBox);
 
 
                         }
@@ -465,8 +465,8 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
             if (id == R.id.btn_Nav_Header_Goback) {
                 finish();
             } else if (id == R.id.tv_CabinetName) {
-                dialog_CabinetConfig.setCofing(cur_Cabinet);
-                dialog_CabinetConfig.show();
+                dialog_SmCabinetConfig.setCofing(cur_Cabinet);
+                dialog_SmCabinetConfig.show();
             } else if (id == R.id.btn_OpenAllBox) {
                 dialog_Confirm.setTipsImageVisibility(View.GONE);
                 dialog_Confirm.setTipsText("确定打开全部箱子？");
@@ -479,12 +479,12 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (dialog_CabinetConfig != null) {
-            dialog_CabinetConfig.cancel();
+        if (dialog_SmCabinetConfig != null) {
+            dialog_SmCabinetConfig.cancel();
         }
 
-        if (dialog_LockerBox != null) {
-            dialog_LockerBox.cancel();
+        if (dialog_SmLockerBox != null) {
+            dialog_SmLockerBox.cancel();
         }
 
         if (dialog_Confirm != null) {

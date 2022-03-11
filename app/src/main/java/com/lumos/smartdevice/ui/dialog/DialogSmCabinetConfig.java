@@ -13,8 +13,8 @@ import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.ui.ViewHolder;
 
-public class DialogCabinetConfig extends Dialog {
-    private static final String TAG = "DialogCabinetConfig";
+public class DialogSmCabinetConfig extends Dialog {
+    private static final String TAG = "DialogSmCabinetConfig";
     private Dialog mThis;
     private Context mContext;
     private View mLayoutRes;
@@ -28,7 +28,7 @@ public class DialogCabinetConfig extends Dialog {
     private TextView tv_ComPrl;
     private TextView tv_Layout;
 
-    public DialogCabinetConfig(Context context) {
+    public DialogSmCabinetConfig(Context context) {
         super(context, R.style.dialog);
         mThis = this;
         mContext = context;

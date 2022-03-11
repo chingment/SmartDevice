@@ -18,9 +18,9 @@ import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.ui.my.MyListView;
 import java.util.List;
 
-public class DialogLockerBox extends Dialog {
+public class DialogSmLockerBox extends Dialog {
 
-    private static final String TAG = "DialogLockerBox";
+    private static final String TAG = "DialogSmLockerBox";
 
     private Dialog mThis;
     private Context mContext;
@@ -41,7 +41,7 @@ public class DialogLockerBox extends Dialog {
     private LinearLayout ll_UsagesEmpty;
 
 
-    public DialogLockerBox(Context context) {
+    public DialogSmLockerBox(Context context) {
         super(context, R.style.dialog);
         mThis = this;
         mContext = context;

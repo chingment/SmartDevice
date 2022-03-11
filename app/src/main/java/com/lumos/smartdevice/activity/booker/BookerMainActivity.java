@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
 import com.danikula.videocache.HttpProxyCacheServer;
@@ -43,6 +44,13 @@ public class BookerMainActivity  extends BaseFragmentActivity {
     private void initView() {
 
         vv_Ad = findViewById(R.id.vv_Ad);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        vv_Ad.setLayoutParams(layoutParams);
+
         btn_QueryBook = findViewById(R.id.btn_QueryBook);
         btn_BorrowBook = findViewById(R.id.btn_BorrowBook);
         btn_ReturnBook = findViewById(R.id.btn_ReturnBook);

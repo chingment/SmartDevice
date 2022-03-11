@@ -3,20 +3,19 @@ package com.lumos.smartdevice.model;
 import java.util.List;
 
 public class IdentityInfoByBorrowerBean {
-    private String signName;
+    private String fullName;
     private String cardNo;
     private int canBorrowQuantity;
     private int borrowedQuantity;
     private float overdueFine;
     private List<BookerBorrowBookBean> borrowBooks;
 
-
-    public String getSignName() {
-        return signName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setSignName(String signName) {
-        this.signName = signName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getCardNo() {
