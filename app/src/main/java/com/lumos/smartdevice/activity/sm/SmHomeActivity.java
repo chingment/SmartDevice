@@ -98,6 +98,9 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
                                 case "lockerboxuserecord":
                                     gdvLockerBoxUseRecord();
                                     break;
+                                case "bookertakestock":
+                                    gdvBookerTakeStock();
+                                    break;
                                 case "usermanager":
                                     gdvUserManager();
                                     break;
@@ -169,10 +172,13 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
 
         gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smdeviceinfo), GridNineItemType.Function, "deviceinfo", R.drawable.ic_sm_deviceinfo));
 
-        if(getDevice().getSceneMode()==AppVar.SCENE_MODE_1) {
+        if(device.getSceneMode()==AppVar.SCENE_MODE_1) {
             gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smlockerboxmanager), GridNineItemType.Function, "lockerboxmanager", R.drawable.ic_sm_lockerboxmanager));
             gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smlockerboxuserecord), GridNineItemType.Function, "lockerboxuserecord", R.drawable.ic_sm_lockerboxuserecord));
             gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smusermanager), GridNineItemType.Function, "usermanager", R.drawable.ic_sm_usermanager));
+        }
+        else if(device.getSceneMode()==AppVar.SCENE_MODE_2) {
+            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smbookertakestock), GridNineItemType.Function, "bookertakestock", R.drawable.ic_sm_bookertakestock));
         }
 
 
@@ -219,6 +225,10 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
         openActivity(intent);
     }
 
+    private void gdvBookerTakeStock(){
+        Intent intent = new Intent(SmHomeActivity.this, SmBookerTakeStockActivity.class);
+        openActivity(intent);
+    }
 
     private void gdvUserManager(){
         Intent intent = new Intent(SmHomeActivity.this, SmUserManagerActivity.class);

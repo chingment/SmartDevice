@@ -40,9 +40,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activity.InitDataActivity" android:exported="true">
+        <activity
+            android:name=".activity.sm.SmBookerTakeStockActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.InitDataActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -54,7 +60,7 @@
         <activity android:name=".activity.locker.LockerMainActivity" />
         <activity android:name=".activity.sm.SmLockerBoxUseRecordActivity" />
         <activity android:name=".activity.sm.SmDeviceInfoActivity" />
-        <activity android:name=".activity.sm.SmExcepitonViewer" />
+        <activity android:name=".activity.sm.SmExcepitonViewerActivity" />
         <activity android:name=".activity.sm.SmUserManagerActivity" />
         <activity android:name=".activity.sm.SmLockerBoxManagerActivity" />
         <activity android:name=".activity.sm.SmHomeActivity" />
