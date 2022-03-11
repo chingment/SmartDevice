@@ -22,7 +22,7 @@
             android:background="@null"
             android:contentDescription="@string/img_content_description_empty"
             android:scaleType="fitXY"
-            android:src="@drawable/nav_header_btn_goback" />
+            android:src="@drawable/ic_sm_nav_header_btn_goback" />
     </LinearLayout>
 
     <LinearLayout

@@ -13,7 +13,6 @@ import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {

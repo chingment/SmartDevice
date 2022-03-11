@@ -14,8 +14,6 @@
     <color name="text">#111</color>
     <color name="ly_nav_header_tv_txt_title">#111</color>
     <color name="ly_nav_header_btn_txt_right">#111</color>
-    <color name="aty_smlogin_input_boder_bg">#E6E6E6</color>
-    <color name="aty_smlogin_input_boder_bottom_bg">#FFFFFF</color>
     <color name="aty_smlogin_et_txt">#333333</color>
     <color name="aty_smlogin_et_hint">#BFBFBF</color>
     <color name="et_txt">#333333</color>

@@ -31,7 +31,7 @@
                 android:background="@null"
                 android:contentDescription="@string/img_content_description_empty"
                 android:scaleType="fitXY"
-                android:src="@drawable/nav_header_btn_goback" />
+                android:src="@drawable/ic_sm_nav_header_btn_goback" />
         </LinearLayout>
 
         <LinearLayout
@@ -57,7 +57,7 @@
                 android:visibility="gone"
                 android:layout_width="@dimen/size_36"
                 android:layout_height="@dimen/size_2"
-                android:background="@drawable/gradient_box" />
+                android:background="@drawable/sm_nav_header_title_gradient_box" />
         </LinearLayout>
 
         <LinearLayout
@@ -91,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_42"
         android:layout_below="@+id/rly_LoginArea_UserName"
-        android:background="@drawable/nav_colum_boder_bottom">
+        android:background="@drawable/vnav_boder_bottom">
 
 
         <ImageView

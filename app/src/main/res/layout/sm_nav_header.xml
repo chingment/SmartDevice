@@ -23,7 +23,7 @@
             android:background="@null"
             android:contentDescription="@string/img_content_description_empty"
             android:scaleType="fitXY"
-            android:src="@drawable/nav_header_btn_goback" />
+            android:src="@drawable/ic_sm_nav_header_btn_goback" />
     </LinearLayout>
 
     <LinearLayout
@@ -49,7 +49,7 @@
             android:visibility="gone"
             android:layout_width="@dimen/size_36"
             android:layout_height="@dimen/size_2"
-            android:background="@drawable/gradient_box" />
+            android:background="@drawable/sm_nav_header_title_gradient_box" />
     </LinearLayout>
 
     <LinearLayout

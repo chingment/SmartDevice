@@ -44,7 +44,7 @@
                 android:orientation="horizontal"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:background="@drawable/aty_smlogin_input_boder_bottom">
+                android:background="@drawable/vnav_boder_bottom">
 
                 <ImageView
                     android:id="@+id/ic_UserName"
@@ -52,7 +52,7 @@
                     android:layout_height="@dimen/size_20"
                     android:contentDescription="@string/img_content_description_empty"
                     android:layout_marginEnd="@dimen/size_12"
-                    android:background="@drawable/aty_smlogin_input_ic_username" />
+                    android:background="@drawable/ic_sm_input_username" />
 
                 <EditText
                     android:id="@+id/et_UserName"
@@ -95,7 +95,7 @@
                 android:layout_height="@dimen/size_50"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:background="@drawable/aty_smlogin_input_boder_bottom">
+                android:background="@drawable/vnav_boder_bottom">
 
                 <ImageView
                     android:id="@+id/ic_Password"
@@ -103,7 +103,7 @@
                     android:layout_height="@dimen/size_20"
                     android:contentDescription="@string/img_content_description_empty"
                     android:layout_marginEnd="@dimen/size_12"
-                    android:background="@drawable/aty_smlogin_input_ic_password" />
+                    android:background="@drawable/ic_sm_input_password" />
 
                 <EditText
                     android:id="@+id/et_Password"
