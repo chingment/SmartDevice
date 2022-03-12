@@ -20,6 +20,7 @@
     <string name="aty_nav_title_smlockerboxmanager">格子管理</string>
     <string name="aty_nav_title_smlockerboxuserecord">使用记录</string>
     <string name="aty_nav_title_smfactorysetting">出厂设置</string>
+    <string name="aty_nav_title_smexceptionviewer">异常查看</string>
     <string name="aty_nav_title_smshowsysstatusbar">显示导航</string>
     <string name="aty_nav_title_smdeviceinfo">设备信息</string>
     <string name="aty_nav_title_smusermanager">用户管理</string>

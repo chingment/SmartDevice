@@ -19,7 +19,7 @@ android {
         debug {
             buildConfigField "Boolean", "ISAPPDEBUG", "true"
             buildConfigField "String", "COMNAME", "\"uplink\""
-            buildConfigField "String", "ENVIRONMENT", "\"http://192.168.10.102:8080\""
+            buildConfigField "String", "ENVIRONMENT", "\"http://192.168.10.105:8080\""
             buildConfigField "String", "APPKEY", "\"fanju\""
             buildConfigField "String", "APPSECRET", "\"7460e6512f1940f68c00fe1fdb2b7eb1\""
         }
@@ -62,6 +62,7 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.7'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation files('libs/ysapi.jar')
+    implementation files('libs/SYMVDIO.jar')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'

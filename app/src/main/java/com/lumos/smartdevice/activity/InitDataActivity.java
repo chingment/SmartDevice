@@ -26,6 +26,8 @@ import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
+import com.lumos.smartdevice.devicectrl.ILockerBoxCtrl;
+import com.lumos.smartdevice.devicectrl.LockerBoxInterface;
 import com.lumos.smartdevice.model.BookerCustomDataBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LogTipsBean;
@@ -85,6 +87,21 @@ public class InitDataActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_init_data);
+
+        ILockerBoxCtrl lockerBoxCtrl= LockerBoxInterface.getInstance("ttyS4",9600,"lbl_ss");
+
+
+        lockerBoxCtrl.open("1", new ILockerBoxCtrl.OnOpenListener() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
 
 //        GifImageView gifImageView = (GifImageView) findViewById(R.id.iv_bird);
 //        GifDrawable gifDrawable = (GifDrawable) gifImageView.getDrawable();

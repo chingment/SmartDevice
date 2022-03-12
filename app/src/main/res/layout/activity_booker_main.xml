@@ -58,12 +58,12 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_QueryBook"
-                android:layout_width="@dimen/size_120"
-                android:layout_height="@dimen/size_120"
+                android:layout_width="@dimen/size_100"
+                android:layout_height="@dimen/size_100"
                 android:orientation="horizontal"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/size_10"
-                app:cardElevation="@dimen/size_10"
+                app:cardCornerRadius="@dimen/size_5"
+                app:cardElevation="0dp"
                 app:cardPreventCornerOverlap="true"
                 app:cardUseCompatPadding="true">
 
@@ -108,12 +108,12 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_BorrowBook"
-                android:layout_width="@dimen/size_120"
-                android:layout_height="@dimen/size_120"
+                android:layout_width="@dimen/size_100"
+                android:layout_height="@dimen/size_100"
                 android:orientation="horizontal"
                 app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="@dimen/size_10"
-                app:cardElevation="@dimen/size_10"
+                app:cardCornerRadius="@dimen/size_5"
+                app:cardElevation="0dp"
                 app:cardPreventCornerOverlap="true"
                 app:cardUseCompatPadding="true">
 
@@ -155,12 +155,12 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/btn_ReturnBook"
-                android:layout_width="@dimen/size_120"
-                android:layout_height="@dimen/size_120"
+                android:layout_width="@dimen/size_100"
+                android:layout_height="@dimen/size_100"
                 android:orientation="horizontal"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="@dimen/size_10"
-                app:cardElevation="@dimen/size_10"
+                app:cardElevation="0dp"
                 app:cardPreventCornerOverlap="true"
                 app:cardUseCompatPadding="true">
 

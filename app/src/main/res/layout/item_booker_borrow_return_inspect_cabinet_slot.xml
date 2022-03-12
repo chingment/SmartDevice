@@ -14,8 +14,8 @@
         android:layout_height="@dimen/size_80"
         android:orientation="vertical"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/size_10"
-        app:cardElevation="@dimen/size_4"
+        app:cardCornerRadius="@dimen/size_5"
+        app:cardElevation="0dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="true">
 

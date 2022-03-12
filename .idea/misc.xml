@@ -47,7 +47,7 @@
         <entry key="app/src/main/res/layout-v21/booker_nav_footer.xml" value="0.140625" />
         <entry key="app/src/main/res/layout-v21/booker_nav_header.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/activity_booker_borrow_return_inspect.xml" value="0.36533957845433257" />
-        <entry key="app/src/main/res/layout/activity_booker_borrow_return_overview.xml" value="0.4213564213564214" />
+        <entry key="app/src/main/res/layout/activity_booker_borrow_return_overview.xml" value="0.35901386748844377" />
         <entry key="app/src/main/res/layout/activity_booker_identity_verify.xml" value="0.15208333333333332" />
         <entry key="app/src/main/res/layout/activity_booker_identity_verify_by_iccard.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_booker_identity_verify_ic_card.xml" value="0.375" />
@@ -110,6 +110,7 @@
         <entry key="app/src/main/res/layout/dialog_sm_locker_box.xml" value="0.134375" />
         <entry key="app/src/main/res/layout/item_booker_borrow_return_book.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_booker_borrow_return_inspect_cabinet_box.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/item_booker_borrow_return_inspect_cabinet_slot.xml" value="0.12135416666666667" />
         <entry key="app/src/main/res/layout/item_booker_identity_verify_way.xml" value="0.1046875" />
         <entry key="app/src/main/res/layout/item_grid_nine.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_grid_nine_booker_borrow_return_inspect_cabinet_box.xml" value="0.335" />

@@ -44,7 +44,7 @@
                 android:paddingBottom="@dimen/size_8">
 
                 <TextView
-                    android:layout_width="@dimen/size_64"
+                    android:layout_width="@dimen/size_70"
                     android:layout_height="wrap_content"
                     android:text="@string/t_borrower"
                     android:textAlignment="textEnd"
@@ -70,7 +70,7 @@
                 android:paddingBottom="@dimen/size_8">
 
                 <TextView
-                    android:layout_width="@dimen/size_64"
+                    android:layout_width="@dimen/size_70"
                     android:layout_height="wrap_content"
                     android:text="@string/t_borrowcardno"
                     android:textAlignment="textEnd"
@@ -96,7 +96,7 @@
                 android:paddingBottom="@dimen/size_8">
 
                 <TextView
-                    android:layout_width="@dimen/size_64"
+                    android:layout_width="@dimen/size_70"
                     android:layout_height="wrap_content"
                     android:text="@string/t_canborrow_quantity"
                     android:textAlignment="textEnd"
@@ -122,7 +122,7 @@
                 android:paddingBottom="@dimen/size_8">
 
                 <TextView
-                    android:layout_width="@dimen/size_64"
+                    android:layout_width="@dimen/size_70"
                     android:layout_height="wrap_content"
                     android:text="@string/t_borrowed_quantity"
                     android:textAlignment="textEnd"

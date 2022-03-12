@@ -15,6 +15,6 @@ public class SmExcepitonViewerActivity extends BaseFragmentActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sm_excepiton_viewer);
 
-        setNavHeaderTtile(R.string.aty_nav_title_smfactorysetting);
+        setNavHeaderTtile(R.string.aty_nav_title_smexceptionviewer);
     }
 }

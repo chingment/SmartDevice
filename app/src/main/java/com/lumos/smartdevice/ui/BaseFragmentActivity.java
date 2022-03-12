@@ -229,4 +229,6 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
         laodingUIHandler.sendMessage(m);
     }
 
+
+
 }

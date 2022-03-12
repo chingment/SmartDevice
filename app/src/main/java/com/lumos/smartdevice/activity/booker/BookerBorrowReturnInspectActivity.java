@@ -310,6 +310,8 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                         super.onFailure(msg, e);
                     }
                 });
+
+
             }
         });
 
