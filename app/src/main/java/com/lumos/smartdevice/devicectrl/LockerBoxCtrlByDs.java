@@ -54,11 +54,14 @@ public class LockerBoxCtrlByDs implements  ILockerBoxCtrl{
 
 
 
-    public void  open(String id,OnOpenListener onOpenListener) {
+    public void  open(String id,OnListener onOpenListener) {
 
-        sym.SN_MV_MotorAction(1, 1, 0);
-        sym.SN_MV_MotorAction(1, 2, 0);
+        int r = sym.SN_MV_MotorAction(1, 1, 0);
 
-        onOpenListener.onSuccess();
+        if (r == 0) {
+            onOpenListener.onSendCommandSuccess();
+        } else {
+            onOpenListener.onSendCommnadFailure();
+        }
     }
 }

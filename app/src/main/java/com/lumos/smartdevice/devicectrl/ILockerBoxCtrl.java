@@ -1,10 +1,12 @@
 package com.lumos.smartdevice.devicectrl;
 
 public interface ILockerBoxCtrl {
-    void open(String id,OnOpenListener onOpenListener);
+    void open(String id,OnListener onOpenListener);
 
-    public  interface OnOpenListener{
-        void onSuccess();
-        void onFailure();
+    public  interface OnListener{
+        void onSendCommandSuccess();
+        void onSendCommnadFailure();
+        void onOpenSuccess();
+        void onOpenFailure();
     }
 }

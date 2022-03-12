@@ -1,5 +1,6 @@
 package com.lumos.smartdevice.api;
 
+import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCloseAction;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnOpenAction;
@@ -36,6 +37,7 @@ public interface IReqVersion {
     void lockerGetBoxUseRecords(RopLockerGetBoxUseRecords rop, final ReqHandler reqHandler);
     void lockerSaveBoxOpenResult(RopLockerSaveBoxOpenResult rop, final ReqHandler reqHandler);
     void identityInfo(RopIdentityInfo rop, final ReqHandler reqHandler);
+    void bookerBorrowReturn(RopBookerBorrowReturn rop, final ReqHandler reqHandler);
     void bookerBorrowReturnCreateFlow(RopBookerBorrowReturnCreateFlow rop, final ReqHandler reqHandler);
     void bookerBorrowReturnOpenAction(RopBookerBorrowReturnOpenAction rop, final ReqHandler reqHandler);
     void bookerBorrowReturnCloseAction(RopBookerBorrowReturnCloseAction rop, final ReqHandler reqHandler);

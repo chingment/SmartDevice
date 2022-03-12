@@ -1,5 +1,6 @@
 package com.lumos.smartdevice.api;
 
+import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCloseAction;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnOpenAction;
@@ -259,6 +260,33 @@ public class ReqNetWord implements IReqVersion{
             public void onFailure(String msg, Exception e) {
                 reqHandler.handleAfterSendMessage();
                 reqHandler.onFailure(msg,e);
+            }
+        });
+
+    }
+
+    @Override
+    public void bookerBorrowReturn(RopBookerBorrowReturn rop, final ReqHandler reqHandler) {
+
+        if(reqHandler!=null) {
+            reqHandler.sendBeforeSendMessage();
+        }
+
+        HttpClient.myPost(Config.URL.booker_BorrowReturn, rop, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                if(reqHandler!=null) {
+                    reqHandler.handleAfterSendMessage();
+                    reqHandler.onSuccess(response);
+                }
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                if(reqHandler!=null) {
+                    reqHandler.handleAfterSendMessage();
+                    reqHandler.onFailure(msg, e);
+                }
             }
         });
 

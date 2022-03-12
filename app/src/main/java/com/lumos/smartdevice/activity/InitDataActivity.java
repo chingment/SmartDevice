@@ -88,20 +88,20 @@ public class InitDataActivity extends BaseFragmentActivity {
 
         setContentView(R.layout.activity_init_data);
 
-        ILockerBoxCtrl lockerBoxCtrl= LockerBoxInterface.getInstance("ttyS4",9600,"lbl_ss");
-
-
-        lockerBoxCtrl.open("1", new ILockerBoxCtrl.OnOpenListener() {
-            @Override
-            public void onSuccess() {
-
-            }
-
-            @Override
-            public void onFailure() {
-
-            }
-        });
+//        ILockerBoxCtrl lockerBoxCtrl= LockerBoxInterface.getInstance("ttyS4",9600,"lbl_ss");
+//
+//
+//        lockerBoxCtrl.open("1", new ILockerBoxCtrl.OnOpenListener() {
+//            @Override
+//            public void onSuccess() {
+//
+//            }
+//
+//            @Override
+//            public void onFailure() {
+//
+//            }
+//        });
 
 //        GifImageView gifImageView = (GifImageView) findViewById(R.id.iv_bird);
 //        GifDrawable gifDrawable = (GifDrawable) gifImageView.getDrawable();

@@ -13,7 +13,7 @@ public class LockerBoxInterface
         ILockerBoxCtrl lockerBoxCtrl = null;
 
         switch (comPrl) {
-            case "lbl_ss":
+            case "Prl_A31":
                 lockerBoxCtrl = LockerBoxCtrlByDs.getInstance(comId, comBaud);
                 break;
             default:

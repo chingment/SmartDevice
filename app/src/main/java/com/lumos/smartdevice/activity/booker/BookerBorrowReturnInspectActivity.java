@@ -2,6 +2,7 @@ package com.lumos.smartdevice.activity.booker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCloseAction;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnOpenAction;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
+import com.lumos.smartdevice.devicectrl.BookerBorrowReturnInterface;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.CabinetSlotBean;
 import com.lumos.smartdevice.model.CabinetLayoutBean;
@@ -29,6 +31,7 @@ import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.IdentityInfoByBorrowerBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyGridView;
+import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.ArrayList;
@@ -59,6 +62,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
     private String identityId;
     private String clientUserId;
 
+    private BookerBorrowReturnInterface bookerBorrowReturnInterface;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +117,27 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
 
         }
+
+
+        bookerBorrowReturnInterface = BookerBorrowReturnInterface.getInstance();
+        bookerBorrowReturnInterface.setOpenHandler(new Handler(msg -> {
+                    LogUtil.i("sdas");
+
+                    switch (msg.what) {
+                        case BookerBorrowReturnInterface.MESSAGE_WHAT_OPEN_REQUEST:
+                            dialog_BookerFlowHandling.show();
+                            break;
+                        case BookerBorrowReturnInterface.MESSAGE_WHAT_OPEN_REQUEST_SUCCESS:
+
+                            break;
+                        case BookerBorrowReturnInterface.MESSAGE_WHAT_OPEN_REQUEST_FAILURE:
+
+                            break;
+                    }
+
+                    return false;
+                })
+        );
 
         initView();
         initEvent();
@@ -264,52 +289,54 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
             public void onClick(CabinetSlotBean cabinetSlot) {
 
 
-                RopBookerBorrowReturnCreateFlow rop=new RopBookerBorrowReturnCreateFlow();
-                rop.setDeviceId(device.getDeviceId());
-                rop.setCabinetId(cabinetSlot.getCabinetId());
-                rop.setSlotId(cabinetSlot.getSlotId());
-                rop.setClientUserId(clientUserId);
-                rop.setIdentityType(identityType);
-                rop.setIdentityId(identityId);
+                bookerBorrowReturnInterface.open(device,cabinetSlot,clientUserId,identityType,identityId);
 
-
-                ReqInterface.getInstance().bookerBorrowReturnCreateFlow(rop, new ReqHandler(){
-
-                    @Override
-                    public void onBeforeSend() {
-                        super.onBeforeSend();
-                        showLoading(BookerBorrowReturnInspectActivity.this);
-                    }
-
-                    @Override
-                    public void onAfterSend() {
-                        super.onAfterSend();
-                        hideLoading(BookerBorrowReturnInspectActivity.this);
-                    }
-
-                    @Override
-                    public void onSuccess(String response) {
-                        super.onSuccess(response);
-                        ResultBean<RetBookerBorrowReturnCreateFlow> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetBookerBorrowReturnCreateFlow>>() {
-                        });
-
-                        if(rt.getCode()== ResultCode.SUCCESS) {
-
-                            RetBookerBorrowReturnCreateFlow d = rt.getData();
-                            dialog_BookerFlowHandling.setFlowId(d.getFlowId());
-                            dialog_BookerFlowHandling.show();
-
-                        }
-                        else {
-                            showToast(rt.getMsg());
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(String msg, Exception e) {
-                        super.onFailure(msg, e);
-                    }
-                });
+//                RopBookerBorrowReturnCreateFlow rop=new RopBookerBorrowReturnCreateFlow();
+//                rop.setDeviceId(device.getDeviceId());
+//                rop.setCabinetId(cabinetSlot.getCabinetId());
+//                rop.setSlotId(cabinetSlot.getSlotId());
+//                rop.setClientUserId(clientUserId);
+//                rop.setIdentityType(identityType);
+//                rop.setIdentityId(identityId);
+//
+//
+//                ReqInterface.getInstance().bookerBorrowReturnCreateFlow(rop, new ReqHandler(){
+//
+//                    @Override
+//                    public void onBeforeSend() {
+//                        super.onBeforeSend();
+//                        showLoading(BookerBorrowReturnInspectActivity.this);
+//                    }
+//
+//                    @Override
+//                    public void onAfterSend() {
+//                        super.onAfterSend();
+//                        hideLoading(BookerBorrowReturnInspectActivity.this);
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(String response) {
+//                        super.onSuccess(response);
+//                        ResultBean<RetBookerBorrowReturnCreateFlow> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetBookerBorrowReturnCreateFlow>>() {
+//                        });
+//
+//                        if(rt.getCode()== ResultCode.SUCCESS) {
+//
+//                            RetBookerBorrowReturnCreateFlow d = rt.getData();
+//                            dialog_BookerFlowHandling.setFlowId(d.getFlowId());
+//                            dialog_BookerFlowHandling.show();
+//
+//                        }
+//                        else {
+//                            showToast(rt.getMsg());
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(String msg, Exception e) {
+//                        super.onFailure(msg, e);
+//                    }
+//                });
 
 
             }

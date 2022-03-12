@@ -97,97 +97,97 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
 
         dialog_SmCabinetConfig = new DialogSmCabinetConfig(SmLockerBoxManagerActivity.this);
         dialog_Confirm = new DialogConfirm(SmLockerBoxManagerActivity.this, "", true);
-        dialog_Confirm.setOnClickListener(new DialogConfirm.OnClickListener() {
-            @Override
-            public void onSure() {
-               final String device_id;
-               final String cabinet_id;
-               final  String slot_id;
-                String fun = dialog_Confirm.getFunction();
-                Object tag=dialog_Confirm.getTag();
-                switch (fun) {
-                    case "deleteusage":
-                        LockerBoxUsageBean usage = (LockerBoxUsageBean) dialog_Confirm.getTag();
-                        lockerBoxDeleteUsage(usage);
-                        break;
-                    case "openallbox":
-                        break;
-                    case "openonebox":
-
-                        HashMap<String, String> hash_tag = (HashMap<String, String>) tag;
-                        device_id = hash_tag.get("device_id");
-                        cabinet_id = hash_tag.get("cabinet_id");
-                        slot_id = hash_tag.get("slot_id");
-
-                        CabinetBean cabinet = device.getCabinets().get(cabinet_id);
-
-                        LockerBoxInterface.getInstance(cabinet.getComId(), cabinet.getComBaud(), cabinet.getComPrl()).open(slot_id, new ILockerBoxCtrl.OnOpenListener() {
-                            @Override
-                            public void onSuccess() {
-                                LogUtil.i(TAG, "开锁成功");
-
-                                RopLockerSaveBoxOpenResult rop = new RopLockerSaveBoxOpenResult();
-                                rop.setDeviceId(device_id);
-                                rop.setCabinetId(cabinet_id);
-                                rop.setSlotId(slot_id);
-                                rop.setResult(1);
-                                rop.setAction("admin_open_one");
-                                rop.setRemark("后台人员操作打开");
-                                ReqInterface.getInstance().lockerSaveBoxOpenResult(rop, new ReqHandler() {
-                                            @Override
-                                            public void onBeforeSend() {
-                                                super.onBeforeSend();
-                                            }
-                                            @Override
-                                            public void onAfterSend() {
-                                                super.onAfterSend();
-                                            }
-                                            @Override
-                                            public void onSuccess(String response) {
-                                            }
-                                        }
-                                );
-                            }
-
-                            @Override
-                            public void onFailure() {
-                                LogUtil.i(TAG, "开锁失败");
-
-                                RopLockerSaveBoxOpenResult rop = new RopLockerSaveBoxOpenResult();
-                                rop.setDeviceId(device_id);
-                                rop.setCabinetId(cabinet_id);
-                                rop.setSlotId(slot_id);
-                                rop.setResult(2);
-                                rop.setAction("admin_open_one");
-                                rop.setRemark("后台人员操作打开");
-                                ReqInterface.getInstance().lockerSaveBoxOpenResult(rop,new ReqHandler() {
-                                            @Override
-                                            public void onBeforeSend() {
-                                                super.onBeforeSend();
-                                            }
-                                            @Override
-                                            public void onAfterSend() {
-                                                super.onAfterSend();
-                                            }
-                                            @Override
-                                            public void onSuccess(String response) {
-                                            }
-                                        }
-                                );
-                            }
-                        });
-
-                        break;
-
-                }
-                dialog_Confirm.hide();
-            }
-
-            @Override
-            public void onCancle() {
-                dialog_Confirm.hide();
-            }
-        });
+//        dialog_Confirm.setOnClickListener(new DialogConfirm.OnClickListener() {
+//            @Override
+//            public void onSure() {
+//               final String device_id;
+//               final String cabinet_id;
+//               final  String slot_id;
+//                String fun = dialog_Confirm.getFunction();
+//                Object tag=dialog_Confirm.getTag();
+//                switch (fun) {
+//                    case "deleteusage":
+//                        LockerBoxUsageBean usage = (LockerBoxUsageBean) dialog_Confirm.getTag();
+//                        lockerBoxDeleteUsage(usage);
+//                        break;
+//                    case "openallbox":
+//                        break;
+//                    case "openonebox":
+//
+//                        HashMap<String, String> hash_tag = (HashMap<String, String>) tag;
+//                        device_id = hash_tag.get("device_id");
+//                        cabinet_id = hash_tag.get("cabinet_id");
+//                        slot_id = hash_tag.get("slot_id");
+//
+//                        CabinetBean cabinet = device.getCabinets().get(cabinet_id);
+//
+//                        LockerBoxInterface.getInstance(cabinet.getComId(), cabinet.getComBaud(), cabinet.getComPrl()).open(slot_id, new ILockerBoxCtrl.OnOpenListener() {
+//                            @Override
+//                            public void onSuccess() {
+//                                LogUtil.i(TAG, "开锁成功");
+//
+//                                RopLockerSaveBoxOpenResult rop = new RopLockerSaveBoxOpenResult();
+//                                rop.setDeviceId(device_id);
+//                                rop.setCabinetId(cabinet_id);
+//                                rop.setSlotId(slot_id);
+//                                rop.setResult(1);
+//                                rop.setAction("admin_open_one");
+//                                rop.setRemark("后台人员操作打开");
+//                                ReqInterface.getInstance().lockerSaveBoxOpenResult(rop, new ReqHandler() {
+//                                            @Override
+//                                            public void onBeforeSend() {
+//                                                super.onBeforeSend();
+//                                            }
+//                                            @Override
+//                                            public void onAfterSend() {
+//                                                super.onAfterSend();
+//                                            }
+//                                            @Override
+//                                            public void onSuccess(String response) {
+//                                            }
+//                                        }
+//                                );
+//                            }
+//
+//                            @Override
+//                            public void onFailure() {
+//                                LogUtil.i(TAG, "开锁失败");
+//
+//                                RopLockerSaveBoxOpenResult rop = new RopLockerSaveBoxOpenResult();
+//                                rop.setDeviceId(device_id);
+//                                rop.setCabinetId(cabinet_id);
+//                                rop.setSlotId(slot_id);
+//                                rop.setResult(2);
+//                                rop.setAction("admin_open_one");
+//                                rop.setRemark("后台人员操作打开");
+//                                ReqInterface.getInstance().lockerSaveBoxOpenResult(rop,new ReqHandler() {
+//                                            @Override
+//                                            public void onBeforeSend() {
+//                                                super.onBeforeSend();
+//                                            }
+//                                            @Override
+//                                            public void onAfterSend() {
+//                                                super.onAfterSend();
+//                                            }
+//                                            @Override
+//                                            public void onSuccess(String response) {
+//                                            }
+//                                        }
+//                                );
+//                            }
+//                        });
+//
+//                        break;
+//
+//                }
+//                dialog_Confirm.hide();
+//            }
+//
+//            @Override
+//            public void onCancle() {
+//                dialog_Confirm.hide();
+//            }
+//        });
 
 
         dialog_SmLockerBox = new DialogSmLockerBox(SmLockerBoxManagerActivity.this);

@@ -11,6 +11,7 @@ import com.lumos.smartdevice.api.rop.RetOwnSaveInfo;
 import com.lumos.smartdevice.api.rop.RetUserGetDetail;
 import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RetUserSave;
+import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCloseAction;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnOpenAction;
@@ -359,6 +360,12 @@ public class ReqStandAlone implements IReqVersion{
 
     @Override
     public void bookerBorrowReturnCloseAction(RopBookerBorrowReturnCloseAction rop, final ReqHandler reqHandler) {
+
+
+    }
+
+    @Override
+    public void bookerBorrowReturn(RopBookerBorrowReturn rop, final ReqHandler reqHandler) {
 
 
     }
