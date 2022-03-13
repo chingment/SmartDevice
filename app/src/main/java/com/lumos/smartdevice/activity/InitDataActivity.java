@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,10 +25,13 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
+import com.lumos.smartdevice.barcodescanner.BarcodeScannerResolver;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.devicectrl.ILockerBoxCtrl;
+import com.lumos.smartdevice.devicectrl.IRfIdCtrl;
 import com.lumos.smartdevice.devicectrl.LockerBoxInterface;
+import com.lumos.smartdevice.devicectrl.RfIdCtrlInterface;
 import com.lumos.smartdevice.model.BookerCustomDataBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LogTipsBean;
@@ -36,6 +40,7 @@ import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.DeviceUtil;
+import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.widget.shapeloading.LoadingView;
@@ -82,23 +87,46 @@ public class InitDataActivity extends BaseFragmentActivity {
     public final int WHAT_SET_CONFIG_FALURE = 5;
 
 
+    private BarcodeScannerResolver mBarcodeScannerResolver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_init_data);
 
-//        ILockerBoxCtrl lockerBoxCtrl= LockerBoxInterface.getInstance("ttyS4",9600,"lbl_ss");
+        mBarcodeScannerResolver = new BarcodeScannerResolver();
+        mBarcodeScannerResolver.setScanSuccessListener(new BarcodeScannerResolver.OnScanSuccessListener() {
+            @Override
+            public void onScanSuccess(String barcode) {
+                //TODO 显示扫描内容
+                LogUtil.i(TAG, "barcode: " + barcode);
+            }
+        });
+
+        IRfIdCtrl rfIdCtrl= RfIdCtrlInterface.getInstance("ttyS4",115200,"DS");
+        rfIdCtrl.read();
+//        ILockerBoxCtrl lockerBoxCtrl= LockerBoxInterface.getInstance("ttyS4",9600,"Prl_A31");
 //
 //
-//        lockerBoxCtrl.open("1", new ILockerBoxCtrl.OnOpenListener() {
+//        lockerBoxCtrl.open("1", new ILockerBoxCtrl.OnListener() {
 //            @Override
-//            public void onSuccess() {
+//            public void onSendCommandSuccess() {
 //
 //            }
 //
 //            @Override
-//            public void onFailure() {
+//            public void onSendCommnadFailure() {
+//
+//            }
+//
+//            @Override
+//            public void onOpenSuccess() {
+//
+//            }
+//
+//            @Override
+//            public void onOpenFailure() {
 //
 //            }
 //        });
@@ -365,5 +393,18 @@ public class InitDataActivity extends BaseFragmentActivity {
                 super.onFailure(msg, e);
             }
         });
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+
+        mBarcodeScannerResolver.resolveKeyEvent(event);
+
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -2,16 +2,30 @@ package com.lumos.smartdevice.activity.booker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.dialog.DialogBookerIdentityVerifyByIcCard;
 import com.lumos.smartdevice.adapter.BookerIdentityVerfiyWayAdapter;
+import com.lumos.smartdevice.api.ReqHandler;
+import com.lumos.smartdevice.api.ReqInterface;
+import com.lumos.smartdevice.api.ResultBean;
+import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturnCloseAction;
+import com.lumos.smartdevice.api.rop.RetIdentityVerify;
+import com.lumos.smartdevice.api.rop.RopIdentityVerify;
+import com.lumos.smartdevice.barcodescanner.BarcodeScannerResolver;
+import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
+import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyGridView;
+import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.ArrayList;
@@ -30,18 +44,22 @@ public class BookerIdentityVerifyActivity extends BaseFragmentActivity {
     private DialogBookerIdentityVerifyByIcCard dialog_BookerIdentityVerifyByIcCard;
 
     private String intent_extra_action="";
+
+
+    private DeviceBean device;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booker_identity_verify);
 
         intent_extra_action = getIntent().getStringExtra("action");
-
+        device = getDevice();
         setNavHeaderTtile(R.string.aty_nav_title_booker_identity_verify);
 
         initView();
         initEvent();
         initData();
+
     }
 
     private void initView() {
@@ -53,16 +71,7 @@ public class BookerIdentityVerifyActivity extends BaseFragmentActivity {
         dialog_BookerIdentityVerifyByIcCard.setOnClickListener(new DialogBookerIdentityVerifyByIcCard.OnClickListener() {
             @Override
             public void testSuccesss() {
-
-                Intent intent = new Intent(getAppContext(), BookerBorrowReturnInspectActivity.class);
-                intent.putExtra("action", intent_extra_action);
-                intent.putExtra("identityType",2);
-                intent.putExtra("identityId","1");
-                intent.putExtra("clientUserId","c89cae062f9b4b098687969fee260000");
-
-
-                openActivity(intent);
-
+                verfiy("1","00077299527");
             }
 
             @Override
@@ -70,6 +79,55 @@ public class BookerIdentityVerifyActivity extends BaseFragmentActivity {
 
             }
         });
+    }
+
+    private void verfiy(String dataType,String payload) {
+
+        RopIdentityVerify rop = new RopIdentityVerify();
+        rop.setDeviceId(device.getDeviceId());
+        rop.setDataType(dataType);
+        rop.setPayload(payload);
+        ReqInterface.getInstance().identityVerify(rop, new ReqHandler() {
+
+            @Override
+            public void onBeforeSend() {
+                super.onBeforeSend();
+            }
+
+            @Override
+            public void onAfterSend() {
+                super.onAfterSend();
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                super.onSuccess(response);
+                ResultBean<RetIdentityVerify> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetIdentityVerify>>() {
+                });
+
+                if (rt.getCode() == ResultCode.SUCCESS) {
+
+                    RetIdentityVerify d = rt.getData();
+                    Intent intent = new Intent(getAppContext(), BookerBorrowReturnInspectActivity.class);
+                    intent.putExtra("action", intent_extra_action);
+                    intent.putExtra("identityType", d.getIdentityType());
+                    intent.putExtra("identityId", d.getIdentityId());
+                    intent.putExtra("clientUserId", d.getClientUserId());
+
+                    openActivity(intent);
+
+                } else {
+                    showToast(rt.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                super.onFailure(msg, e);
+            }
+        });
+
+
     }
 
     private void initEvent() {
@@ -123,4 +181,5 @@ public class BookerIdentityVerifyActivity extends BaseFragmentActivity {
             }
         }
     }
+
 }

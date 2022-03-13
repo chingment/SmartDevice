@@ -34,8 +34,8 @@ public class BookerBorrowReturnInterface {
     public static final int MESSAGE_WHAT_SEND_OPEN_COMMAND = 4;
     public static final int MESSAGE_WHAT_SEND_OPEN_COMMAND_SUCCESS = 5;
     public static final int MESSAGE_WHAT_SEND_OPEN_COMMAND_FAILURE = 6;
-    public static final int MESSAGE_WHAT_SEND_OPEN_SUCCESS= 7;
-    public static final int MESSAGE_WHAT_SEND_OPEN_FAILURE = 8;
+    public static final int MESSAGE_WHAT_OPEN_SUCCESS= 7;
+    public static final int MESSAGE_WHAT_OPEN_FAILURE = 8;
 
     private DeviceBean device;
     private CabinetSlotBean cabinetSlot;
@@ -141,7 +141,6 @@ public class BookerBorrowReturnInterface {
                 break;
             case MESSAGE_WHAT_SEND_OPEN_COMMAND:
                 bookerBorrowReturn("send_open_command", null, null);
-
                 lockerBoxCtrl.open("1", new ILockerBoxCtrl.OnListener() {
                     @Override
                     public void onSendCommandSuccess() {
@@ -155,12 +154,12 @@ public class BookerBorrowReturnInterface {
 
                     @Override
                     public void onOpenSuccess() {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_SEND_OPEN_SUCCESS);
+                        sendOpenHandlerMessage(MESSAGE_WHAT_OPEN_SUCCESS);
                     }
 
                     @Override
                     public void onOpenFailure() {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_SEND_OPEN_FAILURE);
+                        sendOpenHandlerMessage(MESSAGE_WHAT_OPEN_FAILURE);
                     }
                 });
                 break;
@@ -170,11 +169,11 @@ public class BookerBorrowReturnInterface {
             case MESSAGE_WHAT_SEND_OPEN_COMMAND_FAILURE:
                 bookerBorrowReturn("send_open_command_failure", null, null);
                 break;
-            case MESSAGE_WHAT_SEND_OPEN_SUCCESS:
-                bookerBorrowReturn("send_open_success", null, null);
+            case MESSAGE_WHAT_OPEN_SUCCESS:
+                bookerBorrowReturn("open_success", null, null);
                 break;
-            case MESSAGE_WHAT_SEND_OPEN_FAILURE:
-                bookerBorrowReturn("send_open_failure", null, null);
+            case MESSAGE_WHAT_OPEN_FAILURE:
+                bookerBorrowReturn("open_failure", null, null);
                 break;
         }
 

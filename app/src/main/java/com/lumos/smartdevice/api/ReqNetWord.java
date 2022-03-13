@@ -6,6 +6,7 @@ import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturnOpenAction;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
+import com.lumos.smartdevice.api.rop.RopIdentityVerify;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBoxUseRecords;
 import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
@@ -186,6 +187,27 @@ public class ReqNetWord implements IReqVersion{
         reqHandler.sendBeforeSendMessage();
 
         HttpClient.myPost(Config.URL.identity_Info, rop, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onSuccess(response);
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                reqHandler.handleAfterSendMessage();
+                reqHandler.onFailure(msg,e);
+            }
+        });
+
+    }
+
+    @Override
+    public void identityVerify(RopIdentityVerify rop, final ReqHandler reqHandler) {
+
+        reqHandler.sendBeforeSendMessage();
+
+        HttpClient.myPost(Config.URL.identity_Verify, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 reqHandler.handleAfterSendMessage();
