@@ -22,16 +22,6 @@ public class DialogBookerFlowHandling extends Dialog {
     private final BaseFragmentActivity mContext;
     private final View mLayoutRes;
 
-    private String flowId;
-    private CabinetSlotBean cabinetSlot;
-
-    public CabinetSlotBean getCabinetSlot() {
-        return cabinetSlot;
-    }
-
-    public void setCabinetSlot(CabinetSlotBean cabinetSlot) {
-        this.cabinetSlot = cabinetSlot;
-    }
 
     public DialogBookerFlowHandling(Context context) {
         super(context, R.style.dialog);

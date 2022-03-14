@@ -72,6 +72,16 @@ public class BookerBorrowReturnFlowCtrl {
         this.flowId = flowId;
     }
 
+    private void reSet() {
+        device = null;
+        cabinetSlot = null;
+        clientUserId = null;
+        identityType = 0;
+        identityId = null;
+        trgId = null;
+        flowId = null;
+    }
+
     public void open(DeviceBean device,CabinetSlotBean cabinetSlot,String clientUserId,int identityType,String  identityId) {
         new Thread(() -> {
             if (openIsRunning) {
@@ -173,7 +183,6 @@ public class BookerBorrowReturnFlowCtrl {
 
 
                 } catch (InterruptedException e) {
-                    openIsRunning = false;
                     sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
                 }
 
@@ -182,7 +191,6 @@ public class BookerBorrowReturnFlowCtrl {
 
 
     }
-
 
     public void bookerBorrowReturn(String actionCode, HashMap<String,Object> actionData,String actionRemark, ReqHandler reqHandler) {
 
@@ -231,6 +239,7 @@ public class BookerBorrowReturnFlowCtrl {
                 break;
             case MESSAGE_WHAT_INIT_DATA_FAILURE:
                 bookerBorrowReturn("init_data_failure", actionData, actionRemark, null);
+                sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
                 break;
             case MESSAGE_WHAT_OPEN_REQUEST:
                 bookerBorrowReturn("open_request", actionData, actionRemark, new ReqHandler() {
@@ -262,6 +271,7 @@ public class BookerBorrowReturnFlowCtrl {
                 break;
             case MESSAGE_WHAT_OPEN_REQUEST_FAILURE:
                 bookerBorrowReturn("open_request_failure", actionData, actionRemark, null);
+                sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
                 break;
             case MESSAGE_WHAT_SEND_OPEN_COMMAND:
                 bookerBorrowReturn("send_open_command", actionData, actionRemark, null);
@@ -302,16 +312,39 @@ public class BookerBorrowReturnFlowCtrl {
                 break;
             case MESSAGE_WHAT_SEND_OPEN_COMMAND_FAILURE:
                 bookerBorrowReturn("send_open_command_failure", actionData, actionRemark, null);
+                sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
                 break;
             case MESSAGE_WHAT_OPEN_SUCCESS:
                 bookerBorrowReturn("open_success", actionData, actionRemark, null);
                 break;
             case MESSAGE_WHAT_OPEN_FAILURE:
                 bookerBorrowReturn("open_failure", actionData, actionRemark, null);
+                sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
                 break;
             case MESSAGE_WHAT_CLOSE_SUCCESS:
-                bookerBorrowReturn("close_success", actionData, actionRemark, null);
-                sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
+                bookerBorrowReturn("close_success", actionData, actionRemark, new ReqHandler() {
+                    @Override
+                    public void onSuccess(String response) {
+                        super.onSuccess(response);
+                        ResultBean<RetBookerBorrowReturn> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetBookerBorrowReturn>>() {
+                        });
+
+                        if (rt.getCode() == ResultCode.SUCCESS) {
+                            RetBookerBorrowReturn d = rt.getData();
+                            setFlowId(d.getFlowId());
+                            sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
+                        } else {
+                            sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String msg, Exception e) {
+                        super.onFailure(msg, e);
+                        sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
+                    }
+                });
+
                 break;
             case MESSAGE_WHAT_CLOSE_FAILURE:
                 bookerBorrowReturn("close_failure", actionData, actionRemark, null);
@@ -319,6 +352,7 @@ public class BookerBorrowReturnFlowCtrl {
             case MESSAGE_WHAT_FLOW_END:
                 openIsRunning = false;
                 bookerBorrowReturn("flow_end", actionData, actionRemark, null);
+                reSet();
                 break;
         }
 
