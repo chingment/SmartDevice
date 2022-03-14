@@ -80,13 +80,20 @@ public class BookerBorrowReturnFlowCtrl {
         identityId = null;
         trgId = null;
         flowId = null;
+        open_RfIds.clear();
+        close_RfIds.clear();
     }
+
+    private List<String> open_RfIds=new ArrayList<>();
+    private List<String> close_RfIds=new ArrayList<>();
 
     public void open(DeviceBean device,CabinetSlotBean cabinetSlot,String clientUserId,int identityType,String  identityId) {
         new Thread(() -> {
             if (openIsRunning) {
                 LogUtil.d(TAG, "有任务正在执行");
             } else {
+                open_RfIds.clear();
+                close_RfIds.clear();
                 openIsRunning = true;
                 this.device = device;
                 this.cabinetSlot = cabinetSlot;
@@ -142,24 +149,33 @@ public class BookerBorrowReturnFlowCtrl {
 //                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "RFID未配置");
 //                        return;
 //                    }
-//
-//                    RfIdBean rfId = cabinetLayout.getRfId();
-//
-//                    IRfIdCtrl rfIdCtrl = RfIdCtrlInterface.getInstance(rfId.getComId(), rfId.getComBaud(), rfId.getComPrl());
-//
-//                    if (rfIdCtrl == null) {
-//                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "初始化RFID失败");
-//                        return;
-//                    }
-//
-//
-//                    if (!rfIdCtrl.sendRead()) {
-//                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "RFID发送读取命令失败");
-//                        return;
-//                    }
+
+                    RfIdBean rfId = cabinetLayout.getRfId();
+
+                    rfIdCtrl = RfIdCtrlInterface.getInstance("ttyS4",115200,"Prl_A1");
+
+                    if (rfIdCtrl == null) {
+                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "初始化RFID失败");
+                        return;
+                    }
 
 
-                    Thread.sleep(3000);
+
+                    rfIdCtrl.setReadHandler(new IRfIdCtrl.OnReadHandlerListener() {
+                        @Override
+                        public void onData(List<String> rfIds) {
+                            open_RfIds = rfIds;
+                        }
+                    });
+
+
+                    if (!rfIdCtrl.sendRead()) {
+                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "RFID发送读取命令失败");
+                        return;
+                    }
+
+
+                    Thread.sleep(1000);
 
 
                     //rfIdCtrl=RfIdCtrlInterface.getInstance()
@@ -170,14 +186,14 @@ public class BookerBorrowReturnFlowCtrl {
                     HashMap<String,Object> actionData=new HashMap<>();
 
 
-                    List<String> rfIds=new ArrayList<>();
-                    rfIds.add("31");
-                    rfIds.add("32");
-                    rfIds.add("33");
-                    rfIds.add("34");
-                    rfIds.add("35");
+//                    List<String> rfIds=new ArrayList<>();
+//                    rfIds.add("31");
+//                    rfIds.add("32");
+//                    rfIds.add("33");
+//                    rfIds.add("34");
+//                    rfIds.add("35");
 
-                    actionData.put("rfIds",rfIds);
+                    actionData.put("rfIds",open_RfIds);
 
                     sendOpenHandlerMessage(MESSAGE_WHAT_OPEN_REQUEST,actionData, "请求打开");
 
@@ -290,13 +306,32 @@ public class BookerBorrowReturnFlowCtrl {
                     public void onOpenSuccess() {
                         sendOpenHandlerMessage(MESSAGE_WHAT_OPEN_SUCCESS);
 
-                        List<String> rfIds = new ArrayList<>();
-                        rfIds.add("31");
-                        rfIds.add("32");
-                        rfIds.add("33");
+
+
+
+
+                        rfIdCtrl.setReadHandler(new IRfIdCtrl.OnReadHandlerListener() {
+                            @Override
+                            public void onData(List<String> rfIds) {
+                                close_RfIds = rfIds;
+                            }
+                        });
+
+                        try {
+                            Thread.sleep(1000);
+                        }
+                        catch (Exception ex){
+
+                        }
+
+
+//                        List<String> rfIds = new ArrayList<>();
+//                        rfIds.add("31");
+//                        rfIds.add("32");
+//                        rfIds.add("33");
 
                         HashMap<String, Object> actionData = new HashMap<>();
-                        actionData.put("rfIds", rfIds);
+                        actionData.put("rfIds", close_RfIds);
 
                         sendOpenHandlerMessage(MESSAGE_WHAT_CLOSE_SUCCESS, actionData, "关闭成功");
                     }

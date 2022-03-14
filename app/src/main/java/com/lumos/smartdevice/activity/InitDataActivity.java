@@ -33,6 +33,7 @@ import com.lumos.smartdevice.devicectrl.RfIdCtrlInterface;
 import com.lumos.smartdevice.model.BookerCustomDataBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LogTipsBean;
+import com.lumos.smartdevice.ostctrl.OstCtrlByYs;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppVar;
@@ -95,6 +96,7 @@ public class InitDataActivity extends BaseFragmentActivity {
 
         setContentView(R.layout.activity_init_data);
 
+        OstCtrlInterface.getInstance().setHideStatusBar(this,false);
 
 //        readCardUtil.setReadSuccessListener(new ReadCardUtil.OnReadSuccessListener() {
 //            @Override

@@ -10,17 +10,7 @@ public class RfIdCtrlInterface {
 
         LogUtil.i(TAG, "comId:" + comId + ",comBaud:" + comBaud + ",comPrl:" + comPrl);
 
-        IRfIdCtrl iRfIdCtrl = null;
-
-        switch (comPrl) {
-            case "DS":
-                iRfIdCtrl = RfIdCtrlByDs.getInstance(comId, comBaud);
-                break;
-            default:
-                break;
-        }
-
-        return iRfIdCtrl;
+        return RfIdCtrlByDs.getInstance(comId, comBaud);
 
     }
 }

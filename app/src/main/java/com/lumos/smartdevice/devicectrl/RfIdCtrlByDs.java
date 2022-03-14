@@ -27,7 +27,9 @@ import com.gg.reader.api.utils.ThreadPoolUtils;
 import com.lumos.smartdevice.utils.LogUtil;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RfIdCtrlByDs implements IRfIdCtrl {
@@ -38,7 +40,9 @@ public class RfIdCtrlByDs implements IRfIdCtrl {
 
     private GClient client;
 
-    private Map<String, TagInfo> tagInfoMap = new LinkedHashMap<String, TagInfo>();
+   // private Map<String, TagInfo> tagInfoMap = new LinkedHashMap<String, TagInfo>();
+
+    private List<String> epcs=new ArrayList<>();
 
     private long index=0;
 
@@ -98,15 +102,22 @@ public class RfIdCtrlByDs implements IRfIdCtrl {
             public void log(String readerName, LogBaseEpcInfo info) {
                 if (null != info && 0 == info.getResult()) {
 
-                    Map<String, TagInfo> infoMap = pooled6cData(info);
 
-                    for(Map.Entry entry : infoMap.entrySet()) {
-
-                        System.out.println("value is : " + entry.getKey() + " and value is : " +  entry.getValue());
-
+                    if(!epcs.contains(info.getEpc())) {
+                        epcs.add(info.getEpc());
                     }
 
+                    if(onReadHandlerListener!=null) {
+                        onReadHandlerListener.onData(epcs);
+                    }
 
+//                    Map<String, TagInfo> infoMap = pooled6cData(info);
+//
+//                    for(Map.Entry entry : infoMap.entrySet()) {
+//
+//                        System.out.println("value is : " + entry.getKey() + " and value is : " +  entry.getValue());
+//
+//                    }
 
                 }
             }
@@ -119,29 +130,59 @@ public class RfIdCtrlByDs implements IRfIdCtrl {
 
     }
 
-
-    public Map<String, TagInfo> pooled6cData(LogBaseEpcInfo info) {
-        if (tagInfoMap.containsKey(info.getTid() + info.getEpc())) {
-            TagInfo tagInfo = tagInfoMap.get(info.getTid() + info.getEpc());
-            Long count = tagInfoMap.get(info.getTid() + info.getEpc()).getCount();
-            count++;
-            tagInfo.setRssi(info.getRssi() + "");
-            tagInfo.setCount(count);
-            tagInfoMap.put(info.getTid() + info.getEpc(), tagInfo);
-        } else {
-            TagInfo tag = new TagInfo();
-            tag.setIndex(index);
-            tag.setType("6C");
-            tag.setEpc(info.getEpc());
-            tag.setCount(1l);
-            tag.setTid(info.getTid());
-            tag.setRssi(info.getRssi() + "");
-            tagInfoMap.put(info.getTid() + info.getEpc(), tag);
-            index++;
-        }
-
-        return tagInfoMap;
+    private OnReadHandlerListener onReadHandlerListener;
+    @Override
+    public void setReadHandler(OnReadHandlerListener onReadHandlerListener) {
+        this.epcs.clear();
+        this.onReadHandlerListener = onReadHandlerListener;
     }
+
+    //    public List<String> pooled6cEpcs(String epc) {
+//        if (epcs.contains(epc)) {
+//            TagInfo tagInfo = tagInfoMap.get(info.getTid() + info.getEpc());
+//            Long count = tagInfoMap.get(info.getTid() + info.getEpc()).getCount();
+//            count++;
+//            tagInfo.setRssi(info.getRssi() + "");
+//            tagInfo.setCount(count);
+//            tagInfoMap.put(info.getTid() + info.getEpc(), tagInfo);
+//        } else {
+//            TagInfo tag = new TagInfo();
+//            tag.setIndex(index);
+//            tag.setType("6C");
+//            tag.setEpc(info.getEpc());
+//            tag.setCount(1l);
+//            tag.setTid(info.getTid());
+//            tag.setRssi(info.getRssi() + "");
+//            tagInfoMap.put(info.getTid() + info.getEpc(), tag);
+//            index++;
+//        }
+//
+//        return tagInfoMap;
+//    }
+
+
+//    public Map<String, TagInfo> pooled6cData(LogBaseEpcInfo info) {
+//        if (tagInfoMap.containsKey(info.getTid() + info.getEpc())) {
+//            TagInfo tagInfo = tagInfoMap.get(info.getTid() + info.getEpc());
+//            Long count = tagInfoMap.get(info.getTid() + info.getEpc()).getCount();
+//            count++;
+//            tagInfo.setRssi(info.getRssi() + "");
+//            tagInfo.setCount(count);
+//            tagInfoMap.put(info.getTid() + info.getEpc(), tagInfo);
+//        } else {
+//            TagInfo tag = new TagInfo();
+//            tag.setIndex(index);
+//            tag.setType("6C");
+//            tag.setEpc(info.getEpc());
+//            tag.setCount(1l);
+//            tag.setTid(info.getTid());
+//            tag.setRssi(info.getRssi() + "");
+//            tagInfoMap.put(info.getTid() + info.getEpc(), tag);
+//            index++;
+//        }
+//
+//        return tagInfoMap;
+//    }
 
 
 
