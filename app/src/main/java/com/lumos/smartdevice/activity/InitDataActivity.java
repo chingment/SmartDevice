@@ -33,6 +33,7 @@ import com.lumos.smartdevice.devicectrl.RfIdCtrlInterface;
 import com.lumos.smartdevice.model.BookerCustomDataBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LogTipsBean;
+import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
@@ -41,6 +42,7 @@ import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
+import com.lumos.smartdevice.utils.ReadCardUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.widget.shapeloading.LoadingView;
 
@@ -83,7 +85,8 @@ public class InitDataActivity extends BaseFragmentActivity {
     public final int WHAT_SET_CONFIG_FALURE = 5;
 
 
-    private BarcodeScannerResolver mBarcodeScannerResolver;
+
+   // private BarcodeScannerResolver mBarcodeScannerResolver;
 
     private boolean isRunning=false;
     @Override
@@ -93,20 +96,27 @@ public class InitDataActivity extends BaseFragmentActivity {
         setContentView(R.layout.activity_init_data);
 
 
-        for(int i=0;i<20;i++) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    if(isRunning){
-                        LogUtil.d(TAG,"已经正在执行：" +CommonUtil.getCurrentTime());
-                    }
-                    else {
-                        isRunning = true;
-                        LogUtil.d(TAG, "开始执行：" +CommonUtil.getCurrentTime());
-                    }
-                }
-            }).start();
-        }
+//        readCardUtil.setReadSuccessListener(new ReadCardUtil.OnReadSuccessListener() {
+//            @Override
+//            public void onScanSuccess(String barcode) {
+//                LogUtil.e(TAG, "barcode: " + barcode);
+//            }
+//        });
+
+//        for(int i=0;i<20;i++) {
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    if(isRunning){
+//                        LogUtil.d(TAG,"已经正在执行：" +CommonUtil.getCurrentTime());
+//                    }
+//                    else {
+//                        isRunning = true;
+//                        LogUtil.d(TAG, "开始执行：" +CommonUtil.getCurrentTime());
+//                    }
+//                }
+//            }).start();
+//        }
 
 //        mBarcodeScannerResolver = new BarcodeScannerResolver();
 //        mBarcodeScannerResolver.setScanSuccessListener(new BarcodeScannerResolver.OnScanSuccessListener() {
@@ -266,10 +276,12 @@ public class InitDataActivity extends BaseFragmentActivity {
 
                         setHandleMessage(WHAT_SET_CONFIG_SUCCESS, getAppContext().getString(R.string.aty_initdata_tips_setting_complete));
 
+                        OstCtrlInterface.getInstance().setHideStatusBar(InitDataActivity.this,true);
 
                         new Thread(new Runnable() {
                             public void run() {
                                 //SystemClock.sleep(6000);
+
 
 
                                 setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_setting_end));
@@ -308,13 +320,16 @@ public class InitDataActivity extends BaseFragmentActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
 
-        if(initActionHandler!=null&&initActionRunable!=null) {
+
+        if (initActionHandler != null && initActionRunable != null) {
             initActionHandler.removeCallbacks(initActionRunable);
         }
 
+        super.onDestroy();
     }
+
+
 
     @Override
     protected void onResume() {
@@ -406,18 +421,5 @@ public class InitDataActivity extends BaseFragmentActivity {
                 super.onFailure(msg, e);
             }
         });
-    }
-
-    @Override
-    public boolean dispatchKeyEvent(KeyEvent event) {
-
-        mBarcodeScannerResolver.resolveKeyEvent(event);
-
-        return super.dispatchKeyEvent(event);
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return super.onKeyDown(keyCode, event);
     }
 }

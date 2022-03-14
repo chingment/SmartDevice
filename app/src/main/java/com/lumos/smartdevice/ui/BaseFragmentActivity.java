@@ -1,5 +1,6 @@
 package com.lumos.smartdevice.ui;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.ui.dialog.DialogLoading;
+import com.lumos.smartdevice.utils.ReadCardUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.ToastUtil;
 
@@ -54,6 +56,8 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
     public UserBean getCurrentUser() {
         return AppCacheManager.getCurrentUser();
     }
+
+    private ReadCardUtil readCardUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +117,8 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
         });
 
 
+        readCardUtil = new ReadCardUtil();
+
     }
 
     @Override
@@ -148,6 +154,9 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
     protected void onDestroy() {
         super.onDestroy();
 
+        readCardUtil.removeScanSuccessListener();
+        readCardUtil = null;
+
         AppManager.getAppManager().finishActivity(this);
 
     }
@@ -172,8 +181,16 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
     }
 
 
+    @SuppressLint("RestrictedApi")
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
+
+        if (ReadCardUtil.isInputFromReader(this, event)) {
+            if (readCardUtil != null){
+                readCardUtil.resolveKeyEvent(event);
+            }
+        }
+
         return super.dispatchKeyEvent(event);
     }
 
@@ -239,6 +256,10 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
         m.what = 2;
         m.obj = context;
         laodingUIHandler.sendMessage(m);
+    }
+
+    public void setIcReaderSuccessListener(ReadCardUtil.OnReadSuccessListener onReadSuccessListener) {
+        readCardUtil.setReadSuccessListener(onReadSuccessListener);
     }
 
 
