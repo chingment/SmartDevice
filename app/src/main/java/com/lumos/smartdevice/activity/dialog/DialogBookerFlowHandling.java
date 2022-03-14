@@ -62,9 +62,6 @@ public class DialogBookerFlowHandling extends Dialog {
             @Override
             public void onClick(View v) {
 
-                if(onClickListener!=null) {
-                    onClickListener.testOpen(flowId);
-                }
 
             }
         });
@@ -73,22 +70,11 @@ public class DialogBookerFlowHandling extends Dialog {
             @Override
             public void onClick(View v) {
 
-                if(onClickListener!=null) {
-                    onClickListener.testClose(flowId);
-                }
+
 
             }
         });
 
-    }
-
-
-    public String getFlowId() {
-        return flowId;
-    }
-
-    public void setFlowId(String flowId) {
-        this.flowId = flowId;
     }
 
     @Override
@@ -97,15 +83,5 @@ public class DialogBookerFlowHandling extends Dialog {
         this.setContentView(mLayoutRes);
     }
 
-    private OnClickListener onClickListener;
-
-    public void  setOnClickListener(OnClickListener onClickListener){
-        this.onClickListener=onClickListener;
-    }
-
-    public  interface OnClickListener{
-        void testOpen(String flowId);
-        void testClose(String flowId);
-    }
 
 }

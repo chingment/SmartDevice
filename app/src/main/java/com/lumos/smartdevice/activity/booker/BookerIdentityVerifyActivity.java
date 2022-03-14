@@ -15,7 +15,6 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
-import com.lumos.smartdevice.api.rop.RetBookerBorrowReturnCloseAction;
 import com.lumos.smartdevice.api.rop.RetIdentityVerify;
 import com.lumos.smartdevice.api.rop.RopIdentityVerify;
 import com.lumos.smartdevice.barcodescanner.BarcodeScannerResolver;

@@ -25,9 +25,6 @@ import com.lumos.smartdevice.api.rop.RetLockerGetCabinet;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBox;
 import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
-import com.lumos.smartdevice.api.rop.RopLockerSaveBoxOpenResult;
-import com.lumos.smartdevice.devicectrl.ILockerBoxCtrl;
-import com.lumos.smartdevice.devicectrl.LockerBoxInterface;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.CabinetLayoutBean;
 import com.lumos.smartdevice.model.DeviceBean;
@@ -37,7 +34,6 @@ import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.dialog.DialogSmCabinetConfig;
 import com.lumos.smartdevice.ui.dialog.DialogConfirm;
 import com.lumos.smartdevice.ui.dialog.DialogSmLockerBox;
-import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 

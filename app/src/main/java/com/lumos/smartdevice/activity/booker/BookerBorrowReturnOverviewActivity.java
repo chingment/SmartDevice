@@ -2,19 +2,15 @@ package com.lumos.smartdevice.activity.booker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.adapter.BookerBorrowReturnBookAdapter;
-import com.lumos.smartdevice.api.rop.RetBookerBorrowReturnCloseAction;
-import com.lumos.smartdevice.devicectrl.BookerBorrowReturnInterface;
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.model.BookerBookBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyListView;
-import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.List;
@@ -32,7 +28,7 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
     private TextView tv_BorrowCount;
     private TextView tv_ReturnCount;
 
-    private RetBookerBorrowReturnCloseAction retBookerBorrowReturnCloseAction;
+    private RetBookerBorrowReturn retBookerBorrowReturn;
 
 
 
@@ -41,7 +37,7 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booker_borrow_return_overview);
         setNavHeaderTtile(R.string.aty_nav_title_booker_borrow_return_overview);
-        retBookerBorrowReturnCloseAction = (RetBookerBorrowReturnCloseAction) getIntent().getSerializableExtra("ret_booker_borrow_return_close_action");
+        retBookerBorrowReturn = (RetBookerBorrowReturn) getIntent().getSerializableExtra("ret_booker_borrow_return");
 
 
         initView();
@@ -66,7 +62,7 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
     private void initData() {
 
 
-        List<BookerBookBean> borrowBooks = retBookerBorrowReturnCloseAction.getBorrowBooks();
+        List<BookerBookBean> borrowBooks = retBookerBorrowReturn.getBorrowBooks();
 
 //        borrowBooks.add(new BookerBookBean("1", "1", "安徒生童话故事1", "1", "1"));
 //        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静2", "1", "1"));
@@ -80,7 +76,7 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
 //        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静10", "1", "1"));
 //        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静11", "1", "1"));
 
-        List<BookerBookBean> returnBooks = retBookerBorrowReturnCloseAction.getReturnBooks();
+        List<BookerBookBean> returnBooks = retBookerBorrowReturn.getReturnBooks();
 
 //        returnBooks.add(new BookerBookBean("1", "1", "西游记1", "1", "1"));
 //        returnBooks.add(new BookerBookBean("1", "1", "红楼梦2", "1", "1"));
@@ -90,8 +86,8 @@ public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
 //        returnBooks.add(new BookerBookBean("1", "1", "红楼梦6", "1", "1"));
 
 
-        retBookerBorrowReturnCloseAction.setBorrowBooks(borrowBooks);
-        retBookerBorrowReturnCloseAction.setReturnBooks(returnBooks);
+        retBookerBorrowReturn.setBorrowBooks(borrowBooks);
+        retBookerBorrowReturn.setReturnBooks(returnBooks);
 
 
         tv_BorrowCount.setText(String.valueOf(borrowBooks.size()));

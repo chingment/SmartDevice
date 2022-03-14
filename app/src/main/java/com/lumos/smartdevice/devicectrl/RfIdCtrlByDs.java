@@ -51,7 +51,6 @@ public class RfIdCtrlByDs implements IRfIdCtrl {
         if (mRfIdCtrlByDs == null) {
             synchronized (RfIdCtrlByDs.class) {
                 if (mRfIdCtrlByDs == null) {
-
                     mRfIdCtrlByDs = new RfIdCtrlByDs();
                     mRfIdCtrlByDs.connect(comId, comBaud);
                 }
@@ -77,18 +76,7 @@ public class RfIdCtrlByDs implements IRfIdCtrl {
     }
 
 
-    private long getAnt(int ant) {
-        StringBuffer buffer = new StringBuffer();
-        for (int i = 1; i <= 16; i++)
-            if (i == ant) {
-                buffer.append(1);
-            } else {
-                buffer.append(0);
-            }
-        return Long.valueOf(buffer.reverse().toString(), 2);
-    }
-
-    public void  read() {
+    public boolean  sendRead() {
 
         int inventoryMode=1;
         long ant=1;
@@ -96,14 +84,11 @@ public class RfIdCtrlByDs implements IRfIdCtrl {
         msg.setAntennaEnable(ant);
         msg.setInventoryMode(inventoryMode);
 
-
         subHandler(client);
 
         client.sendSynMsg(msg);
 
-        if (0x00 == msg.getRtCode()) {
-            LogUtil.i(TAG,"开始读卡");
-        }
+        return 0x00 == msg.getRtCode();
 
     }
 

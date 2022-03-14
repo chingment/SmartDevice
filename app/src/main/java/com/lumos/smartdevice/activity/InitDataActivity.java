@@ -28,9 +28,7 @@ import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.barcodescanner.BarcodeScannerResolver;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
-import com.lumos.smartdevice.devicectrl.ILockerBoxCtrl;
 import com.lumos.smartdevice.devicectrl.IRfIdCtrl;
-import com.lumos.smartdevice.devicectrl.LockerBoxInterface;
 import com.lumos.smartdevice.devicectrl.RfIdCtrlInterface;
 import com.lumos.smartdevice.model.BookerCustomDataBean;
 import com.lumos.smartdevice.model.DeviceBean;
@@ -39,6 +37,7 @@ import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyListView;
+import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
@@ -50,9 +49,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
-import pl.droidsonroids.gif.GifDrawable;
-import pl.droidsonroids.gif.GifImageView;
 
 public class InitDataActivity extends BaseFragmentActivity {
     private static final String TAG = "InitDataActivity";
@@ -89,23 +85,40 @@ public class InitDataActivity extends BaseFragmentActivity {
 
     private BarcodeScannerResolver mBarcodeScannerResolver;
 
+    private boolean isRunning=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_init_data);
 
-        mBarcodeScannerResolver = new BarcodeScannerResolver();
-        mBarcodeScannerResolver.setScanSuccessListener(new BarcodeScannerResolver.OnScanSuccessListener() {
-            @Override
-            public void onScanSuccess(String barcode) {
-                //TODO 显示扫描内容
-                LogUtil.i(TAG, "barcode: " + barcode);
-            }
-        });
 
-        IRfIdCtrl rfIdCtrl= RfIdCtrlInterface.getInstance("ttyS4",115200,"DS");
-        rfIdCtrl.read();
+        for(int i=0;i<20;i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    if(isRunning){
+                        LogUtil.d(TAG,"已经正在执行：" +CommonUtil.getCurrentTime());
+                    }
+                    else {
+                        isRunning = true;
+                        LogUtil.d(TAG, "开始执行：" +CommonUtil.getCurrentTime());
+                    }
+                }
+            }).start();
+        }
+
+//        mBarcodeScannerResolver = new BarcodeScannerResolver();
+//        mBarcodeScannerResolver.setScanSuccessListener(new BarcodeScannerResolver.OnScanSuccessListener() {
+//            @Override
+//            public void onScanSuccess(String barcode) {
+//                //TODO 显示扫描内容
+//                LogUtil.i(TAG, "barcode: " + barcode);
+//            }
+//        });
+//
+//        IRfIdCtrl rfIdCtrl= RfIdCtrlInterface.getInstance("ttyS4",115200,"DS");
+//        rfIdCtrl.read();
 //        ILockerBoxCtrl lockerBoxCtrl= LockerBoxInterface.getInstance("ttyS4",9600,"Prl_A31");
 //
 //

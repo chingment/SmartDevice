@@ -10,6 +10,7 @@ public class RopBookerBorrowReturn {
     private String actionCode;
     private String actionData;
     private String actionTime;
+    private String actionRemark;
     private String trgId;
     private String flowId;
 
@@ -83,6 +84,14 @@ public class RopBookerBorrowReturn {
 
     public void setActionTime(String actionTime) {
         this.actionTime = actionTime;
+    }
+
+    public String getActionRemark() {
+        return actionRemark;
+    }
+
+    public void setActionRemark(String actionRemark) {
+        this.actionRemark = actionRemark;
     }
 
     public String getTrgId() {

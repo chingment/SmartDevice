@@ -1,13 +1,13 @@
 package com.lumos.smartdevice.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
 import java.io.Serializable;
 import java.util.List;
 
 public class CabinetLayoutBean implements Serializable {
     private int spanCount;
-    private List<String> Cells;
+    private List<String> cells;
+    private RfIdBean rfId;
+
 
     public int getSpanCount() {
         return spanCount;
@@ -18,10 +18,18 @@ public class CabinetLayoutBean implements Serializable {
     }
 
     public List<String> getCells() {
-        return Cells;
+        return cells;
     }
 
     public void setCells(List<String> cells) {
-        Cells = cells;
+        this.cells = cells;
+    }
+
+    public RfIdBean getRfId() {
+        return rfId;
+    }
+
+    public void setRfId(RfIdBean rfId) {
+        this.rfId = rfId;
     }
 }
