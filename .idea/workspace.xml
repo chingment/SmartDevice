@@ -33,11 +33,6 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/BookerBorrowReturnFlowCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/BookerBorrowReturnFlowCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/IRfIdCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/IRfIdCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/RfIdCtrlByDs.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/RfIdCtrlByDs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/RfIdCtrlInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/RfIdCtrlInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -619,11 +614,6 @@
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/CabinetCtrlByDs.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="83" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java</url>
           <line>133</line>
           <option name="timeStamp" value="84" />
@@ -640,18 +630,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/BookerBorrowReturnFlowCtrl.java</url>
-          <line>154</line>
-          <option name="timeStamp" value="101" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/BookerBorrowReturnFlowCtrl.java</url>
           <line>306</line>
-          <option name="timeStamp" value="108" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/BookerBorrowReturnFlowCtrl.java</url>
-          <line>312</line>
-          <option name="timeStamp" value="109" />
+          <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/dialog/DialogSmUserEdit.java</url>
