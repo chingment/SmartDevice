@@ -47,7 +47,7 @@ public class DialogBookerIdentityVerifyByIcCard extends Dialog {
             public void onClick(View v) {
 
                 if (onClickListener != null) {
-                    onClickListener.testSuccesss();
+                    onClickListener.test();
                 }
             }
         });
@@ -66,8 +66,7 @@ public class DialogBookerIdentityVerifyByIcCard extends Dialog {
     }
 
     public  interface OnClickListener{
-        void testSuccesss();
-        void testFailure();
+        void test();
     }
 
 }

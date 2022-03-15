@@ -2,7 +2,7 @@ package com.lumos.smartdevice.model;
 
 import java.io.Serializable;
 
-public class CabinetSlotBean implements Serializable {
+public class SlotBean implements Serializable {
     private String cabinetId;
     private String slotId;
     private String slotName;

@@ -13,7 +13,7 @@ import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.CabinetLayoutBean;
-import com.lumos.smartdevice.model.CabinetSlotBean;
+import com.lumos.smartdevice.model.SlotBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.RfIdBean;
 import com.lumos.smartdevice.utils.CommonUtil;
@@ -29,7 +29,7 @@ public class BookerBorrowReturnFlowCtrl {
 
     private static final String TAG = "BookerBorrowReturnFlowCtrl";
 
-    private static BookerBorrowReturnFlowCtrl mBookerBorrowReturnFlowCtrl= null;
+    private static BookerBorrowReturnFlowCtrl mThis= null;
 
     public static final int MESSAGE_WHAT_FLOW_START = 1;
     public static final int MESSAGE_WHAT_INIT_DATA = 2;
@@ -48,7 +48,7 @@ public class BookerBorrowReturnFlowCtrl {
     public static final int MESSAGE_WHAT_FLOW_END = 15;
 
     private DeviceBean device;
-    private CabinetSlotBean cabinetSlot;
+    private SlotBean slot;
     private String clientUserId;
     private int identityType;
     private String identityId;
@@ -63,9 +63,15 @@ public class BookerBorrowReturnFlowCtrl {
 
     public static BookerBorrowReturnFlowCtrl getInstance() {
 
-        mBookerBorrowReturnFlowCtrl = new BookerBorrowReturnFlowCtrl();
+        if (mThis == null) {
+            synchronized (BookerBorrowReturnFlowCtrl.class) {
+                if (mThis == null) {
+                    mThis = new BookerBorrowReturnFlowCtrl();
+                }
+            }
+        }
 
-        return mBookerBorrowReturnFlowCtrl;
+        return mThis;
     }
 
     private void setFlowId(String flowId) {
@@ -74,7 +80,7 @@ public class BookerBorrowReturnFlowCtrl {
 
     private void reSet() {
         device = null;
-        cabinetSlot = null;
+        slot = null;
         clientUserId = null;
         identityType = 0;
         identityId = null;
@@ -87,7 +93,7 @@ public class BookerBorrowReturnFlowCtrl {
     private List<String> open_RfIds=new ArrayList<>();
     private List<String> close_RfIds=new ArrayList<>();
 
-    public void open(DeviceBean device,CabinetSlotBean cabinetSlot,String clientUserId,int identityType,String  identityId) {
+    public void open(DeviceBean device, SlotBean slot, String clientUserId, int identityType, String  identityId) {
         new Thread(() -> {
             if (openIsRunning) {
                 LogUtil.d(TAG, "有任务正在执行");
@@ -96,7 +102,7 @@ public class BookerBorrowReturnFlowCtrl {
                 close_RfIds.clear();
                 openIsRunning = true;
                 this.device = device;
-                this.cabinetSlot = cabinetSlot;
+                this.slot = slot;
                 this.clientUserId = clientUserId;
                 this.identityType = identityType;
                 this.identityId = identityId;
@@ -118,12 +124,12 @@ public class BookerBorrowReturnFlowCtrl {
                         return;
                     }
 
-                    if (cabinetSlot == null) {
+                    if (slot == null) {
                         sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "格子未配置");
                         return;
                     }
 
-                    CabinetBean cabinet = device.getCabinets().get(cabinetSlot.getCabinetId());
+                    CabinetBean cabinet = device.getCabinets().get(slot.getCabinetId());
 
                     if (cabinet == null) {
                         sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "门柜未配置");
@@ -212,8 +218,8 @@ public class BookerBorrowReturnFlowCtrl {
 
         RopBookerBorrowReturn rop = new RopBookerBorrowReturn();
         rop.setDeviceId(device == null ? null : device.getDeviceId());
-        rop.setCabinetId(cabinetSlot == null ? null : cabinetSlot.getCabinetId());
-        rop.setSlotId(cabinetSlot == null ? null : cabinetSlot.getSlotId());
+        rop.setCabinetId(slot == null ? null : slot.getCabinetId());
+        rop.setSlotId(slot == null ? null : slot.getSlotId());
         rop.setClientUserId(clientUserId);
         rop.setIdentityType(identityType);
         rop.setIdentityId(identityId);

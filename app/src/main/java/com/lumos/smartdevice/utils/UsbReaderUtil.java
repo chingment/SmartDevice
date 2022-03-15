@@ -6,9 +6,9 @@ import android.os.Handler;
 import android.view.InputDevice;
 import android.view.KeyEvent;
 
-public class ReadCardUtil {
+public class UsbReaderUtil {
 
-    private static final String TAG = ReadCardUtil.class.getSimpleName();
+    private static final String TAG = UsbReaderUtil.class.getSimpleName();
 
     // 若500ms之内无字符输入，则表示扫码完成. (若觉得时间还长，则可以设置成更小的值)
     private final static long MESSAGE_DELAY = 500;
@@ -16,7 +16,7 @@ public class ReadCardUtil {
     private boolean mCaps;//大写或小写
     private StringBuilder mResult = new StringBuilder();//扫码内容
 
-    private OnReadSuccessListener mOnReadSuccessListener;
+    private OnListener mOnListener;
     private Handler mHandler = new Handler();
 
     private final Runnable mReadingEndRunnable = new Runnable() {
@@ -30,8 +30,8 @@ public class ReadCardUtil {
     private void performScanSuccess() {
         String barcode = mResult.toString();
         LogUtil.i(TAG, "performScanSuccess -> barcode: "+barcode);
-        if (mOnReadSuccessListener != null) {
-            mOnReadSuccessListener.onScanSuccess(barcode);
+        if (mOnListener != null) {
+            mOnListener.onSuccess(barcode);
         }
         mResult.setLength(0);
     }
@@ -142,17 +142,17 @@ public class ReadCardUtil {
     }
 
 
-    public interface OnReadSuccessListener {
-        void onScanSuccess(String barcode);
+    public interface OnListener {
+        void onSuccess(String barcode);
     }
 
-    public void setReadSuccessListener(OnReadSuccessListener onReadSuccessListener) {
-            mOnReadSuccessListener = onReadSuccessListener;
+    public void setListener(OnListener onListener) {
+        mOnListener = onListener;
     }
 
-    public void removeScanSuccessListener() {
+    public void removeListener() {
         mHandler.removeCallbacks(mReadingEndRunnable);
-        mOnReadSuccessListener = null;
+        mOnListener = null;
     }
 
 }

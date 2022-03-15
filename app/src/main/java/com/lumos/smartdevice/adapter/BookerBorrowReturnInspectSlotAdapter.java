@@ -11,19 +11,19 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.CabinetSlotBean;
+import com.lumos.smartdevice.model.SlotBean;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 import java.util.List;
 
-public class BookerBorrowReturnInspectCabinetBoxAdapter extends BaseAdapter {
+public class BookerBorrowReturnInspectSlotAdapter extends BaseAdapter {
 
     private static final String TAG = "BookerBorrowReturnInspectCabinetBoxAdapter";
 
-    private final List<CabinetSlotBean> items;
+    private final List<SlotBean> items;
     private final Context context;
 
-    public BookerBorrowReturnInspectCabinetBoxAdapter(Context context,List<CabinetSlotBean> items) {
+    public BookerBorrowReturnInspectSlotAdapter(Context context, List<SlotBean> items) {
         this.items = items;
         this.context = context;
     }
@@ -50,7 +50,7 @@ public class BookerBorrowReturnInspectCabinetBoxAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_booker_borrow_return_inspect_cabinet_slot, parent, false);
         }
 
-        CabinetSlotBean bean = items.get(position);
+        SlotBean bean = items.get(position);
 
         CardView cv_Slot = ViewHolder.get(convertView, R.id.cv_Slot);
         TextView tv_SlotName = ViewHolder.get(convertView, R.id.tv_SlotName);
@@ -61,7 +61,7 @@ public class BookerBorrowReturnInspectCabinetBoxAdapter extends BaseAdapter {
             cv_Slot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CabinetSlotBean l_Bean = (CabinetSlotBean) view.getTag();
+                    SlotBean l_Bean = (SlotBean) view.getTag();
                     onClickListener.onClick(l_Bean);
                 }
             });
@@ -77,6 +77,6 @@ public class BookerBorrowReturnInspectCabinetBoxAdapter extends BaseAdapter {
     }
 
     public  interface OnClickListener{
-        void onClick(CabinetSlotBean v);
+        void onClick(SlotBean v);
     }
 }

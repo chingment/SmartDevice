@@ -36,9 +36,6 @@ public class BookerMainActivity  extends BaseFragmentActivity {
         initEvent();
         initData();
 
-        //DbManager.getInstance().saveLockerBoxUsage("locker_1","1-1-1-0","2","dsdaasda");
-        //DbManager.getInstance().saveLockerBoxUsage("locker_1","2-1-2-0","2","dsdaasdDDa");
-        //int a=1/0;
     }
 
     private void initView() {

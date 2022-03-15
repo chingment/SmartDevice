@@ -23,7 +23,7 @@ import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.ui.dialog.DialogLoading;
-import com.lumos.smartdevice.utils.ReadCardUtil;
+import com.lumos.smartdevice.utils.UsbReaderUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.ToastUtil;
 
@@ -57,7 +57,7 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
         return AppCacheManager.getCurrentUser();
     }
 
-    private ReadCardUtil readCardUtil;
+    private UsbReaderUtil usbReaderUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +117,7 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
         });
 
 
-        readCardUtil = new ReadCardUtil();
+        usbReaderUtil = new UsbReaderUtil();
 
     }
 
@@ -154,8 +154,8 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
     protected void onDestroy() {
         super.onDestroy();
 
-        readCardUtil.removeScanSuccessListener();
-        readCardUtil = null;
+        usbReaderUtil.removeListener();
+        usbReaderUtil = null;
 
         AppManager.getAppManager().finishActivity(this);
 
@@ -185,9 +185,9 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
 
-        if (ReadCardUtil.isInputFromReader(this, event)) {
-            if (readCardUtil != null){
-                readCardUtil.resolveKeyEvent(event);
+        if (UsbReaderUtil.isInputFromReader(this, event)) {
+            if (usbReaderUtil != null){
+                usbReaderUtil.resolveKeyEvent(event);
             }
         }
 
@@ -258,10 +258,8 @@ public class BaseFragmentActivity extends FragmentActivity implements View.OnCli
         laodingUIHandler.sendMessage(m);
     }
 
-    public void setIcReaderSuccessListener(ReadCardUtil.OnReadSuccessListener onReadSuccessListener) {
-        readCardUtil.setReadSuccessListener(onReadSuccessListener);
+    public void setUsbReaderListener(UsbReaderUtil.OnListener onListener) {
+        usbReaderUtil.setListener(onListener);
     }
-
-
 
 }

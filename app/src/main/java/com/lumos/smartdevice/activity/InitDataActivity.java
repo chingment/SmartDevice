@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -25,25 +24,18 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
-import com.lumos.smartdevice.barcodescanner.BarcodeScannerResolver;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
-import com.lumos.smartdevice.devicectrl.IRfIdCtrl;
-import com.lumos.smartdevice.devicectrl.RfIdCtrlInterface;
 import com.lumos.smartdevice.model.BookerCustomDataBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LogTipsBean;
-import com.lumos.smartdevice.ostctrl.OstCtrlByYs;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyListView;
-import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.DeviceUtil;
-import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
-import com.lumos.smartdevice.utils.ReadCardUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.widget.shapeloading.LoadingView;
 
@@ -85,11 +77,6 @@ public class InitDataActivity extends BaseFragmentActivity {
     public final int WHAT_SET_CONFIG_SUCCESS = 4;
     public final int WHAT_SET_CONFIG_FALURE = 5;
 
-
-
-   // private BarcodeScannerResolver mBarcodeScannerResolver;
-
-    private boolean isRunning=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,79 +85,9 @@ public class InitDataActivity extends BaseFragmentActivity {
 
         OstCtrlInterface.getInstance().setHideStatusBar(this,false);
 
-//        readCardUtil.setReadSuccessListener(new ReadCardUtil.OnReadSuccessListener() {
-//            @Override
-//            public void onScanSuccess(String barcode) {
-//                LogUtil.e(TAG, "barcode: " + barcode);
-//            }
-//        });
-
-//        for(int i=0;i<20;i++) {
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    if(isRunning){
-//                        LogUtil.d(TAG,"已经正在执行：" +CommonUtil.getCurrentTime());
-//                    }
-//                    else {
-//                        isRunning = true;
-//                        LogUtil.d(TAG, "开始执行：" +CommonUtil.getCurrentTime());
-//                    }
-//                }
-//            }).start();
-//        }
-
-//        mBarcodeScannerResolver = new BarcodeScannerResolver();
-//        mBarcodeScannerResolver.setScanSuccessListener(new BarcodeScannerResolver.OnScanSuccessListener() {
-//            @Override
-//            public void onScanSuccess(String barcode) {
-//                //TODO 显示扫描内容
-//                LogUtil.i(TAG, "barcode: " + barcode);
-//            }
-//        });
-//
-//        IRfIdCtrl rfIdCtrl= RfIdCtrlInterface.getInstance("ttyS4",115200,"DS");
-//        rfIdCtrl.read();
-//        ILockerBoxCtrl lockerBoxCtrl= LockerBoxInterface.getInstance("ttyS4",9600,"Prl_A31");
-//
-//
-//        lockerBoxCtrl.open("1", new ILockerBoxCtrl.OnListener() {
-//            @Override
-//            public void onSendCommandSuccess() {
-//
-//            }
-//
-//            @Override
-//            public void onSendCommnadFailure() {
-//
-//            }
-//
-//            @Override
-//            public void onOpenSuccess() {
-//
-//            }
-//
-//            @Override
-//            public void onOpenFailure() {
-//
-//            }
-//        });
-
-//        GifImageView gifImageView = (GifImageView) findViewById(R.id.iv_bird);
-//        GifDrawable gifDrawable = (GifDrawable) gifImageView.getDrawable();
-//        gifDrawable.start(); //开始播放
-////        gifDrawable.stop(); //停止播放
-////        gifDrawable.reset(); //复位，重新开始播放
-////        gifDrawable.isRunning(); //是否正在播放
-//        gifDrawable.setLoopCount(1000 ); //设置播放的次数，播放完了就自动停止
-////        gifDrawable.getCurrentLoop();  //获取正在播放的次数
-////        gifDrawable.getCurrentPosition(); //获取现在到从开始播放所经历的时间
-////        gifDrawable.getDuration() ; //获取播放一次所需要的时间
-
         initView();
         initEvent();
         initData();
-
 
         initActionHandler.postDelayed(initActionRunable, 1000);
 
@@ -421,6 +338,8 @@ public class InitDataActivity extends BaseFragmentActivity {
             @Override
             public void onFailure(String msg, Exception e) {
                 super.onFailure(msg, e);
+
+                setHandleMessage(WHAT_READ_CONFIG_FAILURE, msg);
             }
         });
     }

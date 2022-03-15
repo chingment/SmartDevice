@@ -10,7 +10,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.dialog.DialogBookerFlowHandling;
-import com.lumos.smartdevice.adapter.BookerBorrowReturnInspectCabinetBoxAdapter;
+import com.lumos.smartdevice.adapter.BookerBorrowReturnInspectSlotAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
@@ -19,7 +19,7 @@ import com.lumos.smartdevice.api.rop.RetIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.devicectrl.BookerBorrowReturnFlowCtrl;
 import com.lumos.smartdevice.model.CabinetBean;
-import com.lumos.smartdevice.model.CabinetSlotBean;
+import com.lumos.smartdevice.model.SlotBean;
 import com.lumos.smartdevice.model.CabinetLayoutBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.IdentityInfoByBorrowerBean;
@@ -48,7 +48,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
     private DeviceBean device;
 
-    private List<CabinetSlotBean> cabinetSlots=new ArrayList<>();
+    private List<SlotBean> slots=new ArrayList<>();
 
     private DialogBookerFlowHandling dialog_BookerFlowHandling;
 
@@ -94,13 +94,13 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                             String plate = cell_prams[1];
                             String name = cell_prams[2];
 
-                            CabinetSlotBean cabinetSlot = new CabinetSlotBean();
-                            cabinetSlot.setCabinetId(cabinet.getCabinetId());
-                            cabinetSlot.setSlotId(id);
-                            cabinetSlot.setSlotName(name);
-                            cabinetSlot.setSlotPlate(plate);
+                            SlotBean slot = new SlotBean();
+                            slot.setCabinetId(cabinet.getCabinetId());
+                            slot.setSlotId(id);
+                            slot.setSlotName(name);
+                            slot.setSlotPlate(plate);
 
-                            cabinetSlots.add(cabinetSlot);
+                            slots.add(slot);
 
                         }
                     }
@@ -115,7 +115,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
         bookerBorrowReturnFlowCtrl = BookerBorrowReturnFlowCtrl.getInstance();
         bookerBorrowReturnFlowCtrl.setOpenHandler(new Handler(msg -> {
-                    LogUtil.i("sdas");
+
 
                     switch (msg.what) {
                         case BookerBorrowReturnFlowCtrl.MESSAGE_WHAT_FLOW_START:
@@ -153,16 +153,16 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
     private void initData() {
 
-        BookerBorrowReturnInspectCabinetBoxAdapter cabinetBoxAdapter = new BookerBorrowReturnInspectCabinetBoxAdapter(getAppContext(), cabinetSlots);
+        BookerBorrowReturnInspectSlotAdapter slotAdapter = new BookerBorrowReturnInspectSlotAdapter(getAppContext(), slots);
 
-        cabinetBoxAdapter.setOnClickListener(new BookerBorrowReturnInspectCabinetBoxAdapter.OnClickListener() {
+        slotAdapter.setOnClickListener(new BookerBorrowReturnInspectSlotAdapter.OnClickListener() {
             @Override
-            public void onClick(CabinetSlotBean cabinetSlot) {
-                bookerBorrowReturnFlowCtrl.open(device,cabinetSlot,clientUserId,identityType,identityId);
+            public void onClick(SlotBean slot) {
+                bookerBorrowReturnFlowCtrl.open(device,slot,clientUserId,identityType,identityId);
             }
         });
 
-        gdv_Slots.setAdapter(cabinetBoxAdapter);
+        gdv_Slots.setAdapter(slotAdapter);
 
         getIdentityInfo();
     }

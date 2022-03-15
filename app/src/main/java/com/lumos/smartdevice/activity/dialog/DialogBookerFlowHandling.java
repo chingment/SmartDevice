@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.CabinetSlotBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 

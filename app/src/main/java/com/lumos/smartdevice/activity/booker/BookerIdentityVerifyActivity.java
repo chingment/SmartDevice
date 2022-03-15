@@ -2,9 +2,7 @@ package com.lumos.smartdevice.activity.booker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 
 import com.alibaba.fastjson.JSON;
@@ -21,12 +19,11 @@ import com.lumos.smartdevice.api.rop.RopIdentityVerify;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
-import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
-import com.lumos.smartdevice.utils.ReadCardUtil;
+import com.lumos.smartdevice.utils.UsbReaderUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,13 +49,14 @@ public class BookerIdentityVerifyActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booker_identity_verify);
 
-        intent_extra_action = getIntent().getStringExtra("action");
-        device = getDevice();
         setNavHeaderTtile(R.string.aty_nav_title_booker_identity_verify);
 
-        setIcReaderSuccessListener(new ReadCardUtil.OnReadSuccessListener() {
+        intent_extra_action = getIntent().getStringExtra("action");
+        device = getDevice();
+
+        setUsbReaderListener(new UsbReaderUtil.OnListener() {
             @Override
-            public void onScanSuccess(String code) {
+            public void onSuccess(String code) {
                 LogUtil.e(TAG, "code: " + code);
                 verfiy("1",code);
             }
@@ -78,13 +76,8 @@ public class BookerIdentityVerifyActivity extends BaseFragmentActivity {
         dialog_BookerIdentityVerifyByIcCard = new DialogBookerIdentityVerifyByIcCard(this);
         dialog_BookerIdentityVerifyByIcCard.setOnClickListener(new DialogBookerIdentityVerifyByIcCard.OnClickListener() {
             @Override
-            public void testSuccesss() {
+            public void test() {
                 verfiy("1","0007729527");
-            }
-
-            @Override
-            public void testFailure() {
-
             }
         });
     }
@@ -162,6 +155,7 @@ public class BookerIdentityVerifyActivity extends BaseFragmentActivity {
             @Override
             public void onFailure(String msg, Exception e) {
                 super.onFailure(msg, e);
+                showToast(msg);
             }
         });
 
