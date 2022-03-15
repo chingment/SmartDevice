@@ -31,25 +31,25 @@ public class BookerBorrowReturnFlowCtrl {
 
     private static BookerBorrowReturnFlowCtrl mThis= null;
 
-    public static final int ACTION_CODE_FLOW_START = 1;
-    public static final int ACTION_CODE_INIT_DATA = 2;
-    public static final int ACTION_CODE_INIT_DATA_SUCCESS = 3;
-    public static final int ACTION_CODE_INIT_DATA_FAILURE = 4;
-    public static final int ACTION_CODE_REQUEST_OPEN_AUTH = 5;
-    public static final int ACTION_CODE_REQUEST_OPEN_AUTH_SUCCESS = 6;
-    public static final int ACTION_CODE_REQUEST_OPEN_AUTH_FAILURE = 7;
-    public static final int ACTION_CODE_SEND_OPEN_COMMAND = 8;
-    public static final int ACTION_CODE_SEND_OPEN_COMMAND_SUCCESS = 9;
-    public static final int ACTION_CODE_SEND_OPEN_COMMAND_FAILURE = 10;
-    public static final int ACTION_CODE_WAIT_OPEN=11;
-    public static final int ACTION_CODE_OPEN_SUCCESS= 12;
-    public static final int ACTION_CODE_OPEN_FAILURE = 13;
-    public static final int ACTION_CODE_WAIT_CLOSE=14;
-    public static final int ACTION_CODE_CLOSE_SUCCESS= 15;
-    public static final int ACTION_CODE_CLOSE_FAILURE = 16;
-    public static final int ACTION_CODE_UPLOAD_CLOSE_RESULT=17;
-    public static final int ACTION_CODE_UPLOAD_CLOSE_RESULT_SUCCESS=18;
-    public static final int ACTION_CODE_UPLOAD_CLOSE_RESULT_FAILURE=19;
+    public static final int ACTION_CODE_FLOW_START = 1;//开始
+    public static final int ACTION_CODE_INIT_DATA = 2;//初始数据
+    public static final int ACTION_CODE_INIT_DATA_SUCCESS = 3;//初始数据成功
+    public static final int ACTION_CODE_INIT_DATA_FAILURE = 4;//初始数据失败 返回 1
+    public static final int ACTION_CODE_REQUEST_OPEN_AUTH = 5;//请求是否允许打开
+    public static final int ACTION_CODE_REQUEST_OPEN_AUTH_SUCCESS = 6;//请求允许打开
+    public static final int ACTION_CODE_REQUEST_OPEN_AUTH_FAILURE = 7;//请求不允许打开 返回 1
+    public static final int ACTION_CODE_SEND_OPEN_COMMAND = 8;//发送打开命令
+    public static final int ACTION_CODE_SEND_OPEN_COMMAND_SUCCESS = 9;//发送打开命令成功
+    public static final int ACTION_CODE_SEND_OPEN_COMMAND_FAILURE = 10;//发送打开命令失败 返回 1
+    public static final int ACTION_CODE_WAIT_OPEN=11;//等待打开
+    public static final int ACTION_CODE_OPEN_SUCCESS= 12;//打开成功
+    public static final int ACTION_CODE_OPEN_FAILURE = 13;//打开失败  返回 1
+    public static final int ACTION_CODE_WAIT_CLOSE=14;//等待关闭
+    public static final int ACTION_CODE_CLOSE_SUCCESS= 15;//关闭成功
+    public static final int ACTION_CODE_CLOSE_FAILURE = 16;//关闭失败 ？如何处理？重试？
+    public static final int ACTION_CODE_REQUEST_CLOSE_AUTH=17;//请求关闭验证
+    public static final int ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS=18;//关闭验证通过
+    public static final int ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE=19;//关闭验证不通   返回  8
     public static final int ACTION_CODE_FLOW_END = 20;
     public static final int ACTION_CODE_EXCEPTION = 21;
     private DeviceBean device;
@@ -352,13 +352,13 @@ public class BookerBorrowReturnFlowCtrl {
                 break;
             case ACTION_CODE_CLOSE_SUCCESS:
                 bookerBorrowReturn("close_success", actionData, actionRemark, null);
-                sendOpenHandlerMessage(ACTION_CODE_UPLOAD_CLOSE_RESULT, actionData, "上传关闭结果");
+                sendOpenHandlerMessage(ACTION_CODE_REQUEST_CLOSE_AUTH, actionData, "请求是否允许关闭");
                 break;
             case ACTION_CODE_CLOSE_FAILURE:
                 bookerBorrowReturn("close_failure", actionData, actionRemark, null);
                 break;
-            case ACTION_CODE_UPLOAD_CLOSE_RESULT:
-                bookerBorrowReturn("upload_close_result", actionData, actionRemark, new ReqHandler() {
+            case ACTION_CODE_REQUEST_CLOSE_AUTH:
+                bookerBorrowReturn("request_close_auth", actionData, actionRemark, new ReqHandler() {
                     @Override
                     public void onSuccess(String response) {
                         super.onSuccess(response);
@@ -369,25 +369,25 @@ public class BookerBorrowReturnFlowCtrl {
                             RetBookerBorrowReturn d = rt.getData();
                             HashMap<String, Object> m_ActionData = new HashMap<>();
                             m_ActionData.put("ret_booker_borrow_return", d);
-                            sendOpenHandlerMessage(ACTION_CODE_UPLOAD_CLOSE_RESULT_SUCCESS, m_ActionData, "上传关闭结果成功");
+                            sendOpenHandlerMessage(ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS, m_ActionData, "请求关闭验证");
                         } else {
-                            sendOpenHandlerMessage(ACTION_CODE_UPLOAD_CLOSE_RESULT_FAILURE, "上传关闭结果失败");
+                            sendOpenHandlerMessage(ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE, "关闭验证不通过");
                         }
                     }
 
                     @Override
                     public void onFailure(String msg, Exception e) {
                         super.onFailure(msg, e);
-                        sendOpenHandlerMessage(ACTION_CODE_UPLOAD_CLOSE_RESULT_FAILURE, "上传关闭结果失败");
+                        sendOpenHandlerMessage(ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE, "关闭验证不通过");
                     }
                 });
                 break;
-            case ACTION_CODE_UPLOAD_CLOSE_RESULT_SUCCESS:
-                bookerBorrowReturn("upload_close_result_success", actionData, actionRemark, null);
+            case ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS:
+                bookerBorrowReturn("request_close_auth_success", actionData, actionRemark, null);
                 sendOpenHandlerMessage(ACTION_CODE_FLOW_END, actionData, "流程结束");
                 break;
-            case ACTION_CODE_UPLOAD_CLOSE_RESULT_FAILURE:
-                bookerBorrowReturn("upload_close_result_failure", actionData, actionRemark, null);
+            case ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE:
+                bookerBorrowReturn("request_close_auth_failure", actionData, actionRemark, null);
                 break;
             case ACTION_CODE_FLOW_END:
                 openIsRunning = false;

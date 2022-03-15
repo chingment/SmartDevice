@@ -145,7 +145,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_CLOSE_FAILURE:
                                 break;
-                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_UPLOAD_CLOSE_RESULT_FAILURE:
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE:
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_END:
 
