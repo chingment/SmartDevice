@@ -3,6 +3,7 @@ package com.lumos.smartdevice.activity.booker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,9 +16,11 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.devicectrl.BookerBorrowReturnFlowCtrl;
+import com.lumos.smartdevice.model.BookerBookBean;
 import com.lumos.smartdevice.model.CabinetBean;
 import com.lumos.smartdevice.model.SlotBean;
 import com.lumos.smartdevice.model.CabinetLayoutBean;
@@ -33,6 +36,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
@@ -113,22 +117,56 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
         }
 
 
+
         bookerBorrowReturnFlowCtrl = BookerBorrowReturnFlowCtrl.getInstance();
-        bookerBorrowReturnFlowCtrl.setOpenHandler(new Handler(msg -> {
+        bookerBorrowReturnFlowCtrl.setOpenHandlerListener(new BookerBorrowReturnFlowCtrl.OnOpenHandlerListener() {
+            @Override
+            public void onHandle(int actionCode, HashMap<String, Object> actionData, String actionRemark) {
 
+                LogUtil.d(TAG,"actionCode:"+actionCode+",actionRemark:"+actionRemark);
 
-                    switch (msg.what) {
-                        case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_START:
-                            dialog_BookerFlowHandling.show();
-                            break;
-                        case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_END:
-                            dialog_BookerFlowHandling.hide();
-                            break;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        showToast(actionRemark);
+                        switch (actionCode) {
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_START:
+                                dialog_BookerFlowHandling.show();
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_INIT_DATA_FAILURE:
+                                //dialog_BookerFlowHandling.hide();
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_OPEN_AUTH_FAILURE:
+                                //dialog_BookerFlowHandling.hide();
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_SEND_OPEN_COMMAND_FAILURE:
+                                //dialog_BookerFlowHandling.hide();
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_CLOSE_FAILURE:
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_UPLOAD_CLOSE_RESULT_FAILURE:
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_END:
+
+                                RetBookerBorrowReturn retBookerBorrowReturn=(RetBookerBorrowReturn)actionData.get("ret_booker_borrow_return");
+
+                                Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("ret_booker_borrow_return", retBookerBorrowReturn);
+                                intent.putExtras(bundle);
+                                openActivity(intent);
+                                finish();
+
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_EXCEPTION:
+                                break;
+                        }
                     }
+                });
 
-                    return false;
-                })
-        );
+            }
+        });
 
         initView();
         initEvent();
