@@ -129,7 +129,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                     @Override
                     public void run() {
 
-                        showToast(actionRemark);
+                        //showToast(actionRemark);
                         switch (actionCode) {
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_START:
                                 dialog_BookerFlowHandling.show();
