@@ -31,21 +31,21 @@ public class BookerBorrowReturnFlowCtrl {
 
     private static BookerBorrowReturnFlowCtrl mThis= null;
 
-    public static final int MESSAGE_WHAT_FLOW_START = 1;
-    public static final int MESSAGE_WHAT_INIT_DATA = 2;
-    public static final int MESSAGE_WHAT_INIT_DATA_SUCCESS = 3;
-    public static final int MESSAGE_WHAT_INIT_DATA_FAILURE = 4;
-    public static final int MESSAGE_WHAT_OPEN_REQUEST = 5;
-    public static final int MESSAGE_WHAT_OPEN_REQUEST_SUCCESS = 6;
-    public static final int MESSAGE_WHAT_OPEN_REQUEST_FAILURE = 7;
-    public static final int MESSAGE_WHAT_SEND_OPEN_COMMAND = 8;
-    public static final int MESSAGE_WHAT_SEND_OPEN_COMMAND_SUCCESS = 9;
-    public static final int MESSAGE_WHAT_SEND_OPEN_COMMAND_FAILURE = 10;
-    public static final int MESSAGE_WHAT_OPEN_SUCCESS= 11;
-    public static final int MESSAGE_WHAT_OPEN_FAILURE = 12;
-    public static final int MESSAGE_WHAT_CLOSE_SUCCESS= 13;
-    public static final int MESSAGE_WHAT_CLOSE_FAILURE = 14;
-    public static final int MESSAGE_WHAT_FLOW_END = 15;
+    public static final int ACTION_CODE_FLOW_START = 1;
+    public static final int ACTION_CODE_INIT_DATA = 2;
+    public static final int ACTION_CODE_INIT_DATA_SUCCESS = 3;
+    public static final int ACTION_CODE_INIT_DATA_FAILURE = 4;
+    public static final int ACTION_CODE_OPEN_REQUEST = 5;
+    public static final int ACTION_CODE_OPEN_REQUEST_SUCCESS = 6;
+    public static final int ACTION_CODE_OPEN_REQUEST_FAILURE = 7;
+    public static final int ACTION_CODE_SEND_OPEN_COMMAND = 8;
+    public static final int ACTION_CODE_SEND_OPEN_COMMAND_SUCCESS = 9;
+    public static final int ACTION_CODE_SEND_OPEN_COMMAND_FAILURE = 10;
+    public static final int ACTION_CODE_OPEN_SUCCESS= 11;
+    public static final int ACTION_CODE_OPEN_FAILURE = 12;
+    public static final int ACTION_CODE_CLOSE_SUCCESS= 13;
+    public static final int ACTION_CODE_CLOSE_FAILURE = 14;
+    public static final int ACTION_CODE_FLOW_END = 15;
 
     private DeviceBean device;
     private SlotBean slot;
@@ -110,34 +110,34 @@ public class BookerBorrowReturnFlowCtrl {
 
                 try {
 
-                    sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_START);
+                    sendOpenHandlerMessage(ACTION_CODE_FLOW_START);
 
-                    sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA);
+                    sendOpenHandlerMessage(ACTION_CODE_INIT_DATA);
 
                     if (device == null) {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "设备未配置");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "设备未配置");
                         return;
                     }
 
                     if (device.getCabinets() == null) {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "门柜未配置");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "门柜未配置");
                         return;
                     }
 
                     if (slot == null) {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "格子未配置");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "格子未配置");
                         return;
                     }
 
                     CabinetBean cabinet = device.getCabinets().get(slot.getCabinetId());
 
                     if (cabinet == null) {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "门柜未配置");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "门柜未配置");
                         return;
                     }
 
                     if (StringUtil.isEmpty(cabinet.getLayout())) {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "门柜参数未配置");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "门柜参数未配置");
                         return;
                     }
 
@@ -145,7 +145,7 @@ public class BookerBorrowReturnFlowCtrl {
                     });
 
                     if (cabinetLayout == null) {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "门柜参数格式有误");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "门柜参数格式有误");
                         return;
                     }
 
@@ -161,7 +161,7 @@ public class BookerBorrowReturnFlowCtrl {
                     rfIdCtrl = RfIdCtrlInterface.getInstance("ttyS4",115200,"Prl_A1");
 
                     if (rfIdCtrl == null) {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "初始化RFID失败");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "初始化RFID失败");
                         return;
                     }
 
@@ -176,7 +176,7 @@ public class BookerBorrowReturnFlowCtrl {
 
 
                     if (!rfIdCtrl.sendRead()) {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "RFID发送读取命令失败");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "RFID发送读取命令失败");
                         return;
                     }
 
@@ -201,11 +201,11 @@ public class BookerBorrowReturnFlowCtrl {
 
                     actionData.put("rfIds",open_RfIds);
 
-                    sendOpenHandlerMessage(MESSAGE_WHAT_OPEN_REQUEST,actionData, "请求打开");
+                    sendOpenHandlerMessage(ACTION_CODE_OPEN_REQUEST,actionData, "请求打开");
 
 
                 } catch (InterruptedException e) {
-                    sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
+                    sendOpenHandlerMessage(ACTION_CODE_FLOW_END);
                 }
 
             }
@@ -250,20 +250,20 @@ public class BookerBorrowReturnFlowCtrl {
     private void sendOpenHandlerMessage(int what,HashMap<String,Object> actionData,String actionRemark ) {
 
         switch (what) {
-            case MESSAGE_WHAT_FLOW_START:
+            case ACTION_CODE_FLOW_START:
                 bookerBorrowReturn("flow_start", actionData, actionRemark, null);
                 break;
-            case MESSAGE_WHAT_INIT_DATA:
+            case ACTION_CODE_INIT_DATA:
                 bookerBorrowReturn("init_data", actionData, actionRemark, null);
                 break;
-            case MESSAGE_WHAT_INIT_DATA_SUCCESS:
+            case ACTION_CODE_INIT_DATA_SUCCESS:
                 bookerBorrowReturn("init_data_success", actionData, actionRemark, null);
                 break;
-            case MESSAGE_WHAT_INIT_DATA_FAILURE:
+            case ACTION_CODE_INIT_DATA_FAILURE:
                 bookerBorrowReturn("init_data_failure", actionData, actionRemark, null);
-                sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
+                sendOpenHandlerMessage(ACTION_CODE_FLOW_END);
                 break;
-            case MESSAGE_WHAT_OPEN_REQUEST:
+            case ACTION_CODE_OPEN_REQUEST:
                 bookerBorrowReturn("open_request", actionData, actionRemark, new ReqHandler() {
                     @Override
                     public void onSuccess(String response) {
@@ -274,43 +274,43 @@ public class BookerBorrowReturnFlowCtrl {
                         if (rt.getCode() == ResultCode.SUCCESS) {
                             RetBookerBorrowReturn d = rt.getData();
                             setFlowId(d.getFlowId());
-                            sendOpenHandlerMessage(MESSAGE_WHAT_OPEN_REQUEST_SUCCESS);
+                            sendOpenHandlerMessage(ACTION_CODE_OPEN_REQUEST_SUCCESS);
                         } else {
-                            sendOpenHandlerMessage(MESSAGE_WHAT_OPEN_REQUEST_FAILURE);
+                            sendOpenHandlerMessage(ACTION_CODE_OPEN_REQUEST_FAILURE);
                         }
                     }
 
                     @Override
                     public void onFailure(String msg, Exception e) {
                         super.onFailure(msg, e);
-                        sendOpenHandlerMessage(MESSAGE_WHAT_OPEN_REQUEST_FAILURE);
+                        sendOpenHandlerMessage(ACTION_CODE_OPEN_REQUEST_FAILURE);
                     }
                 });
                 break;
-            case MESSAGE_WHAT_OPEN_REQUEST_SUCCESS:
+            case ACTION_CODE_OPEN_REQUEST_SUCCESS:
                 bookerBorrowReturn("open_request_success", actionData, actionRemark, null);
-                sendOpenHandlerMessage(MESSAGE_WHAT_SEND_OPEN_COMMAND);
+                sendOpenHandlerMessage(ACTION_CODE_SEND_OPEN_COMMAND);
                 break;
-            case MESSAGE_WHAT_OPEN_REQUEST_FAILURE:
+            case ACTION_CODE_OPEN_REQUEST_FAILURE:
                 bookerBorrowReturn("open_request_failure", actionData, actionRemark, null);
-                sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
+                sendOpenHandlerMessage(ACTION_CODE_FLOW_END);
                 break;
-            case MESSAGE_WHAT_SEND_OPEN_COMMAND:
+            case ACTION_CODE_SEND_OPEN_COMMAND:
                 bookerBorrowReturn("send_open_command", actionData, actionRemark, null);
                 cabinetCtrl.open("1", new ICabinetCtrl.OnListener() {
                     @Override
                     public void onSendCommandSuccess() {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_SEND_OPEN_COMMAND_SUCCESS);
+                        sendOpenHandlerMessage(ACTION_CODE_SEND_OPEN_COMMAND_SUCCESS);
                     }
 
                     @Override
                     public void onSendCommnadFailure() {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_SEND_OPEN_COMMAND_FAILURE);
+                        sendOpenHandlerMessage(ACTION_CODE_SEND_OPEN_COMMAND_FAILURE);
                     }
 
                     @Override
                     public void onOpenSuccess() {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_OPEN_SUCCESS);
+                        sendOpenHandlerMessage(ACTION_CODE_OPEN_SUCCESS);
 
 
 
@@ -339,30 +339,30 @@ public class BookerBorrowReturnFlowCtrl {
                         HashMap<String, Object> actionData = new HashMap<>();
                         actionData.put("rfIds", close_RfIds);
 
-                        sendOpenHandlerMessage(MESSAGE_WHAT_CLOSE_SUCCESS, actionData, "关闭成功");
+                        sendOpenHandlerMessage(ACTION_CODE_CLOSE_SUCCESS, actionData, "关闭成功");
                     }
 
                     @Override
                     public void onOpenFailure() {
-                        sendOpenHandlerMessage(MESSAGE_WHAT_OPEN_FAILURE);
+                        sendOpenHandlerMessage(ACTION_CODE_OPEN_FAILURE);
                     }
                 });
                 break;
-            case MESSAGE_WHAT_SEND_OPEN_COMMAND_SUCCESS:
+            case ACTION_CODE_SEND_OPEN_COMMAND_SUCCESS:
                 bookerBorrowReturn("send_open_command_success", actionData, actionRemark, null);
                 break;
-            case MESSAGE_WHAT_SEND_OPEN_COMMAND_FAILURE:
+            case ACTION_CODE_SEND_OPEN_COMMAND_FAILURE:
                 bookerBorrowReturn("send_open_command_failure", actionData, actionRemark, null);
-                sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
+                sendOpenHandlerMessage(ACTION_CODE_FLOW_END);
                 break;
-            case MESSAGE_WHAT_OPEN_SUCCESS:
+            case ACTION_CODE_OPEN_SUCCESS:
                 bookerBorrowReturn("open_success", actionData, actionRemark, null);
                 break;
-            case MESSAGE_WHAT_OPEN_FAILURE:
+            case ACTION_CODE_OPEN_FAILURE:
                 bookerBorrowReturn("open_failure", actionData, actionRemark, null);
-                sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
+                sendOpenHandlerMessage(ACTION_CODE_FLOW_END);
                 break;
-            case MESSAGE_WHAT_CLOSE_SUCCESS:
+            case ACTION_CODE_CLOSE_SUCCESS:
                 bookerBorrowReturn("close_success", actionData, actionRemark, new ReqHandler() {
                     @Override
                     public void onSuccess(String response) {
@@ -373,24 +373,23 @@ public class BookerBorrowReturnFlowCtrl {
                         if (rt.getCode() == ResultCode.SUCCESS) {
                             RetBookerBorrowReturn d = rt.getData();
                             setFlowId(d.getFlowId());
-                            sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
+                            sendOpenHandlerMessage(ACTION_CODE_FLOW_END);
                         } else {
-                            sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
+                            sendOpenHandlerMessage(ACTION_CODE_FLOW_END);
                         }
                     }
 
                     @Override
                     public void onFailure(String msg, Exception e) {
                         super.onFailure(msg, e);
-                        sendOpenHandlerMessage(MESSAGE_WHAT_FLOW_END);
+                        sendOpenHandlerMessage(ACTION_CODE_FLOW_END);
                     }
                 });
-
                 break;
-            case MESSAGE_WHAT_CLOSE_FAILURE:
+            case ACTION_CODE_CLOSE_FAILURE:
                 bookerBorrowReturn("close_failure", actionData, actionRemark, null);
                 break;
-            case MESSAGE_WHAT_FLOW_END:
+            case ACTION_CODE_FLOW_END:
                 openIsRunning = false;
                 bookerBorrowReturn("flow_end", actionData, actionRemark, null);
                 reSet();

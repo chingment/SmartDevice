@@ -118,10 +118,10 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
 
                     switch (msg.what) {
-                        case BookerBorrowReturnFlowCtrl.MESSAGE_WHAT_FLOW_START:
+                        case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_START:
                             dialog_BookerFlowHandling.show();
                             break;
-                        case BookerBorrowReturnFlowCtrl.MESSAGE_WHAT_FLOW_END:
+                        case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_END:
                             dialog_BookerFlowHandling.hide();
                             break;
                     }
