@@ -36,7 +36,7 @@ public class RfIdCtrlByDs implements IRfIdCtrl {
 
     private static final String TAG = "RfIdCtrlByDs";
 
-    private static RfIdCtrlByDs mRfIdCtrlByDs = null;
+    private static RfIdCtrlByDs mThis = null;
 
     private GClient client;
 
@@ -52,31 +52,25 @@ public class RfIdCtrlByDs implements IRfIdCtrl {
 
     public static RfIdCtrlByDs getInstance(String comId, int comBaud) {
         LogUtil.i(TAG, "comId:" + comId + ",comBaud:" + comBaud);
-        if (mRfIdCtrlByDs == null) {
+        if (mThis == null) {
             synchronized (RfIdCtrlByDs.class) {
-                if (mRfIdCtrlByDs == null) {
-                    mRfIdCtrlByDs = new RfIdCtrlByDs();
-                    mRfIdCtrlByDs.connect(comId, comBaud);
+                if (mThis == null) {
+                    mThis = new RfIdCtrlByDs();
+                    mThis.connect(comId, comBaud);
                 }
             }
         }
-        return mRfIdCtrlByDs;
+        return mThis;
     }
 
     private void connect(String comId,int comBaud) {
-
-        LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud);
-
         String param = "/dev/" + comId + ":" + comBaud;
-
-        if( client.openAndroidSerial(param, 1000)){
-            LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud+",成功");
+        if(client.openAndroidSerial(param, 1000)){
+            LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud+"，成功");
         }
-        else
-        {
-            LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud+",失败");
+        else {
+            LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud + "，失败");
         }
-
     }
 
 

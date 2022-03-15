@@ -98,9 +98,9 @@ public class BookerBorrowReturnFlowCtrl {
             if (openIsRunning) {
                 LogUtil.d(TAG, "有任务正在执行");
             } else {
+                openIsRunning = true;
                 open_RfIds.clear();
                 close_RfIds.clear();
-                openIsRunning = true;
                 this.device = device;
                 this.slot = slot;
                 this.clientUserId = clientUserId;

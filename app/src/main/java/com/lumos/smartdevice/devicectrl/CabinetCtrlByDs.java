@@ -9,14 +9,12 @@ import java.io.File;
 
 public class CabinetCtrlByDs implements ICabinetCtrl {
 
-    private static final String TAG = "LockerBoxCtrlByDs";
+    private static final String TAG = "CabinetCtrlByDs";
 
-    private static CabinetCtrlByDs mLockerBoxCtrlByDs= null;
-
-    private symvdio sym = null;
+    private static CabinetCtrlByDs mThis= null;
+    private symvdio sym;
 
     private CabinetCtrlByDs(){
-
         try {
             sym = new symvdio();
         } catch (Exception ex) {
@@ -28,15 +26,15 @@ public class CabinetCtrlByDs implements ICabinetCtrl {
 
     public static CabinetCtrlByDs getInstance(String comId, int comBaud) {
         LogUtil.i(TAG, "comId:" + comId + ",comBaud:" + comBaud);
-        if (mLockerBoxCtrlByDs == null) {
+        if (mThis == null) {
             synchronized (CabinetCtrlByDs.class) {
-                if (mLockerBoxCtrlByDs == null) {
-                    mLockerBoxCtrlByDs = new CabinetCtrlByDs();
-                    mLockerBoxCtrlByDs.connect(comId,comBaud);
+                if (mThis == null) {
+                    mThis = new CabinetCtrlByDs();
+                    mThis.connect(comId,comBaud);
                 }
             }
         }
-        return mLockerBoxCtrlByDs;
+        return mThis;
     }
 
 
@@ -47,7 +45,7 @@ public class CabinetCtrlByDs implements ICabinetCtrl {
             int rc_status = sym.Connect(comId, comBaud);
             LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud + "，状态为：" + rc_status);
         } else {
-            LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud + "，失败，串口ID不存在");
+            LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud + "，失败");
         }
 
     }
