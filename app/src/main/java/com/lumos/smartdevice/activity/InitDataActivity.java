@@ -26,6 +26,8 @@ import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
+import com.lumos.smartdevice.devicectrl.CabinetCtrlInterface;
+import com.lumos.smartdevice.devicectrl.ICabinetCtrl;
 import com.lumos.smartdevice.model.BookerCustomDataBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LogTipsBean;
@@ -82,6 +84,30 @@ public class InitDataActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_init_data);
+
+//         ICabinetCtrl cabinetCtrl= CabinetCtrlInterface.getInstance("ttyS4",9600,"aaa");
+//
+//        cabinetCtrl.open("1", new ICabinetCtrl.OnListener() {
+//            @Override
+//            public void onSendCommandSuccess() {
+//
+//            }
+//
+//            @Override
+//            public void onSendCommnadFailure() {
+//
+//            }
+//
+//            @Override
+//            public void onOpenSuccess() {
+//
+//            }
+//
+//            @Override
+//            public void onOpenFailure() {
+//
+//            }
+//        });
 
         OstCtrlInterface.getInstance().setHideStatusBar(this,false);
 

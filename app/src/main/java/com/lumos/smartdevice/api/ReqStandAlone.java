@@ -12,6 +12,7 @@ import com.lumos.smartdevice.api.rop.RetUserGetDetail;
 import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
+import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopIdentityVerify;
@@ -345,6 +346,12 @@ public class ReqStandAlone implements IReqVersion{
 
     @Override
     public void identityVerify(RopIdentityVerify rop, final ReqHandler reqHandler) {
+
+
+    }
+
+    @Override
+    public void bookerCreateFlow(RopBookerCreateFlow rop, final ReqHandler reqHandler) {
 
 
     }

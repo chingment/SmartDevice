@@ -54,9 +54,6 @@ public class BookerBorrowReturnFlowCtrl {
     public static final int ACTION_CODE_EXCEPTION = 21;
     private DeviceBean device;
     private SlotBean slot;
-    private String clientUserId;
-    private int identityType;
-    private String identityId;
     private String trgId;
     private String flowId;
 
@@ -85,9 +82,6 @@ public class BookerBorrowReturnFlowCtrl {
     private void reSet() {
         device = null;
         slot = null;
-        clientUserId = null;
-        identityType = 0;
-        identityId = null;
         trgId = null;
         flowId = null;
         open_RfIds.clear();
@@ -97,7 +91,7 @@ public class BookerBorrowReturnFlowCtrl {
     private List<String> open_RfIds=new ArrayList<>();
     private List<String> close_RfIds=new ArrayList<>();
 
-    public void open(DeviceBean device, SlotBean slot, String clientUserId, int identityType, String  identityId) {
+    public void open(DeviceBean device,CabinetBean cabinet, SlotBean slot, String flowId) {
         new Thread(() -> {
             if (openIsRunning) {
                 LogUtil.d(TAG, "有任务正在执行");
@@ -107,9 +101,7 @@ public class BookerBorrowReturnFlowCtrl {
                 close_RfIds.clear();
                 this.device = device;
                 this.slot = slot;
-                this.clientUserId = clientUserId;
-                this.identityType = identityType;
-                this.identityId = identityId;
+                this.flowId=flowId;
                 this.trgId = UUID.randomUUID().toString().replace("-", "");
 
                 try {
@@ -132,8 +124,6 @@ public class BookerBorrowReturnFlowCtrl {
                         sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子未配置");
                         return;
                     }
-
-                    CabinetBean cabinet = device.getCabinets().get(slot.getCabinetId());
 
                     if (cabinet == null) {
                         sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，门柜未配置");
@@ -200,7 +190,7 @@ public class BookerBorrowReturnFlowCtrl {
                     open_RfIds.add("123456789012345678901409");
                     open_RfIds.add("123456789012345678901408");
                     open_RfIds.add("123456789012345678901407");
-                    open_RfIds.add("123456789012345678901406");
+                    //open_RfIds.add("123456789012345678901406");
 
                     actionData.put("rfIds",open_RfIds);
 
@@ -221,11 +211,6 @@ public class BookerBorrowReturnFlowCtrl {
 
         RopBookerBorrowReturn rop = new RopBookerBorrowReturn();
         rop.setDeviceId(device == null ? null : device.getDeviceId());
-        rop.setCabinetId(slot == null ? null : slot.getCabinetId());
-        rop.setSlotId(slot == null ? null : slot.getSlotId());
-        rop.setClientUserId(clientUserId);
-        rop.setIdentityType(identityType);
-        rop.setIdentityId(identityId);
         rop.setActionCode(actionCode);
         rop.setActionTime(CommonUtil.getCurrentTime());
         rop.setActionRemark(actionRemark);
@@ -266,8 +251,6 @@ public class BookerBorrowReturnFlowCtrl {
                         });
 
                         if (rt.getCode() == ResultCode.SUCCESS) {
-                            RetBookerBorrowReturn d = rt.getData();
-                            setFlowId(d.getFlowId());
                             sendOpenHandlerMessage(ACTION_CODE_REQUEST_OPEN_AUTH_SUCCESS, "请求允许打开设备");
                         } else {
                             sendOpenHandlerMessage(ACTION_CODE_REQUEST_OPEN_AUTH_FAILURE, "请求不允许打开设备");
@@ -369,7 +352,7 @@ public class BookerBorrowReturnFlowCtrl {
                             RetBookerBorrowReturn d = rt.getData();
                             HashMap<String, Object> m_ActionData = new HashMap<>();
                             m_ActionData.put("ret_booker_borrow_return", d);
-                            sendOpenHandlerMessage(ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS, m_ActionData, "请求关闭验证");
+                            sendOpenHandlerMessage(ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS, m_ActionData, "请求关闭验证通过");
                         } else {
                             sendOpenHandlerMessage(ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE, "关闭验证不通过");
                         }
@@ -388,6 +371,7 @@ public class BookerBorrowReturnFlowCtrl {
                 break;
             case ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE:
                 bookerBorrowReturn("request_close_auth_failure", actionData, actionRemark, null);
+
                 break;
             case ACTION_CODE_FLOW_END:
                 openIsRunning = false;

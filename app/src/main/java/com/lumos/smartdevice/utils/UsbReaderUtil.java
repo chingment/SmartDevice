@@ -127,6 +127,7 @@ public class UsbReaderUtil {
         }
 
         InputDevice d = event.getDevice();
+
         int c = d.getId();
 //        event.getDevice().getControllerNumber();
         if (event.getKeyCode() == KeyEvent.KEYCODE_BACK || event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_DOWN || event.getKeyCode() == KeyEvent.KEYCODE_VOLUME_UP) {

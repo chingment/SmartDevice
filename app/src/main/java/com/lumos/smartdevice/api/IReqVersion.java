@@ -1,6 +1,7 @@
 package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
+import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopIdentityVerify;
@@ -36,5 +37,6 @@ public interface IReqVersion {
     void lockerSaveBoxOpenResult(RopLockerSaveBoxOpenResult rop, ReqHandler reqHandler);
     void identityInfo(RopIdentityInfo rop, ReqHandler reqHandler);
     void identityVerify(RopIdentityVerify rop, ReqHandler reqHandler);
+    void bookerCreateFlow(RopBookerCreateFlow rop, ReqHandler reqHandler);
     void bookerBorrowReturn(RopBookerBorrowReturn rop, ReqHandler reqHandler);
 }
