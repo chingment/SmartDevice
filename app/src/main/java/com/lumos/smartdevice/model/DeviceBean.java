@@ -9,7 +9,7 @@ public class DeviceBean implements Serializable {
     private int sceneMode;
     private int versionMode;
     private String merchId;
-    private HashMap<String, CabinetBean> cabinets;
+    private HashMap<String, DriveBean> drives;
     private MqttBean mqtt;
 
     public String getDeviceId() {
@@ -52,12 +52,12 @@ public class DeviceBean implements Serializable {
         this.merchId = merchId;
     }
 
-    public HashMap<String, CabinetBean> getCabinets() {
-        return cabinets;
+    public HashMap<String, DriveBean> getDrives() {
+        return drives;
     }
 
-    public void setCabinets(HashMap<String, CabinetBean> cabinets) {
-        this.cabinets = cabinets;
+    public void setDrives(HashMap<String, DriveBean> drives) {
+        this.drives = drives;
     }
 
     public MqttBean getMqtt() {

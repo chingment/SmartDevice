@@ -1,8 +1,5 @@
 package com.lumos.smartdevice.devicectrl;
 
-import android.os.Handler;
-import android.os.Message;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.api.ReqHandler;
@@ -11,19 +8,18 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
-import com.lumos.smartdevice.model.CabinetBean;
-import com.lumos.smartdevice.model.CabinetLayoutBean;
-import com.lumos.smartdevice.model.SlotBean;
+import com.lumos.smartdevice.model.BookerDriveLockeqBean;
+import com.lumos.smartdevice.model.BookerDriveRfeqBean;
+import com.lumos.smartdevice.model.BookerSlotBean;
+import com.lumos.smartdevice.model.BookerSlotDriveBean;
 import com.lumos.smartdevice.model.DeviceBean;
-import com.lumos.smartdevice.model.RfIdBean;
+import com.lumos.smartdevice.model.DriveBean;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
-import com.lumos.smartdevice.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class BookerBorrowReturnFlowCtrl {
 
@@ -54,14 +50,13 @@ public class BookerBorrowReturnFlowCtrl {
     public static final int ACTION_CODE_EXCEPTION = 21;
 
     private DeviceBean device;
-    private CabinetBean cabinet;
-    private SlotBean slot;
+    private BookerSlotBean slot;
     private String flowId;
 
 
     private boolean openIsRunning=false;
-    private ICabinetCtrl cabinetCtrl;
-    private IRfIdCtrl rfIdCtrl;
+    private ILockeqCtrl lockeqCtrl;
+    private IRfeqCtrl rfeqCtrl;
 
     public static BookerBorrowReturnFlowCtrl getInstance() {
 
@@ -91,7 +86,7 @@ public class BookerBorrowReturnFlowCtrl {
     private List<String> open_RfIds=new ArrayList<>();
     private List<String> close_RfIds=new ArrayList<>();
 
-    public void open(DeviceBean device,CabinetBean cabinet, SlotBean slot, String flowId) {
+    public void open(DeviceBean device, BookerSlotBean slot, String flowId) {
         new Thread(() -> {
             if (openIsRunning) {
                 LogUtil.d(TAG, "有任务正在执行");
@@ -100,7 +95,6 @@ public class BookerBorrowReturnFlowCtrl {
                 open_RfIds.clear();
                 close_RfIds.clear();
                 this.device = device;
-                this.cabinet=cabinet;
                 this.slot = slot;
                 this.flowId=flowId;
 
@@ -115,8 +109,15 @@ public class BookerBorrowReturnFlowCtrl {
                         return;
                     }
 
-                    if (device.getCabinets() == null) {
-                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，门柜未配置");
+                    HashMap<String, DriveBean> drives=device.getDrives();
+
+                    if(drives==null||drives.size()==0) {
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，设备未配置驱动");
+                        return;
+                    }
+
+                    if(drives.size()<2) {
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，设备驱动数量不对");
                         return;
                     }
 
@@ -124,35 +125,42 @@ public class BookerBorrowReturnFlowCtrl {
                         sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子未配置");
                         return;
                     }
-
-                    if (cabinet == null) {
-                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，门柜未配置");
+                    BookerSlotDriveBean drive=slot.getDrive();
+                    if(drive==null) {
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子未配置驱动");
                         return;
                     }
 
-                    if (StringUtil.isEmpty(cabinet.getLayout())) {
-                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，门柜参数未配置");
+                    BookerDriveLockeqBean lockeq=drive.getLockeq();
+                    if(lockeq==null) {
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子未配置锁驱动");
                         return;
                     }
 
-                    CabinetLayoutBean cabinetLayout = JSON.parseObject(cabinet.getLayout(), new TypeReference<CabinetLayoutBean>() {
-                    });
-
-                    if (cabinetLayout == null) {
-                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，门柜参数格式有误");
+                    if(!drives.containsKey(lockeq.getDriveId())) {
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子驱动找不到");
                         return;
                     }
 
-                    cabinetCtrl=CabinetCtrlInterface.getInstance(cabinet.getComId(),cabinet.getComBaud(),cabinet.getComPrl());
+                    BookerDriveRfeqBean rfeq=drive.getRfeq();
+                    if(rfeq==null) {
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子未配置射频驱动");
+                        return;
+                    }
 
-//                    if (cabinetLayout.getRfId() == null) {
-//                        sendOpenHandlerMessage(MESSAGE_WHAT_INIT_DATA_FAILURE, "RFID未配置");
-//                        return;
-//                    }
+                    if(!drives.containsKey(rfeq.getDriveId())) {
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，射频驱动找不到");
+                        return;
+                    }
 
-//                    RfIdBean rfId = cabinetLayout.getRfId();
-//
-//                    rfIdCtrl = RfIdCtrlInterface.getInstance("ttyS4",115200,"Prl_A1");
+
+                    DriveBean lockeqDrive=drives.get(lockeq.getDriveId());
+
+                    DriveBean rfeqDrive=drives.get(rfeq.getDriveId());
+
+                    lockeqCtrl= LockeqCtrlInterface.getInstance(lockeqDrive.getComId(),lockeqDrive.getComBaud(),lockeqDrive.getComPrl());
+
+                    rfeqCtrl = RfeqCtrlInterface.getInstance(rfeqDrive.getComId(),rfeqDrive.getComBaud(),rfeqDrive.getComPrl());
 //
 //                    if (rfIdCtrl == null) {
 //                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，设备连接失败");
@@ -177,11 +185,6 @@ public class BookerBorrowReturnFlowCtrl {
 //
                     Thread.sleep(1000);
 
-
-                    //rfIdCtrl=RfIdCtrlInterface.getInstance()
-
-
-                    cabinetCtrl = CabinetCtrlInterface.getInstance(cabinet.getComId(), cabinet.getComBaud(), cabinet.getComPrl());
 
                     HashMap<String,Object> actionData=new HashMap<>();
 
@@ -272,7 +275,7 @@ public class BookerBorrowReturnFlowCtrl {
                 break;
             case ACTION_CODE_SEND_OPEN_COMMAND:
                 bookerBorrowReturn("send_open_command", actionData, actionRemark, null);
-                cabinetCtrl.open("1", new ICabinetCtrl.OnListener() {
+                lockeqCtrl.open("1", new ILockeqCtrl.OnListener() {
                     @Override
                     public void onSendCommandSuccess() {
                         sendOpenHandlerMessage(ACTION_CODE_SEND_OPEN_COMMAND_SUCCESS, "打开命令发送成功");

@@ -6,7 +6,7 @@ import java.util.List;
 public class CabinetLayoutBean implements Serializable {
     private int spanCount;
     private List<String> cells;
-    private RfIdBean rfId;
+    private RfEqBean rfId;
 
 
     public int getSpanCount() {
@@ -25,11 +25,11 @@ public class CabinetLayoutBean implements Serializable {
         this.cells = cells;
     }
 
-    public RfIdBean getRfId() {
+    public RfEqBean getRfId() {
         return rfId;
     }
 
-    public void setRfId(RfIdBean rfId) {
+    public void setRfId(RfEqBean rfId) {
         this.rfId = rfId;
     }
 }

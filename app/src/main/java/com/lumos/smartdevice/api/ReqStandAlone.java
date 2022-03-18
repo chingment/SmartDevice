@@ -64,7 +64,7 @@ public class ReqStandAlone implements IReqVersion{
             device.setDeviceId("1224567");
             device.setSceneMode(scene_mode);
             device.setVersionMode(version_mode);
-            device.setCabinets(DbManager.getInstance().getCabinets());
+           // device.setCabinets(DbManager.getInstance().getCabinets());
 
             ret.setDevice(device);
 

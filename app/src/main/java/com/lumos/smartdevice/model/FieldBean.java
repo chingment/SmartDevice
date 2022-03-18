@@ -1,6 +1,8 @@
 package com.lumos.smartdevice.model;
 
-public class FieldBean {
+import java.io.Serializable;
+
+public class FieldBean implements Serializable {
     private int value;
     private String text;
 

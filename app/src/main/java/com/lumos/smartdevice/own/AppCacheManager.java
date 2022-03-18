@@ -85,4 +85,12 @@ public class AppCacheManager {
         AppCacheManager.getCache().put(Key_BookerCustomData, bean);
     }
 
+    public static BookerCustomDataBean getBookerCustomData() {
+
+        BookerCustomDataBean bean = (BookerCustomDataBean)AppCacheManager.getCache().getAsObject(Key_BookerCustomData);
+
+        return bean;
+
+    }
+
 }

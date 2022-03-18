@@ -1,6 +1,8 @@
 package com.lumos.smartdevice.model;
 
-public class BookerBorrowBookBean {
+import java.io.Serializable;
+
+public class BookerBorrowBookBean implements Serializable {
     private String skuId;
     private String imgUrl;
     private String name;

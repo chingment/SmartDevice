@@ -1,8 +1,9 @@
 package com.lumos.smartdevice.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class IdentityInfoByBorrowerBean {
+public class IdentityInfoByBorrowerBean implements Serializable {
     private String fullName;
     private String cardNo;
     private int canBorrowQuantity;

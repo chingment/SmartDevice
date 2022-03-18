@@ -67,18 +67,18 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
         setNavHeaderTtile(R.string.aty_nav_title_smlockerboxmanager);
         setNavHeaderBtnByGoBackIsVisible(true);
         device=getDevice();
-        HashMap<String, CabinetBean> l_Cabinets=device.getCabinets();
-        if(l_Cabinets!=null) {
-
-            cabinets = new ArrayList<>(l_Cabinets.values());
-
-            Collections.sort(cabinets, new Comparator<CabinetBean>() {
-                @Override
-                public int compare(CabinetBean t1, CabinetBean t2) {
-                    return t2.getPriority() - t1.getPriority();
-                }
-            });
-        }
+//        HashMap<String, CabinetBean> l_Cabinets=device.getCabinets();
+//        if(l_Cabinets!=null) {
+//
+//            cabinets = new ArrayList<>(l_Cabinets.values());
+//
+//            Collections.sort(cabinets, new Comparator<CabinetBean>() {
+//                @Override
+//                public int compare(CabinetBean t1, CabinetBean t2) {
+//                    return t2.getPriority() - t1.getPriority();
+//                }
+//            });
+//        }
 
         initView();
         initEvent();

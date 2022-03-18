@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.SlotBean;
+import com.lumos.smartdevice.model.BookerSlotBean;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 import java.util.List;
@@ -20,10 +20,10 @@ public class BookerBorrowReturnInspectSlotAdapter extends BaseAdapter {
 
     private static final String TAG = "BookerBorrowReturnInspectCabinetBoxAdapter";
 
-    private final List<SlotBean> items;
+    private final List<BookerSlotBean> items;
     private final Context context;
 
-    public BookerBorrowReturnInspectSlotAdapter(Context context, List<SlotBean> items) {
+    public BookerBorrowReturnInspectSlotAdapter(Context context, List<BookerSlotBean> items) {
         this.items = items;
         this.context = context;
     }
@@ -50,18 +50,18 @@ public class BookerBorrowReturnInspectSlotAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_booker_borrow_return_inspect_cabinet_slot, parent, false);
         }
 
-        SlotBean bean = items.get(position);
+        BookerSlotBean bean = items.get(position);
 
         CardView cv_Slot = ViewHolder.get(convertView, R.id.cv_Slot);
         TextView tv_SlotName = ViewHolder.get(convertView, R.id.tv_SlotName);
-        tv_SlotName.setText(bean.getSlotName());
+        tv_SlotName.setText(bean.getName());
 
         if(onClickListener!=null) {
             cv_Slot.setTag(bean);
             cv_Slot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    SlotBean l_Bean = (SlotBean) view.getTag();
+                    BookerSlotBean l_Bean = (BookerSlotBean) view.getTag();
                     onClickListener.onClick(l_Bean);
                 }
             });
@@ -77,6 +77,6 @@ public class BookerBorrowReturnInspectSlotAdapter extends BaseAdapter {
     }
 
     public  interface OnClickListener{
-        void onClick(SlotBean v);
+        void onClick(BookerSlotBean v);
     }
 }

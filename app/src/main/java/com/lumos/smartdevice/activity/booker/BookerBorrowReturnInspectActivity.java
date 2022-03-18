@@ -19,28 +19,20 @@ import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RetIdentityInfo;
-import com.lumos.smartdevice.api.rop.RetIdentityVerify;
 import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
-import com.lumos.smartdevice.api.rop.RopIdentityVerify;
 import com.lumos.smartdevice.devicectrl.BookerBorrowReturnFlowCtrl;
-import com.lumos.smartdevice.model.BookerBookBean;
-import com.lumos.smartdevice.model.CabinetBean;
-import com.lumos.smartdevice.model.SlotBean;
-import com.lumos.smartdevice.model.CabinetLayoutBean;
+import com.lumos.smartdevice.model.BookerSlotBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.IdentityInfoByBorrowerBean;
+import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
@@ -56,7 +48,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
     private DeviceBean device;
 
-    private List<SlotBean> slots=new ArrayList<>();
+    private List<BookerSlotBean> slots;
 
     private DialogBookerFlowHandling dialog_BookerFlowHandling;
 
@@ -74,52 +66,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
         identityId = getIntent().getStringExtra("identityId");
         clientUserId = getIntent().getStringExtra("clientUserId");
         device = getDevice();
-
-        HashMap<String, CabinetBean> l_Cabinets = device.getCabinets();
-        if (l_Cabinets != null) {
-
-            List<CabinetBean> cabinets = new ArrayList<>(l_Cabinets.values());
-
-            Collections.sort(cabinets, new Comparator<CabinetBean>() {
-                @Override
-                public int compare(CabinetBean t1, CabinetBean t2) {
-                    return t2.getPriority() - t1.getPriority();
-                }
-            });
-
-            for (CabinetBean cabinet : cabinets) {
-                String layout = cabinet.getLayout();
-                CabinetLayoutBean cabinetLayout = JSON.parseObject(layout, new TypeReference<CabinetLayoutBean>() {
-                });
-                if (cabinetLayout != null) {
-                    List<String> cabinetCells = cabinetLayout.getCells();
-                    if (cabinetCells != null) {
-                        for (String cabinetCell : cabinetCells) {
-
-                            String[] cell_prams = cabinetCell.split("-");
-
-                            String id = cell_prams[0];
-                            String plate = cell_prams[1];
-                            String name = cell_prams[2];
-
-                            SlotBean slot = new SlotBean();
-                            slot.setCabinetId(cabinet.getCabinetId());
-                            slot.setSlotId(id);
-                            slot.setSlotName(name);
-                            slot.setSlotPlate(plate);
-
-                            slots.add(slot);
-
-                        }
-                    }
-
-                }
-
-            }
-
-
-        }
-
+        slots=AppCacheManager.getBookerCustomData().getSlots();
 
 
         bookerBorrowReturnFlowCtrl = BookerBorrowReturnFlowCtrl.getInstance();
@@ -199,7 +146,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
         slotAdapter.setOnClickListener(new BookerBorrowReturnInspectSlotAdapter.OnClickListener() {
             @Override
-            public void onClick(SlotBean slot) {
+            public void onClick(BookerSlotBean slot) {
                 borrowRetrunCreateFlow(slot);
             }
         });
@@ -210,14 +157,10 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
     }
 
 
-    private void borrowRetrunCreateFlow(SlotBean slot ) {
-
-
-        CabinetBean cabinet = device.getCabinets().get(slot.getCabinetId());
+    private void borrowRetrunCreateFlow(BookerSlotBean slot ) {
 
         RopBookerCreateFlow rop = new RopBookerCreateFlow();
         rop.setDeviceId(device.getDeviceId());
-        rop.setCabinetId(slot.getCabinetId());
         rop.setSlotId(slot.getSlotId());
         rop.setClientUserId(clientUserId);
         rop.setIdentityType(identityType);
@@ -246,7 +189,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
 
                 if (rt.getCode() == ResultCode.SUCCESS) {
                     RetBookerCreateFlow d=rt.getData();
-                    bookerBorrowReturnFlowCtrl.open(device,cabinet,slot,d.getFlowId());
+                    bookerBorrowReturnFlowCtrl.open(device,slot,d.getFlowId());
                 } else {
                     showToast(rt.getMsg());
                 }
