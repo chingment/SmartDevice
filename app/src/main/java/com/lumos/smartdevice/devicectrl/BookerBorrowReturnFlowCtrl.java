@@ -11,7 +11,7 @@ import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.model.BookerDriveLockeqBean;
 import com.lumos.smartdevice.model.BookerDriveRfeqBean;
 import com.lumos.smartdevice.model.BookerSlotBean;
-import com.lumos.smartdevice.model.BookerSlotDriveBean;
+import com.lumos.smartdevice.model.BookerSlotDrivesBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.DriveBean;
 import com.lumos.smartdevice.utils.CommonUtil;
@@ -55,6 +55,7 @@ public class BookerBorrowReturnFlowCtrl {
 
 
     private boolean openIsRunning=false;
+
     private ILockeqCtrl lockeqCtrl;
     private IRfeqCtrl rfeqCtrl;
 
@@ -71,20 +72,20 @@ public class BookerBorrowReturnFlowCtrl {
         return mThis;
     }
 
-    private void setFlowId(String flowId) {
-        this.flowId = flowId;
-    }
-
     private void reSet() {
         device = null;
         slot = null;
         flowId = null;
-        open_RfIds.clear();
-        close_RfIds.clear();
+        if(open_RfIds!=null) {
+            open_RfIds.clear();
+        }
+        if(close_RfIds!=null) {
+            close_RfIds.clear();
+        }
     }
 
-    private List<String> open_RfIds=new ArrayList<>();
-    private List<String> close_RfIds=new ArrayList<>();
+    private List<String> open_RfIds;
+    private List<String> close_RfIds;
 
     public void open(DeviceBean device, BookerSlotBean slot, String flowId) {
         new Thread(() -> {
@@ -92,8 +93,8 @@ public class BookerBorrowReturnFlowCtrl {
                 LogUtil.d(TAG, "有任务正在执行");
             } else {
                 openIsRunning = true;
-                open_RfIds.clear();
-                close_RfIds.clear();
+                open_RfIds=new ArrayList<>();
+                close_RfIds=new ArrayList<>();
                 this.device = device;
                 this.slot = slot;
                 this.flowId=flowId;
@@ -125,13 +126,15 @@ public class BookerBorrowReturnFlowCtrl {
                         sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子未配置");
                         return;
                     }
-                    BookerSlotDriveBean drive=slot.getDrive();
-                    if(drive==null) {
+
+                    BookerSlotDrivesBean slot_Drives=slot.getDrives();
+
+                    if(slot_Drives==null) {
                         sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子未配置驱动");
                         return;
                     }
 
-                    BookerDriveLockeqBean lockeq=drive.getLockeq();
+                    BookerDriveLockeqBean lockeq=slot_Drives.getLockeq();
                     if(lockeq==null) {
                         sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子未配置锁驱动");
                         return;
@@ -142,7 +145,7 @@ public class BookerBorrowReturnFlowCtrl {
                         return;
                     }
 
-                    BookerDriveRfeqBean rfeq=drive.getRfeq();
+                    BookerDriveRfeqBean rfeq=slot_Drives.getRfeq();
                     if(rfeq==null) {
                         sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子未配置射频驱动");
                         return;

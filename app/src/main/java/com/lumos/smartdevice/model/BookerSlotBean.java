@@ -2,10 +2,11 @@ package com.lumos.smartdevice.model;
 
 import java.io.Serializable;
 
+
 public class BookerSlotBean implements Serializable {
     private String slotId;
     private String name;
-    private BookerSlotDriveBean drive;
+    private BookerSlotDrivesBean drives;
 
     public String getSlotId() {
         return slotId;
@@ -23,11 +24,11 @@ public class BookerSlotBean implements Serializable {
         this.name = name;
     }
 
-    public BookerSlotDriveBean getDrive() {
-        return drive;
+    public BookerSlotDrivesBean getDrives() {
+        return drives;
     }
 
-    public void setDrive(BookerSlotDriveBean drive) {
-        this.drive = drive;
+    public void setDrives(BookerSlotDrivesBean drives) {
+        this.drives = drives;
     }
 }

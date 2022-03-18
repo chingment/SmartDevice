@@ -20,7 +20,6 @@ public class CabinetBean implements Serializable {
         this.cabinetId = cabinetId;
     }
 
-
     public String getName() {
         return name;
     }

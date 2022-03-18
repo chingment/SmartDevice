@@ -66,15 +66,14 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
         identityId = getIntent().getStringExtra("identityId");
         clientUserId = getIntent().getStringExtra("clientUserId");
         device = getDevice();
-        slots=AppCacheManager.getBookerCustomData().getSlots();
-
+        slots = AppCacheManager.getBookerCustomData().getSlots();
 
         bookerBorrowReturnFlowCtrl = BookerBorrowReturnFlowCtrl.getInstance();
         bookerBorrowReturnFlowCtrl.setOpenHandlerListener(new BookerBorrowReturnFlowCtrl.OnOpenHandlerListener() {
             @Override
             public void onHandle(int actionCode, HashMap<String, Object> actionData, String actionRemark) {
 
-                LogUtil.d(TAG,"actionCode:"+actionCode+",actionRemark:"+actionRemark);
+                LogUtil.d(TAG, "actionCode:" + actionCode + ",actionRemark:" + actionRemark);
 
                 runOnUiThread(new Runnable() {
                     @Override
@@ -100,7 +99,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_END:
 
-                                RetBookerBorrowReturn retBookerBorrowReturn=(RetBookerBorrowReturn)actionData.get("ret_booker_borrow_return");
+                                RetBookerBorrowReturn retBookerBorrowReturn = (RetBookerBorrowReturn) actionData.get("ret_booker_borrow_return");
 
                                 Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
                                 Bundle bundle = new Bundle();

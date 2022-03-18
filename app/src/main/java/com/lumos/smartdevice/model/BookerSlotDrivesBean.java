@@ -2,7 +2,7 @@ package com.lumos.smartdevice.model;
 
 import java.io.Serializable;
 
-public class BookerSlotDriveBean implements Serializable {
+public class BookerSlotDrivesBean implements Serializable {
     private BookerDriveLockeqBean lockeq;
     private BookerDriveRfeqBean rfeq;
 
