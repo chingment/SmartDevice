@@ -12,6 +12,7 @@ public class CabinetCtrlByDs implements ICabinetCtrl {
     private static final String TAG = "CabinetCtrlByDs";
 
     private static CabinetCtrlByDs mThis= null;
+
     private symvdio sym;
 
     private CabinetCtrlByDs(){

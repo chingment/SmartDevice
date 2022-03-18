@@ -52,9 +52,10 @@ public class BookerBorrowReturnFlowCtrl {
     public static final int ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE=19;//关闭验证不通   返回  8
     public static final int ACTION_CODE_FLOW_END = 20;
     public static final int ACTION_CODE_EXCEPTION = 21;
+
     private DeviceBean device;
+    private CabinetBean cabinet;
     private SlotBean slot;
-    private String trgId;
     private String flowId;
 
 
@@ -82,7 +83,6 @@ public class BookerBorrowReturnFlowCtrl {
     private void reSet() {
         device = null;
         slot = null;
-        trgId = null;
         flowId = null;
         open_RfIds.clear();
         close_RfIds.clear();
@@ -100,9 +100,9 @@ public class BookerBorrowReturnFlowCtrl {
                 open_RfIds.clear();
                 close_RfIds.clear();
                 this.device = device;
+                this.cabinet=cabinet;
                 this.slot = slot;
                 this.flowId=flowId;
-                this.trgId = UUID.randomUUID().toString().replace("-", "");
 
                 try {
 
@@ -215,7 +215,6 @@ public class BookerBorrowReturnFlowCtrl {
         rop.setActionTime(CommonUtil.getCurrentTime());
         rop.setActionRemark(actionRemark);
         rop.setFlowId(flowId);
-        rop.setTrgId(trgId);
         if (actionData != null) {
             rop.setActionData(JSON.toJSONString(actionData));
         }
@@ -367,7 +366,7 @@ public class BookerBorrowReturnFlowCtrl {
                 break;
             case ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS:
                 bookerBorrowReturn("request_close_auth_success", actionData, actionRemark, null);
-                sendOpenHandlerMessage(ACTION_CODE_FLOW_END, actionData, "流程结束");
+                sendOpenHandlerMessage(ACTION_CODE_FLOW_END, actionData, "借还结束");
                 break;
             case ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE:
                 bookerBorrowReturn("request_close_auth_failure", actionData, actionRemark, null);
