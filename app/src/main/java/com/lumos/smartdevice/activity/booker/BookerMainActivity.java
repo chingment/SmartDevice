@@ -11,9 +11,16 @@ import android.widget.VideoView;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
+import com.lumos.smartdevice.model.AdBean;
+import com.lumos.smartdevice.model.AdCreativeBean;
+import com.lumos.smartdevice.model.BookerCustomDataBean;
+import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class BookerMainActivity  extends BaseFragmentActivity {
 
@@ -27,11 +34,13 @@ public class BookerMainActivity  extends BaseFragmentActivity {
     private int vv_Ad_StopLength;
     public static HttpProxyCacheServer proxy;
 
+    private BookerCustomDataBean bookerCustomData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booker_main);
-
+        bookerCustomData = AppCacheManager.getBookerCustomData();
         initView();
         initEvent();
         initData();
@@ -73,22 +82,40 @@ public class BookerMainActivity  extends BaseFragmentActivity {
     }
 
     private void initData() {
-        playVvAd();
 
+        if (bookerCustomData != null) {
+
+
+//广告
+            HashMap<String, AdBean> ads = bookerCustomData.getAds();
+            if (ads != null) {
+                if (ads.containsKey("101")) {
+                    AdBean ad = ads.get("101");
+                    if (ad != null) {
+                        List<AdCreativeBean> adCreatives = ad.getCreatives();
+                        if (adCreatives != null && adCreatives.size() > 0) {
+                            playVvAd(adCreatives.get(0).getFileUrl());
+                        }
+                    }
+                }
+            }
+
+
+        }
     }
 
-    private void  playVvAd() {
+    private void  playVvAd(String fileUrl) {
         proxy = new HttpProxyCacheServer.Builder(this)
                 .maxCacheSize(1024 * 1024 * 1024) //1Gb 緩存
                 .maxCacheFilesCount(5)//最大緩存5個視頻
                 .build();
-        String vv_Ad_Url = proxy.getProxyUrl("http://file.17fanju.com/upload/test.mp4");
+        String vv_Ad_Url = proxy.getProxyUrl(fileUrl);
         vv_Ad.setVideoPath(vv_Ad_Url);
         vv_Ad.start();
         vv_Ad.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mPlayer) {
-                playVvAd();
+                playVvAd(fileUrl);
             }
         });
     }
