@@ -12,16 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.sm.SmHomeActivity;
 import com.lumos.smartdevice.adapter.BookerBorrowBookAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerSawBorrowBooks;
+import com.lumos.smartdevice.api.rop.RopBookerRenewBooks;
 import com.lumos.smartdevice.api.rop.RopBookerSawBorrowBooks;
 import com.lumos.smartdevice.model.BookerBorrowBookBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
+import com.lumos.smartdevice.ui.dialog.DialogConfirm;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -36,6 +39,7 @@ public class BookerSawBorrowBooksActivity extends BaseFragmentActivity {
     private View btn_Nav_Footer_GoBack;
     private View btn_Nav_Footer_GoHome;
 
+    private DialogConfirm dialog_Confirm;
     private SuperRefreshLayout sf_BorrowedBooks;
     private RecyclerView rv_BorrowedBooks;
     private int rv_BorrowedBooks_PageNum=1;
@@ -67,6 +71,32 @@ public class BookerSawBorrowBooksActivity extends BaseFragmentActivity {
 
         btn_Nav_Footer_GoBack = findViewById(R.id.btn_Nav_Footer_GoBack);
         btn_Nav_Footer_GoHome = findViewById(R.id.btn_Nav_Footer_GoHome);
+        dialog_Confirm = new DialogConfirm(BookerSawBorrowBooksActivity.this, "", true);
+        dialog_Confirm.setOnClickListener(new DialogConfirm.OnClickListener() {
+            @Override
+            public void onSure() {
+
+                dialog_Confirm.hide();
+
+                String fun = dialog_Confirm.getFunction();
+
+                switch (fun) {
+                    case "renew":
+                        BookerBorrowBookBean item = (BookerBorrowBookBean) dialog_Confirm.getTag();
+
+                        List<String> borrowIds = new ArrayList<>();
+                        borrowIds.add(item.getBorrowId());
+                        renewBooks("multi", borrowIds);
+                        break;
+                }
+
+            }
+
+            @Override
+            public void onCancle() {
+                dialog_Confirm.hide();
+            }
+        });
 
         sf_BorrowedBooks =  findViewById(R.id.sf_BorrowedBooks);
         rv_BorrowedBooks = findViewById(R.id.rv_BorrowedBooks);
@@ -76,6 +106,16 @@ public class BookerSawBorrowBooksActivity extends BaseFragmentActivity {
         rv_BorrowedBooks.setItemAnimator(new DefaultItemAnimator());
 
         rv_BorrowedBooksAdapter = new BookerBorrowBookAdapter();
+        rv_BorrowedBooksAdapter.setOnClickListener(new BookerBorrowBookAdapter.OnClickListener() {
+            @Override
+            public void onRenew(BookerBorrowBookBean item) {
+                dialog_Confirm.setFunction("renew");
+                dialog_Confirm.setTag(item);
+                dialog_Confirm.setTipsText("是否续借该书本");
+                dialog_Confirm.show();
+
+            }
+        });
         sf_BorrowedBooks.setAdapter(rv_BorrowedBooks, rv_BorrowedBooksAdapter);
         sf_BorrowedBooks.setOnRefreshHandler(new OnRefreshHandler() {
             @Override
@@ -189,6 +229,53 @@ public class BookerSawBorrowBooksActivity extends BaseFragmentActivity {
 
     }
 
+
+    private void renewBooks(String actionCode,List<String> borrowIds){
+
+        RopBookerRenewBooks rop=new RopBookerRenewBooks();
+        rop.setDeviceId(device.getDeviceId());
+        rop.setClientUserId(clientUserId);
+        rop.setIdentityId(identityId);
+        rop.setIdentityType(identityType);
+        rop.setActionCode(actionCode);
+        rop.setBorrowIds(borrowIds);
+
+
+        ReqInterface.getInstance().bookerRenewBooks(rop, new ReqHandler(){
+
+            @Override
+            public void onBeforeSend() {
+                super.onBeforeSend();
+                showLoading(BookerSawBorrowBooksActivity.this);
+            }
+
+            @Override
+            public void onAfterSend() {
+                super.onAfterSend();
+                hideLoading(BookerSawBorrowBooksActivity.this);
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                super.onSuccess(response);
+                ResultBean<Object> rt = JSON.parseObject(response, new TypeReference<ResultBean<Object>>() {
+                });
+
+                showToast(rt.getMsg());
+
+                if(rt.getCode()== ResultCode.SUCCESS) {
+                    getBorrowedBooks();
+                }
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                super.onFailure(msg, e);
+            }
+        });
+
+
+    }
 
     @Override
     public void onClick(View v) {

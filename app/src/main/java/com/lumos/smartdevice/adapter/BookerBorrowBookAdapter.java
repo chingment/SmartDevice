@@ -2,6 +2,7 @@ package com.lumos.smartdevice.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.model.BookerBorrowBookBean;
+import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ui.refreshview.MyViewHolder;
 import com.lumos.smartdevice.ui.refreshview.RefreshAdapter;
 import com.lumos.smartdevice.utils.CommonUtil;
@@ -57,7 +59,7 @@ public class BookerBorrowBookAdapter extends RefreshAdapter {
         ImageView iv_SkuImg = holder.itemView.findViewById(R.id.iv_SkuImg);
         TextView tv_ExpireTime = holder.itemView.findViewById(R.id.tv_ExpireTime);
         TextView tv_StatusText = holder.itemView.findViewById(R.id.tv_StatusText);
-
+        TextView btn_RenewBook = holder.itemView.findViewById(R.id.btn_RenewBook);
         BookerBorrowBookBean item = items.get(position);
 
 
@@ -85,11 +87,33 @@ public class BookerBorrowBookAdapter extends RefreshAdapter {
 
         tv_StatusText.setTextColor(context.getResources().getColor(statusTextColor));
 
+
+        btn_RenewBook.setTag(item);
+        btn_RenewBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(onClickListener!=null) {
+                    BookerBorrowBookBean l_item = (BookerBorrowBookBean) view.getTag();
+                    onClickListener.onRenew(l_item);
+                }
+            }
+        });
     }
 
 
     @Override
     public int getCount() {
         return items.size();
+    }
+
+    public OnClickListener onClickListener;
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
+    public interface OnClickListener {
+        void onRenew(BookerBorrowBookBean bean);
     }
 }
