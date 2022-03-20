@@ -55,7 +55,6 @@ public class BookerBorrowBookAdapter extends RefreshAdapter {
 
         TextView tv_SkuName = holder.itemView.findViewById(R.id.tv_SkuName);
         ImageView iv_SkuImg = holder.itemView.findViewById(R.id.iv_SkuImg);
-        TextView tv_BorrowTime = holder.itemView.findViewById(R.id.tv_BorrowTime);
         TextView tv_ExpireTime = holder.itemView.findViewById(R.id.tv_ExpireTime);
         TextView tv_StatusText = holder.itemView.findViewById(R.id.tv_StatusText);
 
@@ -63,42 +62,28 @@ public class BookerBorrowBookAdapter extends RefreshAdapter {
 
 
         tv_SkuName.setText(String.format("《%s》", item.getSkuName()));
-        tv_BorrowTime.setText(item.getBorrowTime());
         tv_ExpireTime.setText(item.getExpireTime());
         tv_StatusText.setText(item.getStatus().getText());
-
         CommonUtil.loadImageFromUrl(context, iv_SkuImg, item.getSkuImgUrl());
 
-//      View ll_Info = holder.itemView.findViewById(R.id.ll_Info);
-//        View ll_DividerLine = holder.itemView.findViewById(R.id.ll_DividerLine);
-//
-//
-//        TextView tv_BoxName = holder.itemView.findViewById(R.id.tv_BoxName);
-//        TextView tv_UseTime = holder.itemView.findViewById(R.id.tv_UseTime);
-//        TextView tv_UseRemark = holder.itemView.findViewById(R.id.tv_UseRemark);
-//        TextView tv_UseResult = holder.itemView.findViewById(R.id.tv_UseResult);
-//
-//        String slotId=bean.getSlotId();
-//
-//        tv_BoxName.setText(slotId.split("-")[2]);
-//
-//        tv_UseTime.setText(bean.getUseTime());
-//        tv_UseRemark.setText(bean.getUseRemark());
-//
-//        if(bean.getUseResult()==1){
-//            tv_UseResult.setText("成功");
-//        }
-//        else if(bean.getUseResult()==2) {
-//            tv_UseRemark.setText("失败");
-//        }
-//
-//        if((beans.size()-position-1)==0){
-//            ll_DividerLine.setVisibility(View.INVISIBLE);
-//        }
-//        else {
-//            ll_DividerLine.setVisibility(View.VISIBLE);
-//        }
 
+        int statusValue= item.getStatus().getValue();
+        int statusTextColor=R.color.booker_borrow_status_1000;
+
+        if(statusValue==1000){
+            statusTextColor=R.color.booker_borrow_status_1000;
+        }
+        else if(statusValue==2000){
+            statusTextColor=R.color.booker_borrow_status_2000;
+        }
+        else if(statusValue==3000){
+            statusTextColor=R.color.booker_borrow_status_3000;
+        }
+        else  if(statusValue==4000){
+            statusTextColor=R.color.booker_borrow_status_4000;
+        }
+
+        tv_StatusText.setTextColor(context.getResources().getColor(statusTextColor));
 
     }
 

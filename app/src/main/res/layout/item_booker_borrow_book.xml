@@ -84,7 +84,7 @@
                         android:ellipsize="end"
                         android:gravity="left"
                         android:maxLines="3"
-                        android:text="日期"
+                        android:text=""
                         android:textColor="@color/field_name"
                         android:textSize="@dimen/sp_12" />
 
@@ -92,7 +92,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="@dimen/size_100"
+                    android:layout_width="@dimen/size_50"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
                     android:orientation="vertical">
@@ -110,22 +110,13 @@
                         android:textSize="@dimen/sp_14" />
 
                     <LinearLayout
-                        android:layout_width="@dimen/size_100"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/btn_RenewBook"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:maxLines="3"
-                            android:text="续借"
-                            android:textColor="@color/field_name"
-                            android:textSize="@dimen/sp_12" />
 
                     </LinearLayout>
 
@@ -144,14 +135,14 @@
             android:layout_gravity="center"
             android:baselineAligned="false"
             android:orientation="horizontal"
-            android:paddingTop="@dimen/size_5"
-            android:paddingBottom="@dimen/size_5"
+            android:layout_marginTop="@dimen/size_5"
             tools:ignore="UselessParent">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="start"
+                android:layout_gravity="start|center_vertical"
+                android:gravity="center_vertical"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
@@ -159,28 +150,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:text="在"
+                    android:text="请于"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp_12" />
 
                 <TextView
-                    android:id="@+id/tv_BorrowTime"
+                    android:id="@+id/tv_ExpireTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:paddingStart="@dimen/size_6"
                     android:paddingEnd="@dimen/size_6"
                     android:text="2022-02-02"
-                    android:textColor="@color/black"
+                    android:textColor="@color/booker_expire_time"
                     android:textSize="@dimen/sp_14" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:text="借"
+                    android:text="前还书"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_14" />
+                    android:textSize="@dimen/sp_12" />
 
 
             </LinearLayout>
@@ -192,32 +183,19 @@
                 android:gravity="end"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:text="请于"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_14" />
 
                 <TextView
-                    android:id="@+id/tv_ExpireTime"
+                    android:id="@+id/btn_RenewBook"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:paddingStart="@dimen/size_6"
-                    android:paddingEnd="@dimen/size_6"
-                    android:text="2022-02-02"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_14" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:text="前还书"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_14" />
+                    android:paddingTop="@dimen/size_2"
+                    android:paddingBottom="@dimen/size_2"
+                    android:paddingStart="@dimen/size_5"
+                    android:paddingEnd="@dimen/size_5"
+                    android:background="@drawable/booker_widget_btn_1"
+                    android:text="立即续借"
+                    android:textColor="@color/field_name"
+                    android:textSize="@dimen/sp_12" />
 
 
             </LinearLayout>

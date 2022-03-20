@@ -39,4 +39,10 @@
     <color name="booker_primary">#448249</color>
     <color name="booker_primary_dark">#448249</color>
     <color name="booker_nav_header_top_bg">#E6E6E6</color>
+
+    <color name="booker_borrow_status_1000">#4cd445</color>
+    <color name="booker_borrow_status_2000">#fab207</color>
+    <color name="booker_borrow_status_3000">#8cbaf8</color>
+    <color name="booker_borrow_status_4000">#de646a</color>
+    <color name="booker_expire_time">#de646a</color>
 </resources>

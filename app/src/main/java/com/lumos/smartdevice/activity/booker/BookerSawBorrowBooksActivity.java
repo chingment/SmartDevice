@@ -97,7 +97,8 @@ public class BookerSawBorrowBooksActivity extends BaseFragmentActivity {
     }
 
     private void initEvent(){
-
+        btn_Nav_Footer_GoBack.setOnClickListener(this);
+        btn_Nav_Footer_GoHome.setOnClickListener(this);
     }
 
     private void initData() {
