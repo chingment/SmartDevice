@@ -37,7 +37,7 @@
     <string name="aty_nav_title_booker_identity_verify">身份验证</string>
     <string name="aty_nav_title_booker_borrow_return_inspect">借阅信息</string>
     <string name="aty_nav_title_booker_borrow_return_overview">借/还</string>
-
+    <string name="aty_nav_title_booker_borrowed_book">已借的书</string>
     <string name="aty_smlogin_tv_txt_scene">场景</string>
     <string name="aty_smlogin_et_hint_username">用户名</string>
     <string name="aty_smlogin_et_hint_password">密码</string>

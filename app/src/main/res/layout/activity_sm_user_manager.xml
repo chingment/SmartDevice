@@ -87,10 +87,8 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rly_LoginArea_Password"
         android:layout_width="match_parent"
         android:layout_height="@dimen/size_42"
-        android:layout_below="@+id/rly_LoginArea_UserName"
         android:background="@drawable/vnav_boder_bottom">
 
 

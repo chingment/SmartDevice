@@ -3,16 +3,25 @@ package com.lumos.smartdevice.model;
 import java.io.Serializable;
 
 public class BookerBorrowBookBean implements Serializable {
+    private String borrowId;
     private String skuId;
-    private String imgUrl;
-    private String name;
-    private String cumCode;
-    private String rfId;
+    private String skuImgUrl;
+    private String skuName;
+    private String skuCumCode;
+    private String skuRfId;
     private String borrowTime;
     private String expireTime;
     private float overdueFine;
 
     private FieldBean status;
+
+    public String getBorrowId() {
+        return borrowId;
+    }
+
+    public void setBorrowId(String borrowId) {
+        this.borrowId = borrowId;
+    }
 
     public String getSkuId() {
         return skuId;
@@ -22,36 +31,36 @@ public class BookerBorrowBookBean implements Serializable {
         this.skuId = skuId;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
+    public String getSkuImgUrl() {
+        return skuImgUrl;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setSkuImgUrl(String skuImgUrl) {
+        this.skuImgUrl = skuImgUrl;
     }
 
-    public String getName() {
-        return name;
+    public String getSkuName() {
+        return skuName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSkuName(String skuName) {
+        this.skuName = skuName;
     }
 
-    public String getCumCode() {
-        return cumCode;
+    public String getSkuCumCode() {
+        return skuCumCode;
     }
 
-    public void setCumCode(String cumCode) {
-        this.cumCode = cumCode;
+    public void setSkuCumCode(String skuCumCode) {
+        this.skuCumCode = skuCumCode;
     }
 
-    public String getRfId() {
-        return rfId;
+    public String getSkuRfId() {
+        return skuRfId;
     }
 
-    public void setRfId(String rfId) {
-        this.rfId = rfId;
+    public void setSkuRfId(String skuRfId) {
+        this.skuRfId = skuRfId;
     }
 
     public String getBorrowTime() {

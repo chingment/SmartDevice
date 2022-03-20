@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -45,6 +46,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
     private TextView tv_CardNo;
     private TextView tv_CanBorrowQuantity;
     private TextView tv_BorrowedQuantity;
+    private ImageView iv_SawBorrowBooks;
 
     private DeviceBean device;
 
@@ -130,6 +132,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
         tv_CardNo = findViewById(R.id.tv_CardNo);
         tv_CanBorrowQuantity = findViewById(R.id.tv_CanBorrowQuantity);
         tv_BorrowedQuantity = findViewById(R.id.tv_BorrowedQuantity);
+        iv_SawBorrowBooks= findViewById(R.id.iv_SawBorrowBooks);
         gdv_Slots = findViewById(R.id.gdv_Slots);
         dialog_BookerFlowHandling = new DialogBookerFlowHandling(BookerBorrowReturnInspectActivity.this);
     }
@@ -137,6 +140,7 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
     private void initEvent() {
         btn_Nav_Footer_GoBack.setOnClickListener(this);
         btn_Nav_Footer_GoHome.setOnClickListener(this);
+        iv_SawBorrowBooks.setOnClickListener(this);
     }
 
     private void initData() {
@@ -275,6 +279,13 @@ public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
                 Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
                 openActivity(intent);
                 finish();
+            } else if (id == R.id.tv_BorrowedQuantity||id==R.id.iv_SawBorrowBooks) {
+                Intent intent = new Intent(getAppContext(), BookerSawBorrowBooksActivity.class);
+                intent.putExtra("action", "saw_borrow_books");
+                intent.putExtra("identityType", identityType);
+                intent.putExtra("identityId", identityId);
+                intent.putExtra("clientUserId", clientUserId);
+                openActivity(intent);
             }
         }
     }

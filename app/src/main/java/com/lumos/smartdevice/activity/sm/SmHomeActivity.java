@@ -179,6 +179,7 @@ public class SmHomeActivity extends BaseFragmentActivity implements View.OnClick
         }
         else if(device.getSceneMode()==AppVar.SCENE_MODE_2) {
             gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smbookertakestock), GridNineItemType.Function, "bookertakestock", R.drawable.ic_sm_bookertakestock));
+            gdv_Nine_Items.add(new GridNineItemBean(getAppContext().getString(R.string.aty_nav_title_smusermanager), GridNineItemType.Function, "usermanager", R.drawable.ic_sm_usermanager));
         }
 
 

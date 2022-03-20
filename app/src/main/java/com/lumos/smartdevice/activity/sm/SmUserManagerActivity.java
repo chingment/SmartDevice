@@ -260,7 +260,7 @@ public class SmUserManagerActivity extends BaseFragmentActivity {
                         lv_UsersAdapter.addData(items, SmUserManagerActivity.this);
                     }
 
-                    lv_UsersRefresh.loadComplete(hasMore);
+                    lv_UsersRefresh.loadComplete(false);
                 }
                 else {
                     showToast(rt.getMsg());

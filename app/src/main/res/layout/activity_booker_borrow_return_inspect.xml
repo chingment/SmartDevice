@@ -105,9 +105,11 @@
 
                 <TextView
                     android:id="@+id/tv_CanBorrowQuantity"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/size_40"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/size_10"
+                    android:singleLine="true"
+                    android:gravity="center"
                     android:text=""
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
@@ -131,12 +133,25 @@
 
                 <TextView
                     android:id="@+id/tv_BorrowedQuantity"
-                    android:layout_width="match_parent"
+                    android:layout_width="@dimen/size_40"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:singleLine="true"
                     android:layout_marginStart="@dimen/size_10"
                     android:text=""
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
+
+                <ImageView
+                    android:layout_marginStart="@dimen/size_5"
+                    android:id="@+id/iv_SawBorrowBooks"
+                    android:layout_width="@dimen/size_20"
+                    android:layout_height="@dimen/size_20"
+                    android:background="@null"
+                    android:contentDescription="@string/empty"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_booker_saw_renew" />
+
             </LinearLayout>
 
         </LinearLayout>

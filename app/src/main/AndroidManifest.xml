@@ -41,6 +41,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".activity.booker.BookerSawBorrowBooksActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.sm.SmBookerTakeStockActivity"
             android:exported="true" />
         <activity

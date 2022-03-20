@@ -1,7 +1,9 @@
 package com.lumos.smartdevice.api;
 
+import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
+import com.lumos.smartdevice.api.rop.RopBookerSawBorrowBooks;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopIdentityVerify;
@@ -18,8 +20,11 @@ import com.lumos.smartdevice.api.rop.RopOwnSaveInfo;
 import com.lumos.smartdevice.api.rop.RopUserGetDetail;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
+import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.http.HttpClient;
 import com.lumos.smartdevice.http.HttpResponseHandler;
+import com.lumos.smartdevice.model.PageDataBean;
+import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.Config;
 
 
@@ -249,6 +254,33 @@ public class ReqNetWord implements IReqVersion{
         }
 
         HttpClient.myPost(Config.URL.booker_BorrowReturn, rop, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                if(reqHandler!=null) {
+                    reqHandler.handleAfterSendMessage();
+                    reqHandler.onSuccess(response);
+                }
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                if(reqHandler!=null) {
+                    reqHandler.handleAfterSendMessage();
+                    reqHandler.onFailure(msg, e);
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void bookerSawBorrowBooks(RopBookerSawBorrowBooks rop, final ReqHandler reqHandler) {
+
+        if(reqHandler!=null) {
+            reqHandler.sendBeforeSendMessage();
+        }
+
+        HttpClient.myPost(Config.URL.booker_SawBorrowBooks, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 if(reqHandler!=null) {
