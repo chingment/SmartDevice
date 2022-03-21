@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.dialog.DialogBookerIdentityVerifyByIcCard;
+import com.lumos.smartdevice.activity.booker.dialog.DialogBookerIdentityVerifyByIcCard;
 import com.lumos.smartdevice.adapter.BookerIdentityVerfiyWayAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;

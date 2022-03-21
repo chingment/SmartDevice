@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.sm.dialog.DialogSmCabinetConfig;
+import com.lumos.smartdevice.activity.sm.dialog.DialogSmConfirm;
+import com.lumos.smartdevice.activity.sm.dialog.DialogSmLockerBox;
 import com.lumos.smartdevice.adapter.SmLockerBoxCabinetBoxAdapter;
 import com.lumos.smartdevice.adapter.SmLockerBoxCabinetNameAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
@@ -31,15 +34,9 @@ import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
-import com.lumos.smartdevice.ui.dialog.DialogSmCabinetConfig;
-import com.lumos.smartdevice.ui.dialog.DialogConfirm;
-import com.lumos.smartdevice.ui.dialog.DialogSmLockerBox;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -54,7 +51,7 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
 
     private DialogSmCabinetConfig dialog_SmCabinetConfig;
     private DialogSmLockerBox dialog_SmLockerBox;
-    private DialogConfirm dialog_Confirm;
+    private DialogSmConfirm dialog_Confirm;
     private DeviceBean device;
 
     private RecyclerView tl_Boxs;
@@ -92,7 +89,7 @@ public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
         tl_Boxs = findViewById(R.id.tl_Boxs);
 
         dialog_SmCabinetConfig = new DialogSmCabinetConfig(SmLockerBoxManagerActivity.this);
-        dialog_Confirm = new DialogConfirm(SmLockerBoxManagerActivity.this, "", true);
+        dialog_Confirm = new DialogSmConfirm(SmLockerBoxManagerActivity.this, "", true);
 //        dialog_Confirm.setOnClickListener(new DialogConfirm.OnClickListener() {
 //            @Override
 //            public void onSure() {

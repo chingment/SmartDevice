@@ -16,13 +16,13 @@ import androidx.fragment.app.FragmentActivity;
 
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.dialog.DialogLoading;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppManager;
-import com.lumos.smartdevice.ui.dialog.DialogLoading;
 import com.lumos.smartdevice.utils.UsbReaderUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.ToastUtil;

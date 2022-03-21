@@ -3,9 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/transparent">
-
     <LinearLayout
-
         android:layout_width="@dimen/size_250"
         android:layout_height="@dimen/size_250"
         android:layout_centerHorizontal="true"
@@ -13,9 +11,6 @@
         android:background="@drawable/dialog"
         android:elevation="@dimen/size_5"
         android:orientation="vertical">
-
-
-
         <LinearLayout
             android:layout_marginTop="@dimen/size_10"
             android:layout_width="match_parent"
@@ -94,7 +89,6 @@
 
             </LinearLayout>
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -117,8 +111,5 @@
                 />
 
         </LinearLayout>
-
-
-
     </LinearLayout>
 </RelativeLayout>

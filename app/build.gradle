@@ -23,7 +23,7 @@ android {
         debug {
             buildConfigField "Boolean", "ISAPPDEBUG", "true"
             buildConfigField "String", "COMNAME", "\"uplink\""
-            buildConfigField "String", "ENVIRONMENT", "\"http://192.168.10.106:8080\""
+            buildConfigField "String", "ENVIRONMENT", "\"http://192.168.50.8:8080\""
             buildConfigField "String", "APPKEY", "\"fanju\""
             buildConfigField "String", "APPSECRET", "\"7460e6512f1940f68c00fe1fdb2b7eb1\""
         }

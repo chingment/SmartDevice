@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.sm.SmHomeActivity;
+import com.lumos.smartdevice.activity.booker.dialog.DialogBookerConfirm;
 import com.lumos.smartdevice.adapter.BookerBorrowBookAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -24,7 +24,6 @@ import com.lumos.smartdevice.api.rop.RopBookerSawBorrowBooks;
 import com.lumos.smartdevice.model.BookerBorrowBookBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.ui.BaseFragmentActivity;
-import com.lumos.smartdevice.ui.dialog.DialogConfirm;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -39,7 +38,7 @@ public class BookerSawBorrowBooksActivity extends BaseFragmentActivity {
     private View btn_Nav_Footer_GoBack;
     private View btn_Nav_Footer_GoHome;
 
-    private DialogConfirm dialog_Confirm;
+    private DialogBookerConfirm dialog_Confirm;
     private SuperRefreshLayout sf_BorrowedBooks;
     private RecyclerView rv_BorrowedBooks;
     private int rv_BorrowedBooks_PageNum=1;
@@ -71,8 +70,8 @@ public class BookerSawBorrowBooksActivity extends BaseFragmentActivity {
 
         btn_Nav_Footer_GoBack = findViewById(R.id.btn_Nav_Footer_GoBack);
         btn_Nav_Footer_GoHome = findViewById(R.id.btn_Nav_Footer_GoHome);
-        dialog_Confirm = new DialogConfirm(BookerSawBorrowBooksActivity.this, "", true);
-        dialog_Confirm.setOnClickListener(new DialogConfirm.OnClickListener() {
+        dialog_Confirm = new DialogBookerConfirm(BookerSawBorrowBooksActivity.this, "", true);
+        dialog_Confirm.setOnClickListener(new DialogBookerConfirm.OnClickListener() {
             @Override
             public void onSure() {
 
@@ -192,7 +191,7 @@ public class BookerSawBorrowBooksActivity extends BaseFragmentActivity {
 //                    }
 
                     boolean hasMore = true;
-                    if (totalPages == (rv_BorrowedBooks_PageNum + 1)) {
+                    if (totalPages == rv_BorrowedBooks_PageNum) {
                         hasMore = false;
                     }
 

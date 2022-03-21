@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.dialog.DialogBookerFlowHandling;
+import com.lumos.smartdevice.activity.booker.dialog.DialogBookerFlowHandling;
 import com.lumos.smartdevice.adapter.BookerBorrowReturnInspectSlotAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
