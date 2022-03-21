@@ -31,25 +31,20 @@ import com.lumos.smartdevice.utils.UsbReaderUtil;
  */
 
 public class BaseActivity extends FragmentActivity implements View.OnClickListener {
-    private static final String TAG = "BaseFragmentActivity";
+    private static final String TAG = "BaseActivity";
     private AppContext appContext;
     public static boolean isForeground = false;
     private DeviceBean device;
-
-    private Handler laodingUIHandler;
-
-    private DialogLoading dialog_Loading;
+    private UsbReaderUtil usbReaderUtil;
 
     public AppContext getAppContext() {
         return appContext;
     }
 
     public DeviceBean getDevice() {
-
         if (device == null) {
             device = AppCacheManager.getDevice();
         }
-
         return device;
     }
 
@@ -57,7 +52,6 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
         return AppCacheManager.getCurrentUser();
     }
 
-    private UsbReaderUtil usbReaderUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,38 +62,6 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         AppManager.getAppManager().addActivity(this);
-
-
-        laodingUIHandler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                switch (msg.what) {
-                    case 1:
-                        if (msg.obj != null) {
-                            dialog_Loading = new DialogLoading((Context) msg.obj);
-                            dialog_Loading.setProgressText("正在处理中");
-                            dialog_Loading.show();
-                            new Handler().postDelayed(new Runnable() {
-                                public void run() {
-                                    if (dialog_Loading != null) {
-                                        if (dialog_Loading.isShowing()) {
-                                            laodingUIHandler.sendEmptyMessage(2);
-                                        }
-                                    }
-                                }
-                            }, 6000);
-                        }
-                        break;
-                    case 2:
-                        if (dialog_Loading != null) {
-                            dialog_Loading.cancel();
-                            dialog_Loading = null;
-                        }
-                        break;
-                }
-                return false;
-            }
-        });
 
 
         usbReaderUtil = new UsbReaderUtil();
@@ -147,7 +109,6 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
 
     }
 
-
     public void openActivity(Intent intent) {
         startActivity(intent);
         overridePendingTransition(R.anim.fragment_fade_enter,R.anim.fragment_fade_exit);
@@ -155,15 +116,14 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
 
     @Override
     public void finish() {
-        overridePendingTransition(R.anim.fragment_fade_enter,R.anim.fragment_fade_exit);
         super.finish();
+        overridePendingTransition(R.anim.fragment_fade_enter,R.anim.fragment_fade_exit);
     }
 
     @Override
     public void onClick(View v) {
 
     }
-
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -228,19 +188,6 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
         OstCtrlInterface.getInstance().setHideStatusBar(appContext, ishidden);
     }
 
-    public void showLoading(Context context) {
-        Message m = new Message();
-        m.what = 1;
-        m.obj = context;
-        laodingUIHandler.sendMessage(m);
-    }
-
-    public void hideLoading(Context context) {
-        Message m = new Message();
-        m.what = 2;
-        m.obj = context;
-        laodingUIHandler.sendMessage(m);
-    }
 
     public void setUsbReaderListener(UsbReaderUtil.OnListener onListener) {
         usbReaderUtil.setListener(onListener);

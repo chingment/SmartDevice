@@ -163,7 +163,7 @@ public class BookerBorrowReturnFlowCtrl {
 
                     lockeqCtrl= LockeqCtrlInterface.getInstance(lockeqDrive.getComId(),lockeqDrive.getComBaud(),lockeqDrive.getComPrl());
 
-                    rfeqCtrl = RfeqCtrlInterface.getInstance(rfeqDrive.getComId(),rfeqDrive.getComBaud(),rfeqDrive.getComPrl());
+                    rfeqCtrl = RfeqCtrlInterface.getInstance("ttyS0",rfeqDrive.getComBaud(),rfeqDrive.getComPrl());
 //
 //                    if (rfIdCtrl == null) {
 //                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，设备连接失败");

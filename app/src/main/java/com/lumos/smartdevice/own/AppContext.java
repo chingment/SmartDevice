@@ -7,6 +7,7 @@ import android.text.TextUtils;
 
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
+import com.lumos.smartdevice.utils.PermisionUtil;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -58,7 +59,10 @@ public class AppContext extends Application {
     public void onCreate() {
         super.onCreate();
 
+
         Context context = getApplicationContext();
+
+
         DbManager.getInstance().init();
         OstCtrlInterface.init(context);
 

@@ -7,7 +7,9 @@ import android.text.TextUtils;
 
 
 import com.alibaba.fastjson.JSON;
+import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.own.AppContext;
+import com.lumos.smartdevice.own.Config;
 import com.lumos.smartdevice.utils.LogUtil;
 
 import org.json.JSONException;
@@ -143,6 +145,15 @@ public class HttpClient {
 
             RequestBody body = RequestBody.create(MediaType_JSON, data);
 
+
+            requestBuilder.addHeader("appId", "" + BuildConfig.APPLICATION_ID);
+            requestBuilder.addHeader("appKey", "" + BuildConfig.APPKEY);
+            String currenttime = (System.currentTimeMillis() / 1000) + "";
+            requestBuilder.addHeader("timestamp", String.valueOf((System.currentTimeMillis() / 1000)));
+            String sign = Config.getSign(BuildConfig.APPLICATION_ID, BuildConfig.APPKEY, BuildConfig.APPSECRET, data, currenttime);
+            requestBuilder.addHeader("sign", "" + sign);
+            requestBuilder.addHeader("version", BuildConfig.VERSION_NAME);
+
             requestBuilder.post(body);
 
 
@@ -187,6 +198,116 @@ public class HttpClient {
         } catch (Exception ex) {
             LogUtil.e(TAG,ex);
             if(handler!=null) {
+                handler.sendFailureMessage("数据提交发生异常", ex);
+            }
+        }
+    }
+
+    public static void myPostFile(String url, Map<String, String> fields, Map<String, String> filePaths, final HttpResponseHandler handler) {
+
+        try {
+            if (!isNetworkAvailable()) {
+                if(handler!=null) {
+                    handler.sendFailureMessage("网络连接不可用,请检查设置", null);
+                }
+                return;
+            }
+
+            if (handler != null) {
+                handler.handleBeforeSendMessage();
+            }
+
+
+
+            Request.Builder requestBuilder = new Request.Builder().url(url);
+
+            MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+
+
+
+
+            String fields_data="";
+            if (fields != null) {
+                if (fields.size() > 0) {
+                    for (Map.Entry<String, String> entry : fields.entrySet()) {
+                        builder.addFormDataPart(entry.getKey(), entry.getValue());
+                    }
+
+                    fields_data = mapToQueryString(fields);
+                }
+            }
+
+            if (filePaths == null)
+                return;
+
+            if (filePaths.size() < 1)
+                return;
+
+
+            for (Map.Entry<String, String> entry : filePaths.entrySet()) {
+
+                File file = new File( entry.getValue());
+                String fileName = file.getName();
+                RequestBody fileBody = RequestBody.create(MediaType.parse("image/png"), file);
+                builder.addFormDataPart(entry.getKey(), fileName, fileBody);
+            }
+
+
+            RequestBody requestBody = builder.build();
+
+
+            requestBuilder.addHeader("appId", "" + BuildConfig.APPLICATION_ID);
+            requestBuilder.addHeader("appKey", "" + BuildConfig.APPKEY);
+            String currenttime = (System.currentTimeMillis() / 1000) + "";
+            requestBuilder.addHeader("timestamp", String.valueOf((System.currentTimeMillis() / 1000)));
+            String sign = Config.getSign(BuildConfig.APPLICATION_ID, BuildConfig.APPKEY, BuildConfig.APPSECRET, "", currenttime);
+            requestBuilder.addHeader("sign", "" + sign);
+            requestBuilder.addHeader("version", BuildConfig.VERSION_NAME);
+
+
+            requestBuilder.post(requestBody);
+
+
+            client.newCall(requestBuilder.build()).enqueue(new Callback() {
+                @Override
+                public void onResponse(Call call, Response response) {
+
+                    try {
+                        String body = response.body().string();
+                        LogUtil.i(TAG, "Request.onSuccess====>>>" + body);
+                        if (handler != null) {
+                            handler.sendSuccessMessage(body);
+                        }
+
+                    } catch (Exception e) {
+                        LogUtil.i(TAG, "Request.onFailure====>>>" + response);
+                        if (handler != null) {
+                            handler.sendFailureMessage("读取数据发生异常", e);
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    String msg = "读取数据服务发生异常";
+
+                    if (e instanceof SocketTimeoutException) {
+                        msg = "读取数据服务连接超时";
+                    } else if (e instanceof ConnectException) {
+                        msg = "读取数据服务连接失败";
+
+                    } else if (e instanceof UnknownHostException) {
+                        msg = "读取数据服务网络异常或连接不存在";
+                    }
+
+                    if (handler != null) {
+                        handler.sendFailureMessage(msg, e);
+                    }
+                }
+            });
+        } catch (Exception ex) {
+            if (handler != null) {
                 handler.sendFailureMessage("数据提交发生异常", ex);
             }
         }

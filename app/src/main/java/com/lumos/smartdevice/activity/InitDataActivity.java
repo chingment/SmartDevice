@@ -31,9 +31,11 @@ import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LogTipsBean;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
+import com.lumos.smartdevice.own.AppLogcatManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.DeviceUtil;
+import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.widget.shapeloading.LoadingView;
@@ -81,6 +83,10 @@ public class InitDataActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_init_data);
+
+        LogUtil.d(TAG,"您好");
+
+        AppLogcatManager.saveLogcat2Server("logcat -d -s InitDataActivity","test");
 
 //         ICabinetCtrl cabinetCtrl= CabinetCtrlInterface.getInstance("ttyS4",9600,"aaa");
 //
@@ -144,16 +150,21 @@ public class InitDataActivity extends BaseActivity {
             @Override
             public boolean handleMessage(@NonNull Message msg) {
 
+                LogUtil.d(TAG,"A1");
                 Bundle bundle = msg.getData();
 
                 if (bundle == null)
                     return false;
+
+                LogUtil.d(TAG,"A2");
 
                 String tips = bundle.getString("tips", "");
 
                 if (StringUtil.isEmptyNotNull(tips)) {
                     return false;
                 }
+
+                LogUtil.d(TAG,"A3");
 
 
                 ld_Animation.setLoadingText(tips);
@@ -180,6 +191,8 @@ public class InitDataActivity extends BaseActivity {
                 LogTipsAdapter logTipsAdapter = new LogTipsAdapter(InitDataActivity.this, top_logs);
                 ls_Logs.setAdapter(logTipsAdapter);
 
+                LogUtil.d(TAG,"A5");
+                LogUtil.d(TAG,"A5-"+msg.what);
 
                 switch (msg.what) {
                     case WHAT_TIPS:

@@ -2,8 +2,6 @@ package com.lumos.smartdevice.activity.booker;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -140,6 +138,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         btn_Nav_Footer_GoBack.setOnClickListener(this);
         btn_Nav_Footer_GoHome.setOnClickListener(this);
         iv_SawBorrowBooks.setOnClickListener(this);
+        tv_BorrowedQuantity.setOnClickListener(this);
     }
 
     private void initData() {
@@ -260,10 +259,11 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
     @Override
     public void onDestroy() {
+        if(dialog_BookerFlowHandling!=null) {
+            dialog_BookerFlowHandling.cancel();
+        }
+
         super.onDestroy();
-
-        dialog_BookerFlowHandling.cancel();
-
     }
 
     @Override

@@ -143,8 +143,12 @@ public class BookerIdentityVerifyActivity extends BookerBaseActivity {
                     intent.putExtra("identityType", d.getIdentityType());
                     intent.putExtra("identityId", d.getIdentityId());
                     intent.putExtra("clientUserId", d.getClientUserId());
-
                     openActivity(intent);
+
+                    if(dialog_BookerIdentityVerifyByIcCard.isShowing()) {
+                        dialog_BookerIdentityVerifyByIcCard.hide();
+                    }
+
 
                 } else {
                     showToast(rt.getMsg());
@@ -164,6 +168,14 @@ public class BookerIdentityVerifyActivity extends BookerBaseActivity {
 
     private void gdvIcCard() {
         dialog_BookerIdentityVerifyByIcCard.show();
+    }
+
+    @Override
+    public void onDestroy() {
+        if(dialog_BookerIdentityVerifyByIcCard!=null) {
+            dialog_BookerIdentityVerifyByIcCard.cancel();
+        }
+        super.onDestroy();
     }
 
     @Override

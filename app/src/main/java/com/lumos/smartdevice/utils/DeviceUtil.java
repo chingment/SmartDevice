@@ -41,12 +41,13 @@ public class DeviceUtil {
         }
 
 
+        return  "202012110204";
 
-        if(Config.IS_BUILD_DEBUG) {
-            return "202012110204";
-        }
-
-        return Build.SERIAL;
+//        if(Config.IS_BUILD_DEBUG) {
+//            return "202012110204;
+//        }
+//
+//        return Build.SERIAL;
     }
 
     public static String getImeiId() {

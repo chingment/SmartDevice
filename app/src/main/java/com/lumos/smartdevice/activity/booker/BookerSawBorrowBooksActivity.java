@@ -221,6 +221,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
             @Override
             public void onFailure(String msg, Exception e) {
                 super.onFailure(msg, e);
+                showToast(msg);
             }
         });
 
@@ -269,9 +270,21 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
             @Override
             public void onFailure(String msg, Exception e) {
                 super.onFailure(msg, e);
+                showToast(msg);
             }
         });
 
+
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        if(dialog_Confirm!=null) {
+            dialog_Confirm.cancel();
+        }
+
+        super.onDestroy();
 
     }
 
