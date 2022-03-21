@@ -4,9 +4,9 @@ package com.lumos.smartdevice.activity.sm;
 import android.os.Bundle;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
+import com.lumos.smartdevice.activity.BaseActivity;
 
-public class SmExcepitonViewerActivity extends BaseFragmentActivity{
+public class SmExcepitonViewerActivity extends SmBaseActivity {
 
     private static final String TAG = "SmExcepitonViewerActivity";
 

@@ -19,7 +19,6 @@ import com.lumos.smartdevice.api.rop.RopIdentityVerify;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -28,7 +27,7 @@ import com.lumos.smartdevice.utils.UsbReaderUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookerIdentityVerifyActivity extends BaseFragmentActivity {
+public class BookerIdentityVerifyActivity extends BookerBaseActivity {
 
     private static final String TAG = "BookerIdentityVerifyActivity";
 

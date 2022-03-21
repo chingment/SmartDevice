@@ -3,6 +3,7 @@ package com.lumos.smartdevice.activity.sm;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.activity.InitDataActivity;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmConfirm;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmOwnInfo;
@@ -21,7 +22,6 @@ import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.own.AppVar;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -37,7 +37,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SmHelpToolActivity extends BaseFragmentActivity {
+public class SmHelpToolActivity extends SmBaseActivity {
     private static final String TAG = "SmHelpToolActivity";
 
     private DialogSmConfirm dialog_Confirm;

@@ -15,14 +15,13 @@ import com.lumos.smartdevice.model.AdBean;
 import com.lumos.smartdevice.model.AdCreativeBean;
 import com.lumos.smartdevice.model.BookerCustomDataBean;
 import com.lumos.smartdevice.own.AppCacheManager;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class BookerMainActivity  extends BaseFragmentActivity {
+public class BookerMainActivity  extends BookerBaseActivity {
 
     private static final String TAG = "BookerMainActivity";
 

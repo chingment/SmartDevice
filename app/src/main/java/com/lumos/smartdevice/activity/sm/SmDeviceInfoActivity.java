@@ -6,12 +6,12 @@ import android.widget.TextView;
 
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.model.DeviceBean;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
-public class SmDeviceInfoActivity extends BaseFragmentActivity {
+public class SmDeviceInfoActivity extends SmBaseActivity {
 
     private static final String TAG = "SmLockerBoxActivity";
 

@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
+import com.lumos.smartdevice.activity.BaseActivity;
 
-public class SmBookerTakeStockActivity extends BaseFragmentActivity {
+public class SmBookerTakeStockActivity extends SmBaseActivity {
 
     private static final String TAG = "SmBookerTakeStockActivity";
 

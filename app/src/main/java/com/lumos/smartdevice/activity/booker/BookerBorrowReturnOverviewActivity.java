@@ -9,13 +9,12 @@ import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.adapter.BookerBorrowReturnBookAdapter;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.model.BookerBookBean;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.List;
 
-public class BookerBorrowReturnOverviewActivity extends BaseFragmentActivity {
+public class BookerBorrowReturnOverviewActivity extends BookerBaseActivity {
 
     private static final String TAG = "BookerBorrowReturnOverviewActivity";
 

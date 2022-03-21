@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
+import com.lumos.smartdevice.activity.booker.BookerBaseActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 import pl.droidsonroids.gif.GifDrawable;
@@ -18,14 +18,14 @@ public class DialogBookerFlowHandling extends Dialog {
 
     private static final String TAG = "DialogBookerFlowHandling";
     private final Dialog mThis;
-    private final BaseFragmentActivity mContext;
+    private final BookerBaseActivity mContext;
     private final View mLayoutRes;
 
 
     public DialogBookerFlowHandling(Context context) {
         super(context, R.style.dialog);
         mThis = this;
-        mContext = (BaseFragmentActivity) context;
+        mContext = (BookerBaseActivity) context;
         mLayoutRes = LayoutInflater.from(context).inflate(R.layout.dialog_booker_flow_handling, null);
 
 

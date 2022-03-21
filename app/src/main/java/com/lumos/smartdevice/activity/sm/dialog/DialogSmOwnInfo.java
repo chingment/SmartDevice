@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.sm.SmBaseActivity;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
@@ -21,7 +22,6 @@ import com.lumos.smartdevice.api.rop.RetOwnSaveInfo;
 import com.lumos.smartdevice.api.rop.RopOwnGetInfo;
 import com.lumos.smartdevice.api.rop.RopOwnSaveInfo;
 import com.lumos.smartdevice.own.AppVar;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.StringUtil;
@@ -30,7 +30,7 @@ public class DialogSmOwnInfo extends Dialog {
 
     private static final String TAG = "DialogSmOwnInfo";
     private final Dialog mThis;
-    private final BaseFragmentActivity mContext;
+    private final SmBaseActivity mContext;
     private final View mLayoutRes;
 
     private final View btn_Close;
@@ -60,7 +60,7 @@ public class DialogSmOwnInfo extends Dialog {
     public DialogSmOwnInfo(Context context) {
         super(context, R.style.dialog);
         mThis = this;
-        mContext = (BaseFragmentActivity)context;
+        mContext = (SmBaseActivity)context;
         mLayoutRes = LayoutInflater.from(context).inflate(R.layout.dialog_sm_owninfo, null);
 
         btn_Close = ViewHolder.get(mLayoutRes, R.id.dialog_Btn_Close);

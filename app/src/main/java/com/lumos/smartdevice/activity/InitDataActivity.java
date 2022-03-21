@@ -32,7 +32,6 @@ import com.lumos.smartdevice.model.LogTipsBean;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppVar;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
@@ -45,7 +44,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class InitDataActivity extends BaseFragmentActivity {
+public class InitDataActivity extends BaseActivity {
     private static final String TAG = "InitDataActivity";
     private TextView tv_DeviceId;
     private TextView tv_AppVersion;

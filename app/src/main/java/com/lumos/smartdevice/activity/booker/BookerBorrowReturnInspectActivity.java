@@ -27,7 +27,6 @@ import com.lumos.smartdevice.model.BookerSlotBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.IdentityInfoByBorrowerBean;
 import com.lumos.smartdevice.own.AppCacheManager;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -35,7 +34,7 @@ import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import java.util.HashMap;
 import java.util.List;
 
-public class BookerBorrowReturnInspectActivity extends BaseFragmentActivity {
+public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
     private static final String TAG = "BookerBorrowReturnInspectActivity";
 

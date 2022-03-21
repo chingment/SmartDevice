@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
@@ -28,12 +29,11 @@ import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppCacheManager;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
-public class SmLoginActivity extends BaseFragmentActivity implements View.OnClickListener {
+public class SmLoginActivity extends SmBaseActivity implements View.OnClickListener {
     private static final String TAG = "SmLoginActivity";
 
     private Button btn_LoginByAccount;

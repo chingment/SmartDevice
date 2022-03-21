@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.own.AppVar;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
-public class SmFactorySettingActivity extends BaseFragmentActivity implements View.OnClickListener {
+public class SmFactorySettingActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "SmFactorySettingActivity";
     private LinearLayout btn_Nav_AppSceneSetting;
     private TextView tv_Nav_AppScene_Tips;

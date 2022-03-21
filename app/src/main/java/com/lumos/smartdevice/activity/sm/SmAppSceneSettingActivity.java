@@ -7,14 +7,14 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.own.AppVar;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
-public class SmAppSceneSettingActivity extends BaseFragmentActivity {
+public class SmAppSceneSettingActivity extends SmBaseActivity {
     private static final String TAG = "SmAppSceneSettingActivity";
     private RadioGroup rg_VesionMode;
     private RadioGroup rg_SceneMode;

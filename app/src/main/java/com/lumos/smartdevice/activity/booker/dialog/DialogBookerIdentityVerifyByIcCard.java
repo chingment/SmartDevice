@@ -8,14 +8,14 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
+import com.lumos.smartdevice.activity.booker.BookerBaseActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 public class DialogBookerIdentityVerifyByIcCard extends Dialog {
 
     private static final String TAG = "DialogBookerIdentityVerifyByIcCard";
     private final Dialog mThis;
-    private final BaseFragmentActivity mContext;
+    private final BookerBaseActivity mContext;
     private final View mLayoutRes;
 
     private final View btn_Close;
@@ -30,7 +30,7 @@ public class DialogBookerIdentityVerifyByIcCard extends Dialog {
         mThis.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
 
-        mContext = (BaseFragmentActivity) context;
+        mContext = (BookerBaseActivity) context;
         mLayoutRes = LayoutInflater.from(context).inflate(R.layout.dialog_booker_identity_verify_by_iccard, null);
         btn_Close = ViewHolder.get(mLayoutRes, R.id.dialog_Btn_Close);
         btn_Close.setOnClickListener(new View.OnClickListener() {

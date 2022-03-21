@@ -5,10 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
-public class BookerQueryBookActivity extends BaseFragmentActivity {
+public class BookerQueryBookActivity extends BookerBaseActivity {
 
     private static final String TAG = "BookerQueryBookActivity";
 

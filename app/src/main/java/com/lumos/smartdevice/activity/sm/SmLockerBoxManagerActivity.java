@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmCabinetConfig;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmConfirm;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmLockerBox;
@@ -33,14 +34,13 @@ import com.lumos.smartdevice.model.CabinetLayoutBean;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.LockerBoxBean;
 import com.lumos.smartdevice.model.LockerBoxUsageBean;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class SmLockerBoxManagerActivity extends BaseFragmentActivity {
+public class SmLockerBoxManagerActivity extends SmBaseActivity {
     private static final String TAG = "SmLockerBoxManagerActivity";
     private TextView tv_CabinetName;
     private ListView lv_Cabinets;

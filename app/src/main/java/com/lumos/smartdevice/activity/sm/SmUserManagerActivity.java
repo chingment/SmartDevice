@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmUserEdit;
 import com.lumos.smartdevice.adapter.SmUserManagerUserAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
@@ -27,7 +28,6 @@ import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.AppVar;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
 import com.lumos.smartdevice.utils.LogUtil;
@@ -38,7 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SmUserManagerActivity extends BaseFragmentActivity {
+public class SmUserManagerActivity extends SmBaseActivity {
     private static final String TAG = "SmUserManagerActivity";
     private ImageView btn_NewUser;
     private DialogSmUserEdit dialog_UserEdit;

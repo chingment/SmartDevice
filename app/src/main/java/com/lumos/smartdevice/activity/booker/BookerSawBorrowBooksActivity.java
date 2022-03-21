@@ -23,7 +23,6 @@ import com.lumos.smartdevice.api.rop.RopBookerRenewBooks;
 import com.lumos.smartdevice.api.rop.RopBookerSawBorrowBooks;
 import com.lumos.smartdevice.model.BookerBorrowBookBean;
 import com.lumos.smartdevice.model.DeviceBean;
-import com.lumos.smartdevice.ui.BaseFragmentActivity;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -32,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class BookerSawBorrowBooksActivity extends BaseFragmentActivity {
+public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
     private static final String TAG = "BookerBorrowedBookActivity";
 
     private View btn_Nav_Footer_GoBack;
