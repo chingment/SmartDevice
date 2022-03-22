@@ -9,7 +9,6 @@ import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.DeviceUtil;
-import com.lumos.smartdevice.utils.PermisionUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 
 import java.io.BufferedReader;
@@ -69,7 +68,6 @@ public class AppContext extends Application {
         strategy.setDeviceID(DeviceUtil.getDeviceId());
         CrashReport.initCrashReport(getApplicationContext(), "c114c9e5db", true,strategy);
 
-        DbManager.getInstance().init();
         OstCtrlInterface.init(context);
 
     }

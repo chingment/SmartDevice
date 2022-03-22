@@ -38,6 +38,8 @@ import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
+import com.lumos.smartdevice.utils.runtimepermissions.PermissionsManager;
+import com.lumos.smartdevice.utils.runtimepermissions.PermissionsResultAction;
 import com.lumos.smartdevice.widget.shapeloading.LoadingView;
 import com.tencent.bugly.crashreport.CrashReport;
 
@@ -85,8 +87,18 @@ public class InitDataActivity extends BaseActivity {
 
         setContentView(R.layout.activity_init_data);
 
-        LogUtil.d(TAG,"您好");
+        PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
+            @Override
+            public void onGranted() {
+                DbManager.getInstance().init();
+            }
 
+            @Override
+            public void onDenied(String permission) {
+            }
+        });
+
+        LogUtil.d(TAG,"您好");
         AppLogcatManager.saveLogcat2Server("logcat -d -s InitDataActivity","test");
         //CrashReport.testJavaCrash();
 
@@ -152,22 +164,16 @@ public class InitDataActivity extends BaseActivity {
             @Override
             public boolean handleMessage(@NonNull Message msg) {
 
-                LogUtil.d(TAG,"A1");
                 Bundle bundle = msg.getData();
 
                 if (bundle == null)
                     return false;
-
-                LogUtil.d(TAG,"A2");
 
                 String tips = bundle.getString("tips", "");
 
                 if (StringUtil.isEmptyNotNull(tips)) {
                     return false;
                 }
-
-                LogUtil.d(TAG,"A3");
-
 
                 ld_Animation.setLoadingText(tips);
 
@@ -192,9 +198,6 @@ public class InitDataActivity extends BaseActivity {
 
                 LogTipsAdapter logTipsAdapter = new LogTipsAdapter(InitDataActivity.this, top_logs);
                 ls_Logs.setAdapter(logTipsAdapter);
-
-                LogUtil.d(TAG,"A5");
-                LogUtil.d(TAG,"A5-"+msg.what);
 
                 switch (msg.what) {
                     case WHAT_TIPS:
@@ -380,5 +383,20 @@ public class InitDataActivity extends BaseActivity {
                 setHandleMessage(WHAT_READ_CONFIG_FAILURE, msg);
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        DbManager.getInstance().init();
+
+//        if (requestCode == REQUEST_EXTERNAL_STORAGE) {
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                showToast("授权成功");
+//            } else {
+//                showToast("授权失败,请去设置打开权限");
+//            }
+//        }
     }
 }

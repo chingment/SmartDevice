@@ -6,11 +6,7 @@ public  class OwnFileUtil {
 
     public  static String getLogDir(){
 
-        //String mSaveDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/SelfStore";
-
-
         String dir = Environment.getExternalStorageDirectory() + "/SelfStoreLog";
-
 
         return dir;
     }
