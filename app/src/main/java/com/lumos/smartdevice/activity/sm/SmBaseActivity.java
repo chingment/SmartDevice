@@ -6,13 +6,12 @@ import android.os.Handler;
 import android.os.Message;
 
 import com.lumos.smartdevice.activity.BaseActivity;
-import com.lumos.smartdevice.activity.dialog.DialogLoading;
-import com.lumos.smartdevice.own.AppManager;
+import com.lumos.smartdevice.activity.sm.dialog.DialogSmLoading;
 
 public class SmBaseActivity extends BaseActivity {
 
 
-    private DialogLoading dialog_Loading;
+    private DialogSmLoading dialog_Loading;
     private Handler dialog_Loading_Handler;
 
 
@@ -26,7 +25,7 @@ public class SmBaseActivity extends BaseActivity {
                 switch (msg.what) {
                     case 1:
                         if (msg.obj != null) {
-                            dialog_Loading = new DialogLoading((Context) msg.obj);
+                            dialog_Loading = new DialogSmLoading((Context) msg.obj);
                             dialog_Loading.setProgressText("正在处理中");
                             dialog_Loading.show();
                             new Handler().postDelayed(new Runnable() {

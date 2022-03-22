@@ -1,11 +1,8 @@
 package com.lumos.smartdevice.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -15,7 +12,6 @@ import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.dialog.DialogLoading;
 import com.lumos.smartdevice.model.DeviceBean;
 import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;

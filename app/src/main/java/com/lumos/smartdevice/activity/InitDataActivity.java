@@ -39,6 +39,7 @@ import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.widget.shapeloading.LoadingView;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -87,6 +88,7 @@ public class InitDataActivity extends BaseActivity {
         LogUtil.d(TAG,"您好");
 
         AppLogcatManager.saveLogcat2Server("logcat -d -s InitDataActivity","test");
+        //CrashReport.testJavaCrash();
 
 //         ICabinetCtrl cabinetCtrl= CabinetCtrlInterface.getInstance("ttyS4",9600,"aaa");
 //

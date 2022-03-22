@@ -8,7 +8,6 @@ import android.os.Message;
 
 import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.activity.booker.dialog.DialogBookerLoading;
-import com.lumos.smartdevice.activity.dialog.DialogLoading;
 
 public class BookerBaseActivity  extends BaseActivity {
     private static final String TAG = "BookerBaseActivity";
