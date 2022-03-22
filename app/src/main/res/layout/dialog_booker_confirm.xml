@@ -82,8 +82,8 @@
                     android:paddingLeft="@dimen/size_5"
                     android:paddingRight="@dimen/size_5"
                     android:text="@string/t_cancle"
-                    android:background="@drawable/dialog_btn_cancle"
-                    android:textColor="#fff"
+                    android:background="@drawable/booker_dialog_btn_cancel"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/sp_10" />
 
             </LinearLayout>
@@ -106,8 +106,8 @@
                     android:paddingLeft="@dimen/size_5"
                     android:paddingRight="@dimen/size_5"
                     android:text="@string/t_sure"
-                    android:background="@drawable/dialog_btn_sure"
-                    android:textColor="@color/dialog_confirm_btn_sure"
+                    android:background="@drawable/booker_dialog_btn_sure"
+                    android:textColor="@color/white"
                     android:textSize="@dimen/sp_10"
                     tools:ignore="RtlHardcoded" />
 

@@ -109,7 +109,8 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
             public void onRenew(BookerBorrowBookBean item) {
                 dialog_Confirm.setFunction("renew");
                 dialog_Confirm.setTag(item);
-                dialog_Confirm.setTipsText("是否续借该书本");
+                dialog_Confirm.setTipsImageByNetwork(item.getSkuImgUrl());
+                dialog_Confirm.setTipsText("是否续借该书本？");
                 dialog_Confirm.show();
 
             }

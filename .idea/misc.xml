@@ -15,6 +15,8 @@
         <entry key="app/src/main/res/drawable/aty_smlogin_input_boder_bottom.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/booker_btn_round_primary.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/booker_circle_corner.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/booker_dialog_btn_cancel.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/booker_dialog_btn_sure.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/booker_nav_footer_border_top.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/booker_nav_footer_title_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/booker_nav_header_title_bg.xml" value="0.1" />

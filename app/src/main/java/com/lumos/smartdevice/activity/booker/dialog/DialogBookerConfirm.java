@@ -32,20 +32,16 @@ public class DialogBookerConfirm extends Dialog {
     private String function;
 
 
-    public void setTipsImageDrawable(Drawable drawable) {
+    public void setTipsImageByDrawable(Drawable drawable) {
         this.iv_TipsImage.setImageDrawable(drawable);
     }
 
-    public void  setTipsImageNetwork(String url){
+    public void  setTipsImageByNetwork(String url){
         CommonUtil.loadImageFromUrl(mContext,iv_TipsImage, url);
     }
 
     public void setTipsImageVisibility(int visibility){
         iv_TipsImage.setVisibility(visibility);
-    }
-
-    public  ImageView getTipsImage(){
-        return iv_TipsImage;
     }
 
     public void setTipsText(String tips){
@@ -61,7 +57,9 @@ public class DialogBookerConfirm extends Dialog {
     }
 
     public void setCancleVisibility(int visibility){
+        ll_Cancle.setVisibility(visibility);
     }
+
     public void setTag(Object tag){
         this.tag=tag;
     }

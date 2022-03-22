@@ -66,12 +66,12 @@ public class InitDataActivity extends BaseActivity {
         @Override
         public void run() {
 
-            if(!initActionIsRun) {
+            if (!initActionIsRun) {
                 initActionIsRun = true;
                 setDeviceInitData();
             }
 
-            initActionHandler.postDelayed(this, 1000);
+            initActionHandler.postDelayed(this, 2000);
         }
     };
 
@@ -132,7 +132,7 @@ public class InitDataActivity extends BaseActivity {
         initEvent();
         initData();
 
-        initActionHandler.postDelayed(initActionRunable, 1000);
+       // initActionHandler.postDelayed(initActionRunable, 1000);
 
     }
 
@@ -295,7 +295,7 @@ public class InitDataActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        initActionHandler.postDelayed(initActionRunable, 1000);
+        initActionHandler.postDelayed(initActionRunable, 2000);
     }
 
     @Override

@@ -29,7 +29,7 @@ android {
         debug {
             buildConfigField "Boolean", "ISAPPDEBUG", "true"
             buildConfigField "String", "COMNAME", "\"caterbao\""
-            buildConfigField "String", "ENVIRONMENT", "\"http://192.168.50.8:8080\""
+            buildConfigField "String", "ENVIRONMENT", "\"http://192.168.10.100:8080\""
             buildConfigField "String", "APPKEY", "\"smartdevice\""
             buildConfigField "String", "APPSECRET", "\"267b08eef8b8421ca6bab6cf809c7fc5\""
         }
