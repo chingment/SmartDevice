@@ -1,23 +1,29 @@
 package com.lumos.smartdevice.api.rop;
 
-import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.model.UserVo;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class RetUserGetList implements Serializable {
+    private int pageNum;
     private int pageSize;
-    private int total;
+    private long totalSize;
+    private int totalPages;
 
-    private List<UserBean> items;
+    private List<UserVo> items;
 
 
-    public List<UserBean> getItems() {
+    public List<UserVo> getItems() {
         return items;
     }
 
-    public void setItems(List<UserBean> items) {
-        this.items = items;
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
     }
 
     public int getPageSize() {
@@ -28,11 +34,23 @@ public class RetUserGetList implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public int getTotal() {
-        return total;
+    public long getTotalSize() {
+        return totalSize;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setTotalSize(long totalSize) {
+        this.totalSize = totalSize;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
+    }
+
+    public void setItems(List<UserVo> items) {
+        this.items = items;
     }
 }

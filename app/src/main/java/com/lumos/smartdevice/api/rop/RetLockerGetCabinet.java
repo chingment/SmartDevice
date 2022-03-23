@@ -1,10 +1,9 @@
 package com.lumos.smartdevice.api.rop;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.lumos.smartdevice.model.LockerBoxBean;
+import com.lumos.smartdevice.model.LockerBoxVo;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 
 public class RetLockerGetCabinet implements Serializable {
@@ -22,7 +21,7 @@ public class RetLockerGetCabinet implements Serializable {
     @JSONField(name="layout")
     private String layout;
     @JSONField(name="boxs")
-    private List<LockerBoxBean> boxs;
+    private List<LockerBoxVo> boxs;
 
     public String getCabinetId() {
         return cabinetId;
@@ -72,11 +71,11 @@ public class RetLockerGetCabinet implements Serializable {
         this.layout = layout;
     }
 
-    public List<LockerBoxBean> getBoxs() {
+    public List<LockerBoxVo> getBoxs() {
         return boxs;
     }
 
-    public void setBoxs(List<LockerBoxBean> boxs) {
+    public void setBoxs(List<LockerBoxVo> boxs) {
         this.boxs = boxs;
     }
 

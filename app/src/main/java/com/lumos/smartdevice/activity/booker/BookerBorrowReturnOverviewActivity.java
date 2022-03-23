@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.adapter.BookerBorrowReturnBookAdapter;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
-import com.lumos.smartdevice.model.BookerBookBean;
+import com.lumos.smartdevice.model.BookerBookVo;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
@@ -61,7 +61,7 @@ public class BookerBorrowReturnOverviewActivity extends BookerBaseActivity {
     private void initData() {
 
 
-        List<BookerBookBean> borrowBooks = retBookerBorrowReturn.getBorrowBooks();
+        List<BookerBookVo> borrowBooks = retBookerBorrowReturn.getBorrowBooks();
 
 //        borrowBooks.add(new BookerBookBean("1", "1", "安徒生童话故事1", "1", "1"));
 //        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静2", "1", "1"));
@@ -75,7 +75,7 @@ public class BookerBorrowReturnOverviewActivity extends BookerBaseActivity {
 //        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静10", "1", "1"));
 //        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静11", "1", "1"));
 
-        List<BookerBookBean> returnBooks = retBookerBorrowReturn.getReturnBooks();
+        List<BookerBookVo> returnBooks = retBookerBorrowReturn.getReturnBooks();
 
 //        returnBooks.add(new BookerBookBean("1", "1", "西游记1", "1", "1"));
 //        returnBooks.add(new BookerBookBean("1", "1", "红楼梦2", "1", "1"));

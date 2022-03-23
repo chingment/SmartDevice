@@ -11,9 +11,9 @@ import android.widget.VideoView;
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
-import com.lumos.smartdevice.model.AdBean;
-import com.lumos.smartdevice.model.AdCreativeBean;
-import com.lumos.smartdevice.model.BookerCustomDataBean;
+import com.lumos.smartdevice.model.AdVo;
+import com.lumos.smartdevice.model.AdCreativeVo;
+import com.lumos.smartdevice.model.BookerCustomDataVo;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -33,7 +33,7 @@ public class BookerMainActivity  extends BookerBaseActivity {
     private int vv_Ad_StopLength;
     public static HttpProxyCacheServer proxy;
 
-    private BookerCustomDataBean bookerCustomData;
+    private BookerCustomDataVo bookerCustomData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +86,12 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
 
 //广告
-            HashMap<String, AdBean> ads = bookerCustomData.getAds();
+            HashMap<String, AdVo> ads = bookerCustomData.getAds();
             if (ads != null) {
                 if (ads.containsKey("101")) {
-                    AdBean ad = ads.get("101");
+                    AdVo ad = ads.get("101");
                     if (ad != null) {
-                        List<AdCreativeBean> adCreatives = ad.getCreatives();
+                        List<AdCreativeVo> adCreatives = ad.getCreatives();
                         if (adCreatives != null && adCreatives.size() > 0) {
                             playVvAd(adCreatives.get(0).getFileUrl());
                         }

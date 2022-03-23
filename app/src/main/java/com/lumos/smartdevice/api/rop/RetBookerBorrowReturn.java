@@ -1,14 +1,14 @@
 package com.lumos.smartdevice.api.rop;
 
-import com.lumos.smartdevice.model.BookerBookBean;
+import com.lumos.smartdevice.model.BookerBookVo;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class RetBookerBorrowReturn implements Serializable {
     private String flowId;
-    private List<BookerBookBean> borrowBooks;
-    private List<BookerBookBean> returnBooks;
+    private List<BookerBookVo> borrowBooks;
+    private List<BookerBookVo> returnBooks;
 
     public String getFlowId() {
         return flowId;
@@ -18,19 +18,19 @@ public class RetBookerBorrowReturn implements Serializable {
         this.flowId = flowId;
     }
 
-    public List<BookerBookBean> getBorrowBooks() {
+    public List<BookerBookVo> getBorrowBooks() {
         return borrowBooks;
     }
 
-    public void setBorrowBooks(List<BookerBookBean> borrowBooks) {
+    public void setBorrowBooks(List<BookerBookVo> borrowBooks) {
         this.borrowBooks = borrowBooks;
     }
 
-    public List<BookerBookBean> getReturnBooks() {
+    public List<BookerBookVo> getReturnBooks() {
         return returnBooks;
     }
 
-    public void setReturnBooks(List<BookerBookBean> returnBooks) {
+    public void setReturnBooks(List<BookerBookVo> returnBooks) {
         this.returnBooks = returnBooks;
     }
 }

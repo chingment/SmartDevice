@@ -26,8 +26,8 @@ import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
-import com.lumos.smartdevice.model.BookerCustomDataBean;
-import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.BookerCustomDataVo;
+import com.lumos.smartdevice.model.DeviceVo;
 import com.lumos.smartdevice.model.LogTipsBean;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
@@ -41,7 +41,6 @@ import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.runtimepermissions.PermissionsManager;
 import com.lumos.smartdevice.utils.runtimepermissions.PermissionsResultAction;
 import com.lumos.smartdevice.widget.shapeloading.LoadingView;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -217,7 +216,7 @@ public class InitDataActivity extends BaseActivity {
                             return false;
                         }
 
-                        final DeviceBean device = initData.getDevice();//设备数据
+                        final DeviceVo device = initData.getDevice();//设备数据
 
                         if (device == null || StringUtil.isEmptyNotNull(device.getDeviceId())) {
                             setHandleMessage(WHAT_SET_CONFIG_FALURE, getAppContext().getString(R.string.aty_initdata_tips_setting_device_is_null));
@@ -230,7 +229,7 @@ public class InitDataActivity extends BaseActivity {
 
 
                         if(scene_mode==AppVar.SCENE_MODE_2) {
-                            BookerCustomDataBean bookerCustomData = JSON.parseObject(JSON.toJSONString(initData.getCustomData()), BookerCustomDataBean.class);
+                            BookerCustomDataVo bookerCustomData = JSON.parseObject(JSON.toJSONString(initData.getCustomData()), BookerCustomDataVo.class);
                             AppCacheManager.setBookerCustomData(bookerCustomData);
                         }
 

@@ -3,10 +3,19 @@ package com.lumos.smartdevice.model;
 import java.util.List;
 
 public class PageDataBean<T> {
-
+    private int pageNum;
     private int pageSize;
-    private int total;
+    private long totalSize;
+    private int totalPages;
     private List<T> items;
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
 
     public int getPageSize() {
         return pageSize;
@@ -16,12 +25,20 @@ public class PageDataBean<T> {
         this.pageSize = pageSize;
     }
 
-    public int getTotal() {
-        return total;
+    public long getTotalSize() {
+        return totalSize;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setTotalSize(long totalSize) {
+        this.totalSize = totalSize;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
     }
 
     public List<T> getItems() {

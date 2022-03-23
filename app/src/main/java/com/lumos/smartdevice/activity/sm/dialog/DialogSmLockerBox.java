@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.adapter.SmLockerBoxUsageAdapter;
-import com.lumos.smartdevice.model.CabinetBean;
-import com.lumos.smartdevice.model.DeviceBean;
-import com.lumos.smartdevice.model.LockerBoxBean;
-import com.lumos.smartdevice.model.LockerBoxUsageBean;
+import com.lumos.smartdevice.model.CabinetVo;
+import com.lumos.smartdevice.model.DeviceVo;
+import com.lumos.smartdevice.model.LockerBoxVo;
+import com.lumos.smartdevice.model.LockerBoxUsageVo;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.ui.my.MyListView;
 
@@ -36,7 +36,7 @@ public class DialogSmLockerBox extends Dialog {
     private TextView btn_DistUser;
     private TextView btn_OpenBox;
     private MyListView lv_Usages;
-    private DeviceBean device;
+    private DeviceVo device;
     private String cabinetId;
     private String slotId;
     private LinearLayout ll_UsagesEmpty;
@@ -106,7 +106,7 @@ public class DialogSmLockerBox extends Dialog {
         return slotId;
     }
 
-    public void setConfig(DeviceBean device, CabinetBean cabinet, LockerBoxBean lockerBox) {
+    public void setConfig(DeviceVo device, CabinetVo cabinet, LockerBoxVo lockerBox) {
 
         this.device = device;
         this.cabinetId = cabinet.getCabinetId();
@@ -126,11 +126,11 @@ public class DialogSmLockerBox extends Dialog {
 
     }
 
-    public void setLockerBox(LockerBoxBean lockerBox) {
+    public void setLockerBox(LockerBoxVo lockerBox) {
 
         //String isUsed=lockerBox.isUsed();
 
-        List<LockerBoxUsageBean> usages=lockerBox.getUsages();
+        List<LockerBoxUsageVo> usages=lockerBox.getUsages();
 
         if (lockerBox.isOpen()) {
             ll_OpenStatus.setBackgroundResource(R.drawable.locker_box_door_status_2);
@@ -156,7 +156,7 @@ public class DialogSmLockerBox extends Dialog {
         SmLockerBoxUsageAdapter  smLockerBoxUsageAdapter=new SmLockerBoxUsageAdapter(mContext,usages);
         smLockerBoxUsageAdapter.setOnClickListener(new SmLockerBoxUsageAdapter.OnClickListener() {
             @Override
-            public void onDeleteClick(LockerBoxUsageBean usage) {
+            public void onDeleteClick(LockerBoxUsageVo usage) {
                 if(onClickListener!=null) {
                     onClickListener.onDeleteUsage(usage);
                 }
@@ -174,7 +174,7 @@ public class DialogSmLockerBox extends Dialog {
 
     public  interface OnClickListener{
         void onGoSelectUser(String deviceId, String cabinetId,String slotId);
-        void onDeleteUsage(LockerBoxUsageBean usage);
+        void onDeleteUsage(LockerBoxUsageVo usage);
         void onOpenBox(String deviceId, String cabinetId,String slotId);
     }
 

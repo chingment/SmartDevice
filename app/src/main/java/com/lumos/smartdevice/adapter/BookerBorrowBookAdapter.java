@@ -10,8 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.BookerBorrowBookBean;
-import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.model.BookerBorrowBookVo;
 import com.lumos.smartdevice.ui.refreshview.MyViewHolder;
 import com.lumos.smartdevice.ui.refreshview.RefreshAdapter;
 import com.lumos.smartdevice.utils.CommonUtil;
@@ -26,20 +25,20 @@ import java.util.List;
 public class BookerBorrowBookAdapter extends RefreshAdapter {
     private static final String TAG = "BookerBorrowedBookAdapter";
     private Context context;
-    private List<BookerBorrowBookBean> items = new ArrayList<>();
+    private List<BookerBorrowBookVo> items = new ArrayList<>();
 
     public BookerBorrowBookAdapter() {
 
     }
 
-    public void setData(List<BookerBorrowBookBean> items, Context context) {
+    public void setData(List<BookerBorrowBookVo> items, Context context) {
         this.items = items;
         this.context = context;
         notifyDataSetChanged();
 
     }
 
-    public void addData(List<BookerBorrowBookBean> items, Context context) {
+    public void addData(List<BookerBorrowBookVo> items, Context context) {
         this.items.addAll(items);
         this.context = context;
         notifyDataSetChanged();
@@ -60,7 +59,7 @@ public class BookerBorrowBookAdapter extends RefreshAdapter {
         TextView tv_ExpireTime = holder.itemView.findViewById(R.id.tv_ExpireTime);
         TextView tv_StatusText = holder.itemView.findViewById(R.id.tv_StatusText);
         TextView btn_RenewBook = holder.itemView.findViewById(R.id.btn_RenewBook);
-        BookerBorrowBookBean item = items.get(position);
+        BookerBorrowBookVo item = items.get(position);
 
 
         tv_SkuName.setText(String.format("《%s》", item.getSkuName()));
@@ -94,7 +93,7 @@ public class BookerBorrowBookAdapter extends RefreshAdapter {
             public void onClick(View view) {
 
                 if(onClickListener!=null) {
-                    BookerBorrowBookBean l_item = (BookerBorrowBookBean) view.getTag();
+                    BookerBorrowBookVo l_item = (BookerBorrowBookVo) view.getTag();
                     onClickListener.onRenew(l_item);
                 }
             }
@@ -114,6 +113,6 @@ public class BookerBorrowBookAdapter extends RefreshAdapter {
     }
 
     public interface OnClickListener {
-        void onRenew(BookerBorrowBookBean bean);
+        void onRenew(BookerBorrowBookVo bean);
     }
 }

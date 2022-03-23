@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.CabinetBean;
+import com.lumos.smartdevice.model.CabinetVo;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 import java.util.List;
@@ -19,10 +19,10 @@ public class SmLockerBoxCabinetNameAdapter extends BaseAdapter {
 
     private static final String TAG = "SmLockerBoxCabinetNameAdapter";
     private final Context context;
-    private final List<CabinetBean> items;
+    private final List<CabinetVo> items;
     private final int current_position;
 
-    public SmLockerBoxCabinetNameAdapter(Context context, List<CabinetBean> items, int position) {
+    public SmLockerBoxCabinetNameAdapter(Context context, List<CabinetVo> items, int position) {
         this.context = context;
         this.items = items;
         this.current_position = position;
@@ -49,7 +49,7 @@ public class SmLockerBoxCabinetNameAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_sm_locker_box_cabinet_name, parent, false);
         }
-        CabinetBean item = items.get(position);
+        CabinetVo item = items.get(position);
 
         TextView tv_Name = ViewHolder.get(convertView, R.id.tv_Name);
         View v_Bg = ViewHolder.get(convertView, R.id.v_Bg);

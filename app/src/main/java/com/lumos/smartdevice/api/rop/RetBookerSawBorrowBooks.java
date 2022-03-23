@@ -1,6 +1,6 @@
 package com.lumos.smartdevice.api.rop;
 
-import com.lumos.smartdevice.model.BookerBorrowBookBean;
+import com.lumos.smartdevice.model.BookerBorrowBookVo;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class RetBookerSawBorrowBooks {
     private int pageSize;
     private long totalSize;
     private int totalPages;
-    private List<BookerBorrowBookBean> items;
+    private List<BookerBorrowBookVo> items;
 
     public int getPageNum() {
         return pageNum;
@@ -43,11 +43,11 @@ public class RetBookerSawBorrowBooks {
         this.totalPages = totalPages;
     }
 
-    public List<BookerBorrowBookBean> getItems() {
+    public List<BookerBorrowBookVo> getItems() {
         return items;
     }
 
-    public void setItems(List<BookerBorrowBookBean> items) {
+    public void setItems(List<BookerBorrowBookVo> items) {
         this.items = items;
     }
 }

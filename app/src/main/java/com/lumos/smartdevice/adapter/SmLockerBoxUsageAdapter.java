@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.LockerBoxUsageBean;
-import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.model.LockerBoxUsageVo;
+import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.utils.CommonUtil;
 
@@ -22,10 +22,10 @@ public class SmLockerBoxUsageAdapter extends BaseAdapter {
 
     private static final String TAG = "SmLockerBoxUsageAdapter";
     private final Context context;
-    private final List<LockerBoxUsageBean> items;
+    private final List<LockerBoxUsageVo> items;
 
 
-    public SmLockerBoxUsageAdapter(Context context, List<LockerBoxUsageBean> items) {
+    public SmLockerBoxUsageAdapter(Context context, List<LockerBoxUsageVo> items) {
         this.context = context;
         this.items = items;
     }
@@ -51,7 +51,7 @@ public class SmLockerBoxUsageAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_sm_locker_box_usage, parent, false);
         }
-        final LockerBoxUsageBean item = items.get(position);
+        final LockerBoxUsageVo item = items.get(position);
 
         String usageType=item.getUsageType();
 
@@ -62,7 +62,7 @@ public class SmLockerBoxUsageAdapter extends BaseAdapter {
         TextView btn_Delete = ViewHolder.get(convertView, R.id.btn_Delete);
         if(usageType.equals("1")) {
 
-            UserBean user = JSON.parseObject(item.getCustomData(), new TypeReference<UserBean>() {
+            UserVo user = JSON.parseObject(item.getCustomData(), new TypeReference<UserVo>() {
             });
 
             tv_BigTitle.setText(user.getFullName());
@@ -81,7 +81,7 @@ public class SmLockerBoxUsageAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 if(onClickListener!=null){
-                    LockerBoxUsageBean l_Item=(LockerBoxUsageBean)view.getTag();
+                    LockerBoxUsageVo l_Item=(LockerBoxUsageVo)view.getTag();
                     onClickListener.onDeleteClick(l_Item);
                 }
             }
@@ -104,6 +104,6 @@ public class SmLockerBoxUsageAdapter extends BaseAdapter {
     }
 
     public interface OnClickListener {
-        void onDeleteClick(LockerBoxUsageBean usage);
+        void onDeleteClick(LockerBoxUsageVo usage);
     }
 }

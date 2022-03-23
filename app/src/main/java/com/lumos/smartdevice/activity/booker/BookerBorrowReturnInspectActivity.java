@@ -15,15 +15,14 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
-import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RetIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.devicectrl.BookerBorrowReturnFlowCtrl;
-import com.lumos.smartdevice.model.BookerSlotBean;
-import com.lumos.smartdevice.model.DeviceBean;
-import com.lumos.smartdevice.model.IdentityInfoByBorrowerBean;
+import com.lumos.smartdevice.model.BookerSlotVo;
+import com.lumos.smartdevice.model.DeviceVo;
+import com.lumos.smartdevice.model.IdentityInfoByBorrowerVo;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.LogUtil;
@@ -54,9 +53,9 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
     private View ll_OverdueQuantity;
     private View ll_OverdueFine;
 
-    private DeviceBean device;
+    private DeviceVo device;
 
-    private List<BookerSlotBean> slots;
+    private List<BookerSlotVo> slots;
 
     private DialogBookerFlowHandling dialog_BookerFlowHandling;
 
@@ -134,11 +133,13 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
     private void initView() {
         btn_Nav_Footer_GoBack = findViewById(R.id.btn_Nav_Footer_GoBack);
         btn_Nav_Footer_GoHome = findViewById(R.id.btn_Nav_Footer_GoHome);
+
         tv_FullName = findViewById(R.id.tv_FullName);
         tv_CardNo = findViewById(R.id.tv_CardNo);
         tv_CanBorrowQuantity = findViewById(R.id.tv_CanBorrowQuantity);
         tv_BorrowedQuantity = findViewById(R.id.tv_BorrowedQuantity);
         iv_SawBorrowBooks= findViewById(R.id.iv_SawBorrowBooks);
+        iv_SawBorrowBooks.setVisibility(View.VISIBLE);
         tv_WilldueQuantity= findViewById(R.id.tv_WilldueQuantity);
         tv_OverdueQuantity= findViewById(R.id.tv_OverdueQuantity);
         tv_OverdueFine= findViewById(R.id.tv_OverdueFine);
@@ -146,6 +147,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         ll_WilldueQuantity= findViewById(R.id.ll_WilldueQuantity);
         ll_OverdueQuantity= findViewById(R.id.ll_OverdueQuantity);
         ll_OverdueFine= findViewById(R.id.ll_OverdueFine);
+
         gdv_Slots = findViewById(R.id.gdv_Slots);
         dialog_BookerFlowHandling = new DialogBookerFlowHandling(BookerBorrowReturnInspectActivity.this);
     }
@@ -163,7 +165,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
         slotAdapter.setOnClickListener(new BookerBorrowReturnInspectSlotAdapter.OnClickListener() {
             @Override
-            public void onClick(BookerSlotBean slot) {
+            public void onClick(BookerSlotVo slot) {
                 borrowRetrunCreateFlow(slot);
             }
         });
@@ -174,7 +176,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
     }
 
 
-    private void borrowRetrunCreateFlow(BookerSlotBean slot ) {
+    private void borrowRetrunCreateFlow(BookerSlotVo slot ) {
 
         RopBookerCreateFlow rop = new RopBookerCreateFlow();
         rop.setDeviceId(device.getDeviceId());
@@ -252,7 +254,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                 if (rt.getCode() == ResultCode.SUCCESS) {
                     RetIdentityInfo d = rt.getData();
 
-                    IdentityInfoByBorrowerBean borrower = JSON.parseObject(JSON.toJSONString(d.getInfo()), IdentityInfoByBorrowerBean.class);
+                    IdentityInfoByBorrowerVo borrower = JSON.parseObject(JSON.toJSONString(d.getInfo()), IdentityInfoByBorrowerVo.class);
 
                     tv_FullName.setText(borrower.getFullName());
                     tv_CardNo.setText(borrower.getCardNo());

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.ui.refreshview.MyViewHolder;
 import com.lumos.smartdevice.ui.refreshview.RefreshAdapter;
 import com.lumos.smartdevice.utils.CommonUtil;
@@ -25,7 +25,7 @@ import java.util.List;
 public class SmUserManagerUserAdapter extends RefreshAdapter {
     private static final String TAG = "SmUserManagerUserAdapter";
     private Context context;
-    private List<UserBean> beans = new ArrayList<>();
+    private List<UserVo> beans = new ArrayList<>();
 
     private final int scene_mode;
 
@@ -33,14 +33,14 @@ public class SmUserManagerUserAdapter extends RefreshAdapter {
         this.scene_mode = scene_mode;
     }
 
-    public void setData(List<UserBean> beans, Context context) {
+    public void setData(List<UserVo> beans, Context context) {
         this.beans = beans;
         this.context = context;
         notifyDataSetChanged();
 
     }
 
-    public void addData(List<UserBean> beans, Context context)
+    public void addData(List<UserVo> beans, Context context)
     {   this.context = context;
         this.beans.addAll(beans);
         notifyDataSetChanged();
@@ -56,7 +56,7 @@ public class SmUserManagerUserAdapter extends RefreshAdapter {
     @Override
     public void onBindItemHolder(final RecyclerView.ViewHolder holder, int position) {
 
-        final UserBean bean = beans.get(position);
+        final UserVo bean = beans.get(position);
 
         String avatar = bean.getAvatar();
 
@@ -71,7 +71,7 @@ public class SmUserManagerUserAdapter extends RefreshAdapter {
         ll_Info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserBean user = (UserBean) view.getTag();
+                UserVo user = (UserVo) view.getTag();
                 if (onClickListener != null) {
                     onClickListener.onItemClick(user);
                 }
@@ -83,7 +83,7 @@ public class SmUserManagerUserAdapter extends RefreshAdapter {
         img_Avatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserBean user = (UserBean) view.getTag();
+                UserVo user = (UserVo) view.getTag();
                 if (onClickListener != null) {
                     onClickListener.onItemClick(user);
                 }
@@ -109,7 +109,7 @@ public class SmUserManagerUserAdapter extends RefreshAdapter {
             btn_SelectUser.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    UserBean user = (UserBean) view.getTag();
+                    UserVo user = (UserVo) view.getTag();
                     if (onClickListener != null) {
                         onClickListener.onSelectClick(user);
                     }
@@ -130,8 +130,8 @@ public class SmUserManagerUserAdapter extends RefreshAdapter {
     }
 
     public interface OnClickListener {
-        void onItemClick(UserBean bean);
-        void onSelectClick(UserBean bean);
+        void onItemClick(UserVo bean);
+        void onSelectClick(UserVo bean);
     }
 
     @Override

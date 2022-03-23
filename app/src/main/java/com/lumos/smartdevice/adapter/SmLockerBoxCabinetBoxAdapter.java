@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.LockerBoxBean;
+import com.lumos.smartdevice.model.LockerBoxVo;
 import com.lumos.smartdevice.ui.refreshview.MyViewHolder;
 
 import java.util.List;
@@ -22,12 +22,12 @@ public class SmLockerBoxCabinetBoxAdapter extends RecyclerView.Adapter<RecyclerV
     private static final String TAG = "SmLockerBoxCabinetBoxAdapter";
 
     private final Context context;
-    private final List<LockerBoxBean> list;//数据
+    private final List<LockerBoxVo> list;//数据
     private OnRecyclerItemClickListener mOnItemClickListener;//单击事件
     private onRecyclerItemLongClickListener mOnItemLongClickListener;//长按事件
 
 
-    public SmLockerBoxCabinetBoxAdapter(Context context, List<LockerBoxBean> list) {
+    public SmLockerBoxCabinetBoxAdapter(Context context, List<LockerBoxVo> list) {
         this.context = context;
         this.list = list;
     }
@@ -48,7 +48,7 @@ public class SmLockerBoxCabinetBoxAdapter extends RecyclerView.Adapter<RecyclerV
         TextView tv_Name = holder.itemView.findViewById(R.id.tv_Name);
         //TextView tv_UseStatus = holder.itemView.findViewById(R.id.tv_UseStatus);
 
-        LockerBoxBean item = list.get(position);
+        LockerBoxVo item = list.get(position);
 
         String[] cell_prams = item.getSlotId().split("-");
 

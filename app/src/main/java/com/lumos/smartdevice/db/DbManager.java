@@ -16,22 +16,20 @@ import com.lumos.smartdevice.db.dao.LockerBoxUsageDao;
 import com.lumos.smartdevice.db.dao.LockerBoxUseRecordDao;
 import com.lumos.smartdevice.db.dao.TripMsgDao;
 import com.lumos.smartdevice.db.dao.UserDao;
-import com.lumos.smartdevice.model.CabinetBean;
-import com.lumos.smartdevice.model.CabinetLayoutBean;
-import com.lumos.smartdevice.model.LockerBoxBean;
-import com.lumos.smartdevice.model.LockerBoxUsageBean;
-import com.lumos.smartdevice.model.LockerBoxUseRecordBean;
+import com.lumos.smartdevice.model.CabinetVo;
+import com.lumos.smartdevice.model.CabinetLayoutVo;
+import com.lumos.smartdevice.model.LockerBoxVo;
+import com.lumos.smartdevice.model.LockerBoxUsageVo;
+import com.lumos.smartdevice.model.LockerBoxUseRecordVo;
 import com.lumos.smartdevice.model.PageDataBean;
 import com.lumos.smartdevice.model.TripMsgBean;
-import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppVar;
-import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -156,9 +154,9 @@ public class DbManager {
 
     }
 
-    public UserBean checkUserPassword(String username, String password, String type) {
+    public UserVo checkUserPassword(String username, String password, String type) {
 
-        UserBean user = null;
+        UserVo user = null;
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -169,7 +167,7 @@ public class DbManager {
 
             while (cursor.moveToNext()) {
 
-                user = new UserBean();
+                user = new UserVo();
 
                 String user_id = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERID));
                 String user_name = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERNAME));
@@ -205,14 +203,14 @@ public class DbManager {
 
     }
 
-    public PageDataBean<UserBean> GetUsers(int pageIndex, int pageSize, String userType, String keyWord) {
+    public PageDataBean<UserVo> GetUsers(int pageIndex, int pageSize, String userType, String keyWord) {
 
-        PageDataBean<UserBean> pageData = new PageDataBean<UserBean>();
+        PageDataBean<UserVo> pageData = new PageDataBean<UserVo>();
 
         pageData.setPageSize(pageSize);
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        List<UserBean> users = new ArrayList<>();
+        List<UserVo> users = new ArrayList<>();
         if (db.isOpen()) {
 
             String sql = "SELECT {0} FROM " + UserDao.TABLE_NAME + " where " + UserDao.COLUMN_NAME_TYPE + " = " + "'" + userType + "' ";
@@ -233,12 +231,12 @@ public class DbManager {
 
             cursor1.close();
 
-            pageData.setTotal(total);
+            pageData.setTotalSize(total);
 
             Cursor cursor = db.rawQuery(sqlQuery, null);
 
             while (cursor.moveToNext()) {
-                UserBean user = new UserBean();
+                UserVo user = new UserVo();
                 String userId = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERID));
                 String userName = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERNAME));
                 String fullName = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_FULLNAME));
@@ -259,9 +257,9 @@ public class DbManager {
 
     }
 
-    public UserBean GetUser(String userId) {
+    public UserVo GetUser(String userId) {
 
-        UserBean user = null;
+        UserVo user = null;
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -270,7 +268,7 @@ public class DbManager {
             Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where " + UserDao.COLUMN_NAME_USERID + " = ?", new String[]{String.valueOf(userId)});
 
             while (cursor.moveToNext()) {
-                user = new UserBean();
+                user = new UserVo();
 
                 String userName = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_USERNAME));
                 String fullName = cursor.getString(cursor.getColumnIndex(UserDao.COLUMN_NAME_FULLNAME));
@@ -324,9 +322,9 @@ public class DbManager {
     }
 
 
-    public HashMap<String, CabinetBean> getCabinets() {
+    public HashMap<String, CabinetVo> getCabinets() {
 
-        HashMap<String, CabinetBean> cabinets = new HashMap<>();
+        HashMap<String, CabinetVo> cabinets = new HashMap<>();
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -334,7 +332,7 @@ public class DbManager {
             Cursor cursor = db.rawQuery("select * from " + CabinetDao.TABLE_NAME + "", null);
             while (cursor.moveToNext()) {
 
-                CabinetBean cabinet = new CabinetBean();
+                CabinetVo cabinet = new CabinetVo();
 
                 String cabinet_id = cursor.getString(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_CABINET_ID));
                 String name = cursor.getString(cursor.getColumnIndex(CabinetDao.COLUMN_NAME_NAME));
@@ -386,7 +384,7 @@ public class DbManager {
                     return ResultUtil.isFailure("保存失败，有柜子正在使用中");
                 }
 
-                List<CabinetBean> cabinets = JSON.parseObject(json_cabinets, new TypeReference<List<CabinetBean>>() {
+                List<CabinetVo> cabinets = JSON.parseObject(json_cabinets, new TypeReference<List<CabinetVo>>() {
                 });
 
                 if (cabinets == null || cabinets.size() <= 0) {
@@ -396,7 +394,7 @@ public class DbManager {
                 db.delete(LockerBoxDao.TABLE_NAME, null, null);
                 db.delete(CabinetDao.TABLE_NAME, null, null);
 
-                for (CabinetBean cabinet : cabinets) {
+                for (CabinetVo cabinet : cabinets) {
 
                     ContentValues cv_Cabinet = new ContentValues();
                     cv_Cabinet.put(CabinetDao.COLUMN_NAME_CABINET_ID, cabinet.getCabinetId());
@@ -409,7 +407,7 @@ public class DbManager {
                     db.insert(CabinetDao.TABLE_NAME, null, cv_Cabinet);
 
 
-                    CabinetLayoutBean layout = JSON.parseObject(cabinet.getLayout(), new TypeReference<CabinetLayoutBean>() {
+                    CabinetLayoutVo layout = JSON.parseObject(cabinet.getLayout(), new TypeReference<CabinetLayoutVo>() {
                     });
 
                     if (layout == null)
@@ -447,7 +445,7 @@ public class DbManager {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             if (db.isOpen()) {
 
-                List<CabinetBean> cabinets = JSON.parseObject(json_cabinets, new TypeReference<List<CabinetBean>>() {
+                List<CabinetVo> cabinets = JSON.parseObject(json_cabinets, new TypeReference<List<CabinetVo>>() {
                 });
 
                 if (cabinets == null || cabinets.size() <= 0) {
@@ -456,7 +454,7 @@ public class DbManager {
 
                 db.delete(CabinetDao.TABLE_NAME, null, null);
 
-                for (CabinetBean cabinet : cabinets) {
+                for (CabinetVo cabinet : cabinets) {
 
                     ContentValues cv_Cabinet = new ContentValues();
                     cv_Cabinet.put(CabinetDao.COLUMN_NAME_CABINET_ID, cabinet.getCabinetId());
@@ -469,7 +467,7 @@ public class DbManager {
                     db.insert(CabinetDao.TABLE_NAME, null, cv_Cabinet);
 
 
-                    CabinetLayoutBean layout = JSON.parseObject(cabinet.getLayout(), new TypeReference<CabinetLayoutBean>() {
+                    CabinetLayoutVo layout = JSON.parseObject(cabinet.getLayout(), new TypeReference<CabinetLayoutVo>() {
                     });
 
                     if (layout == null)
@@ -634,7 +632,7 @@ public class DbManager {
         }
     }
 
-    public LockerBoxBean getLockerBox(String cabinetId, String slotId) {
+    public LockerBoxVo getLockerBox(String cabinetId, String slotId) {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery("select * from " + LockerBoxDao.TABLE_NAME + " where " + LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + " = ? ", new String[]{cabinetId, slotId});
@@ -644,7 +642,7 @@ public class DbManager {
             return null;
         }
 
-        LockerBoxBean lockerBox=new LockerBoxBean();
+        LockerBoxVo lockerBox=new LockerBoxVo();
 
         while (cursor.moveToNext()) {
 
@@ -664,7 +662,7 @@ public class DbManager {
         }
 
 
-        List<LockerBoxUsageBean> usages = new ArrayList<>();
+        List<LockerBoxUsageVo> usages = new ArrayList<>();
 
         cursor = db.rawQuery("select * from " + LockerBoxUsageDao.TABLE_NAME + " where " + LockerBoxUsageDao.COLUMN_NAME_CABINET_ID + " = ? and " + LockerBoxUsageDao.COLUMN_NAME_SLOT_ID + " = ? ", new String[]{cabinetId, slotId});
         exist = (cursor.getCount() > 0);
@@ -675,7 +673,7 @@ public class DbManager {
                 String usageType = cursor.getString(cursor.getColumnIndex(LockerBoxUsageDao.COLUMN_NAME_USAGE_TYPE));
                 String usageData = cursor.getString(cursor.getColumnIndex(LockerBoxUsageDao.COLUMN_NAME_USAGE_DATA));
 
-                LockerBoxUsageBean usage = new LockerBoxUsageBean();
+                LockerBoxUsageVo usage = new LockerBoxUsageVo();
 
                 usage.setCabinetId(cabinetId);
                 usage.setSlotId(slotId);
@@ -691,7 +689,7 @@ public class DbManager {
 
                         while (cursor1.moveToNext()) {
 
-                            UserBean user = new UserBean();
+                            UserVo user = new UserVo();
 
                             String avatar = cursor1.getString(cursor1.getColumnIndex(UserDao.COLUMN_NAME_AVATAR));
                             String user_name = cursor1.getString(cursor1.getColumnIndex(UserDao.COLUMN_NAME_USERNAME));
@@ -720,9 +718,9 @@ public class DbManager {
         return lockerBox;
     }
 
-    public List<LockerBoxBean>  getLockerBoxs(String cabinetId) {
+    public List<LockerBoxVo>  getLockerBoxs(String cabinetId) {
 
-        List<LockerBoxBean> lockerBoxs = new ArrayList<>();
+        List<LockerBoxVo> lockerBoxs = new ArrayList<>();
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -738,7 +736,7 @@ public class DbManager {
                 int width = cursor.getInt(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_WIDTH));
                 int height = cursor.getInt(cursor.getColumnIndex(LockerBoxDao.COLUMN_NAME_HEIGHT));
 
-                LockerBoxBean lockerBox = new LockerBoxBean();
+                LockerBoxVo lockerBox = new LockerBoxVo();
 
                 lockerBox.setCabinetId(cabinetId);
                 lockerBox.setSlotId(slotId);
@@ -782,14 +780,14 @@ public class DbManager {
     }
 
 
-    public PageDataBean<LockerBoxUseRecordBean> GetLockBoxUseRecords(int pageIndex, int pageSize) {
+    public PageDataBean<LockerBoxUseRecordVo> GetLockBoxUseRecords(int pageIndex, int pageSize) {
 
-        PageDataBean<LockerBoxUseRecordBean> pageData = new PageDataBean<>();
+        PageDataBean<LockerBoxUseRecordVo> pageData = new PageDataBean<>();
 
         pageData.setPageSize(pageSize);
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        List<LockerBoxUseRecordBean> records = new ArrayList<>();
+        List<LockerBoxUseRecordVo> records = new ArrayList<>();
         if (db.isOpen()) {
 
             String sql = "SELECT {0} FROM " + LockerBoxUseRecordDao.TABLE_NAME + " ";
@@ -806,12 +804,12 @@ public class DbManager {
 
             cursor1.close();
 
-            pageData.setTotal(total);
+            pageData.setTotalSize(total);
 
             Cursor cursor = db.rawQuery(sqlQuery, null);
 
             while (cursor.moveToNext()) {
-                LockerBoxUseRecordBean record = new LockerBoxUseRecordBean();
+                LockerBoxUseRecordVo record = new LockerBoxUseRecordVo();
                 String recordId = cursor.getString(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_RECORD_ID));
                 String cabinetId = cursor.getString(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_CABINET_ID));
                 String slotId = cursor.getString(cursor.getColumnIndex(LockerBoxUseRecordDao.COLUMN_NAME_SLOT_ID));

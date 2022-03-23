@@ -3,7 +3,6 @@ package com.lumos.smartdevice.activity.sm;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.activity.InitDataActivity;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmConfirm;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmOwnInfo;
@@ -15,10 +14,10 @@ import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
 import com.lumos.smartdevice.api.rop.RetOwnSaveInfo;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
-import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.DeviceVo;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
-import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppManager;
@@ -48,7 +47,7 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
     private ImageView iv_UserAvatar;
     private DialogSmOwnInfo dialog_OwnInfo;
     private Button btn_Logout;
-    private DeviceBean device;
+    private DeviceVo device;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,7 +160,7 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
 
     private void initData() {
 
-        UserBean currentUser= getCurrentUser();
+        UserVo currentUser= getCurrentUser();
         if(currentUser!=null) {
             tv_UserFullName.setText(currentUser.getFullName());
             CommonUtil.loadImageFromUrl(SmHomeActivity.this, iv_UserAvatar, currentUser.getAvatar());

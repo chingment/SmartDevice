@@ -16,7 +16,7 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetIdentityVerify;
 import com.lumos.smartdevice.api.rop.RopIdentityVerify;
-import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.DeviceVo;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
 import com.lumos.smartdevice.ui.my.MyGridView;
@@ -42,7 +42,7 @@ public class BookerIdentityVerifyActivity extends BookerBaseActivity {
     private String intent_extra_action="";
 
 
-    private DeviceBean device;
+    private DeviceVo device;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

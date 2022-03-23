@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.BookerBookBean;
+import com.lumos.smartdevice.model.BookerBookVo;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 import java.util.List;
@@ -17,10 +17,10 @@ public class BookerBorrowReturnBookAdapter extends BaseAdapter {
 
     private static final String TAG = "BookerBorrowReturnBookAdapter";
     private final Context context;
-    private final List<BookerBookBean> items;
+    private final List<BookerBookVo> items;
 
 
-    public BookerBorrowReturnBookAdapter(Context context, List<BookerBookBean> items) {
+    public BookerBorrowReturnBookAdapter(Context context, List<BookerBookVo> items) {
         this.context = context;
         this.items = items;
     }
@@ -47,7 +47,7 @@ public class BookerBorrowReturnBookAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_booker_borrow_return_book, parent, false);
         }
 
-        final BookerBookBean item = items.get(position);
+        final BookerBookVo item = items.get(position);
 
 
         TextView tv_Name = ViewHolder.get(convertView, R.id.tv_Name);

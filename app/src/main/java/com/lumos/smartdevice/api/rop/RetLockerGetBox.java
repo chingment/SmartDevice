@@ -1,6 +1,6 @@
 package com.lumos.smartdevice.api.rop;
 
-import com.lumos.smartdevice.model.LockerBoxUsageBean;
+import com.lumos.smartdevice.model.LockerBoxUsageVo;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class RetLockerGetBox {
     private int height;
     private int width;
 
-    private List<LockerBoxUsageBean> usages;
+    private List<LockerBoxUsageVo> usages;
 
     public String getDeviceId() {
         return deviceId;
@@ -49,11 +49,11 @@ public class RetLockerGetBox {
         isUsed = used;
     }
 
-    public List<LockerBoxUsageBean> getUsages() {
+    public List<LockerBoxUsageVo> getUsages() {
         return usages;
     }
 
-    public void setUsages(List<LockerBoxUsageBean> usages) {
+    public void setUsages(List<LockerBoxUsageVo> usages) {
         this.usages = usages;
     }
 

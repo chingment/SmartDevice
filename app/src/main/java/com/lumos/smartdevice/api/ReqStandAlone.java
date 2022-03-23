@@ -33,16 +33,13 @@ import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.db.dao.ConfigDao;
-import com.lumos.smartdevice.http.HttpClient;
-import com.lumos.smartdevice.http.HttpResponseHandler;
-import com.lumos.smartdevice.model.CabinetBean;
-import com.lumos.smartdevice.model.DeviceBean;
-import com.lumos.smartdevice.model.LockerBoxBean;
-import com.lumos.smartdevice.model.LockerBoxUseRecordBean;
+import com.lumos.smartdevice.model.CabinetVo;
+import com.lumos.smartdevice.model.DeviceVo;
+import com.lumos.smartdevice.model.LockerBoxVo;
+import com.lumos.smartdevice.model.LockerBoxUseRecordVo;
 import com.lumos.smartdevice.model.PageDataBean;
-import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.own.AppVar;
-import com.lumos.smartdevice.own.Config;
 import com.lumos.smartdevice.utils.StringUtil;
 
 import java.util.List;
@@ -62,7 +59,7 @@ public class ReqStandAlone implements IReqVersion{
         int scene_mode= DbManager.getInstance().getConfigIntValue(ConfigDao.FIELD_SCENE_MODE);
         if (scene_mode==AppVar.SCENE_MODE_1||scene_mode==AppVar.SCENE_MODE_2) {
 
-            DeviceBean device = new DeviceBean();
+            DeviceVo device = new DeviceVo();
             device.setDeviceId("1224567");
             device.setSceneMode(scene_mode);
             device.setVersionMode(version_mode);
@@ -88,7 +85,7 @@ public class ReqStandAlone implements IReqVersion{
 
         ResultBean<RetOwnLogin> result;
 
-        UserBean user=DbManager.getInstance().checkUserPassword(rop.getUserName(), rop.getPassword(), "2");
+        UserVo user=DbManager.getInstance().checkUserPassword(rop.getUserName(), rop.getPassword(), "2");
 
         if (user==null) {
             result = new ResultBean<>(ResultCode.FAILURE, "用户密码错误");
@@ -121,7 +118,7 @@ public class ReqStandAlone implements IReqVersion{
         reqHandler.sendBeforeSendMessage();
         ResultBean<RetOwnGetInfo> result = null;
         RetOwnGetInfo ret = new RetOwnGetInfo();
-        UserBean user = DbManager.getInstance().GetUser(rop.getUserId());
+        UserVo user = DbManager.getInstance().GetUser(rop.getUserId());
         ret.setUserId(user.getUserId());
         ret.setFullName(user.getFullName());
         ret.setUserName(user.getUserName());
@@ -246,8 +243,8 @@ public class ReqStandAlone implements IReqVersion{
         reqHandler.sendBeforeSendMessage();
         ResultBean<RetUserGetList> result = null;
         RetUserGetList ret = new RetUserGetList();
-        PageDataBean<UserBean> users = DbManager.getInstance().GetUsers(rop.getPageIndex(), rop.getPageSize(), "3",rop.getKeyWord());
-        ret.setTotal(users.getTotal());
+        PageDataBean<UserVo> users = DbManager.getInstance().GetUsers(rop.getPageIndex(), rop.getPageSize(), "3",rop.getKeyWord());
+        ret.setTotalSize(users.getTotalSize());
         ret.setPageSize(users.getPageSize());
         ret.setItems(users.getItems());
         result = new ResultBean<>(ResultCode.SUCCESS, "", ret);
@@ -259,7 +256,7 @@ public class ReqStandAlone implements IReqVersion{
         reqHandler.sendBeforeSendMessage();
         ResultBean<RetUserGetDetail> result = null;
         RetUserGetDetail ret = new RetUserGetDetail();
-        UserBean user = DbManager.getInstance().GetUser(rop.getUserId());
+        UserVo user = DbManager.getInstance().GetUser(rop.getUserId());
         ret.setUserId(user.getUserId());
         ret.setFullName(user.getFullName());
         ret.setUserName(user.getUserName());
@@ -273,9 +270,9 @@ public class ReqStandAlone implements IReqVersion{
         reqHandler.sendBeforeSendMessage();
         ResultBean<RetLockerGetCabinet> result;
 
-        CabinetBean cabinet=DbManager.getInstance().getCabinets().get(rop.getCabinetId());
+        CabinetVo cabinet=DbManager.getInstance().getCabinets().get(rop.getCabinetId());
 
-        List<LockerBoxBean> boxs = DbManager.getInstance().getLockerBoxs(rop.getCabinetId());
+        List<LockerBoxVo> boxs = DbManager.getInstance().getLockerBoxs(rop.getCabinetId());
         RetLockerGetCabinet ret=new RetLockerGetCabinet();
         ret.setCabinetId(cabinet.getCabinetId());
         ret.setName(cabinet.getName());
@@ -292,7 +289,7 @@ public class ReqStandAlone implements IReqVersion{
     public void lockerGetBox(RopLockerGetBox rop, final ReqHandler reqHandler) {
         reqHandler.sendBeforeSendMessage();
         ResultBean<RetLockerGetBox> result;
-        LockerBoxBean lockerBox = DbManager.getInstance().getLockerBox(rop.getCabinetId(), rop.getSlotId());
+        LockerBoxVo lockerBox = DbManager.getInstance().getLockerBox(rop.getCabinetId(), rop.getSlotId());
         RetLockerGetBox ret=new RetLockerGetBox();
         ret.setDeviceId(lockerBox.getDeviceId());
         ret.setCabinetId(lockerBox.getCabinetId());
@@ -325,8 +322,8 @@ public class ReqStandAlone implements IReqVersion{
         reqHandler.sendBeforeSendMessage();
         ResultBean<RetLockerGetBoxUseRecords> result = null;
         RetLockerGetBoxUseRecords ret = new RetLockerGetBoxUseRecords();
-        PageDataBean<LockerBoxUseRecordBean> users = DbManager.getInstance().GetLockBoxUseRecords(rop.getPageIndex(), rop.getPageSize());
-        ret.setTotal(users.getTotal());
+        PageDataBean<LockerBoxUseRecordVo> users = DbManager.getInstance().GetLockBoxUseRecords(rop.getPageIndex(), rop.getPageSize());
+        ret.setTotalSize(users.getTotalSize());
         ret.setPageSize(users.getPageSize());
         ret.setItems(users.getItems());
         result = new ResultBean<>(ResultCode.SUCCESS, "", ret);

@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.LockerBoxUseRecordBean;
-import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.model.LockerBoxUseRecordVo;
+import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.ui.refreshview.MyViewHolder;
 import com.lumos.smartdevice.ui.refreshview.RefreshAdapter;
 
@@ -24,20 +24,20 @@ import java.util.List;
 public class SmLockerBoxUseRecordAdapter extends RefreshAdapter {
     private static final String TAG = "SmLockerBoxUseRecordAdapter";
     private Context context;
-    private List<LockerBoxUseRecordBean> beans = new ArrayList<>();
+    private List<LockerBoxUseRecordVo> beans = new ArrayList<>();
 
     public SmLockerBoxUseRecordAdapter() {
 
     }
 
-    public void setData(List<LockerBoxUseRecordBean> beans, Context context) {
+    public void setData(List<LockerBoxUseRecordVo> beans, Context context) {
         this.beans = beans;
         this.context = context;
         notifyDataSetChanged();
 
     }
 
-    public void addData(List<LockerBoxUseRecordBean> beans, Context context)
+    public void addData(List<LockerBoxUseRecordVo> beans, Context context)
     {   this.context = context;
         this.beans.addAll(beans);
         notifyDataSetChanged();
@@ -53,7 +53,7 @@ public class SmLockerBoxUseRecordAdapter extends RefreshAdapter {
     @Override
     public void onBindItemHolder(final RecyclerView.ViewHolder holder, int position) {
 
-        final LockerBoxUseRecordBean bean = beans.get(position);
+        final LockerBoxUseRecordVo bean = beans.get(position);
 
         View ll_Info = holder.itemView.findViewById(R.id.ll_Info);
         View ll_DividerLine = holder.itemView.findViewById(R.id.ll_DividerLine);
@@ -97,8 +97,8 @@ public class SmLockerBoxUseRecordAdapter extends RefreshAdapter {
     }
 
     public interface OnClickListener {
-        void onItemClick(UserBean bean);
-        void onSelectClick(UserBean bean);
+        void onItemClick(UserVo bean);
+        void onSelectClick(UserVo bean);
     }
 
     @Override

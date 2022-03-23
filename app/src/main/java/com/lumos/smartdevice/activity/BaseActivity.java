@@ -12,8 +12,8 @@ import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.DeviceBean;
-import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.model.DeviceVo;
+import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppContext;
@@ -30,21 +30,21 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
     private static final String TAG = "BaseActivity";
     private AppContext appContext;
     public static boolean isForeground = false;
-    private DeviceBean device;
+    private DeviceVo device;
     private UsbReaderUtil usbReaderUtil;
 
     public AppContext getAppContext() {
         return appContext;
     }
 
-    public DeviceBean getDevice() {
+    public DeviceVo getDevice() {
         if (device == null) {
             device = AppCacheManager.getDevice();
         }
         return device;
     }
 
-    public UserBean getCurrentUser() {
+    public UserVo getCurrentUser() {
         return AppCacheManager.getCurrentUser();
     }
 

@@ -18,7 +18,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
@@ -27,7 +26,7 @@ import com.lumos.smartdevice.api.rop.RetOwnLogin;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
-import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -193,7 +192,7 @@ public class SmLoginActivity extends SmBaseActivity implements View.OnClickListe
         switch (scene_mode){
             case "init_data_help":
 
-                UserBean user1=DbManager.getInstance().checkUserPassword(username,password,"1");
+                UserVo user1=DbManager.getInstance().checkUserPassword(username,password,"1");
 
                 if(user1==null){
                     showToast(R.string.tips_password_noright);
@@ -238,7 +237,7 @@ public class SmLoginActivity extends SmBaseActivity implements View.OnClickListe
 
                             AppCacheManager.setLastUserName(scene_mode,rt.getData().getUserName());
 
-                            UserBean user=new UserBean();
+                            UserVo user=new UserVo();
                             user.setUserId(d.getUserId());
                             user.setUserName(d.getUserName());
                             user.setFullName(d.getFullName());

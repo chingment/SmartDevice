@@ -1,16 +1,11 @@
 package com.lumos.smartdevice.own;
 
 
-import com.lumos.smartdevice.model.BookerCustomDataBean;
-import com.lumos.smartdevice.model.DeviceBean;
-import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.model.BookerCustomDataVo;
+import com.lumos.smartdevice.model.DeviceVo;
+import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.utils.ACache;
 import com.lumos.smartdevice.utils.StringUtil;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 /**
  * Created by chingment on 2018/1/16.
@@ -28,12 +23,12 @@ public class AppCacheManager {
         return ACache.get(AppContext.getInstance());
     }
 
-    public static DeviceBean getDevice() {
+    public static DeviceVo getDevice() {
 
-        DeviceBean device = (DeviceBean) AppCacheManager.getCache().getAsObject(Key_Device);
+        DeviceVo device = (DeviceVo) AppCacheManager.getCache().getAsObject(Key_Device);
 
         if(device==null) {
-            device=new DeviceBean();
+            device=new DeviceVo();
             device.setDeviceId("");
             return device;
         }
@@ -42,7 +37,7 @@ public class AppCacheManager {
 
     }
 
-    public static void setDevice(DeviceBean bean) {
+    public static void setDevice(DeviceVo bean) {
         AppCacheManager.getCache().remove(Key_Device);
         AppCacheManager.getCache().put(Key_Device, bean);
     }
@@ -66,28 +61,28 @@ public class AppCacheManager {
 
     }
 
-    public static void setCurrentUser(UserBean user) {
+    public static void setCurrentUser(UserVo user) {
         if(user!=null) {
             AppCacheManager.getCache().put(Key_CurrentUser, user);
         }
     }
 
-    public static UserBean getCurrentUser() {
+    public static UserVo getCurrentUser() {
 
-        UserBean user = (UserBean)AppCacheManager.getCache().getAsObject(Key_CurrentUser);
+        UserVo user = (UserVo)AppCacheManager.getCache().getAsObject(Key_CurrentUser);
 
         return user;
 
     }
 
-    public static void setBookerCustomData(BookerCustomDataBean bean) {
+    public static void setBookerCustomData(BookerCustomDataVo bean) {
         AppCacheManager.getCache().remove(Key_BookerCustomData);
         AppCacheManager.getCache().put(Key_BookerCustomData, bean);
     }
 
-    public static BookerCustomDataBean getBookerCustomData() {
+    public static BookerCustomDataVo getBookerCustomData() {
 
-        BookerCustomDataBean bean = (BookerCustomDataBean)AppCacheManager.getCache().getAsObject(Key_BookerCustomData);
+        BookerCustomDataVo bean = (BookerCustomDataVo)AppCacheManager.getCache().getAsObject(Key_BookerCustomData);
 
         return bean;
 

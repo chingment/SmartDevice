@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.CabinetBean;
+import com.lumos.smartdevice.model.CabinetVo;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 public class DialogSmCabinetConfig extends Dialog {
@@ -57,7 +57,7 @@ public class DialogSmCabinetConfig extends Dialog {
         this.setContentView(mLayoutRes);
     }
 
-    public void setCofing(CabinetBean cabinet) {
+    public void setCofing(CabinetVo cabinet) {
         tv_CabinetId.setText(cabinet.getCabinetId());
         tv_CabinetName.setText(cabinet.getName());
         tv_ComId.setText(cabinet.getComId());

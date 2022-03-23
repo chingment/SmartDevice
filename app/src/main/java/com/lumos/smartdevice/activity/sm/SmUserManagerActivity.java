@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmUserEdit;
 import com.lumos.smartdevice.adapter.SmUserManagerUserAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
@@ -26,7 +25,7 @@ import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
-import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
@@ -128,12 +127,12 @@ public class SmUserManagerActivity extends SmBaseActivity {
 
         lv_UsersAdapter.setOnClickListener(new SmUserManagerUserAdapter.OnClickListener() {
             @Override
-            public void onItemClick(UserBean bean) {
+            public void onItemClick(UserVo bean) {
                 dialog_UserEdit.show(bean.getUserId(),AppVar.VERSION_MODE_0);
             }
 
             @Override
-            public void onSelectClick(UserBean bean) {
+            public void onSelectClick(UserVo bean) {
 
                 RopLockerSaveBoxUsage rop=new RopLockerSaveBoxUsage();
                 rop.setDeviceId(scene_param.get("device_id"));
@@ -228,9 +227,9 @@ public class SmUserManagerActivity extends SmBaseActivity {
                     RetUserGetList d=rt.getData();
 
 
-                    int total=d.getTotal();
-                    int totalPage = (total + lv_Users_PageSize - 1)/lv_Users_PageSize;
-                    List<UserBean> items = d.getItems();
+                    long total=d.getTotalSize();
+                    long totalPage = (total + lv_Users_PageSize - 1)/lv_Users_PageSize;
+                    List<UserVo> items = d.getItems();
 
                     if(total==0){
                         ll_UsersEmpty.setVisibility(View.VISIBLE);

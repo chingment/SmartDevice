@@ -1,24 +1,23 @@
 package com.lumos.smartdevice.api.rop;
 
-import com.lumos.smartdevice.model.LockerBoxUseRecordBean;
-import com.lumos.smartdevice.model.UserBean;
+import com.lumos.smartdevice.model.LockerBoxUseRecordVo;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class RetLockerGetBoxUseRecords implements Serializable {
+    private int pageNum;
     private int pageSize;
-    private int total;
+    private long totalSize;
+    private int totalPages;
+    private List<LockerBoxUseRecordVo> items;
 
-    private List<LockerBoxUseRecordBean> items;
-
-
-    public List<LockerBoxUseRecordBean> getItems() {
-        return items;
+    public int getPageNum() {
+        return pageNum;
     }
 
-    public void setItems(List<LockerBoxUseRecordBean> items) {
-        this.items = items;
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
     }
 
     public int getPageSize() {
@@ -29,11 +28,27 @@ public class RetLockerGetBoxUseRecords implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public int getTotal() {
-        return total;
+    public long getTotalSize() {
+        return totalSize;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setTotalSize(long totalSize) {
+        this.totalSize = totalSize;
+    }
+
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
+    }
+
+    public List<LockerBoxUseRecordVo> getItems() {
+        return items;
+    }
+
+    public void setItems(List<LockerBoxUseRecordVo> items) {
+        this.items = items;
     }
 }

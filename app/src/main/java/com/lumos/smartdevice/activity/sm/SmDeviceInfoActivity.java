@@ -6,8 +6,7 @@ import android.widget.TextView;
 
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.BaseActivity;
-import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.DeviceVo;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
@@ -22,7 +21,7 @@ public class SmDeviceInfoActivity extends SmBaseActivity {
     private TextView tv_VersionMode;
     private TextView tv_SceneMode;
 
-    private DeviceBean device;
+    private DeviceVo device;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.BookerSlotBean;
+import com.lumos.smartdevice.model.BookerSlotVo;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 import java.util.List;
@@ -20,10 +20,10 @@ public class BookerBorrowReturnInspectSlotAdapter extends BaseAdapter {
 
     private static final String TAG = "BookerBorrowReturnInspectSlotAdapter";
 
-    private final List<BookerSlotBean> items;
+    private final List<BookerSlotVo> items;
     private final Context context;
 
-    public BookerBorrowReturnInspectSlotAdapter(Context context, List<BookerSlotBean> items) {
+    public BookerBorrowReturnInspectSlotAdapter(Context context, List<BookerSlotVo> items) {
         this.items = items;
         this.context = context;
     }
@@ -50,7 +50,7 @@ public class BookerBorrowReturnInspectSlotAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_booker_borrow_return_inspect_slot, parent, false);
         }
 
-        BookerSlotBean bean = items.get(position);
+        BookerSlotVo bean = items.get(position);
 
         CardView cv_Slot = ViewHolder.get(convertView, R.id.cv_Slot);
         TextView tv_SlotName = ViewHolder.get(convertView, R.id.tv_SlotName);
@@ -61,7 +61,7 @@ public class BookerBorrowReturnInspectSlotAdapter extends BaseAdapter {
             cv_Slot.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    BookerSlotBean l_Bean = (BookerSlotBean) view.getTag();
+                    BookerSlotVo l_Bean = (BookerSlotVo) view.getTag();
                     onClickListener.onClick(l_Bean);
                 }
             });
@@ -77,6 +77,6 @@ public class BookerBorrowReturnInspectSlotAdapter extends BaseAdapter {
     }
 
     public  interface OnClickListener{
-        void onClick(BookerSlotBean v);
+        void onClick(BookerSlotVo v);
     }
 }

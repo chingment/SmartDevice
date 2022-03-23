@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmCabinetConfig;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmConfirm;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmLockerBox;
@@ -29,11 +28,11 @@ import com.lumos.smartdevice.api.rop.RetLockerGetCabinet;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBox;
 import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
-import com.lumos.smartdevice.model.CabinetBean;
-import com.lumos.smartdevice.model.CabinetLayoutBean;
-import com.lumos.smartdevice.model.DeviceBean;
-import com.lumos.smartdevice.model.LockerBoxBean;
-import com.lumos.smartdevice.model.LockerBoxUsageBean;
+import com.lumos.smartdevice.model.CabinetVo;
+import com.lumos.smartdevice.model.CabinetLayoutVo;
+import com.lumos.smartdevice.model.DeviceVo;
+import com.lumos.smartdevice.model.LockerBoxVo;
+import com.lumos.smartdevice.model.LockerBoxUsageVo;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
@@ -45,14 +44,14 @@ public class SmLockerBoxManagerActivity extends SmBaseActivity {
     private TextView tv_CabinetName;
     private ListView lv_Cabinets;
     private TextView btn_OpenAllBox;
-    private CabinetBean cur_Cabinet;
-    private List<CabinetBean> cabinets;
+    private CabinetVo cur_Cabinet;
+    private List<CabinetVo> cabinets;
     private static int cur_Cabinet_Position = 0;
 
     private DialogSmCabinetConfig dialog_SmCabinetConfig;
     private DialogSmLockerBox dialog_SmLockerBox;
     private DialogSmConfirm dialog_Confirm;
-    private DeviceBean device;
+    private DeviceVo device;
 
     private RecyclerView tl_Boxs;
 
@@ -200,7 +199,7 @@ public class SmLockerBoxManagerActivity extends SmBaseActivity {
             }
 
             @Override
-            public void onDeleteUsage(LockerBoxUsageBean usage) {
+            public void onDeleteUsage(LockerBoxUsageVo usage) {
                 dialog_Confirm.setTipsImageVisibility(View.GONE);
                 dialog_Confirm.setFunction("deleteusage");
                 dialog_Confirm.setTag(usage);
@@ -266,8 +265,8 @@ public class SmLockerBoxManagerActivity extends SmBaseActivity {
 
     }
 
-    public void drawsLayout(String json_layout,List<LockerBoxBean> boxs) {
-        CabinetLayoutBean layout = JSON.parseObject(json_layout, new TypeReference<CabinetLayoutBean>() {});
+    public void drawsLayout(String json_layout,List<LockerBoxVo> boxs) {
+        CabinetLayoutVo layout = JSON.parseObject(json_layout, new TypeReference<CabinetLayoutVo>() {});
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(layout.getSpanCount(),StaggeredGridLayoutManager.VERTICAL);
         tl_Boxs.setLayoutManager(staggeredGridLayoutManager);
 
@@ -280,7 +279,7 @@ public class SmLockerBoxManagerActivity extends SmBaseActivity {
         tl_Boxs_Adapter.setOnItemClickListener(new SmLockerBoxCabinetBoxAdapter.OnRecyclerItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                LockerBoxBean l_Box = (LockerBoxBean)view.getTag();
+                LockerBoxVo l_Box = (LockerBoxVo)view.getTag();
                 dialog_SmLockerBox.setConfig(device, cur_Cabinet, l_Box);
                 lockerGetBox();
                 dialog_SmLockerBox.show();
@@ -328,7 +327,7 @@ public class SmLockerBoxManagerActivity extends SmBaseActivity {
 
                         if (rt.getCode() == ResultCode.SUCCESS) {
                             RetLockerGetBox ret = rt.getData();
-                            LockerBoxBean lockerBox=new LockerBoxBean();
+                            LockerBoxVo lockerBox=new LockerBoxVo();
                             lockerBox.setDeviceId(ret.getDeviceId());
                             lockerBox.setCabinetId(ret.getCabinetId());
                             lockerBox.setSlotId(ret.getSlotId());
@@ -399,7 +398,7 @@ public class SmLockerBoxManagerActivity extends SmBaseActivity {
 
     }
 
-    public void lockerBoxDeleteUsage(LockerBoxUsageBean usage){
+    public void lockerBoxDeleteUsage(LockerBoxUsageVo usage){
 
         RopLockerDeleteBoxUsage rop=new RopLockerDeleteBoxUsage();
         rop.setDeviceId(usage.getDeviceId());

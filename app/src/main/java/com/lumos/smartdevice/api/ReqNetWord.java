@@ -1,6 +1,5 @@
 package com.lumos.smartdevice.api;
 
-import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerRenewBooks;
@@ -21,11 +20,8 @@ import com.lumos.smartdevice.api.rop.RopOwnSaveInfo;
 import com.lumos.smartdevice.api.rop.RopUserGetDetail;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
-import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.http.HttpClient;
 import com.lumos.smartdevice.http.HttpResponseHandler;
-import com.lumos.smartdevice.model.PageDataBean;
-import com.lumos.smartdevice.model.UserBean;
 import com.lumos.smartdevice.own.Config;
 
 

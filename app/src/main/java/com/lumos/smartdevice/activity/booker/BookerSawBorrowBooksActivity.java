@@ -21,8 +21,8 @@ import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerSawBorrowBooks;
 import com.lumos.smartdevice.api.rop.RopBookerRenewBooks;
 import com.lumos.smartdevice.api.rop.RopBookerSawBorrowBooks;
-import com.lumos.smartdevice.model.BookerBorrowBookBean;
-import com.lumos.smartdevice.model.DeviceBean;
+import com.lumos.smartdevice.model.BookerBorrowBookVo;
+import com.lumos.smartdevice.model.DeviceVo;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -44,7 +44,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
     private final int rv_BorrowedBooks_PageSize=10;
     private BookerBorrowBookAdapter rv_BorrowedBooksAdapter;
 
-    private DeviceBean device;
+    private DeviceVo device;
     private int identityType;
     private String identityId;
     private String clientUserId;
@@ -80,7 +80,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
 
                 switch (fun) {
                     case "renew":
-                        BookerBorrowBookBean item = (BookerBorrowBookBean) dialog_Confirm.getTag();
+                        BookerBorrowBookVo item = (BookerBorrowBookVo) dialog_Confirm.getTag();
 
                         List<String> borrowIds = new ArrayList<>();
                         borrowIds.add(item.getBorrowId());
@@ -106,7 +106,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
         rv_BorrowedBooksAdapter = new BookerBorrowBookAdapter();
         rv_BorrowedBooksAdapter.setOnClickListener(new BookerBorrowBookAdapter.OnClickListener() {
             @Override
-            public void onRenew(BookerBorrowBookBean item) {
+            public void onRenew(BookerBorrowBookVo item) {
                 dialog_Confirm.setFunction("renew");
                 dialog_Confirm.setTag(item);
                 dialog_Confirm.setTipsImageByNetwork(item.getSkuImgUrl());
@@ -180,7 +180,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
 
                     int totalPages = d.getTotalPages();
 
-                    List<BookerBorrowBookBean> items = d.getItems();
+                    List<BookerBorrowBookVo> items = d.getItems();
 
 //
 //                    if(total==0){
