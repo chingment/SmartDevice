@@ -11,6 +11,7 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetOwnLogin;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
 import com.lumos.smartdevice.api.rop.RetOwnSaveInfo;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
@@ -23,6 +24,7 @@ import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.CommonUtil;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import android.content.Intent;
@@ -241,8 +243,7 @@ public class SmHelpToolActivity extends SmBaseActivity {
             @Override
             public void onSuccess(String response) {
                 super.onSuccess(response);
-                ResultBean<RetOwnLogout> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetOwnLogout>>() {
-                });
+                ResultBean<RetOwnLogout> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetOwnLogout>>() {});
 
                 if (rt.getCode() == ResultCode.SUCCESS) {
                     AppCacheManager.setCurrentUser(null);

@@ -22,14 +22,17 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerSawBorrowBooks;
 import com.lumos.smartdevice.api.rop.RetIdentityInfo;
+import com.lumos.smartdevice.api.rop.RetIdentityVerify;
 import com.lumos.smartdevice.api.rop.RopBookerRenewBooks;
 import com.lumos.smartdevice.api.rop.RopBookerSawBorrowBooks;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.model.BookerBorrowBookVo;
+import com.lumos.smartdevice.model.BookerCustomDataVo;
 import com.lumos.smartdevice.model.DeviceVo;
 import com.lumos.smartdevice.model.IdentityInfoByBorrowerVo;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.ArrayList;
@@ -213,8 +216,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
             @Override
             public void onSuccess(String response) {
                 super.onSuccess(response);
-                ResultBean<RetBookerSawBorrowBooks> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetBookerSawBorrowBooks>>() {
-                });
+                ResultBean<RetBookerSawBorrowBooks> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetBookerSawBorrowBooks>>() {});
 
                 if(rt.getCode()== ResultCode.SUCCESS) {
                     RetBookerSawBorrowBooks d = rt.getData();
@@ -293,13 +295,12 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
             @Override
             public void onSuccess(String response) {
                 super.onSuccess(response);
-                ResultBean<RetIdentityInfo> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetIdentityInfo>>() {
-                });
+                ResultBean<RetIdentityInfo> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetIdentityInfo>>() {});
 
                 if (rt.getCode() == ResultCode.SUCCESS) {
                     RetIdentityInfo d = rt.getData();
 
-                    IdentityInfoByBorrowerVo borrower = JSON.parseObject(JSON.toJSONString(d.getInfo()), IdentityInfoByBorrowerVo.class);
+                    IdentityInfoByBorrowerVo borrower = JsonUtil.toObject(JSON.toJSONString(d.getInfo()),new TypeReference<IdentityInfoByBorrowerVo>() {});
 
                     tv_FullName.setText(borrower.getFullName());
                     tv_CardNo.setText(borrower.getCardNo());
@@ -351,8 +352,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
             @Override
             public void onSuccess(String response) {
                 super.onSuccess(response);
-                ResultBean<Object> rt = JSON.parseObject(response, new TypeReference<ResultBean<Object>>() {
-                });
+                ResultBean<Object> rt =JsonUtil.toResult(response,new TypeReference<ResultBean<Object>>() {});
 
                 showToast(rt.getMsg());
 

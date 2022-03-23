@@ -24,6 +24,7 @@ import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.utils.CommonUtil;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
 public class DialogSmUserEdit extends Dialog {
@@ -148,9 +149,7 @@ public class DialogSmUserEdit extends Dialog {
                     @Override
                     public void onSuccess(String response) {
                         super.onSuccess(response);
-                        ResultBean<RetUserSave> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetUserSave>>() {
-                        });
-
+                        ResultBean<RetUserSave> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetUserSave>>() {});
                         if(onClickListener!=null){
                             onClickListener.onSaveResult(rt);
                         }
@@ -260,8 +259,7 @@ public class DialogSmUserEdit extends Dialog {
                         public void onSuccess(String response) {
                             super.onSuccess(response);
 
-                            ResultBean<RetUserGetDetail> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetUserGetDetail>>() {
-                            });
+                            ResultBean<RetUserGetDetail> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetUserGetDetail>>() {});
 
                             if (rt.getCode() == ResultCode.SUCCESS) {
                                 RetUserGetDetail ret = rt.getData();

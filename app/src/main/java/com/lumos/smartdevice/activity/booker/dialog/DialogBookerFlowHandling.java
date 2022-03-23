@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.booker.BookerBaseActivity;
@@ -21,6 +22,8 @@ public class DialogBookerFlowHandling extends Dialog {
     private final BookerBaseActivity mContext;
     private final View mLayoutRes;
 
+
+    TextView tv_TipsText;
 
     public DialogBookerFlowHandling(Context context) {
         super(context, R.style.dialog);
@@ -44,7 +47,7 @@ public class DialogBookerFlowHandling extends Dialog {
 //        gifDrawable.getDuration() ; //获取播放一次所需要的时间
 
 
-        View tv_TipsText = ViewHolder.get(mLayoutRes, R.id.tv_TipsText);
+        tv_TipsText = ViewHolder.get(mLayoutRes, R.id.tv_TipsText);
 
 
         iv_TipsLoading.setOnClickListener(new View.OnClickListener() {
@@ -72,5 +75,8 @@ public class DialogBookerFlowHandling extends Dialog {
         this.setContentView(mLayoutRes);
     }
 
+    public void setTipsText(String tips) {
+        tv_TipsText.setText(tips);
+    }
 
 }

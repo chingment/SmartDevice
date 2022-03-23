@@ -23,8 +23,10 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RetLockerGetBox;
 import com.lumos.smartdevice.api.rop.RetLockerGetCabinet;
+import com.lumos.smartdevice.api.rop.RetOwnGetInfo;
 import com.lumos.smartdevice.api.rop.RopLockerDeleteBoxUsage;
 import com.lumos.smartdevice.api.rop.RopLockerGetBox;
 import com.lumos.smartdevice.api.rop.RopLockerGetCabinet;
@@ -33,6 +35,7 @@ import com.lumos.smartdevice.model.CabinetLayoutVo;
 import com.lumos.smartdevice.model.DeviceVo;
 import com.lumos.smartdevice.model.LockerBoxVo;
 import com.lumos.smartdevice.model.LockerBoxUsageVo;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
@@ -266,7 +269,7 @@ public class SmLockerBoxManagerActivity extends SmBaseActivity {
     }
 
     public void drawsLayout(String json_layout,List<LockerBoxVo> boxs) {
-        CabinetLayoutVo layout = JSON.parseObject(json_layout, new TypeReference<CabinetLayoutVo>() {});
+        CabinetLayoutVo layout =JsonUtil.toObject(json_layout,new TypeReference<CabinetLayoutVo>() {});
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(layout.getSpanCount(),StaggeredGridLayoutManager.VERTICAL);
         tl_Boxs.setLayoutManager(staggeredGridLayoutManager);
 
@@ -322,8 +325,7 @@ public class SmLockerBoxManagerActivity extends SmBaseActivity {
                     public void onSuccess(String response) {
                         super.onSuccess(response);
 
-                        ResultBean<RetLockerGetBox> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetLockerGetBox>>() {
-                        });
+                        ResultBean<RetLockerGetBox> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetLockerGetBox>>() {});
 
                         if (rt.getCode() == ResultCode.SUCCESS) {
                             RetLockerGetBox ret = rt.getData();
@@ -372,8 +374,7 @@ public class SmLockerBoxManagerActivity extends SmBaseActivity {
                     public void onSuccess(String response) {
                         super.onSuccess(response);
 
-                        ResultBean<RetLockerGetCabinet> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetLockerGetCabinet>>() {
-                        });
+                        ResultBean<RetLockerGetCabinet> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetLockerGetCabinet>>() {});
 
                         if (rt.getCode() == ResultCode.SUCCESS) {
                             RetLockerGetCabinet ret = rt.getData();
@@ -423,8 +424,7 @@ public class SmLockerBoxManagerActivity extends SmBaseActivity {
                     public void onSuccess(String response) {
                         super.onSuccess(response);
 
-                        ResultBean<Object> rt = JSON.parseObject(response, new TypeReference<ResultBean<Object>>() {
-                        });
+                        ResultBean<Object> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<Object>>() {});
 
                         if (rt.getCode() == ResultCode.SUCCESS) {
                             lockerGetCabinet();

@@ -16,11 +16,13 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RetLockerGetBoxUseRecords;
 import com.lumos.smartdevice.api.rop.RopLockerGetBoxUseRecords;
 import com.lumos.smartdevice.model.LockerBoxUseRecordVo;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.ArrayList;
@@ -117,8 +119,9 @@ public class SmLockerBoxUseRecordActivity  extends SmBaseActivity {
             @Override
             public void onSuccess(String response) {
                 super.onSuccess(response);
-                ResultBean<RetLockerGetBoxUseRecords> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetLockerGetBoxUseRecords>>() {
-                });
+
+                ResultBean<RetLockerGetBoxUseRecords> re=    JSON.parseObject(response, new TypeReference<ResultBean<RetLockerGetBoxUseRecords>>(){});
+                ResultBean<RetLockerGetBoxUseRecords> rt = JsonUtil.toResult(response, new TypeReference<ResultBean<RetLockerGetBoxUseRecords>>(){});
 
                 if(rt.getCode()== ResultCode.SUCCESS) {
                     RetLockerGetBoxUseRecords d=rt.getData();

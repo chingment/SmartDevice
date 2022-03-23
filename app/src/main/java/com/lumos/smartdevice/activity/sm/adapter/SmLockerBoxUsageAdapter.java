@@ -11,10 +11,12 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.model.CabinetLayoutVo;
 import com.lumos.smartdevice.model.LockerBoxUsageVo;
 import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.utils.CommonUtil;
+import com.lumos.smartdevice.utils.JsonUtil;
 
 import java.util.List;
 
@@ -62,8 +64,7 @@ public class SmLockerBoxUsageAdapter extends BaseAdapter {
         TextView btn_Delete = ViewHolder.get(convertView, R.id.btn_Delete);
         if(usageType.equals("1")) {
 
-            UserVo user = JSON.parseObject(item.getCustomData(), new TypeReference<UserVo>() {
-            });
+            UserVo user = JsonUtil.toObject(item.getCustomData(),new TypeReference<UserVo>() {});
 
             tv_BigTitle.setText(user.getFullName());
             tv_SmallTtile.setText(user.getUserName());

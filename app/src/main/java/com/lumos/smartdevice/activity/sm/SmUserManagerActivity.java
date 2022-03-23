@@ -21,6 +21,7 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetOwnGetInfo;
 import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
@@ -29,6 +30,7 @@ import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
@@ -152,8 +154,7 @@ public class SmUserManagerActivity extends SmBaseActivity {
                     @Override
                     public void onSuccess(String response) {
                         super.onSuccess(response);
-                        ResultBean<Object> rt = JSON.parseObject(response, new TypeReference<ResultBean<Object>>() {
-                        });
+                        ResultBean<Object> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<Object>>() {});
                         if (rt.getCode() == ResultCode.SUCCESS) {
                             finish();
                         }
@@ -220,9 +221,7 @@ public class SmUserManagerActivity extends SmBaseActivity {
             @Override
             public void onSuccess(String response) {
                 super.onSuccess(response);
-                ResultBean<RetUserGetList> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetUserGetList>>() {
-                });
-
+                ResultBean<RetUserGetList> rt =JsonUtil.toResult(response,new TypeReference<ResultBean<RetUserGetList>>() {});
                 if(rt.getCode()== ResultCode.SUCCESS) {
                     RetUserGetList d=rt.getData();
 

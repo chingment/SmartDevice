@@ -6,6 +6,7 @@ import com.gg.reader.api.dal.HandlerTagEpcOver;
 import com.gg.reader.api.protocol.gx.LogBaseEpcInfo;
 import com.gg.reader.api.protocol.gx.LogBaseEpcOver;
 import com.gg.reader.api.protocol.gx.MsgBaseInventoryEpc;
+import com.gg.reader.api.protocol.gx.MsgBaseStop;
 import com.lumos.smartdevice.utils.LogUtil;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
 
    // private Map<String, TagInfo> tagInfoMap = new LinkedHashMap<String, TagInfo>();
 
-    private List<String> epcs=new ArrayList<>();
+   // private List<String> epcs=new ArrayList<>();
 
     private long index=0;
 
@@ -46,6 +47,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
         String param = "/dev/" + comId + ":" + comBaud;
         if(client.openAndroidSerial(param, 1000)){
             LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud+"，成功");
+            subHandler(client);
         }
         else {
             LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud + "，失败");
@@ -53,20 +55,28 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
     }
 
 
-    public boolean  sendRead() {
+    public boolean  sendOpenRead(long ant) {
+
+        boolean isflag=false;
 
         int inventoryMode=1;
-        long ant=1;
+
         MsgBaseInventoryEpc msg = new MsgBaseInventoryEpc();
         msg.setAntennaEnable(ant);
         msg.setInventoryMode(inventoryMode);
 
-        subHandler(client);
 
         client.sendSynMsg(msg);
 
+
         return 0x00 == msg.getRtCode();
 
+    }
+
+    public boolean  sendCloseRead(long ant) {
+        MsgBaseStop msgStop = new MsgBaseStop();
+        client.sendSynMsg(msgStop);
+        return 0x00 == msgStop.getRtCode();
     }
 
     //订阅
@@ -75,13 +85,15 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
             public void log(String readerName, LogBaseEpcInfo info) {
                 if (null != info && 0 == info.getResult()) {
 
+                    LogUtil.d(TAG,info.getEpc());
 
-                    if(!epcs.contains(info.getEpc())) {
-                        epcs.add(info.getEpc());
-                    }
+
+//                    if(!epcs.contains(info.getEpc())) {
+//                        epcs.add(info.getEpc());
+//                    }
 
                     if(onReadHandlerListener!=null) {
-                        onReadHandlerListener.onData(epcs);
+                        onReadHandlerListener.onData(info.getEpc());
                     }
 
 //                    Map<String, TagInfo> infoMap = pooled6cData(info);
@@ -95,6 +107,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
                 }
             }
         };
+
         client.onTagEpcOver = new HandlerTagEpcOver() {
             public void log(String readerName, LogBaseEpcOver info) {
 
@@ -106,7 +119,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
     private OnReadHandlerListener onReadHandlerListener;
     @Override
     public void setReadHandler(OnReadHandlerListener onReadHandlerListener) {
-        this.epcs.clear();
+       // this.epcs.clear();
         this.onReadHandlerListener = onReadHandlerListener;
     }
 

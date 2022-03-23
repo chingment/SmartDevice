@@ -26,7 +26,7 @@ public class SmBaseActivity extends BaseActivity {
                     case 1:
                         if (msg.obj != null) {
                             dialog_Loading = new DialogSmLoading((Context) msg.obj);
-                            dialog_Loading.setProgressText("正在处理中");
+                            dialog_Loading.setTipsText("正在处理中");
                             dialog_Loading.show();
                             new Handler().postDelayed(new Runnable() {
                                 public void run() {

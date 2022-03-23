@@ -19,11 +19,13 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetOwnGetInfo;
 import com.lumos.smartdevice.api.rop.RetOwnSaveInfo;
+import com.lumos.smartdevice.api.rop.RetUserGetDetail;
 import com.lumos.smartdevice.api.rop.RopOwnGetInfo;
 import com.lumos.smartdevice.api.rop.RopOwnSaveInfo;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.utils.CommonUtil;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
 public class DialogSmOwnInfo extends Dialog {
@@ -148,9 +150,7 @@ public class DialogSmOwnInfo extends Dialog {
                     @Override
                     public void onSuccess(String response) {
                         super.onSuccess(response);
-                        ResultBean<RetOwnSaveInfo> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetOwnSaveInfo>>() {
-                        });
-
+                        ResultBean<RetOwnSaveInfo> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetOwnSaveInfo>>() {});
                         mContext.showToast(rt.getMsg());
 
                         if(onClickListener!=null) {
@@ -263,8 +263,7 @@ public class DialogSmOwnInfo extends Dialog {
                         public void onSuccess(String response) {
                             super.onSuccess(response);
 
-                            ResultBean<RetOwnGetInfo> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetOwnGetInfo>>() {
-                            });
+                            ResultBean<RetOwnGetInfo> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetOwnGetInfo>>() {});
 
                             if (rt.getCode() == ResultCode.SUCCESS) {
                                 RetOwnGetInfo ret = rt.getData();

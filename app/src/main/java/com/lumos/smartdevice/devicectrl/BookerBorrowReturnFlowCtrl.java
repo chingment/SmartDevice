@@ -1,5 +1,7 @@
 package com.lumos.smartdevice.devicectrl;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.api.ReqHandler;
@@ -7,6 +9,7 @@ import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
+import com.lumos.smartdevice.api.rop.RetIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.model.BookerDriveLockeqVo;
 import com.lumos.smartdevice.model.BookerDriveRfeqVo;
@@ -15,6 +18,7 @@ import com.lumos.smartdevice.model.BookerSlotDrivesVo;
 import com.lumos.smartdevice.model.DeviceVo;
 import com.lumos.smartdevice.model.DriveVo;
 import com.lumos.smartdevice.utils.CommonUtil;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 
 import java.util.ArrayList;
@@ -106,99 +110,115 @@ public class BookerBorrowReturnFlowCtrl {
                     sendOpenHandlerMessage(ACTION_CODE_INIT_DATA,"设备初始数据检查");
 
                     if (device == null) {
-                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，设备未配置");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "设备未配置[01]");
                         return;
                     }
 
                     HashMap<String, DriveVo> drives=device.getDrives();
 
                     if(drives==null||drives.size()==0) {
-                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，设备未配置驱动");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "设备未配置驱动[02]");
                         return;
                     }
 
                     if(drives.size()<2) {
-                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，设备驱动数量不对");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "设备驱动数量不对[03]");
                         return;
                     }
 
                     if (slot == null) {
-                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子未配置");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "格子未配置[04]");
                         return;
                     }
 
                     BookerSlotDrivesVo slot_Drives=slot.getDrives();
 
                     if(slot_Drives==null) {
-                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子未配置驱动");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "设备未配置驱动[05]");
                         return;
                     }
 
                     BookerDriveLockeqVo lockeq=slot_Drives.getLockeq();
                     if(lockeq==null) {
-                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子未配置锁驱动");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "格子未配置锁驱动[06]");
                         return;
                     }
 
                     if(!drives.containsKey(lockeq.getDriveId())) {
-                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子驱动找不到");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "格子驱动找不到[07]");
                         return;
                     }
 
                     BookerDriveRfeqVo rfeq=slot_Drives.getRfeq();
                     if(rfeq==null) {
-                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，格子未配置射频驱动");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "射频未配置驱动[08]");
                         return;
                     }
 
                     if(!drives.containsKey(rfeq.getDriveId())) {
-                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，射频驱动找不到");
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "射频驱动找不到[09]");
                         return;
                     }
 
 
                     DriveVo lockeqDrive=drives.get(lockeq.getDriveId());
 
+                    if(lockeqDrive==null){
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "格子驱动找不到[11]");
+                        return;
+                    }
+
                     DriveVo rfeqDrive=drives.get(rfeq.getDriveId());
+
+                    if(rfeqDrive==null){
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "射频驱动找不到[12]");
+                        return;
+                    }
 
                     lockeqCtrl= LockeqCtrlInterface.getInstance(lockeqDrive.getComId(),lockeqDrive.getComBaud(),lockeqDrive.getComPrl());
 
-                    rfeqCtrl = RfeqCtrlInterface.getInstance("ttyS0",rfeqDrive.getComBaud(),rfeqDrive.getComPrl());
-//
-//                    if (rfIdCtrl == null) {
-//                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，设备连接失败");
-//                        return;
-//                    }
-//
-//
-//
-//                    rfIdCtrl.setReadHandler(new IRfIdCtrl.OnReadHandlerListener() {
-//                        @Override
-//                        public void onData(List<String> rfIds) {
-//                            open_RfIds = rfIds;
-//                        }
-//                    });
-//
-//
-//                    if (!rfIdCtrl.sendRead()) {
-//                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "打开失败，设备命令发送失败");
-//                        return;
-//                    }
-//
-//
-                    Thread.sleep(1000);
+                    rfeqCtrl = RfeqCtrlInterface.getInstance(rfeqDrive.getComId(),rfeqDrive.getComBaud(),rfeqDrive.getComPrl());
+
+                    //todo 判断设备连接
+
+                    if (!rfeqCtrl.sendOpenRead(1)) {
+                        sendOpenHandlerMessage(ACTION_CODE_INIT_DATA_FAILURE, "设备命令发送失败[15]");
+                        return;
+                    }
+
+                    rfeqCtrl.setReadHandler(new IRfeqCtrl.OnReadHandlerListener() {
+                        @Override
+                        public void onData(String rfId) {
+
+                            LogUtil.d(TAG,"open_rfid:"+rfId);
+
+                            if(!open_RfIds.contains(rfId)){
+                                open_RfIds.add(rfId);
+                            }
+                        }
+                    });
+
+
+                    Thread.sleep(500);
 
 
                     HashMap<String,Object> actionData=new HashMap<>();
 
 
-                    open_RfIds.add("123456789012345678901410");
-                    open_RfIds.add("123456789012345678901409");
-                    open_RfIds.add("123456789012345678901408");
-                    open_RfIds.add("123456789012345678901407");
+                    //open_RfIds.add("123456789012345678901410");
+                    //open_RfIds.add("123456789012345678901409");
+                    //open_RfIds.add("123456789012345678901408");
+                    //open_RfIds.add("123456789012345678901407");
                     //open_RfIds.add("123456789012345678901406");
 
                     actionData.put("rfIds",open_RfIds);
+
+                    LogUtil.d(TAG,"open_rfIds"+JSON.toJSONString(open_RfIds));
+
+                    rfeqCtrl.setReadHandler(null);
+
+                    rfeqCtrl.sendCloseRead(1);
+
 
                     sendOpenHandlerMessage(ACTION_CODE_REQUEST_OPEN_AUTH,actionData, "请求是否允许打开设备");
 
@@ -252,8 +272,7 @@ public class BookerBorrowReturnFlowCtrl {
                     @Override
                     public void onSuccess(String response) {
                         super.onSuccess(response);
-                        ResultBean<RetBookerBorrowReturn> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetBookerBorrowReturn>>() {
-                        });
+                        ResultBean<RetBookerBorrowReturn> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetBookerBorrowReturn>>() {});
 
                         if (rt.getCode() == ResultCode.SUCCESS) {
                             sendOpenHandlerMessage(ACTION_CODE_REQUEST_OPEN_AUTH_SUCCESS, "请求允许打开设备");
@@ -294,28 +313,40 @@ public class BookerBorrowReturnFlowCtrl {
                         sendOpenHandlerMessage(ACTION_CODE_OPEN_SUCCESS, "打开成功");
 
 
-//                        rfIdCtrl.setReadHandler(new IRfIdCtrl.OnReadHandlerListener() {
-//                            @Override
-//                            public void onData(List<String> rfIds) {
-//                                close_RfIds = rfIds;
-//                            }
-//                        });
+                        rfeqCtrl.sendOpenRead(1);
+
+                        rfeqCtrl.setReadHandler(new IRfeqCtrl.OnReadHandlerListener() {
+                            @Override
+                            public void onData(String rfId) {
+
+                                LogUtil.d(TAG,"close_rfid:"+rfId);
+                                if(!close_RfIds.contains(rfId)){
+                                    close_RfIds.add(rfId);
+                                }
+                            }
+                        });
+
 
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(15*1000);
                         } catch (Exception ex) {
 
                         }
 
+                        rfeqCtrl.sendCloseRead(1);
+
+                        LogUtil.d(TAG,"close_rfIds"+JSON.toJSONString(close_RfIds));
 
 
-                        close_RfIds.add("123456789012345678901408");
-                        close_RfIds.add("123456789012345678901407");
-                        close_RfIds.add("123456789012345678901406");
+                        //close_RfIds.add("123456789012345678901408");
+                        //close_RfIds.add("123456789012345678901407");
+                        //close_RfIds.add("123456789012345678901406");
 
 
                         HashMap<String, Object> actionData = new HashMap<>();
                         actionData.put("rfIds", close_RfIds);
+
+                        rfeqCtrl.sendCloseRead(1);
 
                         sendOpenHandlerMessage(ACTION_CODE_CLOSE_SUCCESS, actionData, "关闭成功");
                     }
@@ -350,8 +381,8 @@ public class BookerBorrowReturnFlowCtrl {
                     @Override
                     public void onSuccess(String response) {
                         super.onSuccess(response);
-                        ResultBean<RetBookerBorrowReturn> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetBookerBorrowReturn>>() {
-                        });
+                        ResultBean<RetBookerBorrowReturn> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetBookerBorrowReturn>>() {});
+
 
                         if (rt.getCode() == ResultCode.SUCCESS) {
                             RetBookerBorrowReturn d = rt.getData();

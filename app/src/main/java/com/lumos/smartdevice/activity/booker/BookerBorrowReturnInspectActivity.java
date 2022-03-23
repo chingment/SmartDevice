@@ -15,6 +15,7 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RetIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
@@ -25,6 +26,7 @@ import com.lumos.smartdevice.model.DeviceVo;
 import com.lumos.smartdevice.model.IdentityInfoByBorrowerVo;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.ui.my.MyGridView;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
@@ -92,28 +94,57 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                                 dialog_BookerFlowHandling.show();
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_INIT_DATA_FAILURE:
-                                //dialog_BookerFlowHandling.hide();
+                                dialog_BookerFlowHandling.setTipsText(actionRemark);
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_OPEN_AUTH:
+                                dialog_BookerFlowHandling.setTipsText("验证打开授权中");
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_OPEN_AUTH_FAILURE:
-                                //dialog_BookerFlowHandling.hide();
+                                dialog_BookerFlowHandling.setTipsText("验证打开授权失败");
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_OPEN_AUTH_SUCCESS:
+                                dialog_BookerFlowHandling.setTipsText("验证打开授权成功");
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_SEND_OPEN_COMMAND:
+                                dialog_BookerFlowHandling.setTipsText("设备发送打开命令");
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_SEND_OPEN_COMMAND_SUCCESS:
+                                dialog_BookerFlowHandling.setTipsText("设备发送打开命令成功");
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_SEND_OPEN_COMMAND_FAILURE:
-                                //dialog_BookerFlowHandling.hide();
+                                dialog_BookerFlowHandling.setTipsText("设备发送打开命令失败");
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_OPEN_SUCCESS:
+                                dialog_BookerFlowHandling.setTipsText("柜门已打开，等待关门中");
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_OPEN_FAILURE:
+                                dialog_BookerFlowHandling.setTipsText("柜门打开失败，请尝试再次打开");
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_CLOSE_SUCCESS:
+                                dialog_BookerFlowHandling.setTipsText("柜门关门成功");
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_CLOSE_FAILURE:
+                                dialog_BookerFlowHandling.setTipsText("柜门关失败");
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_CLOSE_AUTH:
+                                dialog_BookerFlowHandling.setTipsText("验证关闭授权s");
+                                break;
+                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS:
+                                dialog_BookerFlowHandling.setTipsText("验证关闭授权成功");
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE:
+                                dialog_BookerFlowHandling.setTipsText("验证关闭授权失败");
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_END:
 
-//                                RetBookerBorrowReturn retBookerBorrowReturn = (RetBookerBorrowReturn) actionData.get("ret_booker_borrow_return");
-//
-//                                Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
-//                                Bundle bundle = new Bundle();
-//                                bundle.putSerializable("ret_booker_borrow_return", retBookerBorrowReturn);
-//                                intent.putExtras(bundle);
-//                                openActivity(intent);
-//                                finish();
+                                RetBookerBorrowReturn retBookerBorrowReturn = (RetBookerBorrowReturn) actionData.get("ret_booker_borrow_return");
+
+                                Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("ret_booker_borrow_return", retBookerBorrowReturn);
+                                intent.putExtras(bundle);
+                                openActivity(intent);
+                                finish();
 
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_EXCEPTION:
@@ -202,8 +233,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
             @Override
             public void onSuccess(String response) {
                 super.onSuccess(response);
-                ResultBean<RetBookerCreateFlow> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetBookerCreateFlow>>() {
-                });
+                ResultBean<RetBookerCreateFlow> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetBookerCreateFlow>>() {});
 
                 if (rt.getCode() == ResultCode.SUCCESS) {
                     RetBookerCreateFlow d=rt.getData();
@@ -247,13 +277,12 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
             @Override
             public void onSuccess(String response) {
                 super.onSuccess(response);
-                ResultBean<RetIdentityInfo> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetIdentityInfo>>() {
-                });
+                ResultBean<RetIdentityInfo> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetIdentityInfo>>() {});
 
                 if (rt.getCode() == ResultCode.SUCCESS) {
                     RetIdentityInfo d = rt.getData();
 
-                    IdentityInfoByBorrowerVo borrower = JSON.parseObject(JSON.toJSONString(d.getInfo()), IdentityInfoByBorrowerVo.class);
+                    IdentityInfoByBorrowerVo borrower = JsonUtil.toObject(JSON.toJSONString(d.getInfo()),new TypeReference<IdentityInfoByBorrowerVo>() {});
 
                     tv_FullName.setText(borrower.getFullName());
                     tv_CardNo.setText(borrower.getCardNo());

@@ -15,11 +15,13 @@ import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetIdentityVerify;
+import com.lumos.smartdevice.api.rop.RetOwnLogout;
 import com.lumos.smartdevice.api.rop.RopIdentityVerify;
 import com.lumos.smartdevice.model.DeviceVo;
 import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.model.GridNineItemType;
 import com.lumos.smartdevice.ui.my.MyGridView;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.UsbReaderUtil;
@@ -132,8 +134,7 @@ public class BookerIdentityVerifyActivity extends BookerBaseActivity {
             @Override
             public void onSuccess(String response) {
                 super.onSuccess(response);
-                ResultBean<RetIdentityVerify> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetIdentityVerify>>() {
-                });
+                ResultBean<RetIdentityVerify> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetIdentityVerify>>() {});
 
                 if (rt.getCode() == ResultCode.SUCCESS) {
 

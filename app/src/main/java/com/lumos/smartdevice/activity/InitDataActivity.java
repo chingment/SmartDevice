@@ -27,14 +27,17 @@ import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.BookerCustomDataVo;
+import com.lumos.smartdevice.model.CabinetLayoutVo;
 import com.lumos.smartdevice.model.DeviceVo;
 import com.lumos.smartdevice.model.LogTipsBean;
+import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppLogcatManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.DeviceUtil;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
@@ -86,6 +89,8 @@ public class InitDataActivity extends BaseActivity {
 
         setContentView(R.layout.activity_init_data);
 
+        //ResultBean<RetDeviceInitData> rt = JsonUtil.toResult("Dsads",new TypeReference<ResultBean<RetDeviceInitData>>() {});
+
         PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
             @Override
             public void onGranted() {
@@ -97,8 +102,8 @@ public class InitDataActivity extends BaseActivity {
             }
         });
 
-        LogUtil.d(TAG,"您好");
-        AppLogcatManager.saveLogcat2Server("logcat -d -s InitDataActivity","test");
+        //LogUtil.d(TAG,"您好");
+        //AppLogcatManager.saveLogcat2Server("logcat -d -s InitDataActivity","test");
         //CrashReport.testJavaCrash();
 
 //         ICabinetCtrl cabinetCtrl= CabinetCtrlInterface.getInstance("ttyS4",9600,"aaa");
@@ -229,7 +234,7 @@ public class InitDataActivity extends BaseActivity {
 
 
                         if(scene_mode==AppVar.SCENE_MODE_2) {
-                            BookerCustomDataVo bookerCustomData = JSON.parseObject(JSON.toJSONString(initData.getCustomData()), BookerCustomDataVo.class);
+                            BookerCustomDataVo bookerCustomData = JsonUtil.toObject((JSON.toJSONString(initData.getCustomData())),new TypeReference<BookerCustomDataVo>() {});
                             AppCacheManager.setBookerCustomData(bookerCustomData);
                         }
 
@@ -364,7 +369,8 @@ public class InitDataActivity extends BaseActivity {
             public void onSuccess(String response) {
                 super.onSuccess(response);
 
-                ResultBean<RetDeviceInitData> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetDeviceInitData>>() {
+
+                ResultBean<RetDeviceInitData> rt = JsonUtil.toResult(response, new TypeReference<ResultBean<RetDeviceInitData>>() {
                 });
 
                 if(rt.getCode()==ResultCode.SUCCESS){

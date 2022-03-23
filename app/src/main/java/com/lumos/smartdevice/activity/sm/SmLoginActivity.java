@@ -23,11 +23,13 @@ import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetOwnLogin;
+import com.lumos.smartdevice.api.rop.RetOwnLogout;
 import com.lumos.smartdevice.api.rop.RopOwnLoginByAccount;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.own.AppCacheManager;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
@@ -229,8 +231,7 @@ public class SmLoginActivity extends SmBaseActivity implements View.OnClickListe
                     @Override
                     public void onSuccess(String response) {
                         super.onSuccess(response);
-                        ResultBean<RetOwnLogin> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetOwnLogin>>() {
-                        });
+                        ResultBean<RetOwnLogin> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetOwnLogin>>() {});
 
                         if(rt.getCode()== ResultCode.SUCCESS) {
                             RetOwnLogin d=rt.getData();

@@ -18,6 +18,7 @@ import com.lumos.smartdevice.db.dao.TripMsgDao;
 import com.lumos.smartdevice.db.dao.UserDao;
 import com.lumos.smartdevice.model.CabinetVo;
 import com.lumos.smartdevice.model.CabinetLayoutVo;
+import com.lumos.smartdevice.model.IdentityInfoByBorrowerVo;
 import com.lumos.smartdevice.model.LockerBoxVo;
 import com.lumos.smartdevice.model.LockerBoxUsageVo;
 import com.lumos.smartdevice.model.LockerBoxUseRecordVo;
@@ -26,6 +27,7 @@ import com.lumos.smartdevice.model.TripMsgBean;
 import com.lumos.smartdevice.model.UserVo;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
 import java.text.SimpleDateFormat;
@@ -384,8 +386,7 @@ public class DbManager {
                     return ResultUtil.isFailure("保存失败，有柜子正在使用中");
                 }
 
-                List<CabinetVo> cabinets = JSON.parseObject(json_cabinets, new TypeReference<List<CabinetVo>>() {
-                });
+                List<CabinetVo> cabinets = JsonUtil.toObject(json_cabinets,new TypeReference<List<CabinetVo> >() {});
 
                 if (cabinets == null || cabinets.size() <= 0) {
                     return ResultUtil.isFailure("保存失败，解释串口协议不成功");
@@ -407,8 +408,7 @@ public class DbManager {
                     db.insert(CabinetDao.TABLE_NAME, null, cv_Cabinet);
 
 
-                    CabinetLayoutVo layout = JSON.parseObject(cabinet.getLayout(), new TypeReference<CabinetLayoutVo>() {
-                    });
+                    CabinetLayoutVo layout = JsonUtil.toObject(cabinet.getLayout(),new TypeReference<CabinetLayoutVo>() {});
 
                     if (layout == null)
                         return ResultUtil.isFailure("保存失败，解释布局协议失败");
@@ -445,8 +445,7 @@ public class DbManager {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             if (db.isOpen()) {
 
-                List<CabinetVo> cabinets = JSON.parseObject(json_cabinets, new TypeReference<List<CabinetVo>>() {
-                });
+                List<CabinetVo> cabinets = JsonUtil.toObject(json_cabinets,new TypeReference< List<CabinetVo>>() {});
 
                 if (cabinets == null || cabinets.size() <= 0) {
                     return ResultUtil.isFailure("保存失败，解释串口协议不成功");
@@ -467,8 +466,7 @@ public class DbManager {
                     db.insert(CabinetDao.TABLE_NAME, null, cv_Cabinet);
 
 
-                    CabinetLayoutVo layout = JSON.parseObject(cabinet.getLayout(), new TypeReference<CabinetLayoutVo>() {
-                    });
+                    CabinetLayoutVo layout = JsonUtil.toObject(cabinet.getLayout(),new TypeReference<CabinetLayoutVo>() {});
 
                     if (layout == null)
                         return ResultUtil.isFailure("保存失败，解释布局协议失败");

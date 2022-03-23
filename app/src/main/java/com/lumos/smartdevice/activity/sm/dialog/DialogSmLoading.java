@@ -46,7 +46,7 @@ public class DialogSmLoading extends Dialog {
 		super.cancel();
 	}
 	
-	public void setProgressText(String text){
+	public void setTipsText(String text){
 		tvInfo.setText(text);
 	}
 
