@@ -312,8 +312,19 @@ public class BookerBorrowReturnFlowCtrl {
                     public void onOpenSuccess() {
                         sendOpenHandlerMessage(ACTION_CODE_OPEN_SUCCESS, "打开成功");
 
+                        try {
+                            Thread.sleep(15*1000);
+                        } catch (Exception ex) {
+
+                        }
 
                         rfeqCtrl.sendOpenRead(1);
+                        rfeqCtrl.setReadHandler(null);
+                        try {
+                            Thread.sleep(500);
+                        } catch (Exception ex) {
+
+                        }
 
                         rfeqCtrl.setReadHandler(new IRfeqCtrl.OnReadHandlerListener() {
                             @Override
@@ -328,7 +339,7 @@ public class BookerBorrowReturnFlowCtrl {
 
 
                         try {
-                            Thread.sleep(15*1000);
+                            Thread.sleep(500);
                         } catch (Exception ex) {
 
                         }
