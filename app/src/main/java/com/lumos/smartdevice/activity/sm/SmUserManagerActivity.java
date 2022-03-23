@@ -16,7 +16,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmUserEdit;
-import com.lumos.smartdevice.adapter.SmUserManagerUserAdapter;
+import com.lumos.smartdevice.activity.sm.adapter.SmUserManagerUserAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;

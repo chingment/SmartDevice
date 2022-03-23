@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.adapter.SmLockerBoxUsageAdapter;
+import com.lumos.smartdevice.activity.sm.adapter.SmLockerBoxUsageAdapter;
 import com.lumos.smartdevice.model.CabinetVo;
 import com.lumos.smartdevice.model.DeviceVo;
 import com.lumos.smartdevice.model.LockerBoxVo;

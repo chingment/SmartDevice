@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.adapter.BookerBorrowReturnBookAdapter;
+import com.lumos.smartdevice.activity.booker.adapter.BookerBorrowReturnBookAdapter;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.model.BookerBookVo;
 import com.lumos.smartdevice.ui.my.MyListView;

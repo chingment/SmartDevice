@@ -136,20 +136,20 @@ public class BookerBorrowBookVo implements Serializable {
         this.renewCount = renewCount;
     }
 
-    public boolean isWilldue() {
+    public boolean getIsWilldue() {
         return isWilldue;
     }
 
-    public void setWilldue(boolean willdue) {
-        isWilldue = willdue;
+    public void setIsWilldue(boolean isWilldue) {
+        this.isWilldue = isWilldue;
     }
 
-    public boolean isOverdue() {
+    public boolean getIsOverdue() {
         return isOverdue;
     }
 
-    public void setOverdue(boolean overdue) {
-        isOverdue = overdue;
+    public void setIsOverdue(boolean isOverdue) {
+        this.isOverdue = isOverdue;
     }
 
     public boolean isCanRenew() {

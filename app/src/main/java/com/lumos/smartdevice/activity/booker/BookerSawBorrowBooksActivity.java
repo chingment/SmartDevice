@@ -13,7 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.booker.dialog.DialogBookerConfirm;
-import com.lumos.smartdevice.adapter.BookerBorrowBookAdapter;
+import com.lumos.smartdevice.activity.booker.adapter.BookerBorrowBookAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;

@@ -1,4 +1,4 @@
-package com.lumos.smartdevice.adapter;
+package com.lumos.smartdevice.activity.booker.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 
 import androidx.cardview.widget.CardView;
 

@@ -1,4 +1,4 @@
-package com.lumos.smartdevice.adapter;
+package com.lumos.smartdevice.activity.booker.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -84,8 +84,15 @@ public class BookerBorrowBookAdapter extends RefreshAdapter {
             statusTextColor=R.color.booker_borrow_status_4000;
         }
 
+
         tv_StatusText.setTextColor(context.getResources().getColor(statusTextColor));
 
+        if(item.isCanRenew()){
+            btn_RenewBook.setVisibility(View.VISIBLE);
+        }
+        else {
+            btn_RenewBook.setVisibility(View.GONE);
+        }
 
         btn_RenewBook.setTag(item);
         btn_RenewBook.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +105,7 @@ public class BookerBorrowBookAdapter extends RefreshAdapter {
                 }
             }
         });
+
     }
 
 

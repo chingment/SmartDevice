@@ -1,4 +1,4 @@
-package com.lumos.smartdevice.adapter;
+package com.lumos.smartdevice.activity.booker.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
