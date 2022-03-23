@@ -18,7 +18,7 @@ import java.util.List;
 
 public class BookerBorrowReturnInspectSlotAdapter extends BaseAdapter {
 
-    private static final String TAG = "BookerBorrowReturnInspectCabinetBoxAdapter";
+    private static final String TAG = "BookerBorrowReturnInspectSlotAdapter";
 
     private final List<BookerSlotBean> items;
     private final Context context;
@@ -47,7 +47,7 @@ public class BookerBorrowReturnInspectSlotAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_booker_borrow_return_inspect_cabinet_slot, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_booker_borrow_return_inspect_slot, parent, false);
         }
 
         BookerSlotBean bean = items.get(position);

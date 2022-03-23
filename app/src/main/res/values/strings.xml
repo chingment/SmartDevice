@@ -118,6 +118,10 @@
     <string name="t_borrowcardno">借阅卡号</string>
     <string name="t_canborrow_quantity">可借数量</string>
     <string name="t_borrowed_quantity">已借数量</string>
+    <string name="t_willdue_quantity">即将到期</string>
+    <string name="t_overdue_quantity">逾期数量</string>
+    <string name="t_overdue_fine">逾期费用</string>
+    <string name="t_status">状态</string>
     <string name="t_feedback">问题反馈</string>
     <string name="t_contactaddr">联系地址</string>
     <string name="t_brush_iccard">刷卡</string>

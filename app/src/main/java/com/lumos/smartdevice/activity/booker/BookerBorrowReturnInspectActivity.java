@@ -43,7 +43,16 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
     private TextView tv_CardNo;
     private TextView tv_CanBorrowQuantity;
     private TextView tv_BorrowedQuantity;
+
+    private TextView tv_WilldueQuantity;
+    private TextView tv_OverdueQuantity;
+    private TextView tv_OverdueFine;
+    private TextView tv_Status;
     private ImageView iv_SawBorrowBooks;
+
+    private View ll_WilldueQuantity;
+    private View ll_OverdueQuantity;
+    private View ll_OverdueFine;
 
     private DeviceBean device;
 
@@ -98,14 +107,14 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_END:
 
-                                RetBookerBorrowReturn retBookerBorrowReturn = (RetBookerBorrowReturn) actionData.get("ret_booker_borrow_return");
-
-                                Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
-                                Bundle bundle = new Bundle();
-                                bundle.putSerializable("ret_booker_borrow_return", retBookerBorrowReturn);
-                                intent.putExtras(bundle);
-                                openActivity(intent);
-                                finish();
+//                                RetBookerBorrowReturn retBookerBorrowReturn = (RetBookerBorrowReturn) actionData.get("ret_booker_borrow_return");
+//
+//                                Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
+//                                Bundle bundle = new Bundle();
+//                                bundle.putSerializable("ret_booker_borrow_return", retBookerBorrowReturn);
+//                                intent.putExtras(bundle);
+//                                openActivity(intent);
+//                                finish();
 
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_EXCEPTION:
@@ -130,6 +139,13 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         tv_CanBorrowQuantity = findViewById(R.id.tv_CanBorrowQuantity);
         tv_BorrowedQuantity = findViewById(R.id.tv_BorrowedQuantity);
         iv_SawBorrowBooks= findViewById(R.id.iv_SawBorrowBooks);
+        tv_WilldueQuantity= findViewById(R.id.tv_WilldueQuantity);
+        tv_OverdueQuantity= findViewById(R.id.tv_OverdueQuantity);
+        tv_OverdueFine= findViewById(R.id.tv_OverdueFine);
+        tv_Status= findViewById(R.id.tv_Status);
+        ll_WilldueQuantity= findViewById(R.id.ll_WilldueQuantity);
+        ll_OverdueQuantity= findViewById(R.id.ll_OverdueQuantity);
+        ll_OverdueFine= findViewById(R.id.ll_OverdueFine);
         gdv_Slots = findViewById(R.id.gdv_Slots);
         dialog_BookerFlowHandling = new DialogBookerFlowHandling(BookerBorrowReturnInspectActivity.this);
     }
@@ -205,7 +221,6 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
     }
 
 
-
     private void getIdentityInfo() {
 
         RopIdentityInfo rop = new RopIdentityInfo();
@@ -243,6 +258,32 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                     tv_CardNo.setText(borrower.getCardNo());
                     tv_BorrowedQuantity.setText(String.valueOf(borrower.getBorrowedQuantity()));
                     tv_CanBorrowQuantity.setText(String.valueOf(borrower.getCanBorrowQuantity()));
+                    tv_WilldueQuantity.setText(String.valueOf(borrower.getWilldueQuantity()));
+                    tv_OverdueQuantity.setText(String.valueOf(borrower.getOverdueQuantity()));
+                    tv_OverdueFine.setText(String.valueOf(borrower.getOverdueFine()));
+                    tv_Status.setText(borrower.getStatus().getText());
+
+                    if(borrower.getWilldueQuantity()>0){
+                        ll_WilldueQuantity.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        ll_WilldueQuantity.setVisibility(View.INVISIBLE);
+                    }
+
+                    if(borrower.getOverdueQuantity()>0){
+                        ll_OverdueQuantity.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        ll_OverdueQuantity.setVisibility(View.INVISIBLE);
+                    }
+
+                    if(borrower.getOverdueFine()>0){
+                        ll_OverdueFine.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        ll_OverdueFine.setVisibility(View.INVISIBLE);
+                    }
+
 
                 } else {
                     showToast(rt.getMsg());

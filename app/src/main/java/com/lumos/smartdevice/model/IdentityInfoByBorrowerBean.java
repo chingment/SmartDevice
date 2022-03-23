@@ -8,7 +8,12 @@ public class IdentityInfoByBorrowerBean implements Serializable {
     private String cardNo;
     private int canBorrowQuantity;
     private int borrowedQuantity;
+    private int willdueQuantity;
+    private int overdueQuantity;
+    private FieldBean status;
     private float overdueFine;
+
+
     private List<BookerBorrowBookBean> borrowBooks;
 
     public String getFullName() {
@@ -43,6 +48,22 @@ public class IdentityInfoByBorrowerBean implements Serializable {
         this.borrowedQuantity = borrowedQuantity;
     }
 
+    public int getWilldueQuantity() {
+        return willdueQuantity;
+    }
+
+    public void setWilldueQuantity(int willdueQuantity) {
+        this.willdueQuantity = willdueQuantity;
+    }
+
+    public int getOverdueQuantity() {
+        return overdueQuantity;
+    }
+
+    public void setOverdueQuantity(int overdueQuantity) {
+        this.overdueQuantity = overdueQuantity;
+    }
+
     public float getOverdueFine() {
         return overdueFine;
     }
@@ -57,5 +78,13 @@ public class IdentityInfoByBorrowerBean implements Serializable {
 
     public void setBorrowBooks(List<BookerBorrowBookBean> borrowBooks) {
         this.borrowBooks = borrowBooks;
+    }
+
+    public FieldBean getStatus() {
+        return status;
+    }
+
+    public void setStatus(FieldBean status) {
+        this.status = status;
     }
 }
