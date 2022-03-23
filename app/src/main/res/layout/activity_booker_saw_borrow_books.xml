@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/booker_primary_bg"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
@@ -27,29 +27,41 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_180"
-            android:baselineAligned="false"
-            >
+            android:baselineAligned="false">
+
             <include
                 layout="@layout/booker_card_info"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_180"
-                />
+                android:layout_height="@dimen/size_180" />
         </LinearLayout>
 
-
-
-        <com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout
-            android:id="@+id/sf_BorrowedBooks"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            >
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_BorrowedBooks"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/size_20"
+                android:layout_marginBottom="@dimen/size_10"
+                android:text="以下是已借阅的图书"
+                android:textColor="@color/field_name"
+                android:textSize="@dimen/sp_16" />
+
+            <com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout
+                android:id="@+id/sf_BorrowedBooks"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout>
+                android:layout_height="match_parent">
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_BorrowedBooks"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout>
 
+        </LinearLayout>
 
     </LinearLayout>
 

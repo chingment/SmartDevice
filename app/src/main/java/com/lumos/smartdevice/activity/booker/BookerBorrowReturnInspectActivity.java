@@ -172,7 +172,6 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
         gdv_Slots.setAdapter(slotAdapter);
 
-        getIdentityInfo();
     }
 
 
@@ -299,6 +298,13 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getIdentityInfo();
+
+    }
 
     @Override
     public void onDestroy() {

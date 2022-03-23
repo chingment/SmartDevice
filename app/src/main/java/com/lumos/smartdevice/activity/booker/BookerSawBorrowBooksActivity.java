@@ -3,6 +3,8 @@ package com.lumos.smartdevice.activity.booker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -19,10 +21,13 @@ import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerSawBorrowBooks;
+import com.lumos.smartdevice.api.rop.RetIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopBookerRenewBooks;
 import com.lumos.smartdevice.api.rop.RopBookerSawBorrowBooks;
+import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.model.BookerBorrowBookVo;
 import com.lumos.smartdevice.model.DeviceVo;
+import com.lumos.smartdevice.model.IdentityInfoByBorrowerVo;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -38,6 +43,22 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
     private View btn_Nav_Footer_GoHome;
 
     private DialogBookerConfirm dialog_Confirm;
+
+    private TextView tv_FullName;
+    private TextView tv_CardNo;
+    private TextView tv_CanBorrowQuantity;
+    private TextView tv_BorrowedQuantity;
+
+    private TextView tv_WilldueQuantity;
+    private TextView tv_OverdueQuantity;
+    private TextView tv_OverdueFine;
+    private TextView tv_Status;
+    private ImageView iv_SawBorrowBooks;
+
+    private View ll_WilldueQuantity;
+    private View ll_OverdueQuantity;
+    private View ll_OverdueFine;
+
     private SuperRefreshLayout sf_BorrowedBooks;
     private RecyclerView rv_BorrowedBooks;
     private int rv_BorrowedBooks_PageNum=1;
@@ -96,6 +117,26 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
             }
         });
 
+
+        tv_FullName = findViewById(R.id.tv_FullName);
+        tv_CardNo = findViewById(R.id.tv_CardNo);
+        tv_CanBorrowQuantity = findViewById(R.id.tv_CanBorrowQuantity);
+        tv_BorrowedQuantity = findViewById(R.id.tv_BorrowedQuantity);
+        iv_SawBorrowBooks= findViewById(R.id.iv_SawBorrowBooks);
+        tv_WilldueQuantity= findViewById(R.id.tv_WilldueQuantity);
+        tv_OverdueQuantity= findViewById(R.id.tv_OverdueQuantity);
+        tv_OverdueFine= findViewById(R.id.tv_OverdueFine);
+        tv_Status= findViewById(R.id.tv_Status);
+        ll_WilldueQuantity= findViewById(R.id.ll_WilldueQuantity);
+        ll_OverdueQuantity= findViewById(R.id.ll_OverdueQuantity);
+        ll_OverdueFine= findViewById(R.id.ll_OverdueFine);
+
+        iv_SawBorrowBooks.setVisibility(View.INVISIBLE);
+        ll_WilldueQuantity.setVisibility(View.VISIBLE);
+        ll_OverdueQuantity.setVisibility(View.VISIBLE);
+        ll_OverdueFine.setVisibility(View.VISIBLE);
+
+
         sf_BorrowedBooks =  findViewById(R.id.sf_BorrowedBooks);
         rv_BorrowedBooks = findViewById(R.id.rv_BorrowedBooks);
 
@@ -141,7 +182,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
     }
 
     private void initData() {
-
+        getIdentityInfo();
         getBorrowedBooks();
     }
 
@@ -229,6 +270,58 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
 
     }
 
+    private void getIdentityInfo() {
+
+        RopIdentityInfo rop = new RopIdentityInfo();
+        rop.setDeviceId(device.getDeviceId());
+        rop.setClientUserId(clientUserId);
+        rop.setIdentityType(identityType);
+        rop.setIdentityId(identityId);
+        rop.setSceneMode(device.getSceneMode());
+        ReqInterface.getInstance().identityInfo(rop, new ReqHandler() {
+
+            @Override
+            public void onBeforeSend() {
+                super.onBeforeSend();
+            }
+
+            @Override
+            public void onAfterSend() {
+                super.onAfterSend();
+            }
+
+            @Override
+            public void onSuccess(String response) {
+                super.onSuccess(response);
+                ResultBean<RetIdentityInfo> rt = JSON.parseObject(response, new TypeReference<ResultBean<RetIdentityInfo>>() {
+                });
+
+                if (rt.getCode() == ResultCode.SUCCESS) {
+                    RetIdentityInfo d = rt.getData();
+
+                    IdentityInfoByBorrowerVo borrower = JSON.parseObject(JSON.toJSONString(d.getInfo()), IdentityInfoByBorrowerVo.class);
+
+                    tv_FullName.setText(borrower.getFullName());
+                    tv_CardNo.setText(borrower.getCardNo());
+                    tv_BorrowedQuantity.setText(String.valueOf(borrower.getBorrowedQuantity()));
+                    tv_CanBorrowQuantity.setText(String.valueOf(borrower.getCanBorrowQuantity()));
+                    tv_WilldueQuantity.setText(String.valueOf(borrower.getWilldueQuantity()));
+                    tv_OverdueQuantity.setText(String.valueOf(borrower.getOverdueQuantity()));
+                    tv_OverdueFine.setText(String.valueOf(borrower.getOverdueFine()));
+                    tv_Status.setText(borrower.getStatus().getText());
+
+
+                } else {
+                    showToast(rt.getMsg());
+                }
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                super.onFailure(msg, e);
+            }
+        });
+    }
 
     private void renewBooks(String actionCode,List<String> borrowIds){
 
