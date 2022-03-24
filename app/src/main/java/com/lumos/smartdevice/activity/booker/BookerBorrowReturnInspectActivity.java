@@ -54,6 +54,10 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
     private View ll_WilldueQuantity;
     private View ll_OverdueQuantity;
     private View ll_OverdueFine;
+    private View ll_Booker_Card_Info;
+    private View ll_Booker_Card_Fun;
+    private View btn_RenewBookByOneKey;
+    private View btn_GoPayOverdueFine;
 
     private DeviceVo device;
 
@@ -78,6 +82,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         slots = AppCacheManager.getBookerCustomData().getSlots();
 
         bookerBorrowReturnFlowCtrl = BookerBorrowReturnFlowCtrl.getInstance();
+
         bookerBorrowReturnFlowCtrl.setOpenHandlerListener(new BookerBorrowReturnFlowCtrl.OnOpenHandlerListener() {
             @Override
             public void onHandle(int actionCode, HashMap<String, Object> actionData, String actionRemark) {
@@ -91,6 +96,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                         //showToast(actionRemark);
                         switch (actionCode) {
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_START:
+                                dialog_BookerFlowHandling.setTipsText("设备正在初始化");
                                 dialog_BookerFlowHandling.show();
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_INIT_DATA_FAILURE:
@@ -136,18 +142,17 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                                 dialog_BookerFlowHandling.setTipsText("验证关闭授权失败");
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_END:
-
+                                dialog_BookerFlowHandling.setTipsText("处理结束");
                                 RetBookerBorrowReturn retBookerBorrowReturn = (RetBookerBorrowReturn) actionData.get("ret_booker_borrow_return");
-
                                 Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
                                 Bundle bundle = new Bundle();
                                 bundle.putSerializable("ret_booker_borrow_return", retBookerBorrowReturn);
                                 intent.putExtras(bundle);
                                 openActivity(intent);
                                 finish();
-
                                 break;
                             case BookerBorrowReturnFlowCtrl.ACTION_CODE_EXCEPTION:
+                                dialog_BookerFlowHandling.setTipsText("设备处理异常");
                                 break;
                         }
                     }
@@ -178,6 +183,13 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         ll_WilldueQuantity= findViewById(R.id.ll_WilldueQuantity);
         ll_OverdueQuantity= findViewById(R.id.ll_OverdueQuantity);
         ll_OverdueFine= findViewById(R.id.ll_OverdueFine);
+        ll_Booker_Card_Info= findViewById(R.id.ll_Booker_Card_Info);
+        ll_Booker_Card_Fun= findViewById(R.id.ll_Booker_Card_Fun);
+        btn_RenewBookByOneKey= findViewById(R.id.btn_RenewBookByOneKey);
+        btn_GoPayOverdueFine= findViewById(R.id.btn_GoPayOverdueFine);
+
+        ll_Booker_Card_Info.setVisibility(View.VISIBLE);
+        ll_Booker_Card_Fun.setVisibility(View.VISIBLE);
 
         gdv_Slots = findViewById(R.id.gdv_Slots);
         dialog_BookerFlowHandling = new DialogBookerFlowHandling(BookerBorrowReturnInspectActivity.this);

@@ -26,13 +26,13 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_180"
+            android:layout_height="wrap_content"
             android:baselineAligned="false">
 
             <include
                 layout="@layout/booker_card_info"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/size_180" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <LinearLayout
@@ -44,7 +44,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/size_20"
                 android:layout_marginBottom="@dimen/size_10"
                 android:text="以下是已借阅的图书"
                 android:textColor="@color/field_name"

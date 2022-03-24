@@ -265,6 +265,7 @@ public class BookerBorrowReturnFlowCtrl {
                 bookerBorrowReturn("init_data_success", actionData, actionRemark, null);
                 break;
             case ACTION_CODE_INIT_DATA_FAILURE:
+                openIsRunning = false;
                 bookerBorrowReturn("init_data_failure", actionData, actionRemark, null);
                 break;
             case ACTION_CODE_REQUEST_OPEN_AUTH:
@@ -293,6 +294,7 @@ public class BookerBorrowReturnFlowCtrl {
                 sendOpenHandlerMessage(ACTION_CODE_SEND_OPEN_COMMAND, "发送打开命令");
                 break;
             case ACTION_CODE_REQUEST_OPEN_AUTH_FAILURE:
+                openIsRunning = false;
                 bookerBorrowReturn("request_open_auth_failure", actionData, actionRemark, null);
                 break;
             case ACTION_CODE_SEND_OPEN_COMMAND:
@@ -372,12 +374,14 @@ public class BookerBorrowReturnFlowCtrl {
                 bookerBorrowReturn("send_open_command_success", actionData, actionRemark, null);
                 break;
             case ACTION_CODE_SEND_OPEN_COMMAND_FAILURE:
+                openIsRunning = false;
                 bookerBorrowReturn("send_open_command_failure", actionData, actionRemark, null);
                 break;
             case ACTION_CODE_OPEN_SUCCESS:
                 bookerBorrowReturn("open_success", actionData, actionRemark, null);
                 break;
             case ACTION_CODE_OPEN_FAILURE:
+                openIsRunning = false;
                 bookerBorrowReturn("open_failure", actionData, actionRemark, null);
                 break;
             case ACTION_CODE_CLOSE_SUCCESS:
@@ -385,6 +389,7 @@ public class BookerBorrowReturnFlowCtrl {
                 sendOpenHandlerMessage(ACTION_CODE_REQUEST_CLOSE_AUTH, actionData, "请求是否允许关闭");
                 break;
             case ACTION_CODE_CLOSE_FAILURE:
+                openIsRunning = false;
                 bookerBorrowReturn("close_failure", actionData, actionRemark, null);
                 break;
             case ACTION_CODE_REQUEST_CLOSE_AUTH:
@@ -417,8 +422,8 @@ public class BookerBorrowReturnFlowCtrl {
                 sendOpenHandlerMessage(ACTION_CODE_FLOW_END, actionData, "借还结束");
                 break;
             case ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE:
+                openIsRunning = false;
                 bookerBorrowReturn("request_close_auth_failure", actionData, actionRemark, null);
-
                 break;
             case ACTION_CODE_FLOW_END:
                 openIsRunning = false;
@@ -426,6 +431,7 @@ public class BookerBorrowReturnFlowCtrl {
                 reSet();
                 break;
             case ACTION_CODE_EXCEPTION:
+                openIsRunning = false;
                 bookerBorrowReturn("exception", actionData, actionRemark, null);
                 break;
         }

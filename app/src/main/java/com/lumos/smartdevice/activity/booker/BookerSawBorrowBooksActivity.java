@@ -61,7 +61,12 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
     private View ll_WilldueQuantity;
     private View ll_OverdueQuantity;
     private View ll_OverdueFine;
+    private View ll_Booker_Card_Info;
+    private View ll_Booker_Card_Fun;
 
+    private View btn_RenewBookByOneKey;
+    private View btn_GoPayOverdueFine;
+    
     private SuperRefreshLayout sf_BorrowedBooks;
     private RecyclerView rv_BorrowedBooks;
     private int rv_BorrowedBooks_PageNum=1;
@@ -103,12 +108,14 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
                 String fun = dialog_Confirm.getFunction();
 
                 switch (fun) {
-                    case "renew":
+                    case "renew_multi":
                         BookerBorrowBookVo item = (BookerBorrowBookVo) dialog_Confirm.getTag();
-
                         List<String> borrowIds = new ArrayList<>();
                         borrowIds.add(item.getBorrowId());
                         renewBooks("multi", borrowIds);
+                        break;
+                    case "renew_all":
+                        renewBooks("all", null);
                         break;
                 }
 
@@ -133,11 +140,19 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
         ll_WilldueQuantity= findViewById(R.id.ll_WilldueQuantity);
         ll_OverdueQuantity= findViewById(R.id.ll_OverdueQuantity);
         ll_OverdueFine= findViewById(R.id.ll_OverdueFine);
+        ll_Booker_Card_Info= findViewById(R.id.ll_Booker_Card_Info);
+        ll_Booker_Card_Fun= findViewById(R.id.ll_Booker_Card_Fun);
+        btn_RenewBookByOneKey= findViewById(R.id.btn_RenewBookByOneKey);
+        btn_GoPayOverdueFine= findViewById(R.id.btn_GoPayOverdueFine);
 
+        ll_Booker_Card_Info.setVisibility(View.GONE);
+        ll_Booker_Card_Fun.setVisibility(View.VISIBLE);
         iv_SawBorrowBooks.setVisibility(View.INVISIBLE);
         ll_WilldueQuantity.setVisibility(View.VISIBLE);
         ll_OverdueQuantity.setVisibility(View.VISIBLE);
         ll_OverdueFine.setVisibility(View.VISIBLE);
+
+
 
 
         sf_BorrowedBooks =  findViewById(R.id.sf_BorrowedBooks);
@@ -151,7 +166,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
         rv_BorrowedBooksAdapter.setOnClickListener(new BookerBorrowBookAdapter.OnClickListener() {
             @Override
             public void onRenew(BookerBorrowBookVo item) {
-                dialog_Confirm.setFunction("renew");
+                dialog_Confirm.setFunction("renew_multi");
                 dialog_Confirm.setTag(item);
                 dialog_Confirm.setTipsImageByNetwork(item.getSkuImgUrl());
                 dialog_Confirm.setTipsText("是否续借该书本？");
@@ -179,9 +194,11 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
 
     }
 
-    private void initEvent(){
+    private void initEvent() {
         btn_Nav_Footer_GoBack.setOnClickListener(this);
         btn_Nav_Footer_GoHome.setOnClickListener(this);
+        btn_RenewBookByOneKey.setOnClickListener(this);
+        btn_GoPayOverdueFine.setOnClickListener(this);
     }
 
     private void initData() {
@@ -394,6 +411,12 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
                 Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
                 openActivity(intent);
                 finish();
+            }
+            else if(id==R.id.btn_RenewBookByOneKey){
+                dialog_Confirm.setFunction("renew_all");
+                dialog_Confirm.setTipsImageByResource(R.drawable.ic_booker_warn);
+                dialog_Confirm.setTipsText("确实是一键续借？");
+                dialog_Confirm.show();
             }
         }
     }

@@ -32,8 +32,8 @@ public class DialogBookerConfirm extends Dialog {
     private String function;
 
 
-    public void setTipsImageByDrawable(Drawable drawable) {
-        this.iv_TipsImage.setImageDrawable(drawable);
+    public void setTipsImageByResource(int resId) {
+        this.iv_TipsImage.setImageResource(resId);
     }
 
     public void  setTipsImageByNetwork(String url){
