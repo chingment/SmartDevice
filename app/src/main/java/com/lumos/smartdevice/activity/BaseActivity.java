@@ -193,6 +193,4 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     public abstract void hideLoading(Context context);
     public abstract void showLoading(Context context);
 
-
-
 }

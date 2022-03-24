@@ -179,5 +179,4 @@ public abstract class BookerBaseActivity  extends BaseActivity {
         dialog_Loading_Handler.sendMessage(m);
     }
 
-
 }
