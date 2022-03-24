@@ -21,6 +21,7 @@ import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerSawBorrowBooks;
+import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RetIdentityInfo;
 import com.lumos.smartdevice.api.rop.RetIdentityVerify;
 import com.lumos.smartdevice.api.rop.RopBookerRenewBooks;
@@ -92,6 +93,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
         initView();
         initEvent();
         initData();
+        setTimerByActivityFinish(120);
     }
 
     private void initView(){
@@ -316,6 +318,8 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
 
                 if (rt.getCode() == ResultCode.SUCCESS) {
                     RetIdentityInfo d = rt.getData();
+
+
 
                     IdentityInfoByBorrowerVo borrower = JsonUtil.toObject(d.getInfo(),IdentityInfoByBorrowerVo.class);
 

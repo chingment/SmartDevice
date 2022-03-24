@@ -45,7 +45,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:text="图书自助借阅平台"
+                android:text="智能图书柜借阅平台"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:textColor="@color/booker_primary"

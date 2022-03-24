@@ -2,6 +2,8 @@ package com.lumos.smartdevice.api;
 
 import com.alibaba.fastjson.JSON;
 
+import java.lang.reflect.ParameterizedType;
+
 
 public class ResultBean<T>  {
 

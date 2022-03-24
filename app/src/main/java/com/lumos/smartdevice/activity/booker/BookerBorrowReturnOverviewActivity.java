@@ -42,6 +42,7 @@ public class BookerBorrowReturnOverviewActivity extends BookerBaseActivity {
         initView();
         initEvent();
         initData();
+        setTimerByActivityFinish(120);
     }
 
     private void initView() {

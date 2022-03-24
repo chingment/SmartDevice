@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/size_10"
-                android:text="请选择图书柜编号"
+                android:text="借还图书请选择图书柜编号"
                 android:textColor="@color/field_name"
                 android:textSize="@dimen/sp_16" />
 

@@ -59,9 +59,10 @@
         android:layout_centerVertical="true"
         android:baselineAligned="false"
         android:gravity="center_vertical|center_horizontal"
-        android:visibility="gone">
+        >
 
         <TextView
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="end"
@@ -69,6 +70,18 @@
             android:text="@string/ly_nav_header_btn_txt_right"
             android:textColor="@color/ly_nav_header_btn_txt_right"
             android:textSize="@dimen/sp_18" />
+
+        <TextView
+            android:id="@+id/tv_ActivityFinshTick"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:paddingEnd="@dimen/size_12"
+            android:text=""
+            android:textColor="@color/ly_nav_header_btn_txt_right"
+            android:textSize="@dimen/sp_18" />
+
     </LinearLayout>
 
 

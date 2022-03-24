@@ -89,6 +89,7 @@ public class InitDataActivity extends BaseActivity {
 
         setContentView(R.layout.activity_init_data);
 
+
         //ResultBean<RetDeviceInitData> rt = JsonUtil.toResult("Dsads",new TypeReference<ResultBean<RetDeviceInitData>>() {});
 
         PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
