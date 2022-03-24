@@ -317,7 +317,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
                 if (rt.getCode() == ResultCode.SUCCESS) {
                     RetIdentityInfo d = rt.getData();
 
-                    IdentityInfoByBorrowerVo borrower = JsonUtil.toObject(JSON.toJSONString(d.getInfo()),new TypeReference<IdentityInfoByBorrowerVo>() {});
+                    IdentityInfoByBorrowerVo borrower = JsonUtil.toObject(d.getInfo(),IdentityInfoByBorrowerVo.class);
 
                     tv_FullName.setText(borrower.getFullName());
                     tv_CardNo.setText(borrower.getCardNo());

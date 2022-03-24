@@ -234,7 +234,7 @@ public class InitDataActivity extends BaseActivity {
 
 
                         if(scene_mode==AppVar.SCENE_MODE_2) {
-                            BookerCustomDataVo bookerCustomData = JsonUtil.toObject((JSON.toJSONString(initData.getCustomData())),new TypeReference<BookerCustomDataVo>() {});
+                            BookerCustomDataVo bookerCustomData = JsonUtil.toObject(initData.getCustomData(),BookerCustomDataVo.class);
                             AppCacheManager.setBookerCustomData(bookerCustomData);
                         }
 

@@ -188,9 +188,6 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         btn_RenewBookByOneKey= findViewById(R.id.btn_RenewBookByOneKey);
         btn_GoPayOverdueFine= findViewById(R.id.btn_GoPayOverdueFine);
 
-        ll_Booker_Card_Info.setVisibility(View.VISIBLE);
-        ll_Booker_Card_Fun.setVisibility(View.VISIBLE);
-
         gdv_Slots = findViewById(R.id.gdv_Slots);
         dialog_BookerFlowHandling = new DialogBookerFlowHandling(BookerBorrowReturnInspectActivity.this);
     }
@@ -294,7 +291,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                 if (rt.getCode() == ResultCode.SUCCESS) {
                     RetIdentityInfo d = rt.getData();
 
-                    IdentityInfoByBorrowerVo borrower = JsonUtil.toObject(JSON.toJSONString(d.getInfo()),new TypeReference<IdentityInfoByBorrowerVo>() {});
+                    IdentityInfoByBorrowerVo borrower = JsonUtil.toObject(d.getInfo(),IdentityInfoByBorrowerVo.class);
 
                     tv_FullName.setText(borrower.getFullName());
                     tv_CardNo.setText(borrower.getCardNo());
@@ -305,26 +302,26 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                     tv_OverdueFine.setText(String.valueOf(borrower.getOverdueFine()));
                     tv_Status.setText(borrower.getStatus().getText());
 
-                    if(borrower.getWilldueQuantity()>0){
-                        ll_WilldueQuantity.setVisibility(View.VISIBLE);
-                    }
-                    else{
-                        ll_WilldueQuantity.setVisibility(View.INVISIBLE);
-                    }
-
-                    if(borrower.getOverdueQuantity()>0){
-                        ll_OverdueQuantity.setVisibility(View.VISIBLE);
-                    }
-                    else{
-                        ll_OverdueQuantity.setVisibility(View.INVISIBLE);
-                    }
-
-                    if(borrower.getOverdueFine()>0){
-                        ll_OverdueFine.setVisibility(View.VISIBLE);
-                    }
-                    else{
-                        ll_OverdueFine.setVisibility(View.INVISIBLE);
-                    }
+//                    if(borrower.getWilldueQuantity()>0){
+//                        ll_WilldueQuantity.setVisibility(View.VISIBLE);
+//                    }
+//                    else{
+//                        ll_WilldueQuantity.setVisibility(View.INVISIBLE);
+//                    }
+//
+//                    if(borrower.getOverdueQuantity()>0){
+//                        ll_OverdueQuantity.setVisibility(View.VISIBLE);
+//                    }
+//                    else{
+//                        ll_OverdueQuantity.setVisibility(View.INVISIBLE);
+//                    }
+//
+//                    if(borrower.getOverdueFine()>0){
+//                        ll_OverdueFine.setVisibility(View.VISIBLE);
+//                    }
+//                    else{
+//                        ll_OverdueFine.setVisibility(View.INVISIBLE);
+//                    }
 
 
                 } else {

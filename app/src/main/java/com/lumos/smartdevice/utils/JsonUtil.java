@@ -28,6 +28,21 @@ public class JsonUtil<T>  {
         }
     }
 
+    public static <T> T toObject(Object obj,Class<T> type) {
+        try {
+
+            T ob = JSONObject.toJavaObject((JSON) obj,type);
+
+            if (ob == null)
+                return null;
+
+            return (T) ob;
+
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
 
     public static <T> T toResult(String json,TypeReference<T> type) {
 
