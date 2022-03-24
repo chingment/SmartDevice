@@ -168,7 +168,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         setTimerByActivityFinish(120);
     }
 
-    private void initView() {
+    public void initView() {
         btn_Nav_Footer_GoBack = findViewById(R.id.btn_Nav_Footer_GoBack);
         btn_Nav_Footer_GoHome = findViewById(R.id.btn_Nav_Footer_GoHome);
 
@@ -194,14 +194,14 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         dialog_BookerFlowHandling = new DialogBookerFlowHandling(BookerBorrowReturnInspectActivity.this);
     }
 
-    private void initEvent() {
+    public void initEvent() {
         btn_Nav_Footer_GoBack.setOnClickListener(this);
         btn_Nav_Footer_GoHome.setOnClickListener(this);
         iv_SawBorrowBooks.setOnClickListener(this);
         tv_BorrowedQuantity.setOnClickListener(this);
     }
 
-    private void initData() {
+    public void initData() {
 
         BookerBorrowReturnInspectSlotAdapter slotAdapter = new BookerBorrowReturnInspectSlotAdapter(getAppContext(), slots);
 

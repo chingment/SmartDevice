@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,7 +17,7 @@ import com.lumos.smartdevice.activity.sm.dialog.DialogSmLoading;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.TimerByActivityFinish;
 
-public class SmBaseActivity extends BaseActivity {
+public class SmBaseActivity extends BaseActivity  {
     private static final String TAG = "SmBaseActivity";
 
     private DialogSmLoading dialog_Loading;
@@ -141,6 +142,25 @@ public class SmBaseActivity extends BaseActivity {
 
         super.onDestroy();
 
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()){
+            //获取触摸动作，如果ACTION_UP，计时开始。
+            case MotionEvent.ACTION_UP:
+                if(timerByActivityFinish!=null) {
+                    timerByActivityFinish.start();
+                }
+                break;
+            //否则其他动作计时取消
+            default:
+                if(timerByActivityFinish!=null) {
+                    timerByActivityFinish.cancel();
+                }
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
 

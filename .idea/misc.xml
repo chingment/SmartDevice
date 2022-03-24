@@ -157,6 +157,7 @@
         <entry key="app/src/main/res/layout/sm_nav_header.xml" value="0.375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/network_security_config.xml" value="0.1" />
       </map>
     </option>
   </component>

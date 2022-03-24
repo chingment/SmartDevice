@@ -21,7 +21,7 @@ import com.lumos.smartdevice.utils.TimerByActivityFinish;
 
 import org.w3c.dom.Text;
 
-public class BookerBaseActivity  extends BaseActivity {
+public abstract class BookerBaseActivity  extends BaseActivity {
     private static final String TAG = "BookerBaseActivity";
 
     private DialogBookerLoading dialog_Loading;
@@ -178,5 +178,6 @@ public class BookerBaseActivity  extends BaseActivity {
         m.obj = context;
         dialog_Loading_Handler.sendMessage(m);
     }
+
 
 }

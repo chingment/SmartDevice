@@ -1,5 +1,6 @@
 package com.lumos.smartdevice.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -404,5 +405,13 @@ public class InitDataActivity extends BaseActivity {
 //                showToast("授权失败,请去设置打开权限");
 //            }
 //        }
+    }
+
+    public void showLoading(Context context) {
+
+    }
+
+    public void hideLoading(Context context) {
+
     }
 }

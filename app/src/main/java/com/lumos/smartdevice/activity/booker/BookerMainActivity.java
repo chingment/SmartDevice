@@ -46,7 +46,7 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
     }
 
-    private void initView() {
+    public void initView() {
 
         vv_Ad = findViewById(R.id.vv_Ad);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.FILL_PARENT, RelativeLayout.LayoutParams.FILL_PARENT);
@@ -63,7 +63,7 @@ public class BookerMainActivity  extends BookerBaseActivity {
         rl_Header = findViewById(R.id.rl_Header);
     }
 
-    private void initEvent() {
+    public void initEvent() {
         btn_QueryBook.setOnClickListener(this);
         btn_BorrowBook.setOnClickListener(this);
         btn_ReturnBook.setOnClickListener(this);
@@ -80,7 +80,7 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
     }
 
-    private void initData() {
+    public void initData() {
 
         if (bookerCustomData != null) {
 

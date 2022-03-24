@@ -96,7 +96,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
         setTimerByActivityFinish(120);
     }
 
-    private void initView(){
+    public void initView(){
 
         btn_Nav_Footer_GoBack = findViewById(R.id.btn_Nav_Footer_GoBack);
         btn_Nav_Footer_GoHome = findViewById(R.id.btn_Nav_Footer_GoHome);
@@ -196,14 +196,14 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
 
     }
 
-    private void initEvent() {
+    public void initEvent() {
         btn_Nav_Footer_GoBack.setOnClickListener(this);
         btn_Nav_Footer_GoHome.setOnClickListener(this);
         btn_RenewBookByOneKey.setOnClickListener(this);
         btn_GoPayOverdueFine.setOnClickListener(this);
     }
 
-    private void initData() {
+    public void initData() {
         getIdentityInfo();
         getBorrowedBooks();
     }

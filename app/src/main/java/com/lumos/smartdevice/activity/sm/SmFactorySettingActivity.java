@@ -16,7 +16,7 @@ import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
-public class SmFactorySettingActivity extends BaseActivity implements View.OnClickListener {
+public class SmFactorySettingActivity extends SmBaseActivity implements View.OnClickListener {
     private static final String TAG = "SmFactorySettingActivity";
     private LinearLayout btn_Nav_AppSceneSetting;
     private TextView tv_Nav_AppScene_Tips;

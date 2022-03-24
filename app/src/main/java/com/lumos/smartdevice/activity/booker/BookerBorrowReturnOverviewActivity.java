@@ -45,7 +45,7 @@ public class BookerBorrowReturnOverviewActivity extends BookerBaseActivity {
         setTimerByActivityFinish(120);
     }
 
-    private void initView() {
+    public void initView() {
         btn_Nav_Footer_Finish = findViewById(R.id.btn_Nav_Footer_Finish);
         btn_Nav_Footer_GoHelp = findViewById(R.id.btn_Nav_Footer_GoHelp);
         tv_BorrowCount = findViewById(R.id.tv_BorrowCount);
@@ -54,12 +54,12 @@ public class BookerBorrowReturnOverviewActivity extends BookerBaseActivity {
         lv_ReturnBooks = findViewById(R.id.lv_ReturnBooks);
     }
 
-    private void initEvent() {
+    public void initEvent() {
         btn_Nav_Footer_Finish.setOnClickListener(this);
         btn_Nav_Footer_GoHelp.setOnClickListener(this);
     }
 
-    private void initData() {
+    public void initData() {
 
 
         List<BookerBookVo> borrowBooks = retBookerBorrowReturn.getBorrowBooks();

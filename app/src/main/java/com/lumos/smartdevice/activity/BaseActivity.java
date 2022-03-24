@@ -1,6 +1,7 @@
 package com.lumos.smartdevice.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -26,7 +27,7 @@ import com.lumos.smartdevice.utils.UsbReaderUtil;
  * Created by chingment on 2017/8/23.
  */
 
-public class BaseActivity extends FragmentActivity implements View.OnClickListener {
+public abstract class BaseActivity extends FragmentActivity implements View.OnClickListener {
     private static final String TAG = "BaseActivity";
     private AppContext appContext;
     public static boolean isForeground = false;
@@ -188,5 +189,10 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
     public void setUsbReaderListener(UsbReaderUtil.OnListener onListener) {
         usbReaderUtil.setListener(onListener);
     }
+
+    public abstract void hideLoading(Context context);
+    public abstract void showLoading(Context context);
+
+
 
 }

@@ -69,7 +69,7 @@ public class BookerIdentityVerifyActivity extends BookerBaseActivity {
         setTimerByActivityFinish(120);
     }
 
-    private void initView() {
+    public void initView() {
         btn_Nav_Footer_GoBack = findViewById(R.id.btn_Nav_Footer_GoBack);
         btn_Nav_Footer_GoHome = findViewById(R.id.btn_Nav_Footer_GoHome);
         gdv_Ways = findViewById(R.id.gdv_Ways);
@@ -83,7 +83,7 @@ public class BookerIdentityVerifyActivity extends BookerBaseActivity {
         });
     }
 
-    private void initEvent() {
+    public void initEvent() {
         btn_Nav_Footer_GoBack.setOnClickListener(this);
         btn_Nav_Footer_GoHome.setOnClickListener(this);
         gdv_Ways.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -105,7 +105,7 @@ public class BookerIdentityVerifyActivity extends BookerBaseActivity {
         });
     }
 
-    private void initData() {
+    public void initData() {
         gdv_Ways_Items = new ArrayList<>();
         gdv_Ways_Items.add(new GridNineItemBean(getAppContext().getString(R.string.t_brush_iccard), GridNineItemType.Function, "iccard", R.drawable.ic_booker_identity_verify_way_iccard));
         BookerIdentityVerfiyWayAdapter gdvWaysItemAdapter = new BookerIdentityVerfiyWayAdapter(getAppContext(), gdv_Ways_Items);
