@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.booker.dialog.DialogBookerFlowHandling;
@@ -21,9 +20,9 @@ import com.lumos.smartdevice.api.rop.RetIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.devicectrl.BookerBorrowReturnFlowCtrl;
-import com.lumos.smartdevice.model.BookerSlotVo;
-import com.lumos.smartdevice.model.DeviceVo;
-import com.lumos.smartdevice.model.IdentityInfoByBorrowerVo;
+import com.lumos.smartdevice.api.vo.BookerSlotVo;
+import com.lumos.smartdevice.api.vo.DeviceVo;
+import com.lumos.smartdevice.api.vo.IdentityInfoByBorrowerVo;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.JsonUtil;
@@ -199,6 +198,8 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         btn_Nav_Footer_GoHome.setOnClickListener(this);
         iv_SawBorrowBooks.setOnClickListener(this);
         tv_BorrowedQuantity.setOnClickListener(this);
+        btn_RenewBookByOneKey.setOnClickListener(this);
+        btn_GoPayOverdueFine.setOnClickListener(this);
     }
 
     public void initData() {
@@ -374,6 +375,9 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                 intent.putExtra("identityId", identityId);
                 intent.putExtra("clientUserId", clientUserId);
                 openActivity(intent);
+            }
+            else if(id==R.id.btn_RenewBookByOneKey){
+                //toSpeech("邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦");
             }
         }
     }

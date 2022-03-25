@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.booker.dialog.DialogBookerIdentityVerifyByIcCard;
@@ -15,11 +14,10 @@ import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetIdentityVerify;
-import com.lumos.smartdevice.api.rop.RetOwnLogout;
 import com.lumos.smartdevice.api.rop.RopIdentityVerify;
-import com.lumos.smartdevice.model.DeviceVo;
-import com.lumos.smartdevice.model.GridNineItemBean;
-import com.lumos.smartdevice.model.GridNineItemType;
+import com.lumos.smartdevice.api.vo.DeviceVo;
+import com.lumos.smartdevice.adapter.GridNineItemBean;
+import com.lumos.smartdevice.adapter.GridNineItemType;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
@@ -168,6 +166,7 @@ public class BookerIdentityVerifyActivity extends BookerBaseActivity {
 
 
     private void gdvIcCard() {
+        toSpeech("请把卡片放在机器的感应区");
         dialog_BookerIdentityVerifyByIcCard.show();
     }
 

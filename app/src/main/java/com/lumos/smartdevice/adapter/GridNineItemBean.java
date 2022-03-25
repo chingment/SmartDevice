@@ -1,4 +1,4 @@
-package com.lumos.smartdevice.model;
+package com.lumos.smartdevice.adapter;
 
 /**
  * Created by chingment on 2017/12/18.

@@ -8,12 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.CabinetLayoutVo;
-import com.lumos.smartdevice.model.LockerBoxUsageVo;
-import com.lumos.smartdevice.model.UserVo;
+import com.lumos.smartdevice.api.vo.LockerBoxUsageVo;
+import com.lumos.smartdevice.api.vo.UserVo;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.JsonUtil;

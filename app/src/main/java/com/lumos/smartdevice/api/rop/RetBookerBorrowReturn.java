@@ -1,6 +1,6 @@
 package com.lumos.smartdevice.api.rop;
 
-import com.lumos.smartdevice.model.BookerBookVo;
+import com.lumos.smartdevice.api.vo.BookerBookVo;
 
 import java.io.Serializable;
 import java.util.List;

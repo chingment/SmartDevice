@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.DeviceVo;
+import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 

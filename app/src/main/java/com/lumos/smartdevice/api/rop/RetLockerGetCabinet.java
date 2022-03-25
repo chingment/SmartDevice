@@ -1,7 +1,7 @@
 package com.lumos.smartdevice.api.rop;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.lumos.smartdevice.model.LockerBoxVo;
+import com.lumos.smartdevice.api.vo.LockerBoxVo;
 
 import java.io.Serializable;
 import java.util.List;

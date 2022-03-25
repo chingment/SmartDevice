@@ -1,7 +1,5 @@
 package com.lumos.smartdevice.devicectrl;
 
-import android.util.Log;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.api.ReqHandler;
@@ -9,14 +7,13 @@ import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
-import com.lumos.smartdevice.api.rop.RetIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
-import com.lumos.smartdevice.model.BookerDriveLockeqVo;
-import com.lumos.smartdevice.model.BookerDriveRfeqVo;
-import com.lumos.smartdevice.model.BookerSlotVo;
-import com.lumos.smartdevice.model.BookerSlotDrivesVo;
-import com.lumos.smartdevice.model.DeviceVo;
-import com.lumos.smartdevice.model.DriveVo;
+import com.lumos.smartdevice.api.vo.BookerDriveLockeqVo;
+import com.lumos.smartdevice.api.vo.BookerDriveRfeqVo;
+import com.lumos.smartdevice.api.vo.BookerSlotVo;
+import com.lumos.smartdevice.api.vo.BookerSlotDrivesVo;
+import com.lumos.smartdevice.api.vo.DeviceVo;
+import com.lumos.smartdevice.api.vo.DriveVo;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;

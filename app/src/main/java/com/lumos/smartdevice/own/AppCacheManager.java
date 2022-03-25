@@ -1,9 +1,9 @@
 package com.lumos.smartdevice.own;
 
 
-import com.lumos.smartdevice.model.BookerCustomDataVo;
-import com.lumos.smartdevice.model.DeviceVo;
-import com.lumos.smartdevice.model.UserVo;
+import com.lumos.smartdevice.api.vo.BookerCustomDataVo;
+import com.lumos.smartdevice.api.vo.DeviceVo;
+import com.lumos.smartdevice.api.vo.UserVo;
 import com.lumos.smartdevice.utils.ACache;
 import com.lumos.smartdevice.utils.StringUtil;
 

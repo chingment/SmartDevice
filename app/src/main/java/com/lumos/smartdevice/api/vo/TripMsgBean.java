@@ -1,4 +1,4 @@
-package com.lumos.smartdevice.model;
+package com.lumos.smartdevice.api.vo;
 
 public class TripMsgBean {
     private int msgId;

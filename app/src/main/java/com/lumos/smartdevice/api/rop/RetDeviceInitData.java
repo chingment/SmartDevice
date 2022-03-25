@@ -1,6 +1,6 @@
 package com.lumos.smartdevice.api.rop;
 
-import com.lumos.smartdevice.model.DeviceVo;
+import com.lumos.smartdevice.api.vo.DeviceVo;
 
 import java.io.Serializable;
 

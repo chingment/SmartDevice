@@ -1,10 +1,9 @@
-package com.lumos.smartdevice.model;
+package com.lumos.smartdevice.api.vo;
 
 import java.io.Serializable;
 
-public class BookerDriveLockeqVo implements Serializable{
+public class BookerDriveRfeqVo implements Serializable {
     private String driveId;
-    private String plate;
     private String ant;
 
     public String getDriveId() {
@@ -13,14 +12,6 @@ public class BookerDriveLockeqVo implements Serializable{
 
     public void setDriveId(String driveId) {
         this.driveId = driveId;
-    }
-
-    public String getPlate() {
-        return plate;
-    }
-
-    public void setPlate(String plate) {
-        this.plate = plate;
     }
 
     public String getAnt() {

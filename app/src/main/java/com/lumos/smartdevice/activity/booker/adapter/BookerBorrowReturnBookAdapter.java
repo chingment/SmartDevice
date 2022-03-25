@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.BookerBookVo;
+import com.lumos.smartdevice.api.vo.BookerBookVo;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 import java.util.List;

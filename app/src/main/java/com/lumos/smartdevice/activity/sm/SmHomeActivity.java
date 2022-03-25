@@ -1,6 +1,5 @@
 package com.lumos.smartdevice.activity.sm;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.InitDataActivity;
@@ -13,12 +12,11 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetOwnLogout;
 import com.lumos.smartdevice.api.rop.RetOwnSaveInfo;
-import com.lumos.smartdevice.api.rop.RetUserGetList;
 import com.lumos.smartdevice.api.rop.RopOwnLogout;
-import com.lumos.smartdevice.model.DeviceVo;
-import com.lumos.smartdevice.model.GridNineItemBean;
-import com.lumos.smartdevice.model.GridNineItemType;
-import com.lumos.smartdevice.model.UserVo;
+import com.lumos.smartdevice.api.vo.DeviceVo;
+import com.lumos.smartdevice.adapter.GridNineItemBean;
+import com.lumos.smartdevice.adapter.GridNineItemType;
+import com.lumos.smartdevice.api.vo.UserVo;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppManager;

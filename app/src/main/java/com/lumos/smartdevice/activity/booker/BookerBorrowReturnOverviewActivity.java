@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.booker.adapter.BookerBorrowReturnBookAdapter;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
-import com.lumos.smartdevice.model.BookerBookVo;
+import com.lumos.smartdevice.api.vo.BookerBookVo;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
@@ -61,30 +61,8 @@ public class BookerBorrowReturnOverviewActivity extends BookerBaseActivity {
 
     public void initData() {
 
-
         List<BookerBookVo> borrowBooks = retBookerBorrowReturn.getBorrowBooks();
-
-//        borrowBooks.add(new BookerBookBean("1", "1", "安徒生童话故事1", "1", "1"));
-//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静2", "1", "1"));
-//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静3", "1", "1"));
-//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静4", "1", "1"));
-//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静5", "1", "1"));
-//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静6", "1", "1"));
-//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静7", "1", "1"));
-//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静8", "1", "1"));
-//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静9", "1", "1"));
-//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静10", "1", "1"));
-//        borrowBooks.add(new BookerBookBean("1", "1", "这个杀手不太冷静11", "1", "1"));
-
         List<BookerBookVo> returnBooks = retBookerBorrowReturn.getReturnBooks();
-
-//        returnBooks.add(new BookerBookBean("1", "1", "西游记1", "1", "1"));
-//        returnBooks.add(new BookerBookBean("1", "1", "红楼梦2", "1", "1"));
-//        returnBooks.add(new BookerBookBean("1", "1", "西游记3", "1", "1"));
-//        returnBooks.add(new BookerBookBean("1", "1", "红楼梦4", "1", "1"));
-//        returnBooks.add(new BookerBookBean("1", "1", "西游记5", "1", "1"));
-//        returnBooks.add(new BookerBookBean("1", "1", "红楼梦6", "1", "1"));
-
 
         retBookerBorrowReturn.setBorrowBooks(borrowBooks);
         retBookerBorrowReturn.setReturnBooks(returnBooks);

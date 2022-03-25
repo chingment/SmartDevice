@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
@@ -27,19 +26,15 @@ import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
-import com.lumos.smartdevice.model.BookerCustomDataVo;
-import com.lumos.smartdevice.model.CabinetLayoutVo;
-import com.lumos.smartdevice.model.DeviceVo;
-import com.lumos.smartdevice.model.LogTipsBean;
-import com.lumos.smartdevice.model.UserVo;
+import com.lumos.smartdevice.api.vo.BookerCustomDataVo;
+import com.lumos.smartdevice.api.vo.DeviceVo;
+import com.lumos.smartdevice.api.vo.LogTipsBean;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
-import com.lumos.smartdevice.own.AppLogcatManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
-import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.runtimepermissions.PermissionsManager;
@@ -89,7 +84,6 @@ public class InitDataActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_init_data);
-
 
         //ResultBean<RetDeviceInitData> rt = JsonUtil.toResult("Dsads",new TypeReference<ResultBean<RetDeviceInitData>>() {});
 

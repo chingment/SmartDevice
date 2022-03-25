@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.CabinetVo;
+import com.lumos.smartdevice.api.vo.CabinetVo;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 public class DialogSmCabinetConfig extends Dialog {

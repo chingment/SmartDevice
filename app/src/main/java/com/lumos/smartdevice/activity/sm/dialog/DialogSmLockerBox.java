@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.sm.adapter.SmLockerBoxUsageAdapter;
-import com.lumos.smartdevice.model.CabinetVo;
-import com.lumos.smartdevice.model.DeviceVo;
-import com.lumos.smartdevice.model.LockerBoxVo;
-import com.lumos.smartdevice.model.LockerBoxUsageVo;
+import com.lumos.smartdevice.api.vo.CabinetVo;
+import com.lumos.smartdevice.api.vo.DeviceVo;
+import com.lumos.smartdevice.api.vo.LockerBoxVo;
+import com.lumos.smartdevice.api.vo.LockerBoxUsageVo;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.ui.my.MyListView;
 

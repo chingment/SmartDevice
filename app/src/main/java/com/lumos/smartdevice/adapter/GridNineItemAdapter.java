@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.GridNineItemBean;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.utils.CommonUtil;
 

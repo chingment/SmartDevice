@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.LogTipsBean;
+import com.lumos.smartdevice.api.vo.LogTipsBean;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.lumos.smartdevice.api.rop;
 
-import com.lumos.smartdevice.model.LockerBoxUseRecordVo;
+import com.lumos.smartdevice.api.vo.LockerBoxUseRecordVo;
 
 import java.io.Serializable;
 import java.util.List;

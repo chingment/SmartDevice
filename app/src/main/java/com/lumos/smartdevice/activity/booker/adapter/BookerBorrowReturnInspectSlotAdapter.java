@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.BookerSlotVo;
+import com.lumos.smartdevice.api.vo.BookerSlotVo;
 import com.lumos.smartdevice.ui.ViewHolder;
 
 import java.util.List;

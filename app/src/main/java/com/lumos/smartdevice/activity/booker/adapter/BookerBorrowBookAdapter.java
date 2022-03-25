@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.model.BookerBorrowBookVo;
+import com.lumos.smartdevice.api.vo.BookerBorrowBookVo;
 import com.lumos.smartdevice.ui.refreshview.MyViewHolder;
 import com.lumos.smartdevice.ui.refreshview.RefreshAdapter;
 import com.lumos.smartdevice.utils.CommonUtil;
