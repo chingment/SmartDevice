@@ -5,11 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
-import android.os.Messenger;
-import android.os.RemoteException;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,8 +14,9 @@ import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.booker.dialog.DialogBookerFlowHandling;
 import com.lumos.smartdevice.activity.booker.adapter.BookerBorrowReturnInspectSlotAdapter;
-import com.lumos.smartdevice.activity.booker.service.BookerBorrowReturnFlowReceiver;
-import com.lumos.smartdevice.activity.booker.service.BookerBorrowReturnFlowService;
+import com.lumos.smartdevice.activity.booker.service.BookerCtrlReceiver;
+import com.lumos.smartdevice.activity.booker.service.BookerCtrlService;
+import com.lumos.smartdevice.activity.booker.service.BorrowReturnFlowResultVo;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
@@ -29,7 +26,6 @@ import com.lumos.smartdevice.api.rop.RetBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RetIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
-import com.lumos.smartdevice.devicectrl.BookerBorrowReturnFlowCtrl;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
 import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.api.vo.IdentityInfoByBorrowerVo;
@@ -78,14 +74,14 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
     private String identityId;
     private String clientUserId;
 
-    private BookerBorrowReturnFlowReceiver borrowReturnFlowServiceReceiver;
+    private BookerCtrlReceiver bookerCtrlServiceReceiver;
 
-    private BookerBorrowReturnFlowService.FlowBinder borrowReturnFlowServiceBinder;
+    private BookerCtrlService.CtrlBinder bookerCtrlServiceBinder;
 
-    private final ServiceConnection borrowReturnFlowServiceConnection = new ServiceConnection() {
+    private final ServiceConnection bookerCtrlServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder binder) {
-            borrowReturnFlowServiceBinder = (BookerBorrowReturnFlowService.FlowBinder) binder;
+            bookerCtrlServiceBinder = (BookerCtrlService.CtrlBinder) binder;
         }
 
         @Override
@@ -105,63 +101,67 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         device = getDevice();
         slots = AppCacheManager.getBookerCustomData().getSlots();
 
-        Intent serviceIntent = new Intent(this, BookerBorrowReturnFlowService.class);
-        bindService(serviceIntent, borrowReturnFlowServiceConnection, Context.BIND_AUTO_CREATE);
+        Intent serviceIntent = new Intent(this, BookerCtrlService.class);
+        bindService(serviceIntent, bookerCtrlServiceConnection, Context.BIND_AUTO_CREATE);
 
-        borrowReturnFlowServiceReceiver = new BookerBorrowReturnFlowReceiver(new BookerBorrowReturnFlowReceiver.OnListener() {
+        bookerCtrlServiceReceiver = new BookerCtrlReceiver(new BookerCtrlReceiver.OnListener() {
             @Override
-            public void onReceive(int actionCode, HashMap<String, Object> actionData, String actionRemark) {
+            public void onBorrowReturnFlowReceive(BorrowReturnFlowResultVo flowResult) {
 
+                int actionCode=flowResult.getActionCode();
+                String actionRemark=flowResult.getActionRemark();
+                HashMap<String, Object> actionData=flowResult.getActionData();
                 LogUtil.d(TAG, "actionCode:" + actionCode + ",actionRemark:" + actionRemark);
 
+
                 switch (actionCode) {
-                    case BookerBorrowReturnFlowService.ACTION_CODE_FLOW_START:
+                    case BookerCtrlService.ACTION_CODE_FLOW_START:
                         dialog_BookerFlowHandling.setTipsText("设备正在初始化");
                         dialog_BookerFlowHandling.show();
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_INIT_DATA_FAILURE:
+                    case BookerCtrlService.ACTION_CODE_INIT_DATA_FAILURE:
                         dialog_BookerFlowHandling.setTipsText(actionRemark);
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_REQUEST_OPEN_AUTH:
+                    case BookerCtrlService.ACTION_CODE_REQUEST_OPEN_AUTH:
                         dialog_BookerFlowHandling.setTipsText("验证打开授权中");
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_REQUEST_OPEN_AUTH_FAILURE:
+                    case BookerCtrlService.ACTION_CODE_REQUEST_OPEN_AUTH_FAILURE:
                         dialog_BookerFlowHandling.setTipsText("验证打开授权失败");
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_REQUEST_OPEN_AUTH_SUCCESS:
+                    case BookerCtrlService.ACTION_CODE_REQUEST_OPEN_AUTH_SUCCESS:
                         dialog_BookerFlowHandling.setTipsText("验证打开授权成功");
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_SEND_OPEN_COMMAND:
+                    case BookerCtrlService.ACTION_CODE_SEND_OPEN_COMMAND:
                         dialog_BookerFlowHandling.setTipsText("设备发送打开命令");
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_SEND_OPEN_COMMAND_SUCCESS:
+                    case BookerCtrlService.ACTION_CODE_SEND_OPEN_COMMAND_SUCCESS:
                         dialog_BookerFlowHandling.setTipsText("设备发送打开命令成功");
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_SEND_OPEN_COMMAND_FAILURE:
+                    case BookerCtrlService.ACTION_CODE_SEND_OPEN_COMMAND_FAILURE:
                         dialog_BookerFlowHandling.setTipsText("设备发送打开命令失败");
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_OPEN_SUCCESS:
+                    case BookerCtrlService.ACTION_CODE_OPEN_SUCCESS:
                         dialog_BookerFlowHandling.setTipsText("柜门已打开，等待关门中");
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_OPEN_FAILURE:
+                    case BookerCtrlService.ACTION_CODE_OPEN_FAILURE:
                         dialog_BookerFlowHandling.setTipsText("柜门打开失败，请尝试再次打开");
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_CLOSE_SUCCESS:
+                    case BookerCtrlService.ACTION_CODE_CLOSE_SUCCESS:
                         dialog_BookerFlowHandling.setTipsText("柜门关门成功");
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_CLOSE_FAILURE:
+                    case BookerCtrlService.ACTION_CODE_CLOSE_FAILURE:
                         dialog_BookerFlowHandling.setTipsText("柜门关失败");
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_REQUEST_CLOSE_AUTH:
+                    case BookerCtrlService.ACTION_CODE_REQUEST_CLOSE_AUTH:
                         dialog_BookerFlowHandling.setTipsText("验证关闭授权s");
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS:
+                    case BookerCtrlService.ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS:
                         dialog_BookerFlowHandling.setTipsText("验证关闭授权成功");
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE:
+                    case BookerCtrlService.ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE:
                         dialog_BookerFlowHandling.setTipsText("验证关闭授权失败");
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_FLOW_END:
+                    case BookerCtrlService.ACTION_CODE_FLOW_END:
                         dialog_BookerFlowHandling.setTipsText("处理结束");
                         RetBookerBorrowReturn retBookerBorrowReturn = (RetBookerBorrowReturn) actionData.get("ret_booker_borrow_return");
                         Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
@@ -171,7 +171,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                         openActivity(intent);
                         finish();
                         break;
-                    case BookerBorrowReturnFlowService.ACTION_CODE_EXCEPTION:
+                    case BookerCtrlService.ACTION_CODE_EXCEPTION:
                         dialog_BookerFlowHandling.setTipsText("设备处理异常");
                         break;
                 }
@@ -180,7 +180,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
             }
         });
 
-        borrowReturnFlowServiceReceiver.register(BookerBorrowReturnInspectActivity.this);
+        bookerCtrlServiceReceiver.register(BookerBorrowReturnInspectActivity.this);
 
 
         initView();
@@ -273,7 +273,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                 if (rt.getCode() == ResultCode.SUCCESS) {
                     RetBookerCreateFlow d=rt.getData();
 
-                    borrowReturnFlowServiceBinder.onOpen(device,slot,d.getFlowId());
+                    bookerCtrlServiceBinder.borrowReturnStart(device,slot,d.getFlowId());
 
                 } else {
                     showToast(rt.getMsg());
@@ -378,12 +378,12 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
             dialog_BookerFlowHandling.cancel();
         }
 
-        if(borrowReturnFlowServiceReceiver!=null){
-            borrowReturnFlowServiceReceiver.unRegister(BookerBorrowReturnInspectActivity.this);
+        if(bookerCtrlServiceReceiver!=null){
+            bookerCtrlServiceReceiver.unRegister(BookerBorrowReturnInspectActivity.this);
         }
 
-        if(borrowReturnFlowServiceConnection!=null){
-            unbindService(borrowReturnFlowServiceConnection);
+        if(bookerCtrlServiceConnection!=null){
+            unbindService(bookerCtrlServiceConnection);
         }
 
         super.onDestroy();

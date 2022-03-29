@@ -15,7 +15,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.booker.BookerMainActivity;
-import com.lumos.smartdevice.activity.booker.service.BookerBorrowReturnFlowService;
+import com.lumos.smartdevice.activity.booker.service.BookerCtrlService;
 import com.lumos.smartdevice.activity.locker.LockerMainActivity;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
 import com.lumos.smartdevice.adapter.LogTipsAdapter;
@@ -89,7 +89,7 @@ public class InitDataActivity extends BaseActivity {
         setContentView(R.layout.activity_init_data);
 
 
-        Intent intent = new Intent(this, BookerBorrowReturnFlowService.class);
+        Intent intent = new Intent(this, BookerCtrlService.class);
         stopService(intent);
         startService(intent);
         //ResultBean<RetDeviceInitData> rt = JsonUtil.toResult("Dsads",new TypeReference<ResultBean<RetDeviceInitData>>() {});

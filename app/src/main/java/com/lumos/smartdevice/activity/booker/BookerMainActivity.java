@@ -1,9 +1,6 @@
 package com.lumos.smartdevice.activity.booker;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,14 +10,11 @@ import android.widget.VideoView;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.booker.service.BookerBorrowReturnFlowReceiver;
-import com.lumos.smartdevice.activity.booker.service.BookerBorrowReturnFlowService;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
 import com.lumos.smartdevice.api.vo.AdVo;
 import com.lumos.smartdevice.api.vo.AdCreativeVo;
 import com.lumos.smartdevice.api.vo.BookerCustomDataVo;
 import com.lumos.smartdevice.own.AppCacheManager;
-import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
@@ -41,10 +35,6 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
     private BookerCustomDataVo bookerCustomData;
 
-
-    BookerBorrowReturnFlowReceiver receiver;
-    public static final String ACTION_UPDATEUI = "action.updateUI";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,18 +44,7 @@ public class BookerMainActivity  extends BookerBaseActivity {
         initEvent();
         initData();
 
-        receiver = new BookerBorrowReturnFlowReceiver(new BookerBorrowReturnFlowReceiver.OnListener() {
-            @Override
-            public void onReceive(int actionCode, HashMap<String, Object> actionData, String actionRemark) {
-                LogUtil.d(TAG,"BookerBorrowReturnFlow");
-            }
-        });
-
-        receiver.register(BookerMainActivity.this);
-        receiver.register(BookerMainActivity.this);
     }
-
-
 
     public void initView() {
 
@@ -159,10 +138,6 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
     @Override
     public void onDestroy() {
-
-        if(receiver!=null) {
-            receiver.unRegister(BookerMainActivity.this);
-        }
 
         super.onDestroy();
     }

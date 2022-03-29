@@ -25,30 +25,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc9a5615-753f-4d27-ba9c-39ff462585f0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerBorrowReturnFlowReceiver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerBorrowReturnFlowService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/receiver/BootBroadcastReceiver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/booker_circle_corner_page_next.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/booker_circle_corner_page_pre.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/booker_circle_corner_white.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BorrowReturnFlowResultVo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/InitDataActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/BookerBorrowReturnInspectActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/BookerBorrowReturnInspectActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/BookerMainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/BookerMainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/http/HttpClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/http/HttpClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_booker_display_books.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_booker_display_books.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_booker_loading.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_booker_loading.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerBorrowReturnFlowReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrlReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerBorrowReturnFlowService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrlService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/BookerBorrowReturnFlowCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -667,17 +660,17 @@
           <option name="timeStamp" value="179" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/BookerBorrowReturnFlowCtrl.java</url>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrl.java</url>
           <line>356</line>
           <option name="timeStamp" value="189" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/BookerBorrowReturnFlowCtrl.java</url>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrl.java</url>
           <line>311</line>
           <option name="timeStamp" value="205" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/BookerBorrowReturnFlowCtrl.java</url>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrl.java</url>
           <line>347</line>
           <option name="timeStamp" value="206" />
         </line-breakpoint>
@@ -688,7 +681,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/BookerBorrowReturnInspectActivity.java</url>
-          <line>87</line>
+          <line>83</line>
           <option name="timeStamp" value="224" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
@@ -697,24 +690,9 @@
           <option name="timeStamp" value="225" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerBorrowReturnFlowService.java</url>
-          <line>454</line>
-          <option name="timeStamp" value="226" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerBorrowReturnFlowService.java</url>
-          <line>106</line>
-          <option name="timeStamp" value="228" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerBorrowReturnFlowService.java</url>
-          <line>439</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrlService.java</url>
+          <line>435</line>
           <option name="timeStamp" value="230" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerBorrowReturnFlowReceiver.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="231" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
