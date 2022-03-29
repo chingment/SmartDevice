@@ -4,7 +4,10 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
+import android.util.Log;
 
+
+import androidx.annotation.NonNull;
 
 import com.alibaba.fastjson.JSON;
 import com.lumos.smartdevice.BuildConfig;
@@ -58,8 +61,6 @@ public class HttpClient {
         builder.networkInterceptors().add(new LoggingInterceptor());
         builder.addInterceptor((new RetryIntercepter(3)));
         client = builder.build();
-
-
         client.dispatcher().setMaxRequestsPerHost(MAX_REQUESTS_PER_HOST);
     }
 
@@ -71,15 +72,8 @@ public class HttpClient {
         public Response intercept(Interceptor.Chain chain) throws IOException {
             Request request = chain.request();
 
-            //long t1 = System.nanoTime();
-            //LogUtil.i(TAG, String.format("Sending request %s on %s%n%s",
-            //request.url(), chain.connection(), request.headers()));
-
             Response response = chain.proceed(request);
 
-            //long t2 = System.nanoTime();
-            //LogUtil.i(TAG, String.format("Received response for %s in %.1fms%n%s",
-            //response.request().url(), (t2 - t1) / 1e6d, response.headers()));
             return response;
         }
     }
@@ -96,12 +90,11 @@ public class HttpClient {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
-            System.out.println("retryNum=" + retryNum);
             Response response = chain.proceed(request);
             LogUtil.d("response.isSuccessful():"+response.isSuccessful());
             while (!response.isSuccessful() && retryNum < maxRetry) {
                 retryNum++;
-                System.out.println("retryNum=" + retryNum);
+                LogUtil.d(TAG,"maxRetry:"+maxRetry+",retryNum=" + retryNum);
                 response = chain.proceed(request);
             }
             return response;
@@ -139,8 +132,8 @@ public class HttpClient {
 
             String data = JSON.toJSONString(prm);
 
-            LogUtil.i("Request.url:" + url);
-            LogUtil.i("Request.postData:" + data);
+            LogUtil.i(TAG,"Request.url:" + url);
+            LogUtil.i(TAG,"Request.postData:" + data);
 
 
             RequestBody body = RequestBody.create(MediaType_JSON, data);
@@ -159,20 +152,18 @@ public class HttpClient {
 
             client.newCall(requestBuilder.build()).enqueue(new Callback() {
                 @Override
-                public void onResponse(Call call, Response response) {
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
 
-                    try {
-                        String body = response.body().string();
-                        LogUtil.i(TAG, "Request.onSuccess====>>>" + body);
-                        if(handler!=null) {
-                            handler.sendSuccessMessage(body);
-                        }
+                    String body = "";
 
-                    } catch (Exception e) {
-                        LogUtil.i(TAG, "Request.onFailure====>>>" + response);
-                        if(handler!=null) {
-                            handler.sendFailureMessage("读取数据发生异常", e);
-                        }
+                    if (response.body() != null) {
+                        body = response.body().string();
+                    }
+
+                    LogUtil.i(TAG, "Request.onSuccess=>>" + body);
+
+                    if (handler != null) {
+                        handler.sendSuccessMessage(body);
                     }
 
                 }
@@ -197,6 +188,7 @@ public class HttpClient {
             });
         } catch (Exception ex) {
             LogUtil.e(TAG,ex);
+            LogUtil.e(TAG,"Request.Exception=>>"+ex.getMessage());
             if(handler!=null) {
                 handler.sendFailureMessage("数据提交发生异常", ex);
             }
@@ -224,16 +216,14 @@ public class HttpClient {
             MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
 
 
-
-
-            String fields_data="";
+            String data="";
             if (fields != null) {
                 if (fields.size() > 0) {
                     for (Map.Entry<String, String> entry : fields.entrySet()) {
                         builder.addFormDataPart(entry.getKey(), entry.getValue());
                     }
 
-                    fields_data = mapToQueryString(fields);
+                    data = JSON.toJSONString(fields);
                 }
             }
 
@@ -253,6 +243,8 @@ public class HttpClient {
             }
 
 
+
+
             RequestBody requestBody = builder.build();
 
 
@@ -260,7 +252,7 @@ public class HttpClient {
             requestBuilder.addHeader("appKey", "" + BuildConfig.APPKEY);
             String currenttime = (System.currentTimeMillis() / 1000) + "";
             requestBuilder.addHeader("timestamp", String.valueOf((System.currentTimeMillis() / 1000)));
-            String sign = Config.getSign(BuildConfig.APPLICATION_ID, BuildConfig.APPKEY, BuildConfig.APPSECRET, "", currenttime);
+            String sign = Config.getSign(BuildConfig.APPLICATION_ID, BuildConfig.APPKEY, BuildConfig.APPSECRET, data, currenttime);
             requestBuilder.addHeader("sign", "" + sign);
             requestBuilder.addHeader("version", BuildConfig.VERSION_NAME);
 
@@ -270,43 +262,43 @@ public class HttpClient {
 
             client.newCall(requestBuilder.build()).enqueue(new Callback() {
                 @Override
-                public void onResponse(Call call, Response response) {
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
 
-                    try {
-                        String body = response.body().string();
-                        LogUtil.i(TAG, "Request.onSuccess====>>>" + body);
-                        if (handler != null) {
-                            handler.sendSuccessMessage(body);
-                        }
+                    String body = "";
 
-                    } catch (Exception e) {
-                        LogUtil.i(TAG, "Request.onFailure====>>>" + response);
-                        if (handler != null) {
-                            handler.sendFailureMessage("读取数据发生异常", e);
-                        }
+                    if (response.body() != null) {
+                        body = response.body().string();
+                    }
+
+                    LogUtil.d(TAG, "Request.onSuccess=>>" + body);
+
+                    if (handler != null) {
+                        handler.sendSuccessMessage(body);
                     }
 
                 }
 
                 @Override
-                public void onFailure(Call call, IOException e) {
+                public void onFailure(@NonNull Call call, @NonNull IOException ex) {
+                    LogUtil.e(TAG,"Request.onFailure=>>"+ex.getMessage());
                     String msg = "读取数据服务发生异常";
-
-                    if (e instanceof SocketTimeoutException) {
+                    if (ex instanceof SocketTimeoutException) {
                         msg = "读取数据服务连接超时";
-                    } else if (e instanceof ConnectException) {
+                    } else if (ex instanceof ConnectException) {
                         msg = "读取数据服务连接失败";
 
-                    } else if (e instanceof UnknownHostException) {
+                    } else if (ex instanceof UnknownHostException) {
                         msg = "读取数据服务网络异常或连接不存在";
                     }
 
                     if (handler != null) {
-                        handler.sendFailureMessage(msg, e);
+                        handler.sendFailureMessage(msg, ex);
                     }
                 }
             });
         } catch (Exception ex) {
+            LogUtil.e(TAG,ex);
+            LogUtil.e(TAG,"Request.Exception=>>"+ex.getMessage());
             if (handler != null) {
                 handler.sendFailureMessage("数据提交发生异常", ex);
             }
@@ -316,9 +308,7 @@ public class HttpClient {
 
     public static String mapToQueryString(Map<String, String> map) {
         StringBuilder string = new StringBuilder();
-        /*if(map.size() > 0) {
-            string.append("?");
-        }*/
+
         try {
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 string.append(entry.getKey());
@@ -329,7 +319,8 @@ public class HttpClient {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        return string.toString().substring(0, string.length() - 1);
+
+        return string.substring(0, string.length() - 1);
     }
 
 }

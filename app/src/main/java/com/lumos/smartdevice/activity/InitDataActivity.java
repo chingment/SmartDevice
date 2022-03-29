@@ -31,15 +31,17 @@ import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.api.vo.LogTipsBean;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
+import com.lumos.smartdevice.own.AppLogcatManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
+import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.runtimepermissions.PermissionsManager;
 import com.lumos.smartdevice.utils.runtimepermissions.PermissionsResultAction;
-import com.lumos.smartdevice.widget.shapeloading.LoadingView;
+import com.lumos.smartdevice.ui.shapeloading.LoadingView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -98,8 +100,10 @@ public class InitDataActivity extends BaseActivity {
             }
         });
 
-        //LogUtil.d(TAG,"您好");
-        //AppLogcatManager.saveLogcat2Server("logcat -d -s InitDataActivity","test");
+
+
+        LogUtil.d(TAG,"您好");
+        AppLogcatManager.saveLogcat2Server("logcat -d -s InitDataActivity","test");
         //CrashReport.testJavaCrash();
 
 //         ICabinetCtrl cabinetCtrl= CabinetCtrlInterface.getInstance("ttyS4",9600,"aaa");

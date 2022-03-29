@@ -37,7 +37,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical">
-    <com.lumos.smartdevice.widget.shapeloading.LoadingView
+    <com.lumos.smartdevice.ui.shapeloading.LoadingView
         android:id="@+id/ld_Animation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

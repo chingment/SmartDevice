@@ -66,7 +66,7 @@ public class AppLogcatManager {
             fos = null;
 
             HashMap<String, String> fields = new HashMap<>();
-            fields.put("folder", "LogcatLog");
+            fields.put("folder", "device");
             fields.put("fileName", fileName);
             fields.put("keepFileName", "0");
 

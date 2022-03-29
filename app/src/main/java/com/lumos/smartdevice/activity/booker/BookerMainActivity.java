@@ -151,8 +151,8 @@ public class BookerMainActivity  extends BookerBaseActivity {
                 intent.putExtra("action", "return_book");
                 openActivity(intent);
             } else if (id == R.id.btn_QueryBook) {
-                Intent intent = new Intent(getAppContext(), BookerQueryBookActivity.class);
-                intent.putExtra("action", "query_book");
+                Intent intent = new Intent(getAppContext(), BookerDisplayBooksActivity.class);
+                intent.putExtra("action", "display_books");
                 openActivity(intent);
             }
 

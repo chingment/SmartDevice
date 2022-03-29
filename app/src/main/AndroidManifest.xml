@@ -61,7 +61,7 @@
         <activity android:name=".activity.booker.BookerBorrowReturnOverviewActivity" />
         <activity android:name=".activity.booker.BookerIdentityVerifyActivity" />
         <activity android:name=".activity.booker.BookerMainActivity" />
-        <activity android:name=".activity.booker.BookerQueryBookActivity" />
+        <activity android:name=".activity.booker.BookerDisplayBooksActivity" />
         <activity android:name=".activity.locker.LockerMainActivity" />
         <activity android:name=".activity.sm.SmLockerBoxUseRecordActivity" />
         <activity android:name=".activity.sm.SmDeviceInfoActivity" />

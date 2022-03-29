@@ -28,13 +28,13 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('/Users/chingment/Documents/github/SmartDevice/smartdevice.jks')
+            storeFile file('./smartdevice.jks')
             storePassword 'ching003'
             keyAlias 'SmartDevice'
             keyPassword 'ching003'
         }
         config {
-            storeFile file('/Users/chingment/Documents/github/SmartDevice/smartdevice.jks')
+            storeFile file('./smartdevice.jks')
             storePassword 'ching003'
             keyAlias 'SmartDevice'
             keyPassword 'ching003'
@@ -46,7 +46,7 @@ android {
             signingConfig signingConfigs.release
             buildConfigField "Boolean", "ISAPPDEBUG", "true"
             buildConfigField "String", "COMNAME", "\"caterbao\""
-            buildConfigField "String", "ENVIRONMENT", "\"http://192.168.43.108:8080\""
+            buildConfigField "String", "ENVIRONMENT", "\"http://10.0.2.2:8080\""
             buildConfigField "String", "APPKEY", "\"smartdevice\""
             buildConfigField "String", "APPSECRET", "\"267b08eef8b8421ca6bab6cf809c7fc5\""
         }
@@ -54,7 +54,7 @@ android {
             signingConfig signingConfigs.release
             buildConfigField "Boolean", "ISAPPDEBUG", "true"
             buildConfigField "String", "COMNAME", "\"caterbao\""
-            buildConfigField "String", "ENVIRONMENT", "\"http://192.168.43.108:8080\""
+            buildConfigField "String", "ENVIRONMENT", "\"http://api.device.gddeshang168.com\""
             buildConfigField "String", "APPKEY", "\"smartdevice\""
             buildConfigField "String", "APPSECRET", "\"267b08eef8b8421ca6bab6cf809c7fc5\""
             minifyEnabled true
@@ -103,6 +103,7 @@ android {
 //            universalApk true
 //        }
 //    }
+
 }
 
 dependencies {

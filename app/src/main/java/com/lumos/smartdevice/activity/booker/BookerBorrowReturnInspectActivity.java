@@ -368,16 +368,13 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                 Intent intent = new Intent(getAppContext(), BookerMainActivity.class);
                 openActivity(intent);
                 finish();
-            } else if (id == R.id.tv_BorrowedQuantity||id==R.id.iv_SawBorrowBooks) {
+            } else if (id == R.id.tv_BorrowedQuantity||id==R.id.iv_SawBorrowBooks||id==R.id.btn_RenewBookByOneKey) {
                 Intent intent = new Intent(getAppContext(), BookerSawBorrowBooksActivity.class);
                 intent.putExtra("action", "saw_borrow_books");
                 intent.putExtra("identityType", identityType);
                 intent.putExtra("identityId", identityId);
                 intent.putExtra("clientUserId", clientUserId);
                 openActivity(intent);
-            }
-            else if(id==R.id.btn_RenewBookByOneKey){
-                //toSpeech("邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦邱悦");
             }
         }
     }

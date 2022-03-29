@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tool="http://schemas.android.com/tools">
 
-    <com.lumos.smartdevice.widget.shapeloading.ShapeLoadingView
+    <com.lumos.smartdevice.ui.shapeloading.ShapeLoadingView
         android:id="@+id/shapeloading_View"
         android:layout_width="@dimen/size_40"
         android:layout_height="@dimen/size_40"
