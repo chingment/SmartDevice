@@ -23,19 +23,20 @@
         android:paddingStart="@dimen/size_10"
         android:paddingEnd="@dimen/size_10">
 
-        <androidx.cardview.widget.CardView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_300"
+            android:background="@drawable/booker_circle_corner_white"
             android:orientation="vertical"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="@dimen/size_5"
-            app:cardElevation="0dp"
-            app:cardPreventCornerOverlap="true"
-            app:cardUseCompatPadding="true">
+            app:cardElevation="@dimen/size_5">
+
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:baselineAligned="false"
+                >
 
                 <com.lumos.smartdevice.ui.my.MyGridView
                     android:id="@+id/gdv_DisplayBooks"
@@ -50,7 +51,51 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_50"
+                android:baselineAligned="false"
+
+                >
+
+                <LinearLayout
+                    android:id="@+id/btn_clear"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/booker_circle_corner_page_pre"
+                    android:gravity="center_horizontal|center_vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="上一页" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/booker_circle_corner_page_next"
+                    android:gravity="center_horizontal|center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="下一页" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
 
     </LinearLayout>

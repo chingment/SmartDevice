@@ -3,8 +3,6 @@ package com.lumos.smartdevice.http;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.text.TextUtils;
-import android.util.Log;
 
 
 import androidx.annotation.NonNull;
@@ -15,15 +13,10 @@ import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.Config;
 import com.lumos.smartdevice.utils.LogUtil;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
-import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -48,8 +41,8 @@ public class HttpClient {
     private static final int READ_TIME_OUT = 60;
     private static final int MAX_REQUESTS_PER_HOST = 10;
     private static final String TAG = HttpClient.class.getSimpleName();
-    private static final String UTF_8 = "UTF-8";
-    private static OkHttpClient client;
+    //private static final String UTF_8 = "UTF-8";
+    private static final OkHttpClient client;
     //json请求
     private static final MediaType MediaType_JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -58,8 +51,10 @@ public class HttpClient {
         builder.connectTimeout(CONNECT_TIME_OUT, TimeUnit.SECONDS);
         builder.writeTimeout(WRITE_TIME_OUT, TimeUnit.SECONDS);
         builder.readTimeout(READ_TIME_OUT, TimeUnit.SECONDS);
+
         builder.networkInterceptors().add(new LoggingInterceptor());
         builder.addInterceptor((new RetryIntercepter(3)));
+
         client = builder.build();
         client.dispatcher().setMaxRequestsPerHost(MAX_REQUESTS_PER_HOST);
     }
@@ -71,10 +66,7 @@ public class HttpClient {
         @Override
         public Response intercept(Interceptor.Chain chain) throws IOException {
             Request request = chain.request();
-
-            Response response = chain.proceed(request);
-
-            return response;
+            return chain.proceed(request);
         }
     }
 
@@ -101,27 +93,22 @@ public class HttpClient {
         }
     }
 
-    /**
-     * 网络判断
-     *
-     * @return
-     */
     public static boolean isNetworkAvailable() {
         try {
             ConnectivityManager connectivityManager = (ConnectivityManager) AppContext.getInstance().getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-            return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
+            return networkInfo == null || !networkInfo.isAvailable() || !networkInfo.isConnected();
         } catch (Exception e) {
             LogUtil.v("ConnectivityManager", e.getMessage());
         }
-        return false;
+        return true;
     }
 
     public static void myPost(String url, Object prm, final HttpResponseHandler handler) {
 
         try
         {
-            if (!isNetworkAvailable()) {
+            if (isNetworkAvailable()) {
                 handler.sendFailureMessage("网络连接不可用,请检查设置",null);
                 return;
             }
@@ -169,20 +156,20 @@ public class HttpClient {
                 }
 
                 @Override
-                public void onFailure(Call call, IOException e) {
+                public void onFailure(@NonNull Call call, @NonNull IOException ex) {
                     String msg = "读取数据服务发生异常";
 
-                    if (e instanceof SocketTimeoutException) {
+                    if (ex instanceof SocketTimeoutException) {
                         msg = "读取数据服务连接超时";
-                    } else if (e instanceof ConnectException) {
+                    } else if (ex instanceof ConnectException) {
                         msg = "读取数据服务连接失败";
 
-                    } else if (e instanceof UnknownHostException) {
+                    } else if (ex instanceof UnknownHostException) {
                         msg = "读取数据服务网络异常或连接不存在";
                     }
 
                     if(handler!=null) {
-                        handler.sendFailureMessage(msg, e);
+                        handler.sendFailureMessage(msg, ex);
                     }
                 }
             });
@@ -198,7 +185,7 @@ public class HttpClient {
     public static void myPostFile(String url, Map<String, String> fields, Map<String, String> filePaths, final HttpResponseHandler handler) {
 
         try {
-            if (!isNetworkAvailable()) {
+            if (isNetworkAvailable()) {
                 if(handler!=null) {
                     handler.sendFailureMessage("网络连接不可用,请检查设置", null);
                 }
@@ -304,23 +291,4 @@ public class HttpClient {
             }
         }
     }
-
-
-    public static String mapToQueryString(Map<String, String> map) {
-        StringBuilder string = new StringBuilder();
-
-        try {
-            for (Map.Entry<String, String> entry : map.entrySet()) {
-                string.append(entry.getKey());
-                string.append("=");
-                string.append(URLEncoder.encode(entry.getValue(), UTF_8));
-                string.append("&");
-            }
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        return string.substring(0, string.length() - 1);
-    }
-
 }

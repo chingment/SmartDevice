@@ -73,6 +73,10 @@
         <activity android:name=".activity.sm.SmFactorySettingActivity" />
         <activity android:name=".activity.sm.SmLoginActivity" />
         <activity android:name=".activity.sm.SmHelpToolActivity" />
+        <service
+            android:name=".activity.booker.service.BookerBorrowReturnFlowService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

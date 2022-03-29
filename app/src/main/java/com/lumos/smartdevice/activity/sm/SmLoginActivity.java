@@ -27,6 +27,7 @@ import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.api.vo.UserVo;
 import com.lumos.smartdevice.own.AppCacheManager;
+import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -246,7 +247,6 @@ public class SmLoginActivity extends SmBaseActivity implements View.OnClickListe
 
                             Intent var2 = new Intent(getAppContext(), SmHomeActivity.class);
                             openActivity(var2);
-                            finish();
                         }
                         else {
                             showToast(rt.getMsg());

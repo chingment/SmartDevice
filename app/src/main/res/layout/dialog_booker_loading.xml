@@ -17,8 +17,8 @@
 
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/iv_TipsLoading"
-            android:layout_width="@dimen/size_200"
-            android:layout_height="@dimen/size_200"
+            android:layout_width="@dimen/size_120"
+            android:layout_height="@dimen/size_120"
             android:scaleType="fitXY"
             android:padding="0dp"
             />
