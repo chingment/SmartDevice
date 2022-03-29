@@ -66,7 +66,7 @@ public class AppContext extends Application {
 
         CrashReport.UserStrategy strategy=new CrashReport.UserStrategy(context);
         strategy.setDeviceID(DeviceUtil.getDeviceId());
-        CrashReport.initCrashReport(getApplicationContext(), "c114c9e5db", true,strategy);
+        CrashReport.initCrashReport(getApplicationContext(), "c114c9e5db", false,strategy);
 
         OstCtrlInterface.init(context);
 

@@ -27,7 +27,7 @@ public class BookerCtrlReceiver extends BroadcastReceiver {
 
         LogUtil.d(TAG,"onReceive");
 
-        BorrowReturnFlowResultVo flowResult =( BorrowReturnFlowResultVo)intent.getSerializableExtra("flow_result");
+        BorrowReturnFlowResultVo flowResult =( BorrowReturnFlowResultVo)intent.getSerializableExtra("result");
 
         onListener.onBorrowReturnFlowReceive(flowResult);
 
@@ -40,7 +40,7 @@ public class BookerCtrlReceiver extends BroadcastReceiver {
     public void  register(final Context context) {
         LogUtil.d(TAG,"register");
         IntentFilter filter = new IntentFilter();
-        String ACTION = "action.booker.borrow.return.flow";
+        String ACTION = "action.booker.borrow.return.flow.result";
         filter.addAction(ACTION);
         context.registerReceiver(this, filter);
     }
