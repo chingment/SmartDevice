@@ -25,6 +25,8 @@ import com.lumos.smartdevice.utils.LogUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class BookerCtrl {
 
@@ -57,6 +59,11 @@ public class BookerCtrl {
 
     private ILockeqCtrl lockeqCtrl;
     private IRfeqCtrl rfeqCtrl;
+
+
+    private BookerCtrl(){
+
+    }
 
     public static BookerCtrl getInstance() {
 
@@ -112,33 +119,61 @@ public class BookerCtrl {
         void onBorrowReturn(BorrowReturnFlowResultVo result);
     }
 
+    private Map<String, Object> brFlowDo = new ConcurrentHashMap<>();
+
+
+   // private volatile HashMap  isRunning = false;
+
     private class BorrowReturnFlowThread extends Thread {
 
         private DeviceVo device;
         private BookerSlotVo slot;
         private String flowId;
         private String deviceId;
+        private String slotId;
 
         private List<String> open_RfIds;
         private List<String> close_RfIds;
 
-        private volatile boolean isRunning = false;
 
         private BorrowReturnFlowThread(DeviceVo device, BookerSlotVo slot, String flowId) {
             this.device = device;
             this.deviceId=device.getDeviceId();
             this.slot = slot;
+            this.slotId=slot.getSlotId();
             this.flowId = flowId;
+            this.setName(flowId);
+        }
+
+
+        private void setRunning(boolean isRunning) {
+            if(isRunning) {
+                brFlowDo.put(slotId, true);
+            }
+            else{
+                brFlowDo.remove(slotId);
+            }
         }
 
         @Override
         public void run() {
             super.run();
 
-            if (isRunning) {
-                LogUtil.d(TAG, "有任务正在执行");
-            } else {
-                isRunning = true;
+
+            boolean isDo = false;
+
+            synchronized (BorrowReturnFlowThread.class) {
+                if (brFlowDo.containsKey(slotId)) {
+                    LogUtil.d(TAG, slotId + ":My有任务正在");
+                } else {
+                    setRunning(true);
+                    isDo = true;
+                }
+            }
+
+            if (isDo) {
+                LogUtil.d(TAG, slotId + ":My有任务开始");
+
                 open_RfIds = new ArrayList<>();
                 close_RfIds = new ArrayList<>();
 
@@ -150,7 +185,7 @@ public class BookerCtrl {
 
                     if (device == null) {
                         sendHandlerMessage(BR_ACTION_CODE_INIT_DATA_FAILURE, "设备未配置[01]");
-                        isRunning = false;
+                        setRunning(false);
                         return;
                     }
 
@@ -158,19 +193,19 @@ public class BookerCtrl {
 
                     if (drives == null || drives.size() == 0) {
                         sendHandlerMessage(BR_ACTION_CODE_INIT_DATA_FAILURE, "设备未配置驱动[02]");
-                        isRunning = false;
+                        setRunning(false);
                         return;
                     }
 
                     if (drives.size() < 2) {
                         sendHandlerMessage(BR_ACTION_CODE_INIT_DATA_FAILURE, "设备驱动数量不对[03]");
-                        isRunning = false;
+                        setRunning(false);
                         return;
                     }
 
                     if (slot == null) {
                         sendHandlerMessage(BR_ACTION_CODE_INIT_DATA_FAILURE, "格子未配置[04]");
-                        isRunning = false;
+                        setRunning(false);
                         return;
                     }
 
@@ -178,33 +213,33 @@ public class BookerCtrl {
 
                     if (slot_Drives == null) {
                         sendHandlerMessage(BR_ACTION_CODE_INIT_DATA_FAILURE, "设备未配置驱动[05]");
-                        isRunning = false;
+                        setRunning(false);
                         return;
                     }
 
                     BookerDriveLockeqVo lockeq = slot_Drives.getLockeq();
                     if (lockeq == null) {
                         sendHandlerMessage(BR_ACTION_CODE_INIT_DATA_FAILURE, "格子未配置锁驱动[06]");
-                        isRunning = false;
+                        setRunning(false);
                         return;
                     }
 
                     if (!drives.containsKey(lockeq.getDriveId())) {
                         sendHandlerMessage(BR_ACTION_CODE_INIT_DATA_FAILURE, "格子驱动找不到[07]");
-                        isRunning = false;
+                        setRunning(false);
                         return;
                     }
 
                     BookerDriveRfeqVo rfeq = slot_Drives.getRfeq();
                     if (rfeq == null) {
                         sendHandlerMessage(BR_ACTION_CODE_INIT_DATA_FAILURE, "射频未配置驱动[08]");
-                        isRunning = false;
+                        setRunning(false);
                         return;
                     }
 
                     if (!drives.containsKey(rfeq.getDriveId())) {
                         sendHandlerMessage(BR_ACTION_CODE_INIT_DATA_FAILURE, "射频驱动找不到[09]");
-                        isRunning = false;
+                        setRunning(false);
                         return;
                     }
 
@@ -213,7 +248,7 @@ public class BookerCtrl {
 
                     if (lockeqDrive == null) {
                         sendHandlerMessage(BR_ACTION_CODE_INIT_DATA_FAILURE, "格子驱动找不到[11]");
-                        isRunning = false;
+                        setRunning(false);
                         return;
                     }
 
@@ -221,7 +256,7 @@ public class BookerCtrl {
 
                     if (rfeqDrive == null) {
                         sendHandlerMessage(BR_ACTION_CODE_INIT_DATA_FAILURE, "射频驱动找不到[12]");
-                        isRunning = false;
+                        setRunning(false);
                         return;
                     }
 
@@ -251,7 +286,7 @@ public class BookerCtrl {
 //                        }
 //                    });
 
-                    Thread.sleep(500);
+                    Thread.sleep(1000 * 10);
 
                     HashMap<String, Object> open_ActionData = new HashMap<>();
 
@@ -277,7 +312,8 @@ public class BookerCtrl {
                         public void onSuccess(String response) {
                             super.onSuccess(response);
 
-                            ResultBean<RetBookerBorrowReturn> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetBookerBorrowReturn>>() {});
+                            ResultBean<RetBookerBorrowReturn> rt = JsonUtil.toResult(response, new TypeReference<ResultBean<RetBookerBorrowReturn>>() {
+                            });
 
                             if (rt.getCode() == ResultCode.SUCCESS) {
 
@@ -293,13 +329,13 @@ public class BookerCtrl {
                                     @Override
                                     public void onSendCommnadFailure() {
                                         sendHandlerMessage(BR_ACTION_CODE_SEND_OPEN_COMMAND_FAILURE, "打开命令发送失败");
-                                        isRunning = false;
+                                        setRunning(false);
                                     }
 
                                     @Override
                                     public void onOpenFailure() {
                                         sendHandlerMessage(BR_ACTION_CODE_OPEN_FAILURE, "打开失败");
-                                        isRunning = false;
+                                        setRunning(false);
                                     }
 
                                     @Override
@@ -354,7 +390,7 @@ public class BookerCtrl {
                                         // HashMap<String, Object> actionData = new HashMap<>();
                                         //  actionData.put("rfIds", close_RfIds);
 
-                                       // rfeqCtrl.sendCloseRead(1);
+                                        // rfeqCtrl.sendCloseRead(1);
 
 
                                         HashMap<String, Object> close_ActionData = new HashMap<>();
@@ -362,21 +398,22 @@ public class BookerCtrl {
                                         close_ActionData.put("rfIds", close_RfIds);
 
                                         //todo 判断关闭是否成功
-                                        sendHandlerMessage(BR_ACTION_CODE_CLOSE_SUCCESS, close_ActionData, "关闭成功",null);
+                                        sendHandlerMessage(BR_ACTION_CODE_CLOSE_SUCCESS, close_ActionData, "关闭成功", null);
 
                                         sendHandlerMessage(BR_ACTION_CODE_REQUEST_CLOSE_AUTH, close_ActionData, "请求关闭验证", new ReqHandler() {
                                             @Override
                                             public void onSuccess(String response) {
                                                 super.onSuccess(response);
-                                                ResultBean<RetBookerBorrowReturn> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetBookerBorrowReturn>>() {});
+                                                ResultBean<RetBookerBorrowReturn> rt = JsonUtil.toResult(response, new TypeReference<ResultBean<RetBookerBorrowReturn>>() {
+                                                });
 
                                                 if (rt.getCode() == ResultCode.SUCCESS) {
                                                     RetBookerBorrowReturn d = rt.getData();
                                                     HashMap<String, Object> m_ActionData = new HashMap<>();
                                                     m_ActionData.put("ret_booker_borrow_return", d);
-                                                    sendHandlerMessage(BR_ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS, m_ActionData, "请求关闭验证通过",null);
+                                                    sendHandlerMessage(BR_ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS, m_ActionData, "请求关闭验证通过", null);
 
-                                                    sendHandlerMessage(BR_ACTION_CODE_FLOW_END, m_ActionData, "借阅流程结束",null);
+                                                    sendHandlerMessage(BR_ACTION_CODE_FLOW_END, m_ActionData, "借阅流程结束", null);
 
                                                 } else {
                                                     //todo 验证不通过的流程
@@ -395,7 +432,7 @@ public class BookerCtrl {
 
                             } else {
                                 sendHandlerMessage(BR_ACTION_CODE_REQUEST_OPEN_AUTH_FAILURE, "请求不允许打开设备");
-                                isRunning = false;
+                                setRunning(false);
                             }
                         }
 
@@ -403,14 +440,14 @@ public class BookerCtrl {
                         public void onFailure(String msg, Exception e) {
                             super.onFailure(msg, e);
                             sendHandlerMessage(BR_ACTION_CODE_REQUEST_OPEN_AUTH_FAILURE, "请求不允许打开设备");
-                            isRunning = false;
+                            setRunning(false);
                         }
                     });
 
 
                 } catch (InterruptedException e) {
                     sendHandlerMessage(BR_ACTION_CODE_EXCEPTION, "发生异常");
-                    isRunning = false;
+                    setRunning(false);
                 }
             }
         }

@@ -108,6 +108,8 @@ public class InitDataActivity extends BaseActivity {
 
 
 
+
+
         LogUtil.d(TAG,"您好");
         AppLogcatManager.saveLogcat2Server("logcat -d -s InitDataActivity","test");
         //CrashReport.testJavaCrash();

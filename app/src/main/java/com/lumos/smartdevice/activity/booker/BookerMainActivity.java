@@ -10,16 +10,23 @@ import android.widget.VideoView;
 
 import com.danikula.videocache.HttpProxyCacheServer;
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.booker.service.BookerCtrl;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
 import com.lumos.smartdevice.api.vo.AdVo;
 import com.lumos.smartdevice.api.vo.AdCreativeVo;
 import com.lumos.smartdevice.api.vo.BookerCustomDataVo;
+import com.lumos.smartdevice.api.vo.BookerDriveLockeqVo;
+import com.lumos.smartdevice.api.vo.BookerDriveRfeqVo;
+import com.lumos.smartdevice.api.vo.BookerSlotDrivesVo;
+import com.lumos.smartdevice.api.vo.BookerSlotVo;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class BookerMainActivity  extends BookerBaseActivity {
 
@@ -35,11 +42,57 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
     private BookerCustomDataVo bookerCustomData;
 
+    private BookerCtrl bookerCtrl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booker_main);
         bookerCustomData = AppCacheManager.getBookerCustomData();
+
+        bookerCtrl=BookerCtrl.getInstance();
+
+
+        ExecutorService service = Executors.newFixedThreadPool(1000);
+        service.execute(()->{
+
+            try {
+
+                for (int i=0;i<100;i++){
+                    BookerSlotVo slot=new BookerSlotVo();
+
+                    slot.setSlotId(String.valueOf(i));
+                    slot.setName("1");
+                    BookerSlotDrivesVo drivesVo=new BookerSlotDrivesVo();
+                    BookerDriveLockeqVo lockeq=new BookerDriveLockeqVo();
+                    lockeq.setDriveId("Lockeq_1");
+                    lockeq.setAnt("1");
+                    lockeq.setPlate("1");
+
+                    drivesVo.setLockeq(lockeq);
+                    BookerDriveRfeqVo rfeq=new BookerDriveRfeqVo();
+                    rfeq.setDriveId("Rfeq_1");
+                    rfeq.setAnt("1");
+                    drivesVo.setRfeq(rfeq);
+                    //slot.setDrives(drivesVo);
+                    String flowId=String.valueOf(i);
+
+                    bookerCtrl.borrowReturnStart(getDevice(),slot,flowId);
+                    bookerCtrl.borrowReturnStart(getDevice(),slot,flowId);
+                    Thread.sleep(200);
+                }
+
+            }catch (Exception e) {
+
+                e.printStackTrace();
+
+            }
+
+        });
+
+
+
+
         initView();
         initEvent();
         initData();
