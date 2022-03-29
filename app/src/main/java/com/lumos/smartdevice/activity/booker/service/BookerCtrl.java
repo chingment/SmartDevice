@@ -420,12 +420,12 @@ public class BookerCtrl {
             sendBorrowReturnHandlerMessage(deviceId, flowId,actionCode, actionData, actionRemark,reqHandler);
         }
 
-        private void sendHandlerMessage(String actionCode,String actionRemark, ReqHandler reqHandler){
-            sendHandlerMessage(actionCode, null, actionRemark,reqHandler);
+        private void sendHandlerMessage(String actionCode,HashMap<String,Object> actionData,String actionRemark){
+            sendHandlerMessage(actionCode, actionData, actionRemark,null);
         }
 
-        private void sendHandlerMessage(String actionCode,String actionRemark,HashMap<String,Object> actionData, ReqHandler reqHandler){
-            sendHandlerMessage(actionCode, actionData, actionRemark,reqHandler);
+        private void sendHandlerMessage(String actionCode,String actionRemark, ReqHandler reqHandler){
+            sendHandlerMessage(actionCode, null, actionRemark,reqHandler);
         }
 
         private void sendHandlerMessage(String actionCode,String actionRemark){
