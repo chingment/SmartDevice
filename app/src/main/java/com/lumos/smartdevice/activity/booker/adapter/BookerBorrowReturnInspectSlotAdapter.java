@@ -57,12 +57,9 @@ public class BookerBorrowReturnInspectSlotAdapter extends BaseAdapter {
 
         if(onClickListener!=null) {
             cv_Slot.setTag(bean);
-            cv_Slot.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    BookerSlotVo l_Bean = (BookerSlotVo) view.getTag();
-                    onClickListener.onClick(l_Bean);
-                }
+            cv_Slot.setOnClickListener(view -> {
+                BookerSlotVo l_Bean = (BookerSlotVo) view.getTag();
+                onClickListener.onClick(l_Bean);
             });
         }
 

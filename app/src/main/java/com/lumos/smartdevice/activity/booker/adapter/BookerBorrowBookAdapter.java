@@ -95,14 +95,11 @@ public class BookerBorrowBookAdapter extends RefreshAdapter {
         }
 
         btn_RenewBook.setTag(item);
-        btn_RenewBook.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btn_RenewBook.setOnClickListener(view -> {
 
-                if(onClickListener!=null) {
-                    BookerBorrowBookVo l_item = (BookerBorrowBookVo) view.getTag();
-                    onClickListener.onRenew(l_item);
-                }
+            if(onClickListener!=null) {
+                BookerBorrowBookVo l_item = (BookerBorrowBookVo) view.getTag();
+                onClickListener.onRenew(l_item);
             }
         });
 

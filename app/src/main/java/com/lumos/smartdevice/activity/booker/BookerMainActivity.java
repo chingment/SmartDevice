@@ -58,11 +58,11 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
             try {
 
-//                for (int i=0;i<;i++){
+                for (int i=0;i<10;i++){
                     BookerSlotVo slot=new BookerSlotVo();
 
-                    slot.setSlotId("2");
-                    slot.setName("2");
+                    slot.setSlotId(String.valueOf(i));
+                    slot.setName(String.valueOf(i));
                     BookerSlotDrivesVo drivesVo=new BookerSlotDrivesVo();
                     BookerDriveLockeqVo lockeq=new BookerDriveLockeqVo();
                     lockeq.setDriveId("Lockeq_1");
@@ -78,9 +78,9 @@ public class BookerMainActivity  extends BookerBaseActivity {
                     //String flowId=String.valueOf(i);
 
                     bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot);
-                   // bookerCtrl.borrowReturnStart(getDevice(),slot,flowId);
+                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot);
 //                    Thread.sleep(200);
-//                }
+                }
 
             }catch (Exception e) {
 

@@ -180,31 +180,32 @@ public class BookerCtrl {
         public void run() {
             super.run();
 
-
             synchronized (BorrowReturnFlowThread.class) {
                 if (brFlowDo.containsKey(slotId)) {
                     LogUtil.d(TAG, slotId + ":My有任务正在");
                     sendHandlerMessage(ACTION_CODE_TIPS, "已被使用");
                     return;
-                } else {
+                }
+                else {
                     setRunning(true);
                 }
             }
 
             LogUtil.d(TAG, slotId + ":My有任务开始");
+
             borrowRetrun();
 
 
-            while (brFlowDo.containsKey(slotId)) {
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                LogUtil.d(TAG, slotId + ":等待执行");
-            }
-
-            LogUtil.d(TAG, slotId + ":执行结束");
+//            while (brFlowDo.containsKey(slotId)) {
+////                try {
+////                    Thread.sleep(1000);
+////                } catch (InterruptedException e) {
+////                    e.printStackTrace();
+////                }
+////                LogUtil.d(TAG, slotId + ":等待执行");
+//            }
+//
+//            LogUtil.d(TAG, slotId + ":执行结束");
         }
 
 
@@ -223,6 +224,7 @@ public class BookerCtrl {
                 @Override
                 public void onSuccess(String response) {
                     super.onSuccess(response);
+
                     ResultBean<RetBookerCreateFlow> rt = JsonUtil.toResult(response, new TypeReference<ResultBean<RetBookerCreateFlow>>() {
                     });
 
@@ -231,7 +233,7 @@ public class BookerCtrl {
                         flowId = d.getFlowId();
                         doTask();
                     } else {
-                        sendHandlerMessage(BR_ACTION_CODE_INIT_DATA_FAILURE, "流程创建[01]");
+                        sendHandlerMessage(ACTION_CODE_TIPS, "流程创建[01]");
                         setRunning(false);
                     }
                 }
@@ -239,7 +241,7 @@ public class BookerCtrl {
                 @Override
                 public void onFailure(String msg, Exception e) {
                     super.onFailure(msg, e);
-                    sendHandlerMessage(BR_ACTION_CODE_INIT_DATA_FAILURE, "流程创建[02]");
+                    sendHandlerMessage(ACTION_CODE_TIPS, "流程创建[02]");
                     setRunning(false);
                 }
             });
@@ -252,6 +254,7 @@ public class BookerCtrl {
 
                 open_RfIds = new ArrayList<>();
                 close_RfIds = new ArrayList<>();
+
                 sendHandlerMessage(BR_ACTION_CODE_FLOW_START, "借还开始");
 
                 sendHandlerMessage(BR_ACTION_CODE_INIT_DATA, "设备初始数据检查");
@@ -507,6 +510,7 @@ public class BookerCtrl {
                                             sendHandlerMessage(BR_ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE, "关闭验证不通过");
                                         }
                                     });
+
 
                                 }
                             });

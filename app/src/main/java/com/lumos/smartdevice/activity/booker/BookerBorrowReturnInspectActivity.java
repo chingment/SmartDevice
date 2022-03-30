@@ -126,6 +126,9 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                     case BookerCtrl.BR_ACTION_CODE_INIT_DATA_FAILURE:
                         dialog_BookerFlowHandling.setTipsText(actionRemark);
                         break;
+                    case BookerCtrl.BR_ACTION_CODE_INIT_DATA_SUCCESS:
+                        dialog_BookerFlowHandling.setTipsText("初始化数据成功");
+                        break;
                     case BookerCtrl.BR_ACTION_CODE_REQUEST_OPEN_AUTH:
                         dialog_BookerFlowHandling.setTipsText("验证打开授权中");
                         break;
@@ -233,12 +236,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
         BookerBorrowReturnInspectSlotAdapter slotAdapter = new BookerBorrowReturnInspectSlotAdapter(getAppContext(), slots);
 
-        slotAdapter.setOnClickListener(new BookerBorrowReturnInspectSlotAdapter.OnClickListener() {
-            @Override
-            public void onClick(BookerSlotVo slot) {
-                bookerCtrlServiceBinder.borrowReturnStart(clientUserId,identityType,identityId,device,slot);
-            }
-        });
+        slotAdapter.setOnClickListener(slot -> bookerCtrlServiceBinder.borrowReturnStart(clientUserId,identityType,identityId,device,slot));
 
         gdv_Slots.setAdapter(slotAdapter);
 
