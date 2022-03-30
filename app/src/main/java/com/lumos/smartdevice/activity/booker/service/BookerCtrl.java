@@ -61,6 +61,9 @@ public class BookerCtrl {
     public static final String BR_ACTION_CODE_EXCEPTION = "exception";
 
 
+    private Map<String, Object> brFlowDo = new ConcurrentHashMap<>();
+
+
     private ILockeqCtrl lockeqCtrl;
     private IRfeqCtrl rfeqCtrl;
 
@@ -78,84 +81,33 @@ public class BookerCtrl {
                 }
             }
         }
-
         return mThis;
     }
 
 
-    public void borrowReturnStart(String clientUserId,int identityType,String identityId,DeviceVo device, BookerSlotVo slot) {
-        BorrowReturnFlowThread thread = new BorrowReturnFlowThread(clientUserId,identityType,identityId,device, slot);
+    public void borrowReturnStart(String clientUserId,int identityType,String identityId,DeviceVo device, BookerSlotVo slot,OnHandlerListener onHandlerListener) {
+        BorrowReturnFlowThread thread = new BorrowReturnFlowThread(clientUserId,identityType,identityId,device, slot, onHandlerListener);
         thread.start();
     }
 
-    public boolean check(String slotId) {
-        boolean isFlag = false;
-        Thread[] ts = new Thread[Thread.activeCount()];
-        Thread.enumerate(ts);
-        for (Thread t : ts) {
-            if (t.getName().equals("slotId-" + slotId)) {
-                isFlag = true;
-                break;
-            }
-        }
-
-        return isFlag;
-    }
-
-    private void sendBorrowReturnHandlerMessage(String deviceId,String flowId,String actionCode,HashMap<String,Object> actionData,String actionRemark, ReqHandler reqHandler) {
-
-        if(!StringUtil.isEmpty(flowId)) {
-            RopBookerBorrowReturn rop = new RopBookerBorrowReturn();
-            rop.setDeviceId(deviceId);
-            rop.setActionCode(actionCode);
-            rop.setActionTime(CommonUtil.getCurrentTime());
-            rop.setActionRemark(actionRemark);
-            rop.setFlowId(flowId);
-            if (actionData != null) {
-                rop.setActionData(JSON.toJSONString(actionData));
-            }
-
-            ReqInterface.getInstance().bookerBorrowReturn(rop, reqHandler);
-        }
-
-        if (onHandlerListener != null) {
-            BorrowReturnFlowResultVo result=new BorrowReturnFlowResultVo();
-            result.setDeviceId(deviceId);
-            result.setFlowId(flowId);
-            result.setActionCode(actionCode);
-            result.setActionData(actionData);
-            result.setActionRemark(actionRemark);
-            onHandlerListener.onBorrowReturn(result);
-        }
-    }
-
-    private OnHandlerListener onHandlerListener=null;
-
-    public void setHandlerListener(OnHandlerListener onHandlerListener) {
-        this.onHandlerListener = onHandlerListener;
-    }
-
-    public  interface OnHandlerListener {
-        void onBorrowReturn(BorrowReturnFlowResultVo result);
-    }
-
-    private Map<String, Object> brFlowDo = new ConcurrentHashMap<>();
 
     private class BorrowReturnFlowThread extends Thread {
 
-        private DeviceVo device;
-        private BookerSlotVo slot;
+        private final DeviceVo device;
+        private final BookerSlotVo slot;
         private String flowId;
-        private String deviceId;
-        private String slotId;
-        private String clientUserId;
-        private int identityType;
-        private String identityId;
+        private final String deviceId;
+        private final String slotId;
+        private final String clientUserId;
+        private final int identityType;
+        private final String identityId;
+
         private List<String> open_RfIds;
         private List<String> close_RfIds;
 
+        private OnHandlerListener onHandlerListener=null;
 
-        private BorrowReturnFlowThread(String clientUserId,int identityType,String identityId, DeviceVo device, BookerSlotVo slot) {
+        private BorrowReturnFlowThread(String clientUserId,int identityType,String identityId, DeviceVo device, BookerSlotVo slot,OnHandlerListener onHandlerListener) {
             this.clientUserId = clientUserId;
             this.identityType = identityType;
             this.identityId = identityId;
@@ -163,6 +115,7 @@ public class BookerCtrl {
             this.deviceId = device.getDeviceId();
             this.slot = slot;
             this.slotId = slot.getSlotId();
+            this.onHandlerListener=onHandlerListener;
             this.setName("slotId-" + slotId);
         }
 
@@ -551,5 +504,41 @@ public class BookerCtrl {
         private void sendHandlerMessage(String actionCode,String actionRemark){
             sendHandlerMessage(actionCode, null, actionRemark,null);
         }
+
+        private void sendBorrowReturnHandlerMessage(String deviceId,String flowId,String actionCode,HashMap<String,Object> actionData,String actionRemark, ReqHandler reqHandler) {
+
+            if(!StringUtil.isEmpty(flowId)) {
+                RopBookerBorrowReturn rop = new RopBookerBorrowReturn();
+                rop.setDeviceId(deviceId);
+                rop.setActionCode(actionCode);
+                rop.setActionTime(CommonUtil.getCurrentTime());
+                rop.setActionRemark(actionRemark);
+                rop.setFlowId(flowId);
+                if (actionData != null) {
+                    rop.setActionData(JSON.toJSONString(actionData));
+                }
+
+                ReqInterface.getInstance().bookerBorrowReturn(rop, reqHandler);
+            }
+
+            if (onHandlerListener != null) {
+                BorrowReturnFlowResultVo result=new BorrowReturnFlowResultVo();
+                result.setDeviceId(deviceId);
+                result.setFlowId(flowId);
+                result.setActionCode(actionCode);
+                result.setActionData(actionData);
+                result.setActionRemark(actionRemark);
+                onHandlerListener.onBorrowReturn(result);
+            }
+        }
+
+
+//        public void setHandlerListener(OnHandlerListener onHandlerListener) {
+//            this.onHandlerListener = onHandlerListener;
+//        }
+    }
+
+    public interface OnHandlerListener {
+        void onBorrowReturn(BorrowReturnFlowResultVo result);
     }
 }

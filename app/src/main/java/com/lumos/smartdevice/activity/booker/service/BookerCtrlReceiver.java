@@ -27,7 +27,7 @@ public class BookerCtrlReceiver extends BroadcastReceiver {
 
         LogUtil.d(TAG,"onReceive");
 
-        BorrowReturnFlowResultVo flowResult =( BorrowReturnFlowResultVo)intent.getSerializableExtra("result");
+        BorrowReturnFlowResultVo flowResult =(BorrowReturnFlowResultVo)intent.getSerializableExtra("result");
 
         onListener.onBorrowReturnFlowReceive(flowResult);
 

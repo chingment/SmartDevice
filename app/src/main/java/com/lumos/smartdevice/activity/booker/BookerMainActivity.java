@@ -77,8 +77,8 @@ public class BookerMainActivity  extends BookerBaseActivity {
                     slot.setDrives(drivesVo);
                     //String flowId=String.valueOf(i);
 
-                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot);
-                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot);
+                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot,null);
+                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot,null);
 //                    Thread.sleep(200);
                 }
 

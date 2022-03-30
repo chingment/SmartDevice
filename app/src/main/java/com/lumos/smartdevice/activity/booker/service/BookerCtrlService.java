@@ -52,13 +52,13 @@ public class BookerCtrlService extends Service {
         bookerCtrl = BookerCtrl.getInstance();
 
 
-        bookerCtrl.setHandlerListener(new BookerCtrl.OnHandlerListener() {
-            @Override
-            public void onBorrowReturn(BorrowReturnFlowResultVo result) {
-                LogUtil.d(TAG, "actionCode:" + result.getActionCode() + ",actionRemark:" + result.getActionRemark());
-                sendBroadcastMsg(result);
-            }
-        });
+//        bookerCtrl.setHandlerListener(new BookerCtrl.OnHandlerListener() {
+//            @Override
+//            public void onBorrowReturn(BorrowReturnFlowResultVo result) {
+//                LogUtil.d(TAG, "actionCode:" + result.getActionCode() + ",actionRemark:" + result.getActionRemark());
+//                sendBroadcastMsg(result);
+//            }
+//        });
 
 
         mCtrlBinder = new CtrlBinder();
@@ -100,8 +100,14 @@ public class BookerCtrlService extends Service {
     }
 
     public class CtrlBinder extends Binder {
-        public void borrowReturnStart(String clientUserId,int identityType,String identityId,DeviceVo device, BookerSlotVo slot) {
-            bookerCtrl.borrowReturnStart(clientUserId, identityType, identityId, device, slot);
+        public void borrowReturnStart(String clientUserId, int identityType, String identityId, DeviceVo device, BookerSlotVo slot) {
+            bookerCtrl.borrowReturnStart(clientUserId, identityType, identityId, device, slot, new BookerCtrl.OnHandlerListener() {
+                @Override
+                public void onBorrowReturn(BorrowReturnFlowResultVo result) {
+                    LogUtil.d(TAG, "actionCode:" + result.getActionCode() + ",actionRemark:" + result.getActionRemark());
+                    sendBroadcastMsg(result);
+                }
+            });
         }
     }
 }

@@ -236,7 +236,9 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
         BookerBorrowReturnInspectSlotAdapter slotAdapter = new BookerBorrowReturnInspectSlotAdapter(getAppContext(), slots);
 
-        slotAdapter.setOnClickListener(slot -> bookerCtrlServiceBinder.borrowReturnStart(clientUserId,identityType,identityId,device,slot));
+        slotAdapter.setOnClickListener(slot ->
+                bookerCtrlServiceBinder.borrowReturnStart(clientUserId, identityType, identityId, device, slot)
+        );
 
         gdv_Slots.setAdapter(slotAdapter);
 
