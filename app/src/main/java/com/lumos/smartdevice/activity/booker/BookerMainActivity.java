@@ -58,11 +58,11 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
             try {
 
-                for (int i=0;i<100;i++){
+//                for (int i=0;i<;i++){
                     BookerSlotVo slot=new BookerSlotVo();
 
-                    slot.setSlotId(String.valueOf(i));
-                    slot.setName("1");
+                    slot.setSlotId("2");
+                    slot.setName("2");
                     BookerSlotDrivesVo drivesVo=new BookerSlotDrivesVo();
                     BookerDriveLockeqVo lockeq=new BookerDriveLockeqVo();
                     lockeq.setDriveId("Lockeq_1");
@@ -74,13 +74,13 @@ public class BookerMainActivity  extends BookerBaseActivity {
                     rfeq.setDriveId("Rfeq_1");
                     rfeq.setAnt("1");
                     drivesVo.setRfeq(rfeq);
-                    //slot.setDrives(drivesVo);
-                    String flowId=String.valueOf(i);
+                    slot.setDrives(drivesVo);
+                    //String flowId=String.valueOf(i);
 
-                    bookerCtrl.borrowReturnStart(getDevice(),slot,flowId);
-                    bookerCtrl.borrowReturnStart(getDevice(),slot,flowId);
-                    Thread.sleep(200);
-                }
+                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot);
+                   // bookerCtrl.borrowReturnStart(getDevice(),slot,flowId);
+//                    Thread.sleep(200);
+//                }
 
             }catch (Exception e) {
 
@@ -131,6 +131,11 @@ public class BookerMainActivity  extends BookerBaseActivity {
             }
         });
 
+        proxy = new HttpProxyCacheServer.Builder(this)
+                .maxCacheSize(1024 * 1024 * 1024) //1Gb 緩存
+                .maxCacheFilesCount(5)//最大緩存5個視頻
+                .build();
+
     }
 
     public void initData() {
@@ -157,10 +162,6 @@ public class BookerMainActivity  extends BookerBaseActivity {
     }
 
     private void  playVvAd(String fileUrl) {
-        proxy = new HttpProxyCacheServer.Builder(this)
-                .maxCacheSize(1024 * 1024 * 1024) //1Gb 緩存
-                .maxCacheFilesCount(5)//最大緩存5個視頻
-                .build();
         String vv_Ad_Url = proxy.getProxyUrl(fileUrl);
         vv_Ad.setVideoPath(vv_Ad_Url);
         vv_Ad.start();

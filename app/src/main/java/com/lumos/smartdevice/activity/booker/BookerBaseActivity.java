@@ -75,7 +75,7 @@ public abstract class BookerBaseActivity  extends BaseActivity {
         timerByActivityFinish=new TimerByActivityFinish(getAppContext(), seconds, new TimerByActivityFinish.OnTimerLinster() {
             @Override
             public void onTick(long second) {
-                LogUtil.d(TAG,String.valueOf(second));
+                //LogUtil.d(TAG,String.valueOf(second));
 
                 tv_ActivityFinshTick=findViewById(R.id.tv_ActivityFinshTick);
 

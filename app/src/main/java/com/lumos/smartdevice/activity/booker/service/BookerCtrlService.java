@@ -6,6 +6,7 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -99,8 +100,8 @@ public class BookerCtrlService extends Service {
     }
 
     public class CtrlBinder extends Binder {
-        public void borrowReturnStart(DeviceVo device, BookerSlotVo slot, String flowId) {
-            bookerCtrl.borrowReturnStart(device,slot,flowId);
+        public void borrowReturnStart(String clientUserId,int identityType,String identityId,DeviceVo device, BookerSlotVo slot) {
+            bookerCtrl.borrowReturnStart(clientUserId, identityType, identityId, device, slot);
         }
     }
 }

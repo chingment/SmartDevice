@@ -116,6 +116,9 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
 
                 switch (actionCode) {
+                    case BookerCtrl.ACTION_CODE_TIPS:
+                        showToast(actionRemark);
+                        break;
                     case BookerCtrl.BR_ACTION_CODE_FLOW_START:
                         dialog_BookerFlowHandling.setTipsText("设备正在初始化");
                         dialog_BookerFlowHandling.show();
@@ -233,62 +236,13 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         slotAdapter.setOnClickListener(new BookerBorrowReturnInspectSlotAdapter.OnClickListener() {
             @Override
             public void onClick(BookerSlotVo slot) {
-                borrowRetrunCreateFlow(slot);
+                bookerCtrlServiceBinder.borrowReturnStart(clientUserId,identityType,identityId,device,slot);
             }
         });
 
         gdv_Slots.setAdapter(slotAdapter);
 
     }
-
-
-    private void borrowRetrunCreateFlow(BookerSlotVo slot ) {
-
-        RopBookerCreateFlow rop = new RopBookerCreateFlow();
-        rop.setDeviceId(device.getDeviceId());
-        rop.setSlotId(slot.getSlotId());
-        rop.setClientUserId(clientUserId);
-        rop.setIdentityType(identityType);
-        rop.setIdentityId(identityId);
-        rop.setType(1);
-
-        ReqInterface.getInstance().bookerCreateFlow(rop, new ReqHandler() {
-
-            @Override
-            public void onBeforeSend() {
-                super.onBeforeSend();
-                showLoading(BookerBorrowReturnInspectActivity.this);
-            }
-
-            @Override
-            public void onAfterSend() {
-                super.onAfterSend();
-                hideLoading(BookerBorrowReturnInspectActivity.this);
-            }
-
-            @Override
-            public void onSuccess(String response) {
-                super.onSuccess(response);
-                ResultBean<RetBookerCreateFlow> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetBookerCreateFlow>>() {});
-
-                if (rt.getCode() == ResultCode.SUCCESS) {
-                    RetBookerCreateFlow d=rt.getData();
-
-                    bookerCtrlServiceBinder.borrowReturnStart(device,slot,d.getFlowId());
-
-                } else {
-                    showToast(rt.getMsg());
-                }
-            }
-
-            @Override
-            public void onFailure(String msg, Exception e) {
-                super.onFailure(msg, e);
-                showToast(msg);
-            }
-        });
-    }
-
 
     private void getIdentityInfo() {
 
@@ -412,107 +366,4 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
             }
         }
     }
-
-
-
-//                    Intent intent = new Intent();
-//
-//                    intent.setAction("action.booker.borrow.return.flow");
-//                    intent.putExtra("actionCode", actionCode);
-//                    if(actionData!=null) {
-//                        intent.putExtra("actionData", actionData);
-//                    }
-//
-//                    intent.putExtra("actionRemark",actionRemark);
-//                    sendBroadcast(intent);
-
-
-    //bookerBorrowReturnFlowCtrl.open(device,slot,d.getFlowId());
-
-
-
-    //   private BookerBorrowReturnFlowCtrl bookerBorrowReturnFlowCtrl;
-
-
-
-    //        bookerBorrowReturnFlowCtrl = BookerBorrowReturnFlowCtrl.getInstance();
-//
-//        bookerBorrowReturnFlowCtrl.setOpenHandlerListener(new BookerBorrowReturnFlowCtrl.OnOpenHandlerListener() {
-//            @Override
-//            public void onHandle(int actionCode, HashMap<String, Object> actionData, String actionRemark) {
-//
-//                LogUtil.d(TAG, "actionCode:" + actionCode + ",actionRemark:" + actionRemark);
-//
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//                        //showToast(actionRemark);
-//                        switch (actionCode) {
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_START:
-//                                dialog_BookerFlowHandling.setTipsText("设备正在初始化");
-//                                dialog_BookerFlowHandling.show();
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_INIT_DATA_FAILURE:
-//                                dialog_BookerFlowHandling.setTipsText(actionRemark);
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_OPEN_AUTH:
-//                                dialog_BookerFlowHandling.setTipsText("验证打开授权中");
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_OPEN_AUTH_FAILURE:
-//                                dialog_BookerFlowHandling.setTipsText("验证打开授权失败");
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_OPEN_AUTH_SUCCESS:
-//                                dialog_BookerFlowHandling.setTipsText("验证打开授权成功");
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_SEND_OPEN_COMMAND:
-//                                dialog_BookerFlowHandling.setTipsText("设备发送打开命令");
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_SEND_OPEN_COMMAND_SUCCESS:
-//                                dialog_BookerFlowHandling.setTipsText("设备发送打开命令成功");
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_SEND_OPEN_COMMAND_FAILURE:
-//                                dialog_BookerFlowHandling.setTipsText("设备发送打开命令失败");
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_OPEN_SUCCESS:
-//                                dialog_BookerFlowHandling.setTipsText("柜门已打开，等待关门中");
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_OPEN_FAILURE:
-//                                dialog_BookerFlowHandling.setTipsText("柜门打开失败，请尝试再次打开");
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_CLOSE_SUCCESS:
-//                                dialog_BookerFlowHandling.setTipsText("柜门关门成功");
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_CLOSE_FAILURE:
-//                                dialog_BookerFlowHandling.setTipsText("柜门关失败");
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_CLOSE_AUTH:
-//                                dialog_BookerFlowHandling.setTipsText("验证关闭授权s");
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS:
-//                                dialog_BookerFlowHandling.setTipsText("验证关闭授权成功");
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE:
-//                                dialog_BookerFlowHandling.setTipsText("验证关闭授权失败");
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_FLOW_END:
-//                                dialog_BookerFlowHandling.setTipsText("处理结束");
-//                                RetBookerBorrowReturn retBookerBorrowReturn = (RetBookerBorrowReturn) actionData.get("ret_booker_borrow_return");
-//                                Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
-//                                Bundle bundle = new Bundle();
-//                                bundle.putSerializable("ret_booker_borrow_return", retBookerBorrowReturn);
-//                                intent.putExtras(bundle);
-//                                openActivity(intent);
-//                                finish();
-//                                break;
-//                            case BookerBorrowReturnFlowCtrl.ACTION_CODE_EXCEPTION:
-//                                dialog_BookerFlowHandling.setTipsText("设备处理异常");
-//                                break;
-//                        }
-//                    }
-//                });
-//
-//            }
-//        });
-
 }
