@@ -2,6 +2,7 @@ package com.lumos.smartdevice.activity.booker;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -42,7 +43,7 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
     private BookerCustomDataVo bookerCustomData;
 
-    private BookerCtrl bookerCtrl;
+  //  private BookerCtrl bookerCtrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,45 +51,45 @@ public class BookerMainActivity  extends BookerBaseActivity {
         setContentView(R.layout.activity_booker_main);
         bookerCustomData = AppCacheManager.getBookerCustomData();
 
-        bookerCtrl=BookerCtrl.getInstance();
+ //       bookerCtrl=BookerCtrl.getInstance();
 
 
-        ExecutorService service = Executors.newFixedThreadPool(1000);
-        service.execute(()->{
-
-            try {
-
-                for (int i=0;i<10;i++){
-                    BookerSlotVo slot=new BookerSlotVo();
-
-                    slot.setSlotId(String.valueOf(i));
-                    slot.setName(String.valueOf(i));
-                    BookerSlotDrivesVo drivesVo=new BookerSlotDrivesVo();
-                    BookerDriveLockeqVo lockeq=new BookerDriveLockeqVo();
-                    lockeq.setDriveId("Lockeq_1");
-                    lockeq.setAnt("1");
-                    lockeq.setPlate("1");
-
-                    drivesVo.setLockeq(lockeq);
-                    BookerDriveRfeqVo rfeq=new BookerDriveRfeqVo();
-                    rfeq.setDriveId("Rfeq_1");
-                    rfeq.setAnt("1");
-                    drivesVo.setRfeq(rfeq);
-                    slot.setDrives(drivesVo);
-                    //String flowId=String.valueOf(i);
-
-                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot,null);
-                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot,null);
-//                    Thread.sleep(200);
-                }
-
-            }catch (Exception e) {
-
-                e.printStackTrace();
-
-            }
-
-        });
+//        ExecutorService service = Executors.newFixedThreadPool(1000);
+//        service.execute(()->{
+//
+//            try {
+//
+//                for (int i=0;i<1000;i++){
+//                    BookerSlotVo slot=new BookerSlotVo();
+//
+//                    slot.setSlotId(String.valueOf(i));
+//                    slot.setName(String.valueOf(i));
+//                    BookerSlotDrivesVo drivesVo=new BookerSlotDrivesVo();
+//                    BookerDriveLockeqVo lockeq=new BookerDriveLockeqVo();
+//                    lockeq.setDriveId("Lockeq_1");
+//                    lockeq.setAnt("1");
+//                    lockeq.setPlate("1");
+//
+//                    drivesVo.setLockeq(lockeq);
+//                    BookerDriveRfeqVo rfeq=new BookerDriveRfeqVo();
+//                    rfeq.setDriveId("Rfeq_1");
+//                    rfeq.setAnt("1");
+//                    drivesVo.setRfeq(rfeq);
+//                    slot.setDrives(drivesVo);
+//                    //String flowId=String.valueOf(i);
+//
+//                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot,null);
+//                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot,null);
+////                    Thread.sleep(200);
+//                }
+//
+//            }catch (Exception e) {
+//
+//                e.printStackTrace();
+//
+//            }
+//
+//        });
 
 
 
@@ -163,14 +164,35 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
     private void  playVvAd(String fileUrl) {
         String vv_Ad_Url = proxy.getProxyUrl(fileUrl);
-        vv_Ad.setVideoPath(vv_Ad_Url);
-        vv_Ad.start();
-        vv_Ad.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+        Uri uri = Uri.parse(vv_Ad_Url);
+
+        vv_Ad.setVideoURI(uri);
+
+
+        vv_Ad.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
-            public void onCompletion(MediaPlayer mPlayer) {
-                playVvAd(fileUrl);
+            public void onPrepared(MediaPlayer mp) {
+                // 通过MediaPlayer设置循环播放
+                mp.setLooping(true);
+                // OnPreparedListener中的onPrepared方法是在播放源准备完成后回调的，所以可以在这里开启播放
+               // mp.start();
             }
         });
+
+        vv_Ad.requestFocus();
+        vv_Ad.start();
+
+
+
+//        vv_Ad.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mPlayer) {
+//
+//                vv_Ad.setVideoPath(vv_Ad_Url);
+//                vv_Ad.start();
+//            }
+//        });
     }
 
     @Override

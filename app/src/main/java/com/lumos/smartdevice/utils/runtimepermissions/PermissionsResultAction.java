@@ -95,7 +95,7 @@ public abstract class PermissionsResultAction {
    */
   @SuppressWarnings({"WeakerAccess", "SameReturnValue"})
   public synchronized boolean shouldIgnorePermissionNotFound(String permission) {
-    Log.d(TAG, "Permission not found: " + permission);
+    //Log.d(TAG, "Permission not found: " + permission);
     return true;
   }
 

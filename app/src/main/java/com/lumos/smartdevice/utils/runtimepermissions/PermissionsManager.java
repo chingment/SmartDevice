@@ -92,7 +92,7 @@ public class PermissionsManager {
     PackageInfo packageInfo = null;
     List<String> list = new ArrayList<String>(1);
     try {
-      Log.d(TAG, activity.getPackageName());
+      //Log.d(TAG, activity.getPackageName());
       packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), PackageManager.GET_PERMISSIONS);
     } catch (PackageManager.NameNotFoundException e) {
       Log.e(TAG, "A problem occurred when retrieving permissions", e);
@@ -101,7 +101,7 @@ public class PermissionsManager {
       String[] permissions = packageInfo.requestedPermissions;
       if (permissions != null) {
         for (String perm : permissions) {
-          Log.d(TAG, "Manifest contained permission: " + perm);
+          //Log.d(TAG, "Manifest contained permission: " + perm);
           list.add(perm);
         }
       }

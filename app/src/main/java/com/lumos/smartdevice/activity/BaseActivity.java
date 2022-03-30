@@ -88,7 +88,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
                     boolean a = (result1 == TextToSpeech.LANG_MISSING_DATA || result1 == TextToSpeech.LANG_NOT_SUPPORTED);
                     boolean b = (result2 == TextToSpeech.LANG_MISSING_DATA || result2 == TextToSpeech.LANG_NOT_SUPPORTED);
 
-                    LogUtil.i(TAG,"US支持否？--》" + a + "\nzh-CN支持否》--》" + b);
+                    LogUtil.i(TAG,"US支持否？--》" + a + "，zh-CN支持否》--》" + b);
 
                 }
 

@@ -105,7 +105,7 @@ public class BookerCtrl {
         private List<String> open_RfIds;
         private List<String> close_RfIds;
 
-        private OnHandlerListener onHandlerListener=null;
+        private final OnHandlerListener onHandlerListener;
 
         private BorrowReturnFlowThread(String clientUserId,int identityType,String identityId, DeviceVo device, BookerSlotVo slot,OnHandlerListener onHandlerListener) {
             this.clientUserId = clientUserId;
@@ -115,7 +115,7 @@ public class BookerCtrl {
             this.deviceId = device.getDeviceId();
             this.slot = slot;
             this.slotId = slot.getSlotId();
-            this.onHandlerListener=onHandlerListener;
+            this.onHandlerListener = onHandlerListener;
             this.setName("slotId-" + slotId);
         }
 
@@ -490,22 +490,6 @@ public class BookerCtrl {
         }
 
         private void sendHandlerMessage(String actionCode,HashMap<String,Object> actionData,String actionRemark, ReqHandler reqHandler){
-            sendBorrowReturnHandlerMessage(deviceId, flowId,actionCode, actionData, actionRemark,reqHandler);
-        }
-
-        private void sendHandlerMessage(String actionCode,HashMap<String,Object> actionData,String actionRemark){
-            sendHandlerMessage(actionCode, actionData, actionRemark,null);
-        }
-
-        private void sendHandlerMessage(String actionCode,String actionRemark, ReqHandler reqHandler){
-            sendHandlerMessage(actionCode, null, actionRemark,reqHandler);
-        }
-
-        private void sendHandlerMessage(String actionCode,String actionRemark){
-            sendHandlerMessage(actionCode, null, actionRemark,null);
-        }
-
-        private void sendBorrowReturnHandlerMessage(String deviceId,String flowId,String actionCode,HashMap<String,Object> actionData,String actionRemark, ReqHandler reqHandler) {
 
             if(!StringUtil.isEmpty(flowId)) {
                 RopBookerBorrowReturn rop = new RopBookerBorrowReturn();
@@ -532,10 +516,17 @@ public class BookerCtrl {
             }
         }
 
+        private void sendHandlerMessage(String actionCode,HashMap<String,Object> actionData,String actionRemark){
+            sendHandlerMessage(actionCode, actionData, actionRemark,null);
+        }
 
-//        public void setHandlerListener(OnHandlerListener onHandlerListener) {
-//            this.onHandlerListener = onHandlerListener;
-//        }
+        private void sendHandlerMessage(String actionCode,String actionRemark, ReqHandler reqHandler){
+            sendHandlerMessage(actionCode, null, actionRemark,reqHandler);
+        }
+
+        private void sendHandlerMessage(String actionCode,String actionRemark){
+            sendHandlerMessage(actionCode, null, actionRemark,null);
+        }
     }
 
     public interface OnHandlerListener {
