@@ -186,7 +186,7 @@ public class BookerCtrl {
                         flowId = d.getFlowId();
                         doTask();
                     } else {
-                        sendHandlerMessage(ACTION_CODE_TIPS, "流程创建[01]");
+                        sendHandlerMessage(ACTION_CODE_TIPS, rt.getMsg());
                         setRunning(false);
                     }
                 }
@@ -194,7 +194,7 @@ public class BookerCtrl {
                 @Override
                 public void onFailure(String msg, Exception e) {
                     super.onFailure(msg, e);
-                    sendHandlerMessage(ACTION_CODE_TIPS, "流程创建[02]");
+                    sendHandlerMessage(ACTION_CODE_TIPS, msg);
                     setRunning(false);
                 }
             });

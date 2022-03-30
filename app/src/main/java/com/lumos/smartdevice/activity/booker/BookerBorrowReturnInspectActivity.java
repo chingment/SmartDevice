@@ -95,6 +95,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booker_borrow_return_inspect);
+        LogUtil.i(TAG,"onCreate");
         setNavHeaderTtile(R.string.aty_nav_title_booker_borrow_return_inspect);
         identityType = getIntent().getIntExtra("identityType", 0);
         identityId = getIntent().getStringExtra("identityId");

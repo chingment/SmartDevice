@@ -1,6 +1,10 @@
 package com.lumos.smartdevice.activity.booker;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -44,6 +48,8 @@ public class BookerMainActivity  extends BookerBaseActivity {
     private BookerCustomDataVo bookerCustomData;
 
   //  private BookerCtrl bookerCtrl;
+
+    private MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,16 +179,15 @@ public class BookerMainActivity  extends BookerBaseActivity {
         vv_Ad.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                // 通过MediaPlayer设置循环播放
                 mp.setLooping(true);
-                // OnPreparedListener中的onPrepared方法是在播放源准备完成后回调的，所以可以在这里开启播放
-               // mp.start();
+                vv_Ad.start();
             }
         });
 
-        vv_Ad.requestFocus();
-        vv_Ad.start();
 
+//        mediaMetadataRetriever.setDataSource(fileUrl);
+//        Bitmap bitmap = mediaMetadataRetriever.getFrameAtTime(1);
+//        vv_Ad.setBackground(new BitmapDrawable(null, bitmap));
 
 
 //        vv_Ad.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {

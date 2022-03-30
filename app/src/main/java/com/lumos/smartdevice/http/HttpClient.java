@@ -83,7 +83,7 @@ public class HttpClient {
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
             Response response = chain.proceed(request);
-            LogUtil.d("response.isSuccessful():"+response.isSuccessful());
+            LogUtil.d(TAG,"response.isSuccessful():"+response.isSuccessful());
             while (!response.isSuccessful() && retryNum < maxRetry) {
                 retryNum++;
                 LogUtil.d(TAG,"maxRetry:"+maxRetry+",retryNum=" + retryNum);
