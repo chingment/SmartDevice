@@ -1,5 +1,7 @@
 package com.lumos.smartdevice.api;
 
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
+import com.lumos.smartdevice.api.rop.RetBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RetLockerGetBox;
 import com.lumos.smartdevice.api.rop.RetLockerGetBoxUseRecords;
@@ -351,15 +353,17 @@ public class ReqStandAlone implements IReqVersion{
     }
 
     @Override
-    public void bookerCreateFlow(RopBookerCreateFlow rop, final ReqHandler reqHandler) {
+    public ResultBean<RetBookerCreateFlow>  bookerCreateFlow(RopBookerCreateFlow rop) {
 
+        return null;
 
     }
 
     @Override
-    public void bookerBorrowReturn(RopBookerBorrowReturn rop, final ReqHandler reqHandler) {
+    public ResultBean<RetBookerBorrowReturn>  bookerBorrowReturn(RopBookerBorrowReturn rop) {
 
 
+        return  null;
     }
 
     @Override

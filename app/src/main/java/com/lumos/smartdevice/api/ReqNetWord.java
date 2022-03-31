@@ -1,5 +1,9 @@
 package com.lumos.smartdevice.api;
 
+import com.alibaba.fastjson.TypeReference;
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
+import com.lumos.smartdevice.api.rop.RetBookerCreateFlow;
+import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerDisplayBooks;
@@ -24,6 +28,8 @@ import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.http.HttpClient;
 import com.lumos.smartdevice.http.HttpResponseHandler;
 import com.lumos.smartdevice.own.Config;
+import com.lumos.smartdevice.utils.JsonUtil;
+import com.lumos.smartdevice.utils.StringUtil;
 
 
 public class ReqNetWord implements IReqVersion{
@@ -225,50 +231,33 @@ public class ReqNetWord implements IReqVersion{
     }
 
     @Override
-    public void bookerCreateFlow(RopBookerCreateFlow rop, final ReqHandler reqHandler) {
+    public ResultBean<RetBookerCreateFlow> bookerCreateFlow(RopBookerCreateFlow rop) {
 
-        reqHandler.sendBeforeSendMessage();
+        ResultBean<RetBookerCreateFlow> result;
+        String response = HttpClient.myPost(Config.URL.booker_CreateFlow, rop);
+        if(StringUtil.isEmpty(response)){
+            return  new ResultBean<>(3000,"请求失败");
+        }
 
-        HttpClient.myPost(Config.URL.booker_CreateFlow, rop, new HttpResponseHandler() {
-            @Override
-            public void onSuccess(String response) {
-                reqHandler.handleAfterSendMessage();
-                reqHandler.onSuccess(response);
-            }
-
-            @Override
-            public void onFailure(String msg, Exception e) {
-                reqHandler.handleAfterSendMessage();
-                reqHandler.onFailure(msg,e);
-            }
+        result = JsonUtil.toResult(response, new TypeReference<ResultBean<RetBookerCreateFlow>>() {
         });
+
+        return result;
     }
 
     @Override
-    public void bookerBorrowReturn(RopBookerBorrowReturn rop, final ReqHandler reqHandler) {
+    public ResultBean<RetBookerBorrowReturn>  bookerBorrowReturn(RopBookerBorrowReturn rop) {
 
-        if(reqHandler!=null) {
-            reqHandler.sendBeforeSendMessage();
+        ResultBean<RetBookerBorrowReturn> result;
+        String response = HttpClient.myPost(Config.URL.booker_BorrowReturn, rop);
+        if(StringUtil.isEmpty(response)){
+            return  new ResultBean<>(3000,"请求失败");
         }
 
-        HttpClient.myPost(Config.URL.booker_BorrowReturn, rop, new HttpResponseHandler() {
-            @Override
-            public void onSuccess(String response) {
-                if(reqHandler!=null) {
-                    reqHandler.handleAfterSendMessage();
-                    reqHandler.onSuccess(response);
-                }
-            }
-
-            @Override
-            public void onFailure(String msg, Exception e) {
-                if(reqHandler!=null) {
-                    reqHandler.handleAfterSendMessage();
-                    reqHandler.onFailure(msg, e);
-                }
-            }
+        result = JsonUtil.toResult(response, new TypeReference<ResultBean<RetBookerBorrowReturn>>() {
         });
 
+        return result;
     }
 
     @Override

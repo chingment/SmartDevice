@@ -47,7 +47,7 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
     private BookerCustomDataVo bookerCustomData;
 
-  //  private BookerCtrl bookerCtrl;
+    private BookerCtrl bookerCtrl;
 
     private MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
 
@@ -57,15 +57,19 @@ public class BookerMainActivity  extends BookerBaseActivity {
         setContentView(R.layout.activity_booker_main);
         bookerCustomData = AppCacheManager.getBookerCustomData();
 
- //       bookerCtrl=BookerCtrl.getInstance();
 
 
+
+
+//        bookerCtrl=BookerCtrl.getInstance();
+//
+//
 //        ExecutorService service = Executors.newFixedThreadPool(1000);
 //        service.execute(()->{
 //
 //            try {
 //
-//                for (int i=0;i<1000;i++){
+//                for (int i=0;i<10;i++){
 //                    BookerSlotVo slot=new BookerSlotVo();
 //
 //                    slot.setSlotId(String.valueOf(i));

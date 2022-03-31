@@ -18,6 +18,7 @@ import com.lumos.smartdevice.activity.booker.service.BookerCtrl;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlReceiver;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlService;
 import com.lumos.smartdevice.activity.booker.service.BorrowReturnFlowResultVo;
+import com.lumos.smartdevice.activity.booker.service.BorrowReturnFlowThread;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
@@ -117,59 +118,59 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
 
                 switch (actionCode) {
-                    case BookerCtrl.ACTION_CODE_TIPS:
+                    case BorrowReturnFlowThread.ACTION_CODE_TIPS:
                         showToast(actionRemark);
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_FLOW_START:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_FLOW_START:
                         dialog_BookerFlowHandling.setTipsText("设备正在初始化");
                         dialog_BookerFlowHandling.show();
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_INIT_DATA_FAILURE:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_INIT_DATA_FAILURE:
                         dialog_BookerFlowHandling.setTipsText(actionRemark);
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_INIT_DATA_SUCCESS:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_INIT_DATA_SUCCESS:
                         dialog_BookerFlowHandling.setTipsText("初始化数据成功");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_REQUEST_OPEN_AUTH:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_REQUEST_OPEN_AUTH:
                         dialog_BookerFlowHandling.setTipsText("验证打开授权中");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_REQUEST_OPEN_AUTH_FAILURE:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_REQUEST_OPEN_AUTH_FAILURE:
                         dialog_BookerFlowHandling.setTipsText("验证打开授权失败");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_REQUEST_OPEN_AUTH_SUCCESS:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_REQUEST_OPEN_AUTH_SUCCESS:
                         dialog_BookerFlowHandling.setTipsText("验证打开授权成功");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_SEND_OPEN_COMMAND:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_SEND_OPEN_COMMAND:
                         dialog_BookerFlowHandling.setTipsText("设备发送打开命令");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_SEND_OPEN_COMMAND_SUCCESS:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_SEND_OPEN_COMMAND_SUCCESS:
                         dialog_BookerFlowHandling.setTipsText("设备发送打开命令成功");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_SEND_OPEN_COMMAND_FAILURE:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_SEND_OPEN_COMMAND_FAILURE:
                         dialog_BookerFlowHandling.setTipsText("设备发送打开命令失败");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_OPEN_SUCCESS:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_OPEN_SUCCESS:
                         dialog_BookerFlowHandling.setTipsText("柜门已打开，等待关门中");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_OPEN_FAILURE:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_OPEN_FAILURE:
                         dialog_BookerFlowHandling.setTipsText("柜门打开失败，请尝试再次打开");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_CLOSE_SUCCESS:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_CLOSE_SUCCESS:
                         dialog_BookerFlowHandling.setTipsText("柜门关门成功");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_CLOSE_FAILURE:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_CLOSE_FAILURE:
                         dialog_BookerFlowHandling.setTipsText("柜门关失败");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_REQUEST_CLOSE_AUTH:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_REQUEST_CLOSE_AUTH:
                         dialog_BookerFlowHandling.setTipsText("验证关闭授权s");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_REQUEST_CLOSE_AUTH_SUCCESS:
                         dialog_BookerFlowHandling.setTipsText("验证关闭授权成功");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_REQUEST_CLOSE_AUTH_FAILURE:
                         dialog_BookerFlowHandling.setTipsText("验证关闭授权失败");
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_FLOW_END:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_FLOW_END:
                         dialog_BookerFlowHandling.setTipsText("处理结束");
                         RetBookerBorrowReturn retBookerBorrowReturn = (RetBookerBorrowReturn) actionData.get("ret_booker_borrow_return");
                         Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
@@ -179,7 +180,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                         openActivity(intent);
                         finish();
                         break;
-                    case BookerCtrl.BR_ACTION_CODE_EXCEPTION:
+                    case BorrowReturnFlowThread.BR_ACTION_CODE_EXCEPTION:
                         dialog_BookerFlowHandling.setTipsText("设备处理异常");
                         break;
                 }

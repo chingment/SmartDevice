@@ -52,25 +52,19 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
     }
 
 
-    public void  open(String id,OnListener onOpenListener) {
+    public boolean  sendOpenSlot(String id) {
 
         int var0 = sym.SN_MV_MotorAction(1, 1, 0);
 
+
+        return true;
+
+    }
+
+    public int  getSlotStatus(String id) {
+
         int[] var1 = sym.SN_MV_Get_ColData(1);
 
-        if (var0 == 2||var0 == 4) {
-            onOpenListener.onSendCommandSuccess();
-
-        } else {
-            onOpenListener.onSendCommnadFailure();
-        }
-
-
-        if (var1[0] == 2||var1[0] == 4) {
-            onOpenListener.onOpenSuccess();
-        } else {
-            onOpenListener.onOpenFailure();
-        }
-
+        return 0;
     }
 }

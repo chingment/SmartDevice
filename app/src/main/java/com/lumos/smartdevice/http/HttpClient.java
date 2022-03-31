@@ -182,6 +182,49 @@ public class HttpClient {
         }
     }
 
+
+    public static String myPost(String url, Object prm) {
+
+        try
+        {
+
+            Request.Builder requestBuilder = new Request.Builder().url(url);
+
+            String data = JSON.toJSONString(prm);
+
+            LogUtil.i(TAG,"Request.url:" + url);
+            LogUtil.i(TAG,"Request.postData:" + data);
+
+            RequestBody body = RequestBody.create(MediaType_JSON, data);
+
+            requestBuilder.addHeader("appId", "" + BuildConfig.APPLICATION_ID);
+            requestBuilder.addHeader("appKey", "" + BuildConfig.APPKEY);
+            String currenttime = (System.currentTimeMillis() / 1000) + "";
+            requestBuilder.addHeader("timestamp", String.valueOf((System.currentTimeMillis() / 1000)));
+            String sign = Config.getSign(BuildConfig.APPLICATION_ID, BuildConfig.APPKEY, BuildConfig.APPSECRET, data, currenttime);
+            requestBuilder.addHeader("sign", "" + sign);
+            requestBuilder.addHeader("version", BuildConfig.VERSION_NAME);
+
+            requestBuilder.post(body);
+
+            Response response = client.newCall(requestBuilder.build()).execute();//得到Response 对象
+
+
+            String str_response=response.body().string();
+
+            LogUtil.i(TAG, "Request.onSuccess=>>" + str_response);
+
+            return str_response;
+
+        } catch (Exception ex) {
+            LogUtil.e(TAG,ex);
+            LogUtil.e(TAG,"Request.Exception=>>"+ex.getMessage());
+
+            return null;
+        }
+    }
+
+
     public static void myPostFile(String url, Map<String, String> fields, Map<String, String> filePaths, final HttpResponseHandler handler) {
 
         try {

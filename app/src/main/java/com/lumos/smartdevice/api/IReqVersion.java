@@ -1,5 +1,7 @@
 package com.lumos.smartdevice.api;
 
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
+import com.lumos.smartdevice.api.rop.RetBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerDisplayBooks;
@@ -25,24 +27,44 @@ import com.lumos.smartdevice.api.rop.RopUserSave;
 public interface IReqVersion {
 
     void deviceInitData(RopDeviceInitData rop, ReqHandler reqHandler);
+
     void ownLoginByAccount(RopOwnLoginByAccount rop, ReqHandler reqHandler);
+
     void ownLogout(RopOwnLogout rop, ReqHandler reqHandler);
+
     void ownGetInfo(RopOwnGetInfo rop, ReqHandler reqHandler);
+
     void ownSaveInfo(RopOwnSaveInfo rop, ReqHandler reqHandler);
+
     void userSave(RopUserSave rop, ReqHandler reqHandler);
+
     void userGetList(RopUserGetList rop, ReqHandler reqHandler);
+
     void userGetDetail(RopUserGetDetail rop, ReqHandler reqHandler);
+
     void lockerGetCabinet(RopLockerGetCabinet rop, ReqHandler reqHandler);
+
     void lockerGetBox(RopLockerGetBox rop, ReqHandler reqHandler);
+
     void lockerSaveBoxUsage(RopLockerSaveBoxUsage rop, ReqHandler reqHandler);
+
     void lockerDeleteBoxUsage(RopLockerDeleteBoxUsage rop, ReqHandler reqHandler);
+
     void lockerGetBoxUseRecords(RopLockerGetBoxUseRecords rop, ReqHandler reqHandler);
+
     void lockerSaveBoxOpenResult(RopLockerSaveBoxOpenResult rop, ReqHandler reqHandler);
+
     void identityInfo(RopIdentityInfo rop, ReqHandler reqHandler);
+
     void identityVerify(RopIdentityVerify rop, ReqHandler reqHandler);
-    void bookerCreateFlow(RopBookerCreateFlow rop, ReqHandler reqHandler);
-    void bookerBorrowReturn(RopBookerBorrowReturn rop, ReqHandler reqHandler);
+
+    ResultBean<RetBookerCreateFlow> bookerCreateFlow(RopBookerCreateFlow rop);
+
+    ResultBean<RetBookerBorrowReturn> bookerBorrowReturn(RopBookerBorrowReturn rop);
+
     void bookerSawBorrowBooks(RopBookerSawBorrowBooks rop, ReqHandler reqHandler);
+
     void bookerDisplayBooks(RopBookerDisplayBooks rop, ReqHandler reqHandler);
+
     void bookerRenewBooks(RopBookerRenewBooks rop, ReqHandler reqHandler);
 }
