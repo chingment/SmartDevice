@@ -1,8 +1,8 @@
 package com.lumos.smartdevice.activity.booker.service;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
-import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
@@ -20,8 +20,8 @@ import com.lumos.smartdevice.devicectrl.ILockeqCtrl;
 import com.lumos.smartdevice.devicectrl.IRfeqCtrl;
 import com.lumos.smartdevice.devicectrl.LockeqCtrlInterface;
 import com.lumos.smartdevice.devicectrl.RfeqCtrlInterface;
+import com.lumos.smartdevice.own.AppLogcatManager;
 import com.lumos.smartdevice.utils.CommonUtil;
-import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
@@ -75,9 +75,9 @@ public class BorrowReturnFlowThread extends Thread {
 
     private static final Map<String, Object> brFlowDo = new ConcurrentHashMap<>();
 
-    private final BookerCtrl.OnHandlerListener onHandlerListener;
+    private final OnHandlerListener onHandlerListener;
 
-    public BorrowReturnFlowThread(String clientUserId, int identityType, String identityId, DeviceVo device, BookerSlotVo slot, BookerCtrl.OnHandlerListener onHandlerListener) {
+    public BorrowReturnFlowThread(String clientUserId, int identityType, String identityId, DeviceVo device, BookerSlotVo slot, OnHandlerListener onHandlerListener) {
         this.clientUserId = clientUserId;
         this.identityType = identityType;
         this.identityId = identityId;
@@ -109,7 +109,7 @@ public class BorrowReturnFlowThread extends Thread {
         synchronized (BorrowReturnFlowThread.class) {
             if (brFlowDo.containsKey(slotId)) {
                 LogUtil.d(TAG, slotId + ":借阅任务正在执行");
-                sendHandlerMessage(ACTION_TIPS, "已被使用");
+                sendHandlerMessage(ACTION_TIPS, "正在执行中");
                 return;
             }
             else {
@@ -121,7 +121,7 @@ public class BorrowReturnFlowThread extends Thread {
         doTask();
     }
 
-    private void  doTask(){
+    private void  doTask() {
 
         RopBookerCreateFlow rop = new RopBookerCreateFlow();
         rop.setDeviceId(device.getDeviceId());
@@ -133,7 +133,7 @@ public class BorrowReturnFlowThread extends Thread {
 
         ResultBean<RetBookerCreateFlow> result_CreateFlow = ReqInterface.getInstance().bookerCreateFlow(rop);
 
-        if(result_CreateFlow.getCode()!=ResultCode.SUCCESS) {
+        if (result_CreateFlow.getCode() != ResultCode.SUCCESS) {
             sendHandlerMessage(ACTION_TIPS, result_CreateFlow.getMsg());
             setRunning(false);
             return;
@@ -224,55 +224,48 @@ public class BorrowReturnFlowThread extends Thread {
             rfeqCtrl = RfeqCtrlInterface.getInstance(rfeqDrive.getComId(), rfeqDrive.getComBaud(), rfeqDrive.getComPrl());
 
 
-            if(!lockeqCtrl.isConnect()){
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "格子驱动连接不成功[10]");
+            if (!lockeqCtrl.isConnect()) {
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "格子驱动未连接[10]");
                 setRunning(false);
                 return;
             }
 
-            if(!rfeqCtrl.isConnect()){
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频驱动连接不成功[11]");
+            if (!rfeqCtrl.isConnect()) {
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频驱动未连接[11]");
                 setRunning(false);
                 return;
             }
 
 
-            if (slotId.equals("2")) {
-                Thread.sleep(1000 * 10);
-            }
+//            if (slotId.equals("2")) {
+//                Thread.sleep(1000 * 10);
+//            }
+//
+//            if (slotId.equals("3")) {
+//                Thread.sleep(1000 * 60);
+//            }
 
-            if (slotId.equals("3")) {
-                Thread.sleep(1000 * 60);
-            }
-
-            if (!rfeqCtrl.sendOpenRead(1)) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频设备命令发送失败[12]");
-                setRunning(false);
-                return;
-            }
+//            if (!rfeqCtrl.sendOpenRead(1)) {
+//                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频设备命令发送失败[12]");
+//                setRunning(false);
+//                return;
+//            }
 
             //todo 打开前检查RFID数量
-//                    if (slotId.equals("2")) {
-//                        Thread.sleep(1000 * 10);
+//            rfeqCtrl.setReadHandler(new IRfeqCtrl.OnReadHandlerListener() {
+//                @Override
+//                public void onData(String rfId) {
+//
+//                    LogUtil.d(TAG, "open_rfid:" + rfId);
+//
+//                    if (!open_RfIds.contains(rfId)) {
+//                        open_RfIds.add(rfId);
 //                    }
-//
+//                }
+//            });
 
 
-
-//                    rfeqCtrl.setReadHandler(new IRfeqCtrl.OnReadHandlerListener() {
-//                        @Override
-//                        public void onData(String rfId) {
-//
-//                            LogUtil.d(TAG, "open_rfid:" + rfId);
-//
-//                            if (!open_RfIds.contains(rfId)) {
-//                                open_RfIds.add(rfId);
-//                            }
-//                        }
-//                    });
-
-
-            HashMap<String, Object> ad_Request_Open_Auth= new HashMap<>();
+            HashMap<String, Object> ad_Request_Open_Auth = new HashMap<>();
 
             open_RfIds.add("123456789012345678901410");
             open_RfIds.add("123456789012345678901409");
@@ -290,7 +283,6 @@ public class BorrowReturnFlowThread extends Thread {
 
             rfeqCtrl.sendCloseRead(1);
 
-
             ResultBean<RetBookerBorrowReturn> result_Request_Open_Auth = borrowReturn(ACTION_REQUEST_OPEN_AUTH, ad_Request_Open_Auth, "请求是否允许打开设备");
 
             if (result_Request_Open_Auth.getCode() != ResultCode.SUCCESS) {
@@ -301,9 +293,9 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_REQUEST_OPEN_AUTH_SUCCESS, "请求允许打开设备");
 
-            boolean isSendOpenSlot=lockeqCtrl.sendOpenSlot("1");
+            boolean isSendOpenSlot = lockeqCtrl.sendOpenSlot("1");
 
-            if(!isSendOpenSlot) {
+            if (!isSendOpenSlot) {
                 sendHandlerMessage(ACTION_SEND_OPEN_COMMAND_FAILURE, "打开命令发送失败[15]");
                 setRunning(false);
                 return;
@@ -314,18 +306,19 @@ public class BorrowReturnFlowThread extends Thread {
             sendHandlerMessage(ACTION_WAIT_OPEN, "等待打开");
 
 
-
             //todo 判断开门状态 成功或者失败
-            boolean isOpen=false;
-            long nCheckMinute=2;
+            boolean isOpen = false;
+            long nCheckMinute = 1;
             long nCheckStartTime = System.currentTimeMillis();
             long nCheckMaxStatusTime = System.currentTimeMillis() - nCheckStartTime;
 
-            while (!isOpen&&nCheckMaxStatusTime < nCheckMinute * 60 * 1000) {
+            while (!isOpen && nCheckMaxStatusTime < nCheckMinute * 60 * 1000) {
+
+                //LogUtil.i(TAG,"检查开门状态");
 
                 int slotStatus = lockeqCtrl.getSlotStatus("1");
 
-                if (slotStatus == 0) {
+                if (slotStatus == 1) {
                     isOpen = true;
                 } else {
                     Thread.sleep(300);
@@ -334,8 +327,8 @@ public class BorrowReturnFlowThread extends Thread {
                 nCheckMaxStatusTime = System.currentTimeMillis() - nCheckStartTime;
             }
 
-            if(!isOpen){
-                sendHandlerMessage(ACTION_OPEN_SUCCESS, "打开失败[16]");
+            if (!isOpen) {
+                sendHandlerMessage(ACTION_OPEN_FAILURE, "打开失败[16]");
                 setRunning(false);
                 return;
             }
@@ -346,11 +339,11 @@ public class BorrowReturnFlowThread extends Thread {
             sendHandlerMessage(ACTION_WAIT_CLOSE, "等待关闭");
 
 
-            boolean isClose=false;
-            nCheckMinute=30;
+            boolean isClose = false;
+            nCheckMinute = 30;
             nCheckStartTime = System.currentTimeMillis();
             nCheckMaxStatusTime = System.currentTimeMillis() - nCheckStartTime;
-            while (!isClose&&nCheckMaxStatusTime < nCheckMinute * 60 * 1000) {
+            while (!isClose && nCheckMaxStatusTime < nCheckMinute * 60 * 1000) {
 
                 int slotStatus = lockeqCtrl.getSlotStatus("1");
 
@@ -365,7 +358,7 @@ public class BorrowReturnFlowThread extends Thread {
 
 
             //todo 关闭失败情况处理
-            if(!isClose){
+            if (!isClose) {
                 sendHandlerMessage(ACTION_CLOSE_FAILURE, "关闭失败");
             }
 
@@ -471,6 +464,8 @@ public class BorrowReturnFlowThread extends Thread {
 
     private void sendHandlerMessage(String actionCode,HashMap<String,Object> actionData,String actionRemark) {
 
+        LogUtil.d(TAG,"actionCode:"+actionCode+",actionRemark:"+actionRemark);
+
         new Thread(() -> {
             if (!StringUtil.isEmpty(flowId)) {
                 RopBookerBorrowReturn rop = new RopBookerBorrowReturn();
@@ -485,20 +480,31 @@ public class BorrowReturnFlowThread extends Thread {
 
                 ReqInterface.getInstance().bookerBorrowReturn(rop);
             }
+
+
+            if(actionCode.contains("failure")||actionCode.contains("exception")){
+                AppLogcatManager.uploadLogcat2Server("logcat -d -s BorrowReturnFlowThread RfeqCtrlByDs LockeqCtrlByDs ","test");
+            }
+
         }).start();
 
         if (onHandlerListener != null) {
-            BorrowReturnFlowResultVo result = new BorrowReturnFlowResultVo();
+            BorrowReturnFlowResult result = new BorrowReturnFlowResult();
             result.setDeviceId(deviceId);
             result.setFlowId(flowId);
             result.setActionCode(actionCode);
             result.setActionData(actionData);
             result.setActionRemark(actionRemark);
-            onHandlerListener.onBorrowReturn(result);
+            onHandlerListener.onResult(result);
         }
     }
 
     private void sendHandlerMessage(String actionCode,String actionRemark){
         sendHandlerMessage(actionCode, null, actionRemark);
     }
+
+    public interface OnHandlerListener {
+        void onResult(BorrowReturnFlowResult result);
+    }
+
 }

@@ -153,6 +153,7 @@ public abstract class BookerBaseActivity  extends BaseActivity {
             case MotionEvent.ACTION_UP:
                 if(timerByActivityFinish!=null) {
                     timerByActivityFinish.start();
+
                 }
                 break;
             //否则其他动作计时取消
@@ -177,6 +178,18 @@ public abstract class BookerBaseActivity  extends BaseActivity {
         m.what = 2;
         m.obj = context;
         dialog_Loading_Handler.sendMessage(m);
+    }
+
+    public void setTimerPauseByActivityFinish(){
+        if(timerByActivityFinish!=null) {
+            timerByActivityFinish.cancel();
+        }
+    }
+
+    public void setTimerStartByActivityFinish() {
+        if (timerByActivityFinish != null) {
+            timerByActivityFinish.start();
+        }
     }
 
 }

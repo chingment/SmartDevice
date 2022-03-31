@@ -23,7 +23,11 @@ public class DialogBookerFlowHandling extends Dialog {
     private final View mLayoutRes;
 
 
-    TextView tv_TipsText;
+    private TextView tv_TipsText;
+    private View btn_TryAgainOpen;
+    private View btn_Cancle;
+
+    private OnClickListener onClickListener;
 
     public DialogBookerFlowHandling(Context context) {
         super(context, R.style.dialog);
@@ -48,6 +52,8 @@ public class DialogBookerFlowHandling extends Dialog {
 
 
         tv_TipsText = ViewHolder.get(mLayoutRes, R.id.tv_TipsText);
+        btn_TryAgainOpen = ViewHolder.get(mLayoutRes, R.id.btn_TryAgainOpen);
+        btn_Cancle = ViewHolder.get(mLayoutRes, R.id.btn_Cancle);
 
 
         iv_TipsLoading.setOnClickListener(new View.OnClickListener() {
@@ -67,6 +73,27 @@ public class DialogBookerFlowHandling extends Dialog {
             }
         });
 
+        btn_TryAgainOpen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(onClickListener!=null){
+                    onClickListener.onTryAgainOpen();
+                }
+
+
+            }
+        });
+
+        btn_Cancle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onClickListener!=null) {
+                    onClickListener.onCancle();
+                }
+            }
+        });
+
     }
 
     @Override
@@ -77,6 +104,15 @@ public class DialogBookerFlowHandling extends Dialog {
 
     public void setTipsText(String tips) {
         tv_TipsText.setText(tips);
+    }
+
+    public void  setOnClickListener(OnClickListener onClickListener){
+        this.onClickListener=onClickListener;
+    }
+
+    public  interface OnClickListener {
+        void onTryAgainOpen();
+        void onCancle();
     }
 
 }

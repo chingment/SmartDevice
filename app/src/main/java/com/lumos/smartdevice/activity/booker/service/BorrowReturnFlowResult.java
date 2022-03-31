@@ -3,7 +3,7 @@ package com.lumos.smartdevice.activity.booker.service;
 import java.io.Serializable;
 import java.util.HashMap;
 
-public class BorrowReturnFlowResultVo implements Serializable {
+public class BorrowReturnFlowResult implements Serializable {
     private String deviceId;
     private String flowId;
     private String actionCode;

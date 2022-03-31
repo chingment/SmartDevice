@@ -14,19 +14,16 @@ import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.booker.dialog.DialogBookerFlowHandling;
 import com.lumos.smartdevice.activity.booker.adapter.BookerBorrowReturnInspectSlotAdapter;
-import com.lumos.smartdevice.activity.booker.service.BookerCtrl;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlReceiver;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlService;
-import com.lumos.smartdevice.activity.booker.service.BorrowReturnFlowResultVo;
+import com.lumos.smartdevice.activity.booker.service.BorrowReturnFlowResult;
 import com.lumos.smartdevice.activity.booker.service.BorrowReturnFlowThread;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
-import com.lumos.smartdevice.api.rop.RetBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RetIdentityInfo;
-import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
 import com.lumos.smartdevice.api.vo.DeviceVo;
@@ -109,7 +106,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
         bookerCtrlServiceReceiver = new BookerCtrlReceiver(new BookerCtrlReceiver.OnListener() {
             @Override
-            public void onBorrowReturnFlowReceive(BorrowReturnFlowResultVo flowResult) {
+            public void onBorrowReturnFlowReceive(BorrowReturnFlowResult flowResult) {
 
                 String actionCode=flowResult.getActionCode();
                 String actionRemark=flowResult.getActionRemark();
@@ -122,6 +119,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                         showToast(actionRemark);
                         break;
                     case BorrowReturnFlowThread.ACTION_FLOW_START:
+                        setTimerPauseByActivityFinish();
                         dialog_BookerFlowHandling.setTipsText("设备正在初始化");
                         dialog_BookerFlowHandling.show();
                         break;
@@ -148,6 +146,9 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                         break;
                     case BorrowReturnFlowThread.ACTION_SEND_OPEN_COMMAND_FAILURE:
                         dialog_BookerFlowHandling.setTipsText("设备发送打开命令失败");
+                        break;
+                    case BorrowReturnFlowThread.ACTION_WAIT_OPEN:
+                        dialog_BookerFlowHandling.setTipsText("等待打开柜门");
                         break;
                     case BorrowReturnFlowThread.ACTION_OPEN_SUCCESS:
                         dialog_BookerFlowHandling.setTipsText("柜门已打开，等待关门中");
@@ -223,6 +224,17 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
         gdv_Slots = findViewById(R.id.gdv_Slots);
         dialog_BookerFlowHandling = new DialogBookerFlowHandling(BookerBorrowReturnInspectActivity.this);
+        dialog_BookerFlowHandling.setOnClickListener(new DialogBookerFlowHandling.OnClickListener() {
+            @Override
+            public void onTryAgainOpen() {
+                bookerCtrlServiceBinder.borrowReturnStart(clientUserId, identityType, identityId, device, curSlot);
+            }
+
+            @Override
+            public void onCancle() {
+
+            }
+        });
     }
 
     public void initEvent() {
@@ -234,13 +246,18 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         btn_GoPayOverdueFine.setOnClickListener(this);
     }
 
+    private BookerSlotVo curSlot;
     public void initData() {
 
         BookerBorrowReturnInspectSlotAdapter slotAdapter = new BookerBorrowReturnInspectSlotAdapter(getAppContext(), slots);
 
-        slotAdapter.setOnClickListener(slot ->
-                bookerCtrlServiceBinder.borrowReturnStart(clientUserId, identityType, identityId, device, slot)
-        );
+        slotAdapter.setOnClickListener(new BookerBorrowReturnInspectSlotAdapter.OnClickListener() {
+            @Override
+            public void onClick(BookerSlotVo slot) {
+                curSlot=slot;
+                bookerCtrlServiceBinder.borrowReturnStart(clientUserId, identityType, identityId, device, slot);
+            }
+        });
 
         gdv_Slots.setAdapter(slotAdapter);
 

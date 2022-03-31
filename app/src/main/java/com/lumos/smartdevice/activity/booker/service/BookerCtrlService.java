@@ -4,38 +4,11 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
-import com.lumos.smartdevice.api.ReqHandler;
-import com.lumos.smartdevice.api.ReqInterface;
-import com.lumos.smartdevice.api.ResultBean;
-import com.lumos.smartdevice.api.ResultCode;
-import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
-import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
-import com.lumos.smartdevice.api.vo.BookerDriveLockeqVo;
-import com.lumos.smartdevice.api.vo.BookerDriveRfeqVo;
-import com.lumos.smartdevice.api.vo.BookerSlotDrivesVo;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
 import com.lumos.smartdevice.api.vo.DeviceVo;
-import com.lumos.smartdevice.api.vo.DriveVo;
-import com.lumos.smartdevice.devicectrl.ILockeqCtrl;
-import com.lumos.smartdevice.devicectrl.IRfeqCtrl;
-import com.lumos.smartdevice.devicectrl.LockeqCtrlInterface;
-import com.lumos.smartdevice.devicectrl.RfeqCtrlInterface;
-import com.lumos.smartdevice.utils.CommonUtil;
-import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 
 public class BookerCtrlService extends Service {
 
@@ -85,7 +58,7 @@ public class BookerCtrlService extends Service {
     }
 
 
-    private void sendBroadcastMsg(BorrowReturnFlowResultVo result) {
+    private void sendBroadcastMsg(BorrowReturnFlowResult result) {
 
         Intent intent = new Intent();
 
@@ -101,9 +74,9 @@ public class BookerCtrlService extends Service {
 
     public class CtrlBinder extends Binder {
         public void borrowReturnStart(String clientUserId, int identityType, String identityId, DeviceVo device, BookerSlotVo slot) {
-            bookerCtrl.borrowReturnStart(clientUserId, identityType, identityId, device, slot, new BookerCtrl.OnHandlerListener() {
+            bookerCtrl.borrowReturnStart(clientUserId, identityType, identityId, device, slot, new BorrowReturnFlowThread.OnHandlerListener() {
                 @Override
-                public void onBorrowReturn(BorrowReturnFlowResultVo result) {
+                public void onResult(BorrowReturnFlowResult result) {
                     LogUtil.d(TAG, "actionCode:" + result.getActionCode() + ",actionRemark:" + result.getActionRemark());
                     sendBroadcastMsg(result);
                 }

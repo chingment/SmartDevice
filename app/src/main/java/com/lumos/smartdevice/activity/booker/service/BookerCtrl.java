@@ -50,17 +50,13 @@ public class BookerCtrl {
                 }
             }
         }
+
         return mThis;
     }
 
-
-    public void borrowReturnStart(String clientUserId,int identityType,String identityId,DeviceVo device, BookerSlotVo slot,OnHandlerListener onHandlerListener) {
-        BorrowReturnFlowThread thread = new BorrowReturnFlowThread(clientUserId,identityType,identityId,device, slot, onHandlerListener);
+    public void borrowReturnStart(String clientUserId,int identityType,String identityId,DeviceVo device, BookerSlotVo slot,BorrowReturnFlowThread.OnHandlerListener onHandlerListener) {
+        BorrowReturnFlowThread thread = new BorrowReturnFlowThread(clientUserId, identityType, identityId, device, slot, onHandlerListener);
         thread.start();
     }
 
-
-    public interface OnHandlerListener {
-        void onBorrowReturn(BorrowReturnFlowResultVo result);
-    }
 }

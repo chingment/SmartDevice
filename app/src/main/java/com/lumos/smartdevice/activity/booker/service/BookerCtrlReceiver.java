@@ -5,11 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
-import com.lumos.smartdevice.api.vo.BookerSlotVo;
-import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.utils.LogUtil;
-
-import java.util.HashMap;
 
 public class BookerCtrlReceiver extends BroadcastReceiver {
 
@@ -27,14 +23,14 @@ public class BookerCtrlReceiver extends BroadcastReceiver {
 
         LogUtil.d(TAG,"onReceive");
 
-        BorrowReturnFlowResultVo flowResult =(BorrowReturnFlowResultVo)intent.getSerializableExtra("result");
+        BorrowReturnFlowResult flowResult =(BorrowReturnFlowResult)intent.getSerializableExtra("result");
 
         onListener.onBorrowReturnFlowReceive(flowResult);
 
     }
 
     public  interface OnListener{
-        void onBorrowReturnFlowReceive(BorrowReturnFlowResultVo flowResult);
+        void onBorrowReturnFlowReceive(BorrowReturnFlowResult flowResult);
     }
 
     public void  register(final Context context) {

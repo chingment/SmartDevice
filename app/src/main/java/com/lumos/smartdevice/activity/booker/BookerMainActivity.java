@@ -61,45 +61,45 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
 
 
-        bookerCtrl=BookerCtrl.getInstance();
-
-
-        ExecutorService service = Executors.newFixedThreadPool(1000);
-        service.execute(()->{
-
-            try {
-
-                for (int i=0;i<10;i++){
-                    BookerSlotVo slot=new BookerSlotVo();
-
-                    slot.setSlotId(String.valueOf(i));
-                    slot.setName(String.valueOf(i));
-                    BookerSlotDrivesVo drivesVo=new BookerSlotDrivesVo();
-                    BookerDriveLockeqVo lockeq=new BookerDriveLockeqVo();
-                    lockeq.setDriveId("Lockeq_1");
-                    lockeq.setAnt("1");
-                    lockeq.setPlate("1");
-
-                    drivesVo.setLockeq(lockeq);
-                    BookerDriveRfeqVo rfeq=new BookerDriveRfeqVo();
-                    rfeq.setDriveId("Rfeq_1");
-                    rfeq.setAnt("1");
-                    drivesVo.setRfeq(rfeq);
-                    slot.setDrives(drivesVo);
-                    //String flowId=String.valueOf(i);
-
-                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot,null);
-                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot,null);
-//                    Thread.sleep(200);
-                }
-
-            }catch (Exception e) {
-
-                e.printStackTrace();
-
-            }
-
-        });
+//        bookerCtrl=BookerCtrl.getInstance();
+//
+//
+//        ExecutorService service = Executors.newFixedThreadPool(1000);
+//        service.execute(()->{
+//
+//            try {
+//
+//                for (int i=0;i<10;i++){
+//                    BookerSlotVo slot=new BookerSlotVo();
+//
+//                    slot.setSlotId(String.valueOf(i));
+//                    slot.setName(String.valueOf(i));
+//                    BookerSlotDrivesVo drivesVo=new BookerSlotDrivesVo();
+//                    BookerDriveLockeqVo lockeq=new BookerDriveLockeqVo();
+//                    lockeq.setDriveId("Lockeq_1");
+//                    lockeq.setAnt("1");
+//                    lockeq.setPlate("1");
+//
+//                    drivesVo.setLockeq(lockeq);
+//                    BookerDriveRfeqVo rfeq=new BookerDriveRfeqVo();
+//                    rfeq.setDriveId("Rfeq_1");
+//                    rfeq.setAnt("1");
+//                    drivesVo.setRfeq(rfeq);
+//                    slot.setDrives(drivesVo);
+//                    //String flowId=String.valueOf(i);
+//
+//                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot,null);
+//                    bookerCtrl.borrowReturnStart("c89cae062f9b4b098687969fee260000",1,"1",getDevice(),slot,null);
+////                    Thread.sleep(200);
+//                }
+//
+//            }catch (Exception e) {
+//
+//                e.printStackTrace();
+//
+//            }
+//
+//        });
 
 
 
