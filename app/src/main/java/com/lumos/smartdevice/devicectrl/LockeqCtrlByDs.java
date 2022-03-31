@@ -23,8 +23,6 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
         }
     }
 
-
-
     public static LockeqCtrlByDs getInstance(String comId, int comBaud) {
         LogUtil.i(TAG, "comId:" + comId + ",comBaud:" + comBaud);
         if (mThis == null) {
@@ -51,7 +49,6 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
 
     }
 
-
     public boolean  sendOpenSlot(String id) {
 
         int var0 = sym.SN_MV_MotorAction(1, 1, 0);
@@ -66,5 +63,10 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
         int[] var1 = sym.SN_MV_Get_ColData(1);
 
         return 0;
+    }
+
+    public boolean isConnect(){
+
+        return true;
     }
 }

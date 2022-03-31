@@ -235,11 +235,11 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
             if (id == R.id.btn_BorrowBook) {
                 Intent intent = new Intent(getAppContext(), BookerIdentityVerifyActivity.class);
-                intent.putExtra("action", "borrow_book");
+                intent.putExtra("action", "borrow_books");
                 openActivity(intent);
             } else if (id == R.id.btn_ReturnBook) {
                 Intent intent = new Intent(getAppContext(), BookerIdentityVerifyActivity.class);
-                intent.putExtra("action", "return_book");
+                intent.putExtra("action", "return_books");
                 openActivity(intent);
             } else if (id == R.id.btn_QueryBook) {
                 Intent intent = new Intent(getAppContext(), BookerDisplayBooksActivity.class);

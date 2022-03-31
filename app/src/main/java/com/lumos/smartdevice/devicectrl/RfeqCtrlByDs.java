@@ -171,5 +171,9 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
 //    }
 
 
+    public boolean isConnect() {
+        return true;
+    }
+
 
 }
