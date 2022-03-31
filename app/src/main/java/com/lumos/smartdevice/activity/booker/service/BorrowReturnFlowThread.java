@@ -1,7 +1,5 @@
 package com.lumos.smartdevice.activity.booker.service;
 
-import android.util.Log;
-
 import com.alibaba.fastjson.JSON;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
@@ -20,6 +18,7 @@ import com.lumos.smartdevice.devicectrl.ILockeqCtrl;
 import com.lumos.smartdevice.devicectrl.IRfeqCtrl;
 import com.lumos.smartdevice.devicectrl.LockeqCtrlInterface;
 import com.lumos.smartdevice.devicectrl.RfeqCtrlInterface;
+import com.lumos.smartdevice.devicectrl.TagInfo;
 import com.lumos.smartdevice.own.AppLogcatManager;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
@@ -29,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class BorrowReturnFlowThread extends Thread {
@@ -66,12 +66,6 @@ public class BorrowReturnFlowThread extends Thread {
     private final String clientUserId;
     private final int identityType;
     private final String identityId;
-
-    private List<String> open_RfIds;
-    private List<String> close_RfIds;
-
-    private ILockeqCtrl lockeqCtrl;
-    private IRfeqCtrl rfeqCtrl;
 
     private static final Map<String, Object> brFlowDo = new ConcurrentHashMap<>();
 
@@ -121,6 +115,22 @@ public class BorrowReturnFlowThread extends Thread {
         doTask();
     }
 
+    private List<String> getRfIds(Map<String, TagInfo> map_TagInfos){
+
+        List<String> rfIds=new ArrayList<>();
+
+        if(map_TagInfos!=null) {
+            Set<Map.Entry<String, TagInfo>> entrys = map_TagInfos.entrySet();
+            for (Map.Entry<String, TagInfo> entry : entrys) {
+
+                rfIds.add(entry.getKey());
+            }
+        }
+
+        return rfIds;
+
+    }
+
     private void  doTask() {
 
         RopBookerCreateFlow rop = new RopBookerCreateFlow();
@@ -144,10 +154,6 @@ public class BorrowReturnFlowThread extends Thread {
         flowId = ret_CreateFlow.getFlowId();
 
         try {
-
-            open_RfIds = new ArrayList<>();
-
-            close_RfIds = new ArrayList<>();
 
             sendHandlerMessage(ACTION_FLOW_START, "借还开始");
 
@@ -220,8 +226,8 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_INIT_DATA_SUCCESS, "初始化数据成功");
 
-            lockeqCtrl = LockeqCtrlInterface.getInstance(lockeqDrive.getComId(), lockeqDrive.getComBaud(), lockeqDrive.getComPrl());
-            rfeqCtrl = RfeqCtrlInterface.getInstance(rfeqDrive.getComId(), rfeqDrive.getComBaud(), rfeqDrive.getComPrl());
+            ILockeqCtrl  lockeqCtrl = LockeqCtrlInterface.getInstance(lockeqDrive.getComId(), lockeqDrive.getComBaud(), lockeqDrive.getComPrl());
+            IRfeqCtrl rfeqCtrl = RfeqCtrlInterface.getInstance(rfeqDrive.getComId(), rfeqDrive.getComBaud(), rfeqDrive.getComPrl());
 
 
             if (!lockeqCtrl.isConnect()) {
@@ -237,35 +243,25 @@ public class BorrowReturnFlowThread extends Thread {
             }
 
 
-//            if (slotId.equals("2")) {
-//                Thread.sleep(1000 * 10);
-//            }
-//
-//            if (slotId.equals("3")) {
-//                Thread.sleep(1000 * 60);
-//            }
+            Thread.sleep(200);
 
-//            if (!rfeqCtrl.sendOpenRead(1)) {
-//                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频设备命令发送失败[12]");
-//                setRunning(false);
-//                return;
-//            }
+            if (!rfeqCtrl.sendOpenRead(1)) {
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频设备命令发送失败[12]");
+                setRunning(false);
+                return;
+            }
 
-            //todo 打开前检查RFID数量
-//            rfeqCtrl.setReadHandler(new IRfeqCtrl.OnReadHandlerListener() {
-//                @Override
-//                public void onData(String rfId) {
-//
-//                    LogUtil.d(TAG, "open_rfid:" + rfId);
-//
-//                    if (!open_RfIds.contains(rfId)) {
-//                        open_RfIds.add(rfId);
-//                    }
-//                }
-//            });
+            //todo 读多久;
 
+            Thread.sleep(200);
+
+            rfeqCtrl.sendCloseRead(1);
+
+            Map<String, TagInfo> tag_RfIds=rfeqCtrl.getRfIds(1);
 
             HashMap<String, Object> ad_Request_Open_Auth = new HashMap<>();
+
+            List<String> open_RfIds=getRfIds(tag_RfIds);
 
             open_RfIds.add("123456789012345678901410");
             open_RfIds.add("123456789012345678901409");
@@ -275,13 +271,9 @@ public class BorrowReturnFlowThread extends Thread {
             open_RfIds.add("123456789012345678901402");
             open_RfIds.add("123456789012345678901401");
 
+
             ad_Request_Open_Auth.put("rfIds", open_RfIds);
 
-            LogUtil.d(TAG, "open_rfIds" + JSON.toJSONString(open_RfIds));
-
-            rfeqCtrl.setReadHandler(null);
-
-            rfeqCtrl.sendCloseRead(1);
 
             ResultBean<RetBookerBorrowReturn> result_Request_Open_Auth = borrowReturn(ACTION_REQUEST_OPEN_AUTH, ad_Request_Open_Auth, "请求是否允许打开设备");
 
@@ -306,7 +298,6 @@ public class BorrowReturnFlowThread extends Thread {
             sendHandlerMessage(ACTION_WAIT_OPEN, "等待打开");
 
 
-            //todo 判断开门状态 成功或者失败
             boolean isOpen = false;
             long nCheckMinute = 1;
             long nCheckStartTime = System.currentTimeMillis();
@@ -335,9 +326,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_OPEN_SUCCESS, "打开成功");
 
-
             sendHandlerMessage(ACTION_WAIT_CLOSE, "等待关闭");
-
 
             boolean isClose = false;
             nCheckMinute = 30;
@@ -362,65 +351,29 @@ public class BorrowReturnFlowThread extends Thread {
                 sendHandlerMessage(ACTION_CLOSE_FAILURE, "关闭失败");
             }
 
-
             //todo 关闭成功因网络问题上传的数量如何应对
             sendHandlerMessage(ACTION_CLOSE_SUCCESS, "关闭成功");
 
-            //todo 关闭成功 检查RFID数量
-//                                        try {
-//                                            Thread.sleep(15 * 1000);
-//                                        } catch (Exception ex) {
-//
-//                                        }
-//
-//                                        rfeqCtrl.sendOpenRead(1);
-//                                        rfeqCtrl.setReadHandler(null);
-//                                        try {
-//                                            Thread.sleep(500);
-//                                        } catch (Exception ex) {
-//
-//                                        }
-//
-//                                        rfeqCtrl.setReadHandler(new IRfeqCtrl.OnReadHandlerListener() {
-//                                            @Override
-//                                            public void onData(String rfId) {
-//
-////                                LogUtil.d(TAG,"close_rfid:"+rfId);
-////                                if(!close_RfIds.contains(rfId)){
-////                                    close_RfIds.add(rfId);
-////                                }
-//                                            }
-//                                        });
-//
-//
-            try {
-                Thread.sleep(5 * 1000);
-            } catch (Exception ex) {
+            rfeqCtrl.sendOpenRead(1);
 
-            }
-//
-//                                        rfeqCtrl.sendCloseRead(1);
+            //todo 读多久
+            Thread.sleep(2000);
 
-            // LogUtil.d(TAG,"close_rfIds"+JSON.toJSONString(close_RfIds));
+            rfeqCtrl.sendCloseRead(1);
 
+            tag_RfIds=rfeqCtrl.getRfIds(1);
+
+            List<String> close_RfIds=getRfIds(tag_RfIds);
 
             close_RfIds.add("123456789012345678901403");
             close_RfIds.add("123456789012345678901402");
             close_RfIds.add("123456789012345678901401");
 
-
-            // HashMap<String, Object> actionData = new HashMap<>();
-            //  actionData.put("rfIds", close_RfIds);
-
-            // rfeqCtrl.sendCloseRead(1);
-
-
             HashMap<String, Object> ad_Request_Close_Auth = new HashMap<>();
 
             ad_Request_Close_Auth.put("rfIds", close_RfIds);
 
-
-            ResultBean<RetBookerBorrowReturn> result_Request_Close_Auth = borrowReturn(ACTION_REQUEST_CLOSE_AUTH, ad_Request_Close_Auth, "请求是否允许打开设备");
+            ResultBean<RetBookerBorrowReturn> result_Request_Close_Auth = borrowReturn(ACTION_REQUEST_CLOSE_AUTH, ad_Request_Close_Auth, "请求是否允许关闭设备");
 
             if (result_Request_Close_Auth.getCode() != ResultCode.SUCCESS) {
                 sendHandlerMessage(ACTION_REQUEST_CLOSE_AUTH_FAILURE, "关闭验证不通过[17]");

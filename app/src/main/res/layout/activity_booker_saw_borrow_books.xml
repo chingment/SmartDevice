@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/booker_primary_bg"
@@ -57,7 +58,35 @@
                     android:id="@+id/rv_BorrowedBooks"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
+
+
             </com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout>
+
+
+            <LinearLayout
+                android:id="@+id/et_BorrowedBooks"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="50dp"
+                    android:src="@drawable/default_dataempty"
+                    android:contentDescription="@string/empty" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="暂无数据"
+                    android:textSize="11sp" />
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -9,8 +9,9 @@ import com.gg.reader.api.protocol.gx.MsgBaseInventoryEpc;
 import com.gg.reader.api.protocol.gx.MsgBaseStop;
 import com.lumos.smartdevice.utils.LogUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class RfeqCtrlByDs implements IRfeqCtrl {
 
@@ -20,9 +21,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
 
     private GClient client;
 
-   // private Map<String, TagInfo> tagInfoMap = new LinkedHashMap<String, TagInfo>();
-
-   // private List<String> epcs=new ArrayList<>();
+    private Map<String, TagInfo> map_TagInfos = new LinkedHashMap<String, TagInfo>();//去重数据源
 
     private long index=0;
 
@@ -54,12 +53,15 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
         }
     }
 
+    public boolean isConnect() {
+        return true;
+    }
 
     public boolean  sendOpenRead(long ant) {
 
-        boolean isflag=false;
+        boolean isflag = false;
 
-        int inventoryMode=1;
+        int inventoryMode = 1;
 
         MsgBaseInventoryEpc msg = new MsgBaseInventoryEpc();
         msg.setAntennaEnable(ant);
@@ -68,15 +70,64 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
 
         client.sendSynMsg(msg);
 
+        Set<Map.Entry<String, TagInfo>> entrys = map_TagInfos.entrySet();
+        for (Map.Entry<String, TagInfo> entry : entrys) {
+            TagInfo tagInfo = entry.getValue();
+            if (tagInfo.getAntId() == ant) {
+                map_TagInfos.remove(entry.getKey());
+            }
+        }
 
         return 0x00 == msg.getRtCode();
 
     }
 
+
     public boolean  sendCloseRead(long ant) {
         MsgBaseStop msgStop = new MsgBaseStop();
         client.sendSynMsg(msgStop);
+
         return 0x00 == msgStop.getRtCode();
+    }
+
+    public Map<String, TagInfo> getRfIds(long ant){
+
+        Map<String, TagInfo> ant_TagInfos=new LinkedHashMap<>();
+
+        Set<Map.Entry<String, TagInfo>> entrys = map_TagInfos.entrySet();
+        for(Map.Entry<String, TagInfo> entry:entrys){
+            TagInfo tagInfo=entry.getValue();
+            if(tagInfo.getAntId()==ant){
+                ant_TagInfos.put(entry.getKey(),tagInfo);
+            }
+        }
+
+        return ant_TagInfos;
+    }
+
+    //todo 此处只统计所有天线读取次数和 需要细分天线 自行根据属性 info.getAntId() 统计
+    public void pooled6cData(LogBaseEpcInfo info) {
+        String key=info.getEpc();
+        if (map_TagInfos.containsKey(info.getEpc())) {
+            TagInfo tagInfo = map_TagInfos.get(key);
+            Long count = map_TagInfos.get(key).getCount();
+            count++;
+            tagInfo.setRssi(info.getRssi() + "");
+            tagInfo.setCount(count);
+            map_TagInfos.put(key, tagInfo);
+        } else {
+            TagInfo tag = new TagInfo();
+            tag.setIndex(index);
+            tag.setType("6C");
+            tag.setEpc(key);
+            tag.setAntId(info.getAntId());
+            tag.setCount(1l);
+            tag.setTid(info.getTid());
+            tag.setRssi(info.getRssi() + "");
+            map_TagInfos.put(key, tag);
+            index++;
+        }
+
     }
 
     //订阅
@@ -87,22 +138,11 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
 
                     LogUtil.d(TAG,info.getEpc());
 
-
-//                    if(!epcs.contains(info.getEpc())) {
-//                        epcs.add(info.getEpc());
-//                    }
-
                     if(onReadHandlerListener!=null) {
                         onReadHandlerListener.onData(info.getEpc());
                     }
 
-//                    Map<String, TagInfo> infoMap = pooled6cData(info);
-//
-//                    for(Map.Entry entry : infoMap.entrySet()) {
-//
-//                        System.out.println("value is : " + entry.getKey() + " and value is : " +  entry.getValue());
-//
-//                    }
+                    pooled6cData(info);
 
                 }
             }
@@ -110,6 +150,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
 
         client.onTagEpcOver = new HandlerTagEpcOver() {
             public void log(String readerName, LogBaseEpcOver info) {
+
 
             }
         };
@@ -119,60 +160,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
     private OnReadHandlerListener onReadHandlerListener;
     @Override
     public void setReadHandler(OnReadHandlerListener onReadHandlerListener) {
-       // this.epcs.clear();
         this.onReadHandlerListener = onReadHandlerListener;
-    }
-
-    //    public List<String> pooled6cEpcs(String epc) {
-//        if (epcs.contains(epc)) {
-//            TagInfo tagInfo = tagInfoMap.get(info.getTid() + info.getEpc());
-//            Long count = tagInfoMap.get(info.getTid() + info.getEpc()).getCount();
-//            count++;
-//            tagInfo.setRssi(info.getRssi() + "");
-//            tagInfo.setCount(count);
-//            tagInfoMap.put(info.getTid() + info.getEpc(), tagInfo);
-//        } else {
-//            TagInfo tag = new TagInfo();
-//            tag.setIndex(index);
-//            tag.setType("6C");
-//            tag.setEpc(info.getEpc());
-//            tag.setCount(1l);
-//            tag.setTid(info.getTid());
-//            tag.setRssi(info.getRssi() + "");
-//            tagInfoMap.put(info.getTid() + info.getEpc(), tag);
-//            index++;
-//        }
-//
-//        return tagInfoMap;
-//    }
-
-
-//    public Map<String, TagInfo> pooled6cData(LogBaseEpcInfo info) {
-//        if (tagInfoMap.containsKey(info.getTid() + info.getEpc())) {
-//            TagInfo tagInfo = tagInfoMap.get(info.getTid() + info.getEpc());
-//            Long count = tagInfoMap.get(info.getTid() + info.getEpc()).getCount();
-//            count++;
-//            tagInfo.setRssi(info.getRssi() + "");
-//            tagInfo.setCount(count);
-//            tagInfoMap.put(info.getTid() + info.getEpc(), tagInfo);
-//        } else {
-//            TagInfo tag = new TagInfo();
-//            tag.setIndex(index);
-//            tag.setType("6C");
-//            tag.setEpc(info.getEpc());
-//            tag.setCount(1l);
-//            tag.setTid(info.getTid());
-//            tag.setRssi(info.getRssi() + "");
-//            tagInfoMap.put(info.getTid() + info.getEpc(), tag);
-//            index++;
-//        }
-//
-//        return tagInfoMap;
-//    }
-
-
-    public boolean isConnect() {
-        return true;
     }
 
 

@@ -63,7 +63,8 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
 
     private View btn_RenewBookByOneKey;
     private View btn_GoPayOverdueFine;
-    
+
+    private View et_BorrowedBooks;
     private SuperRefreshLayout sf_BorrowedBooks;
     private RecyclerView rv_BorrowedBooks;
     private int rv_BorrowedBooks_PageNum=1;
@@ -151,11 +152,9 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
         ll_OverdueFine.setVisibility(View.VISIBLE);
 
 
-
-
         sf_BorrowedBooks =  findViewById(R.id.sf_BorrowedBooks);
         rv_BorrowedBooks = findViewById(R.id.rv_BorrowedBooks);
-
+        et_BorrowedBooks = findViewById(R.id.et_BorrowedBooks);
         rv_BorrowedBooks.setLayoutManager(new GridLayoutManager(getAppContext(), 1));
 
         rv_BorrowedBooks.setItemAnimator(new DefaultItemAnimator());
@@ -240,13 +239,13 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
 
                     List<BookerBorrowBookVo> items = d.getItems();
 
-//
-//                    if(total==0){
-//                        ll_UseRecordsEmpty.setVisibility(View.VISIBLE);
-//                    }
-//                    else {
-//                        ll_UseRecordsEmpty.setVisibility(View.GONE);
-//                    }
+
+                    if(d.getTotalSize()==0){
+                        et_BorrowedBooks.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        et_BorrowedBooks.setVisibility(View.GONE);
+                    }
 
                     boolean hasMore = true;
                     if (totalPages == rv_BorrowedBooks_PageNum) {

@@ -10,6 +10,7 @@ public class TagInfo implements Serializable {
     private String tid;
     private String userData;
     private String rssi;
+    private int antId;
 
     public TagInfo() {
     }
@@ -76,6 +77,15 @@ public class TagInfo implements Serializable {
 
     public void setUserData(String userData) {
         this.userData = userData;
+    }
+
+
+    public int getAntId() {
+        return antId;
+    }
+
+    public void setAntId(int antId) {
+        this.antId = antId;
     }
 
     @Override
