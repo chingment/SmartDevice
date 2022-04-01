@@ -91,9 +91,7 @@ public class InitDataActivity extends BaseActivity {
 
 
         Intent timerTaskService = new Intent(this, TimerTaskService.class);
-        stopService(timerTaskService);
         startService(timerTaskService);
-        //ResultBean<RetDeviceInitData> rt = JsonUtil.toResult("Dsads",new TypeReference<ResultBean<RetDeviceInitData>>() {});
 
         PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
             @Override
@@ -106,46 +104,11 @@ public class InitDataActivity extends BaseActivity {
             }
         });
 
-
-
-
-
-
-        //LogUtil.d(TAG,"您好");
-        //AppLogcatManager.saveLogcat2Server("logcat -d -s InitDataActivity","test");
-        //CrashReport.testJavaCrash();
-
-//         ICabinetCtrl cabinetCtrl= CabinetCtrlInterface.getInstance("ttyS4",9600,"aaa");
-//
-//        cabinetCtrl.open("1", new ICabinetCtrl.OnListener() {
-//            @Override
-//            public void onSendCommandSuccess() {
-//
-//            }
-//
-//            @Override
-//            public void onSendCommnadFailure() {
-//
-//            }
-//
-//            @Override
-//            public void onOpenSuccess() {
-//
-//            }
-//
-//            @Override
-//            public void onOpenFailure() {
-//
-//            }
-//        });
-
         OstCtrlInterface.getInstance().setHideStatusBar(this,false);
 
         initView();
         initEvent();
         initData();
-
-       // initActionHandler.postDelayed(initActionRunable, 1000);
 
     }
 

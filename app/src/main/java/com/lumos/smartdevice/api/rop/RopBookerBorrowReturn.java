@@ -1,12 +1,30 @@
 package com.lumos.smartdevice.api.rop;
 
 public class RopBookerBorrowReturn {
+    private String msgId;
+    private String msgMode;
     private String deviceId;
     private String actionCode;
     private String actionData;
     private String actionTime;
     private String actionRemark;
     private String flowId;
+
+    public String getMsgId() {
+        return msgId;
+    }
+
+    public void setMsgId(String msgId) {
+        this.msgId = msgId;
+    }
+
+    public String getMsgMode() {
+        return msgMode;
+    }
+
+    public void setMsgMode(String msgMode) {
+        this.msgMode = msgMode;
+    }
 
     public String getDeviceId() {
         return deviceId;

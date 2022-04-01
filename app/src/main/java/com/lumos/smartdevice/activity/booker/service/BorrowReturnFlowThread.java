@@ -24,6 +24,7 @@ import com.lumos.smartdevice.own.AppLogcatManager;
 import com.lumos.smartdevice.own.Config;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
+import com.lumos.smartdevice.utils.SnowFlake;
 import com.lumos.smartdevice.utils.StringUtil;
 
 import java.util.ArrayList;
@@ -424,6 +425,8 @@ public class BorrowReturnFlowThread extends Thread {
         new Thread(() -> {
             if (!StringUtil.isEmpty(flowId)) {
                 RopBookerBorrowReturn rop = new RopBookerBorrowReturn();
+                rop.setMsgId(String.valueOf(SnowFlake.nextId()));
+                rop.setMsgMode("normal");
                 rop.setDeviceId(deviceId);
                 rop.setActionCode(actionCode);
                 rop.setActionTime(CommonUtil.getCurrentTime());
@@ -434,10 +437,11 @@ public class BorrowReturnFlowThread extends Thread {
                 }
 
                 String msg_content=JSON.toJSONString(rop);
-                String msg_id=DbManager.getInstance().saveTripMsg(Config.URL.booker_BorrowReturn, msg_content);
+
+                DbManager.getInstance().saveTripMsg(rop.getMsgId(), Config.URL.booker_BorrowReturn, msg_content);
                 ResultBean<RetBookerBorrowReturn>  result= ReqInterface.getInstance().bookerBorrowReturn(rop);
                 if(result.getCode()==ResultCode.SUCCESS) {
-                    DbManager.getInstance().deleteTripMsg(msg_id);
+                    DbManager.getInstance().deleteTripMsg(rop.getMsgMode());
                 }
             }
 

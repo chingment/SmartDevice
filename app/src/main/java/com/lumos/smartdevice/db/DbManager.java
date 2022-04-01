@@ -27,6 +27,7 @@ import com.lumos.smartdevice.api.vo.UserVo;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.utils.JsonUtil;
+import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.SnowFlake;
 import com.lumos.smartdevice.utils.StringUtil;
 
@@ -38,6 +39,8 @@ import java.util.List;
 
 
 public class DbManager {
+    private final static String TAG="DbManager";
+
     static private DbManager dbMgr = new DbManager();
     private DbOpenHelper dbHelper;
 
@@ -490,25 +493,20 @@ public class DbManager {
 
     }
 
-    public synchronized String saveTripMsg(String post_url, String content) {
+    public synchronized String saveTripMsg(String msg_id,String post_url, String content) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String msgId ="";
+
         if (db.isOpen()) {
             ContentValues values = new ContentValues();
-            values.put(TripMsgDao.COLUMN_NAME_MSG_ID, SnowFlake.nextId());
+            values.put(TripMsgDao.COLUMN_NAME_MSG_ID, msg_id);
             values.put(TripMsgDao.COLUMN_NAME_POST_URL, post_url);
             values.put(TripMsgDao.COLUMN_NAME_CONTENT, content);
             values.put(TripMsgDao.COLUMN_NAME_STATUS, 0);
-            db.insert(TripMsgDao.TABLE_NAME, null, values);
+            long rows = db.insert(TripMsgDao.TABLE_NAME, null, values);
 
-            Cursor cursor = db.rawQuery("select last_insert_rowid() from " + TripMsgDao.TABLE_NAME, null);
-            if (cursor.moveToFirst()) {
-                msgId = cursor.getString(0);
-            }
-
-            cursor.close();
+            LogUtil.d(TAG,rows+"");
         }
-        return msgId;
+        return msg_id;
     }
 
     synchronized public List<TripMsgBean> getTripMsgs() {
