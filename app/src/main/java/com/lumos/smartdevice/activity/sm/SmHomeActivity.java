@@ -22,21 +22,18 @@ import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.receiver.UpdateAppServiceReceiver;
 import com.lumos.smartdevice.service.UpdateAppService;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
-import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -58,36 +55,9 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
     private Button btn_Logout;
     private DeviceVo device;
 
+    private Intent updateAppService;
 
     private UpdateAppServiceReceiver updateAppServiceReceiver;
-
-    private UpdateAppService.CtrlBinder updateAppServiceCtrlBinder;
-
-    private final ServiceConnection updateAppServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder binder) {
-            updateAppServiceCtrlBinder = (UpdateAppService.CtrlBinder) binder;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-
-        }
-    };
-
-    public static class UpdateAppServiceReceiver extends BroadcastReceiver {
-
-        private static final String TAG = "UpdateAppReceiver";
-
-
-        @Override
-        public void onReceive(final Context context, final Intent intent) {
-
-            LogUtil.d(TAG,"onReceive");
-
-        }
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,10 +69,13 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
         initEvent();
         initData();
 
-        Intent serviceIntent = new Intent(this, UpdateAppService.class);
-        bindService(serviceIntent, updateAppServiceConnection, Context.BIND_AUTO_CREATE);
+        updateAppServiceReceiver= new UpdateAppServiceReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                showLoading(SmHomeActivity.this);
+            }
+        };
 
-        updateAppServiceReceiver= new UpdateAppServiceReceiver();
         registerReceiver(updateAppServiceReceiver, new IntentFilter("action.smartdevice.app.update"));
 
     }
@@ -152,7 +125,8 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
                                     gdvUserManager();
                                     break;
                                 case "checkupdateapp":
-                                    updateAppServiceCtrlBinder.check();
+                                    updateAppService= new Intent(SmHomeActivity.this, UpdateAppService.class);
+                                    startService(updateAppService);
                                     break;
                                 case "closeapp":
                                     gdvCloseApp();
@@ -242,7 +216,6 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
 
     }
 
-
     private void gdvCloseApp(){
         dialog_Confirm.setTipsImageVisibility(View.GONE);
         dialog_Confirm.setFunction("closeapp");
@@ -289,7 +262,6 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
         Intent intent = new Intent(SmHomeActivity.this, SmDeviceInfoActivity.class);
         openActivity(intent);
     }
-
 
     private void dlgCloseApp(){
         setHideSysStatusBar(false);
@@ -340,11 +312,9 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
         });
     }
 
-
     private void dlgOpenDoor(){
 
     }
-
 
     @Override
     public void onClick(View v) {
@@ -363,8 +333,6 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
         }
     }
 
-
-
     @Override
     public void onDestroy() {
 
@@ -380,8 +348,8 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
             unregisterReceiver(updateAppServiceReceiver);
         }
 
-        if(updateAppServiceConnection!=null){
-            unbindService(updateAppServiceConnection);
+        if(updateAppService!=null){
+            stopService(updateAppService);
         }
 
         super.onDestroy();

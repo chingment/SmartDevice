@@ -27,6 +27,7 @@ import com.lumos.smartdevice.api.vo.UserVo;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.utils.JsonUtil;
+import com.lumos.smartdevice.utils.SnowFlake;
 import com.lumos.smartdevice.utils.StringUtil;
 
 import java.text.SimpleDateFormat;
@@ -489,11 +490,12 @@ public class DbManager {
 
     }
 
-    public synchronized Integer saveTripMsg(String post_url, String content) {
+    public synchronized String saveTripMsg(String post_url, String content) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int id = -1;
+        String msgId ="";
         if (db.isOpen()) {
             ContentValues values = new ContentValues();
+            values.put(TripMsgDao.COLUMN_NAME_MSG_ID, SnowFlake.nextId());
             values.put(TripMsgDao.COLUMN_NAME_POST_URL, post_url);
             values.put(TripMsgDao.COLUMN_NAME_CONTENT, content);
             values.put(TripMsgDao.COLUMN_NAME_STATUS, 0);
@@ -501,12 +503,12 @@ public class DbManager {
 
             Cursor cursor = db.rawQuery("select last_insert_rowid() from " + TripMsgDao.TABLE_NAME, null);
             if (cursor.moveToFirst()) {
-                id = cursor.getInt(0);
+                msgId = cursor.getString(0);
             }
 
             cursor.close();
         }
-        return id;
+        return msgId;
     }
 
     synchronized public List<TripMsgBean> getTripMsgs() {
@@ -516,7 +518,7 @@ public class DbManager {
             Cursor cursor = db.rawQuery("select * from " + TripMsgDao.TABLE_NAME, null);
             while (cursor.moveToNext()) {
                 TripMsgBean msg = new TripMsgBean();
-                int msgId = cursor.getInt(cursor.getColumnIndex(TripMsgDao.COLUMN_NAME_MSG_ID));
+                String msgId = cursor.getString(cursor.getColumnIndex(TripMsgDao.COLUMN_NAME_MSG_ID));
                 String content = cursor.getString(cursor.getColumnIndex(TripMsgDao.COLUMN_NAME_CONTENT));
                 int status = cursor.getInt(cursor.getColumnIndex(TripMsgDao.COLUMN_NAME_STATUS));
                 String postUrl = cursor.getString(cursor.getColumnIndex(TripMsgDao.COLUMN_NAME_POST_URL));
@@ -532,7 +534,7 @@ public class DbManager {
         return msgs;
     }
 
-    synchronized public void deleteTripMsg(int id) {
+    synchronized public void deleteTripMsg(String id) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         if (db.isOpen()) {
             db.delete(TripMsgDao.TABLE_NAME, TripMsgDao.COLUMN_NAME_MSG_ID + " = ?", new String[]{String.valueOf(id)});

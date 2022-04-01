@@ -12,6 +12,7 @@ import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
+import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.InitDataActivity;
 
@@ -20,12 +21,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * 正常的系统前台进程，会在系统通知栏显示一个Notification通知图标
- *
- * @author clock
- * @since 2016-04-12
- */
 public class WhiteService extends Service {
 
     private final static String TAG = WhiteService.class.getSimpleName();
@@ -33,12 +28,13 @@ public class WhiteService extends Service {
     private final static int FOREGROUND_ID = 1000;
 
     private static final int handler1_Miniute=5*1000;
+
     private Handler handler1;
     private Runnable handler1_Runnable;
 
     @Override
     public void onCreate() {
-        Log.i(TAG, "WhiteService->onCreate");
+        Log.i(TAG, "onCreate");
         super.onCreate();
 
         if (handler1 == null) {
@@ -57,7 +53,7 @@ public class WhiteService extends Service {
                     handler1.postDelayed(this, handler1_Miniute);
 
                     if(!isForeground(getApplicationContext())){
-                        Intent intent = getPackageManager().getLaunchIntentForPackage("com.uplink.selfstore");
+                        Intent intent = getPackageManager().getLaunchIntentForPackage(BuildConfig.APPLICATION_ID);
                         startActivity(intent);
                     }
                 }
@@ -69,7 +65,7 @@ public class WhiteService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i(TAG, "WhiteService->onStartCommand");
+        Log.i(TAG, "onStartCommand");
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher_round);
@@ -93,7 +89,7 @@ public class WhiteService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "WhiteService->onDestroy");
+        Log.i(TAG, "onDestroy");
         super.onDestroy();
         if(handler1!=null&&handler1_Runnable!=null) {
             handler1.removeCallbacks(handler1_Runnable);

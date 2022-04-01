@@ -14,12 +14,14 @@ import com.lumos.smartdevice.api.vo.BookerSlotDrivesVo;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
 import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.api.vo.DriveVo;
+import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.devicectrl.ILockeqCtrl;
 import com.lumos.smartdevice.devicectrl.IRfeqCtrl;
 import com.lumos.smartdevice.devicectrl.LockeqCtrlInterface;
 import com.lumos.smartdevice.devicectrl.RfeqCtrlInterface;
 import com.lumos.smartdevice.devicectrl.TagInfo;
 import com.lumos.smartdevice.own.AppLogcatManager;
+import com.lumos.smartdevice.own.Config;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.StringUtil;
@@ -431,7 +433,12 @@ public class BorrowReturnFlowThread extends Thread {
                     rop.setActionData(JSON.toJSONString(actionData));
                 }
 
-                ReqInterface.getInstance().bookerBorrowReturn(rop);
+                String msg_content=JSON.toJSONString(rop);
+                String msg_id=DbManager.getInstance().saveTripMsg(Config.URL.booker_BorrowReturn, msg_content);
+                ResultBean<RetBookerBorrowReturn>  result= ReqInterface.getInstance().bookerBorrowReturn(rop);
+                if(result.getCode()==ResultCode.SUCCESS) {
+                    DbManager.getInstance().deleteTripMsg(msg_id);
+                }
             }
 
 

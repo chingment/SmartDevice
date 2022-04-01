@@ -34,6 +34,7 @@ import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppLogcatManager;
 import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.service.TimerTaskService;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
@@ -89,9 +90,9 @@ public class InitDataActivity extends BaseActivity {
         setContentView(R.layout.activity_init_data);
 
 
-        Intent intent = new Intent(this, BookerCtrlService.class);
-        stopService(intent);
-        startService(intent);
+        Intent timerTaskService = new Intent(this, TimerTaskService.class);
+        stopService(timerTaskService);
+        startService(timerTaskService);
         //ResultBean<RetDeviceInitData> rt = JsonUtil.toResult("Dsads",new TypeReference<ResultBean<RetDeviceInitData>>() {});
 
         PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {

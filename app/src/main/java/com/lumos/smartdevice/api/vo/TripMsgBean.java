@@ -1,16 +1,16 @@
 package com.lumos.smartdevice.api.vo;
 
 public class TripMsgBean {
-    private int msgId;
+    private String msgId;
     private String content;
     private String postUrl;
     private int status;
 
-    public int getMsgId() {
+    public String getMsgId() {
         return msgId;
     }
 
-    public void setMsgId(int msgId) {
+    public void setMsgId(String msgId) {
         this.msgId = msgId;
     }
 

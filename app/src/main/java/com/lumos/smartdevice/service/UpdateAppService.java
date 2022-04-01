@@ -41,15 +41,12 @@ public class UpdateAppService extends Service {
 
     private DownloadManager download_manager;
     private DownloadCompleteReceiver download_receiver;
-    private CtrlBinder mCtrlBinder = null;
 
     @Override
     public void onCreate() {
         LogUtil.d(TAG, "onCreate...");
 
         download_manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-
-        mCtrlBinder = new CtrlBinder();
 
         super.onCreate();
     }
@@ -63,8 +60,7 @@ public class UpdateAppService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-
-        return mCtrlBinder;
+        return null;
     }
 
     @Override
@@ -165,9 +161,13 @@ public class UpdateAppService extends Service {
         if (version1 == null)
             return 0;
 
+        if (version2 == null)
+            return 0;
+
         if (version1.equals(version2)) {
             return 0;
         }
+
         String[] version1Array = version1.split("\\.");
         String[] version2Array = version2.split("\\.");
         int index = 0;
@@ -252,16 +252,4 @@ public class UpdateAppService extends Service {
             queryDownloadStatus(downId);
         }
     }
-
-    public class CtrlBinder extends Binder {
-        public void check() {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    checkUpdate();
-                }
-            }).start();
-        }
-    }
-
 }

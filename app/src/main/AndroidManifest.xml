@@ -81,6 +81,10 @@
             android:name=".service.UpdateAppService"
             android:enabled="true"
             android:exported="false" />
+        <service
+            android:name=".service.TimerTaskService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

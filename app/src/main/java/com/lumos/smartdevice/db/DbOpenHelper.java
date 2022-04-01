@@ -57,7 +57,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
 	private static final String TABLE_CREATE_TRIPMSG = "CREATE TABLE if not exists "
 			+ TripMsgDao.TABLE_NAME + " ("
-			+ TripMsgDao.COLUMN_NAME_MSG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+			+ TripMsgDao.COLUMN_NAME_MSG_ID + " TEXT , "
 			+ TripMsgDao.COLUMN_NAME_CONTENT + " TEXT , "
 			+ TripMsgDao.COLUMN_NAME_POST_URL + " TEXT , "
 			+ TripMsgDao.COLUMN_NAME_STATUS + " INTEGER );";

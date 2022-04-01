@@ -190,6 +190,7 @@ public class HttpClient {
 
             Request.Builder requestBuilder = new Request.Builder().url(url);
 
+
             String data = JSON.toJSONString(prm);
 
             LogUtil.i(TAG,"Request.url:" + url);
