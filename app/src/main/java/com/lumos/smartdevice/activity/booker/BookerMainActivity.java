@@ -57,9 +57,9 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
     private BookerCustomDataVo bookerCustomData;
 
-    private BookerCtrl bookerCtrl;
+//    private BookerCtrl bookerCtrl;
 
-    private MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
+//    private MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
