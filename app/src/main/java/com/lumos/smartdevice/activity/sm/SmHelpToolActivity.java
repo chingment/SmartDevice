@@ -20,6 +20,7 @@ import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.service.TimerTaskService;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
@@ -213,6 +214,8 @@ public class SmHelpToolActivity extends SmBaseActivity {
 
     private void dlgCloseApp(){
         setHideSysStatusBar(false);
+        Intent whiteIntent = new Intent(SmHelpToolActivity.this, TimerTaskService.class);
+        stopService(whiteIntent);
         AppManager.getAppManager().AppExit(SmHelpToolActivity.this);
     }
 

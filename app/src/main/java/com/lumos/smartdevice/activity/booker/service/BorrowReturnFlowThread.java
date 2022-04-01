@@ -99,6 +99,11 @@ public class BorrowReturnFlowThread extends Thread {
         brFlowDo.clear();
     }
 
+
+    public static boolean checkRunning(BookerSlotVo slot) {
+        return brFlowDo.containsKey(slot.getSlotId());
+    }
+
     @Override
     public void run() {
         super.run();
@@ -441,7 +446,7 @@ public class BorrowReturnFlowThread extends Thread {
                 DbManager.getInstance().saveTripMsg(rop.getMsgId(), Config.URL.booker_BorrowReturn, msg_content);
                 ResultBean<RetBookerBorrowReturn>  result= ReqInterface.getInstance().bookerBorrowReturn(rop);
                 if(result.getCode()==ResultCode.SUCCESS) {
-                    DbManager.getInstance().deleteTripMsg(rop.getMsgMode());
+                    DbManager.getInstance().deleteTripMsg(rop.getMsgId());
                 }
             }
 

@@ -502,6 +502,8 @@ public class DbManager {
             values.put(TripMsgDao.COLUMN_NAME_POST_URL, post_url);
             values.put(TripMsgDao.COLUMN_NAME_CONTENT, content);
             values.put(TripMsgDao.COLUMN_NAME_STATUS, 0);
+            values.put(TripMsgDao.COLUMN_NAME_CREATETIME, System.currentTimeMillis());
+
             long rows = db.insert(TripMsgDao.TABLE_NAME, null, values);
 
             LogUtil.d(TAG,rows+"");
@@ -520,11 +522,12 @@ public class DbManager {
                 String content = cursor.getString(cursor.getColumnIndex(TripMsgDao.COLUMN_NAME_CONTENT));
                 int status = cursor.getInt(cursor.getColumnIndex(TripMsgDao.COLUMN_NAME_STATUS));
                 String postUrl = cursor.getString(cursor.getColumnIndex(TripMsgDao.COLUMN_NAME_POST_URL));
-
+                long createTime = cursor.getLong(cursor.getColumnIndex(TripMsgDao.COLUMN_NAME_CREATETIME));
                 msg.setMsgId(msgId);
                 msg.setContent(content);
                 msg.setStatus(status);
                 msg.setPostUrl(postUrl);
+                msg.setCreateTime(createTime);
                 msgs.add(msg);
             }
             cursor.close();

@@ -87,20 +87,23 @@ public class TimerTaskService extends Service {
         TimerTask  task = new TimerTask() {
             @Override
             public void run() {
-                LogUtil.d(TAG,"正在执行上传离线消息");
+                //LogUtil.d(TAG,"正在执行上传离线消息");
 
                 List<TripMsgBean> tripMsgs=DbManager.getInstance().getTripMsgs();
                 if(tripMsgs!=null&&tripMsgs.size()>0 ){
 
                     for (TripMsgBean tripMsg: tripMsgs  ) {
-                        com.alibaba.fastjson.JSONObject params = JSON.parseObject(tripMsg.getContent());
-                        params.put("msgId", tripMsg.getMsgId());
-                        params.put("msgMode", "timer");
-                        String respone = HttpClient.myPost(tripMsg.getPostUrl(), params);
-                        if(!StringUtil.isEmpty(respone)){
-                            ResultBean<Object> result= JsonUtil.toResult(respone,new TypeReference<ResultBean<Object>>(){});
-                            if(result.getCode()== ResultCode.SUCCESS){
-                                DbManager.getInstance().deleteTripMsg(tripMsg.getMsgId());
+                        if(tripMsg.getCreateTime()+6000< System.currentTimeMillis()) {
+                            com.alibaba.fastjson.JSONObject params = JSON.parseObject(tripMsg.getContent());
+                            params.put("msgId", tripMsg.getMsgId());
+                            params.put("msgMode", "timer");
+                            String respone = HttpClient.myPost(tripMsg.getPostUrl(), params);
+                            if (!StringUtil.isEmpty(respone)) {
+                                ResultBean<Object> result = JsonUtil.toResult(respone, new TypeReference<ResultBean<Object>>() {
+                                });
+                                if (result.getCode() == ResultCode.SUCCESS) {
+                                    DbManager.getInstance().deleteTripMsg(tripMsg.getMsgId());
+                                }
                             }
                         }
                     }
@@ -118,7 +121,7 @@ public class TimerTaskService extends Service {
         TimerTask  task = new TimerTask() {
             @Override
             public void run() {
-                LogUtil.d(TAG,"正在监听保活服务");
+                //LogUtil.d(TAG,"正在监听保活服务");
 
                 if(!isForeground(getApplicationContext())){
                     Intent intent = getPackageManager().getLaunchIntentForPackage(BuildConfig.APPLICATION_ID);
@@ -136,16 +139,18 @@ public class TimerTaskService extends Service {
         if (context != null) {
             ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
             List<ActivityManager.RunningAppProcessInfo> processes = activityManager.getRunningAppProcesses();
-            for (ActivityManager.RunningAppProcessInfo processInfo : processes) {
+            if(processes!=null) {
+                for (ActivityManager.RunningAppProcessInfo processInfo : processes) {
 
-                if (processInfo.processName.equals(context.getPackageName())) {
+                    if (processInfo.processName.equals(context.getPackageName())) {
 
-                    Log.i(TAG, "processInfo.processName：" + processInfo.processName);
-                    Log.i(TAG, "context.getPackageName()：" + context.getPackageName());
-                    Log.i(TAG, "processInfo.importance：" + processInfo.importance);
+                        //Log.i(TAG, "processInfo.processName：" + processInfo.processName);
+                        //Log.i(TAG, "context.getPackageName()：" + context.getPackageName());
+                        //Log.i(TAG, "processInfo.importance：" + processInfo.importance);
 
-                    if (processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                        return true;
+                        if (processInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                            return true;
+                        }
                     }
                 }
             }

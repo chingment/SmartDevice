@@ -59,4 +59,8 @@ public class BookerCtrl {
         thread.start();
     }
 
+    public boolean checkBorrowReturnIsRunning(BookerSlotVo slot) {
+        return BorrowReturnFlowThread.checkRunning(slot);
+    }
+
 }

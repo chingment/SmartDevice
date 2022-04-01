@@ -3,6 +3,7 @@ package com.lumos.smartdevice.activity.booker.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,8 +27,11 @@ public class DialogBookerFlowHandling extends Dialog {
     private TextView tv_TipsText;
     private View btn_TryAgainOpen;
     private View btn_Cancle;
+    private TextView tv_CancleCountDownSeconds;
 
     private OnClickListener onClickListener;
+
+    private CountDownTimer cancleCountDownTimer;
 
     public DialogBookerFlowHandling(Context context) {
         super(context, R.style.dialog);
@@ -54,7 +58,7 @@ public class DialogBookerFlowHandling extends Dialog {
         tv_TipsText = ViewHolder.get(mLayoutRes, R.id.tv_TipsText);
         btn_TryAgainOpen = ViewHolder.get(mLayoutRes, R.id.btn_TryAgainOpen);
         btn_Cancle = ViewHolder.get(mLayoutRes, R.id.btn_Cancle);
-
+        tv_CancleCountDownSeconds=ViewHolder.get(mLayoutRes, R.id.tv_CancleCountDownSeconds);
 
         iv_TipsLoading.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,12 +98,45 @@ public class DialogBookerFlowHandling extends Dialog {
             }
         });
 
+        cancleCountDownTimer= new CountDownTimer(60*1000,1000) {
+
+            @Override
+
+            public void onTick(long millisUntilFinished) {//倒计时的过程
+                tv_CancleCountDownSeconds.setText(millisUntilFinished / 1000 + "秒");
+            }
+
+            @Override
+
+            public void onFinish() {//倒计时结束
+                if(onClickListener!=null){
+                    onClickListener.onCancle();
+                }
+            }
+        };
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(mLayoutRes);
+    }
+
+    @Override
+    public void show() {
+        tv_CancleCountDownSeconds.setText("");
+        super.show();
+    }
+
+    @Override
+    public void cancel(){
+
+        if(cancleCountDownTimer!=null){
+            cancleCountDownTimer.cancel();
+        }
+
+        super.cancel();
     }
 
     public void setTipsText(String tips) {
@@ -110,9 +147,22 @@ public class DialogBookerFlowHandling extends Dialog {
         this.onClickListener=onClickListener;
     }
 
+    public void startCancleCountDownTimer(){
+        if(cancleCountDownTimer!=null){
+            cancleCountDownTimer.start();
+        }
+    }
+
+    public void stopCancleCountDownTimer(){
+        if(cancleCountDownTimer!=null){
+            cancleCountDownTimer.cancel();
+        }
+    }
+
     public  interface OnClickListener {
         void onTryAgainOpen();
         void onCancle();
     }
+
 
 }

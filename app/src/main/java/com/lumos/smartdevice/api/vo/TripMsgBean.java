@@ -4,6 +4,8 @@ public class TripMsgBean {
     private String msgId;
     private String content;
     private String postUrl;
+    private long createTime;
+
     private int status;
 
     public String getMsgId() {
@@ -36,5 +38,13 @@ public class TripMsgBean {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
     }
 }

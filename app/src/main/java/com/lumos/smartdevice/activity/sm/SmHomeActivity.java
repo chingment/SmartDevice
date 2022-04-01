@@ -23,6 +23,7 @@ import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.receiver.UpdateAppServiceReceiver;
+import com.lumos.smartdevice.service.TimerTaskService;
 import com.lumos.smartdevice.service.UpdateAppService;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.CommonUtil;
@@ -265,6 +266,8 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
 
     private void dlgCloseApp(){
         setHideSysStatusBar(false);
+        Intent whiteIntent = new Intent(SmHomeActivity.this, TimerTaskService.class);
+        stopService(whiteIntent);
         AppManager.getAppManager().AppExit(SmHomeActivity.this);
     }
 

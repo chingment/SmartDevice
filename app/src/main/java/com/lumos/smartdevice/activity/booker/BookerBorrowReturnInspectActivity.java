@@ -72,7 +72,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
     private int identityType;
     private String identityId;
     private String clientUserId;
-
+    private int borrowedQuantity;
     private BookerCtrlReceiver bookerCtrlServiceReceiver;
 
     private BookerCtrlService.CtrlBinder bookerCtrlServiceBinder;
@@ -186,6 +186,9 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                         break;
                 }
 
+                if(actionCode.contains("failure")||actionCode.contains("exception")){
+                    dialog_BookerFlowHandling.startCancleCountDownTimer();
+                }
 
             }
         });
@@ -227,12 +230,20 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         dialog_BookerFlowHandling.setOnClickListener(new DialogBookerFlowHandling.OnClickListener() {
             @Override
             public void onTryAgainOpen() {
+                dialog_BookerFlowHandling.stopCancleCountDownTimer();
                 bookerCtrlServiceBinder.borrowReturnStart(clientUserId, identityType, identityId, device, curSlot);
             }
 
             @Override
             public void onCancle() {
-
+                if( bookerCtrlServiceBinder.checkBorrowReturnIsRunning(curSlot)){
+                    showToast("正在执行中，请稍后再试");
+                }
+                else {
+                    dialog_BookerFlowHandling.hide();
+                    dialog_BookerFlowHandling.stopCancleCountDownTimer();
+                    setTimerStartByActivityFinish();
+                }
             }
         });
     }
@@ -303,7 +314,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                     tv_OverdueQuantity.setText(String.valueOf(borrower.getOverdueQuantity()));
                     tv_OverdueFine.setText(String.valueOf(borrower.getOverdueFine()));
                     tv_Status.setText(borrower.getStatus().getText());
-
+                    borrowedQuantity=borrower.getBorrowedQuantity();
 //                    if(borrower.getWilldueQuantity()>0){
 //                        ll_WilldueQuantity.setVisibility(View.VISIBLE);
 //                    }
@@ -376,12 +387,21 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                 openActivity(intent);
                 finish();
             } else if (id == R.id.tv_BorrowedQuantity||id==R.id.iv_SawBorrowBooks||id==R.id.btn_RenewBookByOneKey) {
-                Intent intent = new Intent(getAppContext(), BookerSawBorrowBooksActivity.class);
-                intent.putExtra("action", "saw_borrow_books");
-                intent.putExtra("identityType", identityType);
-                intent.putExtra("identityId", identityId);
-                intent.putExtra("clientUserId", clientUserId);
-                openActivity(intent);
+
+                if(borrowedQuantity==0){
+                    showToast("当前没有借阅的书本");
+                }
+                else {
+                    Intent intent = new Intent(getAppContext(), BookerSawBorrowBooksActivity.class);
+                    intent.putExtra("action", "saw_borrow_books");
+                    intent.putExtra("identityType", identityType);
+                    intent.putExtra("identityId", identityId);
+                    intent.putExtra("clientUserId", clientUserId);
+                    openActivity(intent);
+                }
+            }
+            else if(id == R.id.btn_GoPayOverdueFine) {
+                showToast("设备未暂未开通支付功能");
             }
         }
     }

@@ -7,5 +7,6 @@ public class TripMsgDao {
     public static final String COLUMN_NAME_CONTENT = "content";
     public static final String COLUMN_NAME_POST_URL = "post_url";
     public static final String COLUMN_NAME_STATUS = "status";
+    public static final String COLUMN_NAME_CREATETIME = "createtime";
 
 }

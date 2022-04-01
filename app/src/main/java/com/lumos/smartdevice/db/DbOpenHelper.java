@@ -13,6 +13,7 @@ import com.lumos.smartdevice.db.dao.LockerBoxUseRecordDao;
 import com.lumos.smartdevice.db.dao.TripMsgDao;
 import com.lumos.smartdevice.db.dao.UserDao;
 import com.lumos.smartdevice.db.dao.UserUnlockKeyDao;
+import com.lumos.smartdevice.utils.FileUtil;
 
 import java.io.File;
 
@@ -60,6 +61,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 			+ TripMsgDao.COLUMN_NAME_MSG_ID + " TEXT , "
 			+ TripMsgDao.COLUMN_NAME_CONTENT + " TEXT , "
 			+ TripMsgDao.COLUMN_NAME_POST_URL + " TEXT , "
+			+ TripMsgDao.COLUMN_NAME_CREATETIME + " BIGINT , "
 			+ TripMsgDao.COLUMN_NAME_STATUS + " INTEGER );";
 
 
@@ -108,10 +110,13 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 			dbPath = context.getFilesDir().getPath() + "/database/";
 		}
 		File dbp = new File(dbPath);
+
 		if (!dbp.exists()) {
 			dbp.mkdirs();
 		}
 		databasename = dbPath + DB_NAME;
+
+
 		return databasename;
 	}
 

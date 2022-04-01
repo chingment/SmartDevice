@@ -63,6 +63,7 @@ public class BookerCtrlService extends Service {
     }
 
     public class CtrlBinder extends Binder {
+
         public void borrowReturnStart(String clientUserId, int identityType, String identityId, DeviceVo device, BookerSlotVo slot) {
             bookerCtrl.borrowReturnStart(clientUserId, identityType, identityId, device, slot, new BorrowReturnFlowThread.OnHandlerListener() {
                 @Override
@@ -71,6 +72,10 @@ public class BookerCtrlService extends Service {
                     sendBroadcastMsg(result);
                 }
             });
+        }
+
+        public boolean checkBorrowReturnIsRunning(BookerSlotVo slot) {
+            return bookerCtrl.checkBorrowReturnIsRunning(slot);
         }
     }
 }

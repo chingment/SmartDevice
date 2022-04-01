@@ -76,6 +76,8 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
     private String identityId;
     private String clientUserId;
 
+    private int borrowedQuantity=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -327,6 +329,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
                     tv_OverdueFine.setText(String.valueOf(borrower.getOverdueFine()));
                     tv_Status.setText(borrower.getStatus().getText());
 
+                    borrowedQuantity=borrower.getBorrowedQuantity();
 
                 } else {
                     showToast(rt.getMsg());
@@ -412,10 +415,18 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
                 finish();
             }
             else if(id==R.id.btn_RenewBookByOneKey){
-                dialog_Confirm.setFunction("renew_all");
-                dialog_Confirm.setTipsImageByResource(R.drawable.ic_booker_warn);
-                dialog_Confirm.setTipsText("确实是一键续借？");
-                dialog_Confirm.show();
+                if(borrowedQuantity==0){
+                    showToast("当前没有借阅的书本");
+                }
+                else {
+                    dialog_Confirm.setFunction("renew_all");
+                    dialog_Confirm.setTipsImageByResource(R.drawable.ic_booker_warn);
+                    dialog_Confirm.setTipsText("确实是一键续借？");
+                    dialog_Confirm.show();
+                }
+            }
+            else if(id == R.id.btn_GoPayOverdueFine) {
+                showToast("设备未暂未开通支付功能");
             }
         }
     }
