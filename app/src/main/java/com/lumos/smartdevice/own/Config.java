@@ -27,7 +27,7 @@ public class Config {
 
     public class URL {
         public static final String device_InitData = BuildConfig.ENVIRONMENT + "/device/initData";
-        public static final String device_checkAppVerion = BuildConfig.ENVIRONMENT + "/device/checkAppVerion";
+        public static final String device_checkAppVersion = BuildConfig.ENVIRONMENT + "/device/checkAppVersion";
         public static final String device_Upload = BuildConfig.ENVIRONMENT + "/device/upload";
         public static final String own_LoginByAccount = BuildConfig.ENVIRONMENT + "/own/loginByAccount";
         public static final String own_Logout = BuildConfig.ENVIRONMENT + "/own/logout";

@@ -33,7 +33,7 @@ public class BookerCtrlReceiver extends BroadcastReceiver {
         void onBorrowReturnFlowReceive(BorrowReturnFlowResult flowResult);
     }
 
-    public void  register(final Context context) {
+    public void  register(Context context) {
         LogUtil.d(TAG,"register");
         IntentFilter filter = new IntentFilter();
         String ACTION = "action.booker.borrow.return.flow.result";
@@ -41,7 +41,7 @@ public class BookerCtrlReceiver extends BroadcastReceiver {
         context.registerReceiver(this, filter);
     }
 
-    public void unRegister(final Context context) {
+    public void unRegister(Context context) {
         LogUtil.d(TAG,"unRegister");
         context.unregisterReceiver(this);
     }

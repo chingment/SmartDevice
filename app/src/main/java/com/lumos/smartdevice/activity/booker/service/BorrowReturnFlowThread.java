@@ -229,7 +229,6 @@ public class BorrowReturnFlowThread extends Thread {
             ILockeqCtrl  lockeqCtrl = LockeqCtrlInterface.getInstance(lockeqDrive.getComId(), lockeqDrive.getComBaud(), lockeqDrive.getComPrl());
             IRfeqCtrl rfeqCtrl = RfeqCtrlInterface.getInstance(rfeqDrive.getComId(), rfeqDrive.getComBaud(), rfeqDrive.getComPrl());
 
-
             if (!lockeqCtrl.isConnect()) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "格子驱动未连接[10]");
                 setRunning(false);
@@ -250,6 +249,7 @@ public class BorrowReturnFlowThread extends Thread {
                 setRunning(false);
                 return;
             }
+
 
             //todo 读多久;
 

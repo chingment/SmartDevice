@@ -24,16 +24,6 @@ public class BookerCtrlService extends Service {
 
         bookerCtrl = BookerCtrl.getInstance();
 
-
-//        bookerCtrl.setHandlerListener(new BookerCtrl.OnHandlerListener() {
-//            @Override
-//            public void onBorrowReturn(BorrowReturnFlowResultVo result) {
-//                LogUtil.d(TAG, "actionCode:" + result.getActionCode() + ",actionRemark:" + result.getActionRemark());
-//                sendBroadcastMsg(result);
-//            }
-//        });
-
-
         mCtrlBinder = new CtrlBinder();
     }
 

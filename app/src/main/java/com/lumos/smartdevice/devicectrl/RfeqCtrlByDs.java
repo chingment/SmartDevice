@@ -57,7 +57,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
         return true;
     }
 
-    public boolean  sendOpenRead(long ant) {
+    public boolean sendOpenRead(long ant) {
 
         boolean isflag = false;
 

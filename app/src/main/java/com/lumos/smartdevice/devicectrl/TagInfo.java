@@ -87,15 +87,4 @@ public class TagInfo implements Serializable {
     public void setAntId(int antId) {
         this.antId = antId;
     }
-
-    @Override
-    public String toString() {
-        return "TagInfo{" +
-                "index=" + index +
-                ", type='" + type + '\'' +
-                ", epc='" + epc + '\'' +
-                ", user='" + tid + '\'' +
-                ", rssi='" + rssi + '\'' +
-                '}';
-    }
 }

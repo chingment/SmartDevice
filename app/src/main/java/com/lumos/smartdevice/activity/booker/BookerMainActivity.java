@@ -13,10 +13,15 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
+import com.alibaba.fastjson.TypeReference;
 import com.danikula.videocache.HttpProxyCacheServer;
+import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrl;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
+import com.lumos.smartdevice.api.ResultBean;
+import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetDeviceCheckAppVersion;
 import com.lumos.smartdevice.api.vo.AdVo;
 import com.lumos.smartdevice.api.vo.AdCreativeVo;
 import com.lumos.smartdevice.api.vo.BookerCustomDataVo;
@@ -24,12 +29,17 @@ import com.lumos.smartdevice.api.vo.BookerDriveLockeqVo;
 import com.lumos.smartdevice.api.vo.BookerDriveRfeqVo;
 import com.lumos.smartdevice.api.vo.BookerSlotDrivesVo;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
+import com.lumos.smartdevice.http.HttpClient;
 import com.lumos.smartdevice.own.AppCacheManager;
+import com.lumos.smartdevice.own.Config;
+import com.lumos.smartdevice.utils.DeviceUtil;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -56,10 +66,6 @@ public class BookerMainActivity  extends BookerBaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booker_main);
         bookerCustomData = AppCacheManager.getBookerCustomData();
-
-
-
-
 
 //        bookerCtrl=BookerCtrl.getInstance();
 //

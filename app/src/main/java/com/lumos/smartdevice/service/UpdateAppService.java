@@ -6,27 +6,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
+import android.os.Binder;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
-
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.BuildConfig;
-import com.lumos.smartdevice.activity.BaseActivity;
-import com.lumos.smartdevice.activity.sm.dialog.DialogSmLoading;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
-import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetDeviceCheckAppVersion;
 import com.lumos.smartdevice.http.HttpClient;
-import com.lumos.smartdevice.http.HttpResponseHandler;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
-import com.lumos.smartdevice.own.AppContext;
-import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.own.Config;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.FileUtil;
@@ -45,130 +36,20 @@ import java.util.Map;
  */
 
 public class UpdateAppService extends Service {
-    private static String TAG = "UpdateAppService";
-    private DownloadManager manager;
-    private DownloadCompleteReceiver receiver;
-    private Handler handler_msg;
-    private DialogSmLoading dialog_Loading;
-    private CommandReceiver cmdReceiver;
 
-    private static String downloadUpdateApkFilePath="";
-    private void downloadManagerApk(String downpath) {
+    private static final String TAG = "UpdateAppService";
 
-        try {
-            Message m = new Message();
-            m.what = 1;
-            handler_msg.sendMessage(m);
-
-            manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-
-            receiver = new DownloadCompleteReceiver();
-
-            //设置下载地址
-            DownloadManager.Request down = new DownloadManager.Request(
-                    Uri.parse(downpath));
-
-            // 设置允许使用的网络类型，这里是移动网络和wifi都可以
-            down.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE
-                    | DownloadManager.Request.NETWORK_WIFI);
-
-            // 下载时，通知栏显示途中
-            down.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
-
-            // 显示下载界面
-            down.setVisibleInDownloadsUi(true);
-
-
-            //String path = Environment.getExternalStorageDirectory() + "/Download";
-
-
-            String filePath = null;
-            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {//外部存储卡
-                filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
-            } else {
-                filePath = Environment.getExternalStorageDirectory() + "/Download";
-                //return;
-            }
-
-
-
-            downloadUpdateApkFilePath = filePath + File.separator + "fanju" + System.currentTimeMillis() + ".apk";
-
-            if(FileUtil.isFileExist(downloadUpdateApkFilePath)) {
-                // 若存在，则删除 (这里具体逻辑具体看,我这里是删除)
-                deleteFile(downloadUpdateApkFilePath);
-            }
-
-            Uri fileUri = Uri.fromFile(new File(downloadUpdateApkFilePath));
-
-            down.setDestinationUri(fileUri);
-            // 设置下载后文件存放的位置
-            //down.setDestinationInExternalFilesDir(this, path, "fanju.apk");
-
-            // 将下载请求放入队列
-            manager.enqueue(down);
-
-            //注册下载广播
-            registerReceiver(receiver, new IntentFilter(
-                    DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-        }
-        catch (Exception ex)
-        {
-            Message m = new Message();
-            m.what = 2;
-            handler_msg.sendMessage(m);
-        }
-
-    }
+    private DownloadManager download_manager;
+    private DownloadCompleteReceiver download_receiver;
+    private CtrlBinder mCtrlBinder = null;
 
     @Override
     public void onCreate() {
         LogUtil.d(TAG, "onCreate...");
 
-        handler_msg = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
+        download_manager = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
 
-                switch (msg.what)
-                {
-                    case  1:
-                        if(dialog_Loading==null) {
-                            dialog_Loading = new DialogSmLoading(AppManager.getAppManager().currentActivity());
-                        }
-                        dialog_Loading.setTipsText("系统正在更新中....");
-                        dialog_Loading.show();
-
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (dialog_Loading != null) {
-                                        dialog_Loading.hide();
-                                    }
-                                }
-                            }, 30*60*1000);
-
-                        break;
-                    case 2:
-                        if(dialog_Loading!=null) {
-                            dialog_Loading.hide();
-                        }
-                        break;
-                    case 3:
-                        if(from==2) {
-                            BaseActivity act = (BaseActivity) AppManager.getAppManager().currentActivity();
-                            act.showToast("已经是最新版本");
-                        }
-                        break;
-                }
-                return  false;
-            }
-        });
-
-        cmdReceiver = new CommandReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("android.intent.action.updateAppService");
-        registerReceiver(cmdReceiver, filter);
+        mCtrlBinder = new CtrlBinder();
 
         super.onCreate();
     }
@@ -176,30 +57,114 @@ public class UpdateAppService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         LogUtil.d(TAG, "onStartCommand...");
+
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public IBinder onBind(Intent intent) {
 
-        return null;
+        return mCtrlBinder;
     }
 
     @Override
     public void onDestroy() {
 
-        // 注销下载广播
-        if (receiver != null)
-            unregisterReceiver(receiver);
-
-        if(dialog_Loading!=null) {
-            dialog_Loading.cancel();
+        if (download_receiver != null) {
+            unregisterReceiver(download_receiver);
         }
 
         super.onDestroy();
     }
 
-    public static int compareVersion(String version1, String version2) {
+    private void checkUpdate() {
+
+        sendBroadcastMsg(1, "正在检查最新版本");
+
+        Map<String, Object> params = new HashMap<>();
+        params.put("deviceId", DeviceUtil.getDeviceId());
+        params.put("appId", BuildConfig.APPLICATION_ID);
+        params.put("appKey", BuildConfig.APPKEY);
+
+        String response = HttpClient.myPost(Config.URL.device_checkAppVersion, params);
+
+        ResultBean<RetDeviceCheckAppVersion> result = JsonUtil.toResult(response, new TypeReference<ResultBean<RetDeviceCheckAppVersion>>() {
+        });
+
+        if (result.getCode() != ResultCode.SUCCESS) {
+            sendBroadcastMsg(2, result.getMsg());
+            return;
+        }
+
+        RetDeviceCheckAppVersion ret = result.getData();
+
+        if (ret == null) {
+            sendBroadcastMsg(2, "已经是最新版本");
+            return;
+        }
+
+        if (ret.getVersionName() == null || ret.getDownloadUrl() == null) {
+            sendBroadcastMsg(2, "已经是最新版本");
+            return;
+        }
+
+        int cp = compareVersion(ret.getVersionName(), BuildConfig.VERSION_NAME);
+        if (cp != 1) {
+            sendBroadcastMsg(2, "已经是最新版本");
+            return;
+        }
+
+        downloadManagerApk(ret.getDownloadUrl());
+
+    }
+
+    private void sendBroadcastMsg(int status, String message) {
+        Intent intent = new Intent();
+        intent.setAction("action.smartdevice.app.update");
+        intent.putExtra("status", status);
+        intent.putExtra("message", message);
+        sendBroadcast(intent);
+    }
+
+    private void downloadManagerApk(String downpath) {
+
+        DownloadManager.Request manager_rquest = new DownloadManager.Request(Uri.parse(downpath));
+        manager_rquest.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE | DownloadManager.Request.NETWORK_WIFI);
+        manager_rquest.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
+        manager_rquest.setVisibleInDownloadsUi(true);
+
+        String filePath;
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            filePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        } else {
+            filePath = Environment.getExternalStorageDirectory() + "/Download";
+        }
+
+        String downloadUpdateApkFilePath = filePath + File.separator + "smartdevices" + System.currentTimeMillis() + ".apk";
+
+        if (FileUtil.isFileExist(downloadUpdateApkFilePath)) {
+            deleteFile(downloadUpdateApkFilePath);
+        }
+
+        Uri fileUri = Uri.fromFile(new File(downloadUpdateApkFilePath));
+
+        manager_rquest.setDestinationUri(fileUri);
+
+        download_manager.enqueue(manager_rquest);
+
+        sendBroadcastMsg(3, "正在下载中");
+
+        download_receiver = new DownloadCompleteReceiver();
+
+        registerReceiver(download_receiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+
+    }
+
+    private int compareVersion(String version1, String version2) {
+
+        if (version1 == null)
+            return 0;
+
         if (version1.equals(version2)) {
             return 0;
         }
@@ -234,127 +199,69 @@ public class UpdateAppService extends Service {
         }
     }
 
-    private class CheckUpdateThread extends Thread {
+    private void queryDownloadStatus(long downId) {
+        DownloadManager.Query query = new DownloadManager.Query();
+        query.setFilterById(downId);
+        Cursor c = download_manager.query(query);
+        if (c != null && c.moveToFirst()) {
+            int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
 
-        @Override
-        public void run() {
-            super.run();
+//            int reasonIdx = c.getColumnIndex(DownloadManager.COLUMN_REASON);
+//            int titleIdx = c.getColumnIndex(DownloadManager.COLUMN_TITLE);
+//            int fileSizeIdx = c.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
+//            int bytesDLIdx = c.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
+//            String title = c.getString(titleIdx);
+//            int fileSize = c.getInt(fileSizeIdx);
+//            int bytesDL = c.getInt(bytesDLIdx);
+//            // Translate the pause reason to friendly text.
+//            int reason = c.getInt(reasonIdx);
 
-
-            Map<String, Object> params = new HashMap<>();
-            params.put("deviceId", DeviceUtil.getDeviceId());
-            params.put("appId", BuildConfig.APPLICATION_ID);
-            params.put("appKey", BuildConfig.APPKEY);
-
-
-            HttpClient.myPost(Config.URL.device_checkAppVerion, params, new HttpResponseHandler() {
-
-                @Override
-                public void onBeforeSend() {
-
-                }
-
-                @Override
-                public void onSuccess(String response) {
-
-                    ResultBean<RetDeviceCheckAppVersion> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetDeviceCheckAppVersion>>() {});
-
-                    if (rt.getCode() == ResultCode.SUCCESS) {
-                        RetDeviceCheckAppVersion d = rt.getData();
-                        if (d != null) {
-                            if (d.getVersionName() != null && d.getDownloadUrl() != null) {
-                                int c = compareVersion(d.getVersionName(), BuildConfig.VERSION_NAME);
-                                if (c == 1) {
-                                    downloadManagerApk(d.getDownloadUrl());
-                                } else {
-                                    Message m = new Message();
-                                    m.what = 3;
-                                    handler_msg.sendMessage(m);
-                                }
-                            }
-                        }
-                    }
-
-
-                }
-
-                @Override
-                public void onFailure(String msg, Exception e) {
-
-                }
-            });
+            switch (status) {
+                case DownloadManager.STATUS_PAUSED:
+                case DownloadManager.STATUS_PENDING:
+                case DownloadManager.STATUS_RUNNING:
+                    // 正在下载，不做任何事情
+                    break;
+                case DownloadManager.STATUS_SUCCESSFUL:
+                    sendBroadcastMsg(4, "正在下载中");
+                    installAPK(downId);
+                    // 完成
+                    break;
+                case DownloadManager.STATUS_FAILED:
+                    sendBroadcastMsg(2, "下载失败");
+                    // 清除已下载的内容，重新下载
+                    break;
+            }
         }
     }
 
-    public  static int from=-1;
-    private class CommandReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context,Intent intent) {
-            LogUtil.i(TAG, "CommandReceiver.onReceive");
+    private void installAPK(long downId) {
 
-            from = intent.getIntExtra("from",-1);
+        Uri uri = download_manager.getUriForDownloadedFile(downId);
 
-            CheckUpdateThread checkUpdateThread=new CheckUpdateThread();
+        String path = uri.getPath();
 
-            checkUpdateThread.start();
-
-        }
+        OstCtrlInterface.getInstance().installApk(UpdateAppService.this, path);
     }
 
-    // 接受下载完成后的intent
     class DownloadCompleteReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-
-            //判断是否下载完成的广播
-            if (intent.getAction().equals(
-                    DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {
-                LogUtil.i(TAG,"下载完成");
-                //获取下载的文件id
-                long downId = intent.getLongExtra(
-                        DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-
-                Uri uri=manager.getUriForDownloadedFile(downId);
-
-                LogUtil.i(TAG,"downloadUpdateApkFilePath:"+downloadUpdateApkFilePath);
-
-                if(Build.VERSION.SDK_INT>=24) {//判读版本是否在7.0以上
-                    LogUtil.i(TAG,"7.0系统以上");
-                    File file = (new File(downloadUpdateApkFilePath));
-                    //Uri apkUri = FileProvider.getUriForFile(context, "com.uplink.selfstore.fileprovider"
-                    //        , file);//在AndroidManifest中的android:authorities值
-
-                    Uri apkUri= Uri.fromFile(file);
-
-                    LogUtil.i(TAG,"path1:"+file.getAbsolutePath());
-                    LogUtil.i(TAG,"path2:"+file.getPath());
-                   // file.getAbsolutePath()
-//                    Intent install = new Intent(Intent.ACTION_VIEW);
-//                    install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-//                    install.setDataAndType(apkUri, "application/vnd.android.package-archive");
-//                    startActivity(install);
-
-                    installAPK(apkUri);
-                }
-                else {
-                    LogUtil.i(TAG,"7.0系统以下");
-                    installAPK(uri);
-                }
-            }
+            long downId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0);
+            queryDownloadStatus(downId);
         }
-
-        private void installAPK(Uri apk) {
-            Message m = new Message();
-            m.what = 2;
-            handler_msg.sendMessage(m);
-            if(apk!=null) {
-                String path = apk.getPath();
-                LogUtil.i(TAG,"path:"+path);
-                OstCtrlInterface.getInstance().installApk(UpdateAppService.this,path);
-            }
-        }
-
     }
+
+    public class CtrlBinder extends Binder {
+        public void check() {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    checkUpdate();
+                }
+            }).start();
+        }
+    }
+
 }

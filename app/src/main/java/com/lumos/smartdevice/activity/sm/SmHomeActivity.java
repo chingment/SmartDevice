@@ -3,6 +3,7 @@ package com.lumos.smartdevice.activity.sm;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.InitDataActivity;
+import com.lumos.smartdevice.activity.booker.service.BookerCtrlService;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmConfirm;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmOwnInfo;
 import com.lumos.smartdevice.adapter.GridNineItemAdapter;
@@ -21,13 +22,21 @@ import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppManager;
 import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.service.UpdateAppService;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
+import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -48,6 +57,38 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
     private DialogSmOwnInfo dialog_OwnInfo;
     private Button btn_Logout;
     private DeviceVo device;
+
+
+    private UpdateAppServiceReceiver updateAppServiceReceiver;
+
+    private UpdateAppService.CtrlBinder updateAppServiceCtrlBinder;
+
+    private final ServiceConnection updateAppServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder binder) {
+            updateAppServiceCtrlBinder = (UpdateAppService.CtrlBinder) binder;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+
+    public static class UpdateAppServiceReceiver extends BroadcastReceiver {
+
+        private static final String TAG = "UpdateAppReceiver";
+
+
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+
+            LogUtil.d(TAG,"onReceive");
+
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +98,13 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
         initView();
         initEvent();
         initData();
+
+        Intent serviceIntent = new Intent(this, UpdateAppService.class);
+        bindService(serviceIntent, updateAppServiceConnection, Context.BIND_AUTO_CREATE);
+
+        updateAppServiceReceiver= new UpdateAppServiceReceiver();
+        registerReceiver(updateAppServiceReceiver, new IntentFilter("action.smartdevice.app.update"));
+
     }
 
     private void initView() {
@@ -104,6 +152,7 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
                                     gdvUserManager();
                                     break;
                                 case "checkupdateapp":
+                                    updateAppServiceCtrlBinder.check();
                                     break;
                                 case "closeapp":
                                     gdvCloseApp();
@@ -318,7 +367,7 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
+
         if (dialog_Confirm != null) {
             dialog_Confirm.cancel();
         }
@@ -326,5 +375,15 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
         if (dialog_OwnInfo != null) {
             dialog_OwnInfo.cancel();
         }
+
+        if(updateAppServiceReceiver!=null) {
+            unregisterReceiver(updateAppServiceReceiver);
+        }
+
+        if(updateAppServiceConnection!=null){
+            unbindService(updateAppServiceConnection);
+        }
+
+        super.onDestroy();
     }
 }
