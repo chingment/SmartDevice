@@ -426,7 +426,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
                 }
             }
             else if(id == R.id.btn_GoPayOverdueFine) {
-                showToast("设备未暂未开通支付功能");
+                showToast("设备暂未开通支付功能");
             }
         }
     }

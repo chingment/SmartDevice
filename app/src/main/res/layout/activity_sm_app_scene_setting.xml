@@ -19,193 +19,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:padding="@dimen/size_4"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/size_4">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_gravity="center_vertical"
-                    android:layout_width="@dimen/size_2"
-                    android:layout_height="@dimen/size_14">
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorPrimary" />
-                </LinearLayout>
-                <TextView
-                    android:paddingLeft="@dimen/size_5"
-                    android:paddingRight="@dimen/size_5"
-                    android:layout_height="wrap_content"
-                    android:layout_width="0dp"
-                    android:layout_gravity="left"
-                    android:gravity="left"
-                    android:layout_weight="1"
-                    android:text="@string/t_vesionmode"
-                    android:textColor="@color/text"
-                    android:textSize="@dimen/sp_16" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:padding="@dimen/size_4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-                <RadioGroup
-                    android:id="@+id/rg_VesionMode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-
-                <RadioButton
-                    android:id="@+id/rbtn_VesionMode_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/size_5"
-                    android:tag="1"
-                    android:text="@string/t_vesionmode_1"
-                    android:textColor="@color/field_name"
-                    android:textSize="@dimen/sp_14" />
-
-                <RadioButton
-                    android:id="@+id/rbtn_VesionMode_2"
-                    android:layout_marginLeft="@dimen/size_10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/size_5"
-                    android:tag="2"
-                    android:text="@string/t_vesionmode_2"
-                    android:textColor="@color/field_name"
-                    android:textSize="@dimen/sp_14" />
-
-                </RadioGroup>
-            </LinearLayout>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical">
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                android:layout_weight="1">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="@dimen/size_2"
-                        android:layout_height="@dimen/size_14">
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/colorPrimary" />
-                    </LinearLayout>
-                    <TextView
-                        android:paddingLeft="@dimen/size_5"
-                        android:paddingRight="@dimen/size_5"
-                        android:layout_height="wrap_content"
-                        android:layout_width="0dp"
-                        android:layout_gravity="left"
-                        android:gravity="left"
-                        android:layout_weight="1"
-                        android:text="@string/t_scenemode"
-                        android:textColor="@color/text"
-                        android:textSize="@dimen/sp_16" />
-                </LinearLayout>
-                <LinearLayout
-                    android:padding="@dimen/size_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
-
-
-                    <RadioGroup
-                        android:id="@+id/rg_SceneMode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                    <RadioButton
-                        android:id="@+id/rbtn_SceneMode_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/size_5"
-                        android:tag="1"
-                        android:text="@string/t_scenemode_1"
-                        android:textColor="@color/field_name"
-                        android:textSize="@dimen/sp_14" />
-
-                    <RadioButton
-                        android:id="@+id/rbtn_SceneMode_2"
-                        android:layout_marginLeft="@dimen/size_10"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="@dimen/size_5"
-                        android:text="@string/t_scenemode_2"
-                        android:tag="2"
-                        android:textColor="@color/field_name"
-                        android:textSize="@dimen/sp_14" />
-
-                    </RadioGroup>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/lyt_Setting_Scene_Mode_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_gravity="center_vertical"
-                        android:layout_width="@dimen/size_2"
-                        android:layout_height="@dimen/size_14">
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/colorPrimary" />
-                    </LinearLayout>
-                    <TextView
-                        android:paddingLeft="@dimen/size_5"
-                        android:paddingRight="@dimen/size_5"
-                        android:layout_height="wrap_content"
-                        android:layout_width="0dp"
-                        android:layout_gravity="left"
-                        android:gravity="left"
-                        android:layout_weight="1"
-                        android:text="@string/aty_smappscenesetting_com_prl"
-                        android:textColor="@color/text"
-                        android:textSize="@dimen/sp_16" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:padding="@dimen/size_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -214,25 +38,218 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:paddingBottom="@dimen/size_10"
-                        android:paddingTop="@dimen/sp_10">
+                        android:background="@color/white"
+                        android:orientation="horizontal">
 
-                        <EditText
-                            android:id="@+id/et_Com_Prl"
-                            android:layout_width="fill_parent"
+                        <LinearLayout
+                            android:layout_width="@dimen/size_2"
+                            android:layout_height="@dimen/size_14"
+                            android:layout_gravity="center_vertical">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorPrimary" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:enabled="true"
-                            android:gravity="top"
-                        android:inputType="textMultiLine"
-                        android:minLines="20"
-                        android:maxLines="30"
-                        android:scrollbars="vertical"
-                        android:background="@android:drawable/edit_text"
-                        >
-                    </EditText>
+                            android:layout_gravity="left"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:paddingLeft="@dimen/size_5"
+                            android:paddingRight="@dimen/size_5"
+                            android:text="@string/t_vesionmode"
+                            android:textColor="@color/text"
+                            android:textSize="@dimen/sp_16" />
+                    </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/size_4">
+
+                        <RadioGroup
+                            android:id="@+id/rg_VesionMode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <RadioButton
+                                android:id="@+id/rbtn_VesionMode_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="@dimen/size_5"
+                                android:tag="1"
+                                android:text="@string/t_vesionmode_1"
+                                android:textColor="@color/field_name"
+                                android:textSize="@dimen/sp_14" />
+
+                            <RadioButton
+                                android:id="@+id/rbtn_VesionMode_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:paddingLeft="@dimen/size_5"
+                                android:tag="2"
+                                android:text="@string/t_vesionmode_2"
+                                android:textColor="@color/field_name"
+                                android:textSize="@dimen/sp_14" />
+
+                        </RadioGroup>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/size_2"
+                            android:layout_height="@dimen/size_14"
+                            android:layout_gravity="center_vertical">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorPrimary" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:paddingLeft="@dimen/size_5"
+                            android:paddingRight="@dimen/size_5"
+                            android:text="@string/t_scenemode"
+                            android:textColor="@color/text"
+                            android:textSize="@dimen/sp_16" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/size_4">
+
+
+                        <RadioGroup
+                            android:id="@+id/rg_SceneMode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/rbtn_SceneMode_1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="@dimen/size_5"
+                                android:tag="1"
+                                android:text="@string/t_scenemode_1"
+                                android:textColor="@color/field_name"
+                                android:textSize="@dimen/sp_14" />
+
+                            <RadioButton
+                                android:id="@+id/rbtn_SceneMode_2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/size_10"
+                                android:paddingLeft="@dimen/size_5"
+                                android:tag="2"
+                                android:text="@string/t_scenemode_2"
+                                android:textColor="@color/field_name"
+                                android:textSize="@dimen/sp_14" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/lyt_Setting_Scene_Mode_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="@dimen/size_2"
+                            android:layout_height="@dimen/size_14"
+                            android:layout_gravity="center_vertical">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorPrimary" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:paddingLeft="@dimen/size_5"
+                            android:paddingRight="@dimen/size_5"
+                            android:text="@string/aty_smappscenesetting_com_prl"
+                            android:textColor="@color/text"
+                            android:textSize="@dimen/sp_16" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        android:padding="@dimen/size_4">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingTop="@dimen/sp_10"
+                            android:paddingBottom="@dimen/size_10">
+
+                            <EditText
+                                android:id="@+id/et_Com_Prl"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:drawable/edit_text"
+                                android:enabled="true"
+                                android:gravity="top"
+                                android:inputType="textMultiLine"
+                                android:maxLines="30"
+                                android:minLines="20"
+                                android:scrollbars="vertical"></EditText>
+
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -240,10 +257,24 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:id="@+id/btn_Save"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_38"
+                    android:layout_marginTop="@dimen/size_30"
+                    android:background="@drawable/widget_common_btn"
+                    android:gravity="center"
+                    android:text="@string/t_save"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_16"/>
+            </LinearLayout>
+
+
 
         </LinearLayout>
-
-
 
 
     </LinearLayout>

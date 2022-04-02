@@ -19,6 +19,7 @@ public class SmAppSceneSettingActivity extends SmBaseActivity {
     private RadioGroup rg_VesionMode;
     private RadioGroup rg_SceneMode;
     private EditText et_Com_Prl;
+    private View btn_Save;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +39,11 @@ public class SmAppSceneSettingActivity extends SmBaseActivity {
         rg_VesionMode = findViewById(R.id.rg_VesionMode);
         rg_SceneMode = findViewById(R.id.rg_SceneMode);
         et_Com_Prl = findViewById(R.id.et_Com_Prl);
+        btn_Save = findViewById(R.id.btn_Save);
     }
 
     private void initEvent() {
+        btn_Save.setOnClickListener(this);
 //        rg_VesionMode.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 //            @Override
 //            public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -95,7 +98,9 @@ public class SmAppSceneSettingActivity extends SmBaseActivity {
 
             if (id == R.id.btn_Nav_Header_Goback) {
                 finish();
-            } else if (id == R.id.btn_Nav_Header_Right) {
+            }
+            else if(id==R.id.btn_Save){
+
                 RadioButton rb_VesionMode = findViewById(rg_VesionMode.getCheckedRadioButtonId());
                 int version_mode = AppVar.VERSION_MODE_0;
                 if (rb_VesionMode != null) {
@@ -113,6 +118,7 @@ public class SmAppSceneSettingActivity extends SmBaseActivity {
                 ResultBean<Object> result = DbManager.getInstance().saveAppScene(version_mode, scene_mode, json_Com_Prl);
 
                 showToast(result.getMsg());
+
             }
         }
     }

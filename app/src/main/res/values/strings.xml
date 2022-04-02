@@ -140,4 +140,5 @@
     <string name="t_cancle">否</string>
     <string name="t_sure">是</string>
     <string name="t_close">关闭</string>
+    <string name="t_save">保存</string>
 </resources>
