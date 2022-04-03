@@ -234,8 +234,12 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_INIT_DATA_SUCCESS, "初始化数据成功");
 
-            ILockeqCtrl  lockeqCtrl = LockeqCtrlInterface.getInstance(lockeqDrive.getComId(), lockeqDrive.getComBaud(), lockeqDrive.getComPrl());
             IRfeqCtrl rfeqCtrl = RfeqCtrlInterface.getInstance(rfeqDrive.getComId(), rfeqDrive.getComBaud(), rfeqDrive.getComPrl());
+
+            ILockeqCtrl  lockeqCtrl = LockeqCtrlInterface.getInstance(lockeqDrive.getComId(), lockeqDrive.getComBaud(), lockeqDrive.getComPrl());
+
+
+            int trydo=0;
 
             if (!lockeqCtrl.isConnect()) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "格子驱动未连接[10]");
@@ -252,7 +256,46 @@ public class BorrowReturnFlowThread extends Thread {
 
             Thread.sleep(200);
 
-            if (!rfeqCtrl.sendOpenRead(1)) {
+
+            //先关闭读取的
+            boolean isSendCloseRead=false;
+            while (trydo<3) {
+
+                if(rfeqCtrl.sendCloseRead(1)) {
+                    isSendCloseRead = true;
+                    break;
+                }
+
+                Thread.sleep(200);
+
+                trydo++;
+            }
+
+
+            if (!isSendCloseRead) {
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频设备命令发送关闭读取失败[12]");
+                setRunning(false);
+                return;
+            }
+
+
+            Thread.sleep(200);
+            //打开读取
+            boolean isSendOpenRead=false;
+            trydo=0;
+            while (trydo<3){
+
+                if (rfeqCtrl.sendOpenRead(1)) {
+                    isSendOpenRead=true;
+                    break;
+                }
+
+                Thread.sleep(200);
+
+                trydo++;
+            }
+
+            if (!isSendOpenRead) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频设备命令发送失败[12]");
                 setRunning(false);
                 return;
@@ -261,9 +304,26 @@ public class BorrowReturnFlowThread extends Thread {
 
             //todo 读多久;
 
-            Thread.sleep(200);
+            Thread.sleep(500);
 
-            rfeqCtrl.sendCloseRead(1);
+
+            trydo=0;
+            isSendCloseRead=false;
+            while (trydo<3) {
+
+                if(rfeqCtrl.sendCloseRead(1)) {
+                    isSendCloseRead = true;
+                    break;
+                }
+
+                Thread.sleep(200);
+
+                trydo++;
+            }
+
+            if(!isSendCloseRead){
+                LogUtil.i(TAG,"射频设备发送关闭读取命令失败");
+            }
 
             Map<String, TagInfo> tag_RfIds=rfeqCtrl.getRfIds(1);
 
@@ -271,13 +331,13 @@ public class BorrowReturnFlowThread extends Thread {
 
             List<String> open_RfIds=getRfIds(tag_RfIds);
 
-            open_RfIds.add("123456789012345678901410");
-            open_RfIds.add("123456789012345678901409");
-            open_RfIds.add("123456789012345678901408");
-            open_RfIds.add("123456789012345678901407");
-            open_RfIds.add("123456789012345678901403");
-            open_RfIds.add("123456789012345678901402");
-            open_RfIds.add("123456789012345678901401");
+//            open_RfIds.add("123456789012345678901410");
+//            open_RfIds.add("123456789012345678901409");
+//            open_RfIds.add("123456789012345678901408");
+//            open_RfIds.add("123456789012345678901407");
+//            open_RfIds.add("123456789012345678901403");
+//            open_RfIds.add("123456789012345678901402");
+//            open_RfIds.add("123456789012345678901401");
 
 
             ad_Request_Open_Auth.put("rfIds", open_RfIds);
@@ -311,7 +371,7 @@ public class BorrowReturnFlowThread extends Thread {
             long nCheckStartTime = System.currentTimeMillis();
             long nCheckMaxStatusTime = System.currentTimeMillis() - nCheckStartTime;
 
-            while (!isOpen && nCheckMaxStatusTime < nCheckMinute * 60 * 1000) {
+            while (nCheckMaxStatusTime < nCheckMinute * 60 * 1000) {
 
                 //LogUtil.i(TAG,"检查开门状态");
 
@@ -319,6 +379,7 @@ public class BorrowReturnFlowThread extends Thread {
 
                 if (slotStatus == 1) {
                     isOpen = true;
+                    break;
                 } else {
                     Thread.sleep(300);
                 }
@@ -337,15 +398,16 @@ public class BorrowReturnFlowThread extends Thread {
             sendHandlerMessage(ACTION_WAIT_CLOSE, "等待关闭");
 
             boolean isClose = false;
-            nCheckMinute = 30;
+            nCheckMinute = 1;
             nCheckStartTime = System.currentTimeMillis();
             nCheckMaxStatusTime = System.currentTimeMillis() - nCheckStartTime;
-            while (!isClose && nCheckMaxStatusTime < nCheckMinute * 60 * 1000) {
+            while (nCheckMaxStatusTime < nCheckMinute * 10 * 1000) {
 
                 int slotStatus = lockeqCtrl.getSlotStatus("1");
 
                 if (slotStatus == 0) {
                     isClose = true;
+                    break;
                 } else {
                     Thread.sleep(300);
                 }
@@ -362,20 +424,30 @@ public class BorrowReturnFlowThread extends Thread {
             //todo 关闭成功因网络问题上传的数量如何应对
             sendHandlerMessage(ACTION_CLOSE_SUCCESS, "关闭成功");
 
+
+
+
+
             rfeqCtrl.sendOpenRead(1);
 
             //todo 读多久
-            Thread.sleep(2000);
+            Thread.sleep(500);
+
+
+
+
 
             rfeqCtrl.sendCloseRead(1);
+
+
 
             tag_RfIds=rfeqCtrl.getRfIds(1);
 
             List<String> close_RfIds=getRfIds(tag_RfIds);
 
-            close_RfIds.add("123456789012345678901403");
-            close_RfIds.add("123456789012345678901402");
-            close_RfIds.add("123456789012345678901401");
+//            close_RfIds.add("123456789012345678901403");
+//            close_RfIds.add("123456789012345678901402");
+//            close_RfIds.add("123456789012345678901401");
 
             HashMap<String, Object> ad_Request_Close_Auth = new HashMap<>();
 
@@ -393,7 +465,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             HashMap<String, Object> ad_Request_Close_Auth_Result = new HashMap<>();
 
-            ad_Request_Close_Auth.put("ret_booker_borrow_return", ret_Request_Close_Auth);
+            ad_Request_Close_Auth_Result.put("ret_booker_borrow_return", ret_Request_Close_Auth);
 
             sendHandlerMessage(ACTION_REQUEST_CLOSE_AUTH_SUCCESS, ad_Request_Close_Auth_Result, "请求关闭验证通过");
 
