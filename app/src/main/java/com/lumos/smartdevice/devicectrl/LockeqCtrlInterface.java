@@ -8,6 +8,6 @@ public class LockeqCtrlInterface
 
     public static ILockeqCtrl getInstance(String comId, int comBaud, String comPrl) {
         LogUtil.i(TAG, "comId:" + comId + ",comBaud:" + comBaud + ",comPrl:" + comPrl);
-        return LockeqCtrlByDs.getInstance(comId, comBaud);
+        return LockeqCtrlByDs.getInstance(comId, comBaud,comPrl);
     }
 }

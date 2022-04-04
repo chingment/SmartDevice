@@ -9,7 +9,9 @@ import com.gg.reader.api.protocol.gx.MsgBaseInventoryEpc;
 import com.gg.reader.api.protocol.gx.MsgBaseStop;
 import com.lumos.smartdevice.utils.LogUtil;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -20,71 +22,109 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
     private static RfeqCtrlByDs mThis = null;
 
     private GClient client;
-
-    private Map<String, TagInfo> map_TagInfos = new LinkedHashMap<String, TagInfo>();//去重数据源
+    private boolean isConnect;
+    private String comId;
+    private int comBaud;
+    private String comPrl;
 
     private long index=0;
 
-    private RfeqCtrlByDs(){
+
+    private Map<String, TagInfo> map_TagInfos = new LinkedHashMap<String, TagInfo>();//去重数据源
+
+    private RfeqCtrlByDs(String comId, int comBaud,String comPrl) {
         client = new GClient();
+        this.comId = comId;
+        this.comBaud = comBaud;
+        this.comPrl = comPrl;
     }
 
-    public static RfeqCtrlByDs getInstance(String comId, int comBaud) {
+    public static RfeqCtrlByDs getInstance(String comId, int comBaud,String comPrl) {
         LogUtil.i(TAG, "comId:" + comId + ",comBaud:" + comBaud);
         if (mThis == null) {
             synchronized (RfeqCtrlByDs.class) {
                 if (mThis == null) {
-                    mThis = new RfeqCtrlByDs();
-                    mThis.connect(comId, comBaud);
+                    mThis = new RfeqCtrlByDs(comId,comBaud,comPrl);
                 }
             }
         }
         return mThis;
     }
 
-    private void connect(String comId,int comBaud) {
+    private void connect() {
         String param = "/dev/" + comId + ":" + comBaud;
-        if(client.openAndroidSerial(param, 1000)){
-            LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud+"，成功");
+        if (client.openAndroidSerial(param, 1000)) {
+            this.isConnect = true;
+            LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud + "，成功");
             subHandler(client);
-        }
-        else {
+        } else {
             LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud + "，失败");
         }
     }
 
     public boolean isConnect() {
-        return true;
+        return isConnect;
     }
+
+    private List<Integer> getAntIds(String ant){
+
+        return new ArrayList<>();
+    }
+
+    private long convertAntennaEnable(String ant){
+
+        long i_ant=0;
+
+        String[] s_ant = ant.split(",");
+
+
+//        StringBuffer buffer = new StringBuffer();
+//        for (String box : checkBoxMap.values()) {
+//
+//
+//            if(box.equals("1")||box.equals("2")){
+//                buffer.append(1);
+//            } else {
+//                buffer.append(0);
+//            }
+//
+//        }
+
+        //  Long c= Long.valueOf(buffer.reverse().toString(), 2);
+
+
+        return i_ant;
+    }
+
 
     public boolean sendOpenRead(String ant) {
 
-        boolean isflag = false;
 
-        int inventoryMode = 1;
+        List<Integer> antIds=getAntIds(ant);
 
         MsgBaseInventoryEpc msg = new MsgBaseInventoryEpc();
-        msg.setAntennaEnable(1l);
-        msg.setInventoryMode(inventoryMode);
-
-
-        client.sendSynMsg(msg);
+        msg.setAntennaEnable(convertAntennaEnable(ant));
+        msg.setInventoryMode(1);
 
         Set<Map.Entry<String, TagInfo>> entrys = map_TagInfos.entrySet();
+
         for (Map.Entry<String, TagInfo> entry : entrys) {
             TagInfo tagInfo = entry.getValue();
-            if (tagInfo.getAntId() == 1l) {
+            if (antIds.contains(tagInfo.getAntId())) {
                 map_TagInfos.remove(entry.getKey());
             }
         }
+
+        client.sendSynMsg(msg);
 
         return 0x00 == msg.getRtCode();
 
     }
 
-
-    public boolean  sendCloseRead(String ant) {
+    public boolean sendCloseRead(String ant) {
         MsgBaseStop msgStop = new MsgBaseStop();
+
+
         client.sendSynMsg(msgStop);
 
         return 0x00 == msgStop.getRtCode();

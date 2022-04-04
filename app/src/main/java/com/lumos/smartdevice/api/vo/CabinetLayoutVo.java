@@ -6,8 +6,6 @@ import java.util.List;
 public class CabinetLayoutVo implements Serializable {
     private int spanCount;
     private List<String> cells;
-    private RfEqVo rfId;
-
 
     public int getSpanCount() {
         return spanCount;
@@ -24,12 +22,5 @@ public class CabinetLayoutVo implements Serializable {
     public void setCells(List<String> cells) {
         this.cells = cells;
     }
-
-    public RfEqVo getRfId() {
-        return rfId;
-    }
-
-    public void setRfId(RfEqVo rfId) {
-        this.rfId = rfId;
-    }
 }
+

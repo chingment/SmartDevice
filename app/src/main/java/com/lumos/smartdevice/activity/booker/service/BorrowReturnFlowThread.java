@@ -172,12 +172,6 @@ public class BorrowReturnFlowThread extends Thread {
                 return;
             }
 
-            if (drives.size() < 2) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "设备驱动数量不对[02]");
-                setRunning(false);
-                return;
-            }
-
             if (StringUtil.isEmpty(slot.getLockeqId())||StringUtil.isEmpty(slot.getLockeqAnt())) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "格子未配置锁驱动[04]");
                 setRunning(false);
@@ -202,18 +196,18 @@ public class BorrowReturnFlowThread extends Thread {
                 return;
             }
 
+
             DriveVo lockeqDrive = drives.get(slot.getLockeqId());
 
             DriveVo rfeqDrive = drives.get(slot.getRfeqAnt());
-
-            sendHandlerMessage(ACTION_INIT_DATA_SUCCESS, "初始化数据成功");
 
             IRfeqCtrl rfeqCtrl = RfeqCtrlInterface.getInstance(rfeqDrive.getComId(), rfeqDrive.getComBaud(), rfeqDrive.getComPrl());
 
             ILockeqCtrl  lockeqCtrl = LockeqCtrlInterface.getInstance(lockeqDrive.getComId(), lockeqDrive.getComBaud(), lockeqDrive.getComPrl());
 
+            sendHandlerMessage(ACTION_INIT_DATA_SUCCESS, "初始化数据成功");
 
-            int trydo=0;
+            int tryDo=0;
 
             if (!lockeqCtrl.isConnect()) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "格子驱动未连接[10]");
@@ -233,16 +227,13 @@ public class BorrowReturnFlowThread extends Thread {
 
             //先关闭读取的
             boolean isSendCloseRead=false;
-            while (trydo<3) {
-
-                if(rfeqCtrl.sendCloseRead(slot.getRfeqAnt())) {
+            while (tryDo<3) {
+                if (rfeqCtrl.sendCloseRead(slot.getRfeqAnt())) {
                     isSendCloseRead = true;
                     break;
                 }
-
                 Thread.sleep(200);
-
-                trydo++;
+                tryDo++;
             }
 
 
@@ -256,17 +247,14 @@ public class BorrowReturnFlowThread extends Thread {
             Thread.sleep(200);
             //打开读取
             boolean isSendOpenRead=false;
-            trydo=0;
-            while (trydo<3){
-
+            tryDo=0;
+            while (tryDo<3){
                 if (rfeqCtrl.sendOpenRead(slot.getRfeqAnt())) {
                     isSendOpenRead=true;
                     break;
                 }
-
                 Thread.sleep(200);
-
-                trydo++;
+                tryDo++;
             }
 
             if (!isSendOpenRead) {
@@ -280,10 +268,9 @@ public class BorrowReturnFlowThread extends Thread {
 
             Thread.sleep(500);
 
-
-            trydo=0;
+            tryDo=0;
             isSendCloseRead=false;
-            while (trydo<3) {
+            while (tryDo<3) {
 
                 if(rfeqCtrl.sendCloseRead(slot.getRfeqAnt())) {
                     isSendCloseRead = true;
@@ -292,7 +279,7 @@ public class BorrowReturnFlowThread extends Thread {
 
                 Thread.sleep(200);
 
-                trydo++;
+                tryDo++;
             }
 
             if(!isSendCloseRead){
@@ -338,7 +325,6 @@ public class BorrowReturnFlowThread extends Thread {
             sendHandlerMessage(ACTION_SEND_OPEN_COMMAND_SUCCESS, "打开命令发送成功");
 
             sendHandlerMessage(ACTION_WAIT_OPEN, "等待打开");
-
 
             boolean isOpen = false;
             long nCheckMinute = 1;
@@ -399,20 +385,13 @@ public class BorrowReturnFlowThread extends Thread {
             sendHandlerMessage(ACTION_CLOSE_SUCCESS, "关闭成功");
 
 
-
-
-
             rfeqCtrl.sendOpenRead(slot.getRfeqAnt());
 
             //todo 读多久
             Thread.sleep(500);
 
 
-
-
-
             rfeqCtrl.sendCloseRead(slot.getRfeqAnt());
-
 
 
             tag_RfIds=rfeqCtrl.getRfIds(slot.getRfeqAnt());

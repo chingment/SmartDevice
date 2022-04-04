@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
@@ -35,6 +36,7 @@ import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -64,6 +66,30 @@ public class BookerMainActivity  extends BookerBaseActivity {
         setContentView(R.layout.activity_booker_main);
         bookerCustomData = AppCacheManager.getBookerCustomData();
 
+
+        Map<String, String> checkBoxMap = new LinkedHashMap<String, String>();
+        checkBoxMap.put("1","1");
+        checkBoxMap.put("2","2");
+        checkBoxMap.put("3","3");
+        checkBoxMap.put("4","4");
+        checkBoxMap.put("5","5");
+        checkBoxMap.put("6","6");
+        checkBoxMap.put("7","7");
+        checkBoxMap.put("8","8");
+
+            StringBuffer buffer = new StringBuffer();
+            for (String box : checkBoxMap.values()) {
+                if(box.equals("1")||box.equals("2")){
+                    buffer.append(1);
+                } else {
+                    buffer.append(0);
+                }
+
+            }
+
+            Long c= Long.valueOf(buffer.reverse().toString(), 2);
+
+
 //        bookerCtrl=BookerCtrl.getInstance();
 //
 //
@@ -84,7 +110,6 @@ public class BookerMainActivity  extends BookerBaseActivity {
 //                    lockeq.setPlate("1");
 //
 //                    drivesVo.setLockeq(lockeq);
-//                    BookerDriveRfeqVo rfeq=new BookerDriveRfeqVo();
 //                    rfeq.setDriveId("Rfeq_1");
 //                    rfeq.setAnt("1");
 //                    drivesVo.setRfeq(rfeq);

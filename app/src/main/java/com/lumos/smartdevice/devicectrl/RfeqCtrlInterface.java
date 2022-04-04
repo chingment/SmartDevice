@@ -10,7 +10,7 @@ public class RfeqCtrlInterface {
 
         LogUtil.i(TAG, "comId:" + comId + ",comBaud:" + comBaud + ",comPrl:" + comPrl);
 
-        return RfeqCtrlByDs.getInstance(comId, comBaud);
+        return RfeqCtrlByDs.getInstance(comId, comBaud,comPrl);
 
     }
 }
