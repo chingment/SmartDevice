@@ -9,11 +9,13 @@ import java.io.File;
 
 public class LockeqCtrlByDs implements ILockeqCtrl {
 
-    private static final String TAG = "CabinetCtrlByDs";
+    private static final String TAG = "LockeqCtrlByDs";
 
     private static LockeqCtrlByDs mThis= null;
 
     private symvdio sym;
+
+    private boolean isConnect=false;
 
     private LockeqCtrlByDs(){
         try {
@@ -29,7 +31,6 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
             synchronized (LockeqCtrlByDs.class) {
                 if (mThis == null) {
                     mThis = new LockeqCtrlByDs();
-                    mThis.connect(comId,comBaud);
                 }
             }
         }
@@ -43,13 +44,16 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
         if (file.exists()) {
             int rc_status = sym.Connect(comId, comBaud);
             LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud + "，状态为：" + rc_status);
+            if(rc_status==0) {
+                isConnect = true;
+            }
         } else {
             LogUtil.d(TAG, "打开串口：" + comId + "，波特：" + comBaud + "，失败");
         }
 
     }
 
-    public boolean  sendOpenSlot(String id) {
+    public boolean  sendOpenSlot(String ant) {
 
         int var0 = sym.SN_MV_MotorAction(1, 1, 0);
 
@@ -58,7 +62,7 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
 
     }
 
-    public int  getSlotStatus(String id) {
+    public int  getSlotStatus(String ant) {
 
         int[] var1 = sym.SN_MV_Get_ColData(1);
 
@@ -66,7 +70,6 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
     }
 
     public boolean isConnect(){
-
-        return true;
+        return isConnect;
     }
 }

@@ -6,7 +6,10 @@ import java.io.Serializable;
 public class BookerSlotVo implements Serializable {
     private String slotId;
     private String name;
-    private BookerSlotDrivesVo drives;
+    private String lockeqId;
+    private String lockeqAnt;
+    private String rfeqId;
+    private String rfeqAnt;
 
     public String getSlotId() {
         return slotId;
@@ -24,11 +27,35 @@ public class BookerSlotVo implements Serializable {
         this.name = name;
     }
 
-    public BookerSlotDrivesVo getDrives() {
-        return drives;
+    public String getLockeqId() {
+        return lockeqId;
     }
 
-    public void setDrives(BookerSlotDrivesVo drives) {
-        this.drives = drives;
+    public void setLockeqId(String lockeqId) {
+        this.lockeqId = lockeqId;
+    }
+
+    public String getLockeqAnt() {
+        return lockeqAnt;
+    }
+
+    public void setLockeqAnt(String lockeqAnt) {
+        this.lockeqAnt = lockeqAnt;
+    }
+
+    public String getRfeqId() {
+        return rfeqId;
+    }
+
+    public void setRfeqId(String rfeqId) {
+        this.rfeqId = rfeqId;
+    }
+
+    public String getRfeqAnt() {
+        return rfeqAnt;
+    }
+
+    public void setRfeqAnt(String rfeqAnt) {
+        this.rfeqAnt = rfeqAnt;
     }
 }

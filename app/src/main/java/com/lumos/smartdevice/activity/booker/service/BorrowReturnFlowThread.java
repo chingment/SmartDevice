@@ -8,9 +8,6 @@ import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
-import com.lumos.smartdevice.api.vo.BookerDriveLockeqVo;
-import com.lumos.smartdevice.api.vo.BookerDriveRfeqVo;
-import com.lumos.smartdevice.api.vo.BookerSlotDrivesVo;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
 import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.api.vo.DriveVo;
@@ -181,56 +178,33 @@ public class BorrowReturnFlowThread extends Thread {
                 return;
             }
 
-            BookerSlotDrivesVo slot_Drives = slot.getDrives();
-
-            if (slot_Drives == null) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "设备未配置驱动[03]");
-                setRunning(false);
-                return;
-            }
-
-            BookerDriveLockeqVo lockeq = slot_Drives.getLockeq();
-            if (lockeq == null) {
+            if (StringUtil.isEmpty(slot.getLockeqId())||StringUtil.isEmpty(slot.getLockeqAnt())) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "格子未配置锁驱动[04]");
                 setRunning(false);
                 return;
             }
 
-            if (!drives.containsKey(lockeq.getDriveId())) {
+            if (!drives.containsKey(slot.getLockeqId())) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "格子驱动找不到[05]");
                 setRunning(false);
                 return;
             }
 
-            BookerDriveRfeqVo rfeq = slot_Drives.getRfeq();
-            if (rfeq == null) {
+            if (StringUtil.isEmpty(slot.getRfeqId())||StringUtil.isEmpty(slot.getRfeqAnt())) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频未配置驱动[06]");
                 setRunning(false);
                 return;
             }
 
-            if (!drives.containsKey(rfeq.getDriveId())) {
+            if (!drives.containsKey(slot.getRfeqId())) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频驱动找不到[07]");
                 setRunning(false);
                 return;
             }
 
+            DriveVo lockeqDrive = drives.get(slot.getLockeqId());
 
-            DriveVo lockeqDrive = drives.get(lockeq.getDriveId());
-
-            if (lockeqDrive == null) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "格子驱动找不到[08]");
-                setRunning(false);
-                return;
-            }
-
-            DriveVo rfeqDrive = drives.get(rfeq.getDriveId());
-
-            if (rfeqDrive == null) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频驱动找不到[09]");
-                setRunning(false);
-                return;
-            }
+            DriveVo rfeqDrive = drives.get(slot.getRfeqAnt());
 
             sendHandlerMessage(ACTION_INIT_DATA_SUCCESS, "初始化数据成功");
 
@@ -261,7 +235,7 @@ public class BorrowReturnFlowThread extends Thread {
             boolean isSendCloseRead=false;
             while (trydo<3) {
 
-                if(rfeqCtrl.sendCloseRead(1)) {
+                if(rfeqCtrl.sendCloseRead(slot.getRfeqAnt())) {
                     isSendCloseRead = true;
                     break;
                 }
@@ -285,7 +259,7 @@ public class BorrowReturnFlowThread extends Thread {
             trydo=0;
             while (trydo<3){
 
-                if (rfeqCtrl.sendOpenRead(1)) {
+                if (rfeqCtrl.sendOpenRead(slot.getRfeqAnt())) {
                     isSendOpenRead=true;
                     break;
                 }
@@ -311,7 +285,7 @@ public class BorrowReturnFlowThread extends Thread {
             isSendCloseRead=false;
             while (trydo<3) {
 
-                if(rfeqCtrl.sendCloseRead(1)) {
+                if(rfeqCtrl.sendCloseRead(slot.getRfeqAnt())) {
                     isSendCloseRead = true;
                     break;
                 }
@@ -325,7 +299,7 @@ public class BorrowReturnFlowThread extends Thread {
                 LogUtil.i(TAG,"射频设备发送关闭读取命令失败");
             }
 
-            Map<String, TagInfo> tag_RfIds=rfeqCtrl.getRfIds(1);
+            Map<String, TagInfo> tag_RfIds=rfeqCtrl.getRfIds(slot.getRfeqAnt());
 
             HashMap<String, Object> ad_Request_Open_Auth = new HashMap<>();
 
@@ -353,7 +327,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_REQUEST_OPEN_AUTH_SUCCESS, "请求允许打开设备");
 
-            boolean isSendOpenSlot = lockeqCtrl.sendOpenSlot("1");
+            boolean isSendOpenSlot = lockeqCtrl.sendOpenSlot(slot.getLockeqAnt());
 
             if (!isSendOpenSlot) {
                 sendHandlerMessage(ACTION_SEND_OPEN_COMMAND_FAILURE, "打开命令发送失败[15]");
@@ -375,7 +349,7 @@ public class BorrowReturnFlowThread extends Thread {
 
                 //LogUtil.i(TAG,"检查开门状态");
 
-                int slotStatus = lockeqCtrl.getSlotStatus("1");
+                int slotStatus = lockeqCtrl.getSlotStatus(slot.getLockeqAnt());
 
                 if (slotStatus == 1) {
                     isOpen = true;
@@ -403,7 +377,7 @@ public class BorrowReturnFlowThread extends Thread {
             nCheckMaxStatusTime = System.currentTimeMillis() - nCheckStartTime;
             while (nCheckMaxStatusTime < nCheckMinute * 10 * 1000) {
 
-                int slotStatus = lockeqCtrl.getSlotStatus("1");
+                int slotStatus = lockeqCtrl.getSlotStatus(slot.getLockeqAnt());
 
                 if (slotStatus == 0) {
                     isClose = true;
@@ -428,7 +402,7 @@ public class BorrowReturnFlowThread extends Thread {
 
 
 
-            rfeqCtrl.sendOpenRead(1);
+            rfeqCtrl.sendOpenRead(slot.getRfeqAnt());
 
             //todo 读多久
             Thread.sleep(500);
@@ -437,11 +411,11 @@ public class BorrowReturnFlowThread extends Thread {
 
 
 
-            rfeqCtrl.sendCloseRead(1);
+            rfeqCtrl.sendCloseRead(slot.getRfeqAnt());
 
 
 
-            tag_RfIds=rfeqCtrl.getRfIds(1);
+            tag_RfIds=rfeqCtrl.getRfIds(slot.getRfeqAnt());
 
             List<String> close_RfIds=getRfIds(tag_RfIds);
 

@@ -57,14 +57,14 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
         return true;
     }
 
-    public boolean sendOpenRead(long ant) {
+    public boolean sendOpenRead(String ant) {
 
         boolean isflag = false;
 
         int inventoryMode = 1;
 
         MsgBaseInventoryEpc msg = new MsgBaseInventoryEpc();
-        msg.setAntennaEnable(ant);
+        msg.setAntennaEnable(1l);
         msg.setInventoryMode(inventoryMode);
 
 
@@ -73,7 +73,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
         Set<Map.Entry<String, TagInfo>> entrys = map_TagInfos.entrySet();
         for (Map.Entry<String, TagInfo> entry : entrys) {
             TagInfo tagInfo = entry.getValue();
-            if (tagInfo.getAntId() == ant) {
+            if (tagInfo.getAntId() == 1l) {
                 map_TagInfos.remove(entry.getKey());
             }
         }
@@ -83,21 +83,21 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
     }
 
 
-    public boolean  sendCloseRead(long ant) {
+    public boolean  sendCloseRead(String ant) {
         MsgBaseStop msgStop = new MsgBaseStop();
         client.sendSynMsg(msgStop);
 
         return 0x00 == msgStop.getRtCode();
     }
 
-    public Map<String, TagInfo> getRfIds(long ant){
+    public Map<String, TagInfo> getRfIds(String ant){
 
         Map<String, TagInfo> ant_TagInfos=new LinkedHashMap<>();
 
         Set<Map.Entry<String, TagInfo>> entrys = map_TagInfos.entrySet();
         for(Map.Entry<String, TagInfo> entry:entrys){
             TagInfo tagInfo=entry.getValue();
-            if(tagInfo.getAntId()==ant){
+            if(tagInfo.getAntId()==1l){
                 ant_TagInfos.put(entry.getKey(),tagInfo);
             }
         }
