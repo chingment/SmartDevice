@@ -57,7 +57,7 @@ public class BookerIdentityVerifyActivity extends BookerBaseActivity {
             @Override
             public void onSuccess(String code) {
                 LogUtil.e(TAG, "code: " + code);
-                verfiy("1",code);
+                verify(1,code);
             }
         });
 
@@ -76,7 +76,7 @@ public class BookerIdentityVerifyActivity extends BookerBaseActivity {
         dialog_BookerIdentityVerifyByIcCard.setOnClickListener(new DialogBookerIdentityVerifyByIcCard.OnClickListener() {
             @Override
             public void test() {
-                verfiy("1","0007729527");
+                verify(1,"0007729527");
             }
         });
     }
@@ -111,11 +111,11 @@ public class BookerIdentityVerifyActivity extends BookerBaseActivity {
 
     }
 
-    private void verfiy(String dataType,String payload) {
+    private void verify(int verifyMode,String payload) {
 
         RopIdentityVerify rop = new RopIdentityVerify();
         rop.setDeviceId(device.getDeviceId());
-        rop.setDataType(dataType);
+        rop.setVerifyMode(verifyMode);
         rop.setPayload(payload);
         ReqInterface.getInstance().identityVerify(rop, new ReqHandler() {
 

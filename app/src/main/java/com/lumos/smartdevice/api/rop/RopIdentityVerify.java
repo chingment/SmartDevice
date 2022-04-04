@@ -2,7 +2,7 @@ package com.lumos.smartdevice.api.rop;
 
 public class RopIdentityVerify {
     private String deviceId;
-    private String dataType;//1 iccard
+    private int verifyMode;//1 iccard
     private String payload;
 
     public String getDeviceId() {
@@ -13,12 +13,12 @@ public class RopIdentityVerify {
         this.deviceId = deviceId;
     }
 
-    public String getDataType() {
-        return dataType;
+    public int getVerifyMode() {
+        return verifyMode;
     }
 
-    public void setDataType(String dataType) {
-        this.dataType = dataType;
+    public void setVerifyMode(int verifyMode) {
+        this.verifyMode = verifyMode;
     }
 
     public String getPayload() {
