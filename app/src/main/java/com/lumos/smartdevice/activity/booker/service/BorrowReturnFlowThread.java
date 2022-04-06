@@ -48,12 +48,14 @@ public class BorrowReturnFlowThread extends Thread {
     public static final String ACTION_SEND_OPEN_COMMAND = "send_open_command";//发送打开命令
     public static final String ACTION_SEND_OPEN_COMMAND_SUCCESS = "send_open_command_success";//发送打开命令成功
     public static final String ACTION_SEND_OPEN_COMMAND_FAILURE = "send_open_command_failure";//发送打开命令失败 返回 1
+    public static final String ACTION_OPEN_RFREADER_FAILURE="open_rfreader_failure";
     public static final String ACTION_WAIT_OPEN="wait_open";//等待打开
     public static final String ACTION_OPEN_SUCCESS= "open_success";//打开成功
     public static final String ACTION_OPEN_FAILURE = "open_failure";//打开失败  返回 1
     public static final String ACTION_WAIT_CLOSE="wait_close";//等待关闭
     public static final String ACTION_CLOSE_SUCCESS = "close_success";//关闭成功
     public static final String ACTION_CLOSE_FAILURE = "close_failure";//关闭失败 ？如何处理？重试？
+    public static final String ACTION_CLOSE_RFREADER_FAILURE="close_rfreader_failure";
     public static final String ACTION_REQUEST_CLOSE_AUTH="request_close_auth";//请求关闭验证
     public static final String ACTION_REQUEST_CLOSE_AUTH_SUCCESS="request_close_auth_success";//关闭验证通过
     public static final String ACTION_REQUEST_CLOSE_AUTH_FAILURE="request_close_auth_failure";//关闭验证不通   返回  8
@@ -93,11 +95,6 @@ public class BorrowReturnFlowThread extends Thread {
             brFlowDo.remove(slotId);
         }
     }
-
-    public static void clear(){
-        brFlowDo.clear();
-    }
-
 
     public static boolean checkRunning(BookerSlotVo slot) {
         return brFlowDo.containsKey(slot.getSlotId());
@@ -169,6 +166,7 @@ public class BorrowReturnFlowThread extends Thread {
             sendHandlerMessage(ACTION_INIT_DATA, "设备初始数据检查");
 
             HashMap<String, DriveVo> drives = device.getDrives();
+
             actionData.put("drives",drives);
             actionData.put("lockeqId",slot.getLockeqId());
             actionData.put("lockeqAnt",slot.getLockeqAnt());
@@ -176,53 +174,41 @@ public class BorrowReturnFlowThread extends Thread {
             actionData.put("rfeqAnt",slot.getRfeqAnt());
 
             if (drives == null || drives.size() == 0) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "设备未配置驱动[01]");
-                setRunning(false);
-                return;
-            }
-
-            if (StringUtil.isEmpty(slot.getLockeqId())||StringUtil.isEmpty(slot.getLockeqAnt())) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "格子未配置驱动[02]");
-                setRunning(false);
-                return;
-            }
-
-            if (!drives.containsKey(slot.getLockeqId())) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "格子驱动找不到[03]");
-                setRunning(false);
-                return;
-            }
-
-            if (StringUtil.isEmpty(slot.getRfeqId())||StringUtil.isEmpty(slot.getRfeqAnt())) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "射频未配置驱动[04]");
-                setRunning(false);
-                return;
-            }
-
-            if (!drives.containsKey(slot.getRfeqId())) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData, "射频驱动找不到[05]");
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "设备未配置驱动[01]");
                 setRunning(false);
                 return;
             }
 
             DriveVo lockeqDrive = drives.get(slot.getLockeqId());
 
+            if (lockeqDrive==null) {
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "格子驱动找不到[02]");
+                setRunning(false);
+                return;
+            }
+
             DriveVo rfeqDrive = drives.get(slot.getRfeqAnt());
 
-            IRfeqCtrl rfeqCtrl = RfeqCtrlInterface.getInstance(rfeqDrive.getComId(), rfeqDrive.getComBaud(), rfeqDrive.getComPrl());
-
-            ILockeqCtrl  lockeqCtrl = LockeqCtrlInterface.getInstance(lockeqDrive.getComId(), lockeqDrive.getComBaud(), lockeqDrive.getComPrl());
+            if (rfeqDrive==null) {
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData, "射频驱动找不到[03]");
+                setRunning(false);
+                return;
+            }
 
             sendHandlerMessage(ACTION_INIT_DATA_SUCCESS, "初始化数据成功");
 
+            IRfeqCtrl rfeqCtrl = RfeqCtrlInterface.getInstance(rfeqDrive.getComId(), rfeqDrive.getComBaud(), rfeqDrive.getComPrl());
+
+            ILockeqCtrl lockeqCtrl = LockeqCtrlInterface.getInstance(lockeqDrive.getComId(), lockeqDrive.getComBaud(), lockeqDrive.getComPrl());
+
             if (!lockeqCtrl.isConnect()) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData,"格子驱动未连接[10]");
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData, "格子驱动未连接[04]");
                 setRunning(false);
                 return;
             }
 
             if (!rfeqCtrl.isConnect()) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频驱动未连接[11]");
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "射频驱动未连接[05]");
                 setRunning(false);
                 return;
             }
@@ -306,7 +292,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             TinySyncExecutor.getInstance().enqueue(taskRfRead);
 
-            long nDoMaxTime = 60 * 1000;
+            long nDoMaxTime = 5 * 1000;
             long nDoStartTime = System.currentTimeMillis();
             long nDoLastTime = System.currentTimeMillis() - nDoStartTime;
 
@@ -322,18 +308,13 @@ public class BorrowReturnFlowThread extends Thread {
 
             }
 
-            if(!taskRfRead.isComplete()){
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频读取未完成[11]");
-                return;
-            }
-
-            if(!taskRfRead.isSuccess()){
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频读取不成功[12]");
+            if(!taskRfRead.isComplete()||!taskRfRead.isSuccess()) {
+                sendHandlerMessage(ACTION_OPEN_RFREADER_FAILURE, actionData, "打开设备前，射频读取未完成[06]");
+                setRunning(false);
                 return;
             }
 
             Map<String, TagInfo> tag_RfIds=taskRfRead.getTagInfos();
-
 
             List<String> open_RfIds=getRfIds(tag_RfIds);
 
@@ -373,7 +354,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             boolean isOpen = false;
 
-            nDoMaxTime = 60 * 1000;
+            nDoMaxTime = 10 * 1000;
             nDoStartTime = System.currentTimeMillis();
             nDoLastTime = System.currentTimeMillis() - nDoStartTime;
 
@@ -406,7 +387,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             boolean isClose = false;
 
-            nDoMaxTime = 60 * 1000;
+            nDoMaxTime = 60*60 * 1000;
             nDoStartTime = System.currentTimeMillis();
             nDoLastTime = System.currentTimeMillis() - nDoStartTime;
 
@@ -434,8 +415,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             TinySyncExecutor.getInstance().enqueue(taskRfRead);
 
-
-            nDoMaxTime = 60 * 1000;
+            nDoMaxTime = 10 * 1000;
             nDoStartTime = System.currentTimeMillis();
             nDoLastTime = System.currentTimeMillis() - nDoStartTime;
 
@@ -451,14 +431,9 @@ public class BorrowReturnFlowThread extends Thread {
 
             }
 
-            if(!taskRfRead.isComplete()){
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频读取未完成[11]");
+            if(!taskRfRead.isComplete()||!taskRfRead.isSuccess()) {
+                sendHandlerMessage(ACTION_CLOSE_RFREADER_FAILURE, "关闭设备后，射频读取不成功[12]");
             }
-
-            if(!taskRfRead.isSuccess()) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频读取不成功[12]");
-            }
-
 
             tag_RfIds=taskRfRead.getTagInfos();
 
@@ -492,7 +467,7 @@ public class BorrowReturnFlowThread extends Thread {
             setRunning(false);
 
         } catch (Exception ex) {
-            sendHandlerMessage(ACTION_EXCEPTION, "发生异常");
+            sendHandlerMessage(ACTION_EXCEPTION, actionData, "发生异常");
             setRunning(false);
         }
     }

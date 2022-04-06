@@ -25,6 +25,7 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
+import com.lumos.smartdevice.api.vo.DriveVo;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.api.vo.BookerCustomDataVo;
@@ -48,6 +49,7 @@ import com.lumos.smartdevice.ui.shapeloading.LoadingView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -83,27 +85,6 @@ public class InitDataActivity extends BaseActivity {
     public final int WHAT_SET_CONFIG_SUCCESS = 4;
     public final int WHAT_SET_CONFIG_FALURE = 5;
 
-    private void  text() {
-        int a = 1;
-        try {
-
-            if(a==1)
-            {
-                a=3;
-                return;
-            }
-
-            a = 3 / 0;
-        } catch (Exception ex) {
-
-        } finally {
-            a = 0;
-        }
-
-
-        int c=a;
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +92,12 @@ public class InitDataActivity extends BaseActivity {
 
         setContentView(R.layout.activity_init_data);
 
-        text();
+
+        HashMap<String, DriveVo> c=new HashMap<>();
+        c.put("a",new DriveVo());
+        c.put("b",null);
+
+        DriveVo d=  c.get("");
 
         Intent timerTaskService = new Intent(this, TimerTaskService.class);
         startService(timerTaskService);
