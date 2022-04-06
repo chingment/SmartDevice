@@ -56,6 +56,9 @@ public class TinySyncExecutor {
 
     public void enqueue(final BaseSyncTask task) {
         task.setId(task.getId());
+        task.setResult(false);
+        task.setTagInfos(null);
+        task.setComplete(false);
         System.out.println("[OneByOne]The task id = :" + task.getId());
         pendingQueue.offer(task);//the ArrayDeque should not be blocked when operate offer
         System.out.println("[OneByOne]The pendingQueue size = :" + pendingQueue.size());

@@ -25,6 +25,7 @@ import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
+import com.lumos.smartdevice.api.vo.BookerBookVo;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
 import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.api.vo.IdentityInfoByBorrowerVo;
@@ -173,7 +174,12 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                         break;
                     case BorrowReturnFlowThread.ACTION_FLOW_END:
                         dialog_BookerFlowHandling.setTipsText("处理结束");
-                        RetBookerBorrowReturn retBookerBorrowReturn = (RetBookerBorrowReturn) actionData.get("ret_booker_borrow_return");
+                        RetBookerBorrowReturn retBookerBorrowReturn = new RetBookerBorrowReturn();
+                        retBookerBorrowReturn.setFlowId(actionData.get("flowId").toString());
+                        retBookerBorrowReturn.setBorrowBooks((List<BookerBookVo>) actionData.get("borrowBooks"));
+                        retBookerBorrowReturn.setReturnBooks((List<BookerBookVo>) actionData.get("returnBooks"));
+                      //  (RetBookerBorrowReturn) actionData.get("result");
+
                         Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("ret_booker_borrow_return", retBookerBorrowReturn);
@@ -184,6 +190,8 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                     case BorrowReturnFlowThread.ACTION_EXCEPTION:
                         dialog_BookerFlowHandling.setTipsText("设备处理异常");
                         break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + actionCode);
                 }
 
                 if(actionCode.contains("failure")||actionCode.contains("exception")){

@@ -83,12 +83,35 @@ public class InitDataActivity extends BaseActivity {
     public final int WHAT_SET_CONFIG_SUCCESS = 4;
     public final int WHAT_SET_CONFIG_FALURE = 5;
 
+    private void  text() {
+        int a = 1;
+        try {
+
+            if(a==1)
+            {
+                a=3;
+                return;
+            }
+
+            a = 3 / 0;
+        } catch (Exception ex) {
+
+        } finally {
+            a = 0;
+        }
+
+
+        int c=a;
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_init_data);
 
+        text();
 
         Intent timerTaskService = new Intent(this, TimerTaskService.class);
         startService(timerTaskService);

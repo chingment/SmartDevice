@@ -23,6 +23,8 @@ import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.SnowFlake;
 import com.lumos.smartdevice.utils.StringUtil;
+import com.lumos.smartdevice.utils.tinytaskonebyone.BaseSyncTask;
+import com.lumos.smartdevice.utils.tinytaskonebyone.TinySyncExecutor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -158,7 +160,10 @@ public class BorrowReturnFlowThread extends Thread {
 
         flowId = ret_CreateFlow.getFlowId();
 
+        HashMap<String, Object> actionData = new HashMap<>();
+
         try {
+
 
             sendHandlerMessage(ACTION_FLOW_START, "借还开始");
 
@@ -173,29 +178,36 @@ public class BorrowReturnFlowThread extends Thread {
             }
 
             if (StringUtil.isEmpty(slot.getLockeqId())||StringUtil.isEmpty(slot.getLockeqAnt())) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "格子未配置锁驱动[04]");
+                actionData.put("lockeqId",slot.getLockeqId());
+                actionData.put("lockeqAnt",slot.getLockeqAnt());
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "格子未配置驱动[02]");
                 setRunning(false);
                 return;
             }
 
             if (!drives.containsKey(slot.getLockeqId())) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "格子驱动找不到[05]");
+                actionData.put("drives",drives);
+                actionData.put("lockeqId",slot.getLockeqId());
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "格子驱动找不到[03]");
                 setRunning(false);
                 return;
             }
 
             if (StringUtil.isEmpty(slot.getRfeqId())||StringUtil.isEmpty(slot.getRfeqAnt())) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频未配置驱动[06]");
+                actionData.put("rfeqId",slot.getRfeqId());
+                actionData.put("rfeqAnt",slot.getRfeqAnt());
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "射频未配置驱动[04]");
                 setRunning(false);
                 return;
             }
 
             if (!drives.containsKey(slot.getRfeqId())) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频驱动找不到[07]");
+                actionData.put("drives", drives);
+                actionData.put("rfeqId", slot.getRfeqId());
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData, "射频驱动找不到[05]");
                 setRunning(false);
                 return;
             }
-
 
             DriveVo lockeqDrive = drives.get(slot.getLockeqId());
 
@@ -207,88 +219,129 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_INIT_DATA_SUCCESS, "初始化数据成功");
 
-            int tryDo=0;
+            int tryDo=0;//尝试的次数
 
             if (!lockeqCtrl.isConnect()) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "格子驱动未连接[10]");
+                actionData.put("drives", drives);
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData,"格子驱动未连接[10]");
                 setRunning(false);
                 return;
             }
 
             if (!rfeqCtrl.isConnect()) {
+                actionData.put("drives", drives);
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频驱动未连接[11]");
                 setRunning(false);
                 return;
             }
 
-
             Thread.sleep(200);
 
+            //Rf读取任务
+            BaseSyncTask taskRfRead = new BaseSyncTask() {
+                @Override
+                public void doTask() {
 
-            //先关闭读取的
-            boolean isSendCloseRead=false;
-            while (tryDo<3) {
-                if (rfeqCtrl.sendCloseRead()) {
-                    isSendCloseRead = true;
+                    try {
+                        int tryDo = 0;
+                        boolean isSendCloseRead = false;
+                        while (tryDo < 3) {
+                            if (rfeqCtrl.sendCloseRead()) {
+                                isSendCloseRead = true;
+                                break;
+                            }
+                            Thread.sleep(200);
+                            tryDo++;
+                        }
+
+                        if (!isSendCloseRead) {
+                            setResult(false);
+                            return;
+                        }
+
+                        Thread.sleep(200);
+
+                        //打开读取
+                        boolean isSendOpenRead=false;
+                        tryDo=0;
+                        while (tryDo<3){
+                            if (rfeqCtrl.sendOpenRead(slot.getRfeqAnt())) {
+                                isSendOpenRead=true;
+                                break;
+                            }
+                            Thread.sleep(200);
+                            tryDo++;
+                        }
+
+                        if (!isSendOpenRead) {
+                            setResult(false);
+                            return;
+                        }
+
+
+                        Thread.sleep(500);
+
+                        tryDo=0;
+                        isSendCloseRead=false;
+                        while (tryDo<3) {
+
+                            if(rfeqCtrl.sendCloseRead()) {
+                                isSendCloseRead = true;
+                                break;
+                            }
+
+                            Thread.sleep(200);
+
+                            tryDo++;
+                        }
+
+                        if(!isSendCloseRead) {
+                            setResult(false);
+                            return;
+                        }
+
+                        setTagInfos(rfeqCtrl.getRfIds(slot.getRfeqAnt()));
+
+                        setResult(true);
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        setResult(false);
+                    }
+                }
+            };
+
+
+            TinySyncExecutor.getInstance().enqueue(taskRfRead);
+
+            long nTaskRfReadMaxTime = 60 * 1000;
+            long nTaskRfReadStartTime = System.currentTimeMillis();
+            long nTaskRfReadLastTime = System.currentTimeMillis() - nTaskRfReadStartTime;
+
+            while (nTaskRfReadLastTime < nTaskRfReadMaxTime) {
+
+                if (taskRfRead.isComplete()) {
                     break;
                 }
-                Thread.sleep(200);
-                tryDo++;
+
+                Thread.sleep(300);
+
+                nTaskRfReadLastTime = System.currentTimeMillis() - nTaskRfReadStartTime;
+
             }
 
-
-            if (!isSendCloseRead) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频设备命令发送关闭读取失败[12]");
-                setRunning(false);
+            if(!taskRfRead.isComplete()){
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频读取未完成[11]");
                 return;
             }
 
-
-            Thread.sleep(200);
-            //打开读取
-            boolean isSendOpenRead=false;
-            tryDo=0;
-            while (tryDo<3){
-                if (rfeqCtrl.sendOpenRead(slot.getRfeqAnt())) {
-                    isSendOpenRead=true;
-                    break;
-                }
-                Thread.sleep(200);
-                tryDo++;
-            }
-
-            if (!isSendOpenRead) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频设备命令发送失败[12]");
-                setRunning(false);
+            if(!taskRfRead.isSuccess()){
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频读取不成功[12]");
                 return;
             }
 
+            Map<String, TagInfo> tag_RfIds=taskRfRead.getTagInfos();
 
-            //todo 读多久;
-
-            Thread.sleep(500);
-
-            tryDo=0;
-            isSendCloseRead=false;
-            while (tryDo<3) {
-
-                if(rfeqCtrl.sendCloseRead()) {
-                    isSendCloseRead = true;
-                    break;
-                }
-
-                Thread.sleep(200);
-
-                tryDo++;
-            }
-
-            if(!isSendCloseRead){
-                LogUtil.i(TAG,"射频设备发送关闭读取命令失败");
-            }
-
-            Map<String, TagInfo> tag_RfIds=rfeqCtrl.getRfIds(slot.getRfeqAnt());
-
-            HashMap<String, Object> ad_Request_Open_Auth = new HashMap<>();
 
             List<String> open_RfIds=getRfIds(tag_RfIds);
 
@@ -301,10 +354,9 @@ public class BorrowReturnFlowThread extends Thread {
 //            open_RfIds.add("123456789012345678901401");
 
 
-            ad_Request_Open_Auth.put("rfIds", open_RfIds);
+            actionData.put("openRfIds", open_RfIds);
 
-
-            ResultBean<RetBookerBorrowReturn> result_Request_Open_Auth = borrowReturn(ACTION_REQUEST_OPEN_AUTH, ad_Request_Open_Auth, "请求是否允许打开设备");
+            ResultBean<RetBookerBorrowReturn> result_Request_Open_Auth = borrowReturn(ACTION_REQUEST_OPEN_AUTH, actionData, "请求是否允许打开设备");
 
             if (result_Request_Open_Auth.getCode() != ResultCode.SUCCESS) {
                 sendHandlerMessage(ACTION_REQUEST_OPEN_AUTH_FAILURE, "请求不允许打开设备[14]");
@@ -355,6 +407,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_OPEN_SUCCESS, "打开成功");
 
+
             sendHandlerMessage(ACTION_WAIT_CLOSE, "等待关闭");
 
             boolean isClose = false;
@@ -375,7 +428,6 @@ public class BorrowReturnFlowThread extends Thread {
                 nCheckMaxStatusTime = System.currentTimeMillis() - nCheckStartTime;
             }
 
-
             //todo 关闭失败情况处理
             if (!isClose) {
                 sendHandlerMessage(ACTION_CLOSE_FAILURE, "关闭失败");
@@ -384,17 +436,33 @@ public class BorrowReturnFlowThread extends Thread {
             //todo 关闭成功因网络问题上传的数量如何应对
             sendHandlerMessage(ACTION_CLOSE_SUCCESS, "关闭成功");
 
+            TinySyncExecutor.getInstance().enqueue(taskRfRead);
 
-            rfeqCtrl.sendOpenRead(slot.getRfeqAnt());
+            nTaskRfReadStartTime = System.currentTimeMillis();
+            nTaskRfReadLastTime = System.currentTimeMillis() - nTaskRfReadStartTime;
 
-            //todo 读多久
-            Thread.sleep(500);
+            while (nTaskRfReadLastTime < nTaskRfReadMaxTime) {
+
+                if (taskRfRead.isComplete()) {
+                    break;
+                }
+
+                Thread.sleep(300);
+
+                nTaskRfReadLastTime = System.currentTimeMillis() - nTaskRfReadStartTime;
+
+            }
+
+            if(!taskRfRead.isComplete()){
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频读取未完成[11]");
+            }
+
+            if(!taskRfRead.isSuccess()) {
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频读取不成功[12]");
+            }
 
 
-            rfeqCtrl.sendCloseRead();
-
-
-            tag_RfIds=rfeqCtrl.getRfIds(slot.getRfeqAnt());
+            tag_RfIds=taskRfRead.getTagInfos();
 
             List<String> close_RfIds=getRfIds(tag_RfIds);
 
@@ -402,11 +470,10 @@ public class BorrowReturnFlowThread extends Thread {
 //            close_RfIds.add("123456789012345678901402");
 //            close_RfIds.add("123456789012345678901401");
 
-            HashMap<String, Object> ad_Request_Close_Auth = new HashMap<>();
 
-            ad_Request_Close_Auth.put("rfIds", close_RfIds);
+            actionData.put("closeRfIds", close_RfIds);
 
-            ResultBean<RetBookerBorrowReturn> result_Request_Close_Auth = borrowReturn(ACTION_REQUEST_CLOSE_AUTH, ad_Request_Close_Auth, "请求是否允许关闭设备");
+            ResultBean<RetBookerBorrowReturn> result_Request_Close_Auth = borrowReturn(ACTION_REQUEST_CLOSE_AUTH, actionData, "请求是否允许关闭设备");
 
             if (result_Request_Close_Auth.getCode() != ResultCode.SUCCESS) {
                 sendHandlerMessage(ACTION_REQUEST_CLOSE_AUTH_FAILURE, "关闭验证不通过[17]");
@@ -416,13 +483,13 @@ public class BorrowReturnFlowThread extends Thread {
 
             RetBookerBorrowReturn ret_Request_Close_Auth = result_Request_Close_Auth.getData();
 
-            HashMap<String, Object> ad_Request_Close_Auth_Result = new HashMap<>();
+            actionData.put("flowId", ret_Request_Close_Auth.getFlowId());
+            actionData.put("borrowBooks",ret_Request_Close_Auth.getBorrowBooks());
+            actionData.put("returnBooks",ret_Request_Close_Auth.getReturnBooks());
 
-            ad_Request_Close_Auth_Result.put("ret_booker_borrow_return", ret_Request_Close_Auth);
+            sendHandlerMessage(ACTION_REQUEST_CLOSE_AUTH_SUCCESS, actionData, "请求关闭验证通过");
 
-            sendHandlerMessage(ACTION_REQUEST_CLOSE_AUTH_SUCCESS, ad_Request_Close_Auth_Result, "请求关闭验证通过");
-
-            sendHandlerMessage(ACTION_FLOW_END, ad_Request_Close_Auth_Result, "借阅流程结束");
+            sendHandlerMessage(ACTION_FLOW_END, actionData, "借阅流程结束");
 
             setRunning(false);
 

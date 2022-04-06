@@ -63,6 +63,8 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
 //    private MediaMetadataRetriever mediaMetadataRetriever = new MediaMetadataRetriever();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
