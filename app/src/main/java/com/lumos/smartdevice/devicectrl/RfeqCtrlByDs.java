@@ -96,7 +96,6 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
         return i_ant;
     }
 
-
     public boolean sendOpenRead(String ant) {
 
 
@@ -121,7 +120,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
 
     }
 
-    public boolean sendCloseRead(String ant) {
+    public boolean sendCloseRead() {
         MsgBaseStop msgStop = new MsgBaseStop();
 
 

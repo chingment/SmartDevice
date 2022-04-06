@@ -228,7 +228,7 @@ public class BorrowReturnFlowThread extends Thread {
             //先关闭读取的
             boolean isSendCloseRead=false;
             while (tryDo<3) {
-                if (rfeqCtrl.sendCloseRead(slot.getRfeqAnt())) {
+                if (rfeqCtrl.sendCloseRead()) {
                     isSendCloseRead = true;
                     break;
                 }
@@ -272,7 +272,7 @@ public class BorrowReturnFlowThread extends Thread {
             isSendCloseRead=false;
             while (tryDo<3) {
 
-                if(rfeqCtrl.sendCloseRead(slot.getRfeqAnt())) {
+                if(rfeqCtrl.sendCloseRead()) {
                     isSendCloseRead = true;
                     break;
                 }
@@ -391,7 +391,7 @@ public class BorrowReturnFlowThread extends Thread {
             Thread.sleep(500);
 
 
-            rfeqCtrl.sendCloseRead(slot.getRfeqAnt());
+            rfeqCtrl.sendCloseRead();
 
 
             tag_RfIds=rfeqCtrl.getRfIds(slot.getRfeqAnt());

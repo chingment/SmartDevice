@@ -32,8 +32,11 @@ import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.Config;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
+import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
+import com.lumos.smartdevice.utils.tinytaskonebyone.BaseSyncTask;
+import com.lumos.smartdevice.utils.tinytaskonebyone.TinySyncExecutor;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -67,27 +70,81 @@ public class BookerMainActivity  extends BookerBaseActivity {
         bookerCustomData = AppCacheManager.getBookerCustomData();
 
 
-        Map<String, String> checkBoxMap = new LinkedHashMap<String, String>();
-        checkBoxMap.put("1","1");
-        checkBoxMap.put("2","2");
-        checkBoxMap.put("3","3");
-        checkBoxMap.put("4","4");
-        checkBoxMap.put("5","5");
-        checkBoxMap.put("6","6");
-        checkBoxMap.put("7","7");
-        checkBoxMap.put("8","8");
 
-            StringBuffer buffer = new StringBuffer();
-            for (String box : checkBoxMap.values()) {
-                if(box.equals("1")||box.equals("2")){
-                    buffer.append(1);
-                } else {
-                    buffer.append(0);
+
+
+            final BaseSyncTask task1 = new BaseSyncTask() {
+                @Override
+                public void doTask() {
+
+
+                    try {
+
+                        Thread.sleep(60*1000);
+
+                    }
+                    catch (Exception ex){
+
+                    }
+
+                    setComplete(true);
+
+                    TinySyncExecutor.getInstance().finish();
+                }
+            };
+
+
+
+            TinySyncExecutor.getInstance().enqueue(task1);
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                while (true) {
+                    LogUtil.d(TAG, "有任务正在执行"+ task1.isComplete());
+
+
+//                    if (TinySyncExecutor.getInstance().count() > 0) {
+//                        LogUtil.d(TAG, "有任务正在执行");
+//                    }
+//
+                    try {
+
+                        Thread.sleep(1000);
+
+                    } catch (Exception ex) {
+
+                    }
                 }
 
-            }
 
-            Long c= Long.valueOf(buffer.reverse().toString(), 2);
+            }
+        }).start();
+
+
+//        Map<String, String> checkBoxMap = new LinkedHashMap<String, String>();
+//        checkBoxMap.put("1","1");
+//        checkBoxMap.put("2","2");
+//        checkBoxMap.put("3","3");
+//        checkBoxMap.put("4","4");
+//        checkBoxMap.put("5","5");
+//        checkBoxMap.put("6","6");
+//        checkBoxMap.put("7","7");
+//        checkBoxMap.put("8","8");
+//
+//            StringBuffer buffer = new StringBuffer();
+//            for (String box : checkBoxMap.values()) {
+//                if(box.equals("1")||box.equals("2")){
+//                    buffer.append(1);
+//                } else {
+//                    buffer.append(0);
+//                }
+//
+//            }
+//
+//            Long c= Long.valueOf(buffer.reverse().toString(), 2);
 
 
 //        bookerCtrl=BookerCtrl.getInstance();
