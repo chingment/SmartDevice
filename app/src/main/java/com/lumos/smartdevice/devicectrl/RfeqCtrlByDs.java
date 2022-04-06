@@ -10,6 +10,7 @@ import com.gg.reader.api.protocol.gx.MsgBaseStop;
 import com.lumos.smartdevice.utils.LogUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,78 +67,65 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
         return isConnect;
     }
 
-    private List<Integer> getAntIds(String ant){
+    private long convertAntennaEnable(String ant) {
 
-        return new ArrayList<>();
-    }
+        long i_ant = -1;
 
-    private long convertAntennaEnable(String ant){
+        String[] s_ants = ant.split(",");
 
-        long i_ant=0;
+        StringBuilder buffer = new StringBuilder();
 
-        String[] s_ant = ant.split(",");
+        String[] m_ants = new String[]{"1", "2", "3", "4", "5", "6", "7", "8"};
+
+        if (s_ants == null || s_ants.length <= 0)
+            return i_ant;
+
+        for (String m_ant : m_ants) {
+            if (Arrays.asList(s_ants).contains(m_ant)) {
+                buffer.append(1);
+            } else {
+                buffer.append(0);
+            }
+        }
 
 
-//        StringBuffer buffer = new StringBuffer();
-//        for (String box : checkBoxMap.values()) {
-//
-//
-//            if(box.equals("1")||box.equals("2")){
-//                buffer.append(1);
-//            } else {
-//                buffer.append(0);
-//            }
-//
-//        }
-
-        //  Long c= Long.valueOf(buffer.reverse().toString(), 2);
-
+        i_ant = Long.valueOf(buffer.reverse().toString(), 2);
 
         return i_ant;
     }
 
     public boolean sendOpenRead(String ant) {
 
-
-        List<Integer> antIds=getAntIds(ant);
-
         MsgBaseInventoryEpc msg = new MsgBaseInventoryEpc();
         msg.setAntennaEnable(convertAntennaEnable(ant));
         msg.setInventoryMode(1);
 
-        Set<Map.Entry<String, TagInfo>> entrys = map_TagInfos.entrySet();
-
-        for (Map.Entry<String, TagInfo> entry : entrys) {
-            TagInfo tagInfo = entry.getValue();
-            if (antIds.contains(tagInfo.getAntId())) {
-                map_TagInfos.remove(entry.getKey());
-            }
-        }
+        map_TagInfos.clear();
 
         client.sendSynMsg(msg);
 
         return 0x00 == msg.getRtCode();
-
     }
 
     public boolean sendCloseRead() {
         MsgBaseStop msgStop = new MsgBaseStop();
-
 
         client.sendSynMsg(msgStop);
 
         return 0x00 == msgStop.getRtCode();
     }
 
-    public Map<String, TagInfo> getRfIds(String ant){
+    public Map<String, TagInfo> getRfIds(String ant) {
 
-        Map<String, TagInfo> ant_TagInfos=new LinkedHashMap<>();
+        String[] s_ants = ant.split(",");
+
+        Map<String, TagInfo> ant_TagInfos = new LinkedHashMap<>();
 
         Set<Map.Entry<String, TagInfo>> entrys = map_TagInfos.entrySet();
-        for(Map.Entry<String, TagInfo> entry:entrys){
-            TagInfo tagInfo=entry.getValue();
-            if(tagInfo.getAntId()==1l){
-                ant_TagInfos.put(entry.getKey(),tagInfo);
+        for (Map.Entry<String, TagInfo> entry : entrys) {
+            TagInfo tagInfo = entry.getValue();
+            if (Arrays.asList(s_ants).contains(String.valueOf(tagInfo.getAntId()))) {
+                ant_TagInfos.put(entry.getKey(), tagInfo);
             }
         }
 

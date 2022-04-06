@@ -74,58 +74,6 @@ public class BookerMainActivity  extends BookerBaseActivity {
 
 
 
-
-            final BaseSyncTask task1 = new BaseSyncTask() {
-                @Override
-                public void doTask() {
-
-
-                    try {
-
-                        Thread.sleep(60*1000);
-
-                    }
-                    catch (Exception ex){
-
-                    }
-
-                    setComplete(true);
-
-                    TinySyncExecutor.getInstance().finish();
-                }
-            };
-
-
-
-            TinySyncExecutor.getInstance().enqueue(task1);
-
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                while (true) {
-                    LogUtil.d(TAG, "有任务正在执行"+ task1.isComplete());
-
-
-//                    if (TinySyncExecutor.getInstance().count() > 0) {
-//                        LogUtil.d(TAG, "有任务正在执行");
-//                    }
-//
-                    try {
-
-                        Thread.sleep(1000);
-
-                    } catch (Exception ex) {
-
-                    }
-                }
-
-
-            }
-        }).start();
-
-
 //        Map<String, String> checkBoxMap = new LinkedHashMap<String, String>();
 //        checkBoxMap.put("1","1");
 //        checkBoxMap.put("2","2");
