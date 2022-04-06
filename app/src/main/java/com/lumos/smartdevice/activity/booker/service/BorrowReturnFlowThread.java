@@ -187,7 +187,7 @@ public class BorrowReturnFlowThread extends Thread {
                 return;
             }
 
-            DriveVo rfeqDrive = drives.get(slot.getRfeqAnt());
+            DriveVo rfeqDrive = drives.get(slot.getRfeqId());
 
             if (rfeqDrive==null) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData, "射频驱动找不到[03]");
@@ -195,7 +195,6 @@ public class BorrowReturnFlowThread extends Thread {
                 return;
             }
 
-            sendHandlerMessage(ACTION_INIT_DATA_SUCCESS, "初始化数据成功");
 
             IRfeqCtrl rfeqCtrl = RfeqCtrlInterface.getInstance(rfeqDrive.getComId(), rfeqDrive.getComBaud(), rfeqDrive.getComPrl());
 
@@ -212,6 +211,8 @@ public class BorrowReturnFlowThread extends Thread {
                 setRunning(false);
                 return;
             }
+
+            sendHandlerMessage(ACTION_INIT_DATA_SUCCESS, "初始化数据成功");
 
             Thread.sleep(200);
 

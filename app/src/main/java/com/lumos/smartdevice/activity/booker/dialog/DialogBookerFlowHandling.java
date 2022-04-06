@@ -123,11 +123,11 @@ public class DialogBookerFlowHandling extends Dialog {
         this.setContentView(mLayoutRes);
     }
 
-    @Override
-    public void show() {
-        tv_CancleCountDownSeconds.setText("");
-        super.show();
-    }
+//    @Override
+//    public void show() {
+//        tv_CancleCountDownSeconds.setText("");
+//        super.show();
+//    }
 
     @Override
     public void cancel(){
