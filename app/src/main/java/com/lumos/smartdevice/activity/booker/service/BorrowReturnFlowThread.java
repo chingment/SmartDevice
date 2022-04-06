@@ -164,12 +164,16 @@ public class BorrowReturnFlowThread extends Thread {
 
         try {
 
-
             sendHandlerMessage(ACTION_FLOW_START, "借还开始");
 
             sendHandlerMessage(ACTION_INIT_DATA, "设备初始数据检查");
 
             HashMap<String, DriveVo> drives = device.getDrives();
+            actionData.put("drives",drives);
+            actionData.put("lockeqId",slot.getLockeqId());
+            actionData.put("lockeqAnt",slot.getLockeqAnt());
+            actionData.put("rfeqId",slot.getRfeqId());
+            actionData.put("rfeqAnt",slot.getRfeqAnt());
 
             if (drives == null || drives.size() == 0) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "设备未配置驱动[01]");
@@ -178,32 +182,24 @@ public class BorrowReturnFlowThread extends Thread {
             }
 
             if (StringUtil.isEmpty(slot.getLockeqId())||StringUtil.isEmpty(slot.getLockeqAnt())) {
-                actionData.put("lockeqId",slot.getLockeqId());
-                actionData.put("lockeqAnt",slot.getLockeqAnt());
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "格子未配置驱动[02]");
                 setRunning(false);
                 return;
             }
 
             if (!drives.containsKey(slot.getLockeqId())) {
-                actionData.put("drives",drives);
-                actionData.put("lockeqId",slot.getLockeqId());
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "格子驱动找不到[03]");
                 setRunning(false);
                 return;
             }
 
             if (StringUtil.isEmpty(slot.getRfeqId())||StringUtil.isEmpty(slot.getRfeqAnt())) {
-                actionData.put("rfeqId",slot.getRfeqId());
-                actionData.put("rfeqAnt",slot.getRfeqAnt());
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "射频未配置驱动[04]");
                 setRunning(false);
                 return;
             }
 
             if (!drives.containsKey(slot.getRfeqId())) {
-                actionData.put("drives", drives);
-                actionData.put("rfeqId", slot.getRfeqId());
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData, "射频驱动找不到[05]");
                 setRunning(false);
                 return;
@@ -219,17 +215,13 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_INIT_DATA_SUCCESS, "初始化数据成功");
 
-            int tryDo=0;//尝试的次数
-
             if (!lockeqCtrl.isConnect()) {
-                actionData.put("drives", drives);
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData,"格子驱动未连接[10]");
                 setRunning(false);
                 return;
             }
 
             if (!rfeqCtrl.isConnect()) {
-                actionData.put("drives", drives);
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, "射频驱动未连接[11]");
                 setRunning(false);
                 return;
@@ -314,11 +306,11 @@ public class BorrowReturnFlowThread extends Thread {
 
             TinySyncExecutor.getInstance().enqueue(taskRfRead);
 
-            long nTaskRfReadMaxTime = 60 * 1000;
-            long nTaskRfReadStartTime = System.currentTimeMillis();
-            long nTaskRfReadLastTime = System.currentTimeMillis() - nTaskRfReadStartTime;
+            long nDoMaxTime = 60 * 1000;
+            long nDoStartTime = System.currentTimeMillis();
+            long nDoLastTime = System.currentTimeMillis() - nDoStartTime;
 
-            while (nTaskRfReadLastTime < nTaskRfReadMaxTime) {
+            while (nDoLastTime < nDoMaxTime) {
 
                 if (taskRfRead.isComplete()) {
                     break;
@@ -326,7 +318,7 @@ public class BorrowReturnFlowThread extends Thread {
 
                 Thread.sleep(300);
 
-                nTaskRfReadLastTime = System.currentTimeMillis() - nTaskRfReadStartTime;
+                nDoLastTime = System.currentTimeMillis() - nDoStartTime;
 
             }
 
@@ -366,6 +358,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_REQUEST_OPEN_AUTH_SUCCESS, "请求允许打开设备");
 
+            //todo 尝试发命令
             boolean isSendOpenSlot = lockeqCtrl.sendOpenSlot(slot.getLockeqAnt());
 
             if (!isSendOpenSlot) {
@@ -379,11 +372,12 @@ public class BorrowReturnFlowThread extends Thread {
             sendHandlerMessage(ACTION_WAIT_OPEN, "等待打开");
 
             boolean isOpen = false;
-            long nCheckMinute = 1;
-            long nCheckStartTime = System.currentTimeMillis();
-            long nCheckMaxStatusTime = System.currentTimeMillis() - nCheckStartTime;
 
-            while (nCheckMaxStatusTime < nCheckMinute * 60 * 1000) {
+            nDoMaxTime = 60 * 1000;
+            nDoStartTime = System.currentTimeMillis();
+            nDoLastTime = System.currentTimeMillis() - nDoStartTime;
+
+            while (nDoLastTime < nDoMaxTime) {
 
                 //LogUtil.i(TAG,"检查开门状态");
 
@@ -396,7 +390,7 @@ public class BorrowReturnFlowThread extends Thread {
                     Thread.sleep(300);
                 }
 
-                nCheckMaxStatusTime = System.currentTimeMillis() - nCheckStartTime;
+                nDoLastTime = System.currentTimeMillis() - nDoStartTime;
             }
 
             if (!isOpen) {
@@ -411,10 +405,12 @@ public class BorrowReturnFlowThread extends Thread {
             sendHandlerMessage(ACTION_WAIT_CLOSE, "等待关闭");
 
             boolean isClose = false;
-            nCheckMinute = 1;
-            nCheckStartTime = System.currentTimeMillis();
-            nCheckMaxStatusTime = System.currentTimeMillis() - nCheckStartTime;
-            while (nCheckMaxStatusTime < nCheckMinute * 10 * 1000) {
+
+            nDoMaxTime = 60 * 1000;
+            nDoStartTime = System.currentTimeMillis();
+            nDoLastTime = System.currentTimeMillis() - nDoStartTime;
+
+            while (nDoLastTime < nDoMaxTime) {
 
                 int slotStatus = lockeqCtrl.getSlotStatus(slot.getLockeqAnt());
 
@@ -425,7 +421,7 @@ public class BorrowReturnFlowThread extends Thread {
                     Thread.sleep(300);
                 }
 
-                nCheckMaxStatusTime = System.currentTimeMillis() - nCheckStartTime;
+                nDoLastTime = System.currentTimeMillis() - nDoStartTime;
             }
 
             //todo 关闭失败情况处理
@@ -438,10 +434,12 @@ public class BorrowReturnFlowThread extends Thread {
 
             TinySyncExecutor.getInstance().enqueue(taskRfRead);
 
-            nTaskRfReadStartTime = System.currentTimeMillis();
-            nTaskRfReadLastTime = System.currentTimeMillis() - nTaskRfReadStartTime;
 
-            while (nTaskRfReadLastTime < nTaskRfReadMaxTime) {
+            nDoMaxTime = 60 * 1000;
+            nDoStartTime = System.currentTimeMillis();
+            nDoLastTime = System.currentTimeMillis() - nDoStartTime;
+
+            while (nDoLastTime < nDoMaxTime) {
 
                 if (taskRfRead.isComplete()) {
                     break;
@@ -449,7 +447,7 @@ public class BorrowReturnFlowThread extends Thread {
 
                 Thread.sleep(300);
 
-                nTaskRfReadLastTime = System.currentTimeMillis() - nTaskRfReadStartTime;
+                nDoLastTime = System.currentTimeMillis() - nDoStartTime;
 
             }
 
