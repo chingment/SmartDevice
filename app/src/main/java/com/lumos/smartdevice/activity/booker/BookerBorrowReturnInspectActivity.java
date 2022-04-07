@@ -32,6 +32,7 @@ import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.api.vo.IdentityInfoByBorrowerVo;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.ui.my.MyGridView;
+import com.lumos.smartdevice.utils.HAUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
@@ -176,10 +177,9 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                             case BorrowReturnFlowThread.ACTION_FLOW_END:
                                 dialog_BookerFlowHandling.setTipsText("处理结束");
                                 RetBookerBorrowReturn retBookerBorrowReturn = new RetBookerBorrowReturn();
-                                retBookerBorrowReturn.setFlowId(actionData.get("flowId").toString());
-                                retBookerBorrowReturn.setBorrowBooks((List<BookerBookVo>) actionData.get("borrowBooks"));
-                                retBookerBorrowReturn.setReturnBooks((List<BookerBookVo>) actionData.get("returnBooks"));
-                                //  (RetBookerBorrowReturn) actionData.get("result");
+                                retBookerBorrowReturn.setFlowId(String.valueOf(actionData.get("flowId")));
+                                retBookerBorrowReturn.setBorrowBooks(HAUtil.objToList(actionData.get("borrowBooks"),BookerBookVo.class));
+                                retBookerBorrowReturn.setReturnBooks(HAUtil.objToList(actionData.get("returnBooks"),BookerBookVo.class));
 
                                 Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
                                 Bundle bundle = new Bundle();
@@ -191,8 +191,6 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                             case BorrowReturnFlowThread.ACTION_EXCEPTION:
                                 dialog_BookerFlowHandling.setTipsText("设备处理异常");
                                 break;
-//                            default:
-//                                throw new IllegalStateException("Unexpected value: " + actionCode);
                         }
 
                         if (actionCode.contains("failure") || actionCode.contains("exception")) {
@@ -317,15 +315,17 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
                     IdentityInfoByBorrowerVo borrower = JsonUtil.toObject(d.getInfo(),IdentityInfoByBorrowerVo.class);
 
-                    tv_FullName.setText(borrower.getFullName());
-                    tv_CardNo.setText(borrower.getCardNo());
-                    tv_BorrowedQuantity.setText(String.valueOf(borrower.getBorrowedQuantity()));
-                    tv_CanBorrowQuantity.setText(String.valueOf(borrower.getCanBorrowQuantity()));
-                    tv_WilldueQuantity.setText(String.valueOf(borrower.getWilldueQuantity()));
-                    tv_OverdueQuantity.setText(String.valueOf(borrower.getOverdueQuantity()));
-                    tv_OverdueFine.setText(String.valueOf(borrower.getOverdueFine()));
-                    tv_Status.setText(borrower.getStatus().getText());
-                    borrowedQuantity=borrower.getBorrowedQuantity();
+                    if(borrower!=null) {
+                        tv_FullName.setText(borrower.getFullName());
+                        tv_CardNo.setText(borrower.getCardNo());
+                        tv_BorrowedQuantity.setText(String.valueOf(borrower.getBorrowedQuantity()));
+                        tv_CanBorrowQuantity.setText(String.valueOf(borrower.getCanBorrowQuantity()));
+                        tv_WilldueQuantity.setText(String.valueOf(borrower.getWilldueQuantity()));
+                        tv_OverdueQuantity.setText(String.valueOf(borrower.getOverdueQuantity()));
+                        tv_OverdueFine.setText(String.valueOf(borrower.getOverdueFine()));
+                        tv_Status.setText(borrower.getStatus().getText());
+                        borrowedQuantity = borrower.getBorrowedQuantity();
+                    }
 //                    if(borrower.getWilldueQuantity()>0){
 //                        ll_WilldueQuantity.setVisibility(View.VISIBLE);
 //                    }

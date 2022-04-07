@@ -86,18 +86,37 @@ public class InitDataActivity extends BaseActivity {
     public final int WHAT_SET_CONFIG_FALURE = 5;
 
 
+
+    public List<Object> objToList(Object obj) {
+        List<Object> list = new ArrayList<>();
+        if (obj instanceof ArrayList<?>) {
+            for (Object o : (List<?>) obj) {
+                list.add(o);
+            }
+            return list;
+        }
+        return null;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_init_data);
 
+        List<DriveVo> s=new ArrayList<>();
+        s.add(new DriveVo());
 
-        HashMap<String, DriveVo> c=new HashMap<>();
-        c.put("a",new DriveVo());
+        HashMap<String, Object> c=new HashMap<>();
+        c.put("a",s);
         c.put("b",null);
 
-        DriveVo d=  c.get("");
+        Object C1=c.get("a");
+        if(C1!=null){
+            List<Object> d= objToList(C1);
+        }
+
 
         Intent timerTaskService = new Intent(this, TimerTaskService.class);
         startService(timerTaskService);
