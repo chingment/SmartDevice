@@ -27,8 +27,6 @@ import com.lumos.smartdevice.api.vo.UserVo;
 import com.lumos.smartdevice.own.AppContext;
 import com.lumos.smartdevice.own.AppVar;
 import com.lumos.smartdevice.utils.JsonUtil;
-import com.lumos.smartdevice.utils.LogUtil;
-import com.lumos.smartdevice.utils.SnowFlake;
 import com.lumos.smartdevice.utils.StringUtil;
 
 import java.text.SimpleDateFormat;
@@ -39,10 +37,10 @@ import java.util.List;
 
 
 public class DbManager {
-    private final static String TAG="DbManager";
+    private final static String TAG = "DbManager";
 
     static private DbManager dbMgr = new DbManager();
-    private DbOpenHelper dbHelper;
+    private final DbOpenHelper dbHelper;
 
     private DbManager() {
         dbHelper = DbOpenHelper.getInstance(AppContext.getInstance().getApplicationContext());
@@ -79,25 +77,26 @@ public class DbManager {
 
     private void addConfig(String field, String value) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int id = -1;
-        if (db.isOpen()) {
 
-            Cursor cursor = db.rawQuery(
-                    "select * from   " + ConfigDao.TABLE_NAME + "  where   field=? ",
-                    new String[]{field});
-            while (cursor.moveToNext()) {
-                db.close();
-                return;
-            }
+        if (!db.isOpen())
+            return;
 
-            ContentValues values = new ContentValues();
-            values.put(ConfigDao.COLUMN_NAME_FIELD, field);
-            values.put(ConfigDao.COLUMN_NAME_VALUE, value);
 
-            db.insert(ConfigDao.TABLE_NAME, null, values);
+        Cursor cursor = db.rawQuery("select * from   " + ConfigDao.TABLE_NAME + "  where   field=? ", new String[]{field});
 
+        if (cursor.getCount() > 0) {
+            cursor.close();
+            return;
         }
+
+        ContentValues values = new ContentValues();
+        values.put(ConfigDao.COLUMN_NAME_FIELD, field);
+        values.put(ConfigDao.COLUMN_NAME_VALUE, value);
+
+        db.insert(ConfigDao.TABLE_NAME, null, values);
+
     }
+
 
     public ResultBean<Object> addUser(String username, String password, String fullname, String type, String avatar) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -198,19 +197,17 @@ public class DbManager {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor cursor = db.rawQuery("select * from " + UserDao.TABLE_NAME + " where " + UserDao.COLUMN_NAME_USERNAME + " = ?", new String[]{username});
-
         boolean exist = (cursor.getCount() > 0);
-        if (exist) {
-            return true;
-        }
 
-        return false;
+        cursor.close();
+
+        return exist;
 
     }
 
     public PageDataBean<UserVo> GetUsers(int pageIndex, int pageSize, String userType, String keyWord) {
 
-        PageDataBean<UserVo> pageData = new PageDataBean<UserVo>();
+        PageDataBean<UserVo> pageData = new PageDataBean<>();
 
         pageData.setPageSize(pageSize);
 
@@ -226,7 +223,7 @@ public class DbManager {
                 sql += " or  " + UserDao.COLUMN_NAME_FULLNAME + " like '%" + keyWord + "%' ) ";
             }
 
-            String sqlQuery = sql.replace("{0}", "*") + " limit " + String.valueOf(pageIndex * pageSize) + "," + pageSize;
+            String sqlQuery = sql.replace("{0}", "*") + " limit " + (pageIndex * pageSize) + "," + pageSize;
             String sqlCount = sql.replace("{0}", "count(*)");
             Cursor cursor1 = db.rawQuery(sqlCount, null);
 
@@ -318,7 +315,7 @@ public class DbManager {
             String v = getConfigStringValue(field);
             if (StringUtil.isEmptyNotNull(field))
                 return 0;
-            return Integer.valueOf(v);
+            return Integer.parseInt(v);
         }
         catch (Exception ex)
         {
@@ -493,7 +490,7 @@ public class DbManager {
 
     }
 
-    public synchronized String saveTripMsg(String msg_id,String post_url, String content) {
+    public synchronized void saveTripMsg(String msg_id, String post_url, String content) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         if (db.isOpen()) {
@@ -504,11 +501,9 @@ public class DbManager {
             values.put(TripMsgDao.COLUMN_NAME_STATUS, 0);
             values.put(TripMsgDao.COLUMN_NAME_CREATETIME, System.currentTimeMillis());
 
-            long rows = db.insert(TripMsgDao.TABLE_NAME, null, values);
+            db.insert(TripMsgDao.TABLE_NAME, null, values);
 
-            LogUtil.d(TAG,rows+"");
         }
-        return msg_id;
     }
 
     synchronized public List<TripMsgBean> getTripMsgs() {
@@ -794,7 +789,7 @@ public class DbManager {
 
 
 
-            String sqlQuery = sql.replace("{0}", "*") + " order by use_time desc limit " + String.valueOf(pageIndex * pageSize) + "," + pageSize;
+            String sqlQuery = sql.replace("{0}", "*") + " order by use_time desc limit " + (pageIndex * pageSize) + "," + pageSize;
             String sqlCount = sql.replace("{0}", "count(*)");
             Cursor cursor1 = db.rawQuery(sqlCount, null);
 

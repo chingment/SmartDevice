@@ -26,6 +26,7 @@ import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.tinytaskonebyone.BaseSyncTask;
 import com.lumos.smartdevice.utils.tinytaskonebyone.TinySyncExecutor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,14 +49,14 @@ public class BorrowReturnFlowThread extends Thread {
     public static final String ACTION_SEND_OPEN_COMMAND = "send_open_command";//发送打开命令
     public static final String ACTION_SEND_OPEN_COMMAND_SUCCESS = "send_open_command_success";//发送打开命令成功
     public static final String ACTION_SEND_OPEN_COMMAND_FAILURE = "send_open_command_failure";//发送打开命令失败 返回 1
-    public static final String ACTION_OPEN_RFREADER_FAILURE="open_rfreader_failure";
+    public static final String ACTION_OPEN_BEFORE_RFREADER_FAILURE="open_before_rfreader_failure";
     public static final String ACTION_WAIT_OPEN="wait_open";//等待打开
     public static final String ACTION_OPEN_SUCCESS= "open_success";//打开成功
     public static final String ACTION_OPEN_FAILURE = "open_failure";//打开失败  返回 1
     public static final String ACTION_WAIT_CLOSE="wait_close";//等待关闭
     public static final String ACTION_CLOSE_SUCCESS = "close_success";//关闭成功
     public static final String ACTION_CLOSE_FAILURE = "close_failure";//关闭失败 ？如何处理？重试？
-    public static final String ACTION_CLOSE_RFREADER_FAILURE="close_rfreader_failure";
+    public static final String ACTION_CLOSE_AFTER_RFREADER_FAILURE="close_after_rfreader_failure";
     public static final String ACTION_REQUEST_CLOSE_AUTH="request_close_auth";//请求关闭验证
     public static final String ACTION_REQUEST_CLOSE_AUTH_SUCCESS="request_close_auth_success";//关闭验证通过
     public static final String ACTION_REQUEST_CLOSE_AUTH_FAILURE="request_close_auth_failure";//关闭验证不通   返回  8
@@ -310,7 +311,7 @@ public class BorrowReturnFlowThread extends Thread {
             }
 
             if(!taskRfRead.isComplete()||!taskRfRead.isSuccess()) {
-                sendHandlerMessage(ACTION_OPEN_RFREADER_FAILURE, actionData, "打开设备前，射频读取未完成[06]");
+                sendHandlerMessage(ACTION_OPEN_BEFORE_RFREADER_FAILURE, actionData, "打开设备前，射频读取未完成[06]");
                 setRunning(false);
                 return;
             }
@@ -330,9 +331,9 @@ public class BorrowReturnFlowThread extends Thread {
 
             actionData.put("openRfIds", open_RfIds);
 
-            ResultBean<RetBookerBorrowReturn> result_Request_Open_Auth = borrowReturn(ACTION_REQUEST_OPEN_AUTH, actionData, "请求是否允许打开设备");
+            ResultBean<RetBookerBorrowReturn> result_BorrowReturn = borrowReturn(ACTION_REQUEST_OPEN_AUTH, actionData, "请求是否允许打开设备");
 
-            if (result_Request_Open_Auth.getCode() != ResultCode.SUCCESS) {
+            if (result_BorrowReturn.getCode() != ResultCode.SUCCESS) {
                 sendHandlerMessage(ACTION_REQUEST_OPEN_AUTH_FAILURE, "请求不允许打开设备[14]");
                 setRunning(false);
                 return;
@@ -348,6 +349,11 @@ public class BorrowReturnFlowThread extends Thread {
                 setRunning(false);
                 return;
             }
+
+            //todo 发送命令成功后，后台要作超时判断和异常处理
+            //情况1 开门后，检查客户最大的关门的时间，超过该时间段
+            //情况2 开门途中，突然断电
+            //情况3 后台处理关门后的数据异常
 
             sendHandlerMessage(ACTION_SEND_OPEN_COMMAND_SUCCESS, "打开命令发送成功");
 
@@ -433,7 +439,7 @@ public class BorrowReturnFlowThread extends Thread {
             }
 
             if(!taskRfRead.isComplete()||!taskRfRead.isSuccess()) {
-                sendHandlerMessage(ACTION_CLOSE_RFREADER_FAILURE, "关闭设备后，射频读取不成功[12]");
+                sendHandlerMessage(ACTION_CLOSE_AFTER_RFREADER_FAILURE, "关闭设备后，射频读取不成功[12]");
             }
 
             tag_RfIds=taskRfRead.getTagInfos();
@@ -447,19 +453,19 @@ public class BorrowReturnFlowThread extends Thread {
 
             actionData.put("closeRfIds", close_RfIds);
 
-            ResultBean<RetBookerBorrowReturn> result_Request_Close_Auth = borrowReturn(ACTION_REQUEST_CLOSE_AUTH, actionData, "请求是否允许关闭设备");
+            result_BorrowReturn = borrowReturn(ACTION_REQUEST_CLOSE_AUTH, actionData, "请求是否允许关闭设备");
 
-            if (result_Request_Close_Auth.getCode() != ResultCode.SUCCESS) {
+            if (result_BorrowReturn.getCode() != ResultCode.SUCCESS) {
                 sendHandlerMessage(ACTION_REQUEST_CLOSE_AUTH_FAILURE, "关闭验证不通过[17]");
                 setRunning(false);
                 return;
             }
 
-            RetBookerBorrowReturn ret_Request_Close_Auth = result_Request_Close_Auth.getData();
+            RetBookerBorrowReturn ret_BorrowReturn = result_BorrowReturn.getData();
 
-            actionData.put("flowId", ret_Request_Close_Auth.getFlowId());
-            actionData.put("borrowBooks",ret_Request_Close_Auth.getBorrowBooks());
-            actionData.put("returnBooks",ret_Request_Close_Auth.getReturnBooks());
+            actionData.put("flowId", ret_BorrowReturn.getFlowId());
+            actionData.put("borrowBooks",ret_BorrowReturn.getBorrowBooks());
+            actionData.put("returnBooks",ret_BorrowReturn.getReturnBooks());
 
             sendHandlerMessage(ACTION_REQUEST_CLOSE_AUTH_SUCCESS, actionData, "请求关闭验证通过");
 

@@ -118,7 +118,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
                         switch (actionCode) {
                             case BorrowReturnFlowThread.ACTION_TIPS:
-                                //showToast(actionRemark);
+                                showToast(actionRemark);
                                 break;
                             case BorrowReturnFlowThread.ACTION_FLOW_START:
                                 setTimerPauseByActivityFinish();
