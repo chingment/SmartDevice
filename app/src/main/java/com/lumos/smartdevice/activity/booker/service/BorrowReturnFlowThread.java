@@ -26,7 +26,6 @@ import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.tinytaskonebyone.BaseSyncTask;
 import com.lumos.smartdevice.utils.tinytaskonebyone.TinySyncExecutor;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -334,26 +333,30 @@ public class BorrowReturnFlowThread extends Thread {
             ResultBean<RetBookerBorrowReturn> result_BorrowReturn = borrowReturn(ACTION_REQUEST_OPEN_AUTH, actionData, "请求是否允许打开设备");
 
             if (result_BorrowReturn.getCode() != ResultCode.SUCCESS) {
-                sendHandlerMessage(ACTION_REQUEST_OPEN_AUTH_FAILURE, "请求不允许打开设备[14]");
+                sendHandlerMessage(ACTION_REQUEST_OPEN_AUTH_FAILURE, "请求不允许打开设备[07]");
                 setRunning(false);
                 return;
             }
 
             sendHandlerMessage(ACTION_REQUEST_OPEN_AUTH_SUCCESS, "请求允许打开设备");
 
-            //todo 尝试发命令
-            boolean isSendOpenSlot = lockeqCtrl.sendOpenSlot(slot.getLockeqAnt());
+            boolean isSendOpenSlot=false;
+            int tryDo=0;
+            while (tryDo<3) {
+                isSendOpenSlot = lockeqCtrl.sendOpenSlot(slot.getLockeqAnt());
+                if (isSendOpenSlot) {
+                    break;
+                }
+                Thread.sleep(300);
+                tryDo++;
+            }
 
             if (!isSendOpenSlot) {
-                sendHandlerMessage(ACTION_SEND_OPEN_COMMAND_FAILURE, "打开命令发送失败[15]");
+                sendHandlerMessage(ACTION_SEND_OPEN_COMMAND_FAILURE, "打开命令发送失败[08]");
                 setRunning(false);
                 return;
             }
 
-            //todo 发送命令成功后，后台要作超时判断和异常处理
-            //情况1 开门后，检查客户最大的关门的时间，超过该时间段
-            //情况2 开门途中，突然断电
-            //情况3 后台处理关门后的数据异常
 
             sendHandlerMessage(ACTION_SEND_OPEN_COMMAND_SUCCESS, "打开命令发送成功");
 
@@ -366,8 +369,6 @@ public class BorrowReturnFlowThread extends Thread {
             nDoLastTime = System.currentTimeMillis() - nDoStartTime;
 
             while (nDoLastTime < nDoMaxTime) {
-
-                //LogUtil.i(TAG,"检查开门状态");
 
                 int slotStatus = lockeqCtrl.getSlotStatus(slot.getLockeqAnt());
 
@@ -387,7 +388,14 @@ public class BorrowReturnFlowThread extends Thread {
                 return;
             }
 
+
             sendHandlerMessage(ACTION_OPEN_SUCCESS, "打开成功");
+
+
+            //todo 发送命令成功后，后台要作超时判断和异常处理
+            //情况1 开门后，检查客户最大的关门的时间，超过该时间段
+            //情况2 开门途中，突然断电
+            //情况3 处理关门后的数据异常
 
 
             sendHandlerMessage(ACTION_WAIT_CLOSE, "等待关闭");
@@ -412,12 +420,11 @@ public class BorrowReturnFlowThread extends Thread {
                 nDoLastTime = System.currentTimeMillis() - nDoStartTime;
             }
 
-            //todo 关闭失败情况处理
+
             if (!isClose) {
                 sendHandlerMessage(ACTION_CLOSE_FAILURE, "关闭失败");
             }
 
-            //todo 关闭成功因网络问题上传的数量如何应对
             sendHandlerMessage(ACTION_CLOSE_SUCCESS, "关闭成功");
 
             TinySyncExecutor.getInstance().enqueue(taskRfRead);
