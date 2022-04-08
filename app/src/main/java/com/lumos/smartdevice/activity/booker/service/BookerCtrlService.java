@@ -48,14 +48,14 @@ public class BookerCtrlService extends Service {
     }
 
 
-    private void sendBroadcastMsg(BorrowReturnFlowResult result) {
+    private void sendBroadcastMsg(MessageByBorrowReturn message) {
 
         Intent intent = new Intent();
 
-        intent.setAction("action.booker.borrow.return.flow.result");
+        intent.setAction("action.booker.borrow.return.handle.message");
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable("result", result);
+        bundle.putSerializable("message", message);
         intent.putExtras(bundle);
 
         sendBroadcast(intent);
@@ -67,9 +67,9 @@ public class BookerCtrlService extends Service {
         public void borrowReturnStart(String clientUserId, int identityType, String identityId, DeviceVo device, BookerSlotVo slot) {
             bookerCtrl.borrowReturnStart(clientUserId, identityType, identityId, device, slot, new BorrowReturnFlowThread.OnHandlerListener() {
                 @Override
-                public void onResult(BorrowReturnFlowResult result) {
-                    LogUtil.d(TAG, "actionCode:" + result.getActionCode() + ",actionRemark:" + result.getActionRemark());
-                    sendBroadcastMsg(result);
+                public void handleMessage(MessageByBorrowReturn message) {
+                    LogUtil.d(TAG, "actionCode:" + message.getActionCode() + ",actionRemark:" + message.getActionRemark());
+                    sendBroadcastMsg(message);
                 }
             });
         }

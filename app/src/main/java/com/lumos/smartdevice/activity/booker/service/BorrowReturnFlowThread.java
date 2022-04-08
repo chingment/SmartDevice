@@ -499,7 +499,7 @@ public class BorrowReturnFlowThread extends Thread {
 
     }
 
-    private void sendHandlerMessage(String actionCode,HashMap<String,Object> actionData,String actionRemark) {
+    private void sendHandlerMessage(String actionCode,HashMap<String,Object> actionData, String actionRemark) {
 
         LogUtil.d(TAG,"actionCode:"+actionCode+",actionRemark:"+actionRemark);
 
@@ -534,13 +534,13 @@ public class BorrowReturnFlowThread extends Thread {
         }).start();
 
         if (onHandlerListener != null) {
-            BorrowReturnFlowResult result = new BorrowReturnFlowResult();
-            result.setDeviceId(deviceId);
-            result.setFlowId(flowId);
-            result.setActionCode(actionCode);
-            result.setActionData(actionData);
-            result.setActionRemark(actionRemark);
-            onHandlerListener.onResult(result);
+            MessageByBorrowReturn message = new MessageByBorrowReturn();
+            message.setDeviceId(deviceId);
+            message.setFlowId(flowId);
+            message.setActionCode(actionCode);
+            message.setActionData(actionData);
+            message.setActionRemark(actionRemark);
+            onHandlerListener.handleMessage(message);
         }
     }
 
@@ -549,7 +549,7 @@ public class BorrowReturnFlowThread extends Thread {
     }
 
     public interface OnHandlerListener {
-        void onResult(BorrowReturnFlowResult result);
+        void handleMessage(MessageByBorrowReturn message);
     }
 
 }

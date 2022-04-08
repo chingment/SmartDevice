@@ -11,13 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.TypeReference;
-import com.gg.reader.api.utils.ThreadPoolUtils;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.booker.dialog.DialogBookerFlowHandling;
 import com.lumos.smartdevice.activity.booker.adapter.BookerBorrowReturnInspectSlotAdapter;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlReceiver;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlService;
-import com.lumos.smartdevice.activity.booker.service.BorrowReturnFlowResult;
+import com.lumos.smartdevice.activity.booker.service.MessageByBorrowReturn;
 import com.lumos.smartdevice.activity.booker.service.BorrowReturnFlowThread;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -109,12 +108,11 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
         bookerCtrlServiceReceiver = new BookerCtrlReceiver(new BookerCtrlReceiver.OnListener() {
             @Override
-            public void onBorrowReturnFlowReceive(BorrowReturnFlowResult flowResult) {
+            public void handleMessageByBorrowReturn(MessageByBorrowReturn message) {
 
-
-                        String actionCode = flowResult.getActionCode();
-                        String actionRemark = flowResult.getActionRemark();
-                        HashMap<String, Object> actionData = flowResult.getActionData();
+                        String actionCode = message.getActionCode();
+                        String actionRemark = message.getActionRemark();
+                        HashMap<String, Object> actionData = message.getActionData();
                         LogUtil.d(TAG, "actionCode:" + actionCode + ",actionRemark:" + actionRemark);
 
                         switch (actionCode) {
