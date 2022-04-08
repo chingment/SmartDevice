@@ -157,7 +157,7 @@ public class BorrowReturnFlowThread extends Thread {
 
         flowId = ret_CreateFlow.getFlowId();
 
-        HashMap<String, Object> actionData = new HashMap<>();
+        HashMap<String,Object> actionData = new HashMap<>();
 
         try {
 
@@ -168,10 +168,7 @@ public class BorrowReturnFlowThread extends Thread {
             HashMap<String, DriveVo> drives = device.getDrives();
 
             actionData.put("drives",drives);
-            actionData.put("lockeqId",slot.getLockeqId());
-            actionData.put("lockeqAnt",slot.getLockeqAnt());
-            actionData.put("rfeqId",slot.getRfeqId());
-            actionData.put("rfeqAnt",slot.getRfeqAnt());
+            actionData.put("slot",slot);
 
             if (drives == null || drives.size() == 0) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "设备未配置驱动[01]");

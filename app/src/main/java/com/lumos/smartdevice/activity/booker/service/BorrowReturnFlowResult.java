@@ -3,11 +3,12 @@ package com.lumos.smartdevice.activity.booker.service;
 import java.io.Serializable;
 import java.util.HashMap;
 
+
 public class BorrowReturnFlowResult implements Serializable {
     private String deviceId;
     private String flowId;
     private String actionCode;
-    private HashMap<String, Object> actionData;
+    private HashMap<String,Object> actionData;
     private String actionRemark;
 
     public String getDeviceId() {
@@ -35,11 +36,11 @@ public class BorrowReturnFlowResult implements Serializable {
         this.actionCode = actionCode;
     }
 
-    public HashMap<String, Object> getActionData() {
+    public HashMap<String,Object> getActionData() {
         return actionData;
     }
 
-    public void setActionData(HashMap<String, Object> actionData) {
+    public void setActionData(HashMap<String,Object> actionData) {
         this.actionData = actionData;
     }
 
@@ -50,4 +51,5 @@ public class BorrowReturnFlowResult implements Serializable {
     public void setActionRemark(String actionRemark) {
         this.actionRemark = actionRemark;
     }
+
 }
