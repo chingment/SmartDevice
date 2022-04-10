@@ -234,7 +234,7 @@ public class InitDataActivity extends BaseActivity {
 
 
                         if(scene_mode==AppVar.SCENE_MODE_2) {
-                            BookerCustomDataVo bookerCustomData = JsonUtil.toObject(initData.getCustomData(),BookerCustomDataVo.class);
+                            BookerCustomDataVo bookerCustomData = JsonUtil.toObject(initData.getCustomData(), BookerCustomDataVo.class);
                             AppCacheManager.setBookerCustomData(bookerCustomData);
                         }
 
@@ -244,8 +244,8 @@ public class InitDataActivity extends BaseActivity {
 
                         new Thread(new Runnable() {
                             public void run() {
-                                //SystemClock.sleep(6000);
 
+                                //SystemClock.sleep(6000);
 
 
                                 setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_setting_end));

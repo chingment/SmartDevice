@@ -238,7 +238,6 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         OstCtrlInterface.getInstance().setHideStatusBar(appContext, ishidden);
     }
 
-
     public void setUsbReaderListener(UsbReaderUtil.OnListener onListener) {
         if(usbReaderUtil!=null) {
             usbReaderUtil.setListener(onListener);
