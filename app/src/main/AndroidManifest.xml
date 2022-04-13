@@ -85,6 +85,11 @@
             android:name=".service.TimerTaskService"
             android:enabled="true"
             android:exported="false" />
+        <service android:name="org.eclipse.paho.android.service.MqttService" />
+        <service
+            android:name=".service.MqttService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -119,14 +119,13 @@ public class BorrowReturnFlowThread extends Thread {
         doTask();
     }
 
-    private List<String> getRfIds(Map<String, TagInfo> map_TagInfos){
+    private List<String> getRfIds(Map<String, TagInfo> map_TagInfos) {
 
-        List<String> rfIds=new ArrayList<>();
+        List<String> rfIds = new ArrayList<>();
 
-        if(map_TagInfos!=null) {
+        if (map_TagInfos != null) {
             Set<Map.Entry<String, TagInfo>> entrys = map_TagInfos.entrySet();
             for (Map.Entry<String, TagInfo> entry : entrys) {
-
                 rfIds.add(entry.getKey());
             }
         }
@@ -157,7 +156,7 @@ public class BorrowReturnFlowThread extends Thread {
 
         flowId = ret_CreateFlow.getFlowId();
 
-        HashMap<String,Object> actionData = new HashMap<>();
+        HashMap<String, Object> actionData = new HashMap<>();
 
         try {
 
@@ -167,26 +166,26 @@ public class BorrowReturnFlowThread extends Thread {
 
             HashMap<String, DriveVo> drives = device.getDrives();
 
-            actionData.put("drives",drives);
-            actionData.put("slot",slot);
+            actionData.put("drives", drives);
+            actionData.put("slot", slot);
 
             if (drives == null || drives.size() == 0) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "设备未配置驱动[01]");
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData, "设备未配置驱动[01]");
                 setRunning(false);
                 return;
             }
 
             DriveVo lockeqDrive = drives.get(slot.getLockeqId());
 
-            if (lockeqDrive==null) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "格子驱动找不到[02]");
+            if (lockeqDrive == null) {
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData, "格子驱动找不到[02]");
                 setRunning(false);
                 return;
             }
 
             DriveVo rfeqDrive = drives.get(slot.getRfeqId());
 
-            if (rfeqDrive==null) {
+            if (rfeqDrive == null) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData, "射频驱动找不到[03]");
                 setRunning(false);
                 return;
@@ -204,7 +203,7 @@ public class BorrowReturnFlowThread extends Thread {
             }
 
             if (!rfeqCtrl.isConnect()) {
-                sendHandlerMessage(ACTION_INIT_DATA_FAILURE,actionData, "射频驱动未连接[05]");
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData, "射频驱动未连接[05]");
                 setRunning(false);
                 return;
             }
@@ -217,7 +216,6 @@ public class BorrowReturnFlowThread extends Thread {
             BaseSyncTask taskRfRead = new BaseSyncTask() {
                 @Override
                 public void doTask() {
-
                     try {
                         int tryDo = 0;
                         boolean isSendCloseRead = false;
@@ -238,11 +236,11 @@ public class BorrowReturnFlowThread extends Thread {
                         Thread.sleep(200);
 
                         //打开读取
-                        boolean isSendOpenRead=false;
-                        tryDo=0;
-                        while (tryDo<3){
+                        boolean isSendOpenRead = false;
+                        tryDo = 0;
+                        while (tryDo < 3) {
                             if (rfeqCtrl.sendOpenRead(slot.getRfeqAnt())) {
-                                isSendOpenRead=true;
+                                isSendOpenRead = true;
                                 break;
                             }
                             Thread.sleep(200);
@@ -257,11 +255,11 @@ public class BorrowReturnFlowThread extends Thread {
 
                         Thread.sleep(500);
 
-                        tryDo=0;
-                        isSendCloseRead=false;
-                        while (tryDo<3) {
+                        tryDo = 0;
+                        isSendCloseRead = false;
+                        while (tryDo < 3) {
 
-                            if(rfeqCtrl.sendCloseRead()) {
+                            if (rfeqCtrl.sendCloseRead()) {
                                 isSendCloseRead = true;
                                 break;
                             }
@@ -271,7 +269,7 @@ public class BorrowReturnFlowThread extends Thread {
                             tryDo++;
                         }
 
-                        if(!isSendCloseRead) {
+                        if (!isSendCloseRead) {
                             setResult(false);
                             return;
                         }
@@ -306,15 +304,16 @@ public class BorrowReturnFlowThread extends Thread {
 
             }
 
-            if(!taskRfRead.isComplete()||!taskRfRead.isSuccess()) {
+            if (!taskRfRead.isComplete() || !taskRfRead.isSuccess()) {
                 sendHandlerMessage(ACTION_OPEN_BEFORE_RFREADER_FAILURE, actionData, "打开设备前，射频读取未完成[06]");
                 setRunning(false);
                 return;
             }
 
-            Map<String, TagInfo> tag_RfIds=taskRfRead.getTagInfos();
 
-            List<String> open_RfIds=getRfIds(tag_RfIds);
+            Map<String, TagInfo> tag_RfIds = taskRfRead.getTagInfos();
+
+            List<String> open_RfIds = getRfIds(tag_RfIds);
 
 //            open_RfIds.add("123456789012345678901410");
 //            open_RfIds.add("123456789012345678901409");
@@ -337,9 +336,9 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_REQUEST_OPEN_AUTH_SUCCESS, "请求允许打开设备");
 
-            boolean isSendOpenSlot=false;
-            int tryDo=0;
-            while (tryDo<3) {
+            boolean isSendOpenSlot = false;
+            int tryDo = 0;
+            while (tryDo < 3) {
                 isSendOpenSlot = lockeqCtrl.sendOpenSlot(slot.getLockeqAnt());
                 if (isSendOpenSlot) {
                     break;
@@ -399,7 +398,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             boolean isClose = false;
 
-            nDoMaxTime = 60*60 * 1000;
+            nDoMaxTime = 60 * 60 * 1000;
             nDoStartTime = System.currentTimeMillis();
             nDoLastTime = System.currentTimeMillis() - nDoStartTime;
 
@@ -442,13 +441,13 @@ public class BorrowReturnFlowThread extends Thread {
 
             }
 
-            if(!taskRfRead.isComplete()||!taskRfRead.isSuccess()) {
+            if (!taskRfRead.isComplete() || !taskRfRead.isSuccess()) {
                 sendHandlerMessage(ACTION_CLOSE_AFTER_RFREADER_FAILURE, "关闭设备后，射频读取不成功[12]");
             }
 
-            tag_RfIds=taskRfRead.getTagInfos();
+            tag_RfIds = taskRfRead.getTagInfos();
 
-            List<String> close_RfIds=getRfIds(tag_RfIds);
+            List<String> close_RfIds = getRfIds(tag_RfIds);
 
 //            close_RfIds.add("123456789012345678901403");
 //            close_RfIds.add("123456789012345678901402");
@@ -468,8 +467,8 @@ public class BorrowReturnFlowThread extends Thread {
             RetBookerBorrowReturn ret_BorrowReturn = result_BorrowReturn.getData();
 
             actionData.put("flowId", ret_BorrowReturn.getFlowId());
-            actionData.put("borrowBooks",ret_BorrowReturn.getBorrowBooks());
-            actionData.put("returnBooks",ret_BorrowReturn.getReturnBooks());
+            actionData.put("borrowBooks", ret_BorrowReturn.getBorrowBooks());
+            actionData.put("returnBooks", ret_BorrowReturn.getReturnBooks());
 
             sendHandlerMessage(ACTION_REQUEST_CLOSE_AUTH_SUCCESS, actionData, "请求关闭验证通过");
 

@@ -10,7 +10,7 @@ public class DeviceVo implements Serializable {
     private int versionMode;
     private String merchId;
     private HashMap<String, DriveVo> drives;
-    private MqttBean mqtt;
+    private MqttVo mqtt;
 
     public String getDeviceId() {
         return deviceId;
@@ -60,11 +60,11 @@ public class DeviceVo implements Serializable {
         this.drives = drives;
     }
 
-    public MqttBean getMqtt() {
+    public MqttVo getMqtt() {
         return mqtt;
     }
 
-    public void setMqtt(MqttBean mqtt) {
+    public void setMqtt(MqttVo mqtt) {
         this.mqtt = mqtt;
     }
 }

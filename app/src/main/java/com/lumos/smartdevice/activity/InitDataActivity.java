@@ -35,6 +35,7 @@ import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.own.AppLogcatManager;
 import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.service.MqttService;
 import com.lumos.smartdevice.service.TimerTaskService;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.DeviceUtil;
@@ -105,18 +106,9 @@ public class InitDataActivity extends BaseActivity {
 
         setContentView(R.layout.activity_init_data);
 
-        List<DriveVo> s=new ArrayList<>();
-        s.add(new DriveVo());
 
-        HashMap<String, Object> c=new HashMap<>();
-        c.put("a",s);
-        c.put("b",null);
-
-        Object C1=c.get("a");
-        if(C1!=null){
-            List<Object> d= objToList(C1);
-        }
-
+        Intent mqttService = new Intent(this, MqttService.class);
+        stopService(mqttService);
 
         Intent timerTaskService = new Intent(this, TimerTaskService.class);
         startService(timerTaskService);
@@ -132,7 +124,7 @@ public class InitDataActivity extends BaseActivity {
             }
         });
 
-        OstCtrlInterface.getInstance().setHideStatusBar(this,false);
+        OstCtrlInterface.getInstance().setHideStatusBar(this, false);
 
         initView();
         initEvent();
@@ -249,6 +241,10 @@ public class InitDataActivity extends BaseActivity {
 
 
                                 setHandleMessage(WHAT_TIPS, getAppContext().getString(R.string.aty_initdata_tips_setting_end));
+
+
+                                Intent mqttService = new Intent(getAppContext(), MqttService.class);
+                                startService(mqttService);
 
                                 if (scene_mode==AppVar.SCENE_MODE_1) {
                                     Intent intent = new Intent(getAppContext(), LockerMainActivity.class);

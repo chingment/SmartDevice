@@ -2,10 +2,11 @@ package com.lumos.smartdevice.service;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 
+import com.lumos.smartdevice.api.vo.DeviceVo;
+import com.lumos.smartdevice.api.vo.MqttVo;
+import com.lumos.smartdevice.own.AppCacheManager;
 import com.lumos.smartdevice.utils.LogUtil;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
@@ -28,31 +29,15 @@ public class MqttService extends Service {
     private static MqttAndroidClient mqttAndroidClient;
     private static MqttConnectOptions mMqttConnectOptions;
 
-    private String clientId="";
-    private String host = "";
-    private String userName = "";
-    private String password = "";
-    private String deviceName="";
-    private String deviceClass="";
-
-    private static String topic_Subscribe="";//订阅主题
-    private static String topic_Pubish="";//发布主题
-
-    private Handler handler_msg;
+    private static String subTopic="";//订阅主题
+    private static String pubTopic="";//发布主题
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-
-        handler_msg = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                return  false;
-            }
-        });
-
         buildMqttClient();
+
     }
 
     private final IMqttActionListener mqttActionListener = new IMqttActionListener() {
@@ -60,7 +45,7 @@ public class MqttService extends Service {
         public void onSuccess(IMqttToken asyncActionToken) {
             LogUtil.i(TAG,"连接成功");
             try {
-                mqttAndroidClient.subscribe(topic_Subscribe, 1);
+                mqttAndroidClient.subscribe(subTopic, 1);
             } catch (MqttException e) {
                 e.printStackTrace();
             }
@@ -78,7 +63,7 @@ public class MqttService extends Service {
             LogUtil.d(TAG,"连接成功："+reconnect+",serverURI:"+serverURI);
             try {
                 if (mqttAndroidClient != null) {
-                    mqttAndroidClient.subscribe(topic_Subscribe, 1);
+                    mqttAndroidClient.subscribe(subTopic, 1);
                 }
             }
             catch (Exception ex){
@@ -107,18 +92,22 @@ public class MqttService extends Service {
 
         closeMqttClient();
 
-        topic_Subscribe ="/" + deviceClass + "/" + deviceName + "/user/get";
-        topic_Pubish = "/" + deviceClass + "/" + deviceName + "/user/update";
+        DeviceVo device = AppCacheManager.getDevice();
 
-        mqttAndroidClient = new MqttAndroidClient(getApplicationContext(), host, clientId);
+        MqttVo mqttVo = device.getMqtt();
+
+        subTopic = mqttVo.getSubTopic();
+        pubTopic = mqttVo.getPubTopic();
+
+        mqttAndroidClient = new MqttAndroidClient(getApplicationContext(), mqttVo.getHost(), mqttVo.getClientId());
 
         mMqttConnectOptions = new MqttConnectOptions();
         // 在重新启动和重新连接时记住状态
         //mMqttConnectOptions.setCleanSession(true);
         // 设置连接的用户名
-        mMqttConnectOptions.setUserName(userName);
+        mMqttConnectOptions.setUserName(mqttVo.getUserName());
         // 设置密码connect-onFailure-java
-        mMqttConnectOptions.setPassword(password.toCharArray());
+        mMqttConnectOptions.setPassword(mqttVo.getPassword().toCharArray());
         // 设置超时时间，单位：秒
         //mMqttConnectOptions.setConnectionTimeout(10);
         // 心跳包发送间隔，单位：秒
@@ -162,9 +151,8 @@ public class MqttService extends Service {
         }
     }
 
-    public static void publish(String payload,int qos) {
-        String topic = topic_Pubish;
-        Boolean retained = false;
+    private static void publish(String payload,int qos,boolean retained) {
+        String topic = pubTopic;
         try {
             if (mqttAndroidClient != null) {
                 if (mqttAndroidClient.isConnected()) {
@@ -193,7 +181,7 @@ public class MqttService extends Service {
 
         String str_Payload=obj_Payload.toString();
 
-        publish(str_Payload,qos);
+        publish(str_Payload,qos,false);
 
     }
 
