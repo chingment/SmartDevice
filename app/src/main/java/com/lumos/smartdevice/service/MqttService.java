@@ -1,5 +1,6 @@
 package com.lumos.smartdevice.service;
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
@@ -26,6 +27,7 @@ public class MqttService extends Service {
 
     private static final String TAG = "MqttService";
 
+    @SuppressLint("StaticFieldLeak")
     private static MqttAndroidClient mqttAndroidClient;
     private static MqttConnectOptions mMqttConnectOptions;
 

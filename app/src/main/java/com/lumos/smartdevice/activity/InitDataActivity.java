@@ -124,7 +124,7 @@ public class InitDataActivity extends BaseActivity {
             }
         });
 
-        OstCtrlInterface.getInstance().setHideStatusBar(this, false);
+        OstCtrlInterface.getInstance().setHideStatusBar(this,false);
 
         initView();
         initEvent();
