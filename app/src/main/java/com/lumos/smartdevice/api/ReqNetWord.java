@@ -26,7 +26,6 @@ import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.http.HttpClient;
 import com.lumos.smartdevice.http.HttpResponseHandler;
-import com.lumos.smartdevice.app.Config;
 import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 

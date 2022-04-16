@@ -19,7 +19,6 @@ import com.lumos.smartdevice.devicectrl.LockeqCtrlInterface;
 import com.lumos.smartdevice.devicectrl.RfeqCtrlInterface;
 import com.lumos.smartdevice.devicectrl.TagInfo;
 import com.lumos.smartdevice.app.AppLogcatManager;
-import com.lumos.smartdevice.app.Config;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.SnowFlake;

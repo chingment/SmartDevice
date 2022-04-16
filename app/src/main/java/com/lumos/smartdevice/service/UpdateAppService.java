@@ -18,7 +18,6 @@ import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetDeviceCheckAppVersion;
 import com.lumos.smartdevice.http.HttpClient;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
-import com.lumos.smartdevice.app.Config;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.FileUtil;
 import com.lumos.smartdevice.utils.JsonUtil;

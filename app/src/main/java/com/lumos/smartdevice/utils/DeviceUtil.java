@@ -6,9 +6,8 @@ import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
+import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.app.AppContext;
-import com.lumos.smartdevice.app.Config;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -88,7 +87,7 @@ public class DeviceUtil {
 
     private static String getMacFromHardware() {
 
-        if(Config.IS_BUILD_DEBUG) {
+        if(BuildConfig.DEBUG) {
             return "02:00:00:00:00:00";
         }
 

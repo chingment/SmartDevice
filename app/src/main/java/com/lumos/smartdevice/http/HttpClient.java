@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import com.alibaba.fastjson.JSON;
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.app.AppContext;
-import com.lumos.smartdevice.app.Config;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.SHA256Encrypt;
 import com.lumos.smartdevice.utils.StringUtil;
