@@ -17,15 +17,12 @@ import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.api.vo.UserVo;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
-import com.lumos.smartdevice.own.AppCacheManager;
-import com.lumos.smartdevice.own.AppContext;
-import com.lumos.smartdevice.own.AppManager;
-import com.lumos.smartdevice.utils.LogUtil;
+import com.lumos.smartdevice.app.AppCacheManager;
+import com.lumos.smartdevice.app.AppContext;
+import com.lumos.smartdevice.app.AppManager;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.ToastUtil;
 import com.lumos.smartdevice.utils.UsbReaderUtil;
-
-import java.util.Locale;
 
 /**
  * Created by chingment on 2017/8/23.

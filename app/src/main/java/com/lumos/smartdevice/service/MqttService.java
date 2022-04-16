@@ -7,7 +7,7 @@ import android.os.IBinder;
 
 import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.api.vo.MqttVo;
-import com.lumos.smartdevice.own.AppCacheManager;
+import com.lumos.smartdevice.app.AppCacheManager;
 import com.lumos.smartdevice.utils.LogUtil;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;

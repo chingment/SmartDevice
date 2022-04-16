@@ -25,7 +25,7 @@ import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopLockerSaveBoxUsage;
 import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.vo.UserVo;
-import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.app.AppVar;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
 import com.lumos.smartdevice.utils.JsonUtil;

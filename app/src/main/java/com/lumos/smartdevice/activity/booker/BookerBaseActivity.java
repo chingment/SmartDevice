@@ -1,7 +1,6 @@
 package com.lumos.smartdevice.activity.booker;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,12 +13,7 @@ import android.widget.TextView;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.activity.booker.dialog.DialogBookerLoading;
-import com.lumos.smartdevice.own.AppContext;
-import com.lumos.smartdevice.own.AppManager;
-import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.TimerByActivityFinish;
-
-import org.w3c.dom.Text;
 
 public abstract class BookerBaseActivity  extends BaseActivity {
     private static final String TAG = "BookerBaseActivity";

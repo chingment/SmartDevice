@@ -3,7 +3,6 @@ package com.lumos.smartdevice.api;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetBookerCreateFlow;
-import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerDisplayBooks;
@@ -27,7 +26,7 @@ import com.lumos.smartdevice.api.rop.RopUserGetList;
 import com.lumos.smartdevice.api.rop.RopUserSave;
 import com.lumos.smartdevice.http.HttpClient;
 import com.lumos.smartdevice.http.HttpResponseHandler;
-import com.lumos.smartdevice.own.Config;
+import com.lumos.smartdevice.app.Config;
 import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
@@ -40,7 +39,7 @@ public class ReqNetWord implements IReqVersion{
 
         reqHandler.sendBeforeSendMessage();
 
-        HttpClient.myPost(Config.URL.device_InitData, rop, new HttpResponseHandler() {
+        HttpClient.myPost(ReqUrl.device_InitData, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 reqHandler.onSuccess(response);
@@ -59,7 +58,7 @@ public class ReqNetWord implements IReqVersion{
 
         reqHandler.sendBeforeSendMessage();
 
-        HttpClient.myPost(Config.URL.own_LoginByAccount, rop, new HttpResponseHandler() {
+        HttpClient.myPost(ReqUrl.own_LoginByAccount, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 reqHandler.handleAfterSendMessage();
@@ -81,7 +80,7 @@ public class ReqNetWord implements IReqVersion{
 
         reqHandler.sendBeforeSendMessage();
 
-        HttpClient.myPost(Config.URL.own_Logout, rop, new HttpResponseHandler() {
+        HttpClient.myPost(ReqUrl.own_Logout, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 reqHandler.handleAfterSendMessage();
@@ -102,7 +101,7 @@ public class ReqNetWord implements IReqVersion{
 
         reqHandler.sendBeforeSendMessage();
 
-        HttpClient.myPost(Config.URL.own_GetInfo, rop, new HttpResponseHandler() {
+        HttpClient.myPost(ReqUrl.own_GetInfo, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 reqHandler.handleAfterSendMessage();
@@ -123,7 +122,7 @@ public class ReqNetWord implements IReqVersion{
 
         reqHandler.sendBeforeSendMessage();
 
-        HttpClient.myPost(Config.URL.own_SaveInfo, rop, new HttpResponseHandler() {
+        HttpClient.myPost(ReqUrl.own_SaveInfo, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 reqHandler.handleAfterSendMessage();
@@ -193,7 +192,7 @@ public class ReqNetWord implements IReqVersion{
 
         reqHandler.sendBeforeSendMessage();
 
-        HttpClient.myPost(Config.URL.identity_Info, rop, new HttpResponseHandler() {
+        HttpClient.myPost(ReqUrl.identity_Info, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 reqHandler.handleAfterSendMessage();
@@ -214,7 +213,7 @@ public class ReqNetWord implements IReqVersion{
 
         reqHandler.sendBeforeSendMessage();
 
-        HttpClient.myPost(Config.URL.identity_Verify, rop, new HttpResponseHandler() {
+        HttpClient.myPost(ReqUrl.identity_Verify, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 reqHandler.handleAfterSendMessage();
@@ -234,7 +233,7 @@ public class ReqNetWord implements IReqVersion{
     public ResultBean<RetBookerCreateFlow> bookerCreateFlow(RopBookerCreateFlow rop) {
 
         ResultBean<RetBookerCreateFlow> result;
-        String response = HttpClient.myPost(Config.URL.booker_CreateFlow, rop);
+        String response = HttpClient.myPost(ReqUrl.booker_CreateFlow, rop);
         if(StringUtil.isEmpty(response)){
             return  new ResultBean<>(3000,"请求失败");
         }
@@ -249,7 +248,7 @@ public class ReqNetWord implements IReqVersion{
     public ResultBean<RetBookerBorrowReturn>  bookerBorrowReturn(RopBookerBorrowReturn rop) {
 
         ResultBean<RetBookerBorrowReturn> result;
-        String response = HttpClient.myPost(Config.URL.booker_BorrowReturn, rop);
+        String response = HttpClient.myPost(ReqUrl.booker_BorrowReturn, rop);
         if(StringUtil.isEmpty(response)){
             return  new ResultBean<>(3000,"请求失败");
         }
@@ -267,7 +266,7 @@ public class ReqNetWord implements IReqVersion{
             reqHandler.sendBeforeSendMessage();
         }
 
-        HttpClient.myPost(Config.URL.booker_SawBorrowBooks, rop, new HttpResponseHandler() {
+        HttpClient.myPost(ReqUrl.booker_SawBorrowBooks, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 if(reqHandler!=null) {
@@ -294,7 +293,7 @@ public class ReqNetWord implements IReqVersion{
             reqHandler.sendBeforeSendMessage();
         }
 
-        HttpClient.myPost(Config.URL.booker_RenewBooks, rop, new HttpResponseHandler() {
+        HttpClient.myPost(ReqUrl.booker_RenewBooks, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 if(reqHandler!=null) {
@@ -322,7 +321,7 @@ public class ReqNetWord implements IReqVersion{
             reqHandler.sendBeforeSendMessage();
         }
 
-        HttpClient.myPost(Config.URL.booker_DisplayBooks, rop, new HttpResponseHandler() {
+        HttpClient.myPost(ReqUrl.booker_DisplayBooks, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 if(reqHandler!=null) {

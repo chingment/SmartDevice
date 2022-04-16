@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.sm.SmBaseActivity;
@@ -21,7 +20,7 @@ import com.lumos.smartdevice.api.rop.RetUserGetDetail;
 import com.lumos.smartdevice.api.rop.RetUserSave;
 import com.lumos.smartdevice.api.rop.RopUserGetDetail;
 import com.lumos.smartdevice.api.rop.RopUserSave;
-import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.app.AppVar;
 import com.lumos.smartdevice.ui.ViewHolder;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.JsonUtil;

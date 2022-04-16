@@ -2,6 +2,7 @@ package com.lumos.smartdevice.activity.booker.service;
 
 import com.alibaba.fastjson.JSON;
 import com.lumos.smartdevice.api.ReqInterface;
+import com.lumos.smartdevice.api.ReqUrl;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
@@ -17,8 +18,8 @@ import com.lumos.smartdevice.devicectrl.IRfeqCtrl;
 import com.lumos.smartdevice.devicectrl.LockeqCtrlInterface;
 import com.lumos.smartdevice.devicectrl.RfeqCtrlInterface;
 import com.lumos.smartdevice.devicectrl.TagInfo;
-import com.lumos.smartdevice.own.AppLogcatManager;
-import com.lumos.smartdevice.own.Config;
+import com.lumos.smartdevice.app.AppLogcatManager;
+import com.lumos.smartdevice.app.Config;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.SnowFlake;
@@ -518,7 +519,7 @@ public class BorrowReturnFlowThread extends Thread {
 
                 String msg_content=JSON.toJSONString(rop);
 
-                DbManager.getInstance().saveTripMsg(rop.getMsgId(), Config.URL.booker_BorrowReturn, msg_content);
+                DbManager.getInstance().saveTripMsg(rop.getMsgId(), ReqUrl.booker_BorrowReturn, msg_content);
                 ResultBean<RetBookerBorrowReturn>  result= ReqInterface.getInstance().bookerBorrowReturn(rop);
                 if(result.getCode()==ResultCode.SUCCESS) {
                     DbManager.getInstance().deleteTripMsg(rop.getMsgId());

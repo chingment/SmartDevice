@@ -3,12 +3,11 @@ package com.lumos.smartdevice.utils;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import com.lumos.smartdevice.own.AppContext;
-import com.lumos.smartdevice.own.Config;
+import com.lumos.smartdevice.app.AppContext;
+import com.lumos.smartdevice.app.Config;
 
 import java.io.BufferedReader;
 import java.io.File;

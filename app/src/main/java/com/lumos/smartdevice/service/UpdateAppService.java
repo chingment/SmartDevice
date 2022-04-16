@@ -8,17 +8,17 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Binder;
 import android.os.Environment;
 import android.os.IBinder;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.BuildConfig;
+import com.lumos.smartdevice.api.ReqUrl;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetDeviceCheckAppVersion;
 import com.lumos.smartdevice.http.HttpClient;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
-import com.lumos.smartdevice.own.Config;
+import com.lumos.smartdevice.app.Config;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.FileUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
@@ -82,7 +82,7 @@ public class UpdateAppService extends Service {
         params.put("appId", BuildConfig.APPLICATION_ID);
         params.put("appKey", BuildConfig.APPKEY);
 
-        String response = HttpClient.myPost(Config.URL.device_checkAppVersion, params);
+        String response = HttpClient.myPost(ReqUrl.device_checkAppVersion, params);
 
         ResultBean<RetDeviceCheckAppVersion> result = JsonUtil.toResult(response, new TypeReference<ResultBean<RetDeviceCheckAppVersion>>() {
         });

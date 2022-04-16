@@ -1,49 +1,26 @@
 package com.lumos.smartdevice.activity.booker;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.VideoView;
 
-import com.alibaba.fastjson.TypeReference;
 import com.danikula.videocache.HttpProxyCacheServer;
-import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.booker.service.BookerCtrl;
 import com.lumos.smartdevice.activity.sm.SmLoginActivity;
-import com.lumos.smartdevice.api.ResultBean;
-import com.lumos.smartdevice.api.ResultCode;
-import com.lumos.smartdevice.api.rop.RetDeviceCheckAppVersion;
 import com.lumos.smartdevice.api.vo.AdVo;
 import com.lumos.smartdevice.api.vo.AdCreativeVo;
 import com.lumos.smartdevice.api.vo.BookerCustomDataVo;
-import com.lumos.smartdevice.api.vo.BookerSlotVo;
-import com.lumos.smartdevice.http.HttpClient;
-import com.lumos.smartdevice.own.AppCacheManager;
-import com.lumos.smartdevice.own.Config;
-import com.lumos.smartdevice.utils.DeviceUtil;
-import com.lumos.smartdevice.utils.JsonUtil;
-import com.lumos.smartdevice.utils.LogUtil;
+import com.lumos.smartdevice.app.AppCacheManager;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
-import com.lumos.smartdevice.utils.tinytaskonebyone.BaseSyncTask;
-import com.lumos.smartdevice.utils.tinytaskonebyone.TinySyncExecutor;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class BookerMainActivity  extends BookerBaseActivity {
 

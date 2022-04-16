@@ -9,9 +9,11 @@ import androidx.annotation.NonNull;
 
 import com.alibaba.fastjson.JSON;
 import com.lumos.smartdevice.BuildConfig;
-import com.lumos.smartdevice.own.AppContext;
-import com.lumos.smartdevice.own.Config;
+import com.lumos.smartdevice.app.AppContext;
+import com.lumos.smartdevice.app.Config;
 import com.lumos.smartdevice.utils.LogUtil;
+import com.lumos.smartdevice.utils.SHA256Encrypt;
+import com.lumos.smartdevice.utils.StringUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -130,7 +132,7 @@ public class HttpClient {
             requestBuilder.addHeader("appKey", "" + BuildConfig.APPKEY);
             String currenttime = (System.currentTimeMillis() / 1000) + "";
             requestBuilder.addHeader("timestamp", String.valueOf((System.currentTimeMillis() / 1000)));
-            String sign = Config.getSign(BuildConfig.APPLICATION_ID, BuildConfig.APPKEY, BuildConfig.APPSECRET, data, currenttime);
+            String sign = getSign(BuildConfig.APPLICATION_ID, BuildConfig.APPKEY, BuildConfig.APPSECRET, data, currenttime);
             requestBuilder.addHeader("sign", "" + sign);
             requestBuilder.addHeader("version", BuildConfig.VERSION_NAME);
 
@@ -202,7 +204,7 @@ public class HttpClient {
             requestBuilder.addHeader("appKey", "" + BuildConfig.APPKEY);
             String currenttime = (System.currentTimeMillis() / 1000) + "";
             requestBuilder.addHeader("timestamp", String.valueOf((System.currentTimeMillis() / 1000)));
-            String sign = Config.getSign(BuildConfig.APPLICATION_ID, BuildConfig.APPKEY, BuildConfig.APPSECRET, data, currenttime);
+            String sign = getSign(BuildConfig.APPLICATION_ID, BuildConfig.APPKEY, BuildConfig.APPSECRET, data, currenttime);
             requestBuilder.addHeader("sign", "" + sign);
             requestBuilder.addHeader("version", BuildConfig.VERSION_NAME);
 
@@ -283,7 +285,7 @@ public class HttpClient {
             requestBuilder.addHeader("appKey", "" + BuildConfig.APPKEY);
             String currenttime = (System.currentTimeMillis() / 1000) + "";
             requestBuilder.addHeader("timestamp", String.valueOf((System.currentTimeMillis() / 1000)));
-            String sign = Config.getSign(BuildConfig.APPLICATION_ID, BuildConfig.APPKEY, BuildConfig.APPSECRET, data, currenttime);
+            String sign = getSign(BuildConfig.APPLICATION_ID, BuildConfig.APPKEY, BuildConfig.APPSECRET, data, currenttime);
             requestBuilder.addHeader("sign", "" + sign);
             requestBuilder.addHeader("version", BuildConfig.VERSION_NAME);
 
@@ -334,5 +336,19 @@ public class HttpClient {
                 handler.sendFailureMessage("数据提交发生异常", ex);
             }
         }
+    }
+
+    public static String getSign(String appId, String appKey, String appSecret, String data, String currenttime) {
+        // 待加密
+        String queryStr =appId+ appKey + appSecret + currenttime + data;
+//        LogUtil.e(TAG, "queryStr>>==>>" + queryStr);
+        String sortedStr = StringUtil.sortString(queryStr);
+//        LogUtil.e(TAG, "sortedStr>>==>>" + sortedStr);
+        String sha256edStr = SHA256Encrypt.bin2hex(sortedStr).toLowerCase();
+//        LogUtil.e(TAG, "sha256edStr>>==>>" + sha256edStr);
+//        String base64Str = Base64.encodeToString(sha256edStr.getBytes(), Base64.NO_WRAP);
+//        String base64Str = StringUtils.replaceEnter(Base64.encodeToString(sha256edStr.getBytes(), Base64.NO_WRAP), "");
+//        LogUtil.e(TAG, "加密后>>==>>" + base64Str);
+        return sha256edStr;
     }
 }

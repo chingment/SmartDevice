@@ -29,7 +29,7 @@ import com.lumos.smartdevice.api.vo.BookerBookVo;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
 import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.api.vo.IdentityInfoByBorrowerVo;
-import com.lumos.smartdevice.own.AppCacheManager;
+import com.lumos.smartdevice.app.AppCacheManager;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.HAUtil;
 import com.lumos.smartdevice.utils.JsonUtil;

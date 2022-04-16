@@ -3,7 +3,7 @@ package com.lumos.smartdevice.utils;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.lumos.smartdevice.own.Config;
+import com.lumos.smartdevice.app.Config;
 
 /**
  * 项目名称：LGF_project

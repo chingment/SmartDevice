@@ -9,10 +9,9 @@ import android.widget.TextView;
 
 import com.lumos.smartdevice.BuildConfig;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
-import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.app.AppVar;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 

@@ -3,7 +3,7 @@ package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.db.dao.ConfigDao;
 import com.lumos.smartdevice.db.DbManager;
-import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.app.AppVar;
 
 public class ReqInterface {
 

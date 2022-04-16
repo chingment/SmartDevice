@@ -24,8 +24,8 @@ import com.lumos.smartdevice.api.vo.LockerBoxUseRecordVo;
 import com.lumos.smartdevice.api.vo.PageDataBean;
 import com.lumos.smartdevice.api.vo.TripMsgBean;
 import com.lumos.smartdevice.api.vo.UserVo;
-import com.lumos.smartdevice.own.AppContext;
-import com.lumos.smartdevice.own.AppVar;
+import com.lumos.smartdevice.app.AppContext;
+import com.lumos.smartdevice.app.AppVar;
 import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 

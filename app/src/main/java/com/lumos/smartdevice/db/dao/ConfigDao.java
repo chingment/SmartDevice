@@ -13,15 +13,10 @@
  */
 package com.lumos.smartdevice.db.dao;
 
-import android.content.Context;
-
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.own.AppContext;
-import com.lumos.smartdevice.own.AppVar;
-
-import java.util.List;
-import java.util.Map;
+import com.lumos.smartdevice.app.AppContext;
+import com.lumos.smartdevice.app.AppVar;
 
 public class ConfigDao {
 	public static final String TABLE_NAME = "tb_config";
