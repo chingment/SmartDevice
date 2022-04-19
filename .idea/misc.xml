@@ -51,6 +51,7 @@
         <entry key="app/src/main/res/drawable/vnav_boder_bottom.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/widget_btn_1.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/widget_btn_1_f.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/widget_btn_1_n.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/widget_common_btn.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/widget_common_radio.xml" value="0.1" />
         <entry key="app/src/main/res/layout-v21/booker_footer.xml" value="0.12604166666666666" />
