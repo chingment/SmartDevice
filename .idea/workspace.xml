@@ -25,33 +25,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc9a5615-753f-4d27-ba9c-39ff462585f0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/TakeStockFlowTread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RetBookerTakeStock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopBookerTakeStock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/BookerBorrowReturnInspectActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/BookerBorrowReturnInspectActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrlReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrlReceiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrlService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BorrowReturnFlowThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BorrowReturnFlowThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/MessageByBorrowReturn.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/MessageByAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/IReqVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/IReqVersion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqNetWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqNetWord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqUrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqUrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/RfeqCtrlByDs.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/RfeqCtrlByDs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/service/TimerTaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/service/TimerTaskService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
