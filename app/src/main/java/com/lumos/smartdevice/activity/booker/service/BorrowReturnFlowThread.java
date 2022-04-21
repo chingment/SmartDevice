@@ -62,14 +62,12 @@ public class BorrowReturnFlowThread extends Thread {
     public static final String ACTION_FLOW_END = "flow_end";
     public static final String ACTION_EXCEPTION = "exception";
 
-    private final DeviceVo device;
-    private final BookerSlotVo slot;
     private String flowId;
-    private final String deviceId;
-    private final String slotId;
     private final String clientUserId;
     private final int identityType;
     private final String identityId;
+    private final DeviceVo device;
+    private final BookerSlotVo slot;
 
     private static final Map<String, Object> brFlowDo = new ConcurrentHashMap<>();
 
@@ -80,14 +78,15 @@ public class BorrowReturnFlowThread extends Thread {
         this.identityType = identityType;
         this.identityId = identityId;
         this.device = device;
-        this.deviceId = device.getDeviceId();
         this.slot = slot;
-        this.slotId = slot.getSlotId();
         this.onHandlerListener = onHandlerListener;
-        this.setName("BorrowReturnFlow-" + slotId);
+        this.setName("BorrowReturnFlow-Slot-" + slot.getSlotId());
     }
 
     private void setRunning(boolean isRunning) {
+
+        String slotId=slot.getSlotId();
+
         if(isRunning) {
             brFlowDo.put(slotId, true);
         }
@@ -103,6 +102,8 @@ public class BorrowReturnFlowThread extends Thread {
     @Override
     public void run() {
         super.run();
+
+        String slotId=slot.getSlotId();
 
         synchronized (BorrowReturnFlowThread.class) {
             if (brFlowDo.containsKey(slotId)) {
@@ -485,7 +486,7 @@ public class BorrowReturnFlowThread extends Thread {
     private ResultBean<RetBookerBorrowReturn> borrowReturn(String actionCode,HashMap<String,Object> actionData,String actionRemark) {
 
         RopBookerBorrowReturn rop = new RopBookerBorrowReturn();
-        rop.setDeviceId(deviceId);
+        rop.setDeviceId(device.getDeviceId());
         rop.setActionCode(actionCode);
         rop.setActionTime(CommonUtil.getCurrentTime());
         rop.setActionRemark(actionRemark);
@@ -507,7 +508,7 @@ public class BorrowReturnFlowThread extends Thread {
                 RopBookerBorrowReturn rop = new RopBookerBorrowReturn();
                 rop.setMsgId(String.valueOf(SnowFlake.nextId()));
                 rop.setMsgMode("normal");
-                rop.setDeviceId(deviceId);
+                rop.setDeviceId(device.getDeviceId());
                 rop.setActionCode(actionCode);
                 rop.setActionTime(CommonUtil.getCurrentTime());
                 rop.setActionRemark(actionRemark);
@@ -533,8 +534,8 @@ public class BorrowReturnFlowThread extends Thread {
         }).start();
 
         if (onHandlerListener != null) {
-            MessageByBorrowReturn message = new MessageByBorrowReturn();
-            message.setDeviceId(deviceId);
+            MessageByAction message = new MessageByAction();
+            message.setDeviceId(device.getDeviceId());
             message.setFlowId(flowId);
             message.setActionCode(actionCode);
             message.setActionData(actionData);
@@ -548,7 +549,7 @@ public class BorrowReturnFlowThread extends Thread {
     }
 
     public interface OnHandlerListener {
-        void handleMessage(MessageByBorrowReturn message);
+        void handleMessage(MessageByAction message);
     }
 
 }

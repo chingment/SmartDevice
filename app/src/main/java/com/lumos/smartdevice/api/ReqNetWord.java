@@ -3,11 +3,13 @@ package com.lumos.smartdevice.api;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetBookerCreateFlow;
+import com.lumos.smartdevice.api.rop.RetBookerTakeStock;
 import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerDisplayBooks;
 import com.lumos.smartdevice.api.rop.RopBookerRenewBooks;
 import com.lumos.smartdevice.api.rop.RopBookerSawBorrowBooks;
+import com.lumos.smartdevice.api.rop.RopBookerTakeStock;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopIdentityVerify;
@@ -253,6 +255,21 @@ public class ReqNetWord implements IReqVersion{
         }
 
         result = JsonUtil.toResult(response, new TypeReference<ResultBean<RetBookerBorrowReturn>>() {
+        });
+
+        return result;
+    }
+
+    @Override
+    public ResultBean<RetBookerTakeStock> bookerTakeStock(RopBookerTakeStock rop){
+
+        ResultBean<RetBookerTakeStock> result;
+        String response = HttpClient.myPost(ReqUrl.booker_TakeStock, rop);
+        if(StringUtil.isEmpty(response)){
+            return  new ResultBean<>(3000,"请求失败");
+        }
+
+        result = JsonUtil.toResult(response, new TypeReference<ResultBean<RetBookerTakeStock>>() {
         });
 
         return result;

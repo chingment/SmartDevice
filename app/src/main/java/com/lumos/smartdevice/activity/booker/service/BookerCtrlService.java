@@ -48,7 +48,7 @@ public class BookerCtrlService extends Service {
     }
 
 
-    private void sendBroadcastMsg(MessageByBorrowReturn message) {
+    private void sendBroadcastMsg(MessageByAction message) {
 
         Intent intent = new Intent();
 
@@ -67,7 +67,7 @@ public class BookerCtrlService extends Service {
         public void borrowReturnStart(String clientUserId, int identityType, String identityId, DeviceVo device, BookerSlotVo slot) {
             bookerCtrl.borrowReturnStart(clientUserId, identityType, identityId, device, slot, new BorrowReturnFlowThread.OnHandlerListener() {
                 @Override
-                public void handleMessage(MessageByBorrowReturn message) {
+                public void handleMessage(MessageByAction message) {
                     LogUtil.d(TAG, "actionCode:" + message.getActionCode() + ",actionRemark:" + message.getActionRemark());
                     sendBroadcastMsg(message);
                 }

@@ -41,7 +41,10 @@ public class TimerTaskService extends Service {
     @Override
     public void onCreate() {
         uploadTripMsgs();
-        keepAppLive();
+
+        if(!BuildConfig.DEBUG) {
+            keepAppLive();
+        }
     }
 
     @Override

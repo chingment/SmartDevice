@@ -16,7 +16,7 @@ import com.lumos.smartdevice.activity.booker.dialog.DialogBookerFlowHandling;
 import com.lumos.smartdevice.activity.booker.adapter.BookerBorrowReturnInspectSlotAdapter;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlReceiver;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlService;
-import com.lumos.smartdevice.activity.booker.service.MessageByBorrowReturn;
+import com.lumos.smartdevice.activity.booker.service.MessageByAction;
 import com.lumos.smartdevice.activity.booker.service.BorrowReturnFlowThread;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -108,7 +108,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
         bookerCtrlServiceReceiver = new BookerCtrlReceiver(new BookerCtrlReceiver.OnListener() {
             @Override
-            public void handleMessageByBorrowReturn(MessageByBorrowReturn message) {
+            public void handleMessageByBorrowReturn(MessageByAction message) {
 
                         String actionCode = message.getActionCode();
                         String actionRemark = message.getActionRemark();

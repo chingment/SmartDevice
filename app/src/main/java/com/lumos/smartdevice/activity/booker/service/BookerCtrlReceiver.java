@@ -23,14 +23,14 @@ public class BookerCtrlReceiver extends BroadcastReceiver {
 
         LogUtil.d(TAG,"onReceive");
 
-        MessageByBorrowReturn message =(MessageByBorrowReturn)intent.getSerializableExtra("message");
+        MessageByAction message =(MessageByAction)intent.getSerializableExtra("message");
 
         onListener.handleMessageByBorrowReturn(message);
 
     }
 
     public  interface OnListener{
-        void handleMessageByBorrowReturn(MessageByBorrowReturn flowResult);
+        void handleMessageByBorrowReturn(MessageByAction flowResult);
     }
 
     public void  register(Context context) {

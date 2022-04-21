@@ -2,6 +2,7 @@ package com.lumos.smartdevice.api;
 
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetBookerCreateFlow;
+import com.lumos.smartdevice.api.rop.RetBookerTakeStock;
 import com.lumos.smartdevice.api.rop.RetDeviceInitData;
 import com.lumos.smartdevice.api.rop.RetLockerGetBox;
 import com.lumos.smartdevice.api.rop.RetLockerGetBoxUseRecords;
@@ -18,6 +19,7 @@ import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerDisplayBooks;
 import com.lumos.smartdevice.api.rop.RopBookerRenewBooks;
 import com.lumos.smartdevice.api.rop.RopBookerSawBorrowBooks;
+import com.lumos.smartdevice.api.rop.RopBookerTakeStock;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
 import com.lumos.smartdevice.api.rop.RopIdentityVerify;
@@ -379,6 +381,12 @@ public class ReqStandAlone implements IReqVersion{
     @Override
     public void bookerDisplayBooks(RopBookerDisplayBooks rop, final ReqHandler reqHandler) {
 
+    }
+
+    @Override
+    public ResultBean<RetBookerTakeStock> bookerTakeStock(RopBookerTakeStock rop){
+
+        return null;
     }
 
 }

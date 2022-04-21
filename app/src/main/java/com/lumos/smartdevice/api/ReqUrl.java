@@ -14,6 +14,7 @@ public class ReqUrl {
         public static final String identity_Verify = BuildConfig.ENVIRONMENT + "/identity/verify";
         public static final String booker_CreateFlow = BuildConfig.ENVIRONMENT + "/booker/createFlow";
         public static final String booker_BorrowReturn = BuildConfig.ENVIRONMENT + "/booker/borrowReturn";
+        public static final String booker_TakeStock = BuildConfig.ENVIRONMENT + "/booker/takeStock";
         public static final String booker_SawBorrowBooks = BuildConfig.ENVIRONMENT + "/booker/sawBorrowBooks";
         public static final String booker_RenewBooks = BuildConfig.ENVIRONMENT + "/booker/renewBooks";
         public static final String booker_DisplayBooks = BuildConfig.ENVIRONMENT + "/booker/displayBooks";

@@ -190,5 +190,4 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
         this.onReadHandlerListener = onReadHandlerListener;
     }
 
-
 }
