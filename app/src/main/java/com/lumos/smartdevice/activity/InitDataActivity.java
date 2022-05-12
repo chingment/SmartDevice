@@ -37,6 +37,7 @@ import com.lumos.smartdevice.service.TimerTaskService;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.DeviceUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
+import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.runtimepermissions.PermissionsManager;
@@ -81,20 +82,6 @@ public class InitDataActivity extends BaseActivity {
     public final int WHAT_SET_CONFIG_SUCCESS = 4;
     public final int WHAT_SET_CONFIG_FALURE = 5;
 
-
-
-    public List<Object> objToList(Object obj) {
-        List<Object> list = new ArrayList<>();
-        if (obj instanceof ArrayList<?>) {
-            for (Object o : (List<?>) obj) {
-                list.add(o);
-            }
-            return list;
-        }
-        return null;
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +111,9 @@ public class InitDataActivity extends BaseActivity {
         initView();
         initEvent();
         initData();
+
+
+
 
     }
 

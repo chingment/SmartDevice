@@ -110,8 +110,7 @@ public class BorrowReturnFlowThread extends Thread {
                 LogUtil.d(TAG, slotId + ":借阅任务正在执行");
                 sendHandlerMessage(ACTION_TIPS, "正在执行中");
                 return;
-            }
-            else {
+            } else {
                 LogUtil.d(TAG, slotId + ":借阅任务开始执行");
                 setRunning(true);
             }
