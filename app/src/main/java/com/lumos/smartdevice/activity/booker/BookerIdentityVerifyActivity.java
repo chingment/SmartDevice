@@ -56,7 +56,7 @@ public class BookerIdentityVerifyActivity extends BookerBaseActivity {
         setUsbReaderListener(new UsbReaderUtil.OnListener() {
             @Override
             public void onSuccess(String code) {
-                LogUtil.e(TAG, "code: " + code);
+                LogUtil.d(TAG, "code: " + code);
                 verify(1,code);
             }
         });

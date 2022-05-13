@@ -33,12 +33,17 @@ public class SmBaseActivity extends BaseActivity  {
         dialog_Loading_Handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
+
                 switch (msg.what) {
                     case 1:
                         if (msg.obj != null) {
+
+                            int seconds=msg.getData().getInt("seconds",6);
+
                             dialog_Loading = new DialogSmLoading((Context) msg.obj);
                             dialog_Loading.setTipsText("正在处理中");
                             dialog_Loading.show();
+
                             new Handler().postDelayed(new Runnable() {
                                 public void run() {
                                     if (dialog_Loading != null) {
@@ -47,13 +52,21 @@ public class SmBaseActivity extends BaseActivity  {
                                         }
                                     }
                                 }
-                            }, 6000);
+                            }, seconds*1000);
+
+
                         }
                         break;
                     case 2:
                         if (dialog_Loading != null) {
                             dialog_Loading.cancel();
                             dialog_Loading = null;
+                        }
+                        break;
+                    case  3:
+                        if (dialog_Loading != null) {
+                            String tips=msg.getData().getString("tips");
+                            dialog_Loading.setTipsText(tips);
                         }
                         break;
                 }
@@ -72,7 +85,7 @@ public class SmBaseActivity extends BaseActivity  {
         timerByActivityFinish=new TimerByActivityFinish(getAppContext(), seconds, new TimerByActivityFinish.OnTimerLinster() {
             @Override
             public void onTick(long second) {
-                LogUtil.d(TAG,String.valueOf(second));
+                //LogUtil.d(TAG,String.valueOf(second));
 
                 tv_ActivityFinshTick=findViewById(R.id.tv_ActivityFinshTick);
 
@@ -163,11 +176,34 @@ public class SmBaseActivity extends BaseActivity  {
         return super.dispatchTouchEvent(ev);
     }
 
+    public void setTimerPauseByActivityFinish(){
+        if(timerByActivityFinish!=null) {
+            timerByActivityFinish.cancel();
+        }
+    }
+
 
     public void showLoading(Context context) {
+        showLoading(context,6);
+    }
+
+    public void showLoading(Context context,int delaySeconds) {
         Message m = new Message();
         m.what = 1;
         m.obj = context;
+        Bundle bundle=new Bundle();
+        bundle.putInt("seconds",delaySeconds);
+        m.setData(bundle);
+        dialog_Loading_Handler.sendMessage(m);
+    }
+
+    public void setLoadingTips(Context context,String tips) {
+        Message m = new Message();
+        m.what = 3;
+        m.obj = context;
+        Bundle bundle = new Bundle();
+        bundle.putString("tips", tips);
+        m.setData(bundle);
         dialog_Loading_Handler.sendMessage(m);
     }
 
@@ -177,4 +213,5 @@ public class SmBaseActivity extends BaseActivity  {
         m.obj = context;
         dialog_Loading_Handler.sendMessage(m);
     }
+
 }

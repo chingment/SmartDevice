@@ -20,13 +20,17 @@ import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.app.AppCacheManager;
 import com.lumos.smartdevice.app.AppManager;
 import com.lumos.smartdevice.app.AppVar;
+import com.lumos.smartdevice.receiver.UpdateAppServiceReceiver;
 import com.lumos.smartdevice.service.TimerTaskService;
+import com.lumos.smartdevice.service.UpdateAppService;
 import com.lumos.smartdevice.ui.my.MyGridView;
 import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -47,6 +51,10 @@ public class SmHelpToolActivity extends SmBaseActivity {
     private ImageView iv_UserAvatar;
     private DialogSmOwnInfo dialog_OwnInfo;
     private Button btn_Logout;
+
+    private Intent updateAppService;
+    private UpdateAppServiceReceiver updateAppServiceReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +65,26 @@ public class SmHelpToolActivity extends SmBaseActivity {
         initView();
         initEvent();
         initData();
+
+        updateAppServiceReceiver= new UpdateAppServiceReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                int status = intent.getIntExtra("status", 0);
+                String message = intent.getStringExtra("message");
+
+                if (status == 1) {
+                    showLoading(SmHelpToolActivity.this,1800);
+                } else if (status == 2) {
+                    hideLoading(SmHelpToolActivity.this);
+                    showToast(message);
+                } else if (status == 3) {
+                    setLoadingTips(SmHelpToolActivity.this,"正在更新中.....");
+                    setTimerPauseByActivityFinish();
+                }
+            }
+        };
+
+        registerReceiver(updateAppServiceReceiver, new IntentFilter("action.smartdevice.app.update"));
     }
 
     private void initView() {
@@ -64,7 +92,6 @@ public class SmHelpToolActivity extends SmBaseActivity {
         tv_UserFullName= findViewById(R.id.tv_UserFullName);
         iv_UserAvatar= findViewById(R.id.iv_UserAvatar);
         gdv_Nine = findViewById(R.id.gdv_Nine);
-
 
         dialog_OwnInfo=new DialogSmOwnInfo(SmHelpToolActivity.this);
         dialog_OwnInfo.checkUserNameIsPhoneFormat(false);
@@ -102,6 +129,7 @@ public class SmHelpToolActivity extends SmBaseActivity {
                                     gdvShowSysStatusBar();
                                     break;
                                 case "checkupdateapp":
+                                    gdvCheckUpdateApp();
                                     break;
                                 case "closeapp":
                                     gdvCloseApp();
@@ -189,6 +217,10 @@ public class SmHelpToolActivity extends SmBaseActivity {
         OstCtrlInterface.getInstance().setHideStatusBar(SmHelpToolActivity.this,false);
     }
 
+    private void gdvCheckUpdateApp(){
+        updateAppService= new Intent(SmHelpToolActivity.this, UpdateAppService.class);
+        startService(updateAppService);
+    }
 
     private void gdvCloseApp(){
         dialog_Confirm.setTipsImageVisibility(View.GONE);
@@ -290,6 +322,14 @@ public class SmHelpToolActivity extends SmBaseActivity {
         super.onDestroy();
         if (dialog_Confirm != null) {
             dialog_Confirm.cancel();
+        }
+
+        if(updateAppServiceReceiver!=null) {
+            unregisterReceiver(updateAppServiceReceiver);
+        }
+
+        if(updateAppService!=null){
+            stopService(updateAppService);
         }
     }
 }

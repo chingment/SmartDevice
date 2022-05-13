@@ -69,7 +69,7 @@ public class MqttService extends Service {
                 }
             }
             catch (Exception ex){
-                LogUtil.e(TAG,ex);
+                LogUtil.e(TAG,"connectComplete",ex);
             }
         }
 

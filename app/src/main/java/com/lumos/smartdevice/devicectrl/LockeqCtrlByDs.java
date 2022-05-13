@@ -94,7 +94,9 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
     }
 
 
-    public int  getSlotStatus(String ant) {
+    public int getSlotStatus(String ant) {
+
+        int status = -1;
 
         int[] arr_ant = getAnt(ant);
 
@@ -103,10 +105,48 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
 
         int[] var1 = sym.SN_MV_Get_ColData(arr_ant[0]);
 
-        return 0;
+        int door = arr_ant[1];
+
+        if (door >= 1 && door <= 8) {
+            int i_status = var1[4];
+            int[] s_status = byteToBit(i_status);
+            status = s_status[8 - door];
+        } else if (door >= 9 && door <= 16) {
+            int i_status = var1[3];
+            int[] s_status = byteToBit(i_status);
+            status = s_status[16 - door];
+        } else if (door >= 17 && door <= 24) {
+            int i_status = var1[2];
+            int[] s_status = byteToBit(i_status);
+            status = s_status[24 - door];
+        }
+
+        return status;
     }
 
     public boolean isConnect(){
         return isConnect;
+    }
+
+    public static  int[] byteToBit(int i) {
+
+        byte b = (byte) i;
+
+        String s_b="" + (byte) ((b >> 0) & 0x1) +
+                (byte) ((b >> 1) & 0x1) +
+                (byte) ((b >> 2) & 0x1) +
+                (byte) ((b >> 3) & 0x1) +
+                (byte) ((b >> 4) & 0x1) +
+                (byte) ((b >> 5) & 0x1) +
+                (byte) ((b >> 6) & 0x1) +
+                (byte) ((b >> 7) & 0x1);
+
+        int[] arr_s=new int[s_b.length()];
+
+        for (int x = 0; i<arr_s.length; x++){
+            arr_s[x]=Integer.valueOf(s_b.substring(x,x+1));
+        }
+
+        return arr_s;
     }
 }

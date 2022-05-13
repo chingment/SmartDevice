@@ -54,6 +54,18 @@ public class UpdateAppService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         LogUtil.d(TAG, "onStartCommand...");
 
+
+        Thread thread=new Thread(new Runnable() {
+            @Override
+            public void run()
+            {
+                checkUpdate();
+            }
+        });
+
+        thread.start();
+
+
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -73,6 +85,7 @@ public class UpdateAppService extends Service {
     }
 
     private void checkUpdate() {
+
 
         sendBroadcastMsg(1, "正在检查最新版本");
 

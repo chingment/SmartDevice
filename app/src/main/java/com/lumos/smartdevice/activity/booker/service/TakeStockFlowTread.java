@@ -51,7 +51,6 @@ public class TakeStockFlowTread extends Thread {
         this.setName("TakeStockFlowTread");
     }
 
-
     private void setRunning(boolean isRunning) {
         this.isRunning=isRunning;
     }
@@ -96,7 +95,14 @@ public class TakeStockFlowTread extends Thread {
                 return;
             }
 
-            DriveVo rfeqDrive = drives.get("ss");
+            DriveVo rfeqDrive=null;
+
+            for (String key:drives.keySet()) {
+                if(key.contains("Rfeq")){
+                    rfeqDrive=drives.get(key);
+                    break;
+                }
+            }
 
             if (rfeqDrive == null) {
                 sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData, "射频驱动找不到[02]");
@@ -256,8 +262,6 @@ public class TakeStockFlowTread extends Thread {
     }
 
     private void sendHandlerMessage(String actionCode, HashMap<String,Object> actionData, String actionRemark) {
-
-
 
     }
 

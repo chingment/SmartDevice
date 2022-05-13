@@ -4,6 +4,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.InitDataActivity;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmConfirm;
+import com.lumos.smartdevice.activity.sm.dialog.DialogSmLoading;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmOwnInfo;
 import com.lumos.smartdevice.adapter.GridNineItemAdapter;
 import com.lumos.smartdevice.api.ReqHandler;
@@ -58,6 +59,7 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
 
     private UpdateAppServiceReceiver updateAppServiceReceiver;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +73,18 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
         updateAppServiceReceiver= new UpdateAppServiceReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                showLoading(SmHomeActivity.this);
+                int status = intent.getIntExtra("status", 0);
+                String message = intent.getStringExtra("message");
+
+                if (status == 1) {
+                    showLoading(SmHomeActivity.this,1800);
+                } else if (status == 2) {
+                    hideLoading(SmHomeActivity.this);
+                    showToast(message);
+                } else if (status == 3) {
+                    setLoadingTips(SmHomeActivity.this,"正在更新中.....");
+                    setTimerPauseByActivityFinish();
+                }
             }
         };
 
@@ -124,8 +137,7 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
                                     gdvUserManager();
                                     break;
                                 case "checkupdateapp":
-                                    updateAppService= new Intent(SmHomeActivity.this, UpdateAppService.class);
-                                    startService(updateAppService);
+                                    gdvCheckUpdateApp();
                                     break;
                                 case "closeapp":
                                     gdvCloseApp();
@@ -260,6 +272,11 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
     private void gdvDeviceInfo(){
         Intent intent = new Intent(SmHomeActivity.this, SmDeviceInfoActivity.class);
         openActivity(intent);
+    }
+
+    private void gdvCheckUpdateApp(){
+        updateAppService= new Intent(SmHomeActivity.this, UpdateAppService.class);
+        startService(updateAppService);
     }
 
     private void dlgCloseApp(){

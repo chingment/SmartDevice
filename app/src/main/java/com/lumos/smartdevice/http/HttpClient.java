@@ -84,7 +84,7 @@ public class HttpClient {
         public Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
             Response response = chain.proceed(request);
-            LogUtil.d(TAG,"response.isSuccessful():"+response.isSuccessful());
+            LogUtil.i(TAG,"response.isSuccessful():"+response.isSuccessful());
             while (!response.isSuccessful() && retryNum < maxRetry) {
                 retryNum++;
                 LogUtil.d(TAG,"maxRetry:"+maxRetry+",retryNum=" + retryNum);
@@ -175,8 +175,7 @@ public class HttpClient {
                 }
             });
         } catch (Exception ex) {
-            LogUtil.e(TAG,ex);
-            LogUtil.e(TAG,"Request.Exception=>>"+ex.getMessage());
+            LogUtil.e(TAG,"Request.Exception=>>"+ex.getMessage(),ex);
             if(handler!=null) {
                 handler.sendFailureMessage("数据提交发生异常", ex);
             }
@@ -219,9 +218,7 @@ public class HttpClient {
             return str_response;
 
         } catch (Exception ex) {
-            LogUtil.e(TAG,ex);
-            LogUtil.e(TAG,"Request.Exception=>>"+ex.getMessage());
-
+            LogUtil.e(TAG,"Request.Exception=>>"+ex.getMessage(),ex);
             return null;
         }
     }
@@ -302,7 +299,7 @@ public class HttpClient {
                         body = response.body().string();
                     }
 
-                    LogUtil.d(TAG, "Request.onSuccess=>>" + body);
+                    LogUtil.i(TAG, "Request.onSuccess=>>" + body);
 
                     if (handler != null) {
                         handler.sendSuccessMessage(body);
@@ -312,7 +309,7 @@ public class HttpClient {
 
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException ex) {
-                    LogUtil.e(TAG,"Request.onFailure=>>"+ex.getMessage());
+                    LogUtil.e(TAG,"Request.onFailure=>>"+ex.getMessage(),ex);
                     String msg = "读取数据服务发生异常";
                     if (ex instanceof SocketTimeoutException) {
                         msg = "读取数据服务连接超时";
@@ -329,8 +326,7 @@ public class HttpClient {
                 }
             });
         } catch (Exception ex) {
-            LogUtil.e(TAG,ex);
-            LogUtil.e(TAG,"Request.Exception=>>"+ex.getMessage());
+            LogUtil.e(TAG,"Request.Exception=>>"+ex.getMessage(),ex);
             if (handler != null) {
                 handler.sendFailureMessage("数据提交发生异常", ex);
             }
@@ -340,14 +336,14 @@ public class HttpClient {
     public static String getSign(String appId, String appKey, String appSecret, String data, String currenttime) {
         // 待加密
         String queryStr =appId+ appKey + appSecret + currenttime + data;
-//        LogUtil.e(TAG, "queryStr>>==>>" + queryStr);
+//        LogUtil.d(TAG, "queryStr>>==>>" + queryStr);
         String sortedStr = StringUtil.sortString(queryStr);
-//        LogUtil.e(TAG, "sortedStr>>==>>" + sortedStr);
+//        LogUtil.d(TAG, "sortedStr>>==>>" + sortedStr);
         String sha256edStr = SHA256Encrypt.bin2hex(sortedStr).toLowerCase();
-//        LogUtil.e(TAG, "sha256edStr>>==>>" + sha256edStr);
+//        LogUtil.d(TAG, "sha256edStr>>==>>" + sha256edStr);
 //        String base64Str = Base64.encodeToString(sha256edStr.getBytes(), Base64.NO_WRAP);
 //        String base64Str = StringUtils.replaceEnter(Base64.encodeToString(sha256edStr.getBytes(), Base64.NO_WRAP), "");
-//        LogUtil.e(TAG, "加密后>>==>>" + base64Str);
+//        LogUtil.d(TAG, "加密后>>==>>" + base64Str);
         return sha256edStr;
     }
 }

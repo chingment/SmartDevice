@@ -82,11 +82,51 @@ public class InitDataActivity extends BaseActivity {
     public final int WHAT_SET_CONFIG_SUCCESS = 4;
     public final int WHAT_SET_CONFIG_FALURE = 5;
 
+
+    public static  String[] byteToBit(int i) {
+
+        byte b = (byte) i;
+
+        String s_b="" + (byte) ((b >> 0) & 0x1) +
+                (byte) ((b >> 1) & 0x1) +
+                (byte) ((b >> 2) & 0x1) +
+                (byte) ((b >> 3) & 0x1) +
+                (byte) ((b >> 4) & 0x1) +
+                (byte) ((b >> 5) & 0x1) +
+                (byte) ((b >> 6) & 0x1) +
+                (byte) ((b >> 7) & 0x1);
+
+        String[] arr_s=new String[s_b.length()];
+
+        for (int x = 0; i<arr_s.length; x++){
+            arr_s[x]=s_b.substring(x,x+1);
+        }
+
+        return arr_s;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_init_data);
+
+//        String s=byteToBit((byte) 32);
+//
+//
+//        String[] arr_s=new String[s.length()];
+//
+//        for (int i = 0; i<arr_s.length; i++){
+//            arr_s[i]=s.substring(i,i+1);
+//        }
+//
+//
+//        char c=s.toCharArray()[8-3];
+//
+//
+//
+//
+//        int bb=c-0;
 
 
         Intent mqttService = new Intent(this, MqttService.class);
@@ -111,9 +151,6 @@ public class InitDataActivity extends BaseActivity {
         initView();
         initEvent();
         initData();
-
-
-
 
     }
 
@@ -280,7 +317,9 @@ public class InitDataActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        initActionHandler.postDelayed(initActionRunable, 2000);
+        if(initActionHandler!=null&&initActionRunable!=null) {
+            initActionHandler.postDelayed(initActionRunable, 2000);
+        }
     }
 
     @Override
@@ -294,11 +333,13 @@ public class InitDataActivity extends BaseActivity {
     }
 
     public void setHandleMessage(int what, String tips, RetDeviceInitData retDeviceInitData) {
+        if (handler_msg == null)
+            return;
         final Message m = new Message();
         m.what = what;
         Bundle bundle = new Bundle();
         bundle.putString("tips", tips);
-        if(retDeviceInitData!=null) {
+        if (retDeviceInitData != null) {
             bundle.putSerializable("ret_device_init_data", retDeviceInitData);
         }
         m.setData(bundle);
