@@ -194,6 +194,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             IRfeqCtrl rfeqCtrl = RfeqCtrlInterface.getInstance(rfeqDrive.getComId(), rfeqDrive.getComBaud(), rfeqDrive.getComPrl());
 
+
             ILockeqCtrl lockeqCtrl = LockeqCtrlInterface.getInstance(lockeqDrive.getComId(), lockeqDrive.getComBaud(), lockeqDrive.getComPrl());
 
             if (!lockeqCtrl.isConnect()) {

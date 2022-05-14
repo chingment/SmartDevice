@@ -29,6 +29,8 @@ import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.api.vo.BookerCustomDataVo;
 import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.api.vo.LogTipsBean;
+import com.lumos.smartdevice.devicectrl.ILockeqCtrl;
+import com.lumos.smartdevice.devicectrl.LockeqCtrlInterface;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.app.AppCacheManager;
 import com.lumos.smartdevice.app.AppVar;
@@ -98,7 +100,7 @@ public class InitDataActivity extends BaseActivity {
 
         String[] arr_s=new String[s_b.length()];
 
-        for (int x = 0; i<arr_s.length; x++){
+        for (int x = 0; x<arr_s.length; x++){
             arr_s[x]=s_b.substring(x,x+1);
         }
 
@@ -110,6 +112,14 @@ public class InitDataActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_init_data);
+
+
+        ILockeqCtrl lockeqCtrl = LockeqCtrlInterface.getInstance("ttyS4", 9600, "sdas");
+        lockeqCtrl.sendOpenSlot("1,3");
+
+        //lockeqCtrl.setLight("1,128");
+
+        lockeqCtrl.getSlotStatus("1,3");
 
 //        String s=byteToBit((byte) 32);
 //

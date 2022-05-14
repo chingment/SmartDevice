@@ -46,6 +46,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
             synchronized (RfeqCtrlByDs.class) {
                 if (mThis == null) {
                     mThis = new RfeqCtrlByDs(comId,comBaud,comPrl);
+                    mThis.connect();
                 }
             }
         }

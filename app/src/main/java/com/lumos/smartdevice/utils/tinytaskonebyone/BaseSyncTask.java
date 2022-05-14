@@ -47,7 +47,6 @@ public abstract class BaseSyncTask implements SyncTask {
     }
 
     public void  setResult(boolean isSuccess) {
-
         this.isComplete = true;
         this.isSuccess=isSuccess;
         TinySyncExecutor.getInstance().finish();

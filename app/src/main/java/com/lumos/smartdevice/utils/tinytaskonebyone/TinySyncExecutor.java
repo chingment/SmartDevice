@@ -55,7 +55,6 @@ public class TinySyncExecutor {
     }
 
     public void enqueue(final BaseSyncTask task) {
-        task.setId(task.getId());
         task.setResult(false);
         task.setTagInfos(null);
         task.setComplete(false);
@@ -68,7 +67,10 @@ public class TinySyncExecutor {
     }
 
     public void finish() {
-        System.out.println("[OneByOne]finish task, task id = " + currentTask.getId() + "; pendingQueue size = " + pendingQueue.size());
+        if(currentTask!=null) {
+            System.out.println("[OneByOne]finish task, task id = " + currentTask.getId() + "; pendingQueue size = " + pendingQueue.size());
+        }
+
         coreExecute();
     }
 

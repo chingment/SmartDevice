@@ -40,6 +40,7 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
             synchronized (LockeqCtrlByDs.class) {
                 if (mThis == null) {
                     mThis = new LockeqCtrlByDs(comId,comBaud,comPrl);
+                    mThis.connect();
                 }
             }
         }
@@ -76,6 +77,22 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
         return var0 == 0;
     }
 
+    public boolean setLight(String ant){
+
+        int[] arr_ant =getAnt(ant);
+
+        if(arr_ant==null||arr_ant.length<2)
+            return  false;
+
+        int[] rowData = new int[16];
+        rowData[0] = arr_ant[0];
+        rowData[1] = 99;
+        rowData[2] = arr_ant[1];
+
+        int var0 = sym.SN_MV_Set_RowData(rowData);
+        return var0 == 0;
+    }
+
     private int[] getAnt(String ant) {
 
         int[] i_ant = new int[2];
@@ -92,7 +109,6 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
             return null;
         }
     }
-
 
     public int getSlotStatus(String ant) {
 
@@ -132,7 +148,7 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
 
         byte b = (byte) i;
 
-        String s_b="" + (byte) ((b >> 0) & 0x1) +
+        String s_b = "" + (byte) ((b >> 0) & 0x1) +
                 (byte) ((b >> 1) & 0x1) +
                 (byte) ((b >> 2) & 0x1) +
                 (byte) ((b >> 3) & 0x1) +
@@ -141,10 +157,11 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
                 (byte) ((b >> 6) & 0x1) +
                 (byte) ((b >> 7) & 0x1);
 
-        int[] arr_s=new int[s_b.length()];
+        int[] arr_s = new int[s_b.length()];
 
-        for (int x = 0; i<arr_s.length; x++){
-            arr_s[x]=Integer.valueOf(s_b.substring(x,x+1));
+
+        for (int x = 0; x < arr_s.length; x++) {
+            arr_s[x] = Integer.valueOf(s_b.substring(x, x + 1));
         }
 
         return arr_s;
