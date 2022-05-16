@@ -51,7 +51,7 @@ public class BorrowReturnFlowThread extends Thread {
     public static final String ACTION_OPEN_BEFORE_RFREADER_FAILURE="open_before_rfreader_failure";
     public static final String ACTION_WAIT_OPEN="wait_open";//等待打开
     public static final String ACTION_OPEN_SUCCESS= "open_success";//打开成功
-    public static final String ACTION_OPEN_FAILURE = "open_failure";//打开失败  返回 1
+    public static final String ACTION_OPEN_FAILURE = "open_failure";//打开失败
     public static final String ACTION_WAIT_CLOSE="wait_close";//等待关闭
     public static final String ACTION_CLOSE_SUCCESS = "close_success";//关闭成功
     public static final String ACTION_CLOSE_FAILURE = "close_failure";//关闭失败 ？如何处理？重试？
@@ -254,7 +254,7 @@ public class BorrowReturnFlowThread extends Thread {
                         }
 
 
-                        Thread.sleep(500);
+                        Thread.sleep(1000);
 
                         tryDo = 0;
                         isSendCloseRead = false;
@@ -488,6 +488,7 @@ public class BorrowReturnFlowThread extends Thread {
         RopBookerBorrowReturn rop = new RopBookerBorrowReturn();
         rop.setDeviceId(device.getDeviceId());
         rop.setActionCode(actionCode);
+        rop.setActionSn(getActionSn(actionCode));
         rop.setActionTime(CommonUtil.getCurrentTime());
         rop.setActionRemark(actionRemark);
         rop.setFlowId(flowId);
@@ -510,6 +511,7 @@ public class BorrowReturnFlowThread extends Thread {
                 rop.setMsgMode("normal");
                 rop.setDeviceId(device.getDeviceId());
                 rop.setActionCode(actionCode);
+                rop.setActionSn(getActionSn(actionCode));
                 rop.setActionTime(CommonUtil.getCurrentTime());
                 rop.setActionRemark(actionRemark);
                 rop.setFlowId(flowId);
@@ -520,7 +522,7 @@ public class BorrowReturnFlowThread extends Thread {
                 String msg_content=JSON.toJSONString(rop);
 
                 DbManager.getInstance().saveTripMsg(rop.getMsgId(), ReqUrl.booker_BorrowReturn, msg_content);
-                ResultBean<RetBookerBorrowReturn>  result= ReqInterface.getInstance().bookerBorrowReturn(rop);
+                ResultBean<RetBookerBorrowReturn>  result=borrowReturn(actionCode,actionData,actionRemark);
                 if(result.getCode()==ResultCode.SUCCESS) {
                     DbManager.getInstance().deleteTripMsg(rop.getMsgId());
                 }
@@ -550,6 +552,62 @@ public class BorrowReturnFlowThread extends Thread {
 
     public interface OnHandlerListener {
         void handleMessage(MessageByAction message);
+    }
+
+    public int getActionSn(String  actionCode){
+
+        switch (actionCode)
+        {
+            case ACTION_FLOW_START:
+                return 1001;
+            case ACTION_INIT_DATA:
+                return 1002;
+            case ACTION_INIT_DATA_SUCCESS:
+                return 1003;
+            case ACTION_INIT_DATA_FAILURE:
+                return 1004;
+            case ACTION_REQUEST_OPEN_AUTH:
+                return 1005;
+            case ACTION_REQUEST_OPEN_AUTH_SUCCESS:
+                return 1006;
+            case ACTION_REQUEST_OPEN_AUTH_FAILURE:
+                return 1007;
+            case ACTION_SEND_OPEN_COMMAND:
+                return 1008;
+            case ACTION_SEND_OPEN_COMMAND_FAILURE:
+                return 1009;
+            case ACTION_SEND_OPEN_COMMAND_SUCCESS:
+                return 1010;
+            case ACTION_OPEN_BEFORE_RFREADER_FAILURE:
+                return 1011;
+            case ACTION_WAIT_OPEN:
+                return 1012;
+            case ACTION_OPEN_SUCCESS:
+                return 1013;
+            case ACTION_OPEN_FAILURE:
+                return 1014;
+            case ACTION_WAIT_CLOSE:
+                return 1015;
+            case ACTION_CLOSE_SUCCESS:
+                return 1016;
+            case ACTION_CLOSE_FAILURE:
+                return 1017;
+            case ACTION_CLOSE_AFTER_RFREADER_FAILURE:
+                return 1018;
+            case ACTION_REQUEST_CLOSE_AUTH:
+                return 1019;
+            case ACTION_REQUEST_CLOSE_AUTH_SUCCESS:
+                return 1020;
+            case ACTION_REQUEST_CLOSE_AUTH_FAILURE:
+                return 1021;
+            case ACTION_FLOW_END:
+                return 1022;
+            case ACTION_EXCEPTION:
+                return 1023;
+
+        }
+
+        return 0;
     }
 
 }

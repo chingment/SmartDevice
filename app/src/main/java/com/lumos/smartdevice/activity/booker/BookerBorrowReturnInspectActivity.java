@@ -130,6 +130,9 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                             case BorrowReturnFlowThread.ACTION_INIT_DATA_SUCCESS:
                                 dialog_BookerFlowHandling.setTipsText("初始化数据成功");
                                 break;
+                            case BorrowReturnFlowThread.ACTION_OPEN_BEFORE_RFREADER_FAILURE:
+                                dialog_BookerFlowHandling.setTipsText("RDIF设备读取失败");
+                                break;
                             case BorrowReturnFlowThread.ACTION_REQUEST_OPEN_AUTH:
                                 dialog_BookerFlowHandling.setTipsText("验证打开授权中");
                                 break;
@@ -164,7 +167,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                                 dialog_BookerFlowHandling.setTipsText("柜门关失败");
                                 break;
                             case BorrowReturnFlowThread.ACTION_REQUEST_CLOSE_AUTH:
-                                dialog_BookerFlowHandling.setTipsText("验证关闭授权s");
+                                dialog_BookerFlowHandling.setTipsText("验证关闭授权");
                                 break;
                             case BorrowReturnFlowThread.ACTION_REQUEST_CLOSE_AUTH_SUCCESS:
                                 dialog_BookerFlowHandling.setTipsText("验证关闭授权成功");

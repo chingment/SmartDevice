@@ -8,7 +8,9 @@ public interface IRfeqCtrl {
     boolean isConnect();
     void setReadHandler(OnReadHandlerListener listener);
     boolean  sendOpenRead(String ant);
+
     boolean  sendCloseRead();
+
     Map<String, TagInfo> getRfIds(String ant);
 
     public  interface OnReadHandlerListener {

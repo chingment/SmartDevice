@@ -95,13 +95,30 @@ public class TakeStockFlowTread extends Thread {
                 return;
             }
 
-            DriveVo rfeqDrive=null;
 
+            DriveVo lockeqDrive=null;
+            DriveVo rfeqDrive=null;
             for (String key:drives.keySet()) {
-                if(key.contains("Rfeq")){
-                    rfeqDrive=drives.get(key);
-                    break;
+                if (key.contains("Lockeq")) {
+                    lockeqDrive = drives.get(key);
                 }
+                else if(key.contains("Rfeq")){
+                    rfeqDrive = drives.get(key);
+                }
+            }
+
+            if (lockeqDrive == null) {
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData, "格子驱动找不到[02]");
+                setRunning(false);
+                return;
+            }
+
+            ILockeqCtrl lockeqCtrl = LockeqCtrlInterface.getInstance(lockeqDrive.getComId(), lockeqDrive.getComBaud(), lockeqDrive.getComPrl());
+
+            if (!lockeqCtrl.isConnect()) {
+                sendHandlerMessage(ACTION_INIT_DATA_FAILURE, actionData, "格子驱动未连接[03]");
+                setRunning(false);
+                return;
             }
 
             if (rfeqDrive == null) {
@@ -117,6 +134,7 @@ public class TakeStockFlowTread extends Thread {
                 setRunning(false);
                 return;
             }
+
 
             sendHandlerMessage(ACTION_INIT_DATA_SUCCESS, "初始化数据成功");
 
@@ -216,6 +234,33 @@ public class TakeStockFlowTread extends Thread {
 
             if (!taskRfRead.isComplete() || !taskRfRead.isSuccess()) {
                 sendHandlerMessage(ACTION_RFREADER_FAILURE, actionData, "射频读取未完成[05]");
+                setRunning(false);
+                return;
+            }
+
+
+            boolean isOpen = false;
+
+            nDoMaxTime = 10 * 1000;
+            nDoStartTime = System.currentTimeMillis();
+            nDoLastTime = System.currentTimeMillis() - nDoStartTime;
+
+            while (nDoLastTime < nDoMaxTime) {
+
+                int slotStatus = lockeqCtrl.getSlotStatus("");
+
+                if (slotStatus == 1) {
+                    isOpen = true;
+                    break;
+                } else {
+                    Thread.sleep(300);
+                }
+
+                nDoLastTime = System.currentTimeMillis() - nDoStartTime;
+            }
+
+            if (!isOpen) {
+                sendHandlerMessage("", "打开失败[16]");
                 setRunning(false);
                 return;
             }

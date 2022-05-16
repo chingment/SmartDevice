@@ -114,12 +114,12 @@ public class InitDataActivity extends BaseActivity {
         setContentView(R.layout.activity_init_data);
 
 
-        ILockeqCtrl lockeqCtrl = LockeqCtrlInterface.getInstance("ttyS4", 9600, "sdas");
-        lockeqCtrl.sendOpenSlot("1,3");
-
-        //lockeqCtrl.setLight("1,128");
-
-        lockeqCtrl.getSlotStatus("1,3");
+        ILockeqCtrl lockeqCtrl = LockeqCtrlInterface.getInstance("ttyS3", 9600, "sdas");
+//        lockeqCtrl.sendOpenSlot("1,3");
+//
+        lockeqCtrl.setLight("1,128");
+//
+//        lockeqCtrl.getSlotStatus("1,3");
 
 //        String s=byteToBit((byte) 32);
 //

@@ -7,6 +7,7 @@ import com.lumos.smartdevice.utils.LogUtil;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -126,18 +127,22 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
         if (door >= 1 && door <= 8) {
             int i_status = var1[4];
             int[] s_status = byteToBit(i_status);
-            status = s_status[8 - door];
+            status = s_status[door-1];
         } else if (door >= 9 && door <= 16) {
             int i_status = var1[3];
             int[] s_status = byteToBit(i_status);
-            status = s_status[16 - door];
+            status = s_status[door-9];
         } else if (door >= 17 && door <= 24) {
             int i_status = var1[2];
             int[] s_status = byteToBit(i_status);
-            status = s_status[24 - door];
+            status = s_status[door-17];
         }
 
         return status;
+    }
+
+    public HashMap<Integer,int[]> getSlotStatus(){
+        return null;
     }
 
     public boolean isConnect(){

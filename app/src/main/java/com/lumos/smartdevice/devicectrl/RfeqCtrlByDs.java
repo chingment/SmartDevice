@@ -108,6 +108,10 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
         return 0x00 == msg.getRtCode();
     }
 
+    public boolean sendOpenAllRead() {
+        return sendOpenRead("1,2,3,4,5,6,7,8");
+    }
+
     public boolean sendCloseRead() {
         MsgBaseStop msgStop = new MsgBaseStop();
 
@@ -132,6 +136,11 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
 
         return ant_TagInfos;
     }
+
+    public  Map<String, TagInfo> getAllRfIds() {
+        return getRfIds("1,2,3,4,5,6,7,8");
+    }
+
 
     //todo 此处只统计所有天线读取次数和 需要细分天线 自行根据属性 info.getAntId() 统计
     public void pooled6cData(LogBaseEpcInfo info) {
