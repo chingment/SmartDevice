@@ -19,6 +19,7 @@ import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerDisplayBooks;
 import com.lumos.smartdevice.api.rop.RopBookerRenewBooks;
 import com.lumos.smartdevice.api.rop.RopBookerSawBorrowBooks;
+import com.lumos.smartdevice.api.rop.RopBookerStockBins;
 import com.lumos.smartdevice.api.rop.RopBookerTakeStock;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
@@ -387,6 +388,11 @@ public class ReqStandAlone implements IReqVersion{
     public ResultBean<RetBookerTakeStock> bookerTakeStock(RopBookerTakeStock rop){
 
         return null;
+    }
+
+    @Override
+    public void bookerStockBins(RopBookerStockBins rop, final ReqHandler reqHandler) {
+
     }
 
 }

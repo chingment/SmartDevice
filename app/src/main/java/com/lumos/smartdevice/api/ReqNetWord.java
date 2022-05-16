@@ -9,6 +9,7 @@ import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerDisplayBooks;
 import com.lumos.smartdevice.api.rop.RopBookerRenewBooks;
 import com.lumos.smartdevice.api.rop.RopBookerSawBorrowBooks;
+import com.lumos.smartdevice.api.rop.RopBookerStockBins;
 import com.lumos.smartdevice.api.rop.RopBookerTakeStock;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
@@ -338,6 +339,33 @@ public class ReqNetWord implements IReqVersion{
         }
 
         HttpClient.myPost(ReqUrl.booker_DisplayBooks, rop, new HttpResponseHandler() {
+            @Override
+            public void onSuccess(String response) {
+                if(reqHandler!=null) {
+                    reqHandler.handleAfterSendMessage();
+                    reqHandler.onSuccess(response);
+                }
+            }
+
+            @Override
+            public void onFailure(String msg, Exception e) {
+                if(reqHandler!=null) {
+                    reqHandler.handleAfterSendMessage();
+                    reqHandler.onFailure(msg, e);
+                }
+            }
+        });
+
+    }
+
+    @Override
+    public void bookerStockBins(RopBookerStockBins rop, final ReqHandler reqHandler) {
+
+        if(reqHandler!=null) {
+            reqHandler.sendBeforeSendMessage();
+        }
+
+        HttpClient.myPost(ReqUrl.booker_StockBins, rop, new HttpResponseHandler() {
             @Override
             public void onSuccess(String response) {
                 if(reqHandler!=null) {

@@ -76,7 +76,7 @@
         <entry key="app/src/main/res/layout/activity_lockermain.xml" value="0.10364583333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_sm_app_scene_setting.xml" value="0.33527696793002915" />
-        <entry key="app/src/main/res/layout/activity_sm_booker_take_stock.xml" value="0.13541666666666666" />
+        <entry key="app/src/main/res/layout/activity_sm_booker_take_stock.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_sm_device_info.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_sm_factory_setting.xml" value="0.15208333333333332" />
         <entry key="app/src/main/res/layout/activity_sm_home.xml" value="0.21822916666666667" />
