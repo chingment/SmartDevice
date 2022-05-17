@@ -173,7 +173,8 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
 
                         RetBookerTakeStock retBookerTakeStock = new RetBookerTakeStock();
                         retBookerTakeStock.setFlowId(String.valueOf(actionData.get("flowId")));
-                        retBookerTakeStock.setBooks(HAUtil.objToList(actionData.get("books"), BookerBookVo.class));
+                        retBookerTakeStock.setSheetId(String.valueOf(actionData.get("sheetId")));
+                        retBookerTakeStock.setSheetItems(HAUtil.objToList(actionData.get("sheetItems"), BookerBookVo.class));
 
                         Intent intent = new Intent(getAppContext(), SmBookerTakeStockResultActivity.class);
                         Bundle bundle = new Bundle();

@@ -330,7 +330,8 @@ public class TakeStockFlowThread extends Thread {
             RetBookerTakeStock ret_TakeStock = result_TakeStock.getData();
 
             actionData.put("flowId", ret_TakeStock.getFlowId());
-            actionData.put("books", ret_TakeStock.getBooks());
+            actionData.put("sheetId", ret_TakeStock.getSheetId());
+            actionData.put("sheetItems",ret_TakeStock.getSheetItems());
 
             sendHandlerMessage(ACTION_TAKESTOCK_SUCCESS,actionData, "盘点成功");
             sendHandlerMessage(ACTION_FLOW_END, actionData, "盘点结束");

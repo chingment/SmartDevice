@@ -7,7 +7,8 @@ import java.util.List;
 
 public class RetBookerTakeStock implements Serializable {
     private String flowId;
-    private List<BookerBookVo> books;
+    private String sheetId;
+    private List<BookerBookVo> sheetItems;
 
     public String getFlowId() {
         return flowId;
@@ -17,11 +18,19 @@ public class RetBookerTakeStock implements Serializable {
         this.flowId = flowId;
     }
 
-    public List<BookerBookVo> getBooks() {
-        return books;
+    public String getSheetId() {
+        return sheetId;
     }
 
-    public void setBooks(List<BookerBookVo> books) {
-        this.books = books;
+    public void setSheetId(String sheetId) {
+        this.sheetId = sheetId;
+    }
+
+    public List<BookerBookVo> getSheetItems() {
+        return sheetItems;
+    }
+
+    public void setSheetItems(List<BookerBookVo> sheetItems) {
+        this.sheetItems = sheetItems;
     }
 }
