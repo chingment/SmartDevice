@@ -15,6 +15,7 @@ import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.booker.BookerBorrowReturnInspectActivity;
 import com.lumos.smartdevice.activity.booker.BookerBorrowReturnOverviewActivity;
+import com.lumos.smartdevice.activity.booker.dialog.DialogBookerFlowHandling;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlReceiver;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlService;
 import com.lumos.smartdevice.activity.booker.service.BorrowReturnFlowThread;
@@ -27,6 +28,7 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerStockSlots;
 import com.lumos.smartdevice.api.rop.RopBookerStockSlots;
+import com.lumos.smartdevice.api.vo.BookerSlotVo;
 import com.lumos.smartdevice.api.vo.BookerStockSlotVo;
 import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
@@ -41,16 +43,18 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
 
     private static final String TAG = "SmBookerTakeStockActivity";
 
-    private DialogSmConfirm dialog_Confirm;
-
     private View et_StockSlots;
     private SuperRefreshLayout sf_StockSlots;
     private RecyclerView rv_StockSlots;
     private int rv_StockSlots_PageNum=1;
     private final int rv_StockSlots_PageSize=10;
     private SmBookerStockSlotAdapter rv_StockSlots_Adapter;
+    private DialogSmConfirm dialog_Confirm;
 
     private DeviceVo device;
+    private List<BookerSlotVo> slots;
+    private BookerSlotVo curSlot;
+    private DialogBookerFlowHandling dialog_BookerFlowHandling;
 
     private BookerCtrlReceiver bookerCtrlServiceReceiver;
 
@@ -114,6 +118,27 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
         });
 
         bookerCtrlServiceReceiver.register(SmBookerTakeStockActivity.this);
+
+        dialog_BookerFlowHandling = new DialogBookerFlowHandling(SmBookerTakeStockActivity.this);
+        dialog_BookerFlowHandling.setOnClickListener(new DialogBookerFlowHandling.OnClickListener() {
+            @Override
+            public void onTryAgainOpen() {
+                dialog_BookerFlowHandling.stopCancleCountDownTimer();
+                bookerCtrlServiceBinder.takeStock(device, curSlot);
+            }
+
+            @Override
+            public void onCancle() {
+                if( bookerCtrlServiceBinder.checkTakeStockIsRunning(curSlot)){
+                    showToast("正在执行中，请稍后再试");
+                }
+                else {
+                    dialog_BookerFlowHandling.hide();
+                    dialog_BookerFlowHandling.stopCancleCountDownTimer();
+                    setTimerStartByActivityFinish();
+                }
+            }
+        });
 
         sf_StockSlots =  findViewById(R.id.sf_StockSlots);
         rv_StockSlots = findViewById(R.id.rv_StockSlots);
@@ -241,7 +266,8 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
     }
 
     private void dlgTakeStock() {
-        bookerCtrlServiceBinder.takeStock(device, null);
+
+        bookerCtrlServiceBinder.takeStock(device, curSlot);
     }
 
     @Override

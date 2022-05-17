@@ -40,4 +40,8 @@ public class BookerCtrl {
         return BorrowReturnFlowThread.checkRunning(slot);
     }
 
+    public boolean checkTakeStockIsRunning(BookerSlotVo slot) {
+        return TakeStockFlowThread.checkRunning(slot);
+    }
+
 }

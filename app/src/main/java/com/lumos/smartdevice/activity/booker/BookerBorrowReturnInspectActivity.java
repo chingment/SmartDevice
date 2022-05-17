@@ -66,9 +66,8 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
     private View btn_GoPayOverdueFine;
 
     private DeviceVo device;
-
     private List<BookerSlotVo> slots;
-
+    private BookerSlotVo curSlot;
     private DialogBookerFlowHandling dialog_BookerFlowHandling;
 
     private int identityType;
@@ -267,7 +266,6 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
         btn_GoPayOverdueFine.setOnClickListener(this);
     }
 
-    private BookerSlotVo curSlot;
     public void initData() {
 
         BookerBorrowReturnInspectSlotAdapter slotAdapter = new BookerBorrowReturnInspectSlotAdapter(getAppContext(), slots);

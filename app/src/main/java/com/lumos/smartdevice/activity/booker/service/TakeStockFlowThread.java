@@ -74,6 +74,11 @@ public class TakeStockFlowThread extends Thread {
         this.isRunning=isRunning;
     }
 
+    public static boolean checkRunning(BookerSlotVo slot) {
+
+        return false;
+    }
+
     @Override
     public synchronized void run() {
         super.run();

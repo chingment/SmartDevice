@@ -106,6 +106,7 @@ public class SmBaseActivity extends BaseActivity  {
 
     }
 
+
     @Override
     protected void onResume() {
 
@@ -179,6 +180,12 @@ public class SmBaseActivity extends BaseActivity  {
     public void setTimerPauseByActivityFinish(){
         if(timerByActivityFinish!=null) {
             timerByActivityFinish.cancel();
+        }
+    }
+
+    public void setTimerStartByActivityFinish() {
+        if (timerByActivityFinish != null) {
+            timerByActivityFinish.start();
         }
     }
 

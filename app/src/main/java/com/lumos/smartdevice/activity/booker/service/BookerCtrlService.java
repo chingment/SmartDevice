@@ -74,6 +74,10 @@ public class BookerCtrlService extends Service {
             });
         }
 
+        public boolean checkBorrowReturnIsRunning(BookerSlotVo slot) {
+            return bookerCtrl.checkBorrowReturnIsRunning(slot);
+        }
+
         public void takeStock(DeviceVo device, BookerSlotVo slot) {
             bookerCtrl.takeStockStart(device, slot, new TakeStockFlowThread.OnHandlerListener() {
                 @Override
@@ -84,8 +88,9 @@ public class BookerCtrlService extends Service {
             });
         }
 
-        public boolean checkBorrowReturnIsRunning(BookerSlotVo slot) {
-            return bookerCtrl.checkBorrowReturnIsRunning(slot);
+        public boolean checkTakeStockIsRunning(BookerSlotVo slot) {
+            return bookerCtrl.checkTakeStockIsRunning(slot);
         }
+
     }
 }
