@@ -319,15 +319,20 @@ public class TakeStockFlowThread extends Thread {
 
             actionData.put("closeRfIds", tag_RfIds);
 
-            ResultBean<RetBookerTakeStock> result_BorrowReturn = takeStock(ACTION_RFREADER_SUCCESS, actionData, "盘点成功");
+            ResultBean<RetBookerTakeStock> result_TakeStock = takeStock(ACTION_RFREADER_SUCCESS, actionData, "盘点成功");
 
-            if (result_BorrowReturn.getCode() != ResultCode.SUCCESS) {
+            if (result_TakeStock.getCode() != ResultCode.SUCCESS) {
                 sendHandlerMessage(ACTION_TAKESTOCK_FAILURE, "盘点失败[09]");
                 setRunning(false);
                 return;
             }
 
-            sendHandlerMessage(ACTION_TAKESTOCK_SUCCESS, "盘点成功");
+            RetBookerTakeStock ret_TakeStock = result_TakeStock.getData();
+
+            actionData.put("flowId", ret_TakeStock.getFlowId());
+            actionData.put("books", ret_TakeStock.getBooks());
+
+            sendHandlerMessage(ACTION_TAKESTOCK_SUCCESS,actionData, "盘点成功");
             sendHandlerMessage(ACTION_FLOW_END, actionData, "盘点结束");
 
             setRunning(false);

@@ -34,6 +34,7 @@
     <string name="aty_nav_title_smappscenesetting">应用场景</string>
     <string name="aty_nav_title_smhome">管理中心</string>
     <string name="aty_nav_title_smbookertakestock">库存盘点</string>
+    <string name="aty_nav_title_smbookertakestockresult">库存盘点结果</string>
     <string name="aty_nav_title_booker_identity_verify">身份验证</string>
     <string name="aty_nav_title_booker_borrow_return_inspect">借阅信息</string>
     <string name="aty_nav_title_booker_borrow_return_overview">借/还</string>

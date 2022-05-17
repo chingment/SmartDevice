@@ -49,6 +49,9 @@
             android:name=".activity.sm.SmBookerTakeStockActivity"
             android:exported="true" />
         <activity
+            android:name=".activity.sm.SmBookerTakeStockResultActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.InitDataActivity"
             android:exported="true">
             <intent-filter>

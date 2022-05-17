@@ -28,6 +28,7 @@ import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetBookerStockSlots;
+import com.lumos.smartdevice.api.rop.RetBookerTakeStock;
 import com.lumos.smartdevice.api.rop.RopBookerStockSlots;
 import com.lumos.smartdevice.api.vo.BookerBookVo;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
@@ -170,17 +171,16 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
                     case TakeStockFlowThread.ACTION_FLOW_END:
                         dialog_BookerFlowHandling.setTipsText("处理结束");
 
-//                        RetBookerBorrowReturn retBookerBorrowReturn = new RetBookerBorrowReturn();
-//                        retBookerBorrowReturn.setFlowId(String.valueOf(actionData.get("flowId")));
-//                        retBookerBorrowReturn.setBorrowBooks(HAUtil.objToList(actionData.get("borrowBooks"), BookerBookVo.class));
-//                        retBookerBorrowReturn.setReturnBooks(HAUtil.objToList(actionData.get("returnBooks"), BookerBookVo.class));
-//
-//                        Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
-//                        Bundle bundle = new Bundle();
-//                        bundle.putSerializable("ret_booker_borrow_return", retBookerBorrowReturn);
-//                        intent.putExtras(bundle);
-//                        openActivity(intent);
-//                        finish();
+                        RetBookerTakeStock retBookerTakeStock = new RetBookerTakeStock();
+                        retBookerTakeStock.setFlowId(String.valueOf(actionData.get("flowId")));
+                        retBookerTakeStock.setBooks(HAUtil.objToList(actionData.get("books"), BookerBookVo.class));
+
+                        Intent intent = new Intent(getAppContext(), SmBookerTakeStockResultActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("ret_booker_take_stock", retBookerTakeStock);
+                        intent.putExtras(bundle);
+                        openActivity(intent);
+                        finish();
                         break;
                     case BorrowReturnFlowThread.ACTION_EXCEPTION:
                         dialog_BookerFlowHandling.setTipsText("设备处理异常");
