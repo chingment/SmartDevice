@@ -8,7 +8,8 @@ import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerDisplayBooks;
 import com.lumos.smartdevice.api.rop.RopBookerRenewBooks;
 import com.lumos.smartdevice.api.rop.RopBookerSawBorrowBooks;
-import com.lumos.smartdevice.api.rop.RopBookerStockBins;
+import com.lumos.smartdevice.api.rop.RopBookerStockInbound;
+import com.lumos.smartdevice.api.rop.RopBookerStockSlots;
 import com.lumos.smartdevice.api.rop.RopBookerTakeStock;
 import com.lumos.smartdevice.api.rop.RopDeviceInitData;
 import com.lumos.smartdevice.api.rop.RopIdentityInfo;
@@ -67,7 +68,9 @@ public interface IReqVersion {
 
     ResultBean<RetBookerTakeStock> bookerTakeStock(RopBookerTakeStock rop);
 
-    void bookerStockBins(RopBookerStockBins rop, ReqHandler reqHandler);
+    void bookerStockStocks(RopBookerStockSlots rop, ReqHandler reqHandler);
+
+    void bookerStockInbound(RopBookerStockInbound rop, ReqHandler reqHandler);
 
     void bookerSawBorrowBooks(RopBookerSawBorrowBooks rop, ReqHandler reqHandler);
 

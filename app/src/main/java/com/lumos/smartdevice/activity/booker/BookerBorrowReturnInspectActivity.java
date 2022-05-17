@@ -108,7 +108,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
 
         bookerCtrlServiceReceiver = new BookerCtrlReceiver(new BookerCtrlReceiver.OnListener() {
             @Override
-            public void handleMessageByBorrowReturn(MessageByAction message) {
+            public void handleMessage(MessageByAction message) {
 
                         String actionCode = message.getActionCode();
                         String actionRemark = message.getActionRemark();

@@ -74,6 +74,16 @@ public class BookerCtrlService extends Service {
             });
         }
 
+        public void takeStock(DeviceVo device, BookerSlotVo slot) {
+            bookerCtrl.takeStockStart(device, slot, new TakeStockFlowThread.OnHandlerListener() {
+                @Override
+                public void handleMessage(MessageByAction message) {
+                    LogUtil.d(TAG, "actionCode:" + message.getActionCode() + ",actionRemark:" + message.getActionRemark());
+                    sendBroadcastMsg(message);
+                }
+            });
+        }
+
         public boolean checkBorrowReturnIsRunning(BookerSlotVo slot) {
             return bookerCtrl.checkBorrowReturnIsRunning(slot);
         }

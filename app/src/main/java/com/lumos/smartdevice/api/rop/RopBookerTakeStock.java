@@ -4,6 +4,8 @@ public class RopBookerTakeStock {
     private String msgId;
     private String msgMode;
     private String deviceId;
+    private String slotId;
+    private int actionSn;
     private String actionCode;
     private String actionData;
     private String actionTime;
@@ -32,6 +34,22 @@ public class RopBookerTakeStock {
 
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
+    }
+
+    public String getSlotId() {
+        return slotId;
+    }
+
+    public void setSlotId(String slotId) {
+        this.slotId = slotId;
+    }
+
+    public int getActionSn() {
+        return actionSn;
+    }
+
+    public void setActionSn(int actionSn) {
+        this.actionSn = actionSn;
     }
 
     public String getActionCode() {

@@ -25,9 +25,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc9a5615-753f-4d27-ba9c-39ff462585f0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RetBookerStockBins.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopBookerStockBins.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/vo/StockBinVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/adapter/SmBookerStockSlotAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopBookerStockInbound.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_sm_booker_stock_slot.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -37,11 +37,25 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/BookerBorrowReturnInspectActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/BookerBorrowReturnInspectActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/BookerSawBorrowBooksActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/BookerSawBorrowBooksActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrlReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrlReceiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrlService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BookerCtrlService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BorrowReturnFlowThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BorrowReturnFlowThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/TakeStockFlowTread.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/TakeStockFlowThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmBookerTakeStockActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmBookerTakeStockActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLockerBoxUseRecordActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmLockerBoxUseRecordActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/IReqVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/IReqVersion.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqNetWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqNetWord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqStandAlone.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqUrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/ReqUrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RetBookerStockBins.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RetBookerStockSlots.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopBookerStockBins.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopBookerStockSlots.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopBookerTakeStock.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/rop/RopBookerTakeStock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/vo/StockBinVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/vo/BookerStockSlotVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_sm_booker_take_stock.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_sm_booker_take_stock.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -369,7 +383,7 @@
     <property name="com.android.tools.idea.emulator.frame.visible" value="false" />
     <property name="com.android.tools.idea.emulator.zoom.toolbar.visible" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/mipmap-xhdpi" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/layout" />
     <property name="memory.settings.postsync.last.time.stamp" value="1651744357993" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
@@ -389,10 +403,10 @@
       <recent name="com.lumos.smartdevice.activity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/utils" />
       <recent name="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/utils/tinytask" />
       <recent name="$PROJECT_DIR$/app/src/main/res/drawable" />
-      <recent name="$PROJECT_DIR$/app/src/main/res/layout" />
       <recent name="$PROJECT_DIR$/app/src/main/res/xml" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -419,11 +433,11 @@
       <recent name="com.lumos.smartdevice.activity.sm" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.lumos.smartdevice.activity.sm.adapter" />
       <recent name="com.lumos.smartdevice.service" />
       <recent name="com.lumos.smartdevice.receiver" />
       <recent name="com.lumos.smartdevice.activity.booker.adapter" />
       <recent name="com.lumos.smartdevice.api.rop" />
-      <recent name="com.lumos.smartdevice.utils" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -674,7 +688,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/BorrowReturnFlowThread.java</url>
-          <line>480</line>
+          <line>479</line>
           <option name="timeStamp" value="309" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
@@ -692,6 +706,11 @@
           <line>116</line>
           <option name="timeStamp" value="341" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/TakeStockFlowThread.java</url>
+          <line>311</line>
+          <option name="timeStamp" value="344" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/RfeqCtrlByDs.java</url>
           <line>122</line>
@@ -699,6 +718,14 @@
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="342" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/booker/service/TakeStockFlowThread.java</url>
+          <line>77</line>
+          <properties class="com.lumos.smartdevice.activity.booker.service.TakeStockFlowThread" method="run">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="343" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

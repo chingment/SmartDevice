@@ -146,6 +146,7 @@
         <entry key="app/src/main/res/layout/item_list_smlockerboxusage.xml" value="0.75" />
         <entry key="app/src/main/res/layout/item_list_smlockerboxuserecord.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_list_smuser.xml" value="0.13125" />
+        <entry key="app/src/main/res/layout/item_sm_booker_stock_slot.xml" value="0.335" />
         <entry key="app/src/main/res/layout/item_sm_locker_box_cabinet_box.xml" value="0.13489583333333333" />
         <entry key="app/src/main/res/layout/item_sm_locker_box_cabinet_name.xml" value="0.12092391304347826" />
         <entry key="app/src/main/res/layout/item_sm_locker_box_usage.xml" value="0.15208333333333332" />

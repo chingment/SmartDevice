@@ -69,7 +69,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
     private RecyclerView rv_BorrowedBooks;
     private int rv_BorrowedBooks_PageNum=1;
     private final int rv_BorrowedBooks_PageSize=10;
-    private BookerBorrowBookAdapter rv_BorrowedBooksAdapter;
+    private BookerBorrowBookAdapter rv_BorrowedBooks_Adapter;
 
     private DeviceVo device;
     private int identityType;
@@ -161,8 +161,8 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
 
         rv_BorrowedBooks.setItemAnimator(new DefaultItemAnimator());
 
-        rv_BorrowedBooksAdapter = new BookerBorrowBookAdapter();
-        rv_BorrowedBooksAdapter.setOnClickListener(new BookerBorrowBookAdapter.OnClickListener() {
+        rv_BorrowedBooks_Adapter = new BookerBorrowBookAdapter();
+        rv_BorrowedBooks_Adapter.setOnClickListener(new BookerBorrowBookAdapter.OnClickListener() {
             @Override
             public void onRenew(BookerBorrowBookVo item) {
                 dialog_Confirm.setFunction("renew_multi");
@@ -173,7 +173,7 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
 
             }
         });
-        sf_BorrowedBooks.setAdapter(rv_BorrowedBooks, rv_BorrowedBooksAdapter);
+        sf_BorrowedBooks.setAdapter(rv_BorrowedBooks, rv_BorrowedBooks_Adapter);
         sf_BorrowedBooks.setOnRefreshHandler(new OnRefreshHandler() {
             @Override
             public void refresh() {
@@ -263,10 +263,10 @@ public class BookerSawBorrowBooksActivity extends BookerBaseActivity {
 
                     if (rv_BorrowedBooks_PageNum == 1) {
                         sf_BorrowedBooks.setRefreshing(false);
-                        rv_BorrowedBooksAdapter.setData(items, BookerSawBorrowBooksActivity.this);
+                        rv_BorrowedBooks_Adapter.setData(items, BookerSawBorrowBooksActivity.this);
                     } else {
 
-                        rv_BorrowedBooksAdapter.addData(items, BookerSawBorrowBooksActivity.this);
+                        rv_BorrowedBooks_Adapter.addData(items, BookerSawBorrowBooksActivity.this);
 
                     }
                     sf_BorrowedBooks.loadComplete(hasMore);

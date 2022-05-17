@@ -31,7 +31,6 @@ public class SmLockerBoxUseRecordActivity  extends SmBaseActivity {
 
     private static final String TAG = "SmLockerBoxUseRecordActivity";
 
-
     private SuperRefreshLayout lv_UseRecordsRefresh;
     private RecyclerView lv_UseRecordsData;
     private int lv_UseRecords_PageIndex=0;
@@ -119,7 +118,6 @@ public class SmLockerBoxUseRecordActivity  extends SmBaseActivity {
             public void onSuccess(String response) {
                 super.onSuccess(response);
 
-                ResultBean<RetLockerGetBoxUseRecords> re=    JSON.parseObject(response, new TypeReference<ResultBean<RetLockerGetBoxUseRecords>>(){});
                 ResultBean<RetLockerGetBoxUseRecords> rt = JsonUtil.toResult(response, new TypeReference<ResultBean<RetLockerGetBoxUseRecords>>(){});
 
                 if(rt.getCode()== ResultCode.SUCCESS) {

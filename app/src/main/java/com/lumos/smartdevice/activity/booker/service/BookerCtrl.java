@@ -31,6 +31,11 @@ public class BookerCtrl {
         thread.start();
     }
 
+    public void takeStockStart(DeviceVo device, BookerSlotVo slot, TakeStockFlowThread.OnHandlerListener onHandlerListener) {
+        TakeStockFlowThread thread = new TakeStockFlowThread(device, slot, 2, onHandlerListener);
+        thread.start();
+    }
+
     public boolean checkBorrowReturnIsRunning(BookerSlotVo slot) {
         return BorrowReturnFlowThread.checkRunning(slot);
     }

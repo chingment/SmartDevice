@@ -25,12 +25,12 @@ public class BookerCtrlReceiver extends BroadcastReceiver {
 
         MessageByAction message =(MessageByAction)intent.getSerializableExtra("message");
 
-        onListener.handleMessageByBorrowReturn(message);
+        onListener.handleMessage(message);
 
     }
 
     public  interface OnListener{
-        void handleMessageByBorrowReturn(MessageByAction flowResult);
+        void handleMessage(MessageByAction message);
     }
 
     public void  register(Context context) {
