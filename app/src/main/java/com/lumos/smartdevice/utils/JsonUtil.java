@@ -68,6 +68,16 @@ public class JsonUtil<T>  {
 
     }
 
+    public static String toJsonStr(Object obj) {
+
+        if (obj == null)
+            return "";
+        try {
+            return JSON.toJSONString(obj);
+        } catch (Exception ex) {
+            return "";
+        }
+    }
 
 //    public static <T> T toResult(String json) {
 //

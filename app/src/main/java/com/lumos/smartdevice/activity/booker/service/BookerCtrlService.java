@@ -78,8 +78,8 @@ public class BookerCtrlService extends Service {
             return bookerCtrl.checkBorrowReturnIsRunning(slot);
         }
 
-        public void takeStock(DeviceVo device, BookerSlotVo slot) {
-            bookerCtrl.takeStockStart(device, slot, new TakeStockFlowThread.OnHandlerListener() {
+        public void takeStock(String clientUserId, int identityType, String identityId,DeviceVo device, BookerSlotVo slot) {
+            bookerCtrl.takeStockStart(clientUserId,identityType,identityId,device, slot, new TakeStockFlowThread.OnHandlerListener() {
                 @Override
                 public void handleMessage(MessageByAction message) {
                     LogUtil.d(TAG, "actionCode:" + message.getActionCode() + ",actionRemark:" + message.getActionRemark());

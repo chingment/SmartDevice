@@ -31,8 +31,8 @@ public class BookerCtrl {
         thread.start();
     }
 
-    public void takeStockStart(DeviceVo device, BookerSlotVo slot, TakeStockFlowThread.OnHandlerListener onHandlerListener) {
-        TakeStockFlowThread thread = new TakeStockFlowThread(device, slot, 2, onHandlerListener);
+    public void takeStockStart(String clientUserId, int identityType, String identityId,DeviceVo device, BookerSlotVo slot, TakeStockFlowThread.OnHandlerListener onHandlerListener) {
+        TakeStockFlowThread thread = new TakeStockFlowThread(clientUserId,identityType,identityId,device, slot, 2, onHandlerListener);
         thread.start();
     }
 

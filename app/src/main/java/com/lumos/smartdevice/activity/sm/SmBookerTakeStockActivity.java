@@ -33,6 +33,8 @@ import com.lumos.smartdevice.api.rop.RopBookerStockSlots;
 import com.lumos.smartdevice.api.vo.BookerBookVo;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
 import com.lumos.smartdevice.api.vo.DeviceVo;
+import com.lumos.smartdevice.api.vo.UserVo;
+import com.lumos.smartdevice.app.AppCacheManager;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
 import com.lumos.smartdevice.utils.HAUtil;
@@ -65,6 +67,8 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
 
     private BookerCtrlService.CtrlBinder bookerCtrlServiceBinder;
 
+    private UserVo currentUser;
+
     private final ServiceConnection bookerCtrlServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder binder) {
@@ -83,10 +87,12 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
         setContentView(R.layout.activity_sm_booker_take_stock);
         setNavHeaderTtile(R.string.aty_nav_title_smbookertakestock);
         setNavHeaderBtnByGoBackIsVisible(true);
-        device=getDevice();
+        device = getDevice();
         initView();
         initEvent();
         initData();
+
+        currentUser = AppCacheManager.getCurrentUser();
     }
 
     private void initView() {
@@ -202,7 +208,7 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
             @Override
             public void onTryAgainOpen() {
                 dialog_BookerFlowHandling.stopCancleCountDownTimer();
-                bookerCtrlServiceBinder.takeStock(device, curSlot);
+                bookerCtrlServiceBinder.takeStock(currentUser.getUserId(),3,currentUser.getUserId(), device, curSlot);
             }
 
             @Override
@@ -345,7 +351,7 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
 
     private void dlgTakeStock() {
         curSlot = (BookerSlotVo) dialog_Confirm.getTag();
-        bookerCtrlServiceBinder.takeStock(device, curSlot);
+        bookerCtrlServiceBinder.takeStock(currentUser.getUserId(),3,currentUser.getUserId(), device, curSlot);
     }
 
     @Override

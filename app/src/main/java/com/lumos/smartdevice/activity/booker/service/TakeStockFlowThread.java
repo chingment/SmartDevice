@@ -22,6 +22,7 @@ import com.lumos.smartdevice.devicectrl.LockeqCtrlInterface;
 import com.lumos.smartdevice.devicectrl.RfeqCtrlInterface;
 import com.lumos.smartdevice.devicectrl.TagInfo;
 import com.lumos.smartdevice.utils.CommonUtil;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.SnowFlake;
 import com.lumos.smartdevice.utils.StringUtil;
@@ -56,16 +57,23 @@ public class TakeStockFlowThread extends Thread {
     public static final String ACTION_FLOW_END = "flow_end";
     public static final String ACTION_EXCEPTION = "exception";
 
+
+    private String flowId;
+    private final String clientUserId;
+    private final int identityType;
+    private final String identityId;
     private final DeviceVo device;
     private final BookerSlotVo slot;
-    private boolean isRunning=false;
-    private String flowId;
+
     private int flowType;
     private final OnHandlerListener onHandlerListener;
 
     private static final Map<String, Object> brFlowDo = new ConcurrentHashMap<>();
 
-    public TakeStockFlowThread(DeviceVo device, BookerSlotVo slot, int flowType, OnHandlerListener onHandlerListener) {
+    public TakeStockFlowThread(String clientUserId, int identityType, String identityId, DeviceVo device, BookerSlotVo slot, int flowType, OnHandlerListener onHandlerListener) {
+        this.clientUserId = clientUserId;
+        this.identityType = identityType;
+        this.identityId = identityId;
         this.device = device;
         this.slot=slot;
         this.flowType = flowType;
@@ -113,6 +121,9 @@ public class TakeStockFlowThread extends Thread {
         RopBookerCreateFlow rop = new RopBookerCreateFlow();
         rop.setDeviceId(device.getDeviceId());
         rop.setSlotId(slot.getSlotId());
+        rop.setClientUserId(clientUserId);
+        rop.setIdentityType(identityType);
+        rop.setIdentityId(identityId);
         rop.setType(flowType);
 
         ResultBean<RetBookerCreateFlow> result_CreateFlow = ReqInterface.getInstance().bookerCreateFlow(rop);
@@ -349,17 +360,25 @@ public class TakeStockFlowThread extends Thread {
 
         RopBookerTakeStock rop = new RopBookerTakeStock();
         rop.setFlowId(flowId);
+        rop.setMsgId(String.valueOf(SnowFlake.nextId()));
+        rop.setMsgMode("normal");
         rop.setDeviceId(device.getDeviceId());
         rop.setSlotId(slot.getSlotId());
-        rop.setActionSn(0);
+        rop.setActionSn(getActionSn(actionCode));
         rop.setActionCode(actionCode);
         rop.setActionTime(CommonUtil.getCurrentTime());
         rop.setActionRemark(actionRemark);
-        if (actionData != null) {
-            rop.setActionData(JSON.toJSONString(actionData));
+        rop.setActionData(JsonUtil.toJsonStr(actionData));
+
+        String msg_content=JSON.toJSONString(rop);
+
+        DbManager.getInstance().saveTripMsg(rop.getMsgId(), ReqUrl.booker_TakeStock, msg_content);
+        ResultBean<RetBookerTakeStock>  result=ReqInterface.getInstance().bookerTakeStock(rop);
+        if(result.getCode()==ResultCode.SUCCESS) {
+            DbManager.getInstance().deleteTripMsg(rop.getMsgId());
         }
 
-        return ReqInterface.getInstance().bookerTakeStock(rop);
+        return result;
 
     }
 
@@ -368,29 +387,8 @@ public class TakeStockFlowThread extends Thread {
         LogUtil.d(TAG,"actionCode:"+actionCode+",actionRemark:"+actionRemark);
 
         new Thread(() -> {
-            if (!StringUtil.isEmpty(flowId)) {
-                RopBookerTakeStock rop = new RopBookerTakeStock();
-                rop.setFlowId(flowId);
-                rop.setMsgId(String.valueOf(SnowFlake.nextId()));
-                rop.setMsgMode("normal");
-                rop.setDeviceId(device.getDeviceId());
-                rop.setSlotId(slot.getSlotId());
-                rop.setActionSn(0);
-                rop.setActionCode(actionCode);
-                rop.setActionTime(CommonUtil.getCurrentTime());
-                rop.setActionRemark(actionRemark);
-                if (actionData != null) {
-                    rop.setActionData(JSON.toJSONString(actionData));
-                }
 
-                String msg_content=JSON.toJSONString(rop);
-
-                DbManager.getInstance().saveTripMsg(rop.getMsgId(), ReqUrl.booker_BorrowReturn, msg_content);
-                ResultBean<RetBookerTakeStock>  result=takeStock(actionCode,actionData,actionRemark);
-                if(result.getCode()==ResultCode.SUCCESS) {
-                    DbManager.getInstance().deleteTripMsg(rop.getMsgId());
-                }
-            }
+            takeStock(actionCode,actionData,actionRemark);
 
             if(actionCode.contains("failure")||actionCode.contains("exception")){
                 AppLogcatManager.uploadLogcat2Server("logcat -d -s TakeStockFlowTread RfeqCtrlByDs LockeqCtrlByDs ","test");
@@ -408,7 +406,6 @@ public class TakeStockFlowThread extends Thread {
             onHandlerListener.handleMessage(message);
         }
 
-
     }
 
     private void sendHandlerMessage(String actionCode,String actionRemark){
@@ -417,5 +414,47 @@ public class TakeStockFlowThread extends Thread {
 
     public interface OnHandlerListener {
         void handleMessage(MessageByAction message);
+    }
+
+    public int getActionSn(String  actionCode) {
+
+        switch (actionCode)
+        {
+            case ACTION_FLOW_START:
+                return 1001;
+            case ACTION_INIT_DATA:
+                return 1002;
+            case ACTION_INIT_DATA_SUCCESS:
+                return 1003;
+            case ACTION_INIT_DATA_FAILURE:
+                return 1004;
+            case ACTION_CHECK_DOOR_STATUS:
+                return 1005;
+            case ACTION_CHECK_DOOR_STATUS_SUCCESS:
+                return 1006;
+            case ACTION_CHECK_DOOR_STATUS_FAILURE:
+                return 1007;
+            case ACTION_DOOR_OPEN:
+                return 1008;
+            case ACTION_DOOR_CLOSE:
+                return 1009;
+            case ACTION_WAIT_RFREADER:
+                return 1010;
+            case ACTION_RFREADER_SUCCESS:
+                return 1011;
+            case ACTION_RFREADER_FAILURE:
+                return 1012;
+            case ACTION_TAKESTOCK_SUCCESS:
+                return 1013;
+            case ACTION_TAKESTOCK_FAILURE:
+                return 1014;
+            case ACTION_FLOW_END:
+                return 1080;
+            case ACTION_EXCEPTION:
+                return 1099;
+
+        }
+
+        return 0;
     }
 }

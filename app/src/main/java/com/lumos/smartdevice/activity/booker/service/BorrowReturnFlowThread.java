@@ -20,6 +20,7 @@ import com.lumos.smartdevice.devicectrl.RfeqCtrlInterface;
 import com.lumos.smartdevice.devicectrl.TagInfo;
 import com.lumos.smartdevice.app.AppLogcatManager;
 import com.lumos.smartdevice.utils.CommonUtil;
+import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.SnowFlake;
 import com.lumos.smartdevice.utils.StringUtil;
@@ -483,20 +484,26 @@ public class BorrowReturnFlowThread extends Thread {
     }
 
     private ResultBean<RetBookerBorrowReturn> borrowReturn(String actionCode,HashMap<String,Object> actionData,String actionRemark) {
-
         RopBookerBorrowReturn rop = new RopBookerBorrowReturn();
+        rop.setFlowId(flowId);
+        rop.setMsgId(String.valueOf(SnowFlake.nextId()));
+        rop.setMsgMode("normal");
         rop.setDeviceId(device.getDeviceId());
         rop.setActionCode(actionCode);
         rop.setActionSn(getActionSn(actionCode));
         rop.setActionTime(CommonUtil.getCurrentTime());
         rop.setActionRemark(actionRemark);
-        rop.setFlowId(flowId);
-        if (actionData != null) {
-            rop.setActionData(JSON.toJSONString(actionData));
+        rop.setActionData(JsonUtil.toJsonStr(actionData));
+
+        String msg_content = JSON.toJSONString(rop);
+
+        DbManager.getInstance().saveTripMsg(rop.getMsgId(), ReqUrl.booker_BorrowReturn, msg_content);
+        ResultBean<RetBookerBorrowReturn> result = ReqInterface.getInstance().bookerBorrowReturn(rop);
+        if (result.getCode() == ResultCode.SUCCESS) {
+            DbManager.getInstance().deleteTripMsg(rop.getMsgId());
         }
 
-        return ReqInterface.getInstance().bookerBorrowReturn(rop);
-
+        return result;
     }
 
     private void sendHandlerMessage(String actionCode,HashMap<String,Object> actionData, String actionRemark) {
@@ -504,29 +511,8 @@ public class BorrowReturnFlowThread extends Thread {
         LogUtil.d(TAG,"actionCode:"+actionCode+",actionRemark:"+actionRemark);
 
         new Thread(() -> {
-            if (!StringUtil.isEmpty(flowId)) {
-                RopBookerBorrowReturn rop = new RopBookerBorrowReturn();
-                rop.setMsgId(String.valueOf(SnowFlake.nextId()));
-                rop.setMsgMode("normal");
-                rop.setDeviceId(device.getDeviceId());
-                rop.setActionCode(actionCode);
-                rop.setActionSn(getActionSn(actionCode));
-                rop.setActionTime(CommonUtil.getCurrentTime());
-                rop.setActionRemark(actionRemark);
-                rop.setFlowId(flowId);
-                if (actionData != null) {
-                    rop.setActionData(JSON.toJSONString(actionData));
-                }
 
-                String msg_content=JSON.toJSONString(rop);
-
-                DbManager.getInstance().saveTripMsg(rop.getMsgId(), ReqUrl.booker_BorrowReturn, msg_content);
-                ResultBean<RetBookerBorrowReturn>  result=borrowReturn(actionCode,actionData,actionRemark);
-                if(result.getCode()==ResultCode.SUCCESS) {
-                    DbManager.getInstance().deleteTripMsg(rop.getMsgId());
-                }
-            }
-
+            borrowReturn(actionCode,actionData,actionRemark);
 
             if(actionCode.contains("failure")||actionCode.contains("exception")){
                 AppLogcatManager.uploadLogcat2Server("logcat -d -s BorrowReturnFlowThread RfeqCtrlByDs LockeqCtrlByDs ","test");
@@ -600,9 +586,9 @@ public class BorrowReturnFlowThread extends Thread {
             case ACTION_REQUEST_CLOSE_AUTH_FAILURE:
                 return 1021;
             case ACTION_FLOW_END:
-                return 1022;
+                return 1080;
             case ACTION_EXCEPTION:
-                return 1023;
+                return 1099;
 
         }
 
