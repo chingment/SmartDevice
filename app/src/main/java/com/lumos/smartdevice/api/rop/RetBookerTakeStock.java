@@ -9,6 +9,7 @@ public class RetBookerTakeStock implements Serializable {
     private String flowId;
     private String sheetId;
     private List<BookerBookVo> sheetItems;
+    private List<BookerBookVo> warnItems;
 
     public String getFlowId() {
         return flowId;
@@ -32,5 +33,13 @@ public class RetBookerTakeStock implements Serializable {
 
     public void setSheetItems(List<BookerBookVo> sheetItems) {
         this.sheetItems = sheetItems;
+    }
+
+    public List<BookerBookVo> getWarnItems() {
+        return warnItems;
+    }
+
+    public void setWarnItems(List<BookerBookVo> warnItems) {
+        this.warnItems = warnItems;
     }
 }

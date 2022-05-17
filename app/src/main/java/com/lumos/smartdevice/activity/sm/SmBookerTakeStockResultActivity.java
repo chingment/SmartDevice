@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.booker.BookerBorrowReturnOverviewActivity;
+import com.lumos.smartdevice.activity.booker.adapter.BookerBorrowReturnBookAdapter;
 import com.lumos.smartdevice.activity.booker.dialog.DialogBookerFlowHandling;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlReceiver;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlService;
@@ -27,12 +29,14 @@ import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetBookerStockSlots;
 import com.lumos.smartdevice.api.rop.RetBookerTakeStock;
 import com.lumos.smartdevice.api.rop.RopBookerStockSlots;
 import com.lumos.smartdevice.api.vo.BookerBookVo;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
 import com.lumos.smartdevice.api.vo.DeviceVo;
+import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
 import com.lumos.smartdevice.utils.HAUtil;
@@ -49,18 +53,34 @@ public class SmBookerTakeStockResultActivity extends SmBaseActivity {
     private static final String TAG = "SmBookerTakeStockResultActivity";
 
 
+    private MyListView lv_SheetItems;
+    private TextView tv_SheetItemsCount;
+    private MyListView lv_WarnItems;
+    private TextView tv_WarnItemsCount;
+
+    private RetBookerTakeStock retBookerTakeStock;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sm_booker_take_stock_result);
         setNavHeaderTtile(R.string.aty_nav_title_smbookertakestockresult);
         setNavHeaderBtnByGoBackIsVisible(true);
+
+        retBookerTakeStock = (RetBookerTakeStock) getIntent().getSerializableExtra("ret_booker_take_stock");
+
+
         initView();
         initEvent();
         initData();
     }
 
     private void initView() {
+
+        lv_SheetItems = findViewById(R.id.lv_SheetItems);
+        tv_SheetItemsCount = findViewById(R.id.tv_SheetItemsCount);
+        lv_WarnItems = findViewById(R.id.lv_WarnItems);
+        tv_WarnItemsCount = findViewById(R.id.tv_WarnItemsCount);
 
     }
 
@@ -69,6 +89,25 @@ public class SmBookerTakeStockResultActivity extends SmBaseActivity {
     }
 
     private void initData() {
+
+        List<BookerBookVo> sheetItems = retBookerTakeStock.getSheetItems();
+        List<BookerBookVo> warnItems = retBookerTakeStock.getWarnItems();
+
+        tv_SheetItemsCount.setText(String.valueOf(sheetItems.size()));
+        BookerBorrowReturnBookAdapter borrowBooksAdapter=new BookerBorrowReturnBookAdapter(SmBookerTakeStockResultActivity.this,sheetItems);
+        lv_SheetItems.setFocusable(false);
+        lv_SheetItems.setClickable(false);
+        lv_SheetItems.setPressed(false);
+        lv_SheetItems.setEnabled(false);
+        lv_SheetItems.setAdapter(borrowBooksAdapter);
+
+        tv_WarnItemsCount.setText(String.valueOf(warnItems.size()));
+        BookerBorrowReturnBookAdapter returnBooksAdapter=new BookerBorrowReturnBookAdapter(SmBookerTakeStockResultActivity.this,warnItems);
+        lv_WarnItems.setFocusable(false);
+        lv_WarnItems.setClickable(false);
+        lv_WarnItems.setPressed(false);
+        lv_WarnItems.setEnabled(false);
+        lv_WarnItems.setAdapter(returnBooksAdapter);
 
     }
 

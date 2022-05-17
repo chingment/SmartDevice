@@ -64,10 +64,6 @@ public class BookerBorrowReturnOverviewActivity extends BookerBaseActivity {
         List<BookerBookVo> borrowBooks = retBookerBorrowReturn.getBorrowBooks();
         List<BookerBookVo> returnBooks = retBookerBorrowReturn.getReturnBooks();
 
-        retBookerBorrowReturn.setBorrowBooks(borrowBooks);
-        retBookerBorrowReturn.setReturnBooks(returnBooks);
-
-
         tv_BorrowCount.setText(String.valueOf(borrowBooks.size()));
         BookerBorrowReturnBookAdapter borrowBooksAdapter=new BookerBorrowReturnBookAdapter(BookerBorrowReturnOverviewActivity.this,borrowBooks);
         lv_BorrowBooks.setFocusable(false);

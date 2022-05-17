@@ -343,6 +343,7 @@ public class TakeStockFlowThread extends Thread {
             actionData.put("flowId", ret_TakeStock.getFlowId());
             actionData.put("sheetId", ret_TakeStock.getSheetId());
             actionData.put("sheetItems",ret_TakeStock.getSheetItems());
+            actionData.put("warnItems",ret_TakeStock.getWarnItems());
 
             sendHandlerMessage(ACTION_TAKESTOCK_SUCCESS,actionData, "盘点成功");
             sendHandlerMessage(ACTION_FLOW_END, actionData, "盘点结束");
