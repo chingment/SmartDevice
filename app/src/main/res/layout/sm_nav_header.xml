@@ -60,7 +60,7 @@
         android:layout_centerVertical="true"
         android:baselineAligned="false"
         android:gravity="center_vertical|center_horizontal"
-        >
+        android:orientation="horizontal">
 
         <TextView
             android:visibility="gone"

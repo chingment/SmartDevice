@@ -13,30 +13,34 @@ import android.os.IBinder;
 import android.view.View;
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.activity.booker.BookerBorrowReturnInspectActivity;
 import com.lumos.smartdevice.activity.booker.BookerBorrowReturnOverviewActivity;
 import com.lumos.smartdevice.activity.booker.dialog.DialogBookerFlowHandling;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlReceiver;
 import com.lumos.smartdevice.activity.booker.service.BookerCtrlService;
 import com.lumos.smartdevice.activity.booker.service.BorrowReturnFlowThread;
 import com.lumos.smartdevice.activity.booker.service.MessageByAction;
+import com.lumos.smartdevice.activity.booker.service.TakeStockFlowThread;
 import com.lumos.smartdevice.activity.sm.adapter.SmBookerStockSlotAdapter;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmConfirm;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
+import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetBookerStockSlots;
 import com.lumos.smartdevice.api.rop.RopBookerStockSlots;
+import com.lumos.smartdevice.api.vo.BookerBookVo;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
-import com.lumos.smartdevice.api.vo.BookerStockSlotVo;
 import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.ui.refreshview.OnRefreshHandler;
 import com.lumos.smartdevice.ui.refreshview.SuperRefreshLayout;
+import com.lumos.smartdevice.utils.HAUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
+import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.NoDoubleClickUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SmBookerTakeStockActivity extends SmBaseActivity {
@@ -113,6 +117,79 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
             @Override
             public void handleMessage(MessageByAction message) {
 
+                String actionCode = message.getActionCode();
+                String actionRemark = message.getActionRemark();
+                HashMap<String, Object> actionData = message.getActionData();
+                LogUtil.d(TAG, "actionCode:" + actionCode + ",actionRemark:" + actionRemark);
+
+                switch (actionCode) {
+                    case TakeStockFlowThread.ACTION_TIPS:
+                        showToast(actionRemark);
+                        break;
+                    case TakeStockFlowThread.ACTION_FLOW_START:
+                        setTimerPauseByActivityFinish();
+                        dialog_BookerFlowHandling.setTipsText("设备正在初始化");
+                        dialog_BookerFlowHandling.show();
+                        break;
+                    case TakeStockFlowThread.ACTION_INIT_DATA_FAILURE:
+                        dialog_BookerFlowHandling.setTipsText(actionRemark);
+                        break;
+                    case TakeStockFlowThread.ACTION_INIT_DATA_SUCCESS:
+                        dialog_BookerFlowHandling.setTipsText("初始化数据成功");
+                        break;
+                    case TakeStockFlowThread.ACTION_CHECK_DOOR_STATUS:
+                        dialog_BookerFlowHandling.setTipsText("检查柜门状态");
+                        break;
+                    case TakeStockFlowThread.ACTION_CHECK_DOOR_STATUS_SUCCESS:
+                        dialog_BookerFlowHandling.setTipsText("检查柜门状态成功");
+                        break;
+                    case TakeStockFlowThread.ACTION_CHECK_DOOR_STATUS_FAILURE:
+                        dialog_BookerFlowHandling.setTipsText("检查柜门状态失败");
+                        break;
+                    case TakeStockFlowThread.ACTION_DOOR_OPEN:
+                        dialog_BookerFlowHandling.setTipsText("柜门状态已打开");
+                        break;
+                    case TakeStockFlowThread.ACTION_DOOR_CLOSE:
+                        dialog_BookerFlowHandling.setTipsText("柜门状态已关闭");
+                        break;
+                    case TakeStockFlowThread.ACTION_WAIT_RFREADER:
+                        dialog_BookerFlowHandling.setTipsText("等待检阅数量");
+                        break;
+                    case TakeStockFlowThread.ACTION_RFREADER_SUCCESS:
+                        dialog_BookerFlowHandling.setTipsText("检阅成功");
+                        break;
+                    case TakeStockFlowThread.ACTION_RFREADER_FAILURE:
+                        dialog_BookerFlowHandling.setTipsText("检阅失败");
+                        break;
+                    case TakeStockFlowThread.ACTION_TAKESTOCK_SUCCESS:
+                        dialog_BookerFlowHandling.setTipsText("盘点成功");
+                        break;
+                    case TakeStockFlowThread.ACTION_TAKESTOCK_FAILURE:
+                        dialog_BookerFlowHandling.setTipsText("盘点失败");
+                        break;
+                    case TakeStockFlowThread.ACTION_FLOW_END:
+                        dialog_BookerFlowHandling.setTipsText("处理结束");
+
+//                        RetBookerBorrowReturn retBookerBorrowReturn = new RetBookerBorrowReturn();
+//                        retBookerBorrowReturn.setFlowId(String.valueOf(actionData.get("flowId")));
+//                        retBookerBorrowReturn.setBorrowBooks(HAUtil.objToList(actionData.get("borrowBooks"), BookerBookVo.class));
+//                        retBookerBorrowReturn.setReturnBooks(HAUtil.objToList(actionData.get("returnBooks"), BookerBookVo.class));
+//
+//                        Intent intent = new Intent(getAppContext(), BookerBorrowReturnOverviewActivity.class);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putSerializable("ret_booker_borrow_return", retBookerBorrowReturn);
+//                        intent.putExtras(bundle);
+//                        openActivity(intent);
+//                        finish();
+                        break;
+                    case BorrowReturnFlowThread.ACTION_EXCEPTION:
+                        dialog_BookerFlowHandling.setTipsText("设备处理异常");
+                        break;
+                }
+
+                if (actionCode.contains("failure") || actionCode.contains("exception")) {
+                    dialog_BookerFlowHandling.startCancleCountDownTimer();
+                }
 
             }
         });
@@ -150,7 +227,7 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
         rv_StockSlots_Adapter = new SmBookerStockSlotAdapter();
         rv_StockSlots_Adapter.setOnClickListener(new SmBookerStockSlotAdapter.OnClickListener() {
             @Override
-            public void onStockTake(BookerStockSlotVo item) {
+            public void onStockTake(BookerSlotVo item) {
                 dialog_Confirm.setFunction("take_stock");
                 dialog_Confirm.setTipsImageVisibility(View.GONE);
                 dialog_Confirm.setTag(item);
@@ -220,7 +297,7 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
 
                     int totalPages = d.getTotalPages();
 
-                    List<BookerStockSlotVo> items = d.getItems();
+                    List<BookerSlotVo> items = d.getItems();
 
 
                     if(d.getTotalSize()==0){
@@ -266,7 +343,7 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
     }
 
     private void dlgTakeStock() {
-
+        curSlot = (BookerSlotVo) dialog_Confirm.getTag();
         bookerCtrlServiceBinder.takeStock(device, curSlot);
     }
 

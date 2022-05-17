@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class TakeStockFlowThread extends Thread {
 
@@ -62,6 +63,8 @@ public class TakeStockFlowThread extends Thread {
     private int flowType;
     private final OnHandlerListener onHandlerListener;
 
+    private static final Map<String, Object> brFlowDo = new ConcurrentHashMap<>();
+
     public TakeStockFlowThread(DeviceVo device, BookerSlotVo slot, int flowType, OnHandlerListener onHandlerListener) {
         this.device = device;
         this.slot=slot;
@@ -71,24 +74,45 @@ public class TakeStockFlowThread extends Thread {
     }
 
     private void setRunning(boolean isRunning) {
-        this.isRunning=isRunning;
+        String slotId=slot.getSlotId();
+
+        if(isRunning) {
+            brFlowDo.put(slotId, true);
+        }
+        else{
+            brFlowDo.remove(slotId);
+        }
     }
 
     public static boolean checkRunning(BookerSlotVo slot) {
-
-        return false;
+        return brFlowDo.containsKey(slot.getSlotId());
     }
 
     @Override
     public synchronized void run() {
         super.run();
 
-        setRunning(true);
+        String slotId=slot.getSlotId();
 
-        HashMap<String, Object> actionData = new HashMap<>();
+        synchronized (BorrowReturnFlowThread.class) {
+            if (brFlowDo.containsKey(slotId)) {
+                LogUtil.d(TAG, slotId + ":盘点任务正在执行");
+                sendHandlerMessage(ACTION_TIPS, "正在执行中");
+                return;
+            } else {
+                LogUtil.d(TAG, slotId + ":盘点任务开始执行");
+                setRunning(true);
+            }
+        }
+
+        doTask();
+    }
+
+    private void  doTask() {
 
         RopBookerCreateFlow rop = new RopBookerCreateFlow();
         rop.setDeviceId(device.getDeviceId());
+        rop.setSlotId(slot.getSlotId());
         rop.setType(flowType);
 
         ResultBean<RetBookerCreateFlow> result_CreateFlow = ReqInterface.getInstance().bookerCreateFlow(rop);
@@ -102,6 +126,8 @@ public class TakeStockFlowThread extends Thread {
         RetBookerCreateFlow ret_CreateFlow = result_CreateFlow.getData();
 
         flowId = ret_CreateFlow.getFlowId();
+
+        HashMap<String, Object> actionData = new HashMap<>();
 
         try {
 
@@ -311,6 +337,7 @@ public class TakeStockFlowThread extends Thread {
             setRunning(false);
         }
     }
+
 
     private ResultBean<RetBookerTakeStock> takeStock(String actionCode, HashMap<String,Object> actionData, String actionRemark) {
 

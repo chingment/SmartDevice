@@ -1,6 +1,6 @@
 package com.lumos.smartdevice.api.rop;
 
-import com.lumos.smartdevice.api.vo.BookerStockSlotVo;
+import com.lumos.smartdevice.api.vo.BookerSlotVo;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class RetBookerStockSlots {
     private int pageSize;
     private long totalSize;
     private int totalPages;
-    private List<BookerStockSlotVo> items;
+    private List<BookerSlotVo> items;
 
     public int getPageNum() {
         return pageNum;
@@ -43,11 +43,11 @@ public class RetBookerStockSlots {
         this.totalPages = totalPages;
     }
 
-    public List<BookerStockSlotVo> getItems() {
+    public List<BookerSlotVo> getItems() {
         return items;
     }
 
-    public void setItems(List<BookerStockSlotVo> items) {
+    public void setItems(List<BookerSlotVo> items) {
         this.items = items;
     }
 }

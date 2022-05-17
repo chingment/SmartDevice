@@ -2,20 +2,15 @@ package com.lumos.smartdevice.activity.sm.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lumos.smartdevice.R;
-import com.lumos.smartdevice.api.vo.BookerBorrowBookVo;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
-import com.lumos.smartdevice.api.vo.BookerStockSlotVo;
 import com.lumos.smartdevice.ui.refreshview.MyViewHolder;
 import com.lumos.smartdevice.ui.refreshview.RefreshAdapter;
-import com.lumos.smartdevice.utils.CommonUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,20 +22,20 @@ import java.util.List;
 public class SmBookerStockSlotAdapter extends RefreshAdapter {
     private static final String TAG = "SmBookerStockSlotAdapter";
     private Context context;
-    private List<BookerStockSlotVo> items = new ArrayList<>();
+    private List<BookerSlotVo> items = new ArrayList<>();
 
     public SmBookerStockSlotAdapter() {
 
     }
 
-    public void setData(List<BookerStockSlotVo> items, Context context) {
+    public void setData(List<BookerSlotVo> items, Context context) {
         this.items = items;
         this.context = context;
         notifyDataSetChanged();
 
     }
 
-    public void addData(List<BookerStockSlotVo> items, Context context) {
+    public void addData(List<BookerSlotVo> items, Context context) {
         this.items.addAll(items);
         this.context = context;
         notifyDataSetChanged();
@@ -62,7 +57,7 @@ public class SmBookerStockSlotAdapter extends RefreshAdapter {
         TextView tv_LastTakeTime = holder.itemView.findViewById(R.id.tv_LastTakeTime);
         TextView btn_StockTake = holder.itemView.findViewById(R.id.btn_StockTake);
 
-        BookerStockSlotVo item = items.get(position);
+        BookerSlotVo item = items.get(position);
 
         if(item.getIsOpen()){
             tv_Status.setText("（已打开）");
@@ -81,7 +76,7 @@ public class SmBookerStockSlotAdapter extends RefreshAdapter {
 
         btn_StockTake.setOnClickListener(view -> {
             if(onClickListener!=null) {
-                BookerStockSlotVo l_item = (BookerStockSlotVo) view.getTag();
+                BookerSlotVo l_item = (BookerSlotVo) view.getTag();
                 onClickListener.onStockTake(l_item);
             }
         });
@@ -101,6 +96,6 @@ public class SmBookerStockSlotAdapter extends RefreshAdapter {
     }
 
     public interface OnClickListener {
-        void onStockTake(BookerStockSlotVo bean);
+        void onStockTake(BookerSlotVo item);
     }
 }

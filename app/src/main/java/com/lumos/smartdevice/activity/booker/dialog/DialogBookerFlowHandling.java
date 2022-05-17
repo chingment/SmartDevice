@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.BaseActivity;
 import com.lumos.smartdevice.activity.booker.BookerBaseActivity;
 import com.lumos.smartdevice.ui.ViewHolder;
 
@@ -20,7 +21,7 @@ public class DialogBookerFlowHandling extends Dialog {
 
     private static final String TAG = "DialogBookerFlowHandling";
     private final Dialog mThis;
-    private final BookerBaseActivity mContext;
+    private final BaseActivity mContext;
     private final View mLayoutRes;
 
 
@@ -36,7 +37,7 @@ public class DialogBookerFlowHandling extends Dialog {
     public DialogBookerFlowHandling(Context context) {
         super(context, R.style.dialog);
         mThis = this;
-        mContext = (BookerBaseActivity) context;
+        mContext = (BaseActivity) context;
         mLayoutRes = LayoutInflater.from(context).inflate(R.layout.dialog_booker_flow_handling, null);
 
 
