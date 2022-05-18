@@ -267,7 +267,7 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
     }
 
     private void initData() {
-        this.getStockSlots();
+
     }
 
     private void getStockSlots(){
@@ -354,6 +354,11 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
         bookerCtrlServiceBinder.takeStock(currentUser.getUserId(),3,currentUser.getUserId(), device, curSlot);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.getStockSlots();
+    }
     @Override
     public void onDestroy() {
         if(dialog_Confirm!=null) {
