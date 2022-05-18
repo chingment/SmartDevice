@@ -269,7 +269,7 @@ public class TakeStockFlowThread extends Thread {
                         }
 
 
-                        Thread.sleep(500);
+                        Thread.sleep(10*1000);
 
                         tryDo = 0;
                         isSendCloseRead = false;
@@ -303,7 +303,7 @@ public class TakeStockFlowThread extends Thread {
 
             TinySyncExecutor.getInstance().enqueue(taskRfRead);
 
-            nDoMaxTime = 5 * 1000;
+            nDoMaxTime = 15 * 1000;
             nDoStartTime = System.currentTimeMillis();
             nDoLastTime = System.currentTimeMillis() - nDoStartTime;
 

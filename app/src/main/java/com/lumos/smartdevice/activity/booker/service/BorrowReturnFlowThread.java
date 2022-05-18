@@ -254,7 +254,7 @@ public class BorrowReturnFlowThread extends Thread {
                         }
 
 
-                        Thread.sleep(1000);
+                        Thread.sleep(10*1000);
 
                         tryDo = 0;
                         isSendCloseRead = false;
@@ -289,7 +289,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             TinySyncExecutor.getInstance().enqueue(taskRfRead);
 
-            long nDoMaxTime = 5 * 1000;
+            long nDoMaxTime = 15 * 1000;
             long nDoStartTime = System.currentTimeMillis();
             long nDoLastTime = System.currentTimeMillis() - nDoStartTime;
 
@@ -426,7 +426,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             TinySyncExecutor.getInstance().enqueue(taskRfRead);
 
-            nDoMaxTime = 10 * 1000;
+            nDoMaxTime = 15 * 1000;
             nDoStartTime = System.currentTimeMillis();
             nDoLastTime = System.currentTimeMillis() - nDoStartTime;
 

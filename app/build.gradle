@@ -18,7 +18,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 2
-        versionName "1.0.0.1"
+        versionName "1.0.0.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
@@ -46,7 +46,7 @@ android {
             signingConfig signingConfigs.release
             buildConfigField "Boolean", "ISAPPDEBUG", "true"
             buildConfigField "String", "COMNAME", "\"caterbao\""
-            buildConfigField "String", "ENVIRONMENT", "\"http://192.168.50.15:8080\""
+            buildConfigField "String", "ENVIRONMENT", "\"http://api.device.gddeshang168.com\""
             buildConfigField "String", "APPKEY", "\"smartdevice\""
             buildConfigField "String", "APPSECRET", "\"267b08eef8b8421ca6bab6cf809c7fc5\""
         }
