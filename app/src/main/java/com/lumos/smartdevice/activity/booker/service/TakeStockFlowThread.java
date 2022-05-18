@@ -1,16 +1,12 @@
 package com.lumos.smartdevice.activity.booker.service;
 
-import android.util.Log;
-
 import com.alibaba.fastjson.JSON;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ReqUrl;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
-import com.lumos.smartdevice.api.rop.RetBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RetBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RetBookerTakeStock;
-import com.lumos.smartdevice.api.rop.RopBookerBorrowReturn;
 import com.lumos.smartdevice.api.rop.RopBookerCreateFlow;
 import com.lumos.smartdevice.api.rop.RopBookerTakeStock;
 import com.lumos.smartdevice.api.vo.BookerSlotVo;
@@ -62,24 +58,24 @@ public class TakeStockFlowThread extends Thread {
 
 
     private String flowId;
-    private final String clientUserId;
+    private final String flowUserId;
+    private int flowType;
     private final int identityType;
     private final String identityId;
     private final DeviceVo device;
     private final BookerSlotVo slot;
 
-    private int flowType;
     private final OnHandlerListener onHandlerListener;
 
     private static final Map<String, Object> brFlowDo = new ConcurrentHashMap<>();
 
-    public TakeStockFlowThread(String clientUserId, int identityType, String identityId, DeviceVo device, BookerSlotVo slot, int flowType, OnHandlerListener onHandlerListener) {
-        this.clientUserId = clientUserId;
+    public TakeStockFlowThread(int flowType,String flowUserId, int identityType, String identityId, DeviceVo device, BookerSlotVo slot, OnHandlerListener onHandlerListener) {
+        this.flowType = flowType;
+        this.flowUserId = flowUserId;
         this.identityType = identityType;
         this.identityId = identityId;
         this.device = device;
         this.slot=slot;
-        this.flowType = flowType;
         this.onHandlerListener = onHandlerListener;
         this.setName("TakeStockFlowTread");
     }
@@ -124,10 +120,10 @@ public class TakeStockFlowThread extends Thread {
         RopBookerCreateFlow rop = new RopBookerCreateFlow();
         rop.setDeviceId(device.getDeviceId());
         rop.setSlotId(slot.getSlotId());
-        rop.setClientUserId(clientUserId);
+        rop.setFlowType(flowType);
+        rop.setFlowUserId(flowUserId);
         rop.setIdentityType(identityType);
         rop.setIdentityId(identityId);
-        rop.setType(flowType);
 
         ResultBean<RetBookerCreateFlow> result_CreateFlow = ReqInterface.getInstance().bookerCreateFlow(rop);
 
@@ -216,6 +212,7 @@ public class TakeStockFlowThread extends Thread {
             }
 
             if(slotStatus!=0&&slotStatus!=1) {
+                LogUtil.d(TAG, "slotStatus:" + slotStatus);
                 sendHandlerMessage(ACTION_CHECK_DOOR_STATUS_FAILURE, "检查柜门状态失败[06]");
             }
 
@@ -343,7 +340,7 @@ public class TakeStockFlowThread extends Thread {
 
             actionData.put("closeRfIds",  closeRfIds);
 
-            ResultBean<RetBookerTakeStock> result_TakeStock = takeStock(ACTION_RFREADER_SUCCESS, actionData, "盘点成功");
+            ResultBean<RetBookerTakeStock> result_TakeStock = takeStock(ACTION_RFREADER_SUCCESS, actionData, "读取成功");
 
             if (result_TakeStock.getCode() != ResultCode.SUCCESS) {
                 sendHandlerMessage(ACTION_TAKESTOCK_FAILURE, "盘点失败[09]");

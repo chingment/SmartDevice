@@ -26,13 +26,13 @@ public class BookerCtrl {
         return mThis;
     }
 
-    public void borrowReturnStart(String clientUserId,int identityType,String identityId,DeviceVo device, BookerSlotVo slot,BorrowReturnFlowThread.OnHandlerListener onHandlerListener) {
-        BorrowReturnFlowThread thread = new BorrowReturnFlowThread(clientUserId, identityType, identityId, device, slot, onHandlerListener);
+    public void borrowReturnStart(String flowUserId,int identityType,String identityId,DeviceVo device, BookerSlotVo slot,BorrowReturnFlowThread.OnHandlerListener onHandlerListener) {
+        BorrowReturnFlowThread thread = new BorrowReturnFlowThread(flowUserId, identityType, identityId, device, slot, onHandlerListener);
         thread.start();
     }
 
-    public void takeStockStart(String clientUserId, int identityType, String identityId,DeviceVo device, BookerSlotVo slot, TakeStockFlowThread.OnHandlerListener onHandlerListener) {
-        TakeStockFlowThread thread = new TakeStockFlowThread(clientUserId,identityType,identityId,device, slot, 2, onHandlerListener);
+    public void takeStockStart(String flowUserId, int identityType, String identityId,DeviceVo device, BookerSlotVo slot, TakeStockFlowThread.OnHandlerListener onHandlerListener) {
+        TakeStockFlowThread thread = new TakeStockFlowThread(2,flowUserId,identityType,identityId,device, slot,  onHandlerListener);
         thread.start();
     }
 

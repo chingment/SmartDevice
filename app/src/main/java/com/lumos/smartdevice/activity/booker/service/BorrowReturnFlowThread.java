@@ -64,7 +64,7 @@ public class BorrowReturnFlowThread extends Thread {
     public static final String ACTION_EXCEPTION = "exception";
 
     private String flowId;
-    private final String clientUserId;
+    private final String flowUserId;
     private final int identityType;
     private final String identityId;
     private final DeviceVo device;
@@ -74,8 +74,8 @@ public class BorrowReturnFlowThread extends Thread {
 
     private final OnHandlerListener onHandlerListener;
 
-    public BorrowReturnFlowThread(String clientUserId, int identityType, String identityId, DeviceVo device, BookerSlotVo slot, OnHandlerListener onHandlerListener) {
-        this.clientUserId = clientUserId;
+    public BorrowReturnFlowThread(String flowUserId, int identityType, String identityId, DeviceVo device, BookerSlotVo slot, OnHandlerListener onHandlerListener) {
+        this.flowUserId = flowUserId;
         this.identityType = identityType;
         this.identityId = identityId;
         this.device = device;
@@ -129,7 +129,7 @@ public class BorrowReturnFlowThread extends Thread {
             for (Map.Entry<String, TagInfo> entry : entrys) {
 
                 rfIds.add(entry.getKey());
-                
+
             }
         }
 
@@ -142,10 +142,10 @@ public class BorrowReturnFlowThread extends Thread {
         RopBookerCreateFlow rop = new RopBookerCreateFlow();
         rop.setDeviceId(device.getDeviceId());
         rop.setSlotId(slot.getSlotId());
-        rop.setClientUserId(clientUserId);
+        rop.setFlowType(1);
+        rop.setFlowUserId(flowUserId);
         rop.setIdentityType(identityType);
         rop.setIdentityId(identityId);
-        rop.setType(1);
 
         ResultBean<RetBookerCreateFlow> result_CreateFlow = ReqInterface.getInstance().bookerCreateFlow(rop);
 
@@ -483,7 +483,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_REQUEST_CLOSE_AUTH_SUCCESS, actionData, "请求关闭验证通过");
 
-            sendHandlerMessage(ACTION_FLOW_END, actionData, "借阅流程结束");
+            sendHandlerMessage(ACTION_FLOW_END, actionData, "借还结束");
 
             setRunning(false);
 
