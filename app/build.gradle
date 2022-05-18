@@ -18,7 +18,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 2
-        versionName "1.0.0.3"
+        versionName "1.0.0.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         ndk {
@@ -63,6 +63,8 @@ android {
 
             applicationVariants.all { variant ->
                 variant.outputs.all {
+
+                    variant.getPackageApplicationProvider().get().outputDirectory =new File("/Users/chingment/Documents/SmartShop/webfile")
 
                     def fileName = 'smartdevice.apk'
 

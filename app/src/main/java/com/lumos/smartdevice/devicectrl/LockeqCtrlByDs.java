@@ -64,7 +64,7 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
     }
 
     public boolean  sendOpenSlot(String ant) {
-
+        LogUtil.d(TAG,"sendOpenSlot.ant:"+ant);
         int[] arr_ant =getAnt(ant);
 
         if(arr_ant==null||arr_ant.length<2)
@@ -79,7 +79,7 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
     }
 
     public boolean setLight(String ant){
-
+        LogUtil.d(TAG,"setLight.ant:"+ant);
         int[] arr_ant =getAnt(ant);
 
         if(arr_ant==null||arr_ant.length<2)
@@ -95,7 +95,7 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
     }
 
     private int[] getAnt(String ant) {
-
+        LogUtil.d(TAG,"getAnt.ant:"+ant);
         int[] i_ant = new int[2];
 
         try {
@@ -112,7 +112,7 @@ public class LockeqCtrlByDs implements ILockeqCtrl {
     }
 
     public int getSlotStatus(String ant) {
-
+        LogUtil.d(TAG,"getSlotStatus.ant:"+ant);
         int status = -1;
 
         int[] arr_ant = getAnt(ant);

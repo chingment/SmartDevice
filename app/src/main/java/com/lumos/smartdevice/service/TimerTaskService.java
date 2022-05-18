@@ -104,7 +104,7 @@ public class TimerTaskService extends Service {
                             if (!StringUtil.isEmpty(respone)) {
                                 ResultBean<Object> result = JsonUtil.toResult(respone, new TypeReference<ResultBean<Object>>() {
                                 });
-                                if (result.getCode() == ResultCode.SUCCESS) {
+                                if (result.getCode() == ResultCode.SUCCESS||result.getCode()==2001) {
                                     DbManager.getInstance().deleteTripMsg(tripMsg.getMsgId());
                                 }
                             }

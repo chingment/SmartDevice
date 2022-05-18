@@ -22,7 +22,6 @@ public class ResultBean<T>  {
     }
 
     public ResultBean(int code , String msg, T data){
-
         this.code=code;
         this.msg=msg;
         this.data=data;

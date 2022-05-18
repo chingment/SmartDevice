@@ -120,14 +120,16 @@ public class BorrowReturnFlowThread extends Thread {
         doTask();
     }
 
-    private List<String> getRfIds(Map<String, TagInfo> map_TagInfos) {
+    private List<String> getRfIds( Map<String, TagInfo> map_TagInfos) {
 
         List<String> rfIds = new ArrayList<>();
 
         if (map_TagInfos != null) {
             Set<Map.Entry<String, TagInfo>> entrys = map_TagInfos.entrySet();
             for (Map.Entry<String, TagInfo> entry : entrys) {
+
                 rfIds.add(entry.getKey());
+                
             }
         }
 
@@ -231,8 +233,11 @@ public class BorrowReturnFlowThread extends Thread {
 
                         if (!isSendCloseRead) {
                             setResult(false);
+                            LogUtil.d(TAG,"发送关闭RFID读取失败1");
                             return;
                         }
+
+                        LogUtil.d(TAG,"发送打开RFID读取成功1");
 
                         Thread.sleep(200);
 
@@ -250,9 +255,11 @@ public class BorrowReturnFlowThread extends Thread {
 
                         if (!isSendOpenRead) {
                             setResult(false);
+                            LogUtil.d(TAG,"发送打开RFID读取失败");
                             return;
                         }
 
+                        LogUtil.d(TAG,"发送打开RFID读取成功");
 
                         Thread.sleep(10*1000);
 
@@ -272,8 +279,11 @@ public class BorrowReturnFlowThread extends Thread {
 
                         if (!isSendCloseRead) {
                             setResult(false);
+                            LogUtil.d(TAG,"发送关闭RFID读取失败2");
                             return;
                         }
+
+                        LogUtil.d(TAG,"发送关闭RFID读取成功");
 
                         setTagInfos(rfeqCtrl.getRfIds(slot.getRfeqAnt()));
 

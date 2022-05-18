@@ -1,5 +1,7 @@
 package com.lumos.smartdevice.activity.booker.service;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 import com.lumos.smartdevice.api.ReqInterface;
 import com.lumos.smartdevice.api.ReqUrl;
@@ -33,6 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TakeStockFlowThread extends Thread {
@@ -245,9 +248,12 @@ public class TakeStockFlowThread extends Thread {
                         }
 
                         if (!isSendCloseRead) {
+                            LogUtil.d(TAG,"发送关闭RFID读取失败1");
                             setResult(false);
                             return;
                         }
+
+                        LogUtil.d(TAG,"发送关闭RFID读取成功1");
 
                         Thread.sleep(200);
 
@@ -265,9 +271,11 @@ public class TakeStockFlowThread extends Thread {
 
                         if (!isSendOpenRead) {
                             setResult(false);
+                            LogUtil.d(TAG,"发送打开RFID读取失败");
                             return;
                         }
 
+                        LogUtil.d(TAG,"发送打开RFID读取成功");
 
                         Thread.sleep(10*1000);
 
@@ -287,8 +295,11 @@ public class TakeStockFlowThread extends Thread {
 
                         if (!isSendCloseRead) {
                             setResult(false);
+                            LogUtil.d(TAG,"发送关闭RFID读取失败2");
                             return;
                         }
+
+                        LogUtil.d(TAG,"发送关闭RFID读取成功2");
 
                         setTagInfos(rfeqCtrl.getRfIds(slot.getRfeqAnt()));
 
@@ -328,7 +339,9 @@ public class TakeStockFlowThread extends Thread {
 
             Map<String, TagInfo> tag_RfIds = taskRfRead.getTagInfos();
 
-            actionData.put("closeRfIds", tag_RfIds);
+            List<String> closeRfIds = getRfIds(tag_RfIds);
+
+            actionData.put("closeRfIds",  closeRfIds);
 
             ResultBean<RetBookerTakeStock> result_TakeStock = takeStock(ACTION_RFREADER_SUCCESS, actionData, "盘点成功");
 
@@ -355,7 +368,6 @@ public class TakeStockFlowThread extends Thread {
             setRunning(false);
         }
     }
-
 
     private ResultBean<RetBookerTakeStock> takeStock(String actionCode, HashMap<String,Object> actionData, String actionRemark) {
 
@@ -457,5 +469,20 @@ public class TakeStockFlowThread extends Thread {
         }
 
         return 0;
+    }
+
+    private List<String> getRfIds(Map<String, TagInfo> map_TagInfos) {
+
+        List<String> rfIds = new ArrayList<>();
+
+        if (map_TagInfos != null) {
+            Set<Map.Entry<String, TagInfo>> entrys = map_TagInfos.entrySet();
+            for (Map.Entry<String, TagInfo> entry : entrys) {
+                rfIds.add(entry.getKey());
+            }
+        }
+
+        return rfIds;
+
     }
 }

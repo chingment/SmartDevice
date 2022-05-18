@@ -1,5 +1,7 @@
 package com.lumos.smartdevice.devicectrl;
 
+import android.util.Log;
+
 import com.gg.reader.api.dal.GClient;
 import com.gg.reader.api.dal.HandlerTagEpcLog;
 import com.gg.reader.api.dal.HandlerTagEpcOver;
@@ -18,7 +20,7 @@ import java.util.Set;
 
 public class RfeqCtrlByDs implements IRfeqCtrl {
 
-    private static final String TAG = "RfIdCtrlByDs";
+    private static final String TAG = "RfeqCtrlByDs";
 
     private static RfeqCtrlByDs mThis = null;
 
@@ -97,6 +99,8 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
 
     public boolean sendOpenRead(String ant) {
 
+        LogUtil.d(TAG,"sendOpenRead.ant:"+ant);
+
         MsgBaseInventoryEpc msg = new MsgBaseInventoryEpc();
         msg.setAntennaEnable(convertAntennaEnable(ant));
         msg.setInventoryMode(1);
@@ -121,7 +125,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
     }
 
     public Map<String, TagInfo> getRfIds(String ant) {
-
+        LogUtil.d(TAG,"getRfIds.ant:"+ant);
         String[] s_ants = ant.split(",");
 
         Map<String, TagInfo> ant_TagInfos = new LinkedHashMap<>();
