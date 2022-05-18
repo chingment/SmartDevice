@@ -191,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
-                    android:id="@+id/btn_Save"
+                    android:id="@+id/btn_StockInbound"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/size_38"
                     android:layout_marginTop="@dimen/size_30"
@@ -202,10 +202,7 @@
                     android:textSize="@dimen/sp_16"/>
             </LinearLayout>
 
-
-
         </LinearLayout>
-
 
     </LinearLayout>
 </LinearLayout>
