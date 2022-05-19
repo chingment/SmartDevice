@@ -296,6 +296,8 @@ public class TakeStockFlowThread extends Thread {
                             return;
                         }
 
+                        Thread.sleep(1000);
+
                         LogUtil.d(TAG,"发送关闭RFID读取成功2");
 
                         setTagInfos(rfeqCtrl.getRfIds(slot.getRfeqAnt()));

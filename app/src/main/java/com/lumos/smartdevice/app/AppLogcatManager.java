@@ -19,6 +19,8 @@ import java.util.Map;
 
 public class AppLogcatManager {
 
+
+
     public static void uploadLogcat2Server(String cmd,String action) {
 
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
