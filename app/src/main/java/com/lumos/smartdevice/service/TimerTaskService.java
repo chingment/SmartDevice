@@ -49,19 +49,21 @@ public class TimerTaskService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setSmallIcon(R.mipmap.ic_launcher_round);
-        builder.setContentTitle("Foreground");
-        builder.setContentText("I am a foreground service");
-        builder.setContentInfo("Content Info");
-        builder.setWhen(System.currentTimeMillis());
-        Intent activityIntent = new Intent(this, InitDataActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(pendingIntent);
-        Notification notification = builder.build();
-        startForeground(FOREGROUND_ID, notification);
+        try {
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+            builder.setSmallIcon(R.mipmap.ic_launcher_round);
+            builder.setContentTitle("Foreground");
+            builder.setContentText("I am a foreground service");
+            builder.setContentInfo("Content Info");
+            builder.setWhen(System.currentTimeMillis());
+            Intent activityIntent = new Intent(this, InitDataActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, activityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.setContentIntent(pendingIntent);
+            Notification notification = builder.build();
+            startForeground(FOREGROUND_ID, notification);
+        }catch (Exception ex){
+            LogUtil.d(TAG,ex);
+        }
 
         return super.onStartCommand(intent, flags, startId);
     }

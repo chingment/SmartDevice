@@ -32,19 +32,14 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmBookerTakeStockActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/SmBookerTakeStockActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/adapter/SmBookerStockSlotAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/activity/sm/adapter/SmBookerStockSlotAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/vo/BookerSlotVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/api/vo/BookerSlotVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/RfeqCtrlByDs.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/devicectrl/RfeqCtrlByDs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_sm_booker_stock_slot.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_sm_booker_stock_slot.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/service/TimerTaskService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/lumos/smartdevice/service/TimerTaskService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/chingment/.android/avd/FANJU_API_24.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[H4K5T20B03004762]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
