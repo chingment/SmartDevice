@@ -92,5 +92,15 @@ public class BookerCtrlService extends Service {
             return bookerCtrl.checkTakeStockIsRunning(slot);
         }
 
+        public void openDoor(String clientUserId, int identityType, String identityId,DeviceVo device, BookerSlotVo slot) {
+            bookerCtrl.openDoorStart(clientUserId,identityType,identityId,device, slot, new OpenDoorFlowThread.OnHandlerListener() {
+                @Override
+                public void handleMessage(MessageByAction message) {
+                    LogUtil.d(TAG, "actionCode:" + message.getActionCode() + ",actionRemark:" + message.getActionRemark());
+                    sendBroadcastMsg(message);
+                }
+            });
+        }
+
     }
 }

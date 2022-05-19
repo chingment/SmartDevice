@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class MessageByAction implements Serializable {
     private String deviceId;
     private String flowId;
+    private int flowType;
     private String actionCode;
     private HashMap<String,Object> actionData;
     private String actionRemark;
@@ -26,6 +27,13 @@ public class MessageByAction implements Serializable {
         this.flowId = flowId;
     }
 
+    public int getFlowType() {
+        return flowType;
+    }
+
+    public void setFlowType(int flowType) {
+        this.flowType = flowType;
+    }
 
     public String getActionCode() {
         return actionCode;

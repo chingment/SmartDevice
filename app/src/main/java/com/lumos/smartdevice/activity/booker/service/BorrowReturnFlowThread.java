@@ -534,6 +534,7 @@ public class BorrowReturnFlowThread extends Thread {
             MessageByAction message = new MessageByAction();
             message.setDeviceId(device.getDeviceId());
             message.setFlowId(flowId);
+            message.setFlowType(1);
             message.setActionCode(actionCode);
             message.setActionData(actionData);
             message.setActionRemark(actionRemark);

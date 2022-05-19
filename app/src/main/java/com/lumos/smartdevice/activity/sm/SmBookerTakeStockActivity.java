@@ -63,6 +63,7 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
     private BookerSlotVo curSlot;
     private DialogBookerFlowHandling dialog_BookerFlowHandling;
 
+
     private BookerCtrlReceiver bookerCtrlServiceReceiver;
 
     private BookerCtrlService.CtrlBinder bookerCtrlServiceBinder;
@@ -107,6 +108,9 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
                     case "take_stock":
                         dlgTakeStock();
                         break;
+                    case "open_door":
+                        dlgOpenDoor();
+                        break;
                 }
                 dialog_Confirm.hide();
             }
@@ -124,78 +128,100 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
             @Override
             public void handleMessage(MessageByAction message) {
 
+                int flowId = message.getFlowType();
                 String actionCode = message.getActionCode();
                 String actionRemark = message.getActionRemark();
                 HashMap<String, Object> actionData = message.getActionData();
                 LogUtil.d(TAG, "actionCode:" + actionCode + ",actionRemark:" + actionRemark);
 
-                switch (actionCode) {
-                    case TakeStockFlowThread.ACTION_TIPS:
-                        showToast(actionRemark);
-                        break;
-                    case TakeStockFlowThread.ACTION_FLOW_START:
-                        setTimerPauseByActivityFinish();
-                        dialog_BookerFlowHandling.setTipsText("设备正在初始化");
-                        dialog_BookerFlowHandling.show();
-                        break;
-                    case TakeStockFlowThread.ACTION_INIT_DATA_FAILURE:
-                        dialog_BookerFlowHandling.setTipsText(actionRemark);
-                        break;
-                    case TakeStockFlowThread.ACTION_INIT_DATA_SUCCESS:
-                        dialog_BookerFlowHandling.setTipsText("初始化数据成功");
-                        break;
-                    case TakeStockFlowThread.ACTION_CHECK_DOOR_STATUS:
-                        dialog_BookerFlowHandling.setTipsText("检查柜门状态");
-                        break;
-                    case TakeStockFlowThread.ACTION_CHECK_DOOR_STATUS_SUCCESS:
-                        dialog_BookerFlowHandling.setTipsText("检查柜门状态成功");
-                        break;
-                    case TakeStockFlowThread.ACTION_CHECK_DOOR_STATUS_FAILURE:
-                        dialog_BookerFlowHandling.setTipsText("检查柜门状态失败");
-                        break;
-                    case TakeStockFlowThread.ACTION_DOOR_OPEN:
-                        dialog_BookerFlowHandling.setTipsText("柜门状态已打开");
-                        break;
-                    case TakeStockFlowThread.ACTION_DOOR_CLOSE:
-                        dialog_BookerFlowHandling.setTipsText("柜门状态已关闭");
-                        break;
-                    case TakeStockFlowThread.ACTION_WAIT_RFREADER:
-                        dialog_BookerFlowHandling.setTipsText("等待检阅数量");
-                        break;
-                    case TakeStockFlowThread.ACTION_RFREADER_SUCCESS:
-                        dialog_BookerFlowHandling.setTipsText("检阅成功");
-                        break;
-                    case TakeStockFlowThread.ACTION_RFREADER_FAILURE:
-                        dialog_BookerFlowHandling.setTipsText("检阅失败");
-                        break;
-                    case TakeStockFlowThread.ACTION_TAKESTOCK_SUCCESS:
-                        dialog_BookerFlowHandling.setTipsText("盘点成功");
-                        break;
-                    case TakeStockFlowThread.ACTION_TAKESTOCK_FAILURE:
-                        dialog_BookerFlowHandling.setTipsText("盘点失败");
-                        break;
-                    case TakeStockFlowThread.ACTION_FLOW_END:
-                        dialog_BookerFlowHandling.setTipsText("处理结束");
+                if(flowId==2) {
+                    switch (actionCode) {
+                        case TakeStockFlowThread.ACTION_TIPS:
+                            showToast(actionRemark);
+                            break;
+                        case TakeStockFlowThread.ACTION_FLOW_START:
+                            setTimerPauseByActivityFinish();
+                            dialog_BookerFlowHandling.setTipsText("设备正在初始化");
+                            dialog_BookerFlowHandling.show();
+                            break;
+                        case TakeStockFlowThread.ACTION_INIT_DATA_FAILURE:
+                            dialog_BookerFlowHandling.setTipsText(actionRemark);
+                            break;
+                        case TakeStockFlowThread.ACTION_INIT_DATA_SUCCESS:
+                            dialog_BookerFlowHandling.setTipsText("初始化数据成功");
+                            break;
+                        case TakeStockFlowThread.ACTION_CHECK_DOOR_STATUS:
+                            dialog_BookerFlowHandling.setTipsText("检查柜门状态");
+                            break;
+                        case TakeStockFlowThread.ACTION_CHECK_DOOR_STATUS_SUCCESS:
+                            dialog_BookerFlowHandling.setTipsText("检查柜门状态成功");
+                            break;
+                        case TakeStockFlowThread.ACTION_CHECK_DOOR_STATUS_FAILURE:
+                            dialog_BookerFlowHandling.setTipsText("检查柜门状态失败");
+                            break;
+                        case TakeStockFlowThread.ACTION_DOOR_OPEN:
+                            dialog_BookerFlowHandling.setTipsText("柜门状态已打开");
+                            break;
+                        case TakeStockFlowThread.ACTION_DOOR_CLOSE:
+                            dialog_BookerFlowHandling.setTipsText("柜门状态已关闭");
+                            break;
+                        case TakeStockFlowThread.ACTION_WAIT_RFREADER:
+                            dialog_BookerFlowHandling.setTipsText("等待检阅数量");
+                            break;
+                        case TakeStockFlowThread.ACTION_RFREADER_SUCCESS:
+                            dialog_BookerFlowHandling.setTipsText("检阅成功");
+                            break;
+                        case TakeStockFlowThread.ACTION_RFREADER_FAILURE:
+                            dialog_BookerFlowHandling.setTipsText("检阅失败");
+                            break;
+                        case TakeStockFlowThread.ACTION_TAKESTOCK_SUCCESS:
+                            dialog_BookerFlowHandling.setTipsText("盘点成功");
+                            break;
+                        case TakeStockFlowThread.ACTION_TAKESTOCK_FAILURE:
+                            dialog_BookerFlowHandling.setTipsText("盘点失败");
+                            break;
+                        case TakeStockFlowThread.ACTION_FLOW_END:
+                            dialog_BookerFlowHandling.setTipsText("处理结束");
 
-                        RetBookerTakeStock retBookerTakeStock = new RetBookerTakeStock();
-                        retBookerTakeStock.setFlowId(String.valueOf(actionData.get("flowId")));
-                        retBookerTakeStock.setSheetId(String.valueOf(actionData.get("sheetId")));
-                        retBookerTakeStock.setSheetItems(HAUtil.objToList(actionData.get("sheetItems"), BookerBookVo.class));
-                        retBookerTakeStock.setWarnItems(HAUtil.objToList(actionData.get("warnItems"), BookerBookVo.class));
-                        Intent intent = new Intent(getAppContext(), SmBookerTakeStockResultActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("ret_booker_take_stock", retBookerTakeStock);
-                        intent.putExtras(bundle);
-                        openActivity(intent);
-                        finish();
-                        break;
-                    case BorrowReturnFlowThread.ACTION_EXCEPTION:
-                        dialog_BookerFlowHandling.setTipsText("设备处理异常");
-                        break;
+                            RetBookerTakeStock retBookerTakeStock = new RetBookerTakeStock();
+                            retBookerTakeStock.setFlowId(String.valueOf(actionData.get("flowId")));
+                            retBookerTakeStock.setSheetId(String.valueOf(actionData.get("sheetId")));
+                            retBookerTakeStock.setSheetItems(HAUtil.objToList(actionData.get("sheetItems"), BookerBookVo.class));
+                            retBookerTakeStock.setWarnItems(HAUtil.objToList(actionData.get("warnItems"), BookerBookVo.class));
+                            Intent intent = new Intent(getAppContext(), SmBookerTakeStockResultActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("ret_booker_take_stock", retBookerTakeStock);
+                            intent.putExtras(bundle);
+                            openActivity(intent);
+                            finish();
+                            break;
+                        case BorrowReturnFlowThread.ACTION_EXCEPTION:
+                            dialog_BookerFlowHandling.setTipsText("设备处理异常");
+                            break;
+                    }
+
+                    if (actionCode.contains("failure") || actionCode.contains("exception")) {
+                        dialog_BookerFlowHandling.startCancleCountDownTimer();
+                    }
                 }
+                else{
+                    switch (actionCode) {
+                        case TakeStockFlowThread.ACTION_TIPS:
+                            showToast(actionRemark);
+                            break;
+                        case TakeStockFlowThread.ACTION_FLOW_START:
+                            showLoading(SmBookerTakeStockActivity.this,1800);
+                            break;
+                        case TakeStockFlowThread.ACTION_FLOW_END:
 
-                if (actionCode.contains("failure") || actionCode.contains("exception")) {
-                    dialog_BookerFlowHandling.startCancleCountDownTimer();
+                            break;
+                    }
+
+                    if (actionCode.contains("failure") || actionCode.contains("exception")) {
+                        hideLoading(SmBookerTakeStockActivity.this);
+                        showToast(actionRemark);
+                    }
+
                 }
 
             }
@@ -234,11 +260,20 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
         rv_StockSlots_Adapter = new SmBookerStockSlotAdapter();
         rv_StockSlots_Adapter.setOnClickListener(new SmBookerStockSlotAdapter.OnClickListener() {
             @Override
-            public void onStockTake(BookerSlotVo item) {
+            public void onTakeStock(BookerSlotVo item) {
                 dialog_Confirm.setFunction("take_stock");
                 dialog_Confirm.setTipsImageVisibility(View.GONE);
                 dialog_Confirm.setTag(item);
                 dialog_Confirm.setTipsText("是否进行盘点？");
+                dialog_Confirm.show();
+            }
+
+            @Override
+            public void onOpenDoor(BookerSlotVo item){
+                dialog_Confirm.setFunction("open_door");
+                dialog_Confirm.setTipsImageVisibility(View.GONE);
+                dialog_Confirm.setTag(item);
+                dialog_Confirm.setTipsText("是否打开柜门？");
                 dialog_Confirm.show();
             }
         });
@@ -352,6 +387,11 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
     private void dlgTakeStock() {
         curSlot = (BookerSlotVo) dialog_Confirm.getTag();
         bookerCtrlServiceBinder.takeStock(currentUser.getUserId(),3,currentUser.getUserId(), device, curSlot);
+    }
+
+    private void dlgOpenDoor(){
+        curSlot = (BookerSlotVo) dialog_Confirm.getTag();
+        bookerCtrlServiceBinder.openDoor(currentUser.getUserId(),3,currentUser.getUserId(), device, curSlot);
     }
 
     @Override

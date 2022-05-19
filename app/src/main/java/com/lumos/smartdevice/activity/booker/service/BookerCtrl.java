@@ -36,6 +36,11 @@ public class BookerCtrl {
         thread.start();
     }
 
+    public void openDoorStart(String flowUserId, int identityType, String identityId,DeviceVo device, BookerSlotVo slot, OpenDoorFlowThread.OnHandlerListener onHandlerListener) {
+        OpenDoorFlowThread thread = new OpenDoorFlowThread(3,flowUserId,identityType,identityId,device, slot,  onHandlerListener);
+        thread.start();
+    }
+
     public boolean checkBorrowReturnIsRunning(BookerSlotVo slot) {
         return BorrowReturnFlowThread.checkRunning(slot);
     }

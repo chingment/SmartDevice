@@ -55,7 +55,9 @@ public class SmBookerStockSlotAdapter extends RefreshAdapter {
         TextView tv_StockQuantity = holder.itemView.findViewById(R.id.tv_StockQuantity);
         TextView tv_Status = holder.itemView.findViewById(R.id.tv_Status);
         TextView tv_LastTakeTime = holder.itemView.findViewById(R.id.tv_LastTakeTime);
-        TextView btn_StockTake = holder.itemView.findViewById(R.id.btn_StockTake);
+        TextView btn_TakeStock = holder.itemView.findViewById(R.id.btn_TakeStock);
+        TextView btn_OpenDoor = holder.itemView.findViewById(R.id.btn_OpenDoor);
+
 
         BookerSlotVo item = items.get(position);
 
@@ -72,12 +74,21 @@ public class SmBookerStockSlotAdapter extends RefreshAdapter {
         tv_StockQuantity.setText(String.format("%s本", item.getStockQuantity()));
         tv_LastTakeTime.setText(item.getLastTakeTime());
 
-        btn_StockTake.setTag(item);
+        btn_TakeStock.setTag(item);
 
-        btn_StockTake.setOnClickListener(view -> {
+        btn_TakeStock.setOnClickListener(view -> {
             if(onClickListener!=null) {
                 BookerSlotVo l_item = (BookerSlotVo) view.getTag();
-                onClickListener.onStockTake(l_item);
+                onClickListener.onTakeStock(l_item);
+            }
+        });
+
+        btn_OpenDoor.setTag(item);
+
+        btn_OpenDoor.setOnClickListener(view -> {
+            if(onClickListener!=null) {
+                BookerSlotVo l_item = (BookerSlotVo) view.getTag();
+                onClickListener.onOpenDoor(l_item);
             }
         });
 
@@ -96,6 +107,7 @@ public class SmBookerStockSlotAdapter extends RefreshAdapter {
     }
 
     public interface OnClickListener {
-        void onStockTake(BookerSlotVo item);
+        void onTakeStock(BookerSlotVo item);
+        void onOpenDoor(BookerSlotVo item);
     }
 }

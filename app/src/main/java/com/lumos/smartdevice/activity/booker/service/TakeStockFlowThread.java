@@ -23,7 +23,6 @@ import com.lumos.smartdevice.utils.CommonUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.SnowFlake;
-import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.tinytaskonebyone.BaseSyncTask;
 import com.lumos.smartdevice.utils.tinytaskonebyone.TinySyncExecutor;
 
@@ -77,7 +76,8 @@ public class TakeStockFlowThread extends Thread {
         this.device = device;
         this.slot=slot;
         this.onHandlerListener = onHandlerListener;
-        this.setName("TakeStockFlowTread");
+
+        this.setName("TakeStockFlowTread-Slot-" + slot.getSlotId());
     }
 
     private void setRunning(boolean isRunning) {
@@ -412,6 +412,7 @@ public class TakeStockFlowThread extends Thread {
             MessageByAction message = new MessageByAction();
             message.setDeviceId(device.getDeviceId());
             message.setFlowId(flowId);
+            message.setFlowType(flowType);
             message.setActionCode(actionCode);
             message.setActionData(actionData);
             message.setActionRemark(actionRemark);
