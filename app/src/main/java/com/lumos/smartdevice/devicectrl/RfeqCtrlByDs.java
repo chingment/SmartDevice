@@ -1,5 +1,7 @@
 package com.lumos.smartdevice.devicectrl;
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import com.gg.reader.api.dal.GClient;

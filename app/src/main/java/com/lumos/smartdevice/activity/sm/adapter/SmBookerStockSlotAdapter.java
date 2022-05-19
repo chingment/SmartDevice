@@ -54,7 +54,7 @@ public class SmBookerStockSlotAdapter extends RefreshAdapter {
         TextView tv_Name = holder.itemView.findViewById(R.id.tv_Name);
         TextView tv_StockQuantity = holder.itemView.findViewById(R.id.tv_StockQuantity);
         TextView tv_Status = holder.itemView.findViewById(R.id.tv_Status);
-        TextView tv_LastTakeTime = holder.itemView.findViewById(R.id.tv_LastTakeTime);
+        TextView tv_LastInboundTime = holder.itemView.findViewById(R.id.tv_LastInboundTime);
         TextView btn_TakeStock = holder.itemView.findViewById(R.id.btn_TakeStock);
         TextView btn_OpenDoor = holder.itemView.findViewById(R.id.btn_OpenDoor);
 
@@ -72,7 +72,7 @@ public class SmBookerStockSlotAdapter extends RefreshAdapter {
 
         tv_Name.setText(String.format("%s号柜", item.getName()));
         tv_StockQuantity.setText(String.format("%s本", item.getStockQuantity()));
-        tv_LastTakeTime.setText(item.getLastTakeTime());
+        tv_LastInboundTime.setText(item.getLastInboundTime());
 
         btn_TakeStock.setTag(item);
 

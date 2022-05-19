@@ -128,13 +128,13 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
             @Override
             public void handleMessage(MessageByAction message) {
 
-                int flowId = message.getFlowType();
+                int flowType = message.getFlowType();
                 String actionCode = message.getActionCode();
                 String actionRemark = message.getActionRemark();
                 HashMap<String, Object> actionData = message.getActionData();
                 LogUtil.d(TAG, "actionCode:" + actionCode + ",actionRemark:" + actionRemark);
 
-                if(flowId==2) {
+                if(flowType==2) {
                     switch (actionCode) {
                         case TakeStockFlowThread.ACTION_TIPS:
                             showToast(actionRemark);
@@ -204,7 +204,7 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
                         dialog_BookerFlowHandling.startCancleCountDownTimer();
                     }
                 }
-                else{
+                else if(flowType==3){
                     switch (actionCode) {
                         case TakeStockFlowThread.ACTION_TIPS:
                             showToast(actionRemark);

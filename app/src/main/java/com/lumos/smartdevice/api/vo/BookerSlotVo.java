@@ -12,8 +12,7 @@ public class BookerSlotVo implements Serializable {
     private String rfeqAnt;
 
     private int stockQuantity;
-    private String lastTakeTime;
-    private String lastTakeQuantity;
+    private String lastInboundTime;
     private boolean isOpen;
 
     public String getSlotId() {
@@ -72,27 +71,19 @@ public class BookerSlotVo implements Serializable {
         this.stockQuantity = stockQuantity;
     }
 
-    public String getLastTakeTime() {
-        return lastTakeTime;
-    }
-
-    public void setLastTakeTime(String lastTakeTime) {
-        this.lastTakeTime = lastTakeTime;
-    }
-
-    public String getLastTakeQuantity() {
-        return lastTakeQuantity;
-    }
-
-    public void setLastTakeQuantity(String lastTakeQuantity) {
-        this.lastTakeQuantity = lastTakeQuantity;
-    }
-
     public boolean getIsOpen() {
         return isOpen;
     }
 
     public void setIsOpen(boolean isOpen) {
         this.isOpen = isOpen;
+    }
+
+    public String getLastInboundTime() {
+        return lastInboundTime;
+    }
+
+    public void setLastInboundTime(String lastInboundTime) {
+        this.lastInboundTime = lastInboundTime;
     }
 }
