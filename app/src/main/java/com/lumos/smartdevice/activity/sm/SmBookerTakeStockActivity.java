@@ -405,6 +405,10 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
             dialog_Confirm.cancel();
         }
 
+        if(dialog_BookerFlowHandling!=null){
+            dialog_BookerFlowHandling.cancel();
+        }
+
         if(bookerCtrlServiceReceiver!=null){
             bookerCtrlServiceReceiver.unRegister(SmBookerTakeStockActivity.this);
         }

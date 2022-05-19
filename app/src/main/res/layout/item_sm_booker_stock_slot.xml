@@ -128,7 +128,7 @@
                     android:paddingEnd="@dimen/size_8"
                     android:background="@drawable/widget_btn_1"
                     android:layout_marginRight="@dimen/size_10"
-                    android:text="打开"
+                    android:text="打开柜门"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_12" />
 
@@ -142,7 +142,7 @@
                     android:paddingStart="@dimen/size_8"
                     android:paddingEnd="@dimen/size_8"
                     android:background="@drawable/widget_btn_1"
-                    android:text="盘点"
+                    android:text="盘点库存"
                     android:textColor="@color/field_name"
                     android:textSize="@dimen/sp_12" />
 
