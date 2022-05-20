@@ -444,4 +444,8 @@ public class InitDataActivity extends BaseActivity {
     public void hideLoading(Context context) {
 
     }
+
+    public void  setLoadingTips(Context context,String tips){
+
+    }
 }

@@ -3,7 +3,9 @@ package com.lumos.smartdevice.activity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Message;
 import android.speech.tts.TextToSpeech;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,12 +16,14 @@ import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 
 import com.lumos.smartdevice.R;
+import com.lumos.smartdevice.activity.sm.SmHomeActivity;
 import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.api.vo.UserVo;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.app.AppCacheManager;
 import com.lumos.smartdevice.app.AppContext;
 import com.lumos.smartdevice.app.AppManager;
+import com.lumos.smartdevice.receiver.UpdateAppServiceReceiver;
 import com.lumos.smartdevice.utils.StringUtil;
 import com.lumos.smartdevice.utils.ToastUtil;
 import com.lumos.smartdevice.utils.UsbReaderUtil;
@@ -50,8 +54,9 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         return AppCacheManager.getCurrentUser();
     }
 
-
     private TextToSpeech textToSpeech = null;
+
+    private UpdateAppServiceReceiver updateAppServiceReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +96,28 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
 //
 //            }
 //        });
+
+
+        updateAppServiceReceiver= new UpdateAppServiceReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                int status = intent.getIntExtra("status", 0);
+                String message = intent.getStringExtra("message");
+
+                if (status == 1) {
+                    showLoading(BaseActivity.this);
+                } else if (status == 2) {
+                    hideLoading(BaseActivity.this);
+                    showToast(message);
+                } else if (status == 3) {
+                    setLoadingTips(BaseActivity.this,"正在更新中.....");
+                    //setTimerPauseByActivityFinish();
+                }
+            }
+        };
+
+
+        registerReceiver(updateAppServiceReceiver, new IntentFilter("action.smartdevice.app.update"));
 
     }
 
@@ -243,5 +270,6 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
 
     public abstract void hideLoading(Context context);
     public abstract void showLoading(Context context);
+    public abstract void setLoadingTips(Context context,String tips);
 
 }

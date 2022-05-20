@@ -3,11 +3,16 @@ package com.lumos.smartdevice.service;
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 
+import com.alibaba.fastjson.JSON;
 import com.lumos.smartdevice.api.vo.DeviceVo;
 import com.lumos.smartdevice.api.vo.MqttVo;
 import com.lumos.smartdevice.app.AppCacheManager;
+import com.lumos.smartdevice.app.CommandManager;
 import com.lumos.smartdevice.utils.LogUtil;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
@@ -22,6 +27,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Map;
+
 
 public class MqttService extends Service {
 
@@ -31,12 +38,72 @@ public class MqttService extends Service {
     private static MqttAndroidClient mqttAndroidClient;
     private static MqttConnectOptions mMqttConnectOptions;
 
+    private Handler handler_msg;
+    private Handler handler_connect;
+
     private static String subTopic="";//订阅主题
     private static String pubTopic="";//发布主题
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        handler_msg = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                Bundle bundle=msg.getData();
+                String topic = bundle.getString("topic", "");
+                String payload = bundle.getString("payload", "");
+
+                LogUtil.d(TAG, "topic:" + topic);
+                LogUtil.d(TAG, "payload:" + payload);
+
+                if (topic.contains("/user/get")) {
+
+                    Map map_payload = JSON.parseObject(payload);
+
+                    String id = "";
+                    String method = "";
+                    String params = "";
+
+                    if (map_payload.containsKey("id")) {
+                        Object obj_id = map_payload.get("id");
+                        if (obj_id != null) {
+                            id = obj_id.toString();
+                        }
+                    }
+
+                    if (map_payload.containsKey("method")) {
+                        Object obj_method = map_payload.get("method");
+                        if (obj_method != null) {
+                            method = obj_method.toString();
+                        }
+                    }
+
+                    if (map_payload.containsKey("params")) {
+                        Object obj_params = map_payload.get("params");
+                        if (obj_params != null) {
+                            params = obj_params.toString();
+                        }
+                    }
+
+                    publish(id, "msg_arrive", null, 1);
+
+                    CommandManager.Execute(id, method, params);
+
+                }
+
+                return  false;
+            }
+        });
+
+        handler_connect = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                connectMqttClient();
+                return  false;
+            }
+        });
 
         buildMqttClient();
 
@@ -56,6 +123,9 @@ public class MqttService extends Service {
         @Override
         public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
             LogUtil.i(TAG,"连接失败");
+            if(handler_connect!=null) {
+                handler_connect.sendEmptyMessage(0);
+            }
         }
     };
 
@@ -80,8 +150,14 @@ public class MqttService extends Service {
 
         @Override
         public void messageArrived(String topic, MqttMessage message) throws Exception {  // 接收的消息
-
-
+            String payload = new String(message.getPayload());
+            final Message m = new Message();
+            m.what = 1;
+            Bundle bundle = new Bundle();
+            bundle.putString("topic", topic);
+            bundle.putString("payload", payload);
+            m.setData(bundle);
+            handler_msg.sendMessage(m);
         }
 
         @Override
@@ -168,22 +244,20 @@ public class MqttService extends Service {
 
     public static void publish(String id, String method,JSONObject params, int qos) {
 
-        //UUID.randomUUID().toString().replace("-","")
-
         JSONObject obj_Payload = new JSONObject();
 
         try {
             obj_Payload.put("id", id);
             obj_Payload.put("method", method);
-            obj_Payload.put("params",params);
+            obj_Payload.put("params", params);
         } catch (JSONException e) {
             e.printStackTrace();
             return;
         }
 
-        String str_Payload=obj_Payload.toString();
+        String str_Payload = obj_Payload.toString();
 
-        publish(str_Payload,qos,false);
+        publish(str_Payload, qos, false);
 
     }
 

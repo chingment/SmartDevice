@@ -1,5 +1,6 @@
 package com.lumos.smartdevice.service;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -19,15 +20,21 @@ import com.lumos.smartdevice.activity.InitDataActivity;
 import com.lumos.smartdevice.api.ResultBean;
 import com.lumos.smartdevice.api.ResultCode;
 import com.lumos.smartdevice.api.vo.TripMsgBean;
+import com.lumos.smartdevice.app.AppManager;
+import com.lumos.smartdevice.app.AppUtil;
 import com.lumos.smartdevice.db.DbManager;
 import com.lumos.smartdevice.http.HttpClient;
 import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.StringUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.UUID;
 
 public class TimerTaskService extends Service {
     private static final String TAG = "TimerTaskService";
@@ -41,10 +48,12 @@ public class TimerTaskService extends Service {
     @Override
     public void onCreate() {
         uploadTripMsgs();
-
+        sendDeviceStauts();
         if(!BuildConfig.DEBUG) {
             keepAppLive();
         }
+
+
     }
 
     @Override
@@ -131,6 +140,30 @@ public class TimerTaskService extends Service {
                 if(!isForeground(getApplicationContext())){
                     Intent intent = getPackageManager().getLaunchIntentForPackage(BuildConfig.APPLICATION_ID);
                     startActivity(intent);
+                }
+            }
+        };
+
+        timerByKeepAppLive = new Timer();
+        timerByKeepAppLive.schedule(task, 2000, 2000);
+
+    }
+
+    private void sendDeviceStauts(){
+
+
+        TimerTask  task = new TimerTask() {
+            @Override
+            public void run() {
+                //LogUtil.d(TAG,"发送设备状态");
+                try {
+                    Activity activity = AppManager.getAppManager().currentActivity();
+                    JSONObject params = new JSONObject();
+                    params.put("activity", activity == null ? "" : activity.getLocalClassName());
+                    params.put("status", AppUtil.getDeviceStatus());
+                    MqttService.publish(UUID.randomUUID().toString().replace("-", ""), "device_status", params, 1);
+                } catch (Exception ex) {
+                    LogUtil.e(TAG,ex);
                 }
             }
         };

@@ -174,6 +174,10 @@ public abstract class BookerBaseActivity  extends BaseActivity {
         dialog_Loading_Handler.sendMessage(m);
     }
 
+    public void  setLoadingTips(Context context,String tips){
+
+    }
+
     public void setTimerPauseByActivityFinish(){
         if(timerByActivityFinish!=null) {
             timerByActivityFinish.cancel();

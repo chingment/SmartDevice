@@ -11,6 +11,7 @@ public class DeviceVo implements Serializable {
     private String merchId;
     private HashMap<String, DriveVo> drives;
     private MqttVo mqtt;
+    private Boolean ExIsHas=false;
 
     public String getDeviceId() {
         return deviceId;
@@ -66,5 +67,13 @@ public class DeviceVo implements Serializable {
 
     public void setMqtt(MqttVo mqtt) {
         this.mqtt = mqtt;
+    }
+
+    public Boolean getExIsHas() {
+        return ExIsHas;
+    }
+
+    public void setExIsHas(Boolean exIsHas) {
+        ExIsHas = exIsHas;
     }
 }

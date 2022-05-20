@@ -149,7 +149,6 @@ public class DialogSmOwnInfo extends Dialog {
                     public void onSuccess(String response) {
                         super.onSuccess(response);
                         ResultBean<RetOwnSaveInfo> rt = JsonUtil.toResult(response,new TypeReference<ResultBean<RetOwnSaveInfo>>() {});
-                        mContext.showToast(rt.getMsg());
 
                         if(onClickListener!=null) {
                             onClickListener.onSaveResult(rt);

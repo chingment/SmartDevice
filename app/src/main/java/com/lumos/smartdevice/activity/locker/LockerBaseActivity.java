@@ -16,4 +16,8 @@ public class LockerBaseActivity  extends BaseActivity {
 
     public void hideLoading(Context context) {
     }
+
+    public void  setLoadingTips(Context context,String tips){
+
+    }
 }

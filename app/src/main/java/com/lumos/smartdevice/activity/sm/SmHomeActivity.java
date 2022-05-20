@@ -55,10 +55,6 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
     private Button btn_Logout;
     private DeviceVo device;
 
-    private Intent updateAppService;
-
-    private UpdateAppServiceReceiver updateAppServiceReceiver;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,26 +65,6 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
         initView();
         initEvent();
         initData();
-
-        updateAppServiceReceiver= new UpdateAppServiceReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                int status = intent.getIntExtra("status", 0);
-                String message = intent.getStringExtra("message");
-
-                if (status == 1) {
-                    showLoading(SmHomeActivity.this,1800);
-                } else if (status == 2) {
-                    hideLoading(SmHomeActivity.this);
-                    showToast(message);
-                } else if (status == 3) {
-                    setLoadingTips(SmHomeActivity.this,"正在更新中.....");
-                    setTimerPauseByActivityFinish();
-                }
-            }
-        };
-
-        registerReceiver(updateAppServiceReceiver, new IntentFilter("action.smartdevice.app.update"));
 
     }
 
@@ -275,7 +251,7 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
     }
 
     private void gdvCheckUpdateApp(){
-        updateAppService= new Intent(SmHomeActivity.this, UpdateAppService.class);
+        Intent  updateAppService= new Intent(SmHomeActivity.this, UpdateAppService.class);
         startService(updateAppService);
     }
 
@@ -362,13 +338,13 @@ public class SmHomeActivity extends SmBaseActivity implements View.OnClickListen
             dialog_OwnInfo.cancel();
         }
 
-        if(updateAppServiceReceiver!=null) {
-            unregisterReceiver(updateAppServiceReceiver);
-        }
+//        if(updateAppServiceReceiver!=null) {
+//            unregisterReceiver(updateAppServiceReceiver);
+//        }
 
-        if(updateAppService!=null){
-            stopService(updateAppService);
-        }
+//        if(updateAppService!=null){
+//            stopService(updateAppService);
+//        }
 
         super.onDestroy();
     }
