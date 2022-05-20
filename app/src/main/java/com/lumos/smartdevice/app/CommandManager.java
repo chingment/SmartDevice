@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.activity.sm.SmHomeActivity;
 import com.lumos.smartdevice.ostctrl.OstCtrlInterface;
 import com.lumos.smartdevice.service.UpdateAppService;
@@ -46,7 +47,7 @@ public class CommandManager {
                     update_app();
                     break;
                 case "logcat":
-                    //logcat(params);
+                    logcat(params);
                     break;
             }
         } finally {
@@ -71,6 +72,20 @@ public class CommandManager {
         Intent updateAppService= new Intent(AppContext.getInstance().getApplicationContext(), UpdateAppService.class);
         AppContext.getInstance().startService(updateAppService);
 
+    }
+
+    private static void logcat(String content){
+
+        try {
+
+            LogcatCommandVo command = JSON.parseObject(content, new TypeReference<LogcatCommandVo>() {
+            });
+
+            AppLogcatManager.uploadLogcat2Server(command.getCommand(), "logcat");
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
 }
