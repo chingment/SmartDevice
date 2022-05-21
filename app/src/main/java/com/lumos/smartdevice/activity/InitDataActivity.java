@@ -38,6 +38,7 @@ import com.lumos.smartdevice.service.MqttService;
 import com.lumos.smartdevice.service.TimerTaskService;
 import com.lumos.smartdevice.ui.my.MyListView;
 import com.lumos.smartdevice.utils.DeviceUtil;
+import com.lumos.smartdevice.utils.FileUtil;
 import com.lumos.smartdevice.utils.JsonUtil;
 import com.lumos.smartdevice.utils.LogUtil;
 import com.lumos.smartdevice.utils.LongClickUtil;
@@ -46,6 +47,7 @@ import com.lumos.smartdevice.utils.runtimepermissions.PermissionsManager;
 import com.lumos.smartdevice.utils.runtimepermissions.PermissionsResultAction;
 import com.lumos.smartdevice.ui.shapeloading.LoadingView;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -113,6 +115,9 @@ public class InitDataActivity extends BaseActivity {
 
         setContentView(R.layout.activity_init_data);
 
+        File mqttConnection= getAppContext().getExternalFilesDir("MqttConnection");
+
+        FileUtil.deleteDirWihtFile(mqttConnection);
 
 //        ILockeqCtrl lockeqCtrl = LockeqCtrlInterface.getInstance("ttyS3", 9600, "sdas");
 //        lockeqCtrl.sendOpenSlot("1,3");

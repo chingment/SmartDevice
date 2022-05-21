@@ -37,13 +37,14 @@ public class TinySyncExecutor {
             TinyTaskExecutor.execute(new Task() {
                 @Override
                 public Object doInBackground() {
-                    System.out.println("[OneByOne]doInBackground, " + "the current thread id = " + Thread.currentThread().getId());
+                    currentTask.doTask();
+                    //System.out.println("[OneByOne]doInBackground, " + "the current thread id = " + Thread.currentThread().getId());
                     return null;
                 }
 
                 @Override
                 public void onSuccess(Object o) {
-                    currentTask.doTask();
+
                 }
 
                 @Override

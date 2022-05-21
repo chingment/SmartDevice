@@ -69,7 +69,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         AppManager.getAppManager().addActivity(this);
 
 
-//        usbReaderUtil = new UsbReaderUtil();
+        usbReaderUtil = new UsbReaderUtil();
 //
 //        //实例化自带语音对象
 //        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
@@ -176,6 +176,9 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
             textToSpeech.shutdown(); // 关闭，释放资源
         }
 
+        if(updateAppServiceReceiver!=null) {
+            unregisterReceiver(updateAppServiceReceiver);
+        }
 
         AppManager.getAppManager().finishActivity(this);
 

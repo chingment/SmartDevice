@@ -166,7 +166,7 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
                             dialog_BookerFlowHandling.setTipsText("柜门状态已关闭");
                             break;
                         case TakeStockFlowThread.ACTION_WAIT_RFREADER:
-                            dialog_BookerFlowHandling.setTipsText("等待检阅数量");
+                            dialog_BookerFlowHandling.setTipsText("正在盘点中");
                             break;
                         case TakeStockFlowThread.ACTION_RFREADER_SUCCESS:
                             dialog_BookerFlowHandling.setTipsText("检阅成功");
@@ -193,7 +193,8 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
                             bundle.putSerializable("ret_booker_take_stock", retBookerTakeStock);
                             intent.putExtras(bundle);
                             openActivity(intent);
-                            finish();
+
+                            dialog_BookerFlowHandling.hide();
                             break;
                         case BorrowReturnFlowThread.ACTION_EXCEPTION:
                             dialog_BookerFlowHandling.setTipsText("设备处理异常");
@@ -213,7 +214,7 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
                             showLoading(SmBookerTakeStockActivity.this,1800);
                             break;
                         case TakeStockFlowThread.ACTION_FLOW_END:
-
+                            hideLoading(SmBookerTakeStockActivity.this);
                             break;
                     }
 

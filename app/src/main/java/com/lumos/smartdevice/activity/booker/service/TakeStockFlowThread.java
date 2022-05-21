@@ -143,7 +143,11 @@ public class TakeStockFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_FLOW_START, "盘点开始");
 
+            Thread.sleep(100);
+
             sendHandlerMessage(ACTION_INIT_DATA, "设备初始数据检查");
+
+            Thread.sleep(100);
 
             HashMap<String, DriveVo> drives = device.getDrives();
 
@@ -190,9 +194,11 @@ public class TakeStockFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_INIT_DATA_SUCCESS, "初始化数据成功");
 
+            Thread.sleep(100);
+
             sendHandlerMessage(ACTION_CHECK_DOOR_STATUS, "检查柜门打开状态");
 
-            Thread.sleep(200);
+            Thread.sleep(100);
 
             long nDoMaxTime = 10 * 1000;
             long nDoStartTime = System.currentTimeMillis();
@@ -218,6 +224,8 @@ public class TakeStockFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_CHECK_DOOR_STATUS_SUCCESS, "检查柜门状态成功");
 
+            Thread.sleep(100);
+
             if (slotStatus==1) {
                 sendHandlerMessage(ACTION_DOOR_OPEN, "柜门已开[07]");
                 setRunning(false);
@@ -226,7 +234,9 @@ public class TakeStockFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_DOOR_CLOSE, "柜门关闭");
 
-            sendHandlerMessage(ACTION_WAIT_RFREADER, "等待检查数量");
+            Thread.sleep(100);
+
+            sendHandlerMessage(ACTION_WAIT_RFREADER, "检查数量中");
 
             //Rf读取任务
             BaseSyncTask taskRfRead = new BaseSyncTask() {
@@ -274,6 +284,7 @@ public class TakeStockFlowThread extends Thread {
 
                         LogUtil.d(TAG,"发送打开RFID读取成功");
 
+
                         Thread.sleep(10*1000);
 
                         tryDo = 0;
@@ -296,7 +307,7 @@ public class TakeStockFlowThread extends Thread {
                             return;
                         }
 
-                        Thread.sleep(1000);
+                        Thread.sleep(1500);
 
                         LogUtil.d(TAG,"发送关闭RFID读取成功2");
 

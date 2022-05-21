@@ -181,7 +181,7 @@ public class MqttService extends Service {
 
         mMqttConnectOptions = new MqttConnectOptions();
         // 在重新启动和重新连接时记住状态
-        //mMqttConnectOptions.setCleanSession(true);
+        mMqttConnectOptions.setCleanSession(false);
         // 设置连接的用户名
         mMqttConnectOptions.setUserName(mqttVo.getUserName());
         // 设置密码connect-onFailure-java

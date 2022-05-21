@@ -25,6 +25,7 @@ import com.lumos.smartdevice.activity.booker.service.BorrowReturnFlowThread;
 import com.lumos.smartdevice.activity.booker.service.MessageByAction;
 import com.lumos.smartdevice.activity.booker.service.TakeStockFlowThread;
 import com.lumos.smartdevice.activity.sm.adapter.SmBookerStockSlotAdapter;
+import com.lumos.smartdevice.activity.sm.adapter.SmBookerTakeStockBookAdapter;
 import com.lumos.smartdevice.activity.sm.dialog.DialogSmConfirm;
 import com.lumos.smartdevice.api.ReqHandler;
 import com.lumos.smartdevice.api.ReqInterface;
@@ -121,7 +122,7 @@ public class SmBookerTakeStockResultActivity extends SmBaseActivity {
         List<BookerBookVo> warnItems = retBookerTakeStock.getWarnItems();
 
         tv_SheetItemsCount.setText(String.valueOf(sheetItems.size()));
-        BookerBorrowReturnBookAdapter borrowBooksAdapter=new BookerBorrowReturnBookAdapter(SmBookerTakeStockResultActivity.this,sheetItems);
+        SmBookerTakeStockBookAdapter borrowBooksAdapter=new SmBookerTakeStockBookAdapter(SmBookerTakeStockResultActivity.this,sheetItems);
         lv_SheetItems.setFocusable(false);
         lv_SheetItems.setClickable(false);
         lv_SheetItems.setPressed(false);
@@ -129,7 +130,7 @@ public class SmBookerTakeStockResultActivity extends SmBaseActivity {
         lv_SheetItems.setAdapter(borrowBooksAdapter);
 
         tv_WarnItemsCount.setText(String.valueOf(warnItems.size()));
-        BookerBorrowReturnBookAdapter returnBooksAdapter=new BookerBorrowReturnBookAdapter(SmBookerTakeStockResultActivity.this,warnItems);
+        SmBookerTakeStockBookAdapter returnBooksAdapter=new SmBookerTakeStockBookAdapter(SmBookerTakeStockResultActivity.this,warnItems);
         lv_WarnItems.setFocusable(false);
         lv_WarnItems.setClickable(false);
         lv_WarnItems.setPressed(false);

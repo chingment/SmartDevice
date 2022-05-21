@@ -72,6 +72,12 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
         return isConnect;
     }
 
+    private boolean isReadComplete=false;
+
+    public boolean isReadComplete() {
+        return isReadComplete;
+    }
+
     private long convertAntennaEnable(String ant) {
 
         long i_ant = -1;
@@ -99,6 +105,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
         return i_ant;
     }
 
+
     public boolean sendOpenRead(String ant) {
 
         LogUtil.d(TAG,"sendOpenRead.ant:"+ant);
@@ -108,7 +115,7 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
         msg.setInventoryMode(1);
 
         map_TagInfos.clear();
-
+        isReadComplete=false;
         client.sendSynMsg(msg);
 
         return 0x00 == msg.getRtCode();
@@ -177,13 +184,14 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
     public void subHandler(GClient client) {
         client.onTagEpcLog = new HandlerTagEpcLog() {
             public void log(String readerName, LogBaseEpcInfo info) {
+
                 if (null != info && 0 == info.getResult()) {
 
                     LogUtil.d(TAG,info.getEpc());
 
-                    if(onReadHandlerListener!=null) {
-                        onReadHandlerListener.onData(info.getEpc());
-                    }
+//                    if(onReadHandlerListener!=null) {
+//                        onReadHandlerListener.onData(info.getEpc());
+//                    }
 
                     pooled6cData(info);
 
@@ -193,17 +201,19 @@ public class RfeqCtrlByDs implements IRfeqCtrl {
 
         client.onTagEpcOver = new HandlerTagEpcOver() {
             public void log(String readerName, LogBaseEpcOver info) {
+                isReadComplete = true;
+                LogUtil.e(TAG, "读取完成:" + map_TagInfos.size());
 
-
+                LogUtil.e(TAG, "读取完成");
             }
         };
 
     }
 
-    private OnReadHandlerListener onReadHandlerListener;
-    @Override
-    public void setReadHandler(OnReadHandlerListener onReadHandlerListener) {
-        this.onReadHandlerListener = onReadHandlerListener;
-    }
+//    private OnReadHandlerListener onReadHandlerListener;
+//    @Override
+//    public void setReadHandler(OnReadHandlerListener onReadHandlerListener) {
+//        this.onReadHandlerListener = onReadHandlerListener;
+//    }
 
 }

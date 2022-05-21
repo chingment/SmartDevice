@@ -165,6 +165,8 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_FLOW_START, "借还开始");
 
+            Thread.sleep(100);
+
             sendHandlerMessage(ACTION_INIT_DATA, "设备初始数据检查");
 
             HashMap<String, DriveVo> drives = device.getDrives();
@@ -213,7 +215,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_INIT_DATA_SUCCESS, "初始化数据成功");
 
-            Thread.sleep(200);
+            Thread.sleep(100);
 
             //Rf读取任务
             BaseSyncTask taskRfRead = new BaseSyncTask() {
@@ -326,15 +328,6 @@ public class BorrowReturnFlowThread extends Thread {
 
             List<String> open_RfIds = getRfIds(tag_RfIds);
 
-//            open_RfIds.add("123456789012345678901410");
-//            open_RfIds.add("123456789012345678901409");
-//            open_RfIds.add("123456789012345678901408");
-//            open_RfIds.add("123456789012345678901407");
-//            open_RfIds.add("123456789012345678901403");
-//            open_RfIds.add("123456789012345678901402");
-//            open_RfIds.add("123456789012345678901401");
-
-
             actionData.put("openRfIds", open_RfIds);
 
             ResultBean<RetBookerBorrowReturn> result_BorrowReturn = borrowReturn(ACTION_REQUEST_OPEN_AUTH, actionData, "请求是否允许打开设备");
@@ -364,8 +357,9 @@ public class BorrowReturnFlowThread extends Thread {
                 return;
             }
 
-
             sendHandlerMessage(ACTION_SEND_OPEN_COMMAND_SUCCESS, "打开命令发送成功");
+
+            Thread.sleep(100);
 
             sendHandlerMessage(ACTION_WAIT_OPEN, "等待打开");
 
@@ -398,12 +392,7 @@ public class BorrowReturnFlowThread extends Thread {
 
             sendHandlerMessage(ACTION_OPEN_SUCCESS, "打开成功");
 
-
-            //todo 发送命令成功后，后台要作超时判断和异常处理
-            //情况1 开门后，检查客户最大的关门的时间，超过该时间段
-            //情况2 开门途中，突然断电
-            //情况3 处理关门后的数据异常
-
+            Thread.sleep(100);
 
             sendHandlerMessage(ACTION_WAIT_CLOSE, "等待关闭");
 
@@ -431,6 +420,8 @@ public class BorrowReturnFlowThread extends Thread {
             if (!isClose) {
                 sendHandlerMessage(ACTION_CLOSE_FAILURE, "关闭失败");
             }
+
+            Thread.sleep(100);
 
             sendHandlerMessage(ACTION_CLOSE_SUCCESS, "关闭成功");
 
@@ -460,10 +451,6 @@ public class BorrowReturnFlowThread extends Thread {
 
             List<String> close_RfIds = getRfIds(tag_RfIds);
 
-//            close_RfIds.add("123456789012345678901403");
-//            close_RfIds.add("123456789012345678901402");
-//            close_RfIds.add("123456789012345678901401");
-
 
             actionData.put("closeRfIds", close_RfIds);
 
@@ -482,6 +469,8 @@ public class BorrowReturnFlowThread extends Thread {
             actionData.put("returnBooks", ret_BorrowReturn.getReturnBooks());
 
             sendHandlerMessage(ACTION_REQUEST_CLOSE_AUTH_SUCCESS, actionData, "请求关闭验证通过");
+
+            Thread.sleep(100);
 
             sendHandlerMessage(ACTION_FLOW_END, actionData, "借还结束");
 

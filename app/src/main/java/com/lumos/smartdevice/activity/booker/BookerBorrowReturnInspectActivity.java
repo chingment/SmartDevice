@@ -127,7 +127,7 @@ public class BookerBorrowReturnInspectActivity extends BookerBaseActivity {
                         dialog_BookerFlowHandling.setTipsText(actionRemark);
                         break;
                     case BorrowReturnFlowThread.ACTION_INIT_DATA_SUCCESS:
-                        dialog_BookerFlowHandling.setTipsText("初始化数据成功");
+                        dialog_BookerFlowHandling.setTipsText("正在打开柜门");
                         break;
                     case BorrowReturnFlowThread.ACTION_OPEN_BEFORE_RFREADER_FAILURE:
                         dialog_BookerFlowHandling.setTipsText("RDIF设备读取失败");
