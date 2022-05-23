@@ -10,6 +10,7 @@ public class BookerSlotVo implements Serializable {
     private String lockeqAnt;
     private String rfeqId;
     private String rfeqAnt;
+    private int rfeqReadTime;
 
     private int stockQuantity;
     private String lastInboundTime;
@@ -62,6 +63,8 @@ public class BookerSlotVo implements Serializable {
     public void setRfeqAnt(String rfeqAnt) {
         this.rfeqAnt = rfeqAnt;
     }
+
+
 
     public int getStockQuantity() {
         return stockQuantity;

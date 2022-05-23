@@ -86,29 +86,6 @@ public class InitDataActivity extends BaseActivity {
     public final int WHAT_SET_CONFIG_SUCCESS = 4;
     public final int WHAT_SET_CONFIG_FALURE = 5;
 
-
-    public static  String[] byteToBit(int i) {
-
-        byte b = (byte) i;
-
-        String s_b="" + (byte) ((b >> 0) & 0x1) +
-                (byte) ((b >> 1) & 0x1) +
-                (byte) ((b >> 2) & 0x1) +
-                (byte) ((b >> 3) & 0x1) +
-                (byte) ((b >> 4) & 0x1) +
-                (byte) ((b >> 5) & 0x1) +
-                (byte) ((b >> 6) & 0x1) +
-                (byte) ((b >> 7) & 0x1);
-
-        String[] arr_s=new String[s_b.length()];
-
-        for (int x = 0; x<arr_s.length; x++){
-            arr_s[x]=s_b.substring(x,x+1);
-        }
-
-        return arr_s;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,31 +95,6 @@ public class InitDataActivity extends BaseActivity {
         File mqttConnection= getAppContext().getExternalFilesDir("MqttConnection");
 
         FileUtil.deleteDirWihtFile(mqttConnection);
-
-//        ILockeqCtrl lockeqCtrl = LockeqCtrlInterface.getInstance("ttyS3", 9600, "sdas");
-//        lockeqCtrl.sendOpenSlot("1,3");
-//
- //       lockeqCtrl.setLight("1,128");
-//
-//        lockeqCtrl.getSlotStatus("1,3");
-
-//        String s=byteToBit((byte) 32);
-//
-//
-//        String[] arr_s=new String[s.length()];
-//
-//        for (int i = 0; i<arr_s.length; i++){
-//            arr_s[i]=s.substring(i,i+1);
-//        }
-//
-//
-//        char c=s.toCharArray()[8-3];
-//
-//
-//
-//
-//        int bb=c-0;
-
 
         Intent mqttService = new Intent(this, MqttService.class);
         stopService(mqttService);

@@ -10,6 +10,7 @@ public class RetBookerStockSlots {
     private long totalSize;
     private int totalPages;
     private List<BookerSlotVo> items;
+    private int stockQuantity;
 
     public int getPageNum() {
         return pageNum;
@@ -49,5 +50,13 @@ public class RetBookerStockSlots {
 
     public void setItems(List<BookerSlotVo> items) {
         this.items = items;
+    }
+
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 }

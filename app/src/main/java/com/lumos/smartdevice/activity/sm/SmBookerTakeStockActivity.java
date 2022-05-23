@@ -11,6 +11,8 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
+import android.widget.TextView;
+
 import com.alibaba.fastjson.TypeReference;
 import com.lumos.smartdevice.R;
 import com.lumos.smartdevice.activity.booker.BookerBorrowReturnOverviewActivity;
@@ -57,6 +59,7 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
     private final int rv_StockSlots_PageSize=10;
     private SmBookerStockSlotAdapter rv_StockSlots_Adapter;
     private DialogSmConfirm dialog_Confirm;
+    private TextView tv_StockQuantity;
 
     private DeviceVo device;
     private List<BookerSlotVo> slots;
@@ -97,6 +100,8 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
     }
 
     private void initView() {
+
+        tv_StockQuantity= findViewById(R.id.tv_StockQuantity);
 
         dialog_Confirm=new DialogSmConfirm(SmBookerTakeStockActivity.this, "", true);
         dialog_Confirm.setOnClickListener(new DialogSmConfirm.OnClickListener() {
@@ -337,6 +342,7 @@ public class SmBookerTakeStockActivity extends SmBaseActivity {
 
                     RetBookerStockSlots d=rt.getData();
 
+                    tv_StockQuantity.setText(String.valueOf(d.getStockQuantity()));
 
                     int totalPages = d.getTotalPages();
 

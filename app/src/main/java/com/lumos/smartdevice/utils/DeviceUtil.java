@@ -144,6 +144,6 @@ public class DeviceUtil {
     }
 
     public static String getCtrlVerName(){
-        return "";
+        return "1.0.0.0";
     }
 }
